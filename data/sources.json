@@ -125,23 +125,23 @@
       "url": "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
       "publisher": "GitHub (official API)",
       "accessible": true,
-      "used_for": "Current Pages configuration: legacy build from main root (/), status built, HTTPS enforced (checked 2026-11-14 via GitHub API). The root index redirects to docs/index.html."
+      "used_for": "Current Pages configuration: legacy build from main root (/), status built, HTTPS enforced (checked 2026-11-14 after PR #15 via GitHub API). The root index redirects to docs/index.html."
     },
     {
       "id": "S-CHECK",
-      "title": "GitHub Actions Site checks run (latest at final audit)",
-      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827",
+      "title": "GitHub Actions Site checks run for PR #15 merge",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548",
       "publisher": "GitHub (official Actions run)",
       "accessible": true,
-      "used_for": "Successful Site checks for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
+      "used_for": "Successful Site checks for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
     },
     {
       "id": "S-DEPLOY",
-      "title": "GitHub Pages deployment run (latest at final audit)",
-      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287",
+      "title": "GitHub Pages deployment run for PR #15 merge",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157",
       "publisher": "GitHub (official Pages deployment run)",
       "accessible": true,
-      "used_for": "Successful Pages deployment for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
+      "used_for": "Successful Pages deployment for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
     },
     {
       "id": "S-WF",
