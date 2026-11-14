@@ -11,7 +11,7 @@
       "Attribution unverified: the resolved links contain no Associates tag parameter (F-03). Confirm the links are generated under your Associates ID before relying on any earnings.",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content, data mining and using Amazon content for AI models (F-11, F-12). The AI content automation is therefore NOT built.",
       "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
-      "Site: static GitHub Pages site on main /docs. Every table row links to an official source, and unverified values are blank and flagged."
+      "Site: GitHub Pages entry point redirects from the repository root to the static site in docs/. Every table row links to an official source, and unverified values are blank and flagged."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and which Amazon marketplace they should target (F-09).",

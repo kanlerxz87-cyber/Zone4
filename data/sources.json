@@ -125,7 +125,23 @@
       "url": "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
       "publisher": "GitHub (official API)",
       "accessible": true,
-      "used_for": "Pages was set to legacy build from main root; the latest build status was 'built' for commit 31f27e4. Used to plan the move to main /docs."
+      "used_for": "Current Pages configuration: legacy build from main root (/), status built, HTTPS enforced (checked 2026-11-14 via GitHub API). The root index redirects to docs/index.html."
+    },
+    {
+      "id": "S-CHECK",
+      "title": "GitHub Actions Site checks run (latest at final audit)",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827",
+      "publisher": "GitHub (official Actions run)",
+      "accessible": true,
+      "used_for": "Successful Site checks for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
+    },
+    {
+      "id": "S-DEPLOY",
+      "title": "GitHub Pages deployment run (latest at final audit)",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287",
+      "publisher": "GitHub (official Pages deployment run)",
+      "accessible": true,
+      "used_for": "Successful Pages deployment for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
     },
     {
       "id": "S-WF",
