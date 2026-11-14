@@ -183,3 +183,18 @@ The current branch added a more detailed multi-page research view and FTC source
 - Concurrent work noticed: PR [#13](https://github.com/kanlerxz87-cyber/Zone4/pull/13) (`arena/169f549b-zone4`, open) adds a log-only addendum to this file. It changes no data. Its content is recorded here, and its conflicts are handled at integration. Its request for a direct Associates-policy citation on the AI/agent flag is being verified in this session.
 - Starting point: `main` at `7ea516c` (PR #12 merged). No other claim covers the files above.
 
+
+### Session arena/7cfe23f4-zone4 — integration log (2026-11-14, UTC)
+
+- **Rebase:** `main` moved to `de08965` (PRs #14, #15, #16 merged). Rebased onto it. Conflicts were in `COORDINATION.md` (both sides kept), `data/content.json`, `data/flags.json`, `data/sources.json` and generated `docs/`. For the data files, the merged PR #15 wording was kept for F-09 (no user-location claim), F-13 (Pages source `main /` with root redirect) and the Pages/check sources. My non-overlapping additions were re-applied. `docs/` was regenerated from the merged data rather than merged by hand.
+- **PR #14 handoff requests, applied here:**
+  - RV-I1 (competitor labels are paraphrases): recorded in `data/products.json` metadata; the ASIN is the identifier.
+  - RV-C5 / RV-I2 (standalone participation page numbering): no site citation points to `/help/operating/participation/`. Lettered citations use the Program Policies URL.
+  - RV-I3 (automation needs PA-API / Creators API access): new flag **F-22** on the Flagged for Review page.
+- **Section-number check (verified on the official page, 2026-11-14):** the ratings clause is Participation Requirements **§3(t)** (lettered list (a)–(z)). §6 ends at (f) and has no (t). The ML-model bar is §5. §2(b) is the prices rule. PR #17 (`arena/e5381cc3-zone4`) proposes changing 3(t) to 6(t). That change is incorrect and was **not** adopted here. Logged for that session to correct its PR.
+- **Overlap with open PR #17 (`arena/e5381cc3-zone4`):** that PR also edits `data/*.json`, `scripts/`, `docs/` and `COORDINATION.md`, which are shared outputs owned by the integration session. It was not merged or closed by this session. Its valid items (Pages wording, F-09 location removal, F-10 "Sponsored" wording, AI-use policy row) are already reflected on `main` through PR #15 or this branch. Its 6(t) change should be dropped before it merges.
+- **Pages source:** the Pages API reports `build_type` legacy, source `main` `/`, status `built`, HTTPS enforced. The root `index.html` redirects to `docs/index.html`. F-13 now records this; the earlier `main /docs` plan is not in effect (the API change was refused with HTTP 403 earlier).
+- **Build fix:** `scripts/build_site.py` no longer hard-codes P2 brand "Unresolved" or the "Sponsored" wording. It reads the data (P2 brand from the Item details table; the "Sponsored" label is marked inconsistent per F-10). Manufacturer rows show "Unverified (blank)" with F-21 where the field is blank.
+- **Verification:** `python3 scripts/build_site.py` then `python3 scripts/verify.py` pass (exit 0, 11 pages). All `data/*.json` parse. No conflict markers in the tree. No Houston, Bucharest, Romania, Texas or Fairfax text remains in `data/`, `scripts/`, `docs/`, or `README.md`.
+- **Still open (not blocking merge; on Flagged for Review):** F-01 (commission schedule behind sign-in), F-02 and F-16 (prices and ratings withheld; API terms), F-03 and F-04 (no Associates tag in resolved links), F-22 (automation needs API access).
+- **Status:** branch `arena/7cfe23f4-zone4` pushed for integration. PR to `main` and merge result to be recorded below after checks.
