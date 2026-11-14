@@ -9,6 +9,7 @@ A static research site for three user-supplied Amazon product links. It publishe
 | Path | Purpose |
 |---|---|
 | `data/products.json` | Verified product records (ASIN, brand, category, specifications, competitor ASINs) |
+| `data/requirements.json` | Every requirement in the project brief, with its delivery status and the official source for that status |
 | `data/sources.json` | Source registry: each official source, and whether it was read |
 | `data/policies.json` | Amazon Associates and FTC requirements, with status for this site |
 | `data/flags.json` | Irregularities and unverified items (Flagged for Review) |
@@ -24,9 +25,16 @@ A static research site for three user-supplied Amazon product links. It publishe
 | `engine/` | Automation layer: verification, economics, scoring, drafting, link safety, tracking, compliance gates |
 | `data/engine-*.json` | The engine's own sources, program facts and verification ledger (kept separate from the site data) |
 | `data/reverification-2026-11-14.json` | Independent re-verification log of the three links and the citations |
-| `tests/test_engine.py` | 80 stdlib tests, including guards that `docs/` stays buildable and verifiable |
+| `tests/test_engine.py` | 73 stdlib tests, including guards that `docs/` stays buildable and verifiable |
 | `tools/check_links.py` | Site integrity checker for the engine's preview build |
 | `.github/workflows/ci.yml` | CI: runs both pipelines (engine and published site) |
+
+## Requirements traceability
+
+The Requirements page (`docs/requirements.html`) maps all 30 items in the project brief to one of five statuses
+(Delivered, Delivered (partial), Not built - blocked (policy), Not built - needs access, Unverifiable (blank + flagged)),
+each with the official source for that status. Blocked rows name the rule that gates them, for example Participation
+Requirements Section 6(y), which states that the Site must not have price tracking or price alerting functionality.
 
 ## Rebuild and verify
 
@@ -57,7 +65,7 @@ GitHub Pages is a legacy build of `main` `/` (the repository's Pages source). Th
 - Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or PA-API / Creators API data.
 - Commission rates are **published from the official rate table**: 4.50% is the Standard Commission Income Statement value for the Kitchen band ([source](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)), recorded on each product row. Which band Amazon applies to a given ASIN is still open (F-01): the breadcrumb top node *Home & Kitchen* straddles the Kitchen (4.50%) and Home (3.00%) rows, and the account's report is the authority. No earning figure is derived, because prices are withheld and no traffic is measured.
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
-- Automated research, AI article generation and click tracking are **implemented in `engine/` but publish nothing**: each refuses to emit a value it cannot cite, so the site shows blanks rather than modelled output. See `ENGINE.md` and `data/content.json` (`not_built`).
+- Automated research, AI article generation, price tracking and affiliate click/conversion tracking are **not built**. They are gated by Participation Requirements Sections 5, 6(s) and 6(y), the Conditions of Use AI clause and the IP License Agent Terms. The Requirements page names the blocking rule for each item; see also `data/content.json` (`not_built`) and `data/flags.json`.
 
 Start with `flagged.html` on the live site for the items that need your decision.
 

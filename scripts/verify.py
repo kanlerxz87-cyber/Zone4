@@ -82,6 +82,29 @@ def check_data() -> None:
         for u in a["sources"]:
             if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
                 fail(f"analysis {a['id']} has a non-official source: {u}")
+    reqs = load("requirements.json")
+    known_status = set(reqs["_meta"]["status_meanings"])
+    known_base = {"Delivered", "Not built", "Unverifiable"}
+    seen: set[str] = set()
+    for r in reqs["requirements"]:
+        if r["id"] in seen:
+            fail(f"duplicate requirement id {r['id']}")
+        seen.add(r["id"])
+        if not r["sources"]:
+            fail(f"requirement {r['id']} has no source")
+        for u in r["sources"]:
+            if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
+                fail(f"requirement {r['id']} has a non-official source: {u}")
+        base = r["status"].split(" (")[0].split(" - ")[0]
+        if base not in known_base or r["status"] not in known_status:
+            fail(f"requirement {r['id']} uses an undeclared status: {r['status']}")
+        if base.startswith("Delivered") and not r["delivered"]:
+            fail(f"requirement {r['id']} is marked {r['status']} but has no delivered evidence")
+        if base.startswith("Not built") and not r["blocker"]:
+            fail(f"requirement {r['id']} is marked {r['status']} but names no blocker")
+        for fid in r.get("flags") or []:
+            if fid not in flags:
+                fail(f"requirement {r['id']} references unknown flag {fid}")
 
 
 class SiteParser(HTMLParser):

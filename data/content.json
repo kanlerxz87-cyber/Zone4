@@ -13,7 +13,6 @@
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content, data mining and using Amazon content for AI models (F-11, F-12). The AI content automation is therefore NOT built.",
       "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
       "Site: static GitHub Pages site (source: main, path /; the root index.html redirects to docs/). Every table row links to an official source, and unverified values are blank and flagged.",
-      "Program economics are sourced rather than blank: the official Table 1 rate for the Kitchen band (4.50%) is recorded against all three products with its source, the automation layer is implemented in engine/ behind compliance gates that block any unverified claim, and the Amazon text disclaimer required by IP License Section 2(k) is displayed on every page.",
       "Program economics are sourced rather than blank: the official Table 1 rate for the Kitchen band (4.50%) is recorded against all three products with its source, the automation layer is implemented in engine/ behind compliance gates that block any unverified claim, and the Amazon text notice required by IP License Section 2(k) is displayed on every page."
     ],
     "decisions_needed": [
@@ -101,19 +100,20 @@
     },
     {
       "id": "A-08",
-      "finding": "Commission band for all three products: 4.50% of Qualifying Revenue (Kitchen band, official Table 1).",
-      "basis": "Standard Commission Income Statement, Table 1, row 'Physical Books, Kitchen, Automotive' = 4.50%, read from the public official help topic on 2026-11-14. This closes the sign-in assumption behind the earlier note. Amazon assigns the commission category per item, so the mapping is recorded as pending account confirmation.",
+      "finding": "Pricing analysis is blocked by a rule that is more specific than the price-display rule: the Site must not have price tracking or price alerting functionality.",
+      "basis": "Participation Requirements Section 6(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' This sits alongside Section 2(b), which limits price display to Amazon-served links or Creators API / PA API data.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "confidence": "Rate verified; mapping pending"
+      "confidence": "Verified"
     },
     {
       "id": "A-09",
-      "finding": "Attribution is narrow: a Session ends at 24 hours, at the first order, or when the customer clicks another publisher's link; a cart order must complete within 89 days; goods must ship within 180 days.",
-      "basis": "Associates Program Policies (page states update 2026-04-14), Commission Income Statement sections on Qualifying Purchases, read 2026-11-14.",
+      "finding": "What the site can prove, it proves; what it cannot, it leaves blank. That split is enforced, not asserted.",
+      "basis": "scripts/verify.py parses every table body row on every page and fails the build if a row has no link to an official host, if any page lacks the Operating Agreement Section 5 disclosure sentence, or if any page contains a currency amount or a star rating. The Site checks workflow runs it on every push and pull request.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/policies"
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/.github/workflows/site-checks.yml"
       ],
       "confidence": "Verified"
     },
