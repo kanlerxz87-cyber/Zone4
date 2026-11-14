@@ -159,9 +159,23 @@ def check_site() -> None:
                     fail(f"{rel}: anchor not found: {url}")
 
 
+def check_root_entry() -> None:
+    """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
+    idx = ROOT / "index.html"
+    if not idx.exists():
+        fail("root index.html missing: Pages source is main / and needs a redirect to docs/")
+        return
+    text = idx.read_text(encoding="utf-8")
+    if "docs/index.html" not in text:
+        fail("root index.html does not redirect to docs/index.html")
+    if not (ROOT / ".nojekyll").exists():
+        fail("root .nojekyll missing")
+
+
 def main() -> int:
     check_data()
     check_site()
+    check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")
         for f in failures:

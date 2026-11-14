@@ -74,3 +74,13 @@ The current branch added a more detailed multi-page research view and FTC source
 - Integration note: this branch was rebased onto latest `main` after PR #3 merged while PR #4 was open. Retained the current main's shared dashboard, flagged page, styles and coordination log; kept the dedicated executive summary page and integrated disclosure/policy references. HTML local-link validation and `git diff --check` pass. Prior custom workflow failure remains recorded above. GitHub Pages deployment was independently confirmed after PR #3: https://kanlerxz87-cyber.github.io/Zone4/; API status `built`, HTTPS enforced. Pages deployment run https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582250899 succeeded. Separate custom workflow run https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582185688 failed without retrievable job logs; investigate as a non-blocking review item.
 
 - Pull request [#4](https://github.com/kanlerxz87-cyber/Zone4/pull/4) merged into `main` on 2026-11-14; merge commit `446e90a653a1d52faf320656664c049f39870b53`. The follow-up coordination update is recorded in PR #5.
+
+### Session arena/1eb689b8-zone4 — merge result and Pages status
+
+- Pull request [#7](https://github.com/kanlerxz87-cyber/Zone4/pull/7) merged into `main` (merge commit `897e53d`, 2026-11-14 09:57 UTC). The merge was self-merged after verification, without waiting for review.
+- **Pages source not changed to `/docs`.** `PUT repos/kanlerxz87-cyber/Zone4/pages` returned HTTP 403 ("Resource not accessible by integration"). This token cannot change Pages settings. Pages therefore still serves `main` `/` (legacy). Pages build for `897e53d` reports `built`.
+- **Fix in place of the source change:** a root `index.html` redirects to `docs/index.html`, and a root `.nojekyll` is present. `scripts/verify.py` checks both and fails when either is missing (negative test confirmed exit 1).
+- **Not confirmed from this sandbox:** the public URL (https://kanlerxz87-cyber.github.io/Zone4/) could not be fetched, because outbound access is limited to GitHub, npm and PyPI hosts. Live status is confirmed only through the Pages API (`status: built`, commit match). The site is not yet confirmed live in a browser.
+- **Follow-up for the repository owner:** in Settings → Pages, set the source to `main` `/docs`, or leave it on `/` with the redirect. Either way, the public URL should resolve to the dashboard.
+- Actions: the `Site checks` workflow (`site-checks.yml`) is added. Its run status was not visible through the Actions API, which returns 403 for this token.
+
