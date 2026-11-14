@@ -2,7 +2,7 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
-**Live site (GitHub Pages, from `main` `/docs`):** https://kanlerxz87-cyber.github.io/Zone4/
+**Live site (GitHub Pages, legacy build of `main` `/`, served through a root redirect to `docs/`):** https://kanlerxz87-cyber.github.io/Zone4/
 
 ## What is in the repo
 
@@ -35,8 +35,9 @@ GitHub Pages is a legacy build of `main` `/` (the repository's Pages source). Th
 - Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 3(t) restrict them to Amazon-served links or PA-API / Creators API data.
 - Commission rates are **blank** (the official schedule is behind an Amazon sign-in).
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
+- Amazon links on the site (source and competitor links) carry **no Associates tag**. Participation Requirements 2(b) require one. No Associates ID was supplied, so none was added (F-18).
 - Automated research, AI article generation and click tracking are **not built**. See `data/content.json` (`not_built`) and `data/flags.json`.
 
-Start with `flagged.html` on the live site for the items that need your decision.
+Start with `flagged.html` on the live site for the items that need your decision. The 2026-11-14 integration pass re-checked the three product pages, the Associates policies and agreement, the Conditions of Use and the FTC guidance against the official pages (see `data/sources.json`).
 
 The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."
