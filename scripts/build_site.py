@@ -165,14 +165,14 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (as shown)", p["brand"], "Verified (Item details)" if p["id"] == "P2" else "Verified (title and byline)", src, "F-05" if p["id"] == "P2" else ""),
-            ("Manufacturer (Item details)", p.get("manufacturer", ""), "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-21"),
+            ("Brand (Item details)", p["brand"], "Verified (Item details)" if p["id"] == "P2" else "Verified (earlier session; Item details not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Manufacturer (Item details)", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-21"),
             ("Category path", p["category_path"], "Verified", src, ""),
-            ("Capacity (as listed)", p["capacity"], "Verified as listed", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "")),
+            ("Capacity (as listed)", p["capacity"], "Verified as listed (earlier session; not re-read, F-18)", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "F-18")),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, "F-07" if p["id"] == "P1" else ""),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown; 'Sponsored' label inconsistent", src, "F-10"),
+            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown (re-read 2026-11-14)" + ("; Sponsored label on some reads" if p["id"] in ("P2", "P3") else ""), src, "F-10" if p["id"] in ("P2", "P3") else ""),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
@@ -255,7 +255,7 @@ def hero(title: str, lead: str) -> str:
 
 def page_index(current: Page) -> str:
     kpis = [
-        ("3 of 3", "Products with verified ASIN, category and brand (P2 brand from Item details, F-05)"),
+        ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
         ("0", "Amazon prices published (policy F-02)"),
         ("0 of 3", "Commission rates verified (F-01)"),
         (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for review page)"),

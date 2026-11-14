@@ -136,7 +136,7 @@ def check_site() -> None:
         if PRICE_RE.search(re.sub(r"<[^>]+>", " ", raw)):
             fail(f"{rel}: contains a currency amount (Amazon prices are withheld under Participation Requirements 2(b))")
         if RATING_RE.search(raw):
-            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 3(t))")
+            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 6(t))")
 
     for page, sp in parsed.items():
         rel = page.relative_to(ROOT)
