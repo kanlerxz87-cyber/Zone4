@@ -101,7 +101,8 @@ class PageParser(HTMLParser):
         self.bad_rows: list[int] = []
         self.row_texts: list[str] = []
         self.row_text: list[str] | None = None
-        self.shop_links: list[tuple[str, int]] = []     # (href, row number; 0 = outside any table row)
+        self.shop_links: list[tuple[str, int, list[str] | None]] = []  # href, row number, enclosing paragraph text
+        self.current_paragraph: list[str] | None = None
         self.current_row_no = 0                          # row number of the row being parsed, 0 outside a row
         self.tables = 0
         self.tables_with_thead = 0
@@ -127,6 +128,8 @@ class PageParser(HTMLParser):
                 self.meta[name] = a.get("content") or ""
         if tag == "h1":
             self.h1_count += 1
+        if tag == "p":
+            self.current_paragraph = []
         if tag in ("a", "link", "script", "img", "iframe"):
             url = a.get("href") or a.get("src")
             if url:
@@ -142,7 +145,7 @@ class PageParser(HTMLParser):
                     if "shop" in cls.split():
                         # row 0 means the link is not inside a table row at all; the
                         # page-global row counter must not be used for that case.
-                        self.shop_links.append((url, self.current_row_no))
+                        self.shop_links.append((url, self.current_row_no, self.current_paragraph))
         if tag == "nav":
             self.in_nav = True
         if tag == "table":
@@ -169,6 +172,8 @@ class PageParser(HTMLParser):
     def handle_endtag(self, tag):
         if tag == "title":
             self.in_title = False
+        if tag == "p":
+            self.current_paragraph = None
         if tag == "thead":
             if self.current_table_has_thead:
                 self.tables_with_thead += 1
@@ -191,6 +196,8 @@ class PageParser(HTMLParser):
     def handle_data(self, data):
         if self.in_title:
             self.title_parts.append(data)
+        if self.current_paragraph is not None:
+            self.current_paragraph.append(data)
         if self.row_text is not None:
             self.row_text.append(data)
         if self.in_footer and re.search(r"Data observed", data):
@@ -270,7 +277,7 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     if PRICE_RE.search(re.sub(r"<[^>]+>", " ", stripped)):
         fail(f"{rel}: currency amount in visible text (prices withheld, Participation Requirements 2(b))")
     if RATING_RE.search(path.read_text(encoding="utf-8")):
-        fail(f"{rel}: star-rating pattern present (withheld, Participation Requirements 3(t))")
+        fail(f"{rel}: star-rating pattern present (withheld, Participation Requirements 6(t))")
     if LOCATION_RESIDUE_RE.search(text):
         fail(f"{rel}: location-claim residue found (flag F-09: user location must not be asserted)")
 
@@ -321,17 +328,22 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     elif not sp.aria_current:
         warn(f"{rel}: nav page without aria-current=\"page\"")
 
-    # -- affiliate link hygiene
-    for href, row_no in sp.shop_links:
+    # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
+    # link, and the link carries a plain-language paid-link label.
+    for href, row_no, paragraph in sp.shop_links:
         if href not in short_links:
             fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
         if row_no == 0:
-            warn(f"{rel}: shop link outside a table row (link-level disclosure not checked): {href}")
+            context = " ".join(paragraph or [])
         elif 1 <= row_no <= len(sp.row_texts):
-            if DISCLOSURE not in sp.row_texts[row_no - 1]:
-                fail(f"{rel}: shop link in table row {row_no} lacks the disclosure sentence in the same row")
+            context = sp.row_texts[row_no - 1]
         else:
             warn(f"{rel}: shop link in row {row_no} could not be matched to a table row: {href}")
+            continue
+        if DISCLOSURE not in context:
+            fail(f"{rel}: shop link lacks the Associates disclosure in its enclosing paragraph or table row")
+        if "paid link" not in context.lower():
+            fail(f"{rel}: shop link lacks a nearby plain-language paid-link label")
 
 
 def check_products_coverage(asins: set[str], short_links: set[str]) -> None:

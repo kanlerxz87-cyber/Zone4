@@ -26,7 +26,7 @@ Exit code `0` = pass (warnings may be printed); `1` = at least one failure.
 | Every internal link and `#anchor` resolves | "No broken links" merge rule |
 | External anchors: official hosts only, `rel="noopener noreferrer"` | Source integrity + tab-nabbing guard |
 | Every table body row links to an official source | Brief: every table row needs an official source link |
-| No currency amounts, no star-rating patterns | Participation Requirements 2(b) / 3(t) |
+| No currency amounts, no star-rating patterns | Participation Requirements 2(b) / 6(t) |
 | No location-claim residue (`Bucharest`/`Romania`) | Flag F-09 regression guard |
 | Shop links only to the three supplied `link.amazon` short links, with the disclosure sentence in the same table row | Link-level disclosure near each affiliate link |
 | `products.html` lists all three ASINs and all three short links | Coverage of the three supplied products |

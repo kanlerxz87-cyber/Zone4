@@ -81,7 +81,7 @@
       "requirement": "Analyze pricing.",
       "status": "Not built - blocked (policy)",
       "delivered": "",
-      "blocker": "Pricing analysis stays blocked. Participation Requirement 2(b) permits prices and availability only if Amazon serves the link or the data comes from the Creators API, and 6(y) prohibits price tracking and price alerting functionality unless Amazon agrees otherwise. The commission rate is published because it is a program term rather than Amazon pricing; no price is published (F-02).",
+      "blocker": "Pricing analysis stays blocked. Participation Requirement 2(b) permits prices and availability only if Amazon serves the link or the data comes from the Creators API, and 6(y) prohibits price tracking and price alerting functionality unless Amazon agrees otherwise. The official category table rate is kept separate; no product-level commission assignment is published without verification (F-01). No price is published (F-02).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -126,10 +126,10 @@
       "area": "Commission analysis",
       "requirement": "Analyze commission potential.",
       "status": "Delivered (partial)",
-      "delivered": "The official Standard Commission Income Statement is published at a public URL that needs no sign-in, and its Table 1 lists the Kitchen band at 4.50%. The site publishes that rate on every product row and in the verification log, with the table cited on the row.",
-      "blocker": "The commission category Amazon assigns to each of the three ASINs cannot be confirmed from outside Associates Central. Table 1 has both a 'Kitchen' band at 4.50% and a 'Home' band at 3.00%, and an air fryer is a kitchen small appliance, so the Kitchen band is the right reading but is not proven per item. Commission income is also paid on Qualifying Revenue, which excludes shipping, tax and similar items, so a rate is not a per-order amount. Flag F-01.",
+      "delivered": "The official public Standard Commission Income Statement Table 1 lists the Kitchen category at 4.50%. That is recorded as a category-level reference only; all three product-level commission cells remain blank because no official source reviewed confirms the commission category assigned to each ASIN.",
+      "blocker": "Amazon’s assigned commission category for each of the three ASINs cannot be confirmed from the official sources reviewed. Table 1 includes Kitchen at 4.50% and Home at 3.00%; the product page breadcrumb alone does not establish the Associates commission category. No product-level rate or earnings estimate is published. Qualifying Revenue also excludes shipping, tax and similar items. Flag F-01.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/schedule",
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
@@ -187,7 +187,7 @@
       "requirement": "Identify profitable niches.",
       "status": "Delivered (partial)",
       "delivered": "Findings A-01 to A-04 state the niche actually evidenced: all three products share one Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers), two share a brand, and the set spans three formats.",
-      "blocker": "'Profitable' cannot be evidenced: the commission rate is unverified (F-01) and prices are withheld (F-02), so no profitability claim is made. The sample is three products, not a market scan.",
+      "blocker": "'Profitable' cannot be evidenced: the product-specific commission category assignment is unverified (F-01) and prices are withheld (F-02), so no profitability claim is made. The sample is three products, not a market scan.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -399,10 +399,11 @@
       "area": "Verification",
       "requirement": "If a value cannot be confirmed from an official source, leave it blank and flag it as unverified.",
       "status": "Delivered",
-      "delivered": "Prices, ratings, review counts, commission rates, trend and conversion are blank on the site and appear as flags F-01, F-02 and F-15 on the Flagged for review page with their sources and the action needed.",
+      "delivered": "Unconfirmed product-level rates, prices, ratings, review counts, trend and conversion values are blank and flagged with their official sources. The official Kitchen category rate (4.50%) is kept separate as a category-level reference and is not attributed to a product. Flags F-01, F-02 and F-15.",
       "blocker": "",
       "sources": [
-        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json"
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
       ],
       "flags": []
     },

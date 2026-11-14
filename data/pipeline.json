@@ -25,7 +25,7 @@
       "stage": "Identity, brand and category extraction",
       "what_it_does": "Reads the listing title, brand byline, store link and category breadcrumb from each product page.",
       "status": "Implemented",
-      "output": "Brand byline for P1 and P3, unresolved brand for P2, and one shared category path for all three.",
+      "output": "Brand byline for P1 and P3; P2 brand and manufacturer verified from its Item details table (F-05 resolved); one shared category path for all three.",
       "requirement": "Program Content may not be altered, and material posted on the site must be accurate, complete and appropriate.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements 3(c) and 6(a)"
@@ -56,19 +56,19 @@
       "what_it_does": "Groups the products into a promotable niche and describes the format sub-types inside it.",
       "status": "Partly implemented",
       "output": "One verified niche (countertop air fryers) split into three sub-categories, each with its own page.",
-      "requirement": "A niche can only be ranked as profitable once a commission rate and a demand signal are available. Neither is connected, so no niche is called the most profitable.",
-      "source_url": "https://affiliate-program.amazon.com/help/operating/schedule",
-      "source_ref": "Standard Commission Income schedule (behind sign-in) and Program Policies, Participation Requirements 6(z)"
+      "requirement": "A niche can only be ranked as profitable once product-specific commission category assignments and a demand signal are available. Neither is confirmed, so no niche is called the most profitable.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "source_ref": "Standard Commission Income Statement Table 1; Program Policies, Participation Requirements 6(z)"
     },
     {
       "id": "PL-6",
       "stage": "Commission and earnings modelling",
       "what_it_does": "Would multiply traffic, conversion and the category rate to project earnings.",
       "status": "Not built",
-      "output": "Empty. The rate cell is blank on every product row and no earnings figure is published.",
-      "requirement": "The category rate sits in the Standard Commission Income schedule, which redirects to an Amazon sign-in, and prices may not be published without the API route.",
-      "source_url": "https://affiliate-program.amazon.com/help/operating/schedule",
-      "source_ref": "Standard Commission Income schedule; Program Policies, Participation Requirements 2(b)"
+      "output": "No earnings projection. The official Table 1 category-level Kitchen rate (4.50%) is recorded separately; product-level rate cells stay blank until Amazon confirms each ASIN’s commission category (F-01).",
+      "requirement": "The public Table 1 gives category rates, but the official sources reviewed do not establish the commission category assigned to each ASIN. Product prices and attributed click/order/revenue data are also unavailable, so no per-product estimate is defensible.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "source_ref": "Standard Commission Income Statement, Table 1; per-ASIN mapping unresolved (F-01)"
     },
     {
       "id": "PL-7",
@@ -192,12 +192,12 @@
     {
       "id": "TR-5",
       "metric": "Category commission rate",
-      "how_obtained": "Standard Commission Income schedule in Associates Central",
-      "source_url": "https://affiliate-program.amazon.com/help/operating/schedule",
-      "source_ref": "Standard Commission Income schedule (Appendix link)",
+      "how_obtained": "Official Standard Commission Income Statement Table 1 (public category-level rate table); ASIN-specific category assignment must be confirmed in Associates Central.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "source_ref": "Standard Commission Income Statement, Table 1",
       "current_value": "",
       "status": "Unverified",
-      "notes": "The URL redirects to an Amazon sign-in, so no rate could be read. Flag F-01."
+      "notes": "Table 1 lists Kitchen at 4.50%, but no source reviewed confirms the assigned commission category for each product. Product-level value remains blank; Flag F-01."
     },
     {
       "id": "TR-6",

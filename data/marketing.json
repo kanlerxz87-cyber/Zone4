@@ -406,7 +406,7 @@
         },
         {
           "id": "M-P2-B7",
-          "text": "The brand is the other open point. The page shows the store 'Emeril Store' and a byline of 'Innovation IQ', while the listing title carries the name Emeril Lagasse. Rather than assume the brand, this research records it as unresolved and links the product page so a reader can check the store listing directly.",
+          "text": "The product identity is clear in the official Item details: Brand Name Emeril and Manufacturer Emeril Lagasse. The product page also links to the Emeril Store. “Innovation IQ” appears as the contributor to a customer-review video, not as the product brand or product byline. The earlier ambiguity is resolved from the listing details (F-05).",
           "fact_ids": [
             "M-P2-F8",
             "M-P2-F1"
@@ -425,11 +425,11 @@
       "facts": [
         {
           "id": "M-P2-F1",
-          "field": "Brand",
-          "value": "Unresolved - page shows the store 'Emeril Store' and the byline 'Innovation IQ'",
+          "field": "Brand and manufacturer",
+          "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
-          "source_ref": "Store link and byline on the Amazon product page",
-          "note": "Flag F-05."
+          "source_ref": "Product information, Item details table (Brand Name and Manufacturer rows)",
+          "note": "Confirmed; F-05 resolved."
         },
         {
           "id": "M-P2-F2",
@@ -481,11 +481,11 @@
         },
         {
           "id": "M-P2-F8",
-          "field": "Store and byline shown on the page",
-          "value": "'Visit the Emeril Store'; byline 'Innovation IQ'",
+          "field": "Store and customer-review attribution shown on the page",
+          "value": "Store link: Visit the Emeril Store; Innovation IQ is the contributor to a customer-review video, not the product brand or byline.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
-          "source_ref": "Brand and byline block on the Amazon product page",
-          "note": "The byline block on this listing carries an 'Earns Commissions' label."
+          "source_ref": "Brand store link, customer-review video block, and Item details table on the Amazon product page",
+          "note": "The review block also carries “Earns Commissions”; it is not a product-brand designation."
         },
         {
           "id": "M-P2-F9",
@@ -1082,7 +1082,7 @@
         },
         {
           "id": "M-BUY-B5",
-          "text": "Two product traps deserve a line each. The single basket fryer is a family of 6, 8 and 9 quart sizes on one page, so a link can point at one size while a review describes another. The toaster oven listing carries the store name and a byline that do not match the name in its own title, so the brand should be confirmed with the seller rather than assumed from the title.",
+          "text": "Two product details deserve a line each. The single basket fryer is a family of 6, 8 and 9 quart sizes on one page, so check which variant the link selects. The toaster oven’s Item details confirm the Emeril brand and Emeril Lagasse manufacturer; the separate open question is the listing’s 24 cooking functions versus 25 pre-sets (F-26).",
           "fact_ids": [
             "M-BUY-F5",
             "M-BUY-F6"
@@ -1139,11 +1139,11 @@
         },
         {
           "id": "M-BUY-F6",
-          "field": "Brand not established for P2",
-          "value": "Store 'Emeril Store'; byline 'Innovation IQ'; listing title names Emeril Lagasse",
+          "field": "P2 brand and manufacturer",
+          "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse; product page links to the Emeril Store.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
-          "source_ref": "Brand and byline block on the Amazon product page",
-          "note": "Flag F-05."
+          "source_ref": "Item details table and brand store link on the Amazon product page",
+          "note": "Confirmed; F-05 resolved. “Innovation IQ” is a customer-review video contributor, not the product brand."
         },
         {
           "id": "M-BUY-F7",
@@ -1163,7 +1163,7 @@
       "compliance_notes": [
         "No price, star rating or review count appears in the guide.",
         "Every step is tied to a verified field; no step depends on a withheld value.",
-        "Unresolved brand and unit questions are stated openly instead of being smoothed over."
+        "Capacity units are kept as listed, and P2’s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
       ]
     }
   ],
