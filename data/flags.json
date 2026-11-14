@@ -117,7 +117,7 @@
       "severity": "Medium",
       "title": "Earlier Pages workflow failure (resolved; root redirect is used)",
       "detail": "An earlier 'Deploy static site to GitHub Pages' workflow failed before creating jobs. The repository's Pages source is main root (/); the root index redirects to docs/index.html. The failure was resolved by replacing the deployment workflow with site checks and confirming the subsequent Pages deployment succeeded (deployment details are in COORDINATION.md).",
-      "sources": ["https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287"],
+      "sources": ["https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157"],
       "status": "Resolved; historical record",
       "action": "See COORDINATION.md for the successful deployment and site-check run links."
     },
