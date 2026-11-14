@@ -2,7 +2,7 @@
   "_meta": {
     "description": "Marketing content kit for the three supplied air-fryer products: one article per product, one comparison page, one buying guide, an SEO rule set and a publishing checklist. Every factual statement is a row in a 'facts' table with an official source link. Copy is written in original words; it does not reproduce Amazon listing prose.",
     "observed_utc": "2026-11-14",
-    "method": "Each article may use only: the product's Amazon listing title as an identifier (always linked), the brand byline, the category breadcrumb, and the structured fields of the Amazon product-details table (Special Feature, Product Dimensions, Color, Capacity, Material), plus the factual statements on the product page that are listed in that product's 'facts' table with a source link. Prices, star ratings, review counts, 'Amazon's Choice' and 'bought in past month' badges are excluded (Participation Requirements 2(b) and 6(t)).",
+    "method": "Each article uses facts recorded from official product pages: listing titles, explicit Item details brand/manufacturer fields where read, category breadcrumbs, and structured product details or feature statements listed in the fact table with source links. P2's store link and creator/review block are recorded separately from the product brand. Prices, ratings, review counts, popularity badges and search-volume figures are excluded; no conversions or commission rates are inferred.",
     "excluded": [
       "Amazon prices and availability - Participation Requirement 2(b): a site may show them only if Amazon serves the link, or the data comes from Creators API / PA API. Neither is connected, so no price appears.",
       "Star ratings, review counts and Amazon popularity badges - Participation Requirement 6(t): these may be displayed only if obtained through Creators API or PA API.",
@@ -132,7 +132,7 @@
         },
         {
           "id": "M-P1-B5",
-          "text": "For everyday use the listing describes a digital dual basket temperature range of 200 to 450 degrees Fahrenheit, removable non-stick coated baskets that are dishwasher safe, and a cETL listing with a one-year assurance from Chefman at 120 volts and 1700 watts. The baskets are listed as two independent 3 quart baskets, which is the practical reason to choose this format over a single basket.",
+          "text": "The listing states a digital dual-basket temperature range of 200 to 450 degrees Fahrenheit, removable non-stick dishwasher-safe baskets, cETL, a one-year assurance, 120 volts and 1700 watts. It names two independent 3-quart baskets. These are page statements, not results from independent performance testing.",
           "fact_ids": [
             "M-P1-F2",
             "M-P1-F8"
@@ -140,7 +140,7 @@
         },
         {
           "id": "M-P1-B6",
-          "text": "Amazon's own also-viewed carousel on this listing pairs it with three other listings: another Chefman dual basket model, a Gourmia 10 quart dual basket air fryer and a Nutrichef 8.8 quart double basket air fryer. That set is a useful shortlist of alternatives, but it is a snapshot of one recommendation widget rather than a ranking, and the widget can carry paid placements, so the three listings are offered as starting points rather than as a recommendation.",
+          "text": "On the captured product-page read, the “also viewed” carousel showed another Chefman dual-basket model, a Gourmia dual-basket model and a Nutrichef double-basket model. This is a dated widget snapshot, not a ranking or evidence of sales; its contents can change between reads (F-29).",
           "fact_ids": [
             "M-P1-F11",
             "M-P1-F12"
@@ -357,7 +357,7 @@
       "body": [
         {
           "id": "M-P2-B1",
-          "text": "An air fryer toaster oven is a countertop oven that air fries as well as baking, toasting and roasting. The format trades countertop space for one appliance that does several jobs, which is why it is usually compared against a dedicated air fryer rather than against a conventional toaster oven.",
+          "text": "The P2 listing identifies a French-door, multi-function air fryer toaster oven. This article records its listed format and feature names; it does not claim tested cooking performance or that the appliance replaces another product.",
           "fact_ids": [
             "M-P2-F2"
           ]
@@ -380,7 +380,7 @@
         },
         {
           "id": "M-P2-B4",
-          "text": "The other structured fields are a footprint of 16.9 inches deep by 15.8 inches wide by 14.8 inches high, a colour of Stainless Steel, and a material of Stainless Steel. That footprint is the single most useful number for a buyer who already owns an air fryer, because it decides whether the two appliances can share a counter.",
+          "text": "The listed dimensions are 16.9 inches deep by 15.8 inches wide by 14.8 inches high; the color and material fields both say Stainless Steel. Check these listed dimensions against the space available; no clearance or fit measurement is inferred.",
           "fact_ids": [
             "M-P2-F4",
             "M-P2-F5",
@@ -544,7 +544,7 @@
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
-        "The brand is not asserted; the page reports what the listing shows and flags the gap.",
+        "P2 brand and manufacturer come from the explicit Item details fields; the separate creator/review block is not used as a product brand.",
         "Both the 24 and the 25 function counts are reported, with the discrepancy flagged."
       ]
     },
@@ -625,7 +625,7 @@
       "body": [
         {
           "id": "M-P3-B1",
-          "text": "A single basket air fryer cooks in one basket rather than two. The trade is a smaller cooking area than a dual basket unit in exchange for a shorter body, a simpler set of controls and a price point that usually sits below the dual basket models. Inside this set it is the direct alternative to the dual basket oven.",
+          "text": "The linked product page identifies an 8-quart, single-basket Chefman air fryer. Its About this item section lists four presets and a 4-in-1 function set. This article reports those listing details without ranking the model against the other formats.",
           "fact_ids": [
             "M-P3-F2"
           ]
@@ -668,7 +668,7 @@
         },
         {
           "id": "M-P3-B6",
-          "text": "Amazon's also-viewed carousel on this listing pairs it with two smaller Chefman 6 quart compact models and a 6 quart Cosori 9-in-1 TurboBlaze air fryer. That is a useful shortlist at the budget end of the category, and it is again a snapshot of one recommendation widget rather than a ranking.",
+          "text": "The captured “also viewed” carousel showed two Chefman 6-quart compact models and a Cosori 6-quart TurboBlaze listing. This is a dated snapshot of that product-page widget, not a ranking, price comparison or demand signal; its membership can change (F-29).",
           "fact_ids": [
             "M-P3-F10",
             "M-P3-F11",
@@ -872,7 +872,7 @@
       "body": [
         {
           "id": "M-CMP-B1",
-          "text": "Three countertop air fryers sit in this comparison, and they are not three sizes of the same machine. One is a dual basket oven that cooks two dishes at once. One is a single basket fryer with a four-in-one function list. One is a French door toaster oven that also air fries. Choosing between them is a decision about format and footprint, not about a single specification.",
+          "text": "This comparison covers three countertop air-fryer formats: a dual-basket oven, a single-basket fryer and a French-door air-fryer toaster oven. It organizes their listed attributes side by side and does not rank or endorse a product.",
           "fact_ids": [
             "M-CMP-F1",
             "M-CMP-F2",
@@ -882,7 +882,7 @@
         },
         {
           "id": "M-CMP-B2",
-          "text": "On capacity the three listings quote different units. The dual basket oven's product details table says 6 liters while its title says 6 quart. The single basket fryer says 8 quarts in both places. The toaster oven's table says 24.6 liters while its title says 26QT. Because the pages state both conventions, this comparison prints each value with its unit and converts nothing. A reader who wants a like-for-like number should compare basket counts and household size instead.",
+          "text": "The product-details tables use different capacity units: P1 lists 6 liters while its title says 6 quart; P3 lists 8 quarts; P2 lists 24.6 liters while its title says 26QT. The pages do not reconcile the P1 and P2 unit differences, so this comparison keeps the original units and does not convert them.",
           "fact_ids": [
             "M-CMP-F1",
             "M-CMP-F2",
@@ -891,7 +891,7 @@
         },
         {
           "id": "M-CMP-B3",
-          "text": "Footprint separates them cleanly. The dual basket oven measures 13.38 by 11.81 by 10.63 inches. The single basket fryer is 12.75 by 13.5 by 10 inches. The toaster oven is 16.9 by 15.8 by 14.8 inches, which is the largest of the three by a clear margin and is usually the deciding factor when a second appliance has to share the counter.",
+          "text": "The listed dimensions are 13.38 by 11.81 by 10.63 inches for P1, 12.75 by 13.5 by 10 inches for P3 and 16.9 by 15.8 by 14.8 inches for P2. P2 is larger on each of the three listed dimensions. Use the product-page measurements to check the intended counter space; no clearance or fit is inferred.",
           "fact_ids": [
             "M-CMP-F1",
             "M-CMP-F2",
@@ -907,7 +907,7 @@
         },
         {
           "id": "M-CMP-B5",
-          "text": "Amazon's recommendation widgets point the three listings at each other's main rivals: the dual basket oven sits beside another Chefman dual basket model, a Gourmia 10 quart dual basket and a Nutrichef 8.8 quart double basket; the single basket fryer sits beside two compact Chefman 6 quart models and a Cosori 6 quart 9-in-1; the toaster oven sits beside a 25 quart Emeril Lagasse dual zone oven, a 20.3 quart Ninja French door oven and a 28 quart HotKing dual-zone unit. These are snapshots of one on-page widget, not a ranking, and the widget can carry paid placements, so they are listed as starting points for further research.",
+          "text": "The captured “also viewed” widgets displayed three other ASINs on each product page. These are dated carousel snapshots, not rankings, market-share evidence or sales data; membership can change between reads (F-29). The fact table links all three product pages used for this snapshot.",
           "fact_ids": [
             "M-CMP-F5"
           ]
@@ -952,7 +952,17 @@
           "value": "Nine distinct ASINs across three carousels: B0B7C327LK, B0BYKGN61Q, B0CNSB81V6, B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH, B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99",
           "source_url": "https://www.amazon.com/dp/B0CDY277D3",
           "source_ref": "'Customers who viewed this item also viewed' carousels on the three product pages",
-          "note": "Snapshots; may include paid placements. Flag F-10."
+          "note": "Snapshots; may include paid placements. Flag F-10.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 also-viewed carousel",
+            "P2 also-viewed carousel",
+            "P3 also-viewed carousel"
+          ]
         },
         {
           "id": "M-CMP-F6",
@@ -960,7 +970,17 @@
           "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
           "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
           "source_ref": "Breadcrumb on all three Amazon product pages",
-          "note": ""
+          "note": "",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 category breadcrumb",
+            "P2 category breadcrumb",
+            "P3 category breadcrumb"
+          ]
         }
       ],
       "cta": {
@@ -972,7 +992,7 @@
       "compliance_notes": [
         "No price, star rating or review count appears anywhere in the comparison table.",
         "Capacity units are shown exactly as listed and are not converted.",
-        "The brand of P2 is not asserted in the comparison."
+        "The comparison does not rank or endorse any of the products."
       ]
     },
     {
@@ -1054,28 +1074,28 @@
       "body": [
         {
           "id": "M-BUY-B1",
-          "text": "Most air fryer comparisons start with capacity, and that is backwards. Capacity only means something once you know how many baskets you are feeding and how much counter you have. Start with the format: a single basket for one dish at a time, two baskets for two dishes side by side, or a toaster oven that also air fries and takes over most of the work a separate oven would do. Every other specification is a filter on top of that choice.",
+          "text": "Start by identifying the format on the product page: P1 has two baskets, P3 has a single basket, and P2 is a French-door air-fryer toaster oven. This guide compares those listed formats and specifications without naming a winner.",
           "fact_ids": [
             "M-BUY-F1"
           ]
         },
         {
           "id": "M-BUY-B2",
-          "text": "Capacity is the second step, and it needs care. Across these three listings the product details tables quote 6 liters, 8 quarts and 24.6 liters, while the listing titles quote 6 quart, 8 quarts and 26QT. Two unit conventions appear on the same pages, so no honest guide can present a single converted figure. Read the number with its unit, count the baskets, and size the appliance against the number of people you cook for.",
+          "text": "Keep source units attached to the capacity values. The details tables list P1 at 6 liters, P3 at 8 quarts and P2 at 24.6 liters; the P1 title says 6 quart and the P2 title says 26QT. The pages do not reconcile the P1 and P2 differences, so this guide does not convert them.",
           "fact_ids": [
             "M-BUY-F2"
           ]
         },
         {
           "id": "M-BUY-B3",
-          "text": "Footprint is the step people skip and then regret. The verified dimensions are 13.38 by 11.81 by 10.63 inches for the dual basket oven, 12.75 by 13.5 by 10 inches for the single basket fryer, and 16.9 by 15.8 by 14.8 inches for the toaster oven. That last number is the one to take to the kitchen and measure against the gap between the wall and the wall cabinet.",
+          "text": "Check the listed dimensions against available counter space: 13.38 by 11.81 by 10.63 inches for P1; 12.75 by 13.5 by 10 inches for P3; and 16.9 by 15.8 by 14.8 inches for P2. P2 is larger on each listed dimension; this guide does not add a clearance estimate.",
           "fact_ids": [
             "M-BUY-F3"
           ]
         },
         {
           "id": "M-BUY-B4",
-          "text": "Function lists are useful, but they are marketing statements and they are not always internally consistent. The toaster oven listing states 24 cooking functions in its title and 25 cooking pre-sets in its feature section, and names Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. Where a page disagrees with itself, treat the named modes as the reliable part and the count as the soft part.",
+          "text": "P2’s page contains a count discrepancy: the title says 24 cooking functions, while the feature section says 25 cooking pre-sets and names Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. The source does not explain the difference, so both counts remain reported and unresolved (F-26).",
           "fact_ids": [
             "M-BUY-F4"
           ]
@@ -1103,7 +1123,17 @@
           "value": "Dual basket oven (P1), single basket 4-in-1 fryer (P3), French door multi-function air fryer toaster oven (P2)",
           "source_url": "https://www.amazon.com/dp/B0CDY277D3",
           "source_ref": "Listing titles and product details tables on the three Amazon product pages",
-          "note": ""
+          "note": "",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 product page",
+            "P2 product page",
+            "P3 product page"
+          ]
         },
         {
           "id": "M-BUY-F2",
@@ -1111,7 +1141,17 @@
           "value": "P1: 6 liters (title 6 quart). P3: 8 quarts. P2: 24.6 liters (title 26QT).",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Product details tables and listing titles on the three Amazon product pages",
-          "note": "Units not converted. Flags F-06 and F-08."
+          "note": "Units not converted. Flags F-06 and F-08.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 product page",
+            "P2 product page",
+            "P3 product page"
+          ]
         },
         {
           "id": "M-BUY-F3",
@@ -1119,7 +1159,17 @@
           "value": "P1: 13.38\"D x 11.81\"W x 10.63\"H. P3: 12.75\"D x 13.5\"W x 10\"H. P2: 16.9\"D x 15.8\"W x 14.8\"H.",
           "source_url": "https://www.amazon.com/dp/B0CDY277D3",
           "source_ref": "Product details tables on the three Amazon product pages",
-          "note": ""
+          "note": "",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 product page",
+            "P2 product page",
+            "P3 product page"
+          ]
         },
         {
           "id": "M-BUY-F4",
@@ -1127,7 +1177,17 @@
           "value": "P3: 4-in-1 (Bake, Dehydrate, Frozen) with 4 presets. P2: title says 24 cooking functions; feature section says 25 cooking pre-sets. P1: no function count stated; special features listed as + 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Listing titles, 'About this item' sections and product details tables",
-          "note": "P2 discrepancy. Flag F-26."
+          "note": "P2 discrepancy. Flag F-26.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "P1 product page",
+            "P2 product page",
+            "P3 product page"
+          ]
         },
         {
           "id": "M-BUY-F5",

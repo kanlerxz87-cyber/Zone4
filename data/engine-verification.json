@@ -8,9 +8,9 @@
   ],
   "method": [
     "1. Parse the identifier out of the supplied URL (path segment).",
-    "2. Test the identifier against Amazon's published ASIN format (10 alphanumeric characters) \u2014 source S11.",
-    "3. Follow the supplied short link to its target and record the resolved product page; also request https://www.amazon.com/dp/<identifier> to test whether the code itself is an ASIN \u2014 S13.",
-    "4. Test whether the supplied host is a real Amazon-controlled host: DNS resolution + IANA root-zone record for the '.amazon' TLD \u2014 source S12.",
+    "2. Test the identifier against Amazon's published ASIN format (10 alphanumeric characters) — source S11.",
+    "3. Follow the supplied short link to its target and record the resolved product page; also request https://www.amazon.com/dp/<identifier> to test whether the code itself is an ASIN — S13.",
+    "4. Test whether the supplied host is a real Amazon-controlled host: DNS resolution + IANA root-zone record for the '.amazon' TLD — source S12.",
     "5. Any attribute not returned by an official page is left null and flagged; nothing is inferred.",
     "6. Re-read each supplied link in a separate session (2026-11-14) and compare the resolved page title and breadcrumb against the recorded values before publishing any product field."
   ],
@@ -115,11 +115,11 @@
           "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
         },
         "commission_rate_pct": {
-          "value": 4.5,
+          "value": null,
           "source_id": "S1",
-          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "quote": "Table 1 lists Kitchen at 4.50%; this is a category band, not an ASIN assignment.",
           "flag": "ENG-F-016",
-          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+          "reason": "The public Standard Commission Income Statement confirms category rates, but the official sources reviewed do not identify the Associates commission category applicable to this ASIN. Product-level rate remains blank; see ENG-F-016."
         },
         "estimated_earning_per_unit": {
           "withheld": true,
@@ -148,7 +148,7 @@
         }
       },
       "status": "PARTIALLY VERIFIED",
-      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "why_blank": "Product identity and listed specifications are verified from official pages. Prices, ratings, reviews and sales rank are withheld by policy. The product-specific commission category, demand, competition and attributed performance inputs are not verified, so no earnings estimate or score is computed.",
       "flag": "ENG-F-013",
       "resolved_asin": "B0CDY277D3",
       "resolved_url": "https://www.amazon.com/dp/B0CDY277D3"
@@ -197,9 +197,9 @@
         "brand": {
           "value": "Emeril",
           "source_id": "S16",
-          "quote": "'Emeril' brand byline; the Item details table gives the manufacturer as 'Emeril Lagasse'.",
+          "quote": "Item details table: Brand Name 'Emeril'; Manufacturer 'Emeril Lagasse'.",
           "flag": "ENG-F-015",
-          "reason": "Recorded by session arena/1eb689b8 from the Item details table and reproduced here; the brand/byline distinction is their flag F-05, not a gap in this pass."
+          "reason": "Recorded from the official Item details table. The separate store link and creator/review block are not treated as product-brand fields; see ENG-F-017."
         },
         "category": {
           "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
@@ -254,11 +254,11 @@
           "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
         },
         "commission_rate_pct": {
-          "value": 4.5,
+          "value": null,
           "source_id": "S1",
-          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "quote": "Table 1 lists Kitchen at 4.50%; this is a category band, not an ASIN assignment.",
           "flag": "ENG-F-016",
-          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+          "reason": "The public Standard Commission Income Statement confirms category rates, but the official sources reviewed do not identify the Associates commission category applicable to this ASIN. Product-level rate remains blank; see ENG-F-016."
         },
         "estimated_earning_per_unit": {
           "withheld": true,
@@ -287,7 +287,7 @@
         }
       },
       "status": "PARTIALLY VERIFIED",
-      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "why_blank": "Product identity and listed specifications are verified from official pages. Prices, ratings, reviews and sales rank are withheld by policy. The product-specific commission category, demand, competition and attributed performance inputs are not verified, so no earnings estimate or score is computed.",
       "flag": "ENG-F-013",
       "resolved_asin": "B09B7SB46R",
       "resolved_url": "https://www.amazon.com/dp/B09B7SB46R"
@@ -392,11 +392,11 @@
           "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
         },
         "commission_rate_pct": {
-          "value": 4.5,
+          "value": null,
           "source_id": "S1",
-          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "quote": "Table 1 lists Kitchen at 4.50%; this is a category band, not an ASIN assignment.",
           "flag": "ENG-F-016",
-          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+          "reason": "The public Standard Commission Income Statement confirms category rates, but the official sources reviewed do not identify the Associates commission category applicable to this ASIN. Product-level rate remains blank; see ENG-F-016."
         },
         "estimated_earning_per_unit": {
           "withheld": true,
@@ -425,14 +425,14 @@
         }
       },
       "status": "PARTIALLY VERIFIED",
-      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "why_blank": "Product identity and listed specifications are verified from official pages. Prices, ratings, reviews and sales rank are withheld by policy. The product-specific commission category, demand, competition and attributed performance inputs are not verified, so no earnings estimate or score is computed.",
       "flag": "ENG-F-013",
       "resolved_asin": "B08DKYBTPH",
       "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH"
     }
   ],
   "niche_scoring": {
-    "note": "The scoring model is implemented and unit-tested. Identity, category and commission rate are now verified for all three products, but price, rating, review count and sales rank are withheld by policy, so the inputs the score requires are still incomplete and no score is published. Scores are withheld rather than estimated.",
+    "note": "The scoring model is implemented and unit-tested. The public commission table verifies rates by category, but the applicable Associates category for these ASINs is unverified. Price, rating, review-count and sales-rank inputs are withheld or unavailable, so no score is published. Scores are withheld rather than estimated.",
     "inputs_required": [
       "category",
       "price",
@@ -572,7 +572,7 @@
         "https://github.com/kanlerxz87-cyber/Zone4/actions",
         "https://kanlerxz87-cyber.github.io/Zone4/"
       ],
-      "action": "Pick exactly one publisher. Recommended: keep the Actions workflow and set Settings \u2192 Pages \u2192 Build and deployment to 'GitHub Actions'. Left unchanged by this session because it is an account-level setting that other sessions may also be touching."
+      "action": "Pick exactly one publisher. Recommended: keep the Actions workflow and set Settings → Pages → Build and deployment to 'GitHub Actions'. Left unchanged by this session because it is an account-level setting that other sessions may also be touching."
     },
     {
       "id": "ENG-F-012",
@@ -625,14 +625,17 @@
       "id": "ENG-F-016",
       "severity": "medium",
       "target": "P-01, P-02, P-03",
-      "title": "Which commission band Amazon assigns to these ASINs is unconfirmed: Kitchen 4.50% or Home 3.00%",
-      "detail": "Table 1 lists 'Physical Books, Kitchen, Automotive' at 4.50% and 'Toys & Games, Furniture, Home, Home Improvement...' at 3.00%. The breadcrumb's top node is 'Home & Kitchen', which spans both labels, and the rate Amazon actually applies is decided per item by Amazon, not by the browse path. The published 4.50% is recorded as the Kitchen-band reading with this flag attached; it is not a per-ASIN confirmation and no earning figure is derived from it.",
+      "title": "Per-ASIN commission category is unverified; public category bands are confirmed",
+      "detail": "The public Table 1 confirms category bands, including Kitchen at 4.50% and Home at 3.00%. The three product pages show a Home & Kitchen browse path, but the reviewed official sources do not map that path or these ASINs to a specific Associates commission category. No per-ASIN rate or earnings estimate is published; the engine evidence fields remain null until item-specific official evidence is available.",
       "evidence": [
         "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-        "https://affiliate-program.amazon.com/help/operating/policies"
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
       ],
       "status": "Needs account check",
-      "action": "Confirm the applied rate for each ASIN in the Associates Central earnings report, then drop or correct the published value."
+      "action": "Confirm each ASIN’s applicable commission category using an official item-specific account source. Until then, keep the per-ASIN value null and do not score or estimate earnings."
     },
     {
       "id": "ENG-F-017",

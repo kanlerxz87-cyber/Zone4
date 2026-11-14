@@ -3,7 +3,8 @@
     "description": "Line-by-line verification performed on 2026-11-14 (UTC) by session arena/ebf5c261-zone4 (final integration session). Every row names the official source that was read. No value was inferred; anything not readable from an official source stays blank and flagged.",
     "method": "Each user-supplied short link was fetched and followed to its Amazon product page. Titles, breadcrumbs, specification/Item-details tables, also-viewed carousels, redirect parameters and delivery location were read directly from the returned official pages. Associates and FTC pages were read at the cited URLs. GitHub Pages state was read from the GitHub REST API.",
     "session": "arena/ebf5c261-zone4",
-    "observed_utc": "2026-11-14"
+    "observed_utc": "2026-11-14",
+    "reconciliation_note_2026_11_14": "This is a dated verification snapshot. The historic sign-in-only Appendix schedule URL noted here is not the public Standard Commission Income Statement. Public Table 1 confirms category rates, but no reviewed official source maps the three ASINs to a category; product-level rates therefore remain blank (F-01). P2 brand is the explicit Item details field; the separate store/creator-review blocks are not the product brand."
   },
   "products": [
     {
@@ -20,7 +21,11 @@
         "color": "Black, Gray (Item details); title ends 'Black' (F-07 confirmed)",
         "material": "Metal, Plastic",
         "model_number": "RJ38-SQPF-3TDB-2W (Item details and Product Description)",
-        "also_viewed_asins": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+        "also_viewed_asins": [
+          "B0B7C327LK",
+          "B0BYKGN61Q",
+          "B0CNSB81V6"
+        ],
         "delivery_location": "US delivery location shown ('Herndon 20170'); not the user's location (F-09)"
       },
       "official_source": "https://www.amazon.com/dp/B0CDY277D3",
@@ -34,14 +39,18 @@
       "verified_fields": {
         "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
         "brand": "Emeril (Item details: 'Brand Name | Emeril', 'Manufacturer | Emeril Lagasse') - resolves F-05",
-        "brand_original_observation": "Earlier snapshot showed store 'Emeril Store' and byline 'Innovation IQ'. The current page's Item details table states the brand and manufacturer above; the Item details values are used.",
+        "brand_original_observation": "Earlier snapshot showed the Emeril Store link and a separate Innovation IQ creator/review block. The current page's Item details table states Brand Name Emeril and Manufacturer Emeril Lagasse; those explicit fields are used.",
         "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
         "capacity": "24.6 liters (Item details); title says '26QT' (F-06 confirmed)",
         "dimensions": "16.9\"D x 15.8\"W x 14.8\"H",
         "color": "Stainless Steel",
         "material": "Stainless Steel",
         "model_number": "4-00675-02X-VN (Item details)",
-        "also_viewed_asins": ["B0BZ52FLKC", "B0FM5KF34G", "B0F92GL7JH"],
+        "also_viewed_asins": [
+          "B0BZ52FLKC",
+          "B0FM5KF34G",
+          "B0F92GL7JH"
+        ],
         "carousel_label": "This snapshot did not show a 'Sponsored' label above the also-viewed carousel; the prior snapshot did (F-10 remains open, rendering varies)"
       },
       "official_source": "https://www.amazon.com/dp/B09B7SB46R",
@@ -53,7 +62,7 @@
       "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH",
       "resolution": "Short link redirects to the ASIN B08DKYBTPH product page with variation parameter th=1 (the 8-quart variant; F-08). No tag= parameter (F-03 confirmed).",
       "verified_fields": {
-        "title": "Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
         "brand": "Chefman (Item details: 'Brand Name | Chefman', 'Manufacturer | Chefman')",
         "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
         "capacity": "8 quarts (Item details 'Capacity' and 'Size'); multiple GTINs on the page indicate a size-variant family (F-08)",
@@ -61,7 +70,11 @@
         "color": "Stainless steel",
         "material": "Plastic, Stainless Steel",
         "part_number": "RJ38-SQSS-8T (Item details)",
-        "also_viewed_asins": ["B0CNY1YVDD", "B0D5FX6VRL", "B0C33CHG99"],
+        "also_viewed_asins": [
+          "B0CNY1YVDD",
+          "B0D5FX6VRL",
+          "B0C33CHG99"
+        ],
         "delivery_location": "US delivery location shown ('Herndon 20170'); not the user's location (F-09)"
       },
       "official_source": "https://www.amazon.com/dp/B08DKYBTPH",
@@ -72,7 +85,7 @@
     {
       "id": "V-OA",
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
-      "checked": "Operating Agreement, 'Updated: October 15, 2025'. Section 5 'Identifying Yourself as an Associate' requires: \u201cAs an Amazon Associate I earn from qualifying purchases.\u201d - rule R-01 confirmed verbatim.",
+      "checked": "Operating Agreement, 'Updated: October 15, 2025'. Section 5 'Identifying Yourself as an Associate' requires: “As an Amazon Associate I earn from qualifying purchases.” - rule R-01 confirmed verbatim.",
       "status": "Verified"
     },
     {
