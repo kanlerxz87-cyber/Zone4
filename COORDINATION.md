@@ -70,7 +70,9 @@ The current active session is working on `arena/13dd55ca-zone4` (branched from `
 - **Gates it resolved:** the `qa/audit_site.py` official-host list had drifted from `verify.py`'s — synced with `test_independent_qa_auditor_agrees` guarding future drift; `engine.cli audit` crashed on an unexercised CLI attribute — fixed and covered by `TestCliSurface`.
 - *(Integration notes: that session's F-50…F-54 were renumbered into the shared register as **F-31…F-35** by `arena/3036372b-zone4` (map in `data/flags.json` `_meta`); its "13 pages" became 15; the 4.50%-per-row publication it shipped was later reconciled to category-level-only reference with blank product cells by `arena/13dd55ca-zone4` (PR #38), which this wrap-up adopts; the "10 qualifying sales in 30 days" Creators API prerequisite was re-confirmed on the official introduction page in this wrap-up's read.)*
 
-**Status:** wrap-up complete; PR number, merge result and Pages confirmation are recorded in the next entry once checks pass.
+**Status:** wrap-up complete.
+
+**PR and Pages result (final).** PR [#39](https://github.com/kanlerxz87-cyber/Zone4/pull/39) (`arena/46c18cd1-zone4` → `main`) passed all three PR gates on head `0f5a67a` (CI verify, Site checks verify, QA audit — all SUCCESS), was merged at 2026-11-14 19:26:49Z as merge commit `5547a6e`, and on that merge commit all four main workflows — CI, Site checks, QA audit and `pages build and deployment` — completed successfully. The GitHub Pages API reports status `built` for commit `5547a6e` (updated 19:26:50Z), source `main` `/` (legacy), HTTPS enforced; live site: https://kanlerxz87-cyber.github.io/Zone4/. Open log-only PRs #22 and #34 were closed with comments pointing at the adopted records above. No other session's files were edited; both mid-session main advances (#38/#40, #41) were rebased over with their work kept canonical, as logged above.
 
 ### Session arena/01ab2940-zone4 — completion (2026-11-14, UTC)
 
