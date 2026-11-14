@@ -632,6 +632,23 @@ class TestSiteBuild(unittest.TestCase):
                                  cwd=str(ROOT), capture_output=True, text=True)
             self.assertEqual(res.returncode, 0, res.stdout + res.stderr)
 
+    def test_independent_qa_auditor_agrees(self):
+        """qa/audit_site.py keeps its own official-host list; drift fails the build.
+
+        It found exactly that when new sources were added to the data layer: the
+        build gate passed while the QA auditor called the same rows unsourced.
+        """
+        import subprocess
+        script = ROOT / "qa" / "audit_site.py"
+        if not script.exists():
+            self.skipTest("qa/audit_site.py not present on this branch yet")
+        official = (ROOT / "scripts" / "verify.py").read_text()
+        qa_src = script.read_text()
+        for host in ("sell.amazon.com", "developers.google.com", "www.iana.org"):
+            self.assertIn(host, qa_src, f"QA auditor is missing {host}, which verify.py accepts")
+        res = subprocess.run([sys.executable, str(script)], cwd=str(ROOT), capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, res.stdout[-1200:] + res.stderr[-600:])
+
     def test_published_docs_site_still_verifies(self):
         """The prior sessions' pipeline must stay green alongside the engine."""
         import subprocess
