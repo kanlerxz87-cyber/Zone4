@@ -287,6 +287,8 @@ class TestCommission(unittest.TestCase):
         self.assertIsNone(rate_for(s, browse_path))
         self.assertTrue(all(p.get("commission_rate_pct") is None
                             for p in json.loads((ROOT / "data" / "products.json").read_text())["products"]))
+        self.assertTrue(all(p["attributes"]["commission_rate_pct"].get("value") is None
+                            for p in s.findings["products"]))
 
     def test_no_category_returns_nothing_not_zero(self):
         self.assertIsNone(store().rate_for_category(None))

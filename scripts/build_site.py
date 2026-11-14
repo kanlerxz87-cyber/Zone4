@@ -390,11 +390,14 @@ def marketing_fact_table(article: dict) -> str:
     rows = []
     for f in article["facts"]:
         note = f'<div class="note">{esc(f["note"])}</div>' if f.get("note") else ""
+        urls = f.get("source_urls") or [f["source_url"]]
+        refs = f.get("source_refs") or [f["source_ref"]] * len(urls)
+        source_links = "<br>".join(ext(url, ref) for url, ref in zip(urls, refs))
         rows.append([
             esc(f["id"]),
             esc(f["field"]),
             esc(f["value"]) if f["value"] else '<span class="muted">Blank - withheld or unverified</span>',
-            ext(f["source_url"], f["source_ref"]),
+            source_links,
             note,
         ])
     return table(["ID", "Field", "Value as listed", "Source (official)", "Note"], rows, "facts")
@@ -417,10 +420,17 @@ def marketing_article(current: Page, article: dict) -> str:
     facts_by_id = {f["id"]: f for f in article["facts"]}
     body_html = []
     for para in article["body"]:
-        cites = "".join(
-            f'<a class="cite" href="{esc(facts_by_id[fid]["source_url"])}" rel="noopener noreferrer">{esc(fid)}</a>'
-            for fid in para["fact_ids"] if fid in facts_by_id
-        )
+        citations = []
+        for fid in para["fact_ids"]:
+            fact = facts_by_id.get(fid)
+            if not fact:
+                continue
+            sources = fact.get("source_urls") or [fact["source_url"]]
+            citations.extend(
+                f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
+                for url in sources
+            )
+        cites = "".join(citations)
         body_html.append(f'<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '

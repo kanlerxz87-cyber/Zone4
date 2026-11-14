@@ -66,7 +66,12 @@ def is_official(url: str) -> bool:
 
 def check_data() -> None:
     products = load("products.json")["products"]
-    flags = {f["id"] for f in load("flags.json")["flags"]}
+    flag_records = {f["id"]: f for f in load("flags.json")["flags"]}
+    flags = set(flag_records)
+    if "F-01" not in flag_records or "unverified" not in flag_records["F-01"]["status"].lower():
+        fail("F-01 must remain open while per-ASIN commission assignments are unverified")
+    if "F-05" not in flag_records or "resolved" not in flag_records["F-05"]["status"].lower():
+        fail("F-05 must reflect the confirmed P2 Item details brand/manufacturer")
     sources = load("sources.json")
     for src in sources["sources"]:
         if not is_official(src["url"]):
@@ -87,6 +92,10 @@ def check_data() -> None:
             fail(f"{p['id']}: short link is not on link.amazon")
         if not p.get("special_feature"):
             fail(f"{p['id']}: special_feature is empty")
+        if p.get("commission_rate_pct") is not None and not p.get("commission_category_official"):
+            fail(f"{p['id']}: product-level commission rate lacks a confirmed category assignment")
+        if p.get("commission_rate_source") and not is_official(p["commission_rate_source"]):
+            fail(f"{p['id']}: commission source is not official")
         for c in p["competitors"]:
             if not ASIN_RE.match(c["asin"]):
                 fail(f"{p['id']}: competitor ASIN malformed: {c['asin']}")
@@ -95,6 +104,12 @@ def check_data() -> None:
         for fid in p["flags"]:
             if fid not in flags:
                 fail(f"{p['id']}: unknown flag {fid}")
+    if flag_records.get("F-01") and "unverified" in flag_records["F-01"]["status"].lower():
+        engine_products = load("engine-verification.json")["products"]
+        for engine_product in engine_products:
+            rate = engine_product.get("attributes", {}).get("commission_rate_pct", {})
+            if rate.get("value") is not None:
+                fail(f"{engine_product['ref']}: engine publishes a rate while F-01 assignment is unverified")
     content = load("content.json")
     for a in content["analysis"]:
         for u in a["sources"]:
@@ -110,14 +125,36 @@ def check_marketing() -> None:
     articles = marketing["articles"]
     if len(articles) < 5:
         fail(f"marketing.json has only {len(articles)} articles; expected at least 5")
-    product_ids = {p["id"] for p in load("products.json")["products"]}
+    product_data = {p["id"]: p for p in load("products.json")["products"]}
+    product_ids = set(product_data)
+    marketing_by_id = {a["id"]: a for a in articles}
+    flag_records = {f["id"]: f for f in load("flags.json")["flags"]}
+    if "P2" in product_data:
+        expected_brand = product_data["P2"]["brand"]
+        p2 = marketing_by_id.get("M-P2")
+        brand_fact = next((f for f in p2.get("facts", []) if f["id"] == "M-P2-F1"), None) if p2 else None
+        if not brand_fact or expected_brand not in brand_fact.get("value", ""):
+            fail("marketing M-P2: brand fact must match the verified P2 product record")
+        if "F-05" not in flag_records or "resolved" not in flag_records["F-05"]["status"].lower():
+            fail("marketing M-P2: brand claim must agree with resolved F-05")
+        for article_id in ("M-P2", "M-CMP", "M-BUY"):
+            article = marketing_by_id.get(article_id)
+            if article and any(term in json.dumps(article, ensure_ascii=False).lower() for term in (
+                    "brand is unresolved", "brand not established", "brand is not asserted",
+                    "brand is the other open point")):
+                fail(f"marketing {article_id}: stale unresolved-P2-brand claim")
     for a in articles:
         facts = {f["id"]: f for f in a["facts"]}
         if not facts:
             fail(f"marketing {a['id']}: no fact table")
         for f in a["facts"]:
-            if not is_official(f["source_url"]):
-                fail(f"marketing {a['id']} fact {f['id']}: non-official source {f['source_url']}")
+            fact_sources = f.get("source_urls") or [f["source_url"]]
+            fact_refs = f.get("source_refs") or [f["source_ref"]] * len(fact_sources)
+            if not fact_sources or len(fact_sources) != len(fact_refs):
+                fail(f"marketing {a['id']} fact {f['id']}: source URLs/references are missing or mismatched")
+            for source_url in fact_sources:
+                if not is_official(source_url):
+                    fail(f"marketing {a['id']} fact {f['id']}: non-official source {source_url}")
         cited = set()
         for para in a["body"]:
             for fid in para["fact_ids"]:
