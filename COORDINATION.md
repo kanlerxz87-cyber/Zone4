@@ -9,8 +9,9 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **done**; unresolved items documented in Flagged for Review | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
-| Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
+| Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
+| Current-session factual audit of deployed content; remove unsupported user-location claim | **in progress** | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, generated `docs/flagged.html`, `data/content.json` only if needed |
 
 ## Original PR #7 branch note (historical)
 
@@ -21,6 +22,11 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 This session worked on the assigned active Arena branch `arena/00ba40db-zone4`. No branch was created or switched to.
 
 ## Work log
+
+### Session arena/f647313b-zone4 — claim (2026-11-14, UTC)
+
+- Claimed a final factual audit of the existing delivered site, focusing on the user-location assertion in F-09. Scope: `COORDINATION.md`, `data/flags.json`, generated `docs/flagged.html`; `data/content.json` only if a related unsupported statement is found. No other active claim overlaps these files.
+- Current assigned branch is `arena/f647313b-zone4`; following the repository/branch constraints, no alternate branch or worktree is being created.
 
 ### Session arena/1eb689b8-zone4 — claim (2026-11-14, UTC)
 
