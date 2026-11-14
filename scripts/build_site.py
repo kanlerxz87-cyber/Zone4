@@ -44,6 +44,7 @@ REQUIREMENTS = CONTENT["requirements"]
 PLATFORM = CONTENT["platform"]
 NICHE = CONTENT["niche"]
 REVERIF = CONTENT["reverification"]
+AMAZON_DISCLAIMER = CONTENT["amazon_text_disclaimer"]
 
 NAV = [
     ("index.html", "Dashboard"),
@@ -70,14 +71,6 @@ def esc(value) -> str:
 
 def pill(label: str, kind: str) -> str:
     return f'<span class="pill pill-{kind}">{esc(label)}</span>'
-
-
-def recheck_pill(text: str) -> str:
-    if text.startswith("Carried forward"):
-        return pill(text, "warn")
-    if text.startswith("Re-confirmed") or text.startswith("V-"):
-        return pill(text, "ok")
-    return pill(text, "muted")
 
 
 def status_pill(status: str) -> str:
@@ -185,16 +178,17 @@ def product_table(current: Page, products: list[dict]) -> str:
     return table(headers, rows, "products")
 
 
-# What the independent 2026-11-14 re-verification pass (see reverification.html) concluded per field.
+# What the independent second pass (reverification.html) concluded for each field.
 RECHECK = {
     "Listing title": "V-04/V-05/V-06 re-confirmed",
     "ASIN": "V-01/V-02/V-03 re-confirmed",
-    "Brand (byline)": "Re-confirmed on the page byline",
+    "Brand (Item details)": "Byline not re-read; Item details value carried (F-18)",
+    "Manufacturer (Item details)": "Carried forward (F-18)",
     "Category path": "V-07 re-confirmed",
-    "Capacity (as listed)": "Carried forward (F-17)",
-    "Dimensions (as listed)": "Carried forward (F-17)",
-    "Colour (as listed)": "Carried forward (F-17)",
-    "Material (as listed)": "Carried forward (F-17)",
+    "Capacity (as listed)": "Carried forward (F-18)",
+    "Dimensions (as listed)": "Carried forward (F-18)",
+    "Colour (as listed)": "Carried forward (F-18)",
+    "Material (as listed)": "Carried forward (F-18)",
     "Also-viewed ASINs": "V-08/V-09/V-10 re-confirmed",
     "Price": "Re-confirmed withheld",
     "Star rating / review count": "Re-confirmed withheld",
@@ -202,6 +196,14 @@ RECHECK = {
     "Trend / conversion": "No official source found",
     "Associates tag in link": "V-11 re-confirmed: no tag",
 }
+
+
+def recheck_pill(text: str) -> str:
+    if text.startswith("Carried forward") or "carried" in text:
+        return pill(text, "warn")
+    if text.startswith("Re-confirmed") or text.startswith("V-"):
+        return pill(text, "ok")
+    return pill(text, "muted")
 
 
 def verification_rows(current: Page) -> list[list[str]]:
@@ -213,13 +215,14 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (byline)", p["brand"], "Verified" if p["id"] != "P2" else "Unresolved", src, "F-05" if p["id"] == "P2" else ""),
+            ("Brand (Item details)", p["brand"], "Verified (Item details)" if p["id"] == "P2" else "Verified (earlier session; Item details not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Manufacturer (Item details)", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-21"),
             ("Category path", p["category_path"], "Verified", src, ""),
-            ("Capacity (as listed)", p["capacity"], "Verified as listed", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "")),
+            ("Capacity (as listed)", p["capacity"], "Verified as listed (earlier session; not re-read, F-18)", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "F-18")),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, "F-07" if p["id"] == "P1" else ""),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown" + ("; carousel labelled Sponsored" if p["id"] == "P2" else ""), src, "F-10" if p["id"] == "P2" else ""),
+            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown (re-read 2026-11-14)" + ("; Sponsored label on some reads" if p["id"] in ("P2", "P3") else ""), src, "F-10" if p["id"] in ("P2", "P3") else ""),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
@@ -236,15 +239,14 @@ def verification_rows(current: Page) -> list[list[str]]:
 def policy_rows(current: Page) -> list[list[str]]:
     rows = []
     for r in RULES:
-        quote = r.get("verified_quote", "")
-        quote_html = (f'<blockquote class="quote">{esc(quote)}</blockquote>' if quote
-                      else '<span class="muted small">No verbatim quote recorded for this row.</span>')
         rows.append([
             esc(r["id"]),
             esc(r["requirement"]),
             ext(r["source_url"], r["source_ref"]),
             status_pill(r["status"]),
-            quote_html + f'<div class="note">{esc(r.get("reverified", "Not re-read in the 2026-11-14 pass"))}</div>',
+            (f'<blockquote class="quote">{esc(r["verified_quote"])}</blockquote>'
+             f'<div class="note">{esc(r["reverified"])}</div>' if r.get("verified_quote")
+             else '<span class="muted small">No verbatim quote recorded for this row.</span>'),
             esc(r["site_implementation"]),
         ])
     return rows
@@ -283,7 +285,7 @@ def source_rows() -> list[list[str]]:
             esc(s["publisher"]),
             pill("Yes" if s["accessible"] else "No", "ok" if s["accessible"] else "warn"),
             esc(s["used_for"]),
-            esc(s.get("reverified", "Not re-read in the 2026-11-14 pass")),
+            esc(s.get("reverified", "Not re-read in the second pass")),
             esc(s.get("notes", "")),
         ])
     return rows
@@ -309,12 +311,12 @@ def hero(title: str, lead: str) -> str:
 def page_index(current: Page) -> str:
     open_flags = len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])
     kpis = [
-        ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
-        ("24", "Requirements from the brief traced on the coverage page"),
+        ("3 of 3", "Products with verified ASIN and category (P2 brand recorded from Item details, F-05)"),
+        (str(len(REVERIF["checks"])), "Checks in the second, independent verification pass"),
         (str(len(MARKETING["articles"]) + 2), "Marketing drafts written (3 articles, comparison, buying guide)"),
-        (str(len(REVERIF["checks"])), "Checks in the independent re-verification pass"),
+        (str(len(REQUIREMENTS)), "Requirements from the brief traced to evidence"),
         ("0", "Amazon prices or star ratings published (policy F-02)"),
-        (str(open_flags), f"Open items in '{open_flags}' flags for your review"),
+        (str(open_flags), f"Open items in the {len(FLAGS)} flags for your review"),
     ]
     kpi_html = "".join(f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>' for v, l in kpis)
     cards = [
@@ -392,7 +394,7 @@ def page_analysis(current: Page) -> str:
         hero("Analysis & findings", "Every finding states its basis and confidence. Where a value is unverified, the finding says so instead of estimating it.")
         + table(["ID", "Finding", "Basis", "Confidence", "Source links"], analysis_rows(), "analysis")
         + f'<p class="small muted">Niche scoring method and its blank inputs: {href(current, "platform.html", "Platform & automation")}. '
-        + f'Marketing drafts that use these findings: {href(current, "marketing.html", "Marketing content")}.</p>' 
+        + f'Marketing drafts built on these findings: {href(current, "marketing.html", "Marketing content")}.</p>'
     )
 
 
@@ -400,7 +402,7 @@ def page_verification(current: Page) -> str:
     return (
         hero("Verification log", "Field-by-field check for each product. Each row links to the official source it was checked against. Blank or withheld values are flagged.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: P2, Unverified, F-02)" aria-label="Filter table"></p>'
-        + table(["Product", "Field", "Value", "Status", "Re-check pass", "Source link", "Flag"], verification_rows(current), "verification")
+        + table(["Product", "Field", "Value", "Status", "Second-pass re-check", "Source link", "Flag"], verification_rows(current), "verification")
         + f'<p class="small muted">Observed {esc(OBSERVED)} (UTC). The verified fields are as shown on the Amazon page at that time. Re-check before publishing.</p>'
     )
 
@@ -408,7 +410,7 @@ def page_verification(current: Page) -> str:
 def page_policy(current: Page) -> str:
     return (
         hero("Policy compliance", "Amazon Associates and FTC requirements checked against this site. Each row links to its official source section.")
-        + table(["ID", "Requirement", "Source (official)", "Status on this site", "How the site complies"], policy_rows(current), "policy")
+        + table(["ID", "Requirement", "Source (official)", "Status on this site", "Verbatim text from the source", "How the site complies"], policy_rows(current), "policy")
     )
 
 
@@ -424,7 +426,7 @@ def page_flagged(current: Page) -> str:
 def page_sources(current: Page) -> str:
     return (
         hero("Sources", "Every source used, with whether it was read during this verification pass. Unread sources are marked No and nothing is inferred from them.")
-        + table(["ID", "Source (link)", "Publisher", "Read?", "Used for", "Re-checked 2026-11-14", "Notes"], source_rows(), "sources")
+        + table(["ID", "Source (link)", "Publisher", "Read?", "Used for", "Second-pass re-check", "Notes"], source_rows(), "sources")
         + non_official_note()
     )
 
@@ -487,6 +489,7 @@ def render(page: Page) -> str:
 {page.body}
 </main>
 <footer>
+  <p class="small disclaimer">{esc(AMAZON_DISCLAIMER["text"])} <span class="muted">({ext(AMAZON_DISCLAIMER["source"], AMAZON_DISCLAIMER["source_ref"])})</span></p>
   <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>

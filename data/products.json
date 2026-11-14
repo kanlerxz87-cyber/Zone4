@@ -21,12 +21,38 @@
       "short_link": "https://link.amazon/B04G1MEwY",
       "canonical_url": "https://www.amazon.com/dp/B0CDY277D3",
       "competitors": [
-        {"asin": "B0B7C327LK", "label": "Chefman 6 Quart Dual Basket Air Fryer (Digital Touchscreen)", "url": "https://www.amazon.com/dp/B0B7C327LK"},
-        {"asin": "B0BYKGN61Q", "label": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity", "url": "https://www.amazon.com/dp/B0BYKGN61Q"},
-        {"asin": "B0CNSB81V6", "label": "Nutrichef Double Basket Air Fryer 8.8 QT", "url": "https://www.amazon.com/dp/B0CNSB81V6"}
+        {
+          "asin": "B0B7C327LK",
+          "label": "Chefman 6 Quart Dual Basket Air Fryer (Digital Touchscreen)",
+          "url": "https://www.amazon.com/dp/B0B7C327LK",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0BYKGN61Q",
+          "label": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity",
+          "url": "https://www.amazon.com/dp/B0BYKGN61Q",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0CNSB81V6",
+          "label": "Nutrichef Double Basket Air Fryer 8.8 QT",
+          "url": "https://www.amazon.com/dp/B0CNSB81V6",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        }
       ],
       "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items, on the product page snapshot.",
-      "flags": ["F-01", "F-02", "F-03", "F-04", "F-06", "F-07", "F-09", "F-15"]
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-06",
+        "F-07",
+        "F-09",
+        "F-15",
+        "F-18"
+      ],
+      "manufacturer": ""
     },
     {
       "id": "P2",
@@ -34,7 +60,7 @@
       "name_short": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
       "name_listing": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
       "subcategory": "Air fryer toaster ovens",
-      "brand": "Unresolved: store 'Emeril Store'; byline 'Innovation IQ'",
+      "brand": "Emeril",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
       "capacity": "24.6 liters",
@@ -44,12 +70,40 @@
       "short_link": "https://link.amazon/B02NbDxp3",
       "canonical_url": "https://www.amazon.com/dp/B09B7SB46R",
       "competitors": [
-        {"asin": "B0BZ52FLKC", "label": "Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven", "url": "https://www.amazon.com/dp/B0BZ52FLKC"},
-        {"asin": "B0FM5KF34G", "label": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, FO101", "url": "https://www.amazon.com/dp/B0FM5KF34G"},
-        {"asin": "B0F92GL7JH", "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT", "url": "https://www.amazon.com/dp/B0F92GL7JH"}
+        {
+          "asin": "B0BZ52FLKC",
+          "label": "Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven",
+          "url": "https://www.amazon.com/dp/B0BZ52FLKC",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0FM5KF34G",
+          "label": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, FO101",
+          "url": "https://www.amazon.com/dp/B0FM5KF34G",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0F92GL7JH",
+          "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT",
+          "url": "https://www.amazon.com/dp/B0F92GL7JH",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items; the carousel was labelled 'Sponsored' on this snapshot (see F-10).",
-      "flags": ["F-01", "F-02", "F-03", "F-04", "F-05", "F-06", "F-09", "F-10", "F-15"]
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. An earlier snapshot labelled it 'Sponsored'; the 2026-11-14 reads did not show that label (see F-10).",
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-05",
+        "F-06",
+        "F-09",
+        "F-10",
+        "F-15",
+        "F-18"
+      ],
+      "brand_note": "Item details table (re-read 2026-11-14). Earlier byline 'Innovation IQ' and store 'Emeril Store' were not seen in this read (F-05).",
+      "manufacturer": "Emeril Lagasse"
     },
     {
       "id": "P3",
@@ -67,12 +121,38 @@
       "short_link": "https://link.amazon/B00hJ57DV",
       "canonical_url": "https://www.amazon.com/dp/B08DKYBTPH",
       "competitors": [
-        {"asin": "B0CNY1YVDD", "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Touchscreen Controls)", "url": "https://www.amazon.com/dp/B0CNY1YVDD"},
-        {"asin": "B0D5FX6VRL", "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Easy-View Window)", "url": "https://www.amazon.com/dp/B0D5FX6VRL"},
-        {"asin": "B0C33CHG99", "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt", "url": "https://www.amazon.com/dp/B0C33CHG99"}
+        {
+          "asin": "B0CNY1YVDD",
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Touchscreen Controls)",
+          "url": "https://www.amazon.com/dp/B0CNY1YVDD",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0D5FX6VRL",
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Easy-View Window)",
+          "url": "https://www.amazon.com/dp/B0D5FX6VRL",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        },
+        {
+          "asin": "B0C33CHG99",
+          "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt",
+          "url": "https://www.amazon.com/dp/B0C33CHG99",
+          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+        }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items, on the product page snapshot.",
-      "flags": ["F-01", "F-02", "F-03", "F-04", "F-08", "F-09", "F-15"]
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. A 'Sponsored' label appeared above it on one 2026-11-14 read of the canonical page (see F-10).",
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-08",
+        "F-09",
+        "F-15",
+        "F-10",
+        "F-18"
+      ],
+      "manufacturer": ""
     }
   ]
 }

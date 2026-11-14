@@ -27,25 +27,29 @@ OFFICIAL_HOSTS = {
     "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
-# Phrases that only ever come from Amazon's own page furniture; publishing them would reuse
-# Amazon-displayed sales, ranking or badge data (Participation Requirements 3(t), flag F-15).
+# Phrases that only exist in Amazon's own page furniture. Publishing them would reuse
+# Amazon-displayed sales, badge or review data (Participation Requirements 6(t), flag F-15).
 FORBIDDEN_MARKETING_PHRASES = [
     "Amazon's Choice", "Best Sellers Rank", "bought in past month", "Top Brand:", "Limited time deal",
     "protection plan", "Asurion",
 ]
-# Claiming to have used a product needs FTC substantiation this site does not have (rule R-19).
+# Claiming to have used a product needs FTC substantiation this site does not have (rule R-25).
 TESTING_CLAIM_RE = re.compile(
-    r"\b(?:we|i)\s+(?:have\s+)?(?:tested|tried|used|reviewed|tried\s+out|hands[- ]on)\b|"
+    r"\b(?:we|i)\s+(?:have\s+)?(?:tested|tried|used|reviewed)\b|"
     r"\b(?:our|my)\s+(?:test|testing|review|hands[- ]on)\b|\bafter\s+\d+\s+(?:weeks?|months?)\s+of\s+use\b",
     re.IGNORECASE,
 )
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
-# Any money figure on a page breaks Participation Requirements 2(b) / flag F-02, written with a
-# symbol, spelled out, or attached to the words price/cost.
+# Any money figure breaks Participation Requirements 2(b) / flag F-02, whether written with a
+# symbol, spelled out, or attached to the words price/cost/discount.
 PRICE_RE = re.compile(
     r"\$\s?\d|\bdollars?\b|\bUSD\b|\b€\s?\d|\b£\s?\d|\b(?:price|prices|cost|costs|discount|savings)\s+(?:of\s+)?[\$€£]?\s*\d"
 )
 RATING_RE = re.compile(r"\b\d\.\d\s*(out of 5|stars?)\b", re.IGNORECASE)
+
+AMAZON_DISCLAIMER = json.loads((DATA / "content.json").read_text(encoding="utf-8"))[
+    "amazon_text_disclaimer"]["text"]
+content_disclaimer = " ".join(AMAZON_DISCLAIMER.split())
 
 failures: list[str] = []
 
@@ -92,6 +96,15 @@ def check_data() -> None:
         for u in a["sources"]:
             if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
                 fail(f"analysis {a['id']} has a non-official source: {u}")
+    flag_ids = {f["id"] for f in load("flags.json")["flags"]}
+    rule_ids = {r["id"] for r in load("policies.json")["rules"]}
+    for text in json.dumps(content, ensure_ascii=False), json.dumps(load("products.json"), ensure_ascii=False):
+        for ref in set(re.findall(r"\bF-\d{2}\b", text)):
+            if ref not in flag_ids:
+                fail(f"data references flag {ref}, which does not exist in data/flags.json")
+        for ref in set(re.findall(r"\bR-\d{2}\b", text)):
+            if ref not in rule_ids:
+                fail(f"data references rule {ref}, which does not exist in data/policies.json")
     ids = {p["id"] for p in products}
     mkt = content["marketing"]
     for art in mkt["articles"]:
@@ -108,9 +121,9 @@ def check_data() -> None:
             if not art.get(field):
                 fail(f"marketing draft {art['id']} is missing SEO field {field}")
         if len(art.get("seo_title", "")) > 65:
-            fail(f"marketing draft {art['id']} SEO title is longer than 65 characters")
+            fail(f"marketing draft {art['id']} SEO title exceeds 65 characters ({len(art['seo_title'])})")
         if len(art.get("meta_description", "")) > 160:
-            fail(f"marketing draft {art['id']} meta description is longer than 160 characters")
+            fail(f"marketing draft {art['id']} meta description exceeds 160 characters ({len(art['meta_description'])})")
     cmp_ = mkt["comparison"]
     width = len(cmp_["columns"]) - 1
     for row in cmp_["rows"]:
@@ -121,8 +134,7 @@ def check_data() -> None:
     for q in content["requirements"]:
         if not q.get("status") or not q.get("delivered") or not q.get("blocker"):
             fail(f"requirement {q['id']} is missing status, delivered text or blocker")
-        host = urlparse(q.get("evidence_url", "")).hostname or ""
-        if host not in OFFICIAL_HOSTS:
+        if (urlparse(q.get("evidence_url", "")).hostname or "") not in OFFICIAL_HOSTS:
             fail(f"requirement {q['id']} evidence is not on an official host: {q.get('evidence_url')}")
     for x in content["platform"]["stages"]:
         if (urlparse(x["source"]).hostname or "") not in OFFICIAL_HOSTS:
@@ -132,6 +144,8 @@ def check_data() -> None:
             fail(f"re-verification check {chk['id']} is missing the expected value or the observation")
         if (urlparse(chk["source"]).hostname or "") not in OFFICIAL_HOSTS:
             fail(f"re-verification check {chk['id']} cites a non-official source: {chk['source']}")
+    if not content.get("amazon_text_disclaimer", {}).get("text"):
+        fail("content.json is missing the IP License 2(k) content disclaimer required in plain view (rule R-20)")
 
 
 class SiteParser(HTMLParser):
@@ -191,38 +205,19 @@ def check_site() -> None:
         raw = page.read_text(encoding="utf-8")
         if PRICE_RE.search(re.sub(r"<[^>]+>", " ", raw)):
             fail(f"{rel}: contains a currency amount (Amazon prices are withheld under Participation Requirements 2(b))")
-        if RATING_RE.search(raw):
-            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 3(t))")
-        visible = re.sub(r"<[^>]+>", " ", raw)
-        for phrase in FORBIDDEN_MARKETING_PHRASES:
-            if phrase.lower() in visible.lower():
-                fail(f"{rel}: reuses Amazon page furniture '{phrase}' (sales, badge or review data, flag F-15)")
-        hit = TESTING_CLAIM_RE.search(visible)
+        if content_disclaimer not in " ".join(sp.text_parts):
+            fail(f"{rel}: the IP License 2(k) content disclaimer is missing from this page (rule R-20)")
+        # flagged.html documents which Amazon-displayed figures are withheld, so it may name them;
+        # no content page may. Any other page that quotes them fails the build.
+        if page.name != "flagged.html":
+            for phrase in FORBIDDEN_MARKETING_PHRASES:
+                if phrase.lower() in " ".join(sp.text_parts).lower():
+                    fail(f"{rel}: reuses Amazon page furniture '{phrase}' (sales, badge or review data, flag F-15)")
+        hit = TESTING_CLAIM_RE.search(" ".join(sp.text_parts)) if page.name != "flagged.html" else None
         if hit:
-            fail(f"{rel}: claims product testing or first-hand use ('{hit.group(0).strip()}'), which FTC Disclosures 101 bars without it (rule R-19)")
-
-    # Navigation must cover every generated page, and every nav entry must exist on disk.
-    pages = [p for p in pages if p.suffix == ".html"]
-    for page in pages:
-        txt = page.read_text(encoding="utf-8")
-        nav = re.search(r'<nav aria-label="Main">(.*?)</nav>', txt, re.S)
-        if not nav:
-            fail(f"{page.relative_to(ROOT)}: no main navigation block")
-            continue
-        for target in re.findall(r'<a href="([^"]+)"', nav.group(1)):
-            clean = target.split("#")[0]
-            if clean and not (page.parent / clean).exists():
-                fail(f"{page.relative_to(ROOT)}: nav link is broken: {target}")
-        if len(re.findall(r'<a href="', nav.group(1))) != len(list(DOCS.rglob("*.html"))):
-            fail(f"{page.relative_to(ROOT)}: the sidebar does not list every page in docs/")
-
-    # The product table must keep the withheld columns visible rather than dropping them.
-    prod = (DOCS / "products.html").read_text(encoding="utf-8")
-    for col in ("Price", "Star rating", "Commission rate", "Trend / conversion"):
-        if col not in prod:
-            fail(f"products.html dropped the '{col}' column; withheld and unverified fields must stay visible")
-    if prod.count("Withheld (F-02)") < 6:
-        fail("products.html should mark the price and rating columns as withheld for all three products")
+            fail(f"{rel}: claims product testing or first-hand use ('{hit.group(0).strip()}'), which FTC Disclosures 101 bars without it (rule R-25)")
+        if RATING_RE.search(raw):
+            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 6(t))")
 
     for page, sp in parsed.items():
         rel = page.relative_to(ROOT)
@@ -245,6 +240,31 @@ def check_site() -> None:
                     fail(f"{rel}: anchor not found: {url}")
 
 
+def check_navigation_and_withheld_columns() -> None:
+    """Every generated page must be reachable, and the withheld columns must stay visible."""
+    pages = sorted(DOCS.rglob("*.html"))
+    total = len(pages)
+    for page in pages:
+        txt = page.read_text(encoding="utf-8")
+        nav = re.search(r'<nav aria-label="Main">(.*?)</nav>', txt, re.S)
+        if not nav:
+            fail(f"{page.relative_to(ROOT)}: no main navigation block")
+            continue
+        links = re.findall(r'<a href="([^"]+)"', nav.group(1))
+        for target in links:
+            clean = target.split("#")[0]
+            if clean and not (page.parent / clean).exists():
+                fail(f"{page.relative_to(ROOT)}: nav link is broken: {target}")
+        if len(links) != total:
+            fail(f"{page.relative_to(ROOT)}: the sidebar lists {len(links)} of {total} pages")
+    prod = (DOCS / "products.html").read_text(encoding="utf-8")
+    for col in ("Price", "Star rating", "Commission rate", "Trend / conversion"):
+        if col not in prod:
+            fail(f"products.html dropped the '{col}' column; withheld and unverified fields must stay visible")
+    if prod.count("Withheld (F-02)") < 6:
+        fail("products.html should mark the price and rating columns as withheld on all three rows")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -261,6 +281,7 @@ def check_root_entry() -> None:
 def main() -> int:
     check_data()
     check_site()
+    check_navigation_and_withheld_columns()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")
