@@ -546,3 +546,37 @@ The current branch added a more detailed multi-page research view and FTC source
 - **PR and merge (completed):** PR [#23](https://github.com/kanlerxz87-cyber/Zone4/pull/23) (`arena/ebf5c261-zone4` → `main`) was opened, rebased onto each advance of `main` from concurrent sessions (PRs #20, #24, #25, #27, #30, #31), and merged at `40fa079` (2026-11-14T10:31:43Z) without waiting for review. The branch had to be force-updated once to replace an earlier superseded commit; all later updates were ordinary rebases with `--force-with-lease`.
 - **Deployment confirmed:** the GitHub Pages API reports status `built`, `html_url https://kanlerxz87-cyber.github.io/Zone4/`, source `main` `/` (root redirect to `docs/`). The published site is live and `scripts/verify.py` passes on the merged tree (13 pages; links, anchors, disclosure, row sources, no prices or ratings).
 - **Note on RV-I1:** the exact competitor listing titles were applied to `data/products.json` on `main` by the concurrent integration session arena/7cfe23f4-zone4 (merged in PR #20). This session independently re-read all three official also-viewed carousels and confirmed the nine titles match exactly, then recorded the audit in `data/verification-session-ebf5c261.json`. No duplicate change was introduced.
+
+
+### Session arena/8592c4f6-zone4 — merge and Pages result
+
+- **PR [#28](https://github.com/kanlerxz87-cyber/Zone4/pull/28) merged into `main`** as merge commit
+  `ba3f30a` at 2026-11-14 10:40:09Z, self-merged after all three gates passed on the PR head `4820629`
+  (`verify` from `ci.yml`, `verify` from `site-checks.yml`, `audit` from `qa.yml`). No force-push, no
+  rewrites of other sessions' commits; the branch was synced to `main` by merge, not by rebasing over it.
+- **Pages deployment confirmed via the API:** `pages/builds/latest` = status `built` for commit `ba3f30a`
+  (updated 2026-11-14T10:40:29Z); Pages source is unchanged (`legacy`, `main` `/`, HTTPS enforced), so the
+  root `index.html` redirect into `docs/` remains the entry point. Live entry point:
+  https://kanlerxz87-cyber.github.io/Zone4/. On `ba3f30a` the `pages build and deployment` job reported
+  **success** rather than being cancelled, which is the first such run recorded on this board.
+- **Merged content spot-checked on `origin/main`, not just locally:** `docs/products.html` renders
+  `4.50% (Kitchen band)` on all three product rows; `docs/index.html` carries the IP License §2(k)
+  `COMES FROM AMAZON` notice; `data/flags.json` holds **F-50…F-54** with **F-01** narrowed to
+  "Rate published from the official table; band assignment needs the account report" and **F-24** marked
+  implemented; `data/products.json` carries the sourced `commission_rate_*` fields and
+  `independent_reverification` on every product.
+- **Gates run on the final tree before merge:** `scripts/build_site.py` → `scripts/verify.py` (13 pages, all
+  checks pass), `qa/audit_site.py` PASS with 0 warnings, `git diff --exit-code -- docs` deterministic,
+  `python -m engine.cli audit` exit 0, `python -m engine.cli build` exit 0 with `publish gate: open=false,
+  blocked_items=7`, `tools/check_links.py` ✓, 81/81 unit tests OK.
+- **Two gates that had to be satisfied, and why they were right to fail:** `qa/audit_site.py` kept its own
+  official-host list and rejected the new sources' rows even though `scripts/verify.py` accepted them — the
+  lists had drifted. Synced by adding the same publishers to both, with a comment tying them together, and a
+  test (`test_independent_qa_auditor_agrees`) now fails if they diverge again. `engine.cli audit` crashed on a
+  wrong attribute name that no local command exercised; CI caught it in 5 s, and `TestCliSurface` now runs
+  every subcommand.
+- **Open items this session leaves for the owner (none blocking):** a Partner Tag (F-03/F-25 — until then no
+  published link can earn), the per-ASIN commission band (F-01), the specification-field sourcing decision
+  (F-50), Creators API eligibility (F-16/F-19, 10 qualifying sales in 30 days), one Pages publisher (F-53),
+  and legal review before AI drafting consumes Amazon-sourced content (F-12). All are on the published
+  Flagged for Review page with the action that closes each.
