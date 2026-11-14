@@ -24,7 +24,7 @@ A static research site for three user-supplied Amazon product links. It publishe
 | `engine/` | Automation layer: verification, economics, scoring, drafting, link safety, tracking, compliance gates |
 | `data/engine-*.json` | The engine's own sources, program facts and verification ledger (kept separate from the site data) |
 | `data/reverification-2026-11-14.json` | Independent re-verification log of the three links and the citations |
-| `tests/test_engine.py` | 73 stdlib tests, including guards that `docs/` stays buildable and verifiable |
+| `tests/test_engine.py` | 80 stdlib tests, including guards that `docs/` stays buildable and verifiable |
 | `tools/check_links.py` | Site integrity checker for the engine's preview build |
 | `.github/workflows/ci.yml` | CI: runs both pipelines (engine and published site) |
 

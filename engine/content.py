@@ -16,7 +16,7 @@ from dataclasses import dataclass, field
 
 from .claims import Entity, Status
 from .datastore import Datastore
-from .policy import register_program_text  # noqa: E402
+from .policy import AMAZON_TEXT_NOTICE, register_program_text  # noqa: E402
 from .policy import REQUIRED_DISCLOSURE
 
 PLACEHOLDER_RE = re.compile(r"\[\[UNVERIFIED: .*?\]\]", re.S)
@@ -130,9 +130,20 @@ def spec_table(entity: Entity, fields: list[str], labels: dict[str, str]) -> str
 
 
 def disclosure_block(extra: str = "") -> str:
+    """The two notices a page must carry, in one block.
+
+    Both are placement duties, so they travel with the draft rather than being
+    assumed from a template: the Operating Agreement identification sentence, and
+    the IP License 2(k) notice required in plain view whenever Amazon-sourced
+    text (a listing title) is reproduced. A draft published on its own therefore
+    stays compliant even if no page shell is wrapped around it.
+    """
     return ("<aside class=\"notice amber\"><b>Affiliate disclosure</b><span>"
             + (extra or "We may earn a commission from qualifying purchases made through links on this page.")
-            + f" {REQUIRED_DISCLOSURE}</span></aside>")
+            + f" {REQUIRED_DISCLOSURE}</span>"
+            + f"<span><b>Amazon content notice</b> {AMAZON_TEXT_NOTICE}"
+            + " (required in plain view by IP License 2(k) where Amazon-sourced text is displayed)</span>"
+            + "</aside>")
 
 
 def product_review(store: Datastore, entity: Entity, site_base: str = "") -> SeoDoc:

@@ -105,7 +105,7 @@ non-verified claim carries a value, `Datastore.audit()` raises if an asserted ro
 generator emits a blocking placeholder, and `_self_check` refuses to write a page that leaks `None`, an
 unresolved placeholder, or a tagged link on a redirect host. 32 of 75 tracked claims are verified; the other
 43 are blank **with a stated reason** — policy (F-02, F-50), missing account access (F-03, F-25), or no
-authorized source at all (F-15). `python3 -m unittest discover -s tests` covers these paths (73 tests), and two
+authorized source at all (F-15). `python3 -m unittest discover -s tests` covers these paths (80 tests), and two
 of them re-run `scripts/build_site.py` and `scripts/verify.py` so the engine can never silently break the site.
 
 **What the owner must supply, in order of what it unblocks:**

@@ -373,3 +373,18 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Post-merge fix (follow-up PR):** two stale statements were still published after the merge: the dashboard tile "P2 brand unresolved" (in `scripts/build_site.py`) and three P2 "unresolved" sentences in `data/content.json` (findings, P2 category intro, brand confidence). These now match the verified Item details. No other shared-output text changed.
 - **Stray local branch:** during this session a local branch `tmp-check` was created by mistake and deleted at once. It had no unique commits and was never pushed. The only branch used is `arena/7cfe23f4-zone4`.
 - **Not changed here:** `data/reverification-2026-11-14.json` (another session's record) still cites 3(t) and 3(w) in its original readings. Its `integration_note_2026_11_14` already records the correct §6 numbering. It is not published on the site.
+
+#### Post-review fix found by CI (same session, same PR)
+
+- CI run for `verify` (`.github/workflows/ci.yml`) failed on `python -m engine.cli audit`: `cmd_audit` read
+  `item.slug`, but `agent.PublishItem` names the field `doc_slug` → `AttributeError`, exit 1. Locally this was
+  never caught because only `build` had been exercised, not `audit`. Fixed by using `doc_slug` and by giving
+  `audit` a real failure mode: it exits 0 while drafts are correctly *blocked* (that is the intended state) and
+  exits 1 only if a draft is `READY` while still unresolved, which would be a leak.
+- Added `TestCliSurface` (7 tests) so every CLI subcommand CI runs is executed by the suite: `status`, `rates`
+  (Kitchen 4.5 and the 4.0 All-Other fallback), `audit`, `audit --strict`, `content`, `tracking`, `economics`,
+  `links` (asserting no placeholder tag is ever emitted) and `build` (6 pages). **80 tests** now pass.
+- Also fixed while here: the new TEXT-01 control initially demanded the §2(k) notice inside each *draft*, which
+  would have blocked all 7 drafts forever for a duty the page shell already satisfies. The notice is now emitted
+  by `content.disclosure_block`, so a draft is self-contained if published standalone, and the audit reasons are
+  back to the genuine ones (unverified fields, missing link-level token). A wrong gate is as harmful as no gate.

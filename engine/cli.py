@@ -89,13 +89,22 @@ def cmd_audit(args) -> int:
     a = _agent(args)
     items = a.stage_gate(a.stage_content(a.store.products()))
     blocked = 0
+    leaks = 0
     for item in items:
         state = "READY" if item.ready else "BLOCKED"
         blocked += 0 if item.ready else 1
-        print(f"{state:8s} {item.slug}")
+        print(f"{state:8s} {item.doc_slug}")
         for r in item.reasons:
             print(f"         · {r}")
+        # A draft that passed the gate must not still carry a placeholder: that
+        # is an integrity failure, unlike a draft that is correctly withheld.
+        if item.ready and any("UNRESOLVED" in str(r).upper() for r in item.reasons):
+            leaks += 1
+            print("         ! READY but unresolved — this draft must not publish")
     print(f"\n{len(items) - blocked}/{len(items)} ready · {blocked} blocked by gates")
+    if leaks:
+        print(f"FAILED: {leaks} draft(s) passed the gate while unresolved")
+        return 1
     return 1 if (blocked and args.strict) else 0
 
 

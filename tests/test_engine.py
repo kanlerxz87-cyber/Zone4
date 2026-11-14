@@ -175,6 +175,59 @@ class TestDataLayer(unittest.TestCase):
             self.assertTrue(f.get("action"), f["id"])
 
 
+class TestCliSurface(unittest.TestCase):
+    """CI runs these subcommands, so each one must at least execute cleanly.
+
+    A wrong attribute name inside `audit` passed every local run until CI caught
+    it; these tests are the regression guard for that class of bug.
+    """
+
+    def _run(self, *args, expect=0):
+        import subprocess
+        res = subprocess.run([sys.executable, "-m", "engine.cli", *args], cwd=str(ROOT),
+                             capture_output=True, text=True)
+        self.assertEqual(res.returncode, expect,
+                         f"engine.cli {' '.join(args)} -> {res.returncode}\n{res.stdout[-900:]}\n{res.stderr[-900:]}")
+        return res.stdout
+
+    def test_status_reports_windows_and_rollup(self):
+        out = self._run("status")
+        self.assertIn("claims_verified", out)
+        self.assertIn("publish_gate", out)
+
+    def test_rates_lookup_and_unknown_category(self):
+        import json
+        kitchen = json.loads(self._run("rates", "--category", "Kitchen"))
+        self.assertEqual(kitchen["rate_pct"], 4.5)
+        self.assertTrue(kitchen["source"].startswith("https://affiliate-program.amazon.com/"),
+                        "a published rate must cite the official table")
+        other = json.loads(self._run("rates", "--category", "Something Amazon Does Not List"))
+        self.assertEqual(other["rate_pct"], 4.0, "unknown categories fall to the All Other band, never a guess")
+
+    def test_audit_is_not_failed_by_correctly_blocked_drafts(self):
+        """Blocking is the intended state; only an unresolved-but-READY draft may fail the gate."""
+        self._run("audit")
+
+    def test_audit_strict_flags_incomplete_data(self):
+        self._run("audit", "--strict", expect=1)
+
+    def test_content_and_tracking_and_economics_run(self):
+        self.assertIn("placeholder", self._run("content"))
+        self._run("tracking")
+        self._run("economics")
+
+    def test_links_refuses_without_a_partner_tag(self):
+        out = self._run("links", "B0CDY277D3")
+        self.assertNotIn("yourid-20", out)
+        self.assertNotIn("amazon-20", out)
+
+    def test_build_writes_every_page(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:
+            self._run("build", "--out", td)
+            self.assertEqual(len(list(Path(td).glob("*.html"))), 6)
+
+
 class TestAmazonTextNotice(unittest.TestCase):
     """IP License 2(k): displayed Amazon text needs the plain-view notice."""
 
