@@ -32,16 +32,16 @@
       "requirement": "Every Special Link must include the Associates ID (tag) as a URL parameter.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
-      "status": "Not verifiable",
-      "site_implementation": "User-supplied short links are used as given. The tag does not appear in the resolved URLs. Flag F-03."
+      "status": "Not met for source and competitor links (F-18); short-link tag not verifiable (F-03)",
+      "site_implementation": "User-supplied short links are used as given. The tag does not appear in the resolved URLs (F-03). Source and competitor links on the site carry no tag at all (F-18)."
     },
     {
       "id": "R-05",
       "requirement": "Do not use a link shortening service in a way that makes it unclear that the link goes to an Amazon Site.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(w); Commission Income Statement, Section 2(g)",
+      "source_ref": "Participation Requirements, Section 3(w)",
       "status": "Needs review",
-      "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled as Amazon links. Flag F-04."
+      "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled 'Open Amazon link'. The resolved destinations are Amazon product pages (F-04)."
     },
     {
       "id": "R-06",
@@ -87,17 +87,17 @@
       "id": "R-11",
       "requirement": "Do not collect, use or store product listings, descriptions or prices beyond the license; do not use data mining or robots.",
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
-      "source_ref": "Amazon Conditions of Use, 'License and Access'",
+      "source_ref": "Amazon Conditions of Use, 'License and Access'; Associates IP License §1 (no data mining, robots or similar extraction tools)",
       "status": "Needs legal review",
-      "site_implementation": "Verification read product pages with an automated retrieval tool. Only identifiers and a few spec fields are kept. Flag F-11."
+      "site_implementation": "The verification reads (original pass and 2026-11-14 integration pass) used an automated retrieval tool on Amazon pages. Only identifiers and a few spec fields are kept. Flags F-11 and F-18."
     },
     {
       "id": "R-12",
       "requirement": "Do not use AI-generated content from Amazon Services to develop or improve large language or machine learning models.",
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
-      "source_ref": "Amazon Conditions of Use, 'License and Access'",
+      "source_ref": "Amazon Conditions of Use, 'License and Access'; Associates IP License §1; Participation Requirements §5",
       "status": "Needs review before AI automation",
-      "site_implementation": "Planned AI content automation is NOT built. Flag F-12."
+      "site_implementation": "Planned AI content automation is NOT built. Flag F-12. The Associates IP License §1 and Participation Requirements §5 also restrict ML use of Program Content and Special Links (https://affiliate-program.amazon.com/help/operating/policies)."
     },
     {
       "id": "R-13",
@@ -130,6 +130,14 @@
       "source_ref": "Commission Income Statement, Sections 1 and 2(d)-(e)",
       "status": "Informational",
       "site_implementation": "Links are direct, with no redirect or intermediate page. Search-engine display is not controlled by this site."
+    },
+    {
+      "id": "R-17",
+      "requirement": "Include the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 2(b); Operating Agreement, Section 1 ('tagged' Special Link formats)",
+      "status": "Not met for source and competitor links (F-18)",
+      "site_implementation": "No tag was supplied, so none was added. Source links and competitor links are untagged. Flag F-18 asks for the Associates ID or confirmation that untagged verification links are acceptable."
     }
   ]
 }

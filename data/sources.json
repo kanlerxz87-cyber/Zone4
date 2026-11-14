@@ -18,8 +18,8 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location, not the user's location."
+      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, also-viewed ASINs (carousel labelled 'Sponsored'), price and rating (withheld from site). Re-checked 2026-11-14.",
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. The page showed 'Delivering to Fairfax 22030' (a US delivery location). The page's 'Sponsored' label appears above the also-viewed carousel."
     },
     {
       "id": "S-P2",
@@ -27,8 +27,8 @@
       "url": "https://www.amazon.com/dp/B09B7SB46R",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. 'Sponsored' label appears above the also-viewed carousel."
+      "used_for": "Listing title and subtitle, store 'Emeril Store' and byline 'Innovation IQ' (brand unresolved), category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site). Re-checked 2026-11-14.",
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3. No 'Sponsored' label appears above the also-viewed carousel on the 2026-11-14 snapshot. The listing gives 24 cooking functions in the subtitle and 25 pre-sets in 'About this item' (F-17)."
     },
     {
       "id": "S-P3",
@@ -36,8 +36,8 @@
       "url": "https://www.amazon.com/dp/B08DKYBTPH",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline, category breadcrumb, specification table, size variants, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page."
+      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, size variants (6, 8, 9 quarts), also-viewed ASINs (carousel labelled 'Sponsored'), price and rating (withheld from site). Re-checked 2026-11-14.",
+      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size options 6, 8 and 9 quarts appear on the page; the 8-quart variant is shown on the site."
     },
     {
       "id": "S-L1",
@@ -45,7 +45,7 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B0CDY277D3 (checked 2026-11-14). The resolved URL carries tracking parameters (btn_ref=srctok-..., channelId=704) and no 'tag=' parameter."
     },
     {
       "id": "S-L2",
@@ -53,7 +53,7 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B09B7SB46R (checked 2026-11-14). The resolved URL carries tracking parameters (btn_ref=srctok-..., channelId=704) and no 'tag=' parameter."
     },
     {
       "id": "S-L3",
@@ -61,7 +61,7 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B08DKYBTPH (checked 2026-11-14). The resolved URL carries tracking parameters (btn_ref=srctok-..., channelId=704) and no 'tag=' parameter."
     },
     {
       "id": "S-CAT",
@@ -77,7 +77,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.'"
+      "used_for": "Section 5: the required statement 'As an Amazon Associate I earn from qualifying purchases.' must be clearly and prominently stated on the site. Section 1: links must use the 'tagged' Special Link formats. Re-read 2026-11-14."
     },
     {
       "id": "S-HELP",
@@ -85,7 +85,7 @@
       "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
       "publisher": "Amazon Associates (official help)",
       "accessible": true,
-      "used_for": "Link-level disclosure must be clear and conspicuous, placed near each affiliate link. The Operating Agreement statement must clearly and conspicuously appear on the site."
+      "used_for": "Link-level disclosure must be 'clear' and 'conspicuous' and placed near each affiliate link or product review. The Operating Agreement statement must clearly and conspicuously appear on the site. Re-read 2026-11-14."
     },
     {
       "id": "S-PP",
@@ -93,7 +93,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement sections 1-3 (qualifying purchases, disqualified purchases, Qualifying Revenue); Participation Requirements sections 2(b), 3(c), 3(f), 3(g), 3(t), 3(w), 3(y), 3(z)."
+      "used_for": "Commission Income Statement §1 (Qualifying Purchases and Qualifying Revenue), §2(d)-(e) (search-engine and redirecting links); Participation Requirements §2(b) (tag in every link; prices only via Amazon-served link or Creators/PA API), §3(g), §3(t) (ratings only via Creators/PA API), §3(w) (link shortening), §5 (no ML use of Special Links or Program Content); IP License and Usage Requirements §1 (no data mining, robots, or LLM/ML use), §2(e) (no ML training use of API data). Re-read 2026-11-14."
     },
     {
       "id": "S-SCHED",
@@ -101,7 +101,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read."
+      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read.",
+      "notes": "Re-checked 2026-11-14: the URL redirects to an Amazon sign-in page, so no rate could be read. The Policies Appendix links to it, too."
     },
     {
       "id": "S-COU",
@@ -109,7 +110,7 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section: license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models."
+      "used_for": "'License and Access': the license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of AI-generated content from Amazon Services to develop or improve models. Re-read 2026-11-14 (same page as nodeId=508088; the site redirects to nodeId=GLSBYFE9MGKKQXXM)."
     },
     {
       "id": "S-FTC",
@@ -117,7 +118,7 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "publisher": "U.S. Federal Trade Commission (official)",
       "accessible": true,
-      "used_for": "Disclosure must be hard to miss, placed with the endorsement, and use simple, clear language; a material connection includes a financial relationship."
+      "used_for": "Disclosure must be 'hard to miss', placed with the endorsement, in simple and clear language; a material connection includes a financial relationship. Re-read 2026-11-14."
     },
     {
       "id": "S-REPO",
@@ -126,6 +127,14 @@
       "publisher": "GitHub (official API)",
       "accessible": true,
       "used_for": "Current Pages configuration: legacy build from main root (/), status built, HTTPS enforced (checked 2026-11-14 after PR #15 via GitHub API). The root index redirects to docs/index.html."
+    },
+    {
+      "id": "S-WF",
+      "title": "Repository Actions run for 'Deploy static site to GitHub Pages' (prior session)",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565",
+      "publisher": "GitHub (official)",
+      "accessible": false,
+      "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
     },
     {
       "id": "S-CHECK",
@@ -142,14 +151,6 @@
       "publisher": "GitHub (official Pages deployment run)",
       "accessible": true,
       "used_for": "Successful Pages deployment for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
-    },
-    {
-      "id": "S-WF",
-      "title": "Repository Actions run for 'Deploy static site to GitHub Pages' (prior session)",
-      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565",
-      "publisher": "GitHub (official)",
-      "accessible": false,
-      "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
     }
   ],
   "non_official_reference_only": [

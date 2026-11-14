@@ -9,7 +9,10 @@
       "severity": "High",
       "title": "Category commission rate unverified (blank on all rows)",
       "detail": "The official Standard Commission Income schedule is behind an Amazon sign-in. Third-party sites disagree (Kitchen is listed at 4.5% by one and 5% by another), so no rate was entered. Earnings and commission potential cannot be calculated until the rate is read from the schedule in an authenticated Associates account.",
-      "sources": ["https://affiliate-program.amazon.com/help/operating/schedule", "https://affiliate-program.amazon.com/help/operating/policies"],
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/schedule",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "status": "Needs review",
       "action": "Sign in to Associates Central, read the rate for the category Amazon assigns to these products, and send it for entry."
     },
@@ -18,7 +21,9 @@
       "severity": "High",
       "title": "Prices and star ratings withheld from the public site",
       "detail": "Participation Requirements Section 2(b) allows prices and availability to be shown only if Amazon serves the link or the data comes from Creators API / PA API. Section 3(t) bars star ratings and review data unless obtained the same way. The verification read prices and ratings, but they are not published. The pricing and rating analysis the brief asks for therefore cannot be shown on a static site.",
-      "sources": ["https://affiliate-program.amazon.com/help/operating/policies"],
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "status": "Needs review",
       "action": "Decide whether to (a) apply for PA-API / Creators API access, which requires review of its license terms (not reviewed in this pass), or (b) accept price and rating fields as withheld."
     },
@@ -26,8 +31,12 @@
       "id": "F-03",
       "severity": "High",
       "title": "Associates tag not visible in the resolved links",
-      "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref) but no 'tag=' parameter. Commission attribution to the user's Associates ID therefore cannot be confirmed from the page.",
-      "sources": ["https://link.amazon/B04G1MEwY", "https://link.amazon/B02NbDxp3", "https://link.amazon/B00hJ57DV"],
+      "detail": "All three short links resolve to Amazon product URLs (checked 2026-11-14). The resolved URLs carry tracking parameters (for example btn_ref=srctok-..., channelId=704) but no 'tag=' parameter. Commission attribution to the user's Associates ID therefore cannot be confirmed from the page.",
+      "sources": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV"
+      ],
       "status": "Needs review",
       "action": "Confirm in Associates Central that each link was generated under the user's Associates ID. Send the tagged canonical URL if the short links do not carry the tag."
     },
@@ -35,8 +44,12 @@
       "id": "F-04",
       "severity": "Medium",
       "title": "Short-link codes do not match the ASINs they resolve to",
-      "detail": "The codes B04G1MEwY, B02NbDxp3 and B00hJ57DV are not ASINs. They resolve to B0CDY277D3, B09B7SB46R and B08DKYBTPH. The ASIN from the resolved URL is used everywhere on the site.",
-      "sources": ["https://link.amazon/B04G1MEwY", "https://link.amazon/B02NbDxp3", "https://link.amazon/B00hJ57DV"],
+      "detail": "The codes B04G1MEwY, B02NbDxp3 and B00hJ57DV are not ASINs. Checked 2026-11-14: they resolve to B0CDY277D3, B09B7SB46R and B08DKYBTPH (the last with variation parameter th=1). The ASIN from the resolved URL is used everywhere on the site.",
+      "sources": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV"
+      ],
       "status": "Needs review",
       "action": "Confirm each resolved ASIN is the intended product."
     },
@@ -45,7 +58,9 @@
       "severity": "Medium",
       "title": "Brand for P2 is ambiguous",
       "detail": "The Emeril product page lists 'Visit the Emeril Store' and shows the byline 'Innovation IQ'. The brand is therefore left unresolved rather than assumed to be Emeril Lagasse.",
-      "sources": ["https://www.amazon.com/dp/B09B7SB46R"],
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
       "status": "Needs review",
       "action": "Confirm the brand/manufacturer from the product's 'Product information' section or the seller page."
     },
@@ -54,7 +69,10 @@
       "severity": "Medium",
       "title": "Capacity units differ between title and specification",
       "detail": "P1 title says '6 Quart' but the specification says '6 liters'. P2 title says '26QT' but the specification says '24.6 liters'. Units were not converted, so the two values were left exactly as listed.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
       "status": "Needs review",
       "action": "Confirm the capacity the manufacturer states (quarts or liters) before using it in comparisons."
     },
@@ -63,7 +81,9 @@
       "severity": "Low",
       "title": "Colour differs between title and specification (P1)",
       "detail": "The title ends in 'Black'; the specification table lists 'Black, Gray'.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
       "status": "Needs review",
       "action": "Confirm the colour option the user intends to promote."
     },
@@ -72,34 +92,47 @@
       "severity": "Medium",
       "title": "P3 is a size-variant family",
       "detail": "The P3 page offers size options of 6, 8 and 9 quarts. The short link resolves to the 8-quart variant (ASIN B08DKYBTPH, with variation parameter th=1). Capacity values on the site are for the 8-quart variant only.",
-      "sources": ["https://www.amazon.com/dp/B08DKYBTPH"],
+      "sources": [
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "status": "Needs review",
       "action": "Confirm whether the user wants the 8-quart variant or the family."
     },
     {
       "id": "F-09",
       "severity": "Medium",
-      "title": "Snapshot was taken for a US delivery location",
-      "detail": "The product-page snapshots were read with a US delivery location set. This does not establish the user's location or intended storefront. Prices and availability may vary by delivery location; no location-specific prices or availability are published.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
+      "title": "Associates marketplace and delivery location not recorded",
+      "detail": "The product pages were read with a US delivery location set (the page shows 'Delivering to Fairfax 22030'). The repository does not record which Associates marketplace the links were generated under. Any price or availability would differ by location, and Amazon's returns and shipping terms are marketplace-specific. Nothing location-specific is published.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "status": "Needs review",
-      "action": "Confirm amazon.com is the intended storefront before promotion; if another marketplace is intended, verify its product links and local program terms."
+      "action": "Confirm in Associates Central which marketplace the Associates account and links belong to, and say which marketplace the site should target."
     },
     {
       "id": "F-10",
       "severity": "Medium",
-      "title": "Competitor carousel on P2 is labelled 'Sponsored'",
-      "detail": "The 'Customers who viewed this item also viewed' section on the P2 page is labelled 'Sponsored'. Competitor ASINs listed for P2 may therefore be paid placements, not organic recommendations.",
-      "sources": ["https://www.amazon.com/dp/B09B7SB46R"],
+      "title": "'Sponsored' label above the also-viewed carousel on P1 and P3",
+      "detail": "On the 2026-11-14 snapshots, the 'Customers who viewed this item also viewed' carousel is labelled 'Sponsored' on the P1 and P3 pages. No such label appears above the P2 carousel on its snapshot (an earlier note said it did; that was corrected). Competitor ASINs from a labelled carousel may be paid placements, not organic recommendations.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
       "status": "Needs review",
-      "action": "Treat P2's competitor list as a sponsored signal, not as organic competition data."
+      "action": "Treat the P1 and P3 competitor lists as possible sponsored signals, not as organic competition data."
     },
     {
       "id": "F-11",
       "severity": "High",
       "title": "Verification method may conflict with Amazon Conditions of Use",
-      "detail": "The Conditions of Use licence excludes collecting and using product listings, descriptions or prices, and excludes data mining and robots. This verification read product pages with an automated retrieval tool. The site keeps only identifiers, brand, category and a few specification fields, and does not publish prices or ratings. Scaling this approach (for example, automated product research) would need legal review.",
-      "sources": ["https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"],
+      "detail": "The Conditions of Use licence excludes collecting and using product listings, descriptions or prices, and excludes data mining and robots. The Associates IP License §1 also excludes data mining, robots and similar extraction tools. The verification reads in the original pass and in the 2026-11-14 integration pass both used an automated retrieval tool on Amazon pages. The site keeps only identifiers, brand, category and a few specification fields, and does not publish prices or ratings. Scaling this approach (for example, automated product research) would need legal review.",
+      "sources": [
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "status": "Needs review",
       "action": "Review with counsel before any automated product research. Prefer PA-API / Creators API data or manual entry."
     },
@@ -107,26 +140,36 @@
       "id": "F-12",
       "severity": "High",
       "title": "AI content automation is restricted by Amazon Conditions of Use",
-      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data.",
-      "sources": ["https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"],
+      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The Associates IP License §1 bars using Program Content to develop or improve large language or multimodal models, machine learning models or related technology, and Participation Requirements §5 bars using Special Links or Program Content to develop machine learning models without written approval. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data.",
+      "sources": [
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "status": "Needs review",
       "action": "Decide the data sources for AI-generated articles and get a compliance review before automation."
     },
     {
       "id": "F-13",
       "severity": "Medium",
-      "title": "Earlier Pages workflow failure (resolved; root redirect is used)",
-      "detail": "An earlier 'Deploy static site to GitHub Pages' workflow failed before creating jobs. The repository's Pages source is main root (/); the root index redirects to docs/index.html. The failure was resolved by replacing the deployment workflow with site checks and confirming the subsequent Pages deployment succeeded (deployment details are in COORDINATION.md).",
-      "sources": ["https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157"],
-      "status": "Resolved; historical record",
-      "action": "See COORDINATION.md for the successful deployment and site-check run links."
+      "title": "GitHub Pages source is main '/' (root redirect to docs/), not main '/docs'",
+      "detail": "The Pages API checked on 2026-11-14 reports build_type 'legacy' with source branch main, path '/'. A change to main '/docs' was attempted earlier and returned HTTP 403, so it was not made. A root index.html redirects to docs/index.html and a root .nojekyll is present, so the public URL serves the site. The earlier prior-session workflow ('Deploy static site to GitHub Pages') that failed before creating jobs was replaced by 'Site checks' (checks only). Later runs on main (Site checks 43584048548 and Pages deployment 43584048157) succeeded.",
+      "sources": [
+        "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
+        "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565",
+        "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548",
+        "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157"
+      ],
+      "status": "Needs review",
+      "action": "In Settings, Pages: keep main '/' (the redirect works) or set main '/docs'. Confirm the public URL after each change."
     },
     {
       "id": "F-14",
       "severity": "Low",
       "title": "Prior prototype records superseded",
       "detail": "The prototype pages from earlier sessions (root index.html, products.html, insights.html, flagged.html) held blank product records and an unverified status. They are replaced by the verified records in this site (git history keeps them).",
-      "sources": ["https://github.com/kanlerxz87-cyber/Zone4/blob/main/COORDINATION.md"],
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/COORDINATION.md"
+      ],
       "status": "Resolved by replacement",
       "action": "None."
     },
@@ -135,18 +178,49 @@
       "severity": "Medium",
       "title": "Trend, popularity and conversion signals are unverified",
       "detail": "The product pages show Amazon badges (for example 'Amazon's Choice' and 'bought in past month') and rank-like signals. These are not published, because reuse of Amazon-displayed sales and review metrics was not confirmed (F-02). No official source provides verified trend or conversion data for these products, so trend and conversion fields are blank.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "status": "Unverified (blank)",
       "action": "Provide an official data source (for example, PA-API) or accept blank fields."
     },
     {
       "id": "F-16",
       "severity": "Low",
-      "title": "Creators API / PA API license terms not reviewed",
-      "detail": "The Program Policies incorporate an 'Associates Program IP License and Usage Requirements' section that governs Creators API and PA API use. It was not read line by line in this pass, so no API integration is claimed.",
-      "sources": ["https://affiliate-program.amazon.com/help/operating/policies"],
+      "title": "Creators API / PA API license only partly reviewed",
+      "detail": "In the 2026-11-14 pass, the Associates Program IP License and Usage Requirements §1 (limited license, no data mining, no LLM or machine-learning use) and §2(a)-(f) were read. The rest of §2, the Specifications and the Creators API / PA API terms were not reviewed in full. No API integration is claimed.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "status": "Open review item",
-      "action": "Read the IP License section before any API work."
+      "action": "Read the full IP License and API Specifications before any API work."
+    },
+    {
+      "id": "F-17",
+      "severity": "Low",
+      "title": "P2 listing gives two different cooking-function counts",
+      "detail": "The P2 listing subtitle says '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. Neither count is used on the site, but a comparison should not repeat either one until the manufacturer's specification is read.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
+      "status": "Needs review",
+      "action": "Confirm the count from the manufacturer's specification before using it."
+    },
+    {
+      "id": "F-18",
+      "severity": "High",
+      "title": "Amazon links on the site carry no Associates tag",
+      "detail": "Participation Requirements §2(b) requires the Associates ID (tag) as a URL parameter in each link from the site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag. The user's short links also show no tag (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Needs review",
+      "action": "Supply your Associates ID (tag) so Special Links can be built, or confirm that untagged verification-only source links are acceptable."
     }
   ]
 }
