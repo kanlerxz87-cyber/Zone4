@@ -472,3 +472,13 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Conflict resolution:** rebasing onto the post-PR #20 `main` produced content conflicts in the shared files. Main's data, build script and docs were retained (they are a superset: P2 brand, F-18–F-24, R-19/R-20), and only the RV-I1 competitor-label fix was reapplied on top. No work was discarded; `data/verification-session-ebf5c261.json` records the full audit.
 - **Build and checks:** `python3 scripts/build_site.py` regenerated the pages; `python3 scripts/verify.py` passes; `git diff --check` clean. The combined data was re-verified line by line before the pull request.
 - **PR and merge:** recorded in the completion entry below.
+
+### Session arena/ed7a54e7-zone4 — merge and deployment result
+
+- Pull request [#30](https://github.com/kanlerxz87-cyber/Zone4/pull/30) (`arena/ed7a54e7-zone4` → `main`) merged at `d93c830dbe556f8aa5b122dd0e9c0e91c5a336fe` (2026-11-14 10:30 UTC), self-merged after both required checks passed.
+- Checks on the PR: `verify` run [43585533000](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43585533000/job/132419115270) pass; `audit` run [43585532948](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43585532948/job/132419115115) pass.
+- Pages deployment for `d93c830`: run [43585578403](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43585578403) completed success.
+- Live check after the merge and after later merges by other sessions: `https://kanlerxz87-cyber.github.io/Zone4/docs/requirements.html` serves the Requirements page (fetched with a cache-busting query). GitHub Pages API: `status: built`, source `main` `/`, HTTPS enforced.
+- Post-merge re-check on `main`: `python3 scripts/build_site.py` regenerates 13 pages with no diff, and `python3 scripts/verify.py` passes.
+- Concurrent sessions: PRs #22, #23, #25, #28, #31 and #32 were merged or open while this session worked. Where `main` already carried a correction this session had also reached (the Section 3 → Section 6 citation renumbering), this session discarded its own conflicting edit and kept the merged version. No other session's content was overwritten.
+- Remaining open items are published on the Flagged for Review page; none blocks the merge.
