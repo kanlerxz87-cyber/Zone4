@@ -10,6 +10,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
+| Repo review, line-by-line re-verification against official pages, corrections to flags and copy, site rebuild, PR and merge | **in progress** (claimed 2026-11-14 UTC) | arena/cc6e8a46-zone4 | `data/*.json`, `scripts/build_site.py`, `docs/` (generated), `README.md`, `COORDINATION.md` |
 
 ## Original PR #7 branch note (historical)
 
@@ -116,3 +117,9 @@ The current branch added a more detailed multi-page research view and FTC source
 
 - PR [#11](https://github.com/kanlerxz87-cyber/Zone4/pull/11) merged into `main` at `efd0cda2ff1fc16e7421f56fa5a89d7a1f724982`. Its Site checks run [43583547392](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583547392) and Pages deployment [43583546871](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583546871) both succeeded; the Pages API remained `built`.
 - Final cleanup removes a generated tracked Python bytecode file and adds `.gitignore` rules for `__pycache__/` and `*.py[cod]`; this does not alter the site output.
+
+### Session arena/cc6e8a46-zone4 — claim (2026-11-14, UTC)
+
+- Claimed: repo review and line-by-line re-verification of the product, policy and source records against official pages; corrections; site rebuild; PR to `main`; merge; Pages check. Scope: `data/*.json`, `scripts/build_site.py`, the generated `docs/`, `README.md` and this file. No other session holds a claim.
+- Branch: the system assigns this session the single branch `arena/cc6e8a46-zone4` (from `main` at `7ea516c`). The brief's `session-<id>/<task>` naming and per-task branches are not used, because this session may only work on its assigned branch. Parallel-session rules still apply through this board.
+- Note: the local clone was shallow (grafted at `efd0cda`). It was unshallowed with `git fetch --unshallow` before the fast-forward to `origin/main`. No history was rewritten.
