@@ -106,10 +106,15 @@ def check_marketing() -> None:
         for f in a["facts"]:
             if not is_official(f["source_url"]):
                 fail(f"marketing {a['id']} fact {f['id']}: non-official source {f['source_url']}")
+        cited = set()
         for para in a["body"]:
             for fid in para["fact_ids"]:
                 if fid not in facts:
                     fail(f"marketing {a['id']} paragraph {para['id']}: unknown fact {fid}")
+                cited.add(fid)
+        for fid in facts:
+            if fid not in cited:
+                fail(f"marketing {a['id']}: fact {fid} is never cited by a paragraph")
         for k in a["target_keywords"]:
             if not is_official(k["source_url"]):
                 fail(f"marketing {a['id']} keyword '{k['term']}': non-official source")

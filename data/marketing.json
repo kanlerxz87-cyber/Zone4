@@ -2,10 +2,10 @@
   "_meta": {
     "description": "Marketing content kit for the three supplied air-fryer products: one article per product, one comparison page, one buying guide, an SEO rule set and a publishing checklist. Every factual statement is a row in a 'facts' table with an official source link. Copy is written in original words; it does not reproduce Amazon listing prose.",
     "observed_utc": "2026-11-14",
-    "method": "Each article may use only: the product's Amazon listing title as an identifier (always linked), the brand byline, the category breadcrumb, and the structured fields of the Amazon product-details table (Special Feature, Product Dimensions, Color, Capacity, Material), plus the factual statements on the product page that are listed in that product's 'facts' table with a source link. Prices, star ratings, review counts, 'Amazon's Choice' and 'bought in past month' badges are excluded (Participation Requirements 2(b) and 3(t)).",
+    "method": "Each article may use only: the product's Amazon listing title as an identifier (always linked), the brand byline, the category breadcrumb, and the structured fields of the Amazon product-details table (Special Feature, Product Dimensions, Color, Capacity, Material), plus the factual statements on the product page that are listed in that product's 'facts' table with a source link. Prices, star ratings, review counts, 'Amazon's Choice' and 'bought in past month' badges are excluded (Participation Requirements 2(b) and 6(t)).",
     "excluded": [
       "Amazon prices and availability - Participation Requirement 2(b): a site may show them only if Amazon serves the link, or the data comes from Creators API / PA API. Neither is connected, so no price appears.",
-      "Star ratings, review counts and Amazon popularity badges - Participation Requirement 3(t): these may be displayed only if obtained through Creators API or PA API.",
+      "Star ratings, review counts and Amazon popularity badges - Participation Requirement 6(t): these may be displayed only if obtained through Creators API or PA API.",
       "Any sentence, bullet or phrase copied from the Amazon listing - Participation Requirement 6(a) forbids altering Program Content, and this site does not republish it.",
       "Search-volume or trend figures - no official source publishes them, so the cells are blank and marked unverified.",
       "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
@@ -250,14 +250,14 @@
           "value": "Short labels, not the full listing titles",
           "source_url": "https://www.amazon.com/dp/B0CDY277D3",
           "source_ref": "Linked product pages carry the full Amazon listing titles",
-          "note": "Flag F-23."
+          "note": "Flag F-20."
         },
         {
           "id": "M-P1-F13",
           "field": "Price and customer rating",
           "value": "",
           "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "source_ref": "Participation Requirements 2(b) and 3(t)",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
           "note": "Withheld: a site may show prices only if Amazon serves the link or the data comes from Creators API / PA API; ratings and reviews only through those APIs. Flag F-02."
         }
       ],
@@ -408,7 +408,8 @@
           "id": "M-P2-B7",
           "text": "The brand is the other open point. The page shows the store 'Emeril Store' and a byline of 'Innovation IQ', while the listing title carries the name Emeril Lagasse. Rather than assume the brand, this research records it as unresolved and links the product page so a reader can check the store listing directly.",
           "fact_ids": [
-            "M-P2-F8"
+            "M-P2-F8",
+            "M-P2-F1"
           ]
         },
         {
@@ -416,7 +417,8 @@
           "text": "Amazon's also-viewed carousel on this listing pairs it with a 25 quart Emeril Lagasse dual zone air fryer oven, a 20.3 quart Ninja French door air fry oven and a 28 quart HotKing dual-zone air fryer toaster oven. Those three make a natural comparison set for the format, although the widget is a point-in-time snapshot rather than a ranking.",
           "fact_ids": [
             "M-P2-F11",
-            "M-P2-F12"
+            "M-P2-F12",
+            "M-P2-F14"
           ]
         }
       ],
@@ -499,7 +501,7 @@
           "value": "Listing title: 24 cooking functions. Feature section: 25 cooking pre-sets, naming Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Listing title and 'About this item' section",
-          "note": "Two different counts on the same page. Flag F-25."
+          "note": "Two different counts on the same page. Flag F-26."
         },
         {
           "id": "M-P2-F11",
@@ -515,7 +517,7 @@
           "value": "Short labels, not the full listing titles",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Linked product pages carry the full Amazon listing titles",
-          "note": "Flag F-23."
+          "note": "Flag F-20."
         },
         {
           "id": "M-P2-F13",
@@ -530,7 +532,7 @@
           "field": "Price and customer rating",
           "value": "",
           "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "source_ref": "Participation Requirements 2(b) and 3(t)",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
           "note": "Withheld. Flag F-02."
         }
       ],
@@ -633,7 +635,9 @@
           "text": "The listing covered here is the Chefman Air Fryer 8 Qt, filed under ASIN B08DKYBTPH and placed in the Air Fryers category. The listing title describes it as a four-in-one unit that bakes, dehydrates and cooks frozen food, with an XL non-stick dishwasher-safe basket in stainless steel.",
           "fact_ids": [
             "M-P3-F8",
-            "M-P3-F9"
+            "M-P3-F9",
+            "M-P3-F1",
+            "M-P3-F12"
           ]
         },
         {
@@ -667,7 +671,8 @@
           "text": "Amazon's also-viewed carousel on this listing pairs it with two smaller Chefman 6 quart compact models and a 6 quart Cosori 9-in-1 TurboBlaze air fryer. That is a useful shortlist at the budget end of the category, and it is again a snapshot of one recommendation widget rather than a ranking.",
           "fact_ids": [
             "M-P3-F10",
-            "M-P3-F11"
+            "M-P3-F11",
+            "M-P3-F13"
           ]
         }
       ],
@@ -758,7 +763,7 @@
           "value": "Short labels, not the full listing titles",
           "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
           "source_ref": "Linked product pages carry the full Amazon listing titles",
-          "note": "Flag F-23."
+          "note": "Flag F-20."
         },
         {
           "id": "M-P3-F12",
@@ -773,7 +778,7 @@
           "field": "Price and customer rating",
           "value": "",
           "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "source_ref": "Participation Requirements 2(b) and 3(t)",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
           "note": "Withheld. Flag F-02."
         }
       ],
@@ -871,7 +876,8 @@
           "fact_ids": [
             "M-CMP-F1",
             "M-CMP-F2",
-            "M-CMP-F3"
+            "M-CMP-F3",
+            "M-CMP-F6"
           ]
         },
         {
@@ -937,7 +943,7 @@
           "field": "Price, star rating and review count",
           "value": "",
           "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "source_ref": "Participation Requirements 2(b) and 3(t)",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
           "note": "Withheld for all three products. Flag F-02."
         },
         {
@@ -1121,7 +1127,7 @@
           "value": "P3: 4-in-1 (Bake, Dehydrate, Frozen) with 4 presets. P2: title says 24 cooking functions; feature section says 25 cooking pre-sets. P1: no function count stated; special features listed as + 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Listing titles, 'About this item' sections and product details tables",
-          "note": "P2 discrepancy. Flag F-25."
+          "note": "P2 discrepancy. Flag F-26."
         },
         {
           "id": "M-BUY-F5",
@@ -1144,7 +1150,7 @@
           "field": "Price, rating and review count",
           "value": "",
           "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "source_ref": "Participation Requirements 2(b) and 3(t)",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
           "note": "Withheld. Flag F-02."
         }
       ],
@@ -1166,7 +1172,7 @@
       "id": "SEO-01",
       "rule": "Do not use an Amazon Mark in the page title, meta description, domain name or keyword text.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 3(g) and 6(e); Trademark Guidelines 1 to 3",
+      "source_ref": "Participation Requirements 1(g) and 6(e); Trademark Guidelines 1 to 3",
       "applied": "None of the suggested title tags, meta descriptions or keyword targets contains the word 'amazon'."
     },
     {
@@ -1208,14 +1214,14 @@
       "id": "SEO-07",
       "rule": "Prices may be shown only if Amazon serves the link or the data comes from Creators API / PA API; ratings and reviews only through those APIs.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 2(b) and 3(t)",
+      "source_ref": "Participation Requirements 2(b) and 6(t)",
       "applied": "The content kit contains no price, rating, review count or popularity badge. Any future price field needs the API route and the IP License 2(i) timestamp and disclaimer."
     },
     {
       "id": "SEO-08",
       "rule": "A site must not have price tracking or price alerting functionality unless Amazon agrees otherwise.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 3(y)",
+      "source_ref": "Participation Requirements 6(y)",
       "applied": "No price tracking or price alerting is built or planned on this site."
     }
   ],
@@ -1260,7 +1266,7 @@
       "step": "Record every link you publish",
       "detail": "Keep the published URL list so a later review can confirm each link carries the right tag and points at the right listing.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 2(b) and 3(w)"
+      "source_ref": "Participation Requirements 2(b) and 6(w)"
     }
   ]
 }

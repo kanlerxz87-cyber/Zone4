@@ -2,10 +2,7 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
-**Live site (GitHub Pages):** https://kanlerxz87-cyber.github.io/Zone4/
-
-The repository's Pages source is `main` `/` (legacy build). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. Setting the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
-
+e to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
 ## What is in the repo
 
 | Path | Purpose |
@@ -17,7 +14,6 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/policies.json` | Amazon Associates and FTC requirements, with status for this site |
 | `data/flags.json` | Irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, analysis findings, category text |
-| `data/reverification-2026-11-14.json` | Independent re-verification record from a parallel session |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `docs/` | The published site |
@@ -36,8 +32,8 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `automation.html` | Pipeline stages, tracking metrics, optimisation loop and the Agent Terms |
 | `analysis.html` | 14 findings with their basis, confidence and source links |
 | `verification.html` | Field-by-field verification log for every product |
-| `policy-compliance.html` | 28 Amazon Associates and FTC rules, each with its official source section |
-| `flagged.html` | Flagged for Review: 26 irregularities and unverified items |
+| `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
+| `flagged.html` | Flagged for Review: 27 irregularities and unverified items |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
@@ -51,7 +47,7 @@ The verifier fails the build if any table row lacks a link to an official source
 
 ## Limits
 
-- Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 3(t) restrict them to Amazon-served links or PA-API / Creators API data.
+- Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or PA-API / Creators API data.
 - Commission rates are **blank** (the official schedule is behind an Amazon sign-in).
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
 - Click, conversion, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated.

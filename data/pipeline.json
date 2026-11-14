@@ -57,7 +57,7 @@
       "output": "One verified niche (countertop air fryers) split into three sub-categories, each with its own page.",
       "requirement": "A niche can only be ranked as profitable once a commission rate and a demand signal are available. Neither is connected, so no niche is called the most profitable.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/schedule",
-      "source_ref": "Standard Commission Income schedule (behind sign-in) and Program Policies, Participation Requirements 3(z)"
+      "source_ref": "Standard Commission Income schedule (behind sign-in) and Program Policies, Participation Requirements 6(z)"
     },
     {
       "id": "PL-6",
@@ -87,7 +87,7 @@
       "output": "scripts/verify.py runs on every pull request and on every push to main; it fails the build on any of those conditions.",
       "requirement": "Prices and ratings may be shown only through Amazon-served links or Creators API / PA API; the disclosure must appear on every page.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 2(b), 3(t) and Operating Agreement Section 5"
+      "source_ref": "Participation Requirements 2(b), 6(t) and Operating Agreement Section 5"
     },
     {
       "id": "PL-9",
@@ -97,7 +97,7 @@
       "output": "The research site publishes to GitHub Pages from main. A monetised publication channel and a link registry are not set up.",
       "requirement": "Every Special Link must carry the Associate ID. The supplied links resolve without a visible tag, so the tagged URLs must be confirmed before publication.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 2(b) and 3(w)"
+      "source_ref": "Participation Requirements 2(b) and 6(w)"
     },
     {
       "id": "PL-10",
@@ -117,7 +117,7 @@
       "output": "Empty. The optimisation loop is specified in the Automation page but every input is still blank.",
       "requirement": "Optimisation needs the tracking data. It must also stay inside the rules on sub-tags and on artificial traffic.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements 2(b) and 3(s)"
+      "source_ref": "Participation Requirements 2(b) and 6(s)"
     },
     {
       "id": "PL-12",
@@ -147,17 +147,17 @@
     {"id": "TR-4", "metric": "Revenue and commission earned per link", "how_obtained": "Associates Central earnings and order reports", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Commission Income Statement, Section 1 (Qualifying Revenue)", "current_value": "", "status": "Not connected", "notes": "Qualifying Revenue excludes shipping, tax, service charges and similar items."},
     {"id": "TR-5", "metric": "Category commission rate", "how_obtained": "Standard Commission Income schedule in Associates Central", "source_url": "https://affiliate-program.amazon.com/help/operating/schedule", "source_ref": "Standard Commission Income schedule (Appendix link)", "current_value": "", "status": "Unverified", "notes": "The URL redirects to an Amazon sign-in, so no rate could be read. Flag F-01."},
     {"id": "TR-6", "metric": "Sub-tag performance (per product, format or campaign)", "how_obtained": "Additional sub-tag Associate IDs, issued on request and approved", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 2(b)", "current_value": "", "status": "Not connected", "notes": "Sub-tags may not be assigned to individual end users."},
-    {"id": "TR-7", "metric": "On-site click-through rate on this site", "how_obtained": "Site analytics", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 2(b) and Section 3(s)", "current_value": "", "status": "Unverified", "notes": "No analytics provider is connected and no official source publishes this figure. Artificial clicks are prohibited. Flag F-22."},
+    {"id": "TR-7", "metric": "On-site click-through rate on this site", "how_obtained": "Site analytics", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 2(b) and Section 6(s)", "current_value": "", "status": "Unverified", "notes": "No analytics provider is connected and no official source publishes this figure. Artificial clicks are prohibited. Flag F-19."},
     {"id": "TR-8", "metric": "Product demand trend (search interest, sales momentum)", "how_obtained": "No official source", "source_url": "https://www.amazon.com/dp/B0CDY277D3", "source_ref": "Amazon product pages show popularity badges; they are not reproduced here", "current_value": "", "status": "Unverified", "notes": "Blank by rule. Flag F-15."},
-    {"id": "TR-9", "metric": "Price movement for the promoted products", "how_obtained": "Not applicable", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 3(y)", "current_value": "", "status": "Not built", "notes": "A site must not have price tracking or price alerting functionality unless Amazon agrees otherwise. Flag F-18."},
-    {"id": "TR-10", "metric": "Comparison of prices against other retailers", "how_obtained": "Not applicable", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 3(z) and Section 2(b)", "current_value": "", "status": "Not built", "notes": "Program Content may not be used to advertise products offered on any site that is not an Amazon Site, and a price comparison must show both the lowest new and the lowest used price."}
+    {"id": "TR-9", "metric": "Price movement for the promoted products", "how_obtained": "Not applicable", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 6(y)", "current_value": "", "status": "Not built", "notes": "A site must not have price tracking or price alerting functionality unless Amazon agrees otherwise. Flag F-22."},
+    {"id": "TR-10", "metric": "Comparison of prices against other retailers", "how_obtained": "Not applicable", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements, Section 6(z) and Section 2(b)", "current_value": "", "status": "Not built", "notes": "Program Content may not be used to advertise products offered on any site that is not an Amazon Site, and a price comparison must show both the lowest new and the lowest used price."}
   ],
   "optimisation": [
     {"id": "OP-1", "step": "Refresh the records", "detail": "Re-read each product page and update the structured fields, because listing titles, prices, availability and the recommendation carousels all change over time.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "IP License, Section 2(h) and 2(i)"},
     {"id": "OP-2", "step": "Re-run the verification", "detail": "Run the build and the verifier, then confirm the committed site matches the build output, before publishing anything.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements 3(c)"},
     {"id": "OP-3", "step": "Read the click and order reports", "detail": "Compare sessions, orders and unit session percentage per link, per sub-tag and per page, once reporting is connected.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Commission Income Statement, Sections 1 to 3"},
     {"id": "OP-4", "step": "Re-weight the content, not the disclosure", "detail": "Shift copy effort towards the pages with the best unit session percentage. The disclosure, the source links and the accuracy rules stay fixed and are never traded away for performance.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements 3(c) and Operating Agreement Section 5"},
-    {"id": "OP-5", "step": "Keep the human in the loop", "detail": "Do not generate traffic artificially, do not assign sub-tags to individual visitors, and do not let an automated agent act on Program Content without meeting the Agent Terms.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements 2(b) and 3(s); IP License Section 4"}
+    {"id": "OP-5", "step": "Keep the human in the loop", "detail": "Do not generate traffic artificially, do not assign sub-tags to individual visitors, and do not let an automated agent act on Program Content without meeting the Agent Terms.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Participation Requirements 2(b) and 6(s); IP License Section 4"}
   ],
   "agent_requirements": [
     {"id": "AG-1", "requirement": "Any agent that accesses Program Content must identify itself in every HTTP and HTTPS request by putting 'Agent/[agent name]' in the user agent string, and must not conceal or obfuscate that the access is from an agent.", "source_url": "https://affiliate-program.amazon.com/help/operating/policies", "source_ref": "Associates Program IP License, Section 4(c)"},

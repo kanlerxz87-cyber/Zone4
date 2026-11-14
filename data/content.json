@@ -3,25 +3,25 @@
   "disclosure_source": "https://affiliate-program.amazon.com/help/operating/agreement",
   "observed_date": "2026-11-14",
   "executive_summary": {
-    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Every published figure was re-read against the official Amazon page on 2026-11-14. Prices, ratings, commission rates and trend data are not published, because they could not be verified or the Associates policy does not allow them on this site. The marketing content the brief asks for is built from those verified figures only.",
+    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Every published figure was read again from the official Amazon page on 2026-11-14. Prices, ratings, commission rates and trend data are not published, because they could not be verified or the Associates policy does not allow them on this site. The marketing content the brief asks for is built from those verified figures only.",
     "bullets": [
-      "Identity verified and re-verified: each link resolves to an Amazon product page (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH). All three sit under the same Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers). The listing titles, brand bylines, category breadcrumbs and the full specification tables were read again on 2026-11-14 and match. Flag F-04 covers the short-link codes.",
+      "Identity verified and re-verified: each link resolves to an Amazon product page (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH). All three sit under the same Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers). The listing titles, brand bylines, category breadcrumbs and the complete specification tables were read again on 2026-11-14 and every value matches. Flag F-04 covers the short-link codes.",
       "Marketing content is built: three product articles, one comparison page and one buying guide, each with a title tag, meta description, keyword targets, an outline, finished copy, a call to action and a fact table in which every row links to its official source. Copy is written in this site's own words and republishes no Amazon listing prose (F-12).",
-      "Pricing and ratings withheld: the Associates Participation Requirements (Section 2(b) and Section 3(t)) allow prices and star ratings on a site only through Amazon-served links or Creators API / PA API. The pages were read, but no price, rating or review count is published (F-02).",
+      "Pricing and ratings withheld: the Associates Participation Requirements (Section 2(b) for prices and availability, Section 6(t) for star ratings and customer reviews) allow those figures on a site only through Amazon-served links or Creators API / PA API. The pages were read, but no price, rating or review count is published (F-02).",
       "Commission potential not calculable: the category commission schedule is behind an Amazon sign-in, so no rate is entered (F-01). Third-party sources conflict on the Kitchen rate, so they are listed as non-official references and are not used as data.",
       "Attribution unverified: the resolved links carry no Associates tag parameter (F-03). Confirm the links were generated under your Associates ID before relying on any earnings.",
-      "The automation and tracking plan is built and specified, with every metric left blank: click, order, unit-session and revenue reporting need Associates reporting and a tagged link (F-22); price tracking is prohibited by default (F-18); API reuse and model training need prior written approval (F-20).",
-      "Agent Terms apply to the research agent in the brief: any agent that touches Program Content must identify itself as 'Agent/[name]' in the user agent string, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits (F-17).",
-      "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content and using robots for extraction (F-11), and Amazon Marks must not be used as search keywords (F-19).",
+      "The automation and tracking plan is built and specified, with every metric left blank: click, order, unit-session and revenue reporting need Associates reporting and a tagged link (F-19); price tracking is prohibited by default (F-22); API reuse and model training need prior written approval (F-24).",
+      "Agent Terms apply to the research agent in the brief: any agent that touches Program Content must identify itself as 'Agent/[name]' in the user agent string, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits (F-21).",
+      "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content and using robots for extraction (F-11), and Amazon Marks must not be used as search keywords (F-23).",
       "Site: static GitHub Pages site; the repository root redirects to the site in docs/. Every table row links to an official source, and unverified values are blank and flagged."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and confirm amazon.com is the intended storefront (F-09).",
       "Read the category commission rate from Associates Central and send it for entry (F-01).",
-      "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16, F-21).",
-      "Decide whether the research agent may be automated at all, and if so implement the Agent Terms user agent string and transparency rules first (F-17, F-11).",
-      "Decide whether to keep prices and ratings withheld, given that price tracking and alerting are prohibited by default (F-18).",
-      "Ask the seller for P2's correct cooking function count and its brand (F-05, F-25)."
+      "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16, F-25).",
+      "Decide whether the research agent may be automated at all, and if so implement the Agent Terms user agent string and transparency rules first (F-21, F-11).",
+      "Decide whether to keep prices and ratings withheld, given that price tracking and alerting are prohibited by default (F-22).",
+      "Ask the seller for P2's correct cooking function count and its brand (F-05, F-26)."
     ]
   },
   "analysis": [
@@ -39,13 +39,13 @@
     {
       "id": "A-02",
       "finding": "Two of the three products share a brand (Chefman). The third brand is unresolved.",
-      "basis": "Brand byline on P1 and P3 reads Chefman. P2 shows store 'Emeril Store' and byline 'Innovation IQ' (F-05).",
+      "basis": "Brand byline on P1 and P3 reads Chefman. P2 shows store 'Emeril Store' and byline 'Innovation IQ' (F-05). The bylines and specification tables were re-read on 2026-11-14 and match (F-18 closed).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B08DKYBTPH",
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "confidence": "Verified for P1 and P3; unresolved for P2"
+      "confidence": "Verified for P1 and P3 (byline and specification table re-read 2026-11-14); unresolved for P2"
     },
     {
       "id": "A-03",
@@ -60,14 +60,14 @@
     },
     {
       "id": "A-04",
-      "finding": "Amazon's own 'also viewed' carousels surface competing air fryers from at least six other brands across the three product pages. P1 and P3 each list another Chefman model.",
-      "basis": "Also-viewed carousel, first three items per product (Gourmia, Nutrichef, Ninja, HotKing, Emeril, Cosori, Chefman). On a second full read on 2026-11-14 the 'Sponsored' label appeared above the P1 and P3 carousels and not above P2, so the label is not product specific and the lists are published as snapshots, not as organic rankings (F-10).",
+      "finding": "Amazon's own 'also viewed' lists show competing air fryers from at least six other brands. P1 and P3 each list another Chefman model.",
+      "basis": "Also-viewed carousel, first three items per product (Gourmia, Nutrichef, Ninja, HotKing, Emeril, Cosori, Chefman). 'Sponsored' labels appeared on some reads (F-10).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
-      "confidence": "Verified as shown; may include paid placements"
+      "confidence": "Verified as shown (re-read 2026-11-14); sponsored labels vary (F-10)"
     },
     {
       "id": "A-05",
@@ -102,7 +102,7 @@
     {
       "id": "A-08",
       "finding": "The Amazon AI clauses restrict training on Amazon content, not the writing of articles. The binding limits on an automated content pipeline are the API reuse clause and the data-mining exclusion.",
-      "basis": "Conditions of Use 'License and Access' bars using AI-generated content from the Amazon Services to develop or improve models. IP License section 1 bars using Program Content to develop or improve models, and section 2(e) bars accessing Creators API or PA API for aggregating, analysing, extracting or repurposing Product Advertising Content, or for direct training or fine-tuning, without express prior written approval. None of these bars writing pages with an AI tool from a licensed source.",
+      "basis": "Conditions of Use 'License and Access' bars using AI-generated content from the Amazon Services to develop or improve models. IP License section 1 bars using Program Content to develop or improve models, section 2(e) bars accessing Creators API or PA API for aggregating, analysing, extracting or repurposing Product Advertising Content, or for direct training or fine-tuning, without express prior written approval, and Participation Requirement 5 bars using Special Links or Program Content to develop machine learning models. None of these bars writing pages with an AI tool from a licensed source.",
       "sources": [
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -130,7 +130,7 @@
     {
       "id": "A-11",
       "finding": "Price tracking is prohibited unless Amazon agrees otherwise, so the brief's pricing-analysis goal has a hard limit.",
-      "basis": "Participation Requirement 3(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' The tracking plan records price movement as Not built for that reason.",
+      "basis": "Participation Requirement 6(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' The tracking plan records price movement as Not built for that reason.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -139,7 +139,7 @@
     {
       "id": "A-12",
       "finding": "Amazon Marks must not be used as search keywords, so the site's title, meta description and suggested keywords were changed to avoid the word.",
-      "basis": "Trademark Guidelines 1 to 3 and Participation Requirement 6(e). The site title, meta description, article title tags, meta descriptions, slugs and keyword targets now contain no Amazon Mark. Flag F-19.",
+      "basis": "Trademark Guidelines 1 to 3 and Participation Requirement 6(e). The site title, meta description, article title tags, meta descriptions, slugs and keyword targets now contain no Amazon Mark. Flag F-23.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -159,7 +159,7 @@
     {
       "id": "A-14",
       "finding": "The set contains two listing inconsistencies beyond the capacity unit mismatch: P2's cooking function count and the carousel's 'Sponsored' label.",
-      "basis": "P2's title says 24 cooking functions while its feature section heads a list of 25 cooking pre-sets (F-25). The 'Sponsored' label appeared on the P1 and P3 carousels and not on P2 in the second read, so it is not product specific (F-10).",
+      "basis": "P2's title says 24 cooking functions while its feature section heads a list of 25 cooking pre-sets (F-26). The 'Sponsored' label appeared on the P3 carousel on one read and on the P1 carousel on another read of the same day, so it is not product specific (F-10).",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B0CDY277D3",
@@ -192,13 +192,13 @@
     }
   },
   "not_built": [
-    "Automated product research at scale (needs a compliance decision under the Agent Terms, and Creators API / PA API access rather than page retrieval). Flags F-11, F-17, F-22.",
-    "Price, rating and review analysis on the public site (withheld under 2(b) and 3(t), and price tracking is prohibited by default). Flags F-02, F-18.",
+    "Automated product research at scale (needs a compliance decision under the Agent Terms, and Creators API / PA API access rather than page retrieval). Flags F-11, F-21, F-19.",
+    "Price, rating and review analysis on the public site (withheld under 2(b) and 6(t), and price tracking is prohibited by default). Flags F-02, F-22.",
     "Commission calculations and earnings projections (needs the category rate from the signed-in schedule). Flag F-01.",
-    "Click, conversion and revenue tracking (needs Associates reporting and a tagged link). Flag F-22.",
-    "API integration of any kind, including reusing or fine-tuning on API content (needs express prior written approval). Flag F-20.",
-    "Price tracking, price alerting and cross-retailer price comparison (prohibited or restricted by 3(y) and 3(z)). Flag F-18.",
-    "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-26.",
+    "Click, conversion and revenue tracking (needs Associates reporting and a tagged link). Flag F-19.",
+    "API integration of any kind, including reusing or fine-tuning on API content (needs express prior written approval). Flags F-16, F-24, F-25.",
+    "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
+    "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",
     "Campaign optimisation (needs the tracking data above; the loop itself is specified on the Automation page)."
   ]
 }

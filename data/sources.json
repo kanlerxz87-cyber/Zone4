@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Registry of every source used. 'accessible' records whether the page content was read during a verification pass. Pass 1: session arena/1eb689b8-zone4. Pass 2 (full line-by-line re-read of every cited section): session arena/3036372b-zone4, 2026-11-14 UTC.",
+    "description": "Registry of every source used. 'accessible' records whether the page content was read during a verification pass. Pass 1: session arena/1eb689b8-zone4. Pass 2, full line-by-line re-read of every cited section: session arena/857e9efd-zone4 and session arena/3036372b-zone4, 2026-11-14 UTC.",
     "official_hosts": [
       "www.amazon.com",
       "amazon.com",
@@ -19,7 +19,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Re-read 2026-11-14 (arena/3036372b-zone4): title, brand byline, breadcrumb, the full specification table and the also-viewed carousel all match. The snapshot shows a US delivery location, which does not establish the user's location."
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Re-read 2026-11-14 by arena/3036372b-zone4: title, brand byline, breadcrumb, the full specification table (special features, dimensions, colour, capacity, material) and the also-viewed carousel all match. The snapshot shows a US delivery location, which does not establish the user's location."
     },
     {
       "id": "S-P2",
@@ -28,7 +28,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. Re-read 2026-11-14 (arena/3036372b-zone4): title, store and byline, breadcrumb, the full specification table and the also-viewed carousel all match. On this pass the 'Sponsored' label did NOT appear above this carousel, while it did appear on the P1 and P3 carousels; the label is therefore not product specific. See F-10."
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3. Re-read 2026-11-14 by arena/3036372b-zone4: title, store and byline, breadcrumb, the full specification table and the also-viewed carousel all match. On this pass the 'Sponsored' label did NOT appear above this carousel, while it did appear on the P1 and P3 carousels; the label is therefore not product specific. See F-10."
     },
     {
       "id": "S-P3",
@@ -37,7 +37,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, size variants, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page. Re-read 2026-11-14 (arena/3036372b-zone4): title, brand byline, breadcrumb, the full specification table and the also-viewed carousel all match."
+      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page. Re-read 2026-11-14 by arena/3036372b-zone4: title, brand byline, breadcrumb, the full specification table and the also-viewed carousel all match."
     },
     {
       "id": "S-L1",
@@ -45,7 +45,7 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
+      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4."
     },
     {
       "id": "S-L2",
@@ -53,7 +53,7 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
+      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4."
     },
     {
       "id": "S-L3",
@@ -61,7 +61,7 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
+      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4."
     },
     {
       "id": "S-CAT",
@@ -77,7 +77,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 1: Special Links must use the tagged link formats. Section 5: the required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.', plus the bar on misrepresenting or embellishing the relationship. Section 7: service offerings are provided 'AS IS'. Re-read in full 2026-11-14 (arena/3036372b-zone4)."
+      "used_for": "Section 1: Special Links must use the tagged link formats. Section 5: the required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.', plus the bar on misrepresenting or embellishing the relationship. Section 7: service offerings are provided 'AS IS'. Re-read in full 2026-11-14."
     },
     {
       "id": "S-HELP",
@@ -85,7 +85,7 @@
       "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
       "publisher": "Amazon Associates (official help)",
       "accessible": true,
-      "used_for": "Link-level disclosure must be clear and conspicuous, placed near each affiliate link. The Operating Agreement statement must clearly and conspicuously appear on the site."
+      "used_for": "Re-read 2026-11-14. Link-level disclosure must be clear and conspicuous and placed near each affiliate link or review; the Operating Agreement statement must clearly and conspicuously appear on the Site."
     },
     {
       "id": "S-PP",
@@ -93,7 +93,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement section 1 (qualifying purchases, Qualifying Revenue); Participation Requirements 1, 2(a), 2(b), 3(b) to 3(z), 4 (Promotional Limitations), 5, 6(a) to 6(f); Trademark Guidelines 1 to 8; Associates Program IP License sections 1, 2(a) to 2(k), 3 and 4 (Agent Terms); Products Statement 1 to 3; Influencer Program Policy; Creator Ads Boost. Every section cited on this site was re-read on 2026-11-14 (arena/3036372b-zone4)."
+      "used_for": "Commission Income Statement sections 1, 2(a) to 2(k), 3 and 4; Participation Requirements sections 1, 2(a), 2(b), 3(a) to 3(f), 4, 5, 6(a) to 6(z); Trademark Guidelines 1 to 8; Associates Program IP License sections 1, 2(a) to 2(k), 3 and 4 (Agent Terms); Products Statement 1 to 3; Influencer Program Policy; Creator Ads Boost. Every section cited on this site was re-read on 2026-11-14. Note for reviewers: the lettered Participation Requirements run 3(a) to 3(f) under 'Responsibility for Your Site' and 6(a) to 6(z) under 'Content on your Site', so the ratings rule is 6(t) and not 3(t)."
     },
     {
       "id": "S-SCHED",
@@ -101,8 +101,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read.",
-      "notes": "Re-checked 2026-11-14 (arena/3036372b-zone4): the URL redirects to https://www.amazon.com/ap/signin?...return_to=...%2Fhome%2Faccount%2Fpayment%2Fcustomratecard, an Amazon sign-in page, so no rate could be read. The same two links are listed in the policies Appendix."
+      "used_for": "Would hold the category commission rates. Re-checked 2026-11-14: the URL still redirects to an Amazon sign-in page, so no rate could be read. The Program Policies Appendix links 'Standard Commission Income' to this same URL, so the rate is not on the policies page.",
+      "notes": "Re-checked 2026-11-14 by arena/3036372b-zone4: the URL redirects to an Amazon sign-in page for .../home/account/payment/customratecard, so no rate could be read. The same two links are listed in the policies Appendix."
     },
     {
       "id": "S-COU",
@@ -110,7 +110,7 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section, read 2026-11-14 (arena/3036372b-zone4): the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology."
+      "used_for": "'License and Access' section, read 2026-11-14: the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology."
     },
     {
       "id": "S-FTC",
@@ -118,7 +118,7 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "publisher": "U.S. Federal Trade Commission (official)",
       "accessible": true,
-      "used_for": "Read in full 2026-11-14 (arena/3036372b-zone4): the disclosure must be hard to miss and placed with the endorsement message; use simple, clear language; a material connection includes a financial relationship; do not talk about a product you have not tried; do not make claims the advertiser cannot prove."
+      "used_for": "Read in full 2026-11-14: the disclosure must be hard to miss and placed with the endorsement message; use simple, clear language; a material connection includes a financial relationship; do not talk about a product you have not tried; do not make claims the advertiser cannot prove."
     },
     {
       "id": "S-REPO",
@@ -130,19 +130,19 @@
     },
     {
       "id": "S-CHECK",
-      "title": "GitHub Actions Site checks run (latest at final audit)",
-      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827",
+      "title": "GitHub Actions Site checks run for PR #15 merge",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548",
       "publisher": "GitHub (official Actions run)",
       "accessible": true,
-      "used_for": "Successful Site checks for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
+      "used_for": "Successful Site checks for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
     },
     {
       "id": "S-DEPLOY",
-      "title": "GitHub Pages deployment run (latest at final audit)",
-      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287",
+      "title": "GitHub Pages deployment run for PR #15 merge",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157",
       "publisher": "GitHub (official Pages deployment run)",
       "accessible": true,
-      "used_for": "Successful Pages deployment for commit 7ea516c686bfd8101baa10345a73475d43d07e87, checked 2026-11-14."
+      "used_for": "Successful Pages deployment for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
     },
     {
       "id": "S-WF",

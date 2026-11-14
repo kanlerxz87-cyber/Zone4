@@ -23,7 +23,7 @@
       "id": "R-03",
       "requirement": "Do not display Amazon customer reviews or star ratings unless obtained through Creators API / PA API.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Program Policies, Participation Requirements, Section 3(t)",
+      "source_ref": "Participation Requirements, Section 6(t)",
       "status": "Implemented (ratings withheld)",
       "site_implementation": "No star ratings or review counts are published. Flag F-02."
     },
@@ -39,7 +39,7 @@
       "id": "R-05",
       "requirement": "Do not use a link shortening service in a way that makes it unclear that the link goes to an Amazon Site.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(w); Commission Income Statement, Section 2(g)",
+      "source_ref": "Participation Requirements, Section 6(w)",
       "status": "Needs review",
       "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled as Amazon links. Flag F-04."
     },
@@ -47,7 +47,7 @@
       "id": "R-06",
       "requirement": "Do not include Amazon trademarks in domain names, subdomains or tags.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(g)",
+      "source_ref": "Participation Requirements, Section 1(g)",
       "status": "Implemented",
       "site_implementation": "Site domain is kanlerxz87-cyber.github.io/Zone4, which contains no Amazon mark."
     },
@@ -55,7 +55,7 @@
       "id": "R-07",
       "requirement": "Do not buy paid search advertisements on keywords that include Amazon trademarks.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Commission Income Statement, Section 2(c); Participation Requirements, Section 3(f)",
+      "source_ref": "Commission Income Statement, Section 2(c); Participation Requirements, Section 6(e)-(f)",
       "status": "Implemented (no paid ads run)",
       "site_implementation": "No paid advertising is connected to this site."
     },
@@ -71,7 +71,7 @@
       "id": "R-09",
       "requirement": "Do not offer incentives for using Special Links, and do not place Special Links in customer reviews or Amazon content.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Sections 3(g) and 3(p)",
+      "source_ref": "Participation Requirements, Sections 6(g) and 6(p)",
       "status": "Implemented",
       "site_implementation": "No incentives or rewards are offered; no links are placed on Amazon."
     },
@@ -97,7 +97,7 @@
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "source_ref": "Amazon Conditions of Use, 'License and Access'",
       "status": "Verified; scope corrected",
-      "site_implementation": "The AI content kit is built, in the site's own words, from verified fields only. No model is trained or fine-tuned on Program Content, and no API content is repurposed. Flags F-12, F-17 and F-20 record the exact limits."
+      "site_implementation": "The AI content kit is built, in the site's own words, from verified fields only. No model is trained or fine-tuned on Program Content, and no API content is repurposed. Flags F-12, F-21 and F-24 record the exact limits."
     },
     {
       "id": "R-13",
@@ -133,54 +133,70 @@
     },
     {
       "id": "R-17",
-      "requirement": "Any agent that accesses Program Content must identify itself in every HTTP and HTTPS request by putting 'Agent/[agent name]' in the user agent string.",
+      "requirement": "Do not use Special Links or Program Content to develop machine learning models or related technology without express prior written approval from Amazon.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Associates Program IP License, Section 4(c)",
-      "status": "Not built",
-      "site_implementation": "No automated retrieval client ships in this repository. Any future agent must send the Agent/ user agent string. Flag F-17."
+      "source_ref": "Participation Requirements, Section 5 (re-read 2026-11-14)",
+      "status": "Needs review before AI automation",
+      "site_implementation": "No machine-learning model is trained or developed with Special Links or Program Content on this site. Any future AI work needs written approval. Flag F-12."
     },
     {
       "id": "R-18",
-      "requirement": "An agent must not conceal or obfuscate that it is an agent, must not mimic human speed or navigation patterns, must not complete or circumvent CAPTCHAs, must answer truthfully when asked whether it is human, and must not work around access limits.",
+      "requirement": "Do not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site, whether by robot, software program or otherwise.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Associates Program IP License, Section 4(c)",
-      "status": "Not built",
-      "site_implementation": "No automated retrieval client ships in this repository. Flag F-17."
+      "source_ref": "Participation Requirements, Section 6(s)",
+      "status": "Constraint on automation",
+      "site_implementation": "The site generates no clicks or sessions and has no click tracking. Automated click tracking is not built (F-19)."
     },
     {
       "id": "R-19",
+      "requirement": "Any agent that accesses Program Content must identify itself in every HTTP and HTTPS request by putting 'Agent/[agent name]' in the user agent string, and must not conceal or obfuscate that it is an agent.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Associates Program IP License, Section 4(c)",
+      "status": "Not built",
+      "site_implementation": "No automated retrieval client ships in this repository. Any future agent must send the Agent/ user agent string. Flag F-21."
+    },
+    {
+      "id": "R-20",
+      "requirement": "An agent must not mimic the speed or pattern of human keystrokes or navigation, must not complete or circumvent CAPTCHAs, must answer truthfully when asked whether it is human or a computer, and must not work around access limits.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Associates Program IP License, Section 4(c)",
+      "status": "Not built",
+      "site_implementation": "No automated retrieval client ships in this repository. Flag F-21."
+    },
+    {
+      "id": "R-21",
       "requirement": "Amazon may limit, including by technical measures, whether and how an agent accesses, uses and interacts with Program Content, and may require an agent to refrain from doing so.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 4(a) and 4(b)",
       "status": "Informational",
-      "site_implementation": "Recorded on the Automation page. Automated research stays manual until this is settled. Flag F-17."
+      "site_implementation": "Recorded on the Automation page. Automated research stays manual until this is settled. Flag F-21."
     },
     {
-      "id": "R-20",
+      "id": "R-22",
       "requirement": "Creators API and PA API content may not be accessed for aggregating, analysing, extracting or repurposing Product Advertising Content, or in connection with training or fine-tuning a model, without express prior written approval.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(e)",
       "status": "Not built",
-      "site_implementation": "No API client and no API content is used. Flag F-20."
+      "site_implementation": "No API client and no API content is used. Flag F-24."
     },
     {
-      "id": "R-21",
+      "id": "R-23",
       "requirement": "If prices or availability come from an API and are refreshed less than hourly, a date and time stamp must sit next to them, together with the 'Product prices and availability are accurate as of the date/time indicated' disclaimer.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(i)",
       "status": "Not applicable",
-      "site_implementation": "No price or availability is displayed at all, so no timestamp is required yet. Flag F-21."
+      "site_implementation": "No price or availability is displayed at all, so no timestamp is required yet. Flag F-25."
     },
     {
-      "id": "R-22",
+      "id": "R-24",
       "requirement": "If Product Advertising Content consisting of text is displayed, the 'CERTAIN CONTENT THAT APPEARS ... COMES FROM AMAZON ...' disclaimer must be shown in plain view.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(k)",
       "status": "Not applicable",
-      "site_implementation": "No API text content is displayed. Flag F-21."
+      "site_implementation": "No API text content is displayed. Flag F-25."
     },
     {
-      "id": "R-23",
+      "id": "R-25",
       "requirement": "When linking to pages with product lists, the site must have additional original content of its own that is relevant to the link.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
@@ -188,44 +204,44 @@
       "site_implementation": "The three product articles, the comparison page and the buying guide are original copy written for this site. The marketing content lives on the Marketing content page."
     },
     {
-      "id": "R-24",
+      "id": "R-26",
       "requirement": "A site must not have price tracking or price alerting functionality unless Amazon agrees otherwise.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(y)",
+      "source_ref": "Participation Requirements, Section 6(y)",
       "status": "Implemented",
-      "site_implementation": "No price tracking or price alerting is built, and the price-tracking metric row on the Automation page is marked Not built. Flag F-18."
+      "site_implementation": "No price tracking or price alerting is built, and the price-tracking metric row on the Automation page is marked Not built. Flag F-22."
     },
     {
-      "id": "R-25",
+      "id": "R-27",
       "requirement": "Amazon Marks may be used only by display on the site for the purpose of advertising the availability of products on an Amazon Site with a corresponding Special Link, and must not be used in Search Engine keyword use.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Trademark Guidelines 1 to 3; Participation Requirements, Section 6(e)",
       "status": "Implemented",
-      "site_implementation": "The site title, meta description, page titles, slugs and suggested keywords contain no Amazon Mark. The wording 'Amazon affiliate' is kept in body text only, and is not a keyword. Flag F-19."
+      "site_implementation": "The site title, meta description, page titles, slugs and suggested keywords contain no Amazon Mark. The wording 'Amazon affiliate' is kept in body text only, and is not a keyword. Flag F-23."
     },
     {
-      "id": "R-26",
+      "id": "R-28",
+      "requirement": "Program Content may not be used to advertise or promote any product offered on any site that is not an Amazon Site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 6(z)",
+      "status": "Implemented",
+      "site_implementation": "Only Amazon product pages are linked. No other retailer is promoted, and no cross-retailer comparison is published."
+    },
+    {
+      "id": "R-29",
       "requirement": "Program Content, Special Links and Amazon Marks must not be used offline, in print, ebook, mailing or oral solicitation, and any email, SMS or direct message that carries a Special Link must be solicited, meaning the recipient opted in.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 4 (Promotional Limitations)",
       "status": "Informational",
-      "site_implementation": "No outreach, email or print use of Program Content is built or planned. Any future outreach must be opt-in only. Flag F-26."
+      "site_implementation": "No outreach, email or print use of Program Content is built or planned. Any future outreach must be opt-in only. Flag F-27."
     },
     {
-      "id": "R-27",
+      "id": "R-30",
       "requirement": "Material provided to Amazon in connection with Program Content is assigned to Amazon as a Your Submission.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 3",
       "status": "Informational",
-      "site_implementation": "No content is submitted to Amazon for approval, so no submission is made. Flag F-20."
-    },
-    {
-      "id": "R-28",
-      "requirement": "Clicks and impressions must not be artificially generated, and Special Links must not be used to cause a page to open other than as a result of a customer clicking the link.",
-      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(s)",
-      "status": "Implemented",
-      "site_implementation": "No traffic generation of any kind is built. Recorded as a rule of the optimisation loop on the Automation page. Flag F-22."
+      "site_implementation": "No content is submitted to Amazon for approval, so no submission is made. Flag F-24."
     }
   ]
 }

@@ -170,7 +170,7 @@ def product_table(current: Page, products: list[dict]) -> str:
 # Per-product flag mapping for the verification log.
 PRODUCT_FLAGS = {
     "P1": {"capacity": "F-06", "colour": "F-07", "competitors": "F-10", "variant": ""},
-    "P2": {"capacity": "F-06", "colour": "", "competitors": "F-10", "variant": "F-25"},
+    "P2": {"capacity": "F-06", "colour": "", "competitors": "F-10", "variant": "F-26"},
     "P3": {"capacity": "F-08", "colour": "", "competitors": "F-10", "variant": ""},
 }
 
@@ -426,7 +426,7 @@ def page_products(current: Page) -> str:
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
-        'Competitor labels are short paraphrases; the exact listing titles are on the linked pages (F-23).</p>'
+        'Competitor labels are short paraphrases; the exact listing titles are on the linked pages (F-20).</p>'
     )
 
 
