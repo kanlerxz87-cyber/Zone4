@@ -6,13 +6,18 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 |---|---|---|---|
 | Static research dashboard, executive summary, verification, Pages workflow (prototype, first pass) | done (prototype); product records **superseded by the verified records below** | arena/c2ff885d-zone4 | previously `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` (root prototype removed in this integration; history kept) |
 | Follow-up multi-page research view and FTC citation | done; superseded by the verified site below | arena/00ccfbd4-zone4 | previously `products.html`, `insights.html`, `flagged.html`, `styles.css` (root removed in this integration; history kept) |
-| Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **in progress** (claimed by arena/1eb689b8-zone4) | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
-| Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **in progress** (claimed by arena/1eb689b8-zone4) | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` (replaces `pages.yml`) |
-| Integration: PR, merge to `main`, Pages deploy check | **in progress** (arena/1eb689b8-zone4 acts as the final integration session; no other session is active) | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
+| Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **done**; unresolved items documented in Flagged for Review | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
+| Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
+| Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
+| Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
 
-## Branch note
+## Original PR #7 branch note (historical)
 
-The task brief asks for session branches named `session-<id>/<task>`. The session branch note assigns this session `arena/1eb689b8-zone4`, and the session rules say to work only on that branch. This session therefore works on `arena/1eb689b8-zone4` and does not create other branches. Other `arena/*` branches on the remote were not modified.
+The task brief asks for session branches named `session-<id>/<task>`. At the time of the PR #7 claim, its owner recorded `arena/1eb689b8-zone4` as its assigned branch. The historical claim and its logs are preserved below.
+
+## Current branch note
+
+This session worked on the assigned active Arena branch `arena/00ba40db-zone4`. No branch was created or switched to.
 
 ## Work log
 
@@ -89,4 +94,13 @@ The current branch added a more detailed multi-page research view and FTC source
 
 - Follow-up PR [#8](https://github.com/kanlerxz87-cyber/Zone4/pull/8) (root redirect to `docs/`, `.nojekyll`, verify check) merged into `main` at `697d79e` (2026-11-14 09:59 UTC), self-merged after the `Site checks` workflow passed on the PR.
 - Confirmed via the GitHub API: `pages/builds/latest` = `built` for `697d79e`; Pages source is `main` `/`; `pages build and deployment` and `Site checks` both `success` on `697d79e`.
-- Not confirmed: the public URL from this sandbox (outbound access is limited). The Pages source change to `/docs` still needs a repository owner in Settings, or the root redirect serves as the entry point.
+- Not confirmed at that point: the public URL from that sandbox (outbound access was limited). The Pages source change to `/docs` was unnecessary; the root redirect serves as the entry point.
+
+### Session arena/00ba40db-zone4 — final integration check
+
+- PRs [#7](https://github.com/kanlerxz87-cyber/Zone4/pull/7), [#8](https://github.com/kanlerxz87-cyber/Zone4/pull/8), and [#9](https://github.com/kanlerxz87-cyber/Zone4/pull/9) are merged into `main`. The product/source research and docs site from PR #7 superseded this session’s earlier static root-page prototype; no parallel duplicate site was kept.
+- Local checks on the merged tree: `python3 scripts/build_site.py` regenerated 11 pages; `python3 scripts/verify.py` passed for data validity, internal links/anchors, per-page disclosure, a source link in each table row, and withholding of prices/ratings; `git diff --exit-code -- docs` and `git diff --check` passed.
+- GitHub Actions verification succeeded: Site checks run [43583178517](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583178517) and Pages deployment run [43583178064](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583178064), both on merge commit `d27c0ad57653835a4792213095fb395f1a3e8357`. GitHub Pages API reports `status: built`, source `main` `/`, HTTPS enforced. Root `index.html` redirects to `docs/index.html`.
+- Live entry point: https://kanlerxz87-cyber.github.io/Zone4/. A browser fetch from this sandbox was not attempted because the accessible network hosts exclude `github.io`; publication is confirmed by the GitHub Pages API, successful deployment run and checked-in root redirect.
+- Product fact verification is attributed to `arena/1eb689b8-zone4`; this session did not independently re-fetch Amazon/FTC content. Keep all unresolved items in `data/flags.json` and the public Flagged for Review page, including withheld price/rating/commission data, unverified Associates tag attribution, P2 brand ambiguity, sponsored carousel note, policy/automation limitations, and trend/conversion gaps.
+- Current session initially worked on `arena/00ba40db-zone4` from the originally assigned base. Once the full verified site and root redirect were merged to main by PRs #7–#9, the assigned branch was aligned to `origin/main` rather than reopening duplicate product/site changes. This final coordination note is the only new change from this session.
