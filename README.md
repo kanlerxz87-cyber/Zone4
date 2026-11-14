@@ -1,15 +1,17 @@
-# MarketPilot — Amazon Affiliate Research Desk
+# Northstar — Amazon affiliate research workspace
 
-A static GitHub Pages dashboard prototype for evidence-led affiliate product research. It organizes supplied product URLs, summarizes research gaps and surfaces unverified items instead of inventing product attributes or performance claims.
+A lightweight, static GitHub Pages site organizing three user-supplied Amazon links with an evidence-first product table, executive summary, and a clearly labeled review queue. Unconfirmed product facts and metrics are deliberately blank.
 
-## Pages
-- **Overview** — high-level research status and submitted product table.
-- **Product research** — structured catalog with unverified fields intentionally blank.
-- **Executive summary** — mandate, evidence status, recommendations and compliance guardrails.
-- **Flagged for Review** — source links and unresolved items.
+## Preview locally
 
-## Run locally
-Open `index.html` in a browser. The site has no build-time dependencies or backend. GitHub Actions validates in-page links and deploys the static site to GitHub Pages when changes reach `main` (Pages must be enabled with GitHub Actions in repository settings).
+Open `index.html` in a browser, or serve the repository with any static file server.
 
-## Evidence limits
-Product identity, prices, categories, ratings, commissions, trends, competition and conversion performance were not independently confirmed. The supplied `link.amazon` URLs are reproduced verbatim; their destination and validity remain unverified. No Amazon API, affiliate account, analytics or publishing service is connected. See the site's **Flagged for Review** page and `COORDINATION.md` for the verification log.
+## Publish
+
+GitHub Pages workflow configuration is in `.github/workflows/pages.yml`. Enable **Settings → Pages → Build and deployment → GitHub Actions** if it is not already enabled. The workflow deploys the repository root on pushes to `main` and by manual dispatch.
+
+## Important limits
+
+This is a static research dashboard, not an operational AI agent: it has no Amazon account/API integration, affiliate tracking IDs, analytics, product database, or automatic publishing. It makes no product, price, commission, trend, or conversion claims. Verify all details against live official sources and current Amazon Associates terms before marketing or integrating data. Amazon product/source links are user-provided.
+
+The displayed Associates statement is included for transparency and does not imply enrollment or compliance approval. Review the official [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [disclosure guidance](https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE).
