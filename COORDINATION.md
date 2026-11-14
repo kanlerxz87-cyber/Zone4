@@ -182,3 +182,32 @@ The current branch added a more detailed multi-page research view and FTC source
 - Claimed: repo review and line-by-line re-verification of the product, policy and source records against official pages; corrections; site rebuild; PR to `main`; merge; Pages check. Scope: `data/*.json`, `scripts/build_site.py`, the generated `docs/`, `README.md` and this file. No other session holds a claim.
 - Branch: the system assigns this session the single branch `arena/cc6e8a46-zone4` (from `main` at `7ea516c`). The brief's `session-<id>/<task>` naming and per-task branches are not used, because this session may only work on its assigned branch. Parallel-session rules still apply through this board.
 - Note: the local clone was shallow (grafted at `efd0cda`). It was unshallowed with `git fetch --unshallow` before the fast-forward to `origin/main`. No history was rewritten.
+
+### Session arena/cc6e8a46-zone4 — verification, corrections and integration log (2026-11-14, UTC)
+
+- **Sources read in this pass (official):**
+  - Amazon product pages, fetched 2026-11-14: P1 https://www.amazon.com/dp/B0CDY277D3; P2 https://www.amazon.com/dp/B09B7SB46R; P3 https://www.amazon.com/dp/B08DKYBTPH. Read: title, byline ("Visit the Chefman Store" for P1 and P3; "Visit the Emeril Store" and byline "Innovation IQ" for P2), category breadcrumb, specification table, the "Customers who viewed this item also viewed" carousel, and the price and rating blocks (withheld from the site).
+  - Short links, resolved 2026-11-14: https://link.amazon/B04G1MEwY → B0CDY277D3; https://link.amazon/B02NbDxp3 → B09B7SB46R; https://link.amazon/B00hJ57DV → B08DKYBTPH (variation th=1). None of the resolved URLs has a `tag=` parameter.
+  - Associates Operating Agreement, updated October 15, 2025: https://affiliate-program.amazon.com/help/operating/agreement (§1 tagged links; §5 disclosure sentence).
+  - Associates Program Policies, updated April 14, 2026: https://affiliate-program.amazon.com/help/operating/policies (Commission Income Statement §1–§3, §2(d)–(e); Participation Requirements §2(b), §3(g), §3(t), §3(w), §5; IP License §1 and §2).
+  - Associates help: https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE (link-level disclosure must be clear and conspicuous, near the link).
+  - Amazon Conditions of Use, last updated August 14, 2026: https://www.amazon.com/gp/help/customer/display.html?nodeId=508088 ("License and Access").
+  - FTC Disclosures 101 for Social Media Influencers, November 2019: https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers.
+  - Standard Commission Income schedule: https://affiliate-program.amazon.com/help/operating/schedule. Re-checked: redirects to sign-in. **Not read.** Third-party web results (not used as values) disagree on the Kitchen rate (4.5% in some, 5% in another table).
+  - GitHub Pages API: https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages (build_type legacy, source main `/`).
+- **Verification performed:** field-by-field re-check of each product row against the live page (title, byline, spec table, breadcrumb, also-viewed ASINs, sponsored labels, short-link resolution). Policy quotations were checked against the policy text. `python3 scripts/build_site.py` and `python3 scripts/verify.py` pass (11 pages; links and anchors; disclosure on every page; a source link in every table row; no currency amounts or star ratings).
+- **Corrections made (each one logged in `data/flags.json` or the rule/source records):**
+  1. F-10: the "Sponsored" label is on the P1 and P3 carousels. The P2 carousel is **not** labelled on the snapshot, so the earlier P2-only claim (and its copies in the analysis, sources and build script) was wrong. The build now reads the label from each product record.
+  2. F-09: removed the statement that the user is in Bucharest, Romania. No source in the repository supports it. The flag now asks for the Associates marketplace to be confirmed.
+  3. F-13, README and executive summary: the Pages source is legacy main `/`, not main `/docs`. The earlier `/docs` change was refused (HTTP 403) and never made. The root redirect serves the site.
+  4. R-05: the citation pointed at Commission Income Statement §2(g), which covers improperly formatted links. The link-shortening rule is Participation Requirements §3(w).
+  5. F-12 and R-12: added the Associates IP License §1 and Participation Requirements §5 (no ML or LLM use of Program Content or Special Links) next to the Conditions of Use.
+  6. F-11 and F-16: updated to state what was read. F-11 now also covers the automated page reads in this pass.
+  7. Competitor labels: replaced paraphrases with the first part of each listing title as shown on the page.
+  8. New: **F-18 (High)**, Participation Requirements §2(b) requires the Associates tag on every link from the site to an Amazon site. The source and competitor links carry none. No Associates ID was supplied, so none was added. New rule R-17.
+  9. New: F-17 (Low), the P2 listing gives 24 cooking functions in the subtitle and 25 pre-sets in the bullets. Neither count is used.
+  10. Product row and verification log now show a per-product "Associates tag in source link" row (status: not met, F-18).
+- **Still unverified and left blank (per the brief):** commission rate for each product (F-01); prices and star ratings (withheld by Participation Requirements §2(b) and §3(t), F-02); trend and conversion (no official source, F-15); Associates attribution (F-03).
+- **Irregularities:** 18 items on the Flagged for Review page (`docs/flagged.html`, source `data/flags.json`). High: F-01, F-02, F-03, F-11, F-12, F-18.
+- **Process notes:** the brief's `session-<id>/<task>` branch naming and per-task branches were not used. The system assigns this session one branch (`arena/cc6e8a46-zone4`), so all work is on it. No other session is active on these files, and the claim is at the top of this log.
+- **Pull request and merge:** recorded in the entry below, after the merge.
