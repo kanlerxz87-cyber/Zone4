@@ -117,3 +117,25 @@ The current branch added a more detailed multi-page research view and FTC source
 
 - PR [#11](https://github.com/kanlerxz87-cyber/Zone4/pull/11) merged into `main` at `efd0cda2ff1fc16e7421f56fa5a89d7a1f724982`. Its Site checks run [43583547392](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583547392) and Pages deployment [43583546871](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583546871) both succeeded; the Pages API remained `built`.
 - Final cleanup removes a generated tracked Python bytecode file and adds `.gitignore` rules for `__pycache__/` and `*.py[cod]`; this does not alter the site output.
+
+### Session arena/857e9efd-zone4 — re-verification (2026-11-14, UTC)
+
+- **Claim:** re-verification of the three supplied links and the Associates citations used by the site. Scope: `data/reverification-2026-11-14.json` (new) and this log. No shared output (`docs/`, `data/products.json`, `data/flags.json`) was changed.
+- **Branch:** all work on `arena/857e9efd-zone4`, the only branch assigned to this session. The `session-<id>/<task>` naming in the brief was not used, because the assigned branch is fixed for this session.
+- **Official sources read this session (fetched, not inferred):**
+  - https://link.amazon/B04G1MEwY → https://www.amazon.com/dp/B0CDY277D3 (title, breadcrumb, also-viewed ASINs match `data/products.json`)
+  - https://link.amazon/B02NbDxp3 → https://www.amazon.com/dp/B09B7SB46R (same checks; match)
+  - https://link.amazon/B00hJ57DV → https://www.amazon.com/dp/B08DKYBTPH (same checks; match)
+  - Associates Program Policies, Participation Requirements: https://affiliate-program.amazon.com/help/operating/policies (Section 2(b) prices; 3(s) artificial clicks; 3(t) ratings; 3(w) link shortening; page updated April 14, 2026)
+  - Associates Participation Requirements (standalone page): https://affiliate-program.amazon.com/help/operating/participation/
+- **Result:** all three ASINs, titles, breadcrumbs and also-viewed ASINs match the records. Section 2(b) and 3(t) citations are correct on the Program Policies page.
+- **Irregularities logged (see `data/reverification-2026-11-14.json`):**
+  - RV-C5 (medium): the standalone participation page uses a different numbering (1–31) and has no 2(b) or 3(t). Cite the Program Policies page for those section numbers.
+  - RV-I1 (medium): competitor labels in `data/products.json` are paraphrases of the listing titles, not exact titles. ASINs match.
+  - RV-I3 (high): the brief's automation goals (AI research, publishing, click and conversion tracking) conflict with Sections 2(b), 3(s) and 3(t) unless PA-API or Creators API access is in place. None is available in this sandbox, so nothing is built and no values are simulated.
+- **Requests for the integration session (not edited here):**
+  1. Apply RV-I1: use exact competitor titles or mark them as paraphrased in `products.json`.
+  2. Apply RV-C5: make sure lettered section citations point to the Program Policies URL.
+  3. Add RV-I3 to the Flagged for Review page.
+- **Verification performed:** JSON validity of the new file; `python3 scripts/build_site.py` and `python3 scripts/verify.py` run on the branch (no site output changed).
+- **Status:** done, pending integration review. Live pages on Amazon show prices and star ratings; the site continues to withhold them under Section 2(b) and 3(t).
