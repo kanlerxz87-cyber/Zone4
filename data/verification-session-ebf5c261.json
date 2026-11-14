@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "description": "Line-by-line verification performed on 2026-11-14 (UTC) by session arena/ebf5c261-zone4 (final integration session). Every row names the official source that was read. No value was inferred; anything not readable from an official source stays blank and flagged.",
+    "method": "Each user-supplied short link was fetched and followed to its Amazon product page. Titles, breadcrumbs, specification/Item-details tables, also-viewed carousels, redirect parameters and delivery location were read directly from the returned official pages. Associates and FTC pages were read at the cited URLs. GitHub Pages state was read from the GitHub REST API.",
+    "session": "arena/ebf5c261-zone4",
+    "observed_utc": "2026-11-14"
+  },
+  "products": [
+    {
+      "id": "P1",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "resolution": "Short link redirects to the ASIN B0CDY277D3 product page. Redirect URL carries lv, channelId, plpRedirect and btn_ref parameters; no tag= parameter (F-03 confirmed).",
+      "verified_fields": {
+        "title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+        "brand": "Chefman (Item details: 'Brand Name | Chefman', 'Manufacturer | Chefman')",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "capacity": "6 liters (Item details 'Capacity'); title says '6 Quart' (F-06 confirmed)",
+        "dimensions": "13.38\"D x 11.81\"W x 10.63\"H",
+        "color": "Black, Gray (Item details); title ends 'Black' (F-07 confirmed)",
+        "material": "Metal, Plastic",
+        "model_number": "RJ38-SQPF-3TDB-2W (Item details and Product Description)",
+        "also_viewed_asins": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+        "delivery_location": "US delivery location shown ('Herndon 20170'); not the user's location (F-09)"
+      },
+      "official_source": "https://www.amazon.com/dp/B0CDY277D3",
+      "status": "Verified"
+    },
+    {
+      "id": "P2",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "resolution": "Short link redirects to the ASIN B09B7SB46R product page. No tag= parameter (F-03 confirmed).",
+      "verified_fields": {
+        "title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+        "brand": "Emeril (Item details: 'Brand Name | Emeril', 'Manufacturer | Emeril Lagasse') - resolves F-05",
+        "brand_original_observation": "Earlier snapshot showed store 'Emeril Store' and byline 'Innovation IQ'. The current page's Item details table states the brand and manufacturer above; the Item details values are used.",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "capacity": "24.6 liters (Item details); title says '26QT' (F-06 confirmed)",
+        "dimensions": "16.9\"D x 15.8\"W x 14.8\"H",
+        "color": "Stainless Steel",
+        "material": "Stainless Steel",
+        "model_number": "4-00675-02X-VN (Item details)",
+        "also_viewed_asins": ["B0BZ52FLKC", "B0FM5KF34G", "B0F92GL7JH"],
+        "carousel_label": "This snapshot did not show a 'Sponsored' label above the also-viewed carousel; the prior snapshot did (F-10 remains open, rendering varies)"
+      },
+      "official_source": "https://www.amazon.com/dp/B09B7SB46R",
+      "status": "Verified"
+    },
+    {
+      "id": "P3",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "resolution": "Short link redirects to the ASIN B08DKYBTPH product page with variation parameter th=1 (the 8-quart variant; F-08). No tag= parameter (F-03 confirmed).",
+      "verified_fields": {
+        "title": "Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+        "brand": "Chefman (Item details: 'Brand Name | Chefman', 'Manufacturer | Chefman')",
+        "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "capacity": "8 quarts (Item details 'Capacity' and 'Size'); multiple GTINs on the page indicate a size-variant family (F-08)",
+        "dimensions": "12.75\"D x 13.5\"W x 10\"H",
+        "color": "Stainless steel",
+        "material": "Plastic, Stainless Steel",
+        "part_number": "RJ38-SQSS-8T (Item details)",
+        "also_viewed_asins": ["B0CNY1YVDD", "B0D5FX6VRL", "B0C33CHG99"],
+        "delivery_location": "US delivery location shown ('Herndon 20170'); not the user's location (F-09)"
+      },
+      "official_source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "status": "Verified"
+    }
+  ],
+  "policy_sources": [
+    {
+      "id": "V-OA",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "checked": "Operating Agreement, 'Updated: October 15, 2025'. Section 5 'Identifying Yourself as an Associate' requires: \u201cAs an Amazon Associate I earn from qualifying purchases.\u201d - rule R-01 confirmed verbatim.",
+      "status": "Verified"
+    },
+    {
+      "id": "V-PP",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "checked": "Associates Program Policies, 'Updated: April 14, 2026'. Commission Income Statement Section 1 (Qualifying Purchases / Qualifying Revenue) read. Participation Requirements 2(a)-(b) (Special Links, tag parameter, price display limited to Amazon-served links or Creators API / PA API, price-comparison rule), 3(f) (paid search on Amazon marks), 3(g) (marks in domains/tags), 3(p) (links in Amazon content), 3(s) (artificially generated clicks), 3(t) (customer reviews / star ratings only via Creators API / PA API), 3(w) (link shortening clarity), 4-6 and the IP License (no data mining or robots; no Special Links/Program Content for machine-learning development without prior written approval) read. - rules R-02 to R-10, R-14, R-15 confirmed; supports F-17.",
+      "status": "Verified"
+    },
+    {
+      "id": "V-HELP",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "checked": "Associates Central help 'Why do I have to identify myself as an Associate?': link-level disclosure must be clear and conspicuous and placed near any affiliate link; the Operating Agreement statement must clearly and conspicuously appear on the Site. - rule R-16 confirmed.",
+      "status": "Verified"
+    },
+    {
+      "id": "V-SCHED",
+      "url": "https://affiliate-program.amazon.com/help/operating/schedule",
+      "checked": "The commission schedule URL redirects to an Amazon sign-in page (openid return_to=/home/account/payment/customratecard). No category commission rate could be read from an official source. - F-01 confirmed; rate remains blank.",
+      "status": "Not accessible (sign-in)"
+    },
+    {
+      "id": "V-COU",
+      "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "checked": "Amazon Conditions of Use, 'Last updated: August 14, 2026'. 'License and Access' excludes collection and use of product listings, descriptions or prices, and data mining / robots; and bars use of AI-generated content from Amazon Services to develop or improve large language or machine learning models. - F-11 and F-12 confirmed.",
+      "status": "Verified"
+    },
+    {
+      "id": "V-FTC",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "checked": "FTC 'Disclosures 101 for Social Media Influencers' (November 2019): disclosure must be hard to miss, placed with the endorsement, in simple and clear language; a material connection includes a financial relationship. - rule R-13 confirmed.",
+      "status": "Verified"
+    }
+  ],
+  "deployment": [
+    {
+      "id": "V-PAGES",
+      "url": "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
+      "checked": "GitHub Pages API on 2026-11-14: status 'built', html_url https://kanlerxz87-cyber.github.io/Zone4/, source main /, https_enforced true. Latest build API confirmed 'built'. (Public github.io fetch not possible from the sandbox; state confirmed through the official GitHub API.)",
+      "status": "Verified via official API"
+    }
+  ],
+  "integration_actions": [
+    "RV-I1 applied: competitor labels in data/products.json replaced with the exact listing titles read from the official also-viewed carousels (9 labels).",
+    "RV-C5 / RV-I2 confirmed: every lettered section citation in data/policies.json (and therefore the policy page) points to the Program Policies URL; the standalone participation page is referenced only in the historical log file. No site citation changed.",
+    "RV-I3 applied: added as flag F-17 and published on the Flagged for Review page.",
+    "F-05 resolved: P2 brand recorded as 'Emeril' from the official Item details table; flag status updated; executive summary and analysis updated.",
+    "F-10 annotated: the 2026-11-14 snapshot did not show the 'Sponsored' carousel label; flag stays open.",
+    "Site rebuilt from data and re-verified (scripts/verify.py) before the pull request."
+  ]
+}
