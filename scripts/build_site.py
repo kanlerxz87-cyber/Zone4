@@ -44,6 +44,7 @@ NAV = [
     ("analysis.html", "Analysis & findings"),
     ("verification.html", "Verification log"),
     ("policy-compliance.html", "Policy compliance"),
+    ("analytics.html", "Analytics"),
     ("flagged.html", "Flagged for review"),
     ("sources.html", "Sources"),
 ]
