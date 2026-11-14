@@ -9,9 +9,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "source_ref": "Operating Agreement, Section 5",
       "status": "Implemented",
-      "site_implementation": "Disclosure bar on every page and beside each affiliate link.",
-      "verified_quote": "“You must clearly and prominently state the following … on your Site …: ‘As an Amazon Associate I earn from qualifying purchases.’”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "Disclosure bar on every page and beside each affiliate link."
     },
     {
       "id": "R-02",
@@ -19,9 +17,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Program Policies, Participation Requirements, Section 2(b)",
       "status": "Implemented (prices withheld)",
-      "site_implementation": "No Amazon prices are published. Flag F-02.",
-      "verified_quote": "“your Site may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API…”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "No Amazon prices are published. Flag F-02."
     },
     {
       "id": "R-03",
@@ -29,9 +25,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 6(t)",
       "status": "Implemented (ratings withheld)",
-      "site_implementation": "No star ratings or review counts are published. Flag F-02.",
-      "verified_quote": "“You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API…”",
-      "reverified": "Confirmed verbatim in the second pass; the lettered list sits under heading 6, so 6(t) is correct (F-17)"
+      "site_implementation": "No star ratings or review counts are published. Flag F-02."
     },
     {
       "id": "R-04",
@@ -39,9 +33,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
       "status": "Not verifiable",
-      "site_implementation": "User-supplied short links are used as given. The tag does not appear in the resolved URLs. Flag F-03.",
-      "verified_quote": "“you must include your Associates ID or ‘tag’ (appearing as XXXXX-##…) as a parameter in the URL of each link you place on your Site to an Amazon Site.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "User-supplied short links are used as given. The tag does not appear in the resolved URLs. Flag F-03."
     },
     {
       "id": "R-05",
@@ -49,9 +41,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 6(w)",
       "status": "Needs review",
-      "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled as Amazon links. Flag F-04.",
-      "verified_quote": "“You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled as Amazon links. Flag F-04."
     },
     {
       "id": "R-06",
@@ -59,9 +49,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 1(g)",
       "status": "Implemented",
-      "site_implementation": "Site domain is kanlerxz87-cyber.github.io/Zone4, which contains no Amazon mark.",
-      "verified_quote": "“You will not … include any trademark of Amazon or its affiliates, or a variant or misspelling … in any domain name, subdomain name, in any ‘tag’ or Associates ID…”",
-      "reverified": "Confirmed verbatim in the second pass; section reference matches the corrected numbering"
+      "site_implementation": "Site domain is kanlerxz87-cyber.github.io/Zone4, which contains no Amazon mark."
     },
     {
       "id": "R-07",
@@ -69,8 +57,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Commission Income Statement, Section 2(c); Participation Requirements, Section 6(e)-(f)",
       "status": "Implemented (no paid ads run)",
-      "site_implementation": "No paid advertising is connected to this site.",
-      "reverified": "Not re-read by arena/8908f0b3-zone4 in the second pass"
+      "site_implementation": "No paid advertising is connected to this site."
     },
     {
       "id": "R-08",
@@ -78,8 +65,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
       "status": "Implemented",
-      "site_implementation": "No per-user tracking or sub-tags are used.",
-      "reverified": "Not re-read by arena/8908f0b3-zone4 in the second pass"
+      "site_implementation": "No per-user tracking or sub-tags are used."
     },
     {
       "id": "R-09",
@@ -87,9 +73,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Sections 6(g) and 6(p)",
       "status": "Implemented",
-      "site_implementation": "No incentives or rewards are offered; no links are placed on Amazon.",
-      "verified_quote": "“You will not offer any person or entity any consideration, reward, or incentive … for using Special Links.” — “You will not include any Special Links in any content that you place on an Amazon Site…”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "No incentives or rewards are offered; no links are placed on Amazon."
     },
     {
       "id": "R-10",
@@ -97,9 +81,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
       "status": "Not applicable",
-      "site_implementation": "No prices are displayed, so no comparison is shown.",
-      "verified_quote": "“if you choose to display prices for any Product on your Site in any ‘comparison’ format … you must display both the lowest ‘new’ price and, if we provide it to you, the lowest ‘used’ price at which the Product is available on the Amazon Site.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "No prices are displayed, so no comparison is shown."
     },
     {
       "id": "R-11",
@@ -107,9 +89,7 @@
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "source_ref": "Amazon Conditions of Use, 'License and Access'",
       "status": "Needs legal review",
-      "site_implementation": "Verification read product pages with an automated retrieval tool. Only identifiers and a few spec fields are kept. Flag F-11.",
-      "verified_quote": "The licence “does not include … any collection and use of any product listings, descriptions, or prices; any derivative use of any Amazon Service or its contents … or any use of data mining, robots, or similar data gathering and extraction tools.”",
-      "reverified": "Confirmed verbatim in the second pass; canonical node is GLSBYFE9MGKKQXXM"
+      "site_implementation": "Verification read product pages with an automated retrieval tool. Only identifiers and a few spec fields are kept. Flag F-11."
     },
     {
       "id": "R-12",
@@ -117,9 +97,7 @@
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "source_ref": "Amazon Conditions of Use, 'License and Access'",
       "status": "Needs review before AI automation",
-      "site_implementation": "Planned AI content automation is NOT built. Flag F-12.",
-      "verified_quote": "“You will not, and will not allow any third party to, use AI-generated content from the Amazon Services to, directly or indirectly, develop or improve large language or multimodal models, machine learning models or related technology.”",
-      "reverified": "Confirmed verbatim in the second pass; wording restored in full"
+      "site_implementation": "Planned AI content automation is NOT built. Flag F-12."
     },
     {
       "id": "R-13",
@@ -127,9 +105,7 @@
       "source_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "source_ref": "FTC Disclosures 101 for Social Media Influencers, 'How to Disclose'",
       "status": "Implemented",
-      "site_implementation": "The Associates disclosure sentence is shown on every page, including next to each affiliate link.",
-      "verified_quote": "“Place it so it’s hard to miss. The disclosure should be placed with the endorsement message itself.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "The Associates disclosure sentence is shown on every page, including next to each affiliate link."
     },
     {
       "id": "R-14",
@@ -137,8 +113,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Commission Income Statement, Section 1 (Qualifying Revenue)",
       "status": "Informational",
-      "site_implementation": "Applies to any future earnings model. No earnings are calculated, because the category rate is unverified (F-01).",
-      "reverified": "Not re-read by arena/8908f0b3-zone4 in the second pass"
+      "site_implementation": "Applies to any future earnings model. No earnings are calculated, because the category rate is unverified (F-01)."
     },
     {
       "id": "R-15",
@@ -146,8 +121,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Commission Income Statement, Sections 1 and 2(d)-(e)",
       "status": "Informational",
-      "site_implementation": "Links are direct, with no redirect or intermediate page. Search-engine display is not controlled by this site.",
-      "reverified": "Not re-read by arena/8908f0b3-zone4 in the second pass"
+      "site_implementation": "Links are direct, with no redirect or intermediate page. Search-engine display is not controlled by this site."
     },
     {
       "id": "R-16",
@@ -155,9 +129,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
       "source_ref": "Associates Central help: 'Why do I have to identify myself as an Associate?'",
       "status": "Implemented",
-      "site_implementation": "The disclosure sentence appears directly under each 'Open Amazon link' button, in the same card or row.",
-      "verified_quote": "“your link-level disclosure must be: 1. Clear. … 2. Conspicuous. It should be placed near any affiliate link or product review in a location that customers will notice easily. They shouldn’t have to hunt for it.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "The disclosure sentence appears directly under each 'Open Amazon link' button, in the same card or row."
     },
     {
       "id": "R-17",
@@ -165,9 +137,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 5 (re-read 2026-11-14)",
       "status": "Needs review before AI automation",
-      "site_implementation": "No machine-learning model is trained or developed with Special Links or Program Content on this site. Any future AI work needs written approval. Flag F-12.",
-      "verified_quote": "“You will not, without … express prior written approval, use, or allow any third party to use, any Special Links or Program Content to develop machine learning models or related technology.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "No machine-learning model is trained or developed with Special Links or Program Content on this site. Any future AI work needs written approval. Flag F-12."
     },
     {
       "id": "R-18",
@@ -175,9 +145,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 6(s)",
       "status": "Constraint on automation",
-      "site_implementation": "The site generates no clicks or sessions and has no click tracking. Automated click tracking is not built (F-19).",
-      "verified_quote": "“You will not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site, whether by way of a robot or software program or otherwise.”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "The site generates no clicks or sessions and has no click tracking. Automated click tracking is not built (F-19)."
     },
     {
       "id": "R-19",
@@ -185,19 +153,15 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "IP License, Section 4 (Agent Terms)",
       "status": "Constraint on automation",
-      "site_implementation": "No agent is built. AI automation is not connected to Amazon data (F-23).",
-      "verified_quote": "“Agents must: In all HTTP/HTTPS requests, identify that the request is from an Agent and disclose the name of the Agent by including the following in the request’s user agent string: ‘Agent/[agent name]’ … Not conceal or obfuscate that any access, use, or interactions are from an Agent…”",
-      "reverified": "Confirmed verbatim in the second pass"
+      "site_implementation": "No agent is built. AI automation is not connected to Amazon data (F-23)."
     },
     {
       "id": "R-20",
       "requirement": "If Amazon text (Product Advertising Content) is displayed, include the Section 2(k) disclaimer in plain view.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "IP License, Section 2(k)",
-      "status": "Implemented (disclaimer shown site-wide)",
-      "site_implementation": "The 2(k) sentence appears in the footer of every page, including the analytics page. Whether 2(k) applies to text read from a product page rather than obtained through an API is unconfirmed (F-24).",
-      "verified_quote": "“If you display Product Advertising Content consisting of text on your application, you will include the following disclaimer in plain view to end users of your application: ‘CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.’”",
-      "reverified": "Confirmed verbatim in the second pass; the disclaimer is now shown in the footer of every page on this site"
+      "status": "Open (applicability unconfirmed)",
+      "site_implementation": "The disclaimer is not shown. Decision pending (F-24)."
     },
     {
       "id": "R-21",
@@ -209,22 +173,22 @@
     },
     {
       "id": "R-22",
+      "requirement": "The Site must not have price tracking or price alerting functionality.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Program Policies, Participation Requirements, Section 6(y)",
+      "status": "Implemented (not applicable)",
+      "site_implementation": "The brief asks for pricing analysis. No price history, price tracker or price alert is built, because Section 6(y) states 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' Only the rule is documented. Flag F-19.",
+      "verified_quote": "Participation Requirements, Section 6(y): “Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.”",
+      "reverified": "Confirmed verbatim in the second pass"
+    },
+    {
+      "id": "R-23",
       "requirement": "Do not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or Amazon's policies, promotions or prices.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
       "status": "Implemented (drafts limited to listing-sourced claims)",
       "site_implementation": "Every marketing sentence on the content page is tied to the verified listing title, brand field or category breadcrumb; anything the record does not support is left out and listed under 'Cannot claim'.",
       "verified_quote": "Participation Requirements, Section 2(b): “You must not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or any of our policies, promotions, or prices.”",
-      "reverified": "Confirmed verbatim in the second pass"
-    },
-    {
-      "id": "R-23",
-      "requirement": "Do not give the Site price tracking or price alerting functionality unless Amazon agrees otherwise.",
-      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 6(y)",
-      "status": "Implemented (no price tracking built)",
-      "site_implementation": "The pricing analysis the brief asks for is limited to noting that prices are withheld; no tracker, alert or historical chart exists. Flag F-25.",
-      "verified_quote": "Participation Requirements, Section 6(y): “Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.”",
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
@@ -283,7 +247,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(e)",
       "status": "Gates the brief's automation",
-      "site_implementation": "No API aggregation or analysis pipeline exists; product research here is a small, manually verified record rather than an automated harvest. Flag F-30.",
+      "site_implementation": "No API aggregation or analysis pipeline exists; product research here is a small, manually verified record rather than an automated harvest. Flag F-31.",
       "verified_quote": "IP License, Section 2(e): “You will not, without our express prior written approval, access or use Creators API, PA API or Data Feeds for the purpose of aggregating, analyzing, extracting, or repurposing any Product Advertising Content … or in the direct training or fine-tuning of a machine learning and/or foundational model.”",
       "reverified": "Confirmed verbatim in the second pass"
     },
@@ -303,7 +267,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(h)",
       "status": "Needs review (static snapshot)",
-      "site_implementation": "This site is a static snapshot regenerated on each build, and listing text is quoted only to identify the product. A refresh cadence is not yet scheduled. Flag F-29.",
+      "site_implementation": "This site is a static snapshot regenerated on each build, and listing text is quoted only to identify the product. A refresh cadence is not yet scheduled. Flag F-30.",
       "verified_quote": "IP License, Section 2(h): “You may store other Product Advertising Content that does not consist of images for caching purposes for up to 24 hours, but if you do so you must immediately thereafter refresh and re-display the Product Advertising Content… You may store individual Amazon Standard Identification Numbers (ASINs) for an indefinite period.”",
       "reverified": "Confirmed verbatim in the second pass"
     },

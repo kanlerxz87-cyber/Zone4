@@ -3,7 +3,7 @@
   "disclosure_source": "https://affiliate-program.amazon.com/help/operating/agreement",
   "observed_date": "2026-11-14",
   "executive_summary": {
-    "headline": "All three supplied links resolve to real air-fryer listings, verified twice by independent passes. The site now also carries the marketing drafts, the requirement traceability, the platform blueprint and twenty-nine flags; prices, ratings, commission rates and trend data stay blank because they are withheld by policy or unverifiable in this environment.",
+    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Prices, ratings, commission rates and trend data are not published, because they could not be verified or the Associates policy does not allow them on this site.",
     "bullets": [
       "Re-verification (2026-11-14): each short link was resolved again; titles, breadcrumbs and also-viewed ASINs match the records. The Agreement's disclosure wording, the Participation Requirements text, the Conditions of Use licence and the FTC and Associates guidance were re-read. Corrections: policy section numbers (F-17), the 'Sponsored' label observations (F-10), and competitor labels marked as paraphrased (F-20). Brand bylines and specification tables were not re-read (F-18). The automation conflict with Program Policies is flagged (F-19).",
       "Identity verified: each link resolves to an Amazon product page (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH). All three sit under the same Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers). Flag F-04 covers the short-link codes.",
@@ -12,21 +12,22 @@
       "Attribution unverified: the resolved links contain no Associates tag parameter (F-03). Confirm the links are generated under your Associates ID before relying on any earnings.",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content, data mining and using Amazon content for AI models (F-11, F-12). The AI content automation is therefore NOT built.",
       "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
+      "Site: static GitHub Pages site (source: main, path /; the root index.html redirects to docs/). Every table row links to an official source, and unverified values are blank and flagged.",
       "Site: static GitHub Pages site (source: main, path /; the root index.html redirects to docs/). Every table row links to an official source, and unverified values are blank and flagged. The new Analytics page logs clicks in browser storage only and cannot confirm earnings.",
       "Second verification pass (this session): all three link redirects, listing titles, category breadcrumbs, also-viewed ASINs and the absence of a tag parameter were re-read and re-confirmed; every policy quote on the site was checked against the live official page.",
       "Three marketing drafts are now published as drafts: one article per product, a head-to-head comparison and a buying guide, with every sentence tied to a verified listing field and unclaimable statements listed separately.",
-      "Two new policy findings shape the design: Participation Requirements section 5 bars using Program Content to develop machine learning models (R-17), and section 6(y) bars price tracking or alerting on the Site (R-23), which limits the brief's pricing-analysis request.",
-      "Specification-table values (litre capacity, dimensions, colour, material) are carried forward from the earlier session's read rather than re-verified, because that table was not present in the page text this pass (F-18). A brand page for a similarly named model lists different dimensions (F-31).",
-      "Publishing the drafts still needs two things no environment here can supply: an approved Associates account with tagged links (F-30) and, for prices and ratings, PA-API or Creators API access (F-02)."
+      "Two new policy findings shape the design: Participation Requirements section 5 bars using Program Content to develop machine learning models (R-17), and section 6(y) bars price tracking or alerting on the Site (R-22), which limits the brief's pricing-analysis request.",
+      "Specification-table values (litre capacity, dimensions, colour, material) are carried forward from the earlier session's read rather than re-verified, because that table was not present in the page text this pass (F-18). A brand page for a similarly named model lists different dimensions (F-32).",
+      "Publishing the drafts still needs two things no environment here can supply: an approved Associates account with tagged links (F-31) and, for prices and ratings, PA-API or Creators API access (F-02)."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and which Amazon marketplace they should target (F-09).",
       "Read the category commission rate from Associates Central and send it for entry (F-01).",
       "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16).",
       "Decide whether automated research and AI article generation may use Amazon-derived data, after review (F-11, F-12).",
-      "Confirm the pricing scope: on-site price display needs data from the Creators API (PA-API 5 is deprecated, F-34) or an Amazon-served link, and price tracking or alerting is barred on the Site outright (F-28).",
-      "Confirm whether a content generator may be connected at all, given the machine-learning restrictions in both the Conditions of Use and the Program Policies (F-12, R-17, F-33).",
-      "Re-check the four specification fields by hand, or accept them as carried forward (F-18, F-28)."
+      "Confirm the pricing scope: on-site price display needs data from the Creators API (PA-API 5 is deprecated, F-35) or an Amazon-served link, and price tracking or alerting is barred on the Site outright (F-29).",
+      "Confirm whether a content generator may be connected at all, given the machine-learning restrictions in both the Conditions of Use and the Program Policies (F-12, R-17, F-34).",
+      "Re-check the four specification fields by hand, or accept them as carried forward (F-18, F-29)."
     ]
   },
   "analysis": [
@@ -106,26 +107,22 @@
     },
     {
       "id": "A-08",
-      "finding": "A second, independent read of every source reproduced the published record exactly for identity, category and competition fields.",
-      "basis": "Re-verification log V-01 to V-11, all re-confirmed by arena/8908f0b3-zone4 on 2026-11-14.",
-      "sources": [
-        "https://www.amazon.com/dp/B0CDY277D3",
-        "https://www.amazon.com/dp/B09B7SB46R",
-        "https://www.amazon.com/dp/B08DKYBTPH",
-        "https://link.amazon/B04G1MEwY",
-        "https://link.amazon/B02NbDxp3",
-        "https://link.amazon/B00hJ57DV"
-      ],
-      "confidence": "Verified twice"
-    },
-    {
-      "id": "A-09",
-      "finding": "Amazon's Program Policies carry two clauses that shape this platform: Program Content may not be used to develop machine learning models, and the Site may not have price tracking or alerting.",
-      "basis": "Participation Requirements section 5 and section 6(y), quoted verbatim on the Policy compliance page.",
+      "finding": "Pricing analysis is blocked by a rule that is more specific than the price-display rule: the Site must not have price tracking or price alerting functionality.",
+      "basis": "Participation Requirements Section 6(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' This sits alongside Section 2(b), which limits price display to Amazon-served links or Creators API / PA API data.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "confidence": "Verified verbatim"
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-09",
+      "finding": "What the site can prove, it proves; what it cannot, it leaves blank. That split is enforced, not asserted.",
+      "basis": "scripts/verify.py parses every table body row on every page and fails the build if a row has no link to an official host, if any page lacks the Operating Agreement Section 5 disclosure sentence, or if any page contains a currency amount or a star rating. The Site checks workflow runs it on every push and pull request.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/.github/workflows/site-checks.yml"
+      ],
+      "confidence": "Verified"
     },
     {
       "id": "A-10",
@@ -140,7 +137,7 @@
     {
       "id": "A-11",
       "finding": "Four specification fields are carried forward rather than re-verified, which is the main residual data risk in the record.",
-      "basis": "The Product-information table was not present in the page text returned by the second pass (F-18); a brand page disagrees on one of them (F-31).",
+      "basis": "The Product-information table was not present in the page text returned by the second pass (F-18); a brand page disagrees on one of them (F-32).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -151,7 +148,7 @@
     {
       "id": "A-12",
       "finding": "Nothing on the site monetises traffic: the links are the user-supplied short links without a tag, so no commission attribution is implied.",
-      "basis": "F-03 re-confirmed in this pass; publishing monetised links requires an approved account and tagged Special Links (R-25, F-30).",
+      "basis": "F-03 re-confirmed in this pass; publishing monetised links requires an approved account and tagged Special Links (R-25, F-31).",
       "sources": [
         "https://link.amazon/B04G1MEwY",
         "https://link.amazon/B02NbDxp3",
@@ -172,7 +169,7 @@
     {
       "id": "A-14",
       "finding": "Two independent verification passes agree on every field they both reached, which is the strongest evidence the record is sound; the disagreement is only about what each pass could see.",
-      "basis": "The 2026-11-14 pass re-read the same pages and reproduced the identity, category and competition fields; the Item details table was visible to the first pass for P2 and to neither pass for P1 and P3 (F-28).",
+      "basis": "The 2026-11-14 pass re-read the same pages and reproduced the identity, category and competition fields; the Item details table was visible to the first pass for P2 and to neither pass for P1 and P3 (F-29).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -221,10 +218,10 @@
     "Click, conversion and revenue tracking (needs Associates reporting or tracked links, F-03).",
     "AI-generated articles, comparisons and buying guides (restricted pending review, F-12).",
     "Campaign optimisation (needs the data above).",
-    "Price tracking or alerting on the Site (barred by Participation Requirements 6(y) unless Amazon agrees, F-28).",
+    "Price tracking or alerting on the Site (barred by Participation Requirements 6(y) unless Amazon agrees, F-29).",
     "Any niche ranking by demand or profitability (no official demand or earnings source, F-01, F-15).",
-    "Automated aggregation or analysis of API content (barred without written approval, R-29, F-33).",
-    "A rebuild or refresh cadence for listing text (24-hour caching limit, R-31, F-32)."
+    "Automated aggregation or analysis of API content (barred without written approval, R-29, F-34).",
+    "A rebuild or refresh cadence for listing text (24-hour caching limit, R-31, F-33)."
   ],
   "requirements": [
     {
@@ -250,7 +247,7 @@
       "brief": "Analyze pricing",
       "status": "Partial — limited by policy",
       "delivered": "Price fields are recorded as withheld rather than omitted, so the gap is visible on every row.",
-      "blocker": "Prices may only be shown through Amazon-served links or PA-API (R-02); price tracking and alerting are barred on the Site (R-23, F-28).",
+      "blocker": "Prices may only be shown through Amazon-served links or PA-API (R-02); price tracking and alerting are barred on the Site (R-22, F-29).",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "evidence": "Participation Requirements 2(b), 6(y)"
     },
@@ -286,7 +283,7 @@
       "brief": "Generate SEO-optimized product articles",
       "status": "Drafted this session",
       "delivered": "Three per-product drafts with SEO title, meta description, slug, keyword targets and a per-sentence substantiation audit.",
-      "blocker": "Publication awaits an approved Associates account and tagged links (F-30); no model is trained on Amazon content (R-17, F-12).",
+      "blocker": "Publication awaits an approved Associates account and tagged links (F-31); no model is trained on Amazon content (R-17, F-12).",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "evidence": "Participation Requirements 2(a), section 5"
     },
@@ -322,7 +319,7 @@
       "brief": "Publish and manage affiliate links",
       "status": "Not published",
       "delivered": "Links are managed in data/products.json and rendered with a disclosure beside every one; the build fails if one is missing.",
-      "blocker": "Publishing monetised links requires an approved Associates account and tagged Special Links (R-25, F-30).",
+      "blocker": "Publishing monetised links requires an approved Associates account and tagged Special Links (R-25, F-31).",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "evidence": "Participation Requirements 2(a)"
     },
@@ -377,7 +374,7 @@
       "brief": "Compliance with Amazon Associates policies",
       "status": "Delivered",
       "delivered": "Twenty-four requirements are listed with their official section references, verbatim quotes and the site's status.",
-      "blocker": "Two items need your decision: pricing scope (F-28) and account confirmation (F-30).",
+      "blocker": "Two items need your decision: pricing scope (F-29) and account confirmation (F-31).",
       "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "evidence": "Associates Program Policies"
     },
@@ -464,16 +461,16 @@
     }
   ],
   "marketing": {
-    "status": "Drafts held in the repository, not published as monetised pages. Reasons: no approved Associates account or tag is confirmed (F-30), prices and ratings may not be shown here (F-02), and no model may be trained on Amazon content without written approval (R-17, F-12).",
+    "status": "Drafts held in the repository, not published as monetised pages. Reasons: no approved Associates account or tag is confirmed (F-31), prices and ratings may not be shown here (F-02), and no model may be trained on Amazon content without written approval (R-17, F-12).",
     "writing_rules": [
-      "Only attributes visible in the verified listing title, the brand byline or the category breadcrumb are asserted as facts (R-22).",
+      "Only attributes visible in the verified listing title, the brand byline or the category breadcrumb are asserted as facts (R-23).",
       "Prices, discounts, star ratings, review counts, badges and sales figures never appear (R-02, R-03, F-02, F-15).",
       "No first-person testing, tasting or long-term-use language, and no claim needing proof the advertiser does not have (R-26).",
       "The Operating Agreement disclosure sentence sits above the fold on the page and again immediately before each affiliate link (R-01, R-16).",
       "Every link is a tagged Special Link to a Product page, never to a search or department page, and no link is placed on Amazon (R-04, R-24, R-25).",
       "Promotional copy that mentions a limited-time offer carries an expiry task; these drafts mention none (R-27).",
       "Text taken from a listing is labelled as the listing's wording, and the page carries the IP License 2(k) content disclaimer in the footer (R-20, F-24).",
-      "No listing content is fed to a model that trains on its inputs, and no API data is aggregated for analysis without written approval (R-17, R-29, F-12, F-33)."
+      "No listing content is fed to a model that trains on its inputs, and no API data is aggregated for analysis without written approval (R-17, R-29, F-12, F-34)."
     ],
     "articles": [
       {
@@ -675,7 +672,7 @@
               },
               {
                 "text": "This draft therefore names the brand only as the Item details state it, and quotes nothing from the byline.",
-                "basis": "Site rule against overbroad or unsupported claims (R-22)",
+                "basis": "Site rule against overbroad or unsupported claims (R-23)",
                 "source": "https://affiliate-program.amazon.com/help/operating/policies"
               }
             ]
@@ -929,17 +926,17 @@
       "source": "https://www.amazon.com/dp/B08DKYBTPH"
     },
     "publish_checklist": [
-      "Confirm the Associates account and generate each link as a tagged Special Link so the tag parameter is present (F-03, F-30).",
+      "Confirm the Associates account and generate each link as a tagged Special Link so the tag parameter is present (F-03, F-31).",
       "Re-read the specification table on each listing by hand before publishing capacity, dimension, colour or material figures (F-18).",
       "Set the marketplace the pages target, since the listings here were read as US pages (F-09).",
       "Keep the disclosure above the fold and repeat it immediately before every link, as the Associates help requires (R-16).",
       "Leave prices, ratings, badges and sales counts out unless PA-API or Creators API access is approved (F-02).",
-      "Record a removal date for any future promotion mention, because the reference must go as soon as the offer ends (R-27, F-29).",
+      "Record a removal date for any future promotion mention, because the reference must go as soon as the offer ends (R-27, F-30).",
       "Do not feed listing text into any model that trains on its inputs (R-17, F-12).",
       "Rebuild with python3 scripts/build_site.py and let verify.py fail the publish if a row loses its source.",
       "Show the IP License 2(k) content disclaimer in plain view wherever listing text is quoted; this site already does (R-20, F-24).",
-      "Keep refreshed: listing content other than ASINs may be cached for only 24 hours under the IP License, so a static page needs a rebuild cadence (R-31, F-32).",
-      "Do not aggregate or analyse API content for the platform without Amazon's written approval (R-29, F-33)."
+      "Keep refreshed: listing content other than ASINs may be cached for only 24 hours under the IP License, so a static page needs a rebuild cadence (R-31, F-33).",
+      "Do not aggregate or analyse API content for the platform without Amazon's written approval (R-29, F-34)."
     ],
     "measurement_plan": [
       {
@@ -979,8 +976,8 @@
     "stages": [
       {
         "stage": "1. Product discovery",
-        "automation": "Query the Creators API (PA-API 5 is deprecated, F-34) for candidates in an assigned node",
-        "gate": "API access and its license terms, which have not been reviewed (F-16; PA-API 5 is deprecated, so an application must target the Creators API (F-34)",
+        "automation": "Query the Creators API (PA-API 5 is deprecated, F-35) for candidates in an assigned node",
+        "gate": "API access and its license terms, which have not been reviewed (F-16; PA-API 5 is deprecated, so an application must target the Creators API (F-35)",
         "status": "Blocked",
         "source": "https://affiliate-program.amazon.com/help/operating/policies"
       },
@@ -1015,7 +1012,7 @@
       {
         "stage": "6. Publish",
         "automation": "Build docs/ and deploy to GitHub Pages on merge to main",
-        "gate": "None for the research site; monetised pages need an approved account first (F-30)",
+        "gate": "None for the research site; monetised pages need an approved account first (F-31)",
         "status": "Built",
         "source": "https://github.com/kanlerxz87-cyber/Zone4"
       },
@@ -1206,7 +1203,7 @@
         "id": "V-15",
         "check": "Machine-learning restriction relevant to the AI goal",
         "expected": "not previously recorded as a rule",
-        "result": "Confirmed as rule R-17 in the merged record; IP License 2(e) adds a wider bar on aggregation and model training, added as rule R-29 and flag F-33",
+        "result": "Confirmed as rule R-17 in the merged record; IP License 2(e) adds a wider bar on aggregation and model training, added as rule R-29 and flag F-34",
         "status": "New finding this pass",
         "source": "https://affiliate-program.amazon.com/help/operating/policies"
       },
@@ -1214,7 +1211,7 @@
         "id": "V-16",
         "check": "Price tracking and alerting restriction",
         "expected": "not previously recorded as a rule",
-        "result": "Found in Participation Requirements section 6(y); added as rule R-23 and flag F-28",
+        "result": "Found in Participation Requirements section 6(y); added as rule R-22 and flag F-29",
         "status": "New finding this pass",
         "source": "https://affiliate-program.amazon.com/help/operating/policies"
       },
@@ -1278,7 +1275,7 @@
         "id": "V-24",
         "check": "IP License sections 1, 2(c), 2(e), 2(h), 2(i), 2(j), 2(k) and 4",
         "expected": "not previously recorded line by line",
-        "result": "Read and quoted verbatim; added rules R-29 to R-32, refreshed R-20, and added flags F-32 and F-33",
+        "result": "Read and quoted verbatim; added rules R-29 to R-32, refreshed R-20, and added flags F-33 and F-34",
         "status": "New finding this pass",
         "source": "https://affiliate-program.amazon.com/help/operating/policies"
       },
@@ -1286,7 +1283,7 @@
         "id": "V-25",
         "check": "Whether any price, rating, badge or sales figure appears on a built page",
         "expected": "none",
-        "result": "verify.py now also blocks spelled-out money amounts and Amazon page furniture strings, and passes on all 16 pages after the second merge with main",
+        "result": "verify.py now also blocks spelled-out money amounts and Amazon page furniture strings, and passes on all 17 pages after the third merge with main",
         "status": "Verified by test",
         "source": "https://github.com/kanlerxz87-cyber/Zone4"
       }

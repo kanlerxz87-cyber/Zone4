@@ -69,7 +69,7 @@ def page_marketing(ctx, current):
               "in this environment, so nothing is estimated (flags F-01 and F-15).</p>"
             + "<h3>Call to action as it would be published</h3>"
             + "<p>" + ext(a["cta"]["url"], a["cta"]["label"], ' class="shop"')
-            + '<div class="note">' + esc(ctx.disclosure) + "</div></p>"
+            + '<span class="note small"> ' + esc(ctx.disclosure) + "</span></p>"
             + "<h3>Cannot claim in this draft</h3><ul class=\"small\">" + cannot + "</ul>"
             + '<p class="small muted">Product record: ' + href(current, "products.html", prod["id"])
             + " · Verification: " + href(current, "verification.html", "log") + " · Flags: " + flags + "</p></section>"
@@ -163,7 +163,7 @@ def page_platform(ctx, current):
 
 
 def page_requirements(ctx, current):
-    esc, ext, table, hero = ctx.esc, ctx.ext, ctx.table, ctx.hero
+    esc, ext, table, hero, href = ctx.esc, ctx.ext, ctx.table, ctx.hero, ctx.href
     rows = []
     counts = {"Delivered": 0, "Drafted": 0, "Gated": 0}
     for q in ctx.requirements:
@@ -176,9 +176,11 @@ def page_requirements(ctx, current):
         ])
     summary = " · ".join(f"{k}: {v}" for k, v in counts.items())
     return (
-        hero("Requirements coverage",
+        hero("Brief coverage (this session's trace)",
              "Every requirement in the brief, traced to what this repository does about it. Gated rows name the credential, data "
-             "source or compliance decision that blocks them, with the flag that carries it.")
+             "source or compliance decision that blocks them, with the flag that carries it. The repository also publishes a separate "
+             "register of the same brief, built from `data/requirements.json` by a parallel session.")
+        + f'<p class="small">{href(current, "requirements.html", "Open the 30-item requirements register")}</p>'
         + '<div class="callout small">' + esc(summary) + " · " + str(len(ctx.requirements)) + " requirements in total.</div>"
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Blocked, Q-07, F-18)" '
           'aria-label="Filter table"></p>'
@@ -199,7 +201,7 @@ def page_reverification(ctx, current):
             esc(chk["id"]), esc(chk["check"]), esc(chk["expected"]), esc(chk["result"]),
             ctx.status_pill(chk["status"]), ext(chk["source"], "Official source"),
         ])
-    chips = " ".join(flag_chip(current, f) for f in ("F-12", "F-18", "F-24", "F-25", "F-26", "F-27", "F-28", "F-29", "F-30", "F-31", "F-32", "F-33", "F-34"))
+    chips = " ".join(flag_chip(current, f) for f in ("F-12", "F-18", "F-24", "F-25", "F-26", "F-27", "F-29", "F-30", "F-31", "F-32", "F-33", "F-34", "F-35"))
     return (
         hero("Independent re-verification pass",
              f"Second pass by session {rev['session']} on {rev['date_utc']} (UTC). {reconfirmed} of {len(rev['checks'])} checks "
@@ -219,6 +221,6 @@ def build_pages(ctx):
     return {
         "marketing.html": lambda cur: page_marketing(ctx, cur),
         "platform.html": lambda cur: page_platform(ctx, cur),
-        "requirements.html": lambda cur: page_requirements(ctx, cur),
+        "brief-coverage.html": lambda cur: page_requirements(ctx, cur),
         "reverification.html": lambda cur: page_reverification(ctx, cur),
     }

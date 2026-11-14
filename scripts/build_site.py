@@ -38,9 +38,11 @@ FLAGS_DOC = load("flags.json")
 FLAGS = FLAGS_DOC["flags"]
 FLAG_BY_ID = {f["id"]: f for f in FLAGS}
 CONTENT = load("content.json")
+REQUIREMENTS_DOC = load("requirements.json")
+REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
 OBSERVED = CONTENT["observed_date"]
 MARKETING = CONTENT["marketing"]
-REQUIREMENTS = CONTENT["requirements"]
+BRIEF_COVERAGE = CONTENT["requirements"]
 PLATFORM = CONTENT["platform"]
 NICHE = CONTENT["niche"]
 REVERIF = CONTENT["reverification"]
@@ -49,6 +51,7 @@ AMAZON_DISCLAIMER = CONTENT["amazon_text_disclaimer"]
 NAV = [
     ("index.html", "Dashboard"),
     ("executive-summary.html", "Executive summary"),
+    ("requirements.html", "Requirements"),
     ("products.html", "All products"),
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers"),
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers"),
@@ -57,7 +60,7 @@ NAV = [
     ("analytics.html", "Analytics"),
     ("marketing.html", "Marketing content (drafts)"),
     ("platform.html", "Platform & automation"),
-    ("requirements.html", "Requirements coverage"),
+    ("brief-coverage.html", "Brief coverage (Q-trace)"),
     ("verification.html", "Verification log"),
     ("reverification.html", "Re-verification pass"),
     ("policy-compliance.html", "Policy compliance"),
@@ -76,7 +79,13 @@ def pill(label: str, kind: str) -> str:
 
 def status_pill(status: str) -> str:
     s = status.lower()
-    if s.startswith("verified") or s.startswith("implemented") or s.startswith("informational"):
+    if s.startswith("delivered"):
+        kind = "ok"
+    elif s.startswith("not built"):
+        kind = "bad" if "needs access" in s else "muted"
+    elif s.startswith("unverifiable"):
+        kind = "warn"
+    elif s.startswith("verified") or s.startswith("implemented") or s.startswith("informational"):
         kind = "ok"
     elif "withheld" in s or "not applicable" in s:
         kind = "muted"
@@ -256,6 +265,46 @@ def policy_rows(current: Page) -> list[list[str]]:
     return rows
 
 
+def requirement_rows(current: Page) -> list[list[str]]:
+    rows = []
+    for r in REQUIREMENTS:
+        sources = "<br>".join(ext(u, source_label(u)) for u in r["sources"])
+        flags = r.get("flags") or []
+        rows.append([
+            f'<span id="{esc(r["id"])}"><strong>{esc(r["id"])}</strong></span>',
+            esc(r["area"]),
+            esc(r["requirement"]),
+            status_pill(r["status"]),
+            esc(r["delivered"]) or '<span class="muted">Nothing published yet.</span>',
+            esc(r["blocker"]) or '<span class="muted">None.</span>',
+            sources,
+            " ".join(flag_chip(current, f) for f in flags) or '<span class="muted">-</span>',
+        ])
+    return rows
+
+
+def page_requirements(current: Page) -> str:
+    counts: dict[str, int] = {}
+    for r in REQUIREMENTS:
+        counts[r["status"]] = counts.get(r["status"], 0) + 1
+    order = sorted(counts, key=lambda k: (-counts[k], k))
+    kpi_html = "".join(
+        f'<div class="kpi"><div class="kpi-value">{esc(str(counts[k]))}</div><div class="kpi-label">{esc(k)}</div></div>'
+        for k in order
+    )
+    meaning = "".join(
+        f"<li><strong>{esc(k)}</strong> - {esc(v)}</li>"
+        for k, v in REQUIREMENTS_DOC["_meta"]["status_meanings"].items()
+    )
+    return (
+        hero("Requirements", "Every requirement in the project brief, one row each, with what this site actually delivers, what blocks it, and the official source for that status. Nothing is marked Delivered unless it is live on the site.")
+        + f'<section class="kpis">{kpi_html}</section>'
+        + f'<section><h2>What the statuses mean</h2><ul class="small">{meaning}</ul></section>'
+        + table(["ID", "Area", "Requirement", "Status", "Delivered on this site", "Blocker or gap (official rule)", "Official sources", "Flags"], requirement_rows(current), "requirements")
+        + f'<p class="small muted">Assessed {esc(REQUIREMENTS_DOC["_meta"]["as_of_utc"])} (UTC). Blocked does not mean skipped without reason: each blocked row names the official rule that gates it.</p>'
+    )
+
+
 def flag_table(current: Page) -> str:
     rows = []
     for f in FLAGS:
@@ -327,12 +376,13 @@ def page_index(current: Page) -> str:
         ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "P1: CHEFMAN 6 Quart Dual Basket Air Fryer Oven"),
         ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "P3: Chefman Air Fryer 8 Qt TurboFry 4-in-1"),
         ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "P2: Emeril Lagasse 26QT French Door Air Fryer Toaster Oven"),
+        ("requirements.html", "Requirements", "All 30 brief items: delivered, blocked or unverifiable"),
         ("products.html", "All products (table)", "Every row links to its Amazon source"),
         ("analysis.html", "Analysis & findings", "Niche, competition, what can and cannot be concluded"),
         ("verification.html", "Verification log", "Field-by-field check with source and status"),
         ("marketing.html", "Marketing content (drafts)", "Articles, comparison and buying guide, sentence by sentence"),
         ("platform.html", "Platform & automation", "Pipeline stages, gates, guardrails, niche method"),
-        ("requirements.html", "Requirements coverage", "Every requirement in the brief, traced to evidence"),
+        ("brief-coverage.html", "Brief coverage (Q-01 to Q-26)", "This session's trace of the brief, item by item, in data/content.json"),
         ("reverification.html", "Re-verification pass", "Second, independent check of every published value"),
         ("flagged.html", "Flagged for review", "Irregularities and unverified items, with sources"),
     ]
@@ -438,6 +488,7 @@ def page_sources(current: Page) -> str:
 BODIES = {
     "index.html": page_index,
     "executive-summary.html": page_exec,
+    "requirements.html": page_requirements,
     "products.html": page_products,
     "categories/dual-basket-air-fryers.html": lambda c: page_category(c, "dual-basket-air-fryers"),
     "categories/single-basket-air-fryers.html": lambda c: page_category(c, "single-basket-air-fryers"),
@@ -452,7 +503,7 @@ BODIES = {
 
 SITE_CTX = SimpleNamespace(
     esc=esc, ext=ext, table=table, pill=pill, hero=hero, href=href, flag_chip=flag_chip,
-    status_pill=status_pill, products=PRODUCTS, marketing=MARKETING, requirements=REQUIREMENTS,
+    status_pill=status_pill, products=PRODUCTS, marketing=MARKETING, requirements=BRIEF_COVERAGE,
     platform=PLATFORM, niche=NICHE, reverif=REVERIF, disclosure=DISCLOSURE_SENTENCE,
     policies_url=PUBLISHER_SOURCE,
 )
