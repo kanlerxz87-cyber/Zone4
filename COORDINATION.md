@@ -389,3 +389,35 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Review of PR #21's analytics tracker (`docs/tracker.js`, merged by `arena/cd6113ca-zone4`):** reviewed. It records events in the visitor's `localStorage` only. It makes no network requests, starts empty and fabricates no data. It does not measure conversions, so conversion tracking remains not built (see F-15 and the Flagged page).
 - **Live check:** https://kanlerxz87-cyber.github.io/Zone4/docs/index.html?v=0762959 loaded (current text). The bare root URL can return an older cached copy. A cache-busted fetch is the reliable check.
 - **Status:** the verified data, Flagged for Review and the rebuilt site are live on `main` at `77076b2`. Open items (F-01 commission schedule, F-02 and F-16 prices and ratings, F-03 and F-04 Associates tag, F-05 byline, F-06 to F-08 capacity and variants, F-09 storefront, F-18 and F-21 unread fields, F-22 to F-24 policy items) are published on the Flagged for Review page. None blocks the merge.
+---
+
+## Session arena/ed7a54e7-zone4 — final integration (2026-11-14, UTC)
+
+**Claim.** Requirements traceability (the brief's "full list of requirements" mapped to status and official source), a line-by-line re-verification of the published policy citations and product identity fields, and the integration steps (PR, merge, Pages check). Scope: `data/requirements.json` (new), `data/policies.json`, `data/flags.json`, `data/content.json`, `data/products.json`, `README.md`, `scripts/build_site.py` (Requirements page), `scripts/verify.py`, `docs/` (rebuilt), and this log. All work stays on the assigned branch `arena/ed7a54e7-zone4`; no other branch was created or pushed.
+
+**Official sources read first-hand in this session** (via `fetch_page`; the sandbox has no direct egress to these hosts):
+
+- [Associates Program Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) — "Updated: October 15, 2025". Section 5 read verbatim: the disclosure sentence on this site is character-for-character the sentence the Agreement requires.
+- [Associates Program Policies](https://affiliate-program.amazon.com/help/operating/policies) — "Updated: April 14, 2026". Read the Commission Income Statement §1–3 and the Participation Requirements §1–6.
+- [Amazon Conditions of Use](https://www.amazon.com/gp/help/customer/display.html?nodeId=508088) — "Last updated: August 14, 2026". "License and Access" read verbatim (listings/descriptions/prices; data mining and robots; AI-generated content and model development). Served by Amazon as node `GLSBYFE9MGKKQXXM` (F-28).
+- [Associates Central help: identifying yourself as an Associate](https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE) — link-level disclosure must be clear, conspicuous and placed near the link.
+- [FTC Disclosures 101 for Social Media Influencers](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) (November 2019) — placement and plain-language tests.
+- Product pages [B0CDY277D3](https://www.amazon.com/dp/B0CDY277D3), [B09B7SB46R](https://www.amazon.com/dp/B09B7SB46R), [B08DKYBTPH](https://www.amazon.com/dp/B08DKYBTPH) — listing title, category breadcrumb and also-viewed ASINs re-read and compared with `data/products.json`. All three match.
+- [GitHub Pages API](https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages) — source `main` `/`, legacy build, HTTPS enforced.
+
+**Independently confirmed from those pages:** the Operating Agreement and Policies "updated" dates; the Section 5 disclosure wording; §2(b) (prices, the tag parameter, sub-tags, price-comparison format); §1(g) (trademark in domain, subdomain, tag); §3(c) and §6(a) (accuracy of materials, no alteration of Program Content); §6(e)–(f) (paid search keywords); §6(g) (incentives); §6(p) (Special Links in Amazon customer content); §6(t) (reviews and star ratings); §6(w) (link shortening); §6(y) (price tracking and price alerts); Section 5 (Special Links or Program Content must not be used to develop machine learning models without express prior written approval); Commission Income Statement §1 (Qualifying Revenue definition), §2(c)–(e) and §2(g), §3 (percentage of Qualifying Revenue), §6 (Amazon does the tracking and reporting).
+
+**Corrections and additions applied here**
+
+1. **`data/requirements.json` and the Requirements page.** All 30 items in the brief, each with a status (Delivered 12, Delivered (partial) 4, Not built – blocked (policy) 9, Not built – needs access 2, Unverifiable 3), the evidence, the blocking rule and official source links. Nothing is marked Delivered unless it is live.
+2. **R-22 — Participation Requirements Section 6(y).** A rule nobody had recorded: "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality." It blocks the brief's pricing-analysis goal more specifically than §2(b). Also recorded as analysis finding A-08.
+3. **F-28** — the Conditions of Use URL is served under a different node id (`GLSBYFE9MGKKQXXM`).
+4. **A-09** — records that the source-link rule is enforced by `scripts/verify.py`, not merely asserted.
+5. **F-10 / F-20 attached to P1 as well** — on my 2026-11-14 read the "Sponsored" label sat directly above the also-viewed module on P1 and P3; P2's read showed a sponsored brand-store module above it. All three competitor lists are ad-influenced.
+6. **`scripts/verify.py` extended** to validate `requirements.json`: no duplicate IDs, every source on an official host, status drawn from the declared vocabulary, Delivered rows must carry evidence, Not built rows must name a blocker, flag references must exist.
+
+**Self-correction recorded.** My first pass asserted that the ratings, link-shortening, incentive, artificial-click and price-tracking rules sit in Participation Requirements Section 3. Re-reading the page boundaries showed Section 3 runs (a)–(f) and the (g)–(z) items sit under the later "6. Content on your Site" heading. `arena/e5381cc3-zone4` had already reached the same conclusion, and `main` already carried those corrections when I rebased. I discarded my conflicting edit rather than reintroducing 3(t)/3(w)/3(y). This is why the section numbers on the site now read 6(t), 6(w), 6(s), 6(y) and 6(z).
+
+**Branch note.** This session's branch was reset to `origin/main` twice and force-pushed with `--force-with-lease` after the reset, because an earlier superseded version of the same change was already on the branch. No other session's work was discarded: the reset targets were this session's own commits, and the surviving content is in the final commit.
+
+**Verification performed.** `python3 scripts/build_site.py` (13 pages) and `python3 scripts/verify.py` pass. Negative tests re-run this session: a requirement row with no source, a row with a non-official source, a Delivered row with no evidence, an unknown flag reference, a currency amount and a star rating each make the verifier exit 1.

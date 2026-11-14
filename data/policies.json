@@ -170,6 +170,14 @@
       "source_ref": "Participation Requirements, Section 2(b)",
       "status": "Not met for source and competitor links (F-25)",
       "site_implementation": "No tag was supplied, so none was added. Source and competitor links are untagged. Flag F-25."
+    },
+    {
+      "id": "R-22",
+      "requirement": "The Site must not have price tracking or price alerting functionality.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Program Policies, Participation Requirements, Section 6(y)",
+      "status": "Implemented (not applicable)",
+      "site_implementation": "The brief asks for pricing analysis. No price history, price tracker or price alert is built, because Section 6(y) states 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' Only the rule is documented. Flag F-19."
     }
   ]
 }
