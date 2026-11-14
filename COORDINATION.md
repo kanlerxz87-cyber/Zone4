@@ -28,6 +28,8 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 
 The current active session is working on `arena/13dd55ca-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`). No branch was created or switched to.
 
+| Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, site rebuild, integration (PR, merge, Pages check) | **done** | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
+
 ## Work log
 
 ### Session arena/01ab2940-zone4 — completion (2026-11-14, UTC)
@@ -518,3 +520,77 @@ is on an official host, and no tracking metric carries a value.
 - **Disclosure/QA improvement:** every shop link now visibly says “(paid link)” next to the link and the Associates disclosure. The independent HTML audit checks the adjacent paragraph or table row, replacing five prior advisory warnings with a strict pass.
 - **Checks:** `python3 scripts/build_site.py`; `python3 scripts/verify.py` (15 generated pages; all table rows source-linked, disclosures/anchors/links/policy guards pass); `python3 qa/audit_site.py --strict-warnings` (15 pages, 0 warnings); `python3 -m unittest discover -s tests` (81 passed); `python3 -m engine.cli audit` (0/7 drafts ready, all blocked by explicit missing-input/compliance gates); `python3 -m engine.cli build`; `python3 tools/check_links.py` (6 pages, 71 CSS lines; pass); `git diff --check`. These checks were rerun after rebuilding `docs/`.
 - **PR/deploy confirmed:** PR [#38](https://github.com/kanlerxz87-cyber/Zone4/pull/38) merged to `main` at `077bb3e904cfce555708cd176ad2c7593d683eff` on 2026-11-14 19:12:11 UTC. Required PR checks passed (CI verify, Site checks verify, QA audit). The Pages deployment workflow [43630802636](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43630802636) completed successfully. GitHub Pages API reports `built`, public, HTTPS enforced, publishing from `main:/`; the latest CI, Site checks, QA audit and Pages deploy on the merge SHA all succeeded. Live site: https://kanlerxz87-cyber.github.io/Zone4/.
+
+
+### Session arena/949aaac1-zone4 — independent fourth-pass verification, corrections and integration (2026-11-14, UTC)
+
+**Scope.** This session re-read every official source it relied on rather than reusing an earlier session's record.
+Field-by-field record: `data/verification-session-949aaac1.json`.
+
+**Re-verified against the live official pages on 2026-11-14 (every citation MATCHED).**
+
+- **Three short links re-resolved.** `link.amazon/B04G1MEwY` -> `B0CDY277D3`, `link.amazon/B02NbDxp3` -> `B09B7SB46R`,
+  `link.amazon/B00hJ57DV` -> `B08DKYBTPH`. Titles matched. No `tag=` parameter in any resolved URL, so **F-03 stands**.
+- **Breadcrumb** `Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers` on all three; matches.
+- **All nine stored competitor ASINs** reappeared on all three carousels **in the stored order with the same titles**. The
+  snapshot reproduced exactly on this read.
+- **Commission table** (`.../help/node/topic/GRXPHT8U84RAYDXZ`) Table 1: "Physical Books, Kitchen, Automotive" = **4.50%**,
+  and a "Home" band at 3.00% — confirming both the category figure and the reason the per-ASIN step is unproven.
+- **Operating Agreement §5** read verbatim; the disclosure sentence the site shows is the one the Agreement requires. Page
+  states "Updated: October 15, 2025", matching `S-OA`.
+- **Program Policies** (page states "Updated: April 14, 2026"). Commission Income Statement §1 windows re-read: 24 hours,
+  89-day cart, 180-day ship — matches. Participation Requirements lettering re-confirmed independently: **6(g)** incentives,
+  **6(p)** links in customer content, **6(s)** artificial clicks, **6(t)** reviews and star ratings, **6(w)** link
+  shortening, **6(y)** price tracking, **6(z)** non-Amazon-Site products. This independently confirms the earlier 3(t) ->
+  6(t) correction.
+- **IP License** §1 (no model development on Program Content), §2(e) (aggregating / analysing / extracting / fine-tuning
+  without express prior written approval), §2(k) (Amazon text disclaimer, "ON THIS SITE" branch) and §4 Agent Terms
+  (`Agent/[agent name]`, no concealing, no CAPTCHAs, answer truthfully) — all read verbatim and matching.
+- **Conditions of Use** "License and Access": the exclusions the site relies on (collection and use of product listings,
+  descriptions or prices; data mining, robots or similar extraction tools; using Amazon AI-generated content to develop or
+  improve models) are present word for word. Page states "Last updated: August 14, 2026", matching `S-COU`.
+- **FTC Disclosures 101** (November 2019): "The disclosure should be placed with the endorsement message itself" — the site
+  puts it in the page header and beside every shop link.
+
+**Overlap with session arena/13dd55ca-zone4, and how it was resolved.** Both sessions found the same defect at the same
+time: the product table published a per-product commission rate that no official source confirms for these ASINs, while the
+rest of the site described the rate as unverified. `arena/13dd55ca-zone4` landed the fix on `main` first (PR #38): blank the
+product-level rate cells and state the official category-level Kitchen rate (4.50%) in the narrative with its source. That is
+the more conservative reading of the brief's "never infer or fill in values" rule, it was already merged, and it is coherent
+across the data, so **this session adopted it rather than re-litigating it.** The branch was reset to `origin/main` and only
+the non-overlapping findings below were re-applied. Their `(paid link)` link-level disclosure was kept unchanged; it also
+cleared the five long-standing QA advisories about call-to-action links, so the QA audit now reports **0 warnings**. The
+superseded branch state is preserved locally as `backup-949aaac1-pre-rebase` and remains in the reflog.
+
+**Findings applied on top of `main` (all recorded in `data/flags.json`).**
+
+- **F-36 (new) — the commission defect and its resolution.** Recorded as the audit trail: what the site published, what the
+  official table does and does not establish, how two sessions reached the same conclusion independently, and what the
+  adopted resolution is. Product-level cells stay blank; the category-level rate stays in the narrative with its source.
+- **F-37 (new) — a resolvable-but-wrong flag cross-reference.** The carousel-instability notes on all three products in
+  `data/products.json` cited **F-27**, which is the flag about offline, print, email and SMS use. The carousel flag is
+  **F-29**. Every automated check passed because the reference resolved to a real flag; only reading it caught it. Fixed on
+  all three products. F-27 keeps its meaning and is still cited correctly in the not-built list.
+- **F-29 — the last blank competitor label is now filled.** `B0CNSB81V6` on P1 was read verbatim as "Nutrichef Double Basket
+  Air Fryer 8.8 QT" (opening segment before the first ` | `, the same rule used for the other eight labels). No label on the
+  site is blank. The flag stays open, because the module is an advertising slot whose membership can change.
+- **F-30 — resolved.** `...?nodeId=508088` still returns the Conditions of Use page; its canonical URL is now
+  `...?nodeId=GLSBYFE9MGKKQXXM`, which was also fetched directly and returned the same page with the same "Last updated:
+  August 14, 2026" line. The working citation was deliberately **not** churned, because the old one still resolves; both node
+  ids are recorded so the next reviewer can see the mapping.
+- **Competitor labels were verified but never rendered.** The products table and the verification log showed bare ASINs, so
+  the verified listing titles were invisible to a reader. Both now render the title segment next to the ASIN, marked
+  "(as listed)". Only data already verified verbatim is used.
+- **Index KPIs are now computed from the data** instead of typed in, so they cannot drift from the tables again. This is what
+  allowed the stale "0 of 3" KPI to survive three previous integration passes.
+
+**Checks.** `scripts/build_site.py` regenerated all 15 pages; `scripts/verify.py` passed (data validity, official-host
+sources, links and anchors, per-page disclosure, a source link in every table row, no prices or ratings, no Amazon Mark in
+titles or keywords, per-fact citation traceability, requirement-status evidence); `qa/audit_site.py` passed with **0 failures
+and 0 warnings**; `python3 -m unittest discover -s tests` passed all 81 engine tests; `engine.cli audit` reports 0 of 7 drafts
+ready, all 7 blocked by gates, which is correct. A separate cross-check confirmed every `F-xx` reference resolves, that every
+competitor label is populated, and that all three product-level commission cells are null.
+
+**Left for the user (unchanged).** F-01 per-ASIN commission band, F-02 prices and ratings (needs the API route), F-03 no
+Associates tag in the supplied links, F-11/F-12 legal review of automated retrieval, and the remaining Medium and Low items
+on the Flagged for Review page.
