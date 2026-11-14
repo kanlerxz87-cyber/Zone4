@@ -55,14 +55,14 @@
     },
     {
       "id": "F-05",
-      "severity": "Medium",
-      "title": "Brand for P2 is ambiguous",
-      "detail": "The Emeril product page lists 'Visit the Emeril Store' and shows the byline 'Innovation IQ'. The brand is therefore left unresolved rather than assumed to be Emeril Lagasse.",
+      "severity": "Low",
+      "title": "P2 brand confirmed from Item details; byline to confirm",
+      "detail": "The P2 Item details table (re-read 2026-11-14) lists Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse'. An earlier verification recorded a store name 'Emeril Store' and a byline 'Innovation IQ'. Neither appeared in the 2026-11-14 read, so neither is used on the site.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "status": "Needs review",
-      "action": "Confirm the brand/manufacturer from the product's 'Product information' section or the seller page."
+      "status": "Resolved (brand field)",
+      "action": "Optional: check the byline on the live page if you want it shown."
     },
     {
       "id": "F-06",
@@ -210,15 +210,15 @@
     {
       "id": "F-18",
       "severity": "Medium",
-      "title": "Brand byline and specification tables not re-read in the 2026-11-14 pass",
-      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, the page titles, the category breadcrumbs and the also-viewed ASINs. It did not re-read the brand byline or the specification table (capacity, dimensions, colour, material) on P1, P2 or P3. Those values remain as recorded by the earlier verification session and are marked as not re-read.",
+      "title": "Brand byline and P1/P3 specification tables not re-read in the 2026-11-14 pass",
+      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
       "status": "Open (not re-read)",
-      "action": "A second reviewer should read the byline and specification tables on each page and confirm the values."
+      "action": "A second reviewer should read the brand byline and the P1/P3 Item details tables."
     },
     {
       "id": "F-19",
@@ -242,6 +242,40 @@
       ],
       "status": "Corrected in this session; needs review",
       "action": "None beyond review. Cite the Program Policies URL for every lettered section."
+    },
+    {
+      "id": "F-21",
+      "severity": "Low",
+      "title": "Manufacturer not confirmed for P1 and P3",
+      "detail": "The Item details table was read for P2 (Manufacturer 'Emeril Lagasse'). For P1 and P3 it was not read in this pass, so the manufacturer field is left blank rather than inferred from the 'Chefman' brand.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Unverified (blank)",
+      "action": "Read the Item details table on both pages, or accept the blank."
+    },
+    {
+      "id": "F-23",
+      "severity": "High",
+      "title": "Amazon Agent Terms apply to any automated agent that accesses Program Content",
+      "detail": "IP License Section 4 (Agent Terms) applies if an autonomous or semi-autonomous software agent accesses, uses or interacts with Program Content. Such an agent must identify itself in the user-agent string as 'Agent/[agent name]', must not conceal or obfuscate that it is an agent, and must not circumvent measures that limit agent access. The brief's AI automation would fall under these terms. No agent is built.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Obtain written approval and confirm eligibility before any agent accesses Amazon data."
+    },
+    {
+      "id": "F-24",
+      "severity": "Low",
+      "title": "Amazon text disclaimer required if Amazon text is displayed",
+      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
     }
   ]
 }

@@ -165,7 +165,8 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (byline)", p["brand"], "Unresolved" if p["id"] == "P2" else "Verified (earlier session; byline not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Brand (Item details)", p["brand"], "Verified (Item details)" if p["id"] == "P2" else "Verified (earlier session; Item details not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Manufacturer (Item details)", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-21"),
             ("Category path", p["category_path"], "Verified", src, ""),
             ("Capacity (as listed)", p["capacity"], "Verified as listed (earlier session; not re-read, F-18)", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "F-18")),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),

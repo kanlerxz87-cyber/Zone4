@@ -146,6 +146,22 @@
       "source_ref": "Participation Requirements, Section 6(s)",
       "status": "Constraint on automation",
       "site_implementation": "The site generates no clicks or sessions and has no click tracking. Automated click tracking is not built (F-19)."
+    },
+    {
+      "id": "R-19",
+      "requirement": "Any agent that accesses Program Content must identify itself in the user-agent ('Agent/[agent name]'), must not conceal that it is an agent, and must not circumvent access controls.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "IP License, Section 4 (Agent Terms)",
+      "status": "Constraint on automation",
+      "site_implementation": "No agent is built. AI automation is not connected to Amazon data (F-23)."
+    },
+    {
+      "id": "R-20",
+      "requirement": "If Amazon text (Product Advertising Content) is displayed, include the Section 2(k) disclaimer in plain view.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "IP License, Section 2(k)",
+      "status": "Open (applicability unconfirmed)",
+      "site_implementation": "The disclaimer is not shown. Decision pending (F-24)."
     }
   ]
 }

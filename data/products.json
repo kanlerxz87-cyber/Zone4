@@ -51,7 +51,8 @@
         "F-09",
         "F-15",
         "F-18"
-      ]
+      ],
+      "manufacturer": ""
     },
     {
       "id": "P2",
@@ -59,7 +60,7 @@
       "name_short": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
       "name_listing": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
       "subcategory": "Air fryer toaster ovens",
-      "brand": "Unresolved: store 'Emeril Store'; byline 'Innovation IQ'",
+      "brand": "Emeril",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
       "capacity": "24.6 liters",
@@ -100,7 +101,9 @@
         "F-10",
         "F-15",
         "F-18"
-      ]
+      ],
+      "brand_note": "Item details table (re-read 2026-11-14). Earlier byline 'Innovation IQ' and store 'Emeril Store' were not seen in this read (F-05).",
+      "manufacturer": "Emeril Lagasse"
     },
     {
       "id": "P3",
@@ -148,7 +151,8 @@
         "F-15",
         "F-10",
         "F-18"
-      ]
+      ],
+      "manufacturer": ""
     }
   ]
 }
