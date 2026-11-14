@@ -62,7 +62,11 @@
       "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10",
       "model_number": "RJ38-SQPF-3TDB-2W",
       "model_name": "Turbo Fry® Touch",
-      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Turbo Fry® Touch', Model Number RJ38-SQPF-3TDB-2W, Part Number RJ38-SQPF-3TDB-2W, UPC 810087845025."
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Turbo Fry® Touch', Model Number RJ38-SQPF-3TDB-2W, Part Number RJ38-SQPF-3TDB-2W, UPC 810087845025.",
+      "commission_rate_pct": 4.5,
+      "commission_category_official": "Kitchen",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     },
     {
       "id": "P2",
@@ -116,7 +120,11 @@
       "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string is the name of an Amazon Influencer who wrote the customer review attached to this listing, not the brand. The brand is therefore confirmed. See F-05.",
       "competitor_carousel_label": "not labelled 'Sponsored' on either read",
       "model_number": "4-00675-02X-VN",
-      "model_name": "Extra Large 26 QT French Door Air Fryer Oven"
+      "model_name": "Extra Large 26 QT French Door Air Fryer Oven",
+      "commission_rate_pct": 4.5,
+      "commission_category_official": "Kitchen",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     },
     {
       "id": "P3",
@@ -168,7 +176,11 @@
       "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10",
       "model_number": "RJ38-SQSS-8T",
       "model_name": "Square Air Fryer",
-      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Square Air Fryer', Model Number 'Large Air Fryer', Part Number RJ38-SQSS-8T, UPC 816458024518. Four GTINs are listed (00816458024518, 10816458024515, 30816458024519, 40816458024516), which confirms the size-variant family recorded in F-08."
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Square Air Fryer', Model Number 'Large Air Fryer', Part Number RJ38-SQSS-8T, UPC 816458024518. Four GTINs are listed (00816458024518, 10816458024515, 30816458024519, 40816458024516), which confirms the size-variant family recorded in F-08.",
+      "commission_rate_pct": 4.5,
+      "commission_category_official": "Kitchen",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     }
   ]
 }

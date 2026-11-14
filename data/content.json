@@ -211,5 +211,11 @@
     "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
     "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",
     "Campaign optimisation (needs the attributed data above; the loop itself is specified on the Automation page)."
-  ]
+  ],
+  "site_disclaimer": {
+    "text": "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.",
+    "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+    "source_ref": "IP License, Section 2(k)",
+    "reason": "IP License Section 2(k) requires this text in plain view when Product Advertising Content consisting of text is displayed. This site displays Amazon listing titles, so the notice is shown as the conservative reading of the clause. Flag F-25."
+  }
 }

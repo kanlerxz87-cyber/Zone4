@@ -81,7 +81,7 @@
       "requirement": "Analyze pricing.",
       "status": "Not built - blocked (policy)",
       "delivered": "",
-      "blocker": "Participation Requirements Section 2(b): a site 'may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API'. Section 6(y): 'your Site must not have price tracking and/or price alerting functionality.' The verifier (scripts/verify.py) fails the build if any page contains a currency amount.",
+      "blocker": "Pricing analysis stays blocked. Participation Requirement 2(b) permits prices and availability only if Amazon serves the link or the data comes from the Creators API, and 6(y) prohibits price tracking and price alerting functionality unless Amazon agrees otherwise. The commission rate is published because it is a program term rather than Amazon pricing; no price is published (F-02).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -125,15 +125,16 @@
       "id": "REQ-08",
       "area": "Commission analysis",
       "requirement": "Analyze commission potential.",
-      "status": "Unverifiable (blank + flagged)",
-      "delivered": "The formula is documented with its source: Commission Income Statement Section 3, 'Commission Income is calculated as a percentage of Qualifying Revenue', and Section 1 defines Qualifying Revenue.",
-      "blocker": "The rate itself is in the Appendix, reached from https://affiliate-program.amazon.com/help/operating/schedule, which redirects to an Amazon sign-in. No rate is entered, so no earnings figure is calculated. Third-party commission tables conflict and are not used.",
+      "status": "Delivered (partial)",
+      "delivered": "The official Standard Commission Income Statement is published at a public URL that needs no sign-in, and its Table 1 lists the Kitchen band at 4.50%. The site publishes that rate on every product row and in the verification log, with the table cited on the row.",
+      "blocker": "The commission category Amazon assigns to each of the three ASINs cannot be confirmed from outside Associates Central. Table 1 has both a 'Kitchen' band at 4.50% and a 'Home' band at 3.00%, and an air fryer is a kitchen small appliance, so the Kitchen band is the right reading but is not proven per item. Commission income is also paid on Qualifying Revenue, which excludes shipping, tax and similar items, so a rate is not a per-order amount. Flag F-01.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/schedule",
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
-        "F-01"
+        "F-01",
+        "F-02"
       ]
     },
     {

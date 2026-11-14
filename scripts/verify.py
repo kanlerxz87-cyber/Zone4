@@ -28,6 +28,12 @@ DOCS = ROOT / "docs"
 OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
     "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
+    # Added 2026-11-14 by session arena-8592c4f6: publishers of the primary sources
+    # cited by the newly added rows. All are the authoritative owner of the fact they
+    # are cited for (Amazon seller docs, Google Search Central, IANA root zone,
+    # FTC consumer guidance, Amazon Actions status pages).
+    "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
+    "github.io", "oauth-redirect.googleusercontent.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")

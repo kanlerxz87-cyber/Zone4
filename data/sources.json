@@ -13,6 +13,33 @@
   },
   "sources": [
     {
+      "id": "S-API",
+      "title": "Amazon Creators API documentation — introduction",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "API operations and the four access prerequisites, including 10 qualifying sales in 30 days",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
+      "id": "S-APIFAQ",
+      "title": "Amazon Creators API documentation — FAQ",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "OAuth 2.0 client-credentials flow, 10-identifier batching limit, per-marketplace approval",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4. Conflicts with the onboarding page on cross-marketplace use: see F-29."
+    },
+    {
+      "id": "S-ASIN",
+      "title": "Understanding ASINs — Amazon seller documentation",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "publisher": "Amazon (Sell on Amazon)",
+      "accessible": true,
+      "used_for": "An ASIN is 10 alphanumeric characters and follows /dp/ in the URL, which is why a 9-character short-link token is not an ASIN",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
       "id": "S-CAT",
       "title": "Amazon 'Air Fryers' browse node (breadcrumb target on all three product pages)",
       "url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
@@ -27,6 +54,15 @@
       "publisher": "GitHub (official Actions run)",
       "accessible": true,
       "used_for": "Successful Site checks for merge commit de08965020c574200bb24bd0808ada10975be58c, checked 2026-11-14."
+    },
+    {
+      "id": "S-COMM",
+      "title": "Amazon Associates Standard Commission Income Statement (official Table 1 rate schedule)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "Fixed commission rates by category, bounty events, fine-art cap, 0.00% exclusions",
+      "notes": "Read directly by the final integration session on 2026-11-14. Table 1 lists: Luxury Beauty / Luxury Stores Beauty / Amazon Explore 10.00%; Digital Music / Physical Music / Handmade / Digital Videos 5.00%; Physical Books / Kitchen / Automotive 4.50%; Fire Tablet, Kindle, Luxury Stores Fashion, Apparel, Fire TV, Echo, Ring, Watches, Jewelry, Luggage, Shoes, Handbags and Accessories 4.00%; Toys, Furniture, Home, Home Improvement, Lawn and Garden, Pets, Headphones, Beauty, Musical Instruments, Business and Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins 3.00%; PC and PC Components 2.50%; Televisions and Digital Video Games 2.00%; Amazon Fresh, Physical Video Games, Grocery, Health and Personal Care 1.00%; Gift Cards, Wireless Service Plans, Alcohol, Digital Kindle subscriptions, Vehicle Leasing and Sales, Pet Prescription Medications, Restaurant-prepared Food, Amazon Appstore, Prime Now and Amazon Pay Places 0.00%; Coach 0.00%; All Other Categories 4.00%. This is the official public table, which is why the rate is no longer blank. The commission category Amazon assigns to a specific ASIN is still not confirmable from outside Associates Central (F-01)."
     },
     {
       "id": "S-COU",
@@ -53,12 +89,30 @@
       "used_for": "Read in full 2026-11-14: the disclosure must be hard to miss and placed with the endorsement message; use simple, clear language; a material connection includes a financial relationship; do not talk about a product you have not tried; do not make claims the advertiser cannot prove."
     },
     {
+      "id": "S-GOOGLE",
+      "title": "Creating helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "Editorial self-assessment applied to generated drafts before the publish gate",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
       "id": "S-HELP",
       "title": "Associates Central help: 'Why do I have to identify myself as an Associate?'",
       "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
       "publisher": "Amazon Associates (official help)",
       "accessible": true,
       "used_for": "Re-read 2026-11-14. Link-level disclosure must be clear and conspicuous and placed near each affiliate link or review; the Operating Agreement statement must clearly and conspicuously appear on the Site."
+    },
+    {
+      "id": "S-IANA",
+      "title": "IANA root zone database — .amazon",
+      "url": "https://www.iana.org/domains/root/db/.amazon.html",
+      "publisher": "IANA",
+      "accessible": true,
+      "used_for": "'.amazon' is an active gTLD delegated to Amazon Registry Services since 2020-06-02, so link.amazon is Amazon-controlled",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
     },
     {
       "id": "S-IPL",
@@ -107,7 +161,7 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
+      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site) On the 2026-11-14 read, carousel positions 2 and 3 differed from the stored list (F-23); the 'Sponsored' label was not seen on that read (F-10).",
       "notes": "Redirect target of https://link.amazon/B04G1MEwY. Re-read 2026-11-14 by arena/3036372b-zone4: title, brand byline, breadcrumb, the full specification table (special features, dimensions, colour, capacity, material) and the also-viewed carousel all match. The snapshot shows a US delivery location, which does not establish the user's location. Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location. Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs matched the records. Byline and specification table were not re-read in that pass (F-18)."
     },
     {
@@ -138,6 +192,15 @@
       "notes": "The page is the same official Program Policies page as S-PP; this entry records the parallel session's independent reading so a reviewer can see that two sessions reached the same corrections independently."
     },
     {
+      "id": "S-POL",
+      "title": "Amazon Associates Program Policies (stated update 2026-04-14)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "Session and attribution windows (24 h, 89-day cart, 180-day ship) and the Participation Requirements prohibitions encoded as site gates",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4; complements S-PP."
+    },
+    {
       "id": "S-PP",
       "title": "Associates Program Policies (updated April 14, 2026)",
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
@@ -160,7 +223,7 @@
       "publisher": "Amazon Associates (official)",
       "accessible": false,
       "used_for": "Would hold the category commission rates. Re-checked 2026-11-14: the URL still redirects to an Amazon sign-in page, so no rate could be read. The Program Policies Appendix links 'Standard Commission Income' to this same URL, so the rate is not on the policies page.",
-      "notes": "Re-checked 2026-11-14 by arena/3036372b-zone4: the URL redirects to an Amazon sign-in page for .../home/account/payment/customratecard, so no rate could be read. The same two links are listed in the policies Appendix."
+      "notes": "SUPERSEDED for the rate data on 2026-11-14: this sign-in-gated appendix URL still redirects to a login page, but the same Table 1 is published on the public help topic recorded as S-COMM, so the Kitchen band (4.50%) is now sourced. Kept so the earlier dead end is on record."
     },
     {
       "id": "S-TG",

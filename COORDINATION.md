@@ -12,7 +12,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
-| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, requirements register, PR to `main`, Pages deploy check | **in progress**; 15 pages built and verified locally, QA audit passing; merging `origin/main` (PRs #17, #20, #21, #23, #30, #31, #32, #33) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
+| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, requirements register, commission rate from the official table, engine integration, PR to `main`, Pages deploy check | **in progress**; 15 pages built and verified locally, QA audit passing, 81 engine tests passing; merging `origin/main` (PRs #17, #20, #21, #23, #28, #30 to #33) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
 
 | Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **done** on the branch; PR and merge recorded in the log below | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
@@ -450,3 +450,46 @@ validity, links and anchors, the disclosure on every page, an official source li
 title, meta description or keyword, per-fact citation traceability, and the requirement-status evidence rules); `python3 qa/audit_site.py` passed
 (15 pages, 0 failures, 5 advisory warnings about call-to-action links that sit outside a table); `git diff --exit-code -- docs` confirmed the committed
 HTML matches a fresh build.
+
+
+### Session arena/3036372b-zone4 — third integration round: PR #28, the automation engine and the commission rate (2026-11-14, UTC)
+
+**What arrived.** `origin/main` advanced with PR #28 (`arena/8592c4f6-zone4`), which is the largest single addition in the project: an `engine/` package
+(2,400+ lines across research, claims, scoring, economics, links, tracking, policy, content, sitegen, datastore, config and CLI), `tests/test_engine.py`
+with 81 unit tests, `tools/check_links.py`, `ENGINE.md`, `data/engine-*.json`, a new `.github/workflows/ci.yml`, and — importantly — a **new official
+source for the commission table**.
+
+**The commission rate is no longer blank (F-01, partly resolved).** Every previous session recorded F-01 as "the official schedule is behind an Amazon
+sign-in". PR #28 found that the **Standard Commission Income Statement is published at a public URL that needs no sign-in**:
+`https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ`. The final integration session read that page directly on 2026-11-14. Table 1
+("Fixed Standard Commission Income Rates for Specific Product Categories") lists **"Physical Books, Kitchen, Automotive" at 4.50%**. The site now
+publishes 4.50% on every product row and in the verification log, with the table cited on the row, and the builder falls back to the blank/unverified
+cell whenever the data carries no sourced rate, so the cell can never publish a percentage the ledger has not attributed to an official page.
+
+The honest caveat is kept on every row: Amazon assigns the commission category per item, and Table 1 has both a "Kitchen" band at 4.50% and a "Home"
+band at 3.00%. An air fryer is a kitchen small appliance, so Kitchen is the right reading, but it is not proven per ASIN from outside Associates
+Central. F-01 now says exactly that.
+
+**The engine was kept, and its Agent Terms defect was fixed.** The engine is offline by default, raises rather than returning stand-in data when
+credentials are missing, and keeps "Amazon has no such page" (a verified FAIL) distinct from "this environment cannot reach the network" (BLOCKED).
+That is the discipline the site is built on, so it was kept as-is. One compliance defect was found and fixed: `engine/research.py` sent the user agent
+string `zone4-research/0.1 (...)`, which does not satisfy **IP License Section 4(c)** — any agent that accesses Program Content must put
+`Agent/[agent name]` in the user agent string of every HTTP and HTTPS request and must not conceal that it is an agent. It now sends
+`Agent/zone4-research (evidence-first affiliate research)`. The 81 tests still pass.
+
+**The Amazon text disclaimer is now shown (F-25).** IP License Section 2(k) requires "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON.
+THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME." in plain view when Product Advertising Content consisting of text is
+displayed. This site displays Amazon listing titles. Whether those titles count as Program Content is arguable — they were read by hand from the
+official pages rather than served by an API — so the conservative reading was taken and the notice is shown on every page with the section cited.
+F-25 records the reasoning.
+
+**Five flags renumbered.** PR #28 added five flags under its own numbering. They are carried into this branch's register as F-31 to F-35 (product
+specification fields displayed without an approved content source; the short-link host confirmed genuine but its codes are tokens; API quota figures
+and the price-timestamp clause not adopted; two CI pipelines configured; two official Creators API pages describing marketplace access differently).
+The `data/flags.json` `_meta` records the mapping, so the provenance is on the record and no dangling flag reference is left on the site.
+
+**Checks on the merged tree.** `python3 scripts/build_site.py` regenerated all 15 pages. `python3 scripts/verify.py` passed. `python3 qa/audit_site.py`
+passed with 0 failures and 5 advisory warnings. `python3 -m unittest discover -s tests` passed all 81 engine tests. `python3 -m engine.cli audit`
+reports **0 of 7 drafts ready, all 7 blocked by gates** — the engine refuses to publish, which is the correct behaviour. `python3 -m engine.cli build`
+and `python3 tools/check_links.py` pass. A separate cross-check confirmed every flag and rule reference resolves, every source and requirement source
+is on an official host, and no tracking metric carries a value.

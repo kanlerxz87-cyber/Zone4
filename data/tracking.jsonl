@@ -1,0 +1,6 @@
+# Append observed events here from authorized reporting only (Associates Central
+# reports export, or your own analytics export).
+# This file is intentionally empty of events: no Amazon account or analytics source is
+# connected to this workspace, so every performance rollup renders as null (flag F-010).
+# Do NOT add invented events: engine.tracking refuses source="synthetic-example".
+# Schema: {"ts","type","ref","href","amount","currency","other_tag","order_status","source"}

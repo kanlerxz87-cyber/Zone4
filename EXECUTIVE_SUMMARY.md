@@ -26,9 +26,9 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 
 | # | Submitted link | Resolved ASIN | Official listing title | Category (breadcrumb) | Brand | Manufacturer | Price / rating / reviews | Commission |
 |---|---|---|---|---|---|---|---|---|
-| P1 | https://link.amazon/B04G1MEwY | `B0CDY277D3` | CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Chefman | Chefman | **Withheld** (F-02) | **Blank** (F-01) |
-| P2 | https://link.amazon/B02NbDxp3 | `B09B7SB46R` | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven \| 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals. | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Emeril (F-05, resolved) | Emeril Lagasse | **Withheld** (F-02) | **Blank** (F-01) |
-| P3 | https://link.amazon/B00hJ57DV | `B08DKYBTPH` | Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1 with 450°F Hi-Fry Option \| XL Nonstick Dishwasher-Safe Basket \| Stainless Steel | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Chefman | Chefman | **Withheld** (F-02) | **Blank** (F-01) |
+| P1 | https://link.amazon/B04G1MEwY | `B0CDY277D3` | CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Chefman | Chefman | **Withheld** (F-02) | 4.50% (Kitchen band, F-01) |
+| P2 | https://link.amazon/B02NbDxp3 | `B09B7SB46R` | Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven \| 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals. | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Emeril (F-05, resolved) | Emeril Lagasse | **Withheld** (F-02) | 4.50% (Kitchen band, F-01) |
+| P3 | https://link.amazon/B00hJ57DV | `B08DKYBTPH` | Chefman Air Fryer 8 Qt \| TurboFry® 4-in-1 with 450°F Hi-Fry Option \| XL Nonstick Dishwasher-Safe Basket \| Stainless Steel | Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers | Chefman | Chefman | **Withheld** (F-02) | 4.50% (Kitchen band, F-01) |
 
 **Key finding (confirmed independently by several sessions):** the 9-character strings in the submitted links (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`) are **short-link slugs, not ASINs** — using them as ASINs returns Amazon's official "Page Not Found" page (e.g. https://www.amazon.com/dp/B04G1MEwY). Amazon's own guide defines ASINs as **10-character alphanumeric** codes (https://sell.amazon.com/blog/what-is-an-asin). All three `link.amazon` URLs resolved to live Amazon.com product pages on 2026-11-14, and none of the resolved URLs carried an Associates `tag=` parameter.
 
@@ -43,13 +43,13 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 - Participation Requirements as numbered on the current Program Policies page (updated 2026-04-14): §1(g) trademarks in domains and tags; §2(b) prices, availability and the Associates tag; §5 no machine-learning use of Program Content without prior express written approval; §6(e)–(f) Amazon marks as search keywords; §6(g) incentives; §6(p) Special Links in customer content; §6(s) artificial clicks; §6(t) reviews and star ratings; §6(w) link shortening; §6(y) price tracking and alerting; §6(z) promoting non-Amazon-Site products.
 - **IP License** §§1–4: no data-mining or extraction tools (§1), no repurposing or model training on API content without express prior written approval (§2(e)), price timestamps and disclaimers if API prices are ever shown (§2(i), §2(k)), and the **Agent Terms** (§4) — any automated agent must identify itself as `Agent/[agent name]`, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits.
 - **PA-API 5 is officially deprecated** in favour of the **Creators API** (https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation); license terms not yet reviewed (F-16).
-- Commission rates live behind the Associates sign-in schedule (https://affiliate-program.amazon.com/help/operating/schedule); the category row has not been confirmed, so **no rate is asserted** (F-01).
+- The **Standard Commission Income Statement is published at a public URL that needs no sign-in** (https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ). Its Table 1 lists "Physical Books, Kitchen, Automotive" at **4.50%**, which is read directly and published with the table cited. Which band Amazon assigns to each individual ASIN is not confirmable from outside Associates Central, so the caveat is on every row (F-01).
 - Amazon Conditions of Use (updated 2026-08-14) additionally constrain scraping/data mining and the use of Amazon content to improve models (F-11, F-12).
-- The complete flag register (**F-01 … F-30**, 30 items, all used) is published at `docs/flagged.html` with sources.
+- The complete flag register (**F-01 … F-35**, 35 items, all used) is published at `docs/flagged.html` with sources.
 
 ## 5. Flagged for review — headline items (complete register: `docs/flagged.html`)
 
-- **F-01** Category commission rate unverified (schedule behind sign-in). **F-02** Prices and star ratings withheld by policy. **F-03** No Associates tag in the resolved links.
+- **F-01** Commission rate published from the official public table (Kitchen band 4.50%); the per-ASIN band assignment is still unconfirmed. **F-02** Prices and star ratings withheld by policy. **F-03** No Associates tag in the resolved links.
 - **F-04** Short-link slugs ≠ ASINs. **F-05** P2 brand and manufacturer — **resolved** from the Item details table. **F-06/F-07/F-08** listed-specification inconsistencies and the P3 size-variant family.
 - **F-09** Snapshots used a US delivery location; no user-location or marketplace claim is made. **F-10** Competitor carousel "Sponsored" labels vary between reads, so they are not treated as product-specific.
 - **F-11/F-12** Verification method and AI content automation are constrained by the Amazon Conditions of Use. **F-13** Historic Pages-workflow failure (resolved; the root redirect serves the site). **F-14** Prior prototype records superseded. **F-15** Trend/popularity/conversion signals unverified — no such claims are made. **F-16** Creators API license terms not reviewed.
@@ -65,10 +65,10 @@ Every item in the brief, one row each, is published at `docs/requirements.html` 
 | Status | Count | What it covers |
 |---|---|---|
 | Delivered | 16 | Site, verification discipline, disclosure, compliance, scalability, data-driven decisions, the marketing content kit, publishing on Pages |
-| Delivered (partial) | 6 | Competition analysis, niche research, marketing content, link management, click tracking, delivery for the three products |
+| Delivered (partial) | 7 | Competition analysis, niche research, marketing content, link management, click tracking, commission potential, delivery for the three products |
 | Not built — blocked (policy) | 5 | The AI-powered platform, automated research, price analysis, review analysis, full content automation |
 | Not built — needs access | 2 | Campaign optimisation, attributed conversion reporting |
-| Unverifiable (blank + flagged) | 3 | Trend analysis, conversion analysis, commission potential |
+| Unverifiable (blank + flagged) | 2 | Trend analysis, conversion analysis |
 
 Nothing is simulated in place of a blocked or unverified requirement.
 

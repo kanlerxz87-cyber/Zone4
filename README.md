@@ -14,15 +14,19 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
 | `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
 | `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
-| `data/sources.json` | Source registry (20 entries): each official source, and whether it was read |
+| `data/sources.json` | Source registry (27 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 30 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 35 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
+| `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
+| `tests/test_engine.py` | 81 unit tests for the engine |
+| `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
+| `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
 | `docs/` | The published site (15 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
@@ -45,7 +49,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `flagged.html` | Flagged for Review: 30 irregularities and unverified items |
+| `flagged.html` | Flagged for Review: 35 irregularities and unverified items |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
@@ -54,14 +58,24 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 python3 scripts/build_site.py     # regenerate docs/ from data/
 python3 scripts/verify.py         # data + page checks
 python3 qa/audit_site.py          # independent audit of the committed HTML
+
+python3 -m unittest discover -s tests   # 81 engine tests
+python3 -m engine.cli status            # what is verified, withheld or blocked
+python3 -m engine.cli audit             # compliance gate on the engine's drafts
+python3 tools/check_links.py            # link and per-row sourcing check
 ```
+
+The engine is offline by default: with no OAuth credentials it raises rather than returning stand-in data, and its network probe path degrades to
+`BLOCKED` so that "Amazon has no such page" stays distinct from "this environment cannot reach the network". Any request it does make identifies itself
+as `Agent/zone4-research`, as the Agent Terms in IP License Section 4(c) require.
 
 The verifier fails the build if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, if a marketing fact row is never cited by a paragraph, or if a requirement row has an undeclared status, no source, or no evidence for its status. The QA audit re-checks the committed HTML on its own, so a hand-edit or a stale commit is caught too.
 
 ## Limits
 
 - Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or Creators API / PA API data.
-- Commission rates are **blank** (the official schedule is behind an Amazon sign-in).
+- The commission rate is published as **4.50%**, the official Table 1 rate for the Kitchen band, read directly from the public Standard Commission
+  Income Statement. Which band Amazon assigns to each individual ASIN is not confirmable from outside Associates Central, so that caveat is on the row.
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
 - Attributed click, order, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated. The Analytics page records first-party clicks in the visitor's own browser and publishes no attributed figure.
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
