@@ -8,7 +8,8 @@
       "session": "arena/3036372b-zone4",
       "result": "Every published field was read again from the official Amazon product page and matched: listing title, brand byline, store link, category breadcrumb, and the full specification table (special features, dimensions, colour, capacity, material) for all three products, plus the three also-viewed carousels. The special-feature row is new and is now published. This closes the gap recorded as F-18, which the previous session had left open, and adds F-26 for P2's two different cooking function counts."
     },
-    "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50%. This is a category-level reference only; the commission category Amazon assigns to each supplied ASIN is not verified. Product-level rate fields are intentionally null (F-01)."
+    "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50%. This is a category-level reference only; the commission category Amazon assigns to each supplied ASIN is not verified. Product-level rate fields are intentionally null (F-01).",
+    "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands)."
   },
   "products": [
     {
@@ -39,12 +40,12 @@
         },
         {
           "asin": "B0CNSB81V6",
-          "label": "",
+          "label": "Nutrichef Double Basket Air Fryer 8.8 QT",
           "url": "https://www.amazon.com/dp/B0CNSB81V6",
-          "label_status": "not seen on the 2026-11-14 read; left blank (F-27)"
+          "label_status": "Read verbatim on 2026-11-14 by session arena/949aaac1-zone4: the opening segment of the listing title, before the first \" | \" separator, exactly as shown in the 'Customers who viewed this item also viewed' module on the P1 page. It was left blank on an earlier read that could not see the title (F-29)."
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-29).",
       "flags": [
         "F-01",
         "F-02",
@@ -58,7 +59,7 @@
         "F-29"
       ],
       "special_feature": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
-      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The P1 label for B0CNSB81V6 was filled on 2026-11-14 by session arena/949aaac1-zone4 from a later read of the same page, on which the ASIN and its carousel position matched the stored snapshot. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
       "manufacturer": "Chefman",
       "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10",
       "model_number": "RJ38-SQPF-3TDB-2W",
@@ -101,7 +102,7 @@
           "url": "https://www.amazon.com/dp/B0F92GL7JH"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-29).",
       "flags": [
         "F-01",
         "F-02",
@@ -116,7 +117,7 @@
         "F-29"
       ],
       "special_feature": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
-      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The P1 label for B0CNSB81V6 was filled on 2026-11-14 by session arena/949aaac1-zone4 from a later read of the same page, on which the ASIN and its carousel position matched the stored snapshot. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
       "manufacturer": "Emeril Lagasse",
       "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string appears as the creator associated with a customer-review video and is linked to Amazon Influencer information, not as the product brand. The brand is therefore confirmed. See F-05.",
       "competitor_carousel_label": "not labelled 'Sponsored' on either read",
@@ -159,7 +160,7 @@
           "url": "https://www.amazon.com/dp/B0C33CHG99"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-29).",
       "flags": [
         "F-01",
         "F-02",
@@ -172,7 +173,7 @@
         "F-29"
       ],
       "special_feature": "Automatic Shut-Off, LED Shake Reminder, Programmable",
-      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The P1 label for B0CNSB81V6 was filled on 2026-11-14 by session arena/949aaac1-zone4 from a later read of the same page, on which the ASIN and its carousel position matched the stored snapshot. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
       "manufacturer": "Chefman",
       "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10",
       "model_number": "RJ38-SQSS-8T",

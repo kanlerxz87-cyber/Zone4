@@ -1,0 +1,258 @@
+{
+  "_meta": {
+    "session": "arena/949aaac1-zone4",
+    "date_utc": "2026-11-14",
+    "purpose": "Independent fourth-pass verification of the published site against the live official sources, taken field by field. Every item below was re-read from the official page on 2026-11-14 by this session. Nothing was taken on trust from an earlier session's record.",
+    "method": "Each of the three user-supplied short links was resolved again and its redirect target recorded. The three Amazon product pages were re-read. The official Associates policy pages, the public commission statement, the Amazon Conditions of Use and the FTC disclosure page were re-read and the exact wording compared against what the site publishes. The built pages were regenerated and re-checked.",
+    "result": "All three links still resolve to the stored ASINs. All nine stored competitor ASINs reappeared in the stored order with the same titles, so the one label that had been left blank was filled from a verbatim read. Every policy citation re-read on this pass matched the site's wording. One substantive defect was found: the product table was publishing a per-product commission rate that no official source confirms for these ASINs, while the rest of the site described the rate as unverified. Session arena/13dd55ca-zone4 reached the same finding on main (PR #38) and blanked the product-level cells; this session independently reached the same conclusion and adopted that resolution rather than re-litigating it. One wrong flag cross-reference (F-37) was also found and corrected, and F-30 was resolved.",
+    "note_on_parallel_session_overlap": "Session arena/13dd55ca-zone4 was working the same contradiction at the same time on main (PR #38). It blanked the product-level commission cells and rewrote the narrative; this session had independently reached the same conclusion about the rate and the same wording for the narrative, so the branch was reset to origin/main and only this session's non-overlapping findings were re-applied: the competitor label, the F-27/F-29 correction, the F-30 resolution, the derived KPIs and the rendered competitor labels. Their '(paid link)' link-level disclosure was kept; it also cleared the five outstanding QA advisories about call-to-action links, so the QA audit now reports 0 warnings."
+  },
+  "link_resolution": [
+    {
+      "id": "P1",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-0740a2e990c9bbb3&channelId=704&plpRedirect=mhFallback",
+      "asin": "B0CDY277D3",
+      "listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "matches_record": true,
+      "tag_parameter_seen": false,
+      "source": "https://link.amazon/B04G1MEwY"
+    },
+    {
+      "id": "P2",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-3541f5edba6b914c&channelId=704&plpRedirect=mhFallback",
+      "asin": "B09B7SB46R",
+      "listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+      "matches_record": true,
+      "tag_parameter_seen": false,
+      "source": "https://link.amazon/B02NbDxp3"
+    },
+    {
+      "id": "P3",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-507e2d3d167072eb&channelId=704&plpRedirect=mhFallback",
+      "asin": "B08DKYBTPH",
+      "listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "matches_record": true,
+      "tag_parameter_seen": false,
+      "source": "https://link.amazon/B00hJ57DV"
+    }
+  ],
+  "breadcrumb_check": {
+    "path_read_on_all_three": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+    "matches_record": true,
+    "sources": [
+      "https://www.amazon.com/dp/B0CDY277D3",
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.amazon.com/dp/B08DKYBTPH"
+    ]
+  },
+  "competitor_carousel_check": {
+    "module": "Customers who viewed this item also viewed",
+    "read_on": "2026-11-14",
+    "result": "For all three products the stored ASINs appeared in the stored order with the same listing titles, so the stored snapshot reproduced exactly on this read.",
+    "P1": [
+      {
+        "asin": "B0B7C327LK",
+        "label_read": "Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen, Smart Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3QT Nonstick Dishwasher-Safe Frying Baskets - Digital Double Air Fryer - Black",
+        "matches_record": true
+      },
+      {
+        "asin": "B0BYKGN61Q",
+        "label_read": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel | Digital Display, Touch Controls, 7 Cooking Presets, 90-400F Adjustable Temperature, Dishwasher-Safe Baskets & Crisper Trays",
+        "matches_record": true
+      },
+      {
+        "asin": "B0CNSB81V6",
+        "label_read": "Nutrichef Double Basket Air Fryer 8.8 QT | Family Size Oil Free Airfryer with Transparent Window | 9-1 Preset Cooking Options | 360 Hot Air Circulation Technology | 4.4 QTs per Basket | Black",
+        "matches_record": "n/a - was blank",
+        "action": "FILLED. Stored as 'Nutrichef Double Basket Air Fryer 8.8 QT', the opening segment of the listing title before the first ' | ' separator, which is the same rule used for the other labels. Read verbatim, not inferred."
+      }
+    ],
+    "P2": [
+      {
+        "asin": "B0BZ52FLKC",
+        "label_read": "Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven | Dual-zone 25QT air fryer oven cooks two foods at once with synchronized settings and faster convection cooking.",
+        "matches_record": true
+      },
+      {
+        "asin": "B0FM5KF34G",
+        "label_read": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101 | 450F cyclonic air, PFAS-free surface, Air fry, sear crisp, bake, broil, toast, dehydrate",
+        "matches_record": true
+      },
+      {
+        "asin": "B0F92GL7JH",
+        "label_read": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven | French Door, Stainless Steel Non-Toxic, 10-in-1 Multifunction, 500F Broil, Rotisserie, Dehydrate, Reheat, Bake, ETL Rated",
+        "matches_record": true
+      }
+    ],
+    "P3": [
+      {
+        "asin": "B0CNY1YVDD",
+        "label_read": "Chefman Air Fryer - 6 QT Compact Airfryer for Quick & Easy Meals in Minutes, Features Hi-Fry Technology for Extra Crisp, Touchscreen Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
+        "matches_record": true
+      },
+      {
+        "asin": "B0D5FX6VRL",
+        "label_read": "Chefman Air Fryer - 6 QT Compact Airfryer for Quick & Easy Meals, Features Hi-Fry Technology for Extra Crisp, Easy-View Window, Touch Controls with 4 Presets, Nonstick & Dishwasher Safe Basket - Black",
+        "matches_record": true
+      },
+      {
+        "asin": "B0C33CHG99",
+        "label_read": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating | 90-450F, 5 Fan Speeds, Air Fry, Roast, Broil, Frozen, Bake, Dry, Proof, 95% Less Oil, Safety Lock, Dishwasher-Safe, 1725W",
+        "matches_record": true
+      }
+    ],
+    "sources": [
+      "https://www.amazon.com/dp/B0CDY277D3",
+      "https://www.amazon.com/dp/B09B7SB46R",
+      "https://www.amazon.com/dp/B08DKYBTPH"
+    ]
+  },
+  "policy_citation_check": [
+    {
+      "cited_as": "Operating Agreement, Section 5",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "page_stated_update": "October 15, 2025",
+      "text_read_2026_11_14": "You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: \"As an Amazon Associate I earn from qualifying purchases.\"",
+      "site_publishes": "As an Amazon Associate I earn from qualifying purchases.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Standard Commission Income Statement, Table 1",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "page_stated_update": "not stated on the page",
+      "text_read_2026_11_14": "Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories. Row: 'Physical Books, Kitchen, Automotive' = 4.50%. Also present: 'Toys, Furniture, Home, Home Improvement, ... ' = 3.00%.",
+      "site_publishes": "4.50% (Kitchen band)",
+      "verdict": "MATCH; the competing Home band at 3.00% is the reason the per-ASIN assignment stays open (F-01)"
+    },
+    {
+      "cited_as": "Program Policies, Commission Income Statement Section 1 (session and windows)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "page_stated_update": "April 14, 2026",
+      "text_read_2026_11_14": "Session begins on click-through and ends on the first of: (x) 24 hours elapse, (y) the customer places an order for a Product other than a digital product, or (z) the customer clicks through a Special Link that is not your Special Link. Cart purchases qualify if ordered no later than 89 days after the initial click-through, and the Product is shipped, streamed or downloaded and paid for within 180 days of purchase.",
+      "site_publishes": "24 h session, 89-day cart window, 180-day ship window",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(g) incentives",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not offer any person or entity any consideration, reward, or incentive (including any money, rebate, discount, points, donation to charity or other organization, or other benefit) for using Special Links.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(p) links in customer content",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not include any Special Links in any content that you place on an Amazon Site (for example, in connection with any advertising service available through an Amazon Site or in a customer review, forum, Wish List, guide, or any other customer-generated context available on an Amazon Site).",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(s) artificial clicks",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site, whether by way of a robot or software program or otherwise.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(t) reviews and star ratings",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not display or otherwise use any of our customer reviews or star ratings, in part or in whole, on your Site unless you have obtained a link to that customer review or star rating through Creators API or PA API and you comply with the requirements for Creators API and PA API described in the License.",
+      "verdict": "MATCH; this is the basis for withholding ratings (F-02), and the lettering confirms the earlier correction from 3(t) to 6(t)"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(w) link shortening",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "verdict": "MATCH; the site labels each shop link 'Open Amazon link', which is the disclosure this clause asks for"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(y) price tracking",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Program Policies, Participation Requirements 6(z) non-Amazon-Site products",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not display on your Site, or otherwise use, any Program Content to advertise or promote any products that are offered on any site that is not an Amazon Site (e.g., products offered by other retailers).",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "IP License, Section 1 (no model development on Program Content)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "... will not allow any third party to, use Program Content to, directly or indirectly, develop or improve large language or multimodal models, machine learning models or related technology.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "IP License, Section 2(e) (aggregating, analysing, extracting, training)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "You will not, without our express prior written approval, access or use Creators API, PA API or Data Feeds for the purpose of aggregating, analyzing, extracting, or repurposing any Product Advertising Content or in connection with any software or other application intended for use by persons or entities that offer products on an Amazon Site, or in the direct training or fine-tuning of a machine learning and/or foundational model.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "IP License, Section 2(k) (Amazon text disclaimer)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "If you display Product Advertising Content consisting of text on your application, you will include the following disclaimer in plain view to end users of your application: \"CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.\"",
+      "site_publishes": "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.",
+      "verdict": "MATCH (the site uses the 'ON THIS SITE' branch, which is the applicable one for a website)"
+    },
+    {
+      "cited_as": "IP License, Section 4 (Agent Terms)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "text_read_2026_11_14": "\"Agent\" means any software or service that takes autonomous or semi-autonomous action on behalf of, or at the instruction of, any person or entity. (b) At our sole discretion, we may limit, including by technical measures, whether and how any Agent accesses, uses, and interacts with Program Content. (c) In all HTTP/HTTPS requests, identify that the request is from an Agent and disclose the name of the Agent by including the following in the request's user agent string: \"Agent/[agent name]\" (e.g., Agent/AmazonAgent). Not conceal or obfuscate that any access, use, or interactions are from an Agent, such as by (a) mimicking the speed or pattern of human keystrokes, page navigation, or other interactions or (b) completing or circumventing CAPTCHAs or other measures intended to distinguish computers from humans. Respond truthfully to any question or prompt seeking to determine if interactions are coming from a human or a computer.",
+      "verdict": "MATCH"
+    },
+    {
+      "cited_as": "Conditions of Use, License and Access",
+      "url_requested": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "url_returned": "https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM",
+      "page_stated_update": "August 14, 2026",
+      "text_read_2026_11_14": "This license does not include any resale or commercial use of any Amazon Service, or its contents; any collection and use of any product listings, descriptions, or prices; any derivative use of any Amazon Service or its contents; ... or any use of data mining, robots, or similar data gathering and extraction tools. ... You will not, and will not allow any third party to, use AI-generated content from the Amazon Services to, directly or indirectly, develop or improve large language or multimodal models, machine learning models or related technology.",
+      "verdict": "MATCH on wording. F-30 is resolved: the old node id still resolves through a redirect, and the canonical node id is GLSBYFE9MGKKQXXM, which was also fetched directly and returned the same page."
+    },
+    {
+      "cited_as": "FTC Disclosures 101 for Social Media Influencers",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "page_stated_update": "November 2019",
+      "text_read_2026_11_14": "The disclosure should be placed with the endorsement message itself. Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE.",
+      "verdict": "MATCH; the site puts the disclosure in the page header and next to each shop link"
+    }
+  ],
+  "contradictions_found_and_corrected": [
+    {
+      "flag": "F-36",
+      "where": "docs/products.html commission cells versus the index KPI, the executive-summary headline and bullet, finding A-05, pipeline stages PL-5/PL-6 and tracking row TR-5",
+      "problem": "The product table published '4.50% (Kitchen band)' on all three rows. Amazon's public Standard Commission Income Statement Table 1 does list 'Physical Books, Kitchen, Automotive' at 4.50%, so the category-level figure is official; what no official source states is the commission category Amazon assigns to each of these three ASINs. Table 1 also carries a 'Home' band at 3.00%. Placing the Kitchen figure on a product row applied a category-level rate to an individual item without an official source for that step. Meanwhile the rest of the site said the opposite: the index KPI read '0 of 3 Commission rates verified', the executive-summary headline said commission rates are not published, a bullet said the schedule was behind an Amazon sign-in, and A-05 said 'The category rate is unverified'.",
+      "correction": "Adopted from main (PR #38, session arena/13dd55ca-zone4) and confirmed independently by this session: the official category-level Kitchen rate of 4.50% is stated in the narrative with its source, and the product-level rate cells are left blank until Amazon confirms each ASIN's commission category. The index KPIs are now computed from data/products.json and data/marketing.json rather than typed in, so they cannot drift from the tables again.",
+      "status": "Resolved 2026-11-14"
+    },
+    {
+      "flag": "F-37",
+      "where": "data/products.json, competitor_source_note on all three products, and the blank-label note on P1",
+      "problem": "The notes cited F-27 for carousel instability. F-27 is the flag about offline, print, email and SMS use of Program Content. The carousel-instability flag is F-29. The reference resolved to a real flag, so no automated cross-reference check caught it.",
+      "correction": "All three notes now point at F-29. F-27 keeps its meaning and is still cited correctly in the not-built list.",
+      "status": "Corrected 2026-11-14"
+    },
+    {
+      "flag": "F-29",
+      "where": "data/products.json, P1 competitor B0CNSB81V6",
+      "problem": "The label for B0CNSB81V6 was blank because an earlier read could not see the listing title.",
+      "correction": "Filled from a verbatim read: 'Nutrichef Double Basket Air Fryer 8.8 QT' (the opening segment before the first ' | ' separator, the same rule used for the other eight labels). No label on the site is blank now. The flag stays open, because the module is an advertising slot whose membership can change.",
+      "status": "Label filled 2026-11-14; flag still open"
+    },
+    {
+      "flag": "F-30",
+      "where": "data/flags.json, the Conditions of Use citation used across the site",
+      "problem": "A parallel session recorded that the cited help URL now resolves to a different node id, and left it for the next policy review.",
+      "correction": "Re-checked: nodeId=508088 still returns the Conditions of Use page, and its canonical URL is nodeId=GLSBYFE9MGKKQXXM, which was also fetched directly and returned the same page. Both are recorded in F-30. The working citation was deliberately not churned, because the old one still resolves.",
+      "status": "Resolved 2026-11-14"
+    }
+  ],
+  "checks_run": [
+    "python3 scripts/build_site.py - regenerated all 15 pages",
+    "python3 scripts/verify.py - passed: data validity, official-host sources, links and anchors, per-page disclosure, a source link in every table row, no prices or ratings, no Amazon Mark in titles or keywords, per-fact citation traceability, requirement-status evidence",
+    "python3 qa/audit_site.py - passed with 0 failures and 0 warnings",
+    "python3 -m unittest discover -s tests - 81 engine tests passed",
+    "python3 -m engine.cli audit - 0 of 7 drafts ready, all 7 blocked by gates (correct behaviour)"
+  ]
+}
