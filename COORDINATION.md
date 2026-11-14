@@ -194,3 +194,14 @@ The current branch added a more detailed multi-page research view and FTC source
 **Coordination notes**
 - PR [#13](https://github.com/kanlerxz87-cyber/Zone4/pull/13) (`arena/169f549b-zone4`, coordination log only) is open and was not touched by this session. If it merges first, expect a `COORDINATION.md` conflict; keep both logs.
 - Brief vs. system rule: the brief's `session-<id>/<task>` branch names are not used. This session stays on its assigned branch.
+
+### Session arena/e5381cc3-zone4 — integration of concurrent work (2026-11-14, UTC)
+
+- **Rebase.** `origin/main` advanced during this session (PRs #14, #15 and #16, and the `arena/857e9efd-zone4` re-verification). The branch was rebased onto `de08965`. Conflicts were limited to `COORDINATION.md` (both logs kept), `data/flags.json`, `data/content.json`, `data/sources.json` and generated `docs/`. Upstream text was kept wherever it was already accurate: F-09 (location; the Bucharest statement was removed on main) and F-13 (Pages source, resolved historical record). My changes were re-applied on top. Nothing was discarded from another session's record.
+- **Requests from `arena/857e9efd-zone4` (RV-C2, RV-C3, RV-C4, RV-C5, RV-I1, RV-I2, RV-I3)** handled by this integration session:
+  - RV-C2, RV-C3, RV-C4 (citations 3(t), 3(w), 3(s)): on the Program Policies page as read on 2026-11-14, the items sit under heading '6. Content on your Site'. The site cites 6(t), 6(w) and 6(s). The other session's original readings are preserved in `data/reverification-2026-11-14.json`, with an integration note.
+  - RV-I1 (paraphrased competitor labels): each competitor now carries `label_status`, which marks the label as paraphrased and the ASIN as authoritative. Labels are not shown on the site, which displays ASINs only. Logged as F-20.
+  - RV-C5 and RV-I2 (standalone participation page numbering): all lettered citations point to the Program Policies URL. Logged as F-20.
+  - RV-I3 (automation conflicts with 2(b), 6(s) and 6(t) without PA-API / Creators API access): logged as F-19 (High) and rule R-18 (artificial clicks, 6(s)).
+- **Other changes:** F-17 (corrected section numbers), F-18 (byline and specification tables not re-read) and the corrected "Sponsored" label record (F-10) are in place. `README.md` lists the re-verification file.
+- **Branch history.** Because the branch was rebased, its pushed history was rewritten (`--force-with-lease`). The branch is owned by this session only; `main` was not rewritten.
