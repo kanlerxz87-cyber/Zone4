@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Registry of every source used. 'accessible' records whether the page content was read during this verification pass (UTC 2026-11-14).",
+    "description": "Registry of every source used. 'accessible' records whether the page content was read during a verification pass. Pass 1: session arena/1eb689b8-zone4. Pass 2 (full line-by-line re-read of every cited section): session arena/3036372b-zone4, 2026-11-14 UTC.",
     "official_hosts": [
       "www.amazon.com",
       "amazon.com",
@@ -19,7 +19,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location, not the user's location."
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Re-read 2026-11-14 (arena/3036372b-zone4): title, brand byline, breadcrumb, the full specification table and the also-viewed carousel all match. The snapshot shows a US delivery location, which does not establish the user's location."
     },
     {
       "id": "S-P2",
@@ -28,7 +28,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. 'Sponsored' label appears above the also-viewed carousel."
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3. Re-read 2026-11-14 (arena/3036372b-zone4): title, store and byline, breadcrumb, the full specification table and the also-viewed carousel all match. On this pass the 'Sponsored' label did NOT appear above this carousel, while it did appear on the P1 and P3 carousels; the label is therefore not product specific. See F-10."
     },
     {
       "id": "S-P3",
@@ -37,7 +37,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, size variants, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page."
+      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page. Re-read 2026-11-14 (arena/3036372b-zone4): title, brand byline, breadcrumb, the full specification table and the also-viewed carousel all match."
     },
     {
       "id": "S-L1",
@@ -45,7 +45,7 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
     },
     {
       "id": "S-L2",
@@ -53,7 +53,7 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
     },
     {
       "id": "S-L3",
@@ -61,7 +61,7 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 (arena/3036372b-zone4)."
     },
     {
       "id": "S-CAT",
@@ -77,7 +77,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.'"
+      "used_for": "Section 1: Special Links must use the tagged link formats. Section 5: the required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.', plus the bar on misrepresenting or embellishing the relationship. Section 7: service offerings are provided 'AS IS'. Re-read in full 2026-11-14 (arena/3036372b-zone4)."
     },
     {
       "id": "S-HELP",
@@ -93,7 +93,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement sections 1-3 (qualifying purchases, disqualified purchases, Qualifying Revenue); Participation Requirements sections 2(b), 3(c), 3(f), 3(g), 3(t), 3(w), 3(y), 3(z)."
+      "used_for": "Commission Income Statement section 1 (qualifying purchases, Qualifying Revenue); Participation Requirements 1, 2(a), 2(b), 3(b) to 3(z), 4 (Promotional Limitations), 5, 6(a) to 6(f); Trademark Guidelines 1 to 8; Associates Program IP License sections 1, 2(a) to 2(k), 3 and 4 (Agent Terms); Products Statement 1 to 3; Influencer Program Policy; Creator Ads Boost. Every section cited on this site was re-read on 2026-11-14 (arena/3036372b-zone4)."
     },
     {
       "id": "S-SCHED",
@@ -101,7 +101,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read."
+      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read.",
+      "notes": "Re-checked 2026-11-14 (arena/3036372b-zone4): the URL redirects to https://www.amazon.com/ap/signin?...return_to=...%2Fhome%2Faccount%2Fpayment%2Fcustomratecard, an Amazon sign-in page, so no rate could be read. The same two links are listed in the policies Appendix."
     },
     {
       "id": "S-COU",
@@ -109,7 +110,7 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section: license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models."
+      "used_for": "'License and Access' section, read 2026-11-14 (arena/3036372b-zone4): the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology."
     },
     {
       "id": "S-FTC",
@@ -117,7 +118,7 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "publisher": "U.S. Federal Trade Commission (official)",
       "accessible": true,
-      "used_for": "Disclosure must be hard to miss, placed with the endorsement, and use simple, clear language; a material connection includes a financial relationship."
+      "used_for": "Read in full 2026-11-14 (arena/3036372b-zone4): the disclosure must be hard to miss and placed with the endorsement message; use simple, clear language; a material connection includes a financial relationship; do not talk about a product you have not tried; do not make claims the advertiser cannot prove."
     },
     {
       "id": "S-REPO",
@@ -125,7 +126,7 @@
       "url": "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
       "publisher": "GitHub (official API)",
       "accessible": true,
-      "used_for": "Current Pages configuration: legacy build from main root (/), status built, HTTPS enforced (checked 2026-11-14 via GitHub API). The root index redirects to docs/index.html."
+      "used_for": "Pages configuration read from the GitHub API on 2026-11-14: legacy build from main root (/), status 'built', HTTPS enforced, public entry point https://kanlerxz87-cyber.github.io/Zone4/. The repository root index.html redirects to docs/index.html."
     },
     {
       "id": "S-CHECK",
@@ -150,6 +151,24 @@
       "publisher": "GitHub (official)",
       "accessible": false,
       "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
+    },
+    {
+      "id": "S-IPL",
+      "title": "Associates Program IP License and Usage Requirements, including Section 4 (Agent Terms)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon Associates (official)",
+      "accessible": true,
+      "used_for": "IP License section 1 (limited licence to Program Content; no data mining, robots or similar extraction tools; no use of Program Content to develop or improve models); section 2(b) to 2(k) (account identifiers, usage requirements, no repurposing or model training without prior written approval, caching limits, price timestamps and disclaimers, the 'CERTAIN CONTENT THAT APPEARS' disclaimer); section 3 (Your Submissions); section 4 (Agent Terms: identification, transparency, no concealment, no CAPTCHA solving, truthful responses, Amazon may limit access).",
+      "notes": "Same page as S-PP; listed separately because the site cites the IP License and Agent Terms directly."
+    },
+    {
+      "id": "S-TG",
+      "title": "Associates Program Trademark Guidelines",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon Associates (official)",
+      "accessible": true,
+      "used_for": "Guidelines 1 to 3: Amazon Marks may be used only by display on the Site for the purpose of advertising the availability of products on an Amazon Site, with a corresponding Special Link; they may not be used in a way that implies sponsorship or endorsement, nor offline or in email.",
+      "notes": "Same page as S-PP; listed separately because the site cites the trademark rules directly."
     }
   ],
   "non_official_reference_only": [

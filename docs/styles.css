@@ -74,3 +74,25 @@ td.num { text-align: right; }
   .sidebar { position: static; height: auto; }
   main, .disclosure, footer { padding-left: 14px; padding-right: 14px; }
 }
+
+/* Marketing content and automation pages */
+.doc { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 4px 20px 18px; margin: 14px 0 18px; }
+.doc > h3 { margin: 18px 0 8px; font-size: 18px; }
+.doc h4 { margin: 18px 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.doc p { max-width: 96ch; }
+.seo { display: grid; grid-template-columns: 190px 1fr; gap: 2px 14px; margin: 8px 0 4px; font-size: 13.5px; }
+.seo dt { color: var(--muted); }
+.seo dd { margin: 0; }
+.seo code { background: var(--muted-bg); border-radius: 4px; padding: 1px 5px; }
+.outline li { margin-bottom: 5px; }
+.cites { white-space: nowrap; }
+.cite { display: inline-block; background: var(--muted-bg); color: var(--muted-ink); border-radius: 4px; padding: 0 5px; font-size: 11px; font-weight: 650; text-decoration: none; margin-left: 3px; }
+.cite:hover { background: var(--accent); color: #fff; }
+.cta { background: #f2f7ff; border: 1px solid #cfe0f7; border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+.cta p { margin: 4px 0; }
+.cta .note { max-width: none; }
+table.facts td:first-child, table.keywords td:first-child, table.seo-rules td:first-child,
+table.checklist td:first-child, table.stages td:first-child, table.tracking td:first-child,
+table.optimisation td:first-child, table.agents td:first-child { white-space: nowrap; font-weight: 600; }
+table.facts td:nth-child(3) { min-width: 200px; }
+table.tracking td:nth-child(4) { min-width: 120px; }
