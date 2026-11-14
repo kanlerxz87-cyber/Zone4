@@ -18,13 +18,13 @@
       "id": "F-01",
       "severity": "Medium",
       "title": "Commission rate read from the official public table; the per-ASIN category assignment is still unconfirmed",
-      "detail": "The rate used to be blank because the schedule behind the sign-in could not be read. The official 'Associates Program Standard Commission Income Statement' is published at a public URL that does not require a sign-in, and its Table 1 (Fixed Standard Commission Income Rates for Specific Product Categories) lists 'Physical Books, Kitchen, Automotive' at 4.50%. The final integration session read that page directly on 2026-11-14 and the site now publishes 4.50% with the table cited on the row. What is still not confirmable from outside Associates Central is which commission category Amazon assigns to each of the three ASINs: the table has both a 'Kitchen' band at 4.50% and a 'Home' band at 3.00%, and an air fryer is a kitchen small appliance, so the Kitchen band is the right reading but is not proven per item. The published rate is therefore the official band value with the caveat attached, not a promise of what a given item earns.",
+      "detail": "The public official Associates Program Standard Commission Income Statement Table 1 lists “Physical Books, Kitchen, Automotive” at 4.50%; this category-level rate was re-read from the official page on 2026-11-14. The product page breadcrumbs do not establish which Associates commission category Amazon assigns to each ASIN, and no official source reviewed confirms that mapping. To avoid inference, the three product-level rate cells are left blank. Table 1 also lists Home at 3.00%, so assigning the Kitchen value to an individual item without confirmation would be unsafe. No product-level earnings estimate is made.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/schedule",
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Partly resolved; band value published, per-ASIN assignment still unconfirmed",
-      "action": "Confirm each ASIN's commission category in Associates Central (or via the Creators API's category fields) before relying on the rate for a specific product. If an item is assigned to Home rather than Kitchen the rate is 3.00%."
+      "status": "Category-level band verified; per-ASIN assignment unverified",
+      "action": "Confirm each ASIN’s commission category in Associates Central before assigning a product-level rate or calculating product earnings."
     },
     {
       "id": "F-02",
@@ -67,7 +67,7 @@
       "id": "F-05",
       "severity": "Low",
       "title": "P2 brand and manufacturer confirmed from the Item details table",
-      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link reads 'Visit the Emeril Store' and the page carries a 'Top Brand: Emeril' module. The string 'Innovation IQ' seen in an earlier reading is the name of an Amazon Influencer who wrote the customer review attached to this listing; it is not the brand and is not a byline for the product. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
+      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link reads 'Visit the Emeril Store' and the page carries a 'Top Brand: Emeril' module. The string 'Innovation IQ' appears as the creator associated with a customer-review video and links to Amazon Influencer information; it is not the product brand or product byline. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],

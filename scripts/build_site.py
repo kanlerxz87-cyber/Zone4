@@ -136,7 +136,7 @@ def competitor_links(p: dict) -> str:
 
 
 def shop_link(p: dict) -> str:
-    return ext(p["short_link"], "Open Amazon link",
+    return ext(p["short_link"], "Open Amazon link (paid link)",
                f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"')
 
 
@@ -147,16 +147,18 @@ def commission_cell(p: dict) -> str:
 
     Returns the withheld pill when the data carries no rate, so this cell cannot
     publish a number that the ledger does not attribute to a source. A rate is a
-    program term, not Amazon pricing, so it is displayable under Participation
-    Requirements 2(b)/3(y), which is what the price and rating cells obey.
+    program term, not Amazon pricing, so it is displayable under the relevant
+    participation requirements; the product-level value is blank when unverified.
     """
     rate = p.get("commission_rate_pct")
     url = p.get("commission_rate_source")
     if rate is None or not url:
-        return pill("Unverified (F-01)", "warn")
+        if url:
+            return (pill("Blank — category unverified for this ASIN (F-01)", "warn")
+                    + f' <span class="small">{ext(url, "official category table")}</span>')
+        return pill("Blank — unverified (F-01)", "warn")
     return (pill(f"{rate:.2f}% ({p.get('commission_category_official', 'category')} band)", "ok")
-            + f' <span class="small">{ext(url, "official Table 1")}</span>'
-            + ' <span class="small muted">Per-ASIN assignment pending (F-01).</span>')
+            + f' <span class="small">{ext(url, "official Table 1")}</span>')
 
 
 def commission_verification_item(p: dict, sched: str) -> tuple[str, str, str, str, str]:
@@ -169,10 +171,10 @@ def commission_verification_item(p: dict, sched: str) -> tuple[str, str, str, st
     rate = p.get("commission_rate_pct")
     url = p.get("commission_rate_source")
     if rate is None or not url:
-        return ("Category commission rate", "Blank", "Unverified", sched, "F-01")
-    return ("Category commission rate", f"{rate:.2f}% ({p.get('commission_category_official', 'category')} band)",
-            "Verified from the official rate table; per-ASIN assignment pending (F-01)",
-            ext(url, "Standard Commission Income Statement"), "F-01")
+        source = ext(url, "Official category rate table") if url else sched
+        return ("Product-level commission rate", "Blank", "Unverified for this ASIN (F-01)", source, "F-01")
+    return ("Product-level commission rate", f"{rate:.2f}% ({p.get('commission_category_official', 'category')} band)",
+            "Verified from the official rate table", ext(url, "Standard Commission Income Statement"), "F-01")
 
 
 def product_table(current: Page, products: list[dict]) -> str:
@@ -368,7 +370,7 @@ def marketing_article(current: Page, article: dict) -> str:
     # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
         f'<div class="cta"><p>{esc(cta["text"])}</p>'
-        f'<p>{cta_button} <span class="note"><strong>Disclosure:</strong> {esc(cta["disclosure"])}</span></p></div>'
+        f'<p>{cta_button} <span class="note">(paid link)</span> <span class="note"><strong>Disclosure:</strong> {esc(cta["disclosure"])}</span></p></div>'
     )
     return (
         f'<article class="doc" id="{esc(article["id"])}">'
@@ -410,7 +412,7 @@ def page_index(current: Page) -> str:
         ("3 of 3", "Products with verified ASIN, category, brand and specification table"),
         ("5", "Marketing pages built: 3 articles, 1 comparison, 1 buying guide"),
         ("0", "Amazon prices published (policy F-02)"),
-        ("0 of 3", "Commission rates verified (F-01)"),
+        ("0 of 3", "ASIN commission-category assignments confirmed (F-01)"),
         (str(len(open_flags)), "Open items for your review (Flagged for review page)"),
     ]
     kpi_html = "".join(

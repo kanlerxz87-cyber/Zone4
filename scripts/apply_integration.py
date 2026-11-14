@@ -94,8 +94,8 @@ flags["flags"].append({
     "detail": (
         "The brief asks for automated research, AI article generation, publishing, click and "
         "conversion tracking. Program Policies Participation Requirements Section 2(b) limits "
-        "price display to Amazon-served links or Creators API / PA API data; Section 3(s) bars "
-        "artificially generated clicks or impressions; Section 3(t) bars review and star-rating "
+        "price display to Amazon-served links or Creators API / PA API data; Section 6(s) bars "
+        "artificially generated clicks or impressions; Section 6(t) bars review and star-rating "
         "display without API data. No Associates tag, PA-API or Creators API access exists in this "
         "environment, so none of these features is built and no values were simulated."
     ),

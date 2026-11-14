@@ -113,7 +113,7 @@
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Commission Income Statement, Section 1 (Qualifying Revenue)",
       "status": "Informational",
-      "site_implementation": "Applies to any future earnings model. No earnings are calculated, because the category rate is unverified (F-01)."
+      "site_implementation": "Applies to any future earnings model. No earnings are calculated because the per-ASIN commission category assignment is unverified (F-01)."
     },
     {
       "id": "R-15",

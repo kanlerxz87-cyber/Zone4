@@ -3,12 +3,12 @@
   "disclosure_source": "https://affiliate-program.amazon.com/help/operating/agreement",
   "observed_date": "2026-11-14",
   "executive_summary": {
-    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Every published figure was read again from the official Amazon page on 2026-11-14. Prices, ratings, commission rates and trend data are not published, because they could not be verified or the Associates policy does not allow them on this site. The marketing content the brief asks for is built from those verified figures only.",
+    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Product identities and listed specifications are cited to official Amazon pages. Prices, ratings, reviews and trend data are withheld or unverified. Amazon’s public Standard Commission Income Statement lists the Kitchen category at 4.50%, but no official source reviewed here confirms the commission category assigned to any of these three ASINs, so product-level rate cells remain blank. Marketing content is built from verified facts only.",
     "bullets": [
       "Identity verified and re-verified: each link resolves to an Amazon product page (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH). All three sit under the same Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers). The listing titles, brand bylines, category breadcrumbs and the complete specification tables were read again on 2026-11-14 and every value matches. Flag F-04 covers the short-link codes.",
       "Marketing content is built: three product articles, one comparison page and one buying guide, each with a title tag, meta description, keyword targets, an outline, finished copy, a call to action and a fact table in which every row links to its official source. Copy is written in this site's own words and republishes no Amazon listing prose (F-12).",
       "Pricing and ratings withheld: the Associates Participation Requirements (Section 2(b) for prices and availability, Section 6(t) for star ratings and customer reviews) allow those figures on a site only through Amazon-served links or Creators API / PA API. The pages were read, but no price, rating or review count is published (F-02).",
-      "Commission potential not calculable: the category commission schedule is behind an Amazon sign-in, so no rate is entered (F-01). Third-party sources conflict on the Kitchen rate, so they are listed as non-official references and are not used as data.",
+      "Commission potential is not calculable per product: Amazon’s public Standard Commission Income Statement Table 1 lists the Kitchen category at 4.50% (official category-level reference). The category Amazon assigns to these specific ASINs is not confirmed from an official source, so their product-level commission cells are blank (F-01). Prices are withheld and attributed orders, sessions and revenue are not connected; no earnings estimate is made.",
       "Attribution unverified: the resolved links carry no Associates tag parameter (F-03). Confirm the links were generated under your Associates ID before relying on any earnings.",
       "The automation and tracking plan is built and specified, with every metric left blank: a first-party, local-only click tracker is implemented and starts at zero (Analytics page), but click-to-order attribution, unit-session and revenue reporting need Associates reporting and a tagged link (F-19); price tracking is prohibited by default (F-22); API reuse and model training need prior written approval (F-24).",
       "Agent Terms apply to the research agent in the brief: any agent that touches Program Content must identify itself as 'Agent/[name]' in the user agent string, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits (F-21).",
@@ -17,8 +17,8 @@
       "Measured, not modelled: the Analytics page records real clicks in the visitor's own browser and exports them as JSON or CSV. It sends nothing to any server, it never invents a figure, and the only non-click event it can write is one explicitly labelled a test. The tracked links are the supplied short links, which still carry no visible Associates tag, so a recorded click cannot yet be reconciled against Amazon reporting."
     ],
     "decisions_needed": [
+      "Confirm each ASIN’s commission category in Associates Central before using any category rate for product-level calculations (F-01).",
       "Confirm whether the links were generated under your Associates ID (F-03), and confirm amazon.com is the intended storefront (F-09).",
-      "Read the category commission rate from Associates Central and send it for entry (F-01).",
       "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16, F-25).",
       "Decide whether the research agent may be automated at all, and if so implement the Agent Terms user agent string and transparency rules first (F-21, F-11).",
       "Confirm whether a local, browser-only click log is acceptable for the audience, and add a cookie or consent notice before enabling it on real traffic.",
@@ -74,12 +74,12 @@
     {
       "id": "A-05",
       "finding": "Commission potential cannot be estimated on this site.",
-      "basis": "Commission is a percentage of Qualifying Revenue (price less shipping, tax and similar items; Commission Income Statement, Section 1). The category rate is unverified (F-01), and prices may not be published (F-02). No earnings figure is given.",
+      "basis": "The public Standard Commission Income Statement Table 1 lists Kitchen at 4.50%, but no official source reviewed here confirms which commission category Amazon assigns to these ASINs (F-01). Prices are withheld under policy (F-02), and attributed sessions, orders and revenue are not connected. No product-level rate or earnings figure is published.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/policies",
-        "https://affiliate-program.amazon.com/help/operating/schedule"
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "confidence": "Formula verified; rate unverified"
+      "confidence": "Official Kitchen category rate verified; per-ASIN category assignment unverified"
     },
     {
       "id": "A-06",
@@ -206,7 +206,7 @@
     "Conversion, order, unit-session and revenue attribution (needs Associates reporting and a tagged link). The Analytics page records first-party clicks locally and publishes no attributed figure. Flag F-19.",
     "Automated product research at scale (needs a compliance decision under the Agent Terms, and Creators API access rather than page retrieval). Flags F-11, F-21.",
     "Price, rating and review analysis on the public site (withheld under 2(b) and 6(t), and price tracking is prohibited by default). Flags F-02, F-22.",
-    "Commission calculations and earnings projections (needs the category rate from the signed-in schedule). Flag F-01.",
+    "Commission calculations and earnings projections (the public table gives category rates, but product-specific category assignments, prices and attributed order data are not verified/connected). Flag F-01.",
     "API integration of any kind, including reusing or fine-tuning on API content (needs express prior written approval). Flags F-16, F-24, F-25.",
     "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
     "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",

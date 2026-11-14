@@ -218,12 +218,12 @@
     },
     {
       "id": "S-SCHED",
-      "title": "Associates Program Standard Commission Income schedule (Appendix link)",
+      "title": "Associates Program Standard Commission Income schedule (historic sign-in-gated Appendix link; superseded by S-COMM)",
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. Re-checked 2026-11-14: the URL still redirects to an Amazon sign-in page, so no rate could be read. The Program Policies Appendix links 'Standard Commission Income' to this same URL, so the rate is not on the policies page.",
-      "notes": "SUPERSEDED for the rate data on 2026-11-14: this sign-in-gated appendix URL still redirects to a login page, but the same Table 1 is published on the public help topic recorded as S-COMM, so the Kitchen band (4.50%) is now sourced. Kept so the earlier dead end is on record."
+      "used_for": "Historical verification only. This Appendix link redirects to sign-in; the public official Table 1 is cited as S-COMM and used for the category-level reference rate.",
+      "notes": "Superseded for rate data by the public Associates Program Standard Commission Income Statement at S-COMM. The Kitchen 4.50% category rate is confirmed there; per-ASIN commission-category assignment remains unverified."
     },
     {
       "id": "S-TG",

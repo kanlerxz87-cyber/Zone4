@@ -92,17 +92,17 @@
         "star_rating": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "review_count": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "best_sellers_rank": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "coupon_or_deal": {
           "withheld": true,
@@ -231,17 +231,17 @@
         "star_rating": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "review_count": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "best_sellers_rank": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "coupon_or_deal": {
           "withheld": true,
@@ -369,17 +369,17 @@
         "star_rating": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "review_count": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "best_sellers_rank": {
           "withheld": true,
           "flag": "ENG-F-014",
-          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+          "reason": "Participation Requirements 6(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
         },
         "coupon_or_deal": {
           "withheld": true,
@@ -590,7 +590,7 @@
       "severity": "medium",
       "target": "P-01, P-02, P-03",
       "title": "Price, availability and deal fields are withheld by policy, not by lack of data",
-      "detail": "The product pages display price, availability and protection-plan figures, and they were seen while verifying identity. They are not published here: Participation Requirements 2(b) restricts how Amazon-sourced content may be obtained and displayed, and 3(y) bars tracking, selecting or capturing Amazon prices without a written agreement. Any price comparison or deal-alert feature is therefore out of scope until that agreement exists.",
+      "detail": "The product pages display price, availability and protection-plan figures, and they were seen while verifying identity. They are not published here: Participation Requirements 2(b) restricts how Amazon-sourced content may be obtained and displayed, and 6(y) bars tracking, selecting or capturing Amazon prices without a written agreement. Any price comparison or deal-alert feature is therefore out of scope until that agreement exists.",
       "evidence": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -602,7 +602,7 @@
       "severity": "medium",
       "target": "P-01, P-02, P-03",
       "title": "Star ratings and review counts may only come from the Creators API",
-      "detail": "Participation Requirements 3(t) permits displaying Amazon reviews or star ratings only when the data is obtained through the API. Ratings were visible on the pages but are withheld. Until API access exists, no rating-based ranking, 'high-converting' label or review-velocity metric can be published.",
+      "detail": "Participation Requirements 6(t) permits displaying Amazon reviews or star ratings only when the data is obtained through the API. Ratings were visible on the pages but are withheld. Until API access exists, no rating-based ranking, 'high-converting' label or review-velocity metric can be published.",
       "evidence": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -638,13 +638,13 @@
       "id": "ENG-F-017",
       "severity": "info",
       "target": "P-02",
-      "title": "P2 brand and manufacturer resolved by another session; byline wording still differs",
-      "detail": "CLOSED as a blank-field item. The site ledger records brand 'Emeril' with manufacturer 'Emeril Lagasse' from the Item details table (their F-05/F-21), so this engine row no longer withholds the brand. The 'Visit the Emeril Store' byline and the 'Innovation IQ' attribution still differ, which the site tracks rather than this file.",
+      "title": "P2 brand and manufacturer confirmed; review-video attribution clarified",
+      "detail": "CLOSED as a blank-field item. The official P2 Item details table confirms Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse'; the product page links to the Emeril Store. 'Innovation IQ' is shown as the creator associated with a customer-review video and is linked to Amazon Influencer information, not the product brand or product byline. The site records the confirmed brand and manufacturer; F-05 is resolved.",
       "evidence": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "status": "Needs review",
-      "action": "No action for the engine. Confirm the byline only if the site reopens F-05 for a different reason."
+      "status": "Resolved (informational)",
+      "action": "Resolved: retain the official Item details citation as the audit record."
     },
     {
       "id": "ENG-F-018",
