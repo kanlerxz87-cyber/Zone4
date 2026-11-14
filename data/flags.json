@@ -11,6 +11,10 @@
         "F-34": "F-53",
         "F-35": "F-54"
       }
+    },
+    "added_by_949aaac1_2026_11_14": {
+      "F-36": "New. The per-product commission rate was published without an official source for the per-ASIN category step. Found independently by two sessions and resolved on main; recorded here as the audit trail.",
+      "F-37": "New. Carousel-instability notes in data/products.json cited F-27 where they meant F-29."
     }
   },
   "flags": [
@@ -346,7 +350,7 @@
       "id": "F-29",
       "severity": "Medium",
       "title": "The also-viewed carousel changes between page loads; some labels could not be read",
-      "detail": "The 'Customers who viewed this item also viewed' module does not return the same set, or the same order, on every load of the same product page. On the 2026-11-14 reads of the P2 page the first three entries appeared in two different orders, and on the P1 page one of the three stored ASINs had no readable title on that read, so its label is blank. The stored ASINs and their order are therefore a snapshot of one read, not a stable list, and the module is an advertising slot whose membership can change without notice.",
+      "detail": "The 'Customers who viewed this item also viewed' module does not return the same set, or the same order, on every load of the same product page. On the 2026-11-14 reads of the P2 page the first three entries appeared in two different orders, and on the P1 page one of the three stored ASINs had no readable title on that read, so its label is blank. The stored ASINs and their order are therefore a snapshot of one read, not a stable list, and the module is an advertising slot whose membership can change without notice. Update 2026-11-14 (arena/949aaac1-zone4): all three carousels were read again and every stored ASIN appeared in the stored order with the same titles, so the snapshot reproduced exactly on that read. The one label that had been left blank (B0CNSB81V6 on P1) was read on that pass as 'Nutrichef Double Basket Air Fryer 8.8 QT' and is now filled, so no label on the site is blank. The module is still an advertising slot whose membership can change without notice, so the flag stays open.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -358,13 +362,14 @@
     {
       "id": "F-30",
       "severity": "Low",
-      "title": "The Amazon Conditions of Use help URL now resolves to a different node id",
-      "detail": "The Conditions of Use page is cited throughout this site as https://www.amazon.com/gp/help/customer/display.html?nodeId=508088, last updated August 14, 2026. A parallel session recorded that the same help URL now redirects to a different node id. The 'License and Access' wording this site relies on (the collection and use of product listings, descriptions and prices; the exclusion of data mining, robots and similar extraction tools; the restriction on using Amazon AI-generated content to develop or improve models) was read on 2026-11-14 from that URL, so the citations are accurate as read on that date. The canonical node id should be re-confirmed before the next policy review.",
+      "title": "The Amazon Conditions of Use help URL redirects to a different node id; the target is now recorded and the old citation still resolves",
+      "detail": "The Conditions of Use page is cited throughout this site as https://www.amazon.com/gp/help/customer/display.html?nodeId=508088, last updated August 14, 2026. Session arena/949aaac1-zone4 re-read that URL on 2026-11-14: it still returns the Conditions of Use page, but the page's own canonical URL is now https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM, which was also fetched directly and returned the same text with the same 'Last updated: August 14, 2026' line. The 'License and Access' wording this site relies on was re-read on that fetch and matches what the site quotes: the license excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools', and it bars using 'AI-generated content from the Amazon Services to, directly or indirectly, develop or improve large language or multimodal models, machine learning models or related technology'. Because nodeId=508088 still resolves through the redirect, the citation was not churned; both node ids are recorded here instead.",
       "sources": [
-        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM"
       ],
-      "status": "Needs review",
-      "action": "Re-check the Conditions of Use URL and node id at the next policy review, and update the citation if it has moved."
+      "status": "Resolved 2026-11-14 (arena/949aaac1-zone4); the old citation still resolves, so it was kept",
+      "action": "No action needed. The old URL still resolves. If the citation is ever refreshed, use nodeId=GLSBYFE9MGKKQXXM and re-read the 'License and Access' wording at that time."
     },
     {
       "id": "F-31",
@@ -423,6 +428,28 @@
       ],
       "status": "Needs review",
       "action": "Confirm the current wording for the locale you publish in before enabling a second marketplace."
+    },
+    {
+      "id": "F-36",
+      "severity": "Medium",
+      "title": "The site published a per-product commission rate that no official source confirms for these ASINs",
+      "detail": "Two sessions found the same defect on 2026-11-14 and reached the same conclusion about the fix, having got there from opposite directions. The product table published '4.50% (Kitchen band)' on all three product rows, sourced from Amazon's public Standard Commission Income Statement Table 1, which does list 'Physical Books, Kitchen, Automotive' at 4.50%. What Table 1 does not say is which commission category Amazon assigns to each of these three ASINs, and the table also carries a 'Home' band at 3.00%. Putting the Kitchen figure on a product row therefore applies a category-level rate to an individual item without an official source for that step, which this site's own rule forbids. At the same time, the rest of the site still described the rate as unverified and behind a sign-in, so the site contradicted itself: the index KPI read '0 of 3 Commission rates verified (F-01)', the executive-summary headline said commission rates are not published, an executive-summary bullet said the schedule was behind an Amazon sign-in, and finding A-05 said the category rate was unverified. Resolution adopted on main (PR #38, session arena/13dd55ca-zone4) and confirmed by this session: the official category-level Kitchen rate of 4.50% is stated in the narrative with its source, and the product-level rate cells are left blank until Amazon confirms each ASIN's commission category. Session arena/949aaac1-zone4 independently reached the same wording for the narrative text and adopted main's resolution for the cells rather than re-litigating it. The index KPI is now computed from the data instead of typed in, so it cannot drift from the table again.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+      ],
+      "status": "Resolved 2026-11-14; product-level cells blank, category-level rate stated with its source",
+      "action": "Confirm each ASIN's commission category in Associates Central (or via the Creators API category fields) before using any product-level rate. If an item is assigned to Home rather than Kitchen the rate is 3.00%."
+    },
+    {
+      "id": "F-37",
+      "severity": "Low",
+      "title": "Carousel-instability notes cited flag F-27 (offline and email use) instead of F-29",
+      "detail": "Found by session arena/949aaac1-zone4 on 2026-11-14 and corrected in the same session. The competitor notes attached to all three products in data/products.json ended with 'Carousel membership changes between page loads (F-27)', and the blank-label note on P1 pointed at F-27 as well. F-27 is the flag about offline, print, email and SMS use of Program Content, so those references pointed a reviewer at the wrong item; the carousel-instability flag is F-29. Both references now point at F-29. The reference resolved to a real flag, so no verifier caught it, which is recorded here because a cross-reference can be resolvable and still wrong.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Corrected 2026-11-14 (arena/949aaac1-zone4); kept as the audit record",
+      "action": "None. F-27 keeps its own meaning and is still cited correctly in the not-built list."
     }
   ]
 }

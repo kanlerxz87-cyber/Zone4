@@ -16,7 +16,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (27 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 35 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 37 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
@@ -49,7 +49,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `flagged.html` | Flagged for Review: 35 irregularities and unverified items |
+| `flagged.html` | Flagged for Review: 37 irregularities and unverified items |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify

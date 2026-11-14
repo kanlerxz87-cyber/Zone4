@@ -132,7 +132,11 @@ def flag_chip(current: Page, fid: str) -> str:
 
 
 def competitor_links(p: dict) -> str:
-    return "<br>".join(ext(c["url"], c["asin"]) for c in p["competitors"])
+    return "<br>".join(
+        ext(c["url"], c["asin"])
+        + (f' <span class="small muted">{esc(c["label"])} (as listed)</span>' if c.get("label") else "")
+        for c in p["competitors"]
+    )
 
 
 def shop_link(p: dict) -> str:
@@ -234,7 +238,9 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Colour (as listed)", p["color"], "Verified as listed", src, fl["colour"]),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
             ("Special features (as listed)", p.get("special_feature", ""), "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown", src, fl["competitors"]),
+            ("Also-viewed ASINs and listing titles",
+             "; ".join(c["asin"] + (": " + c["label"] if c.get("label") else "") for c in p["competitors"]),
+             "Verified as shown (title segment as listed)", src, fl["competitors"]),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             commission_verification_item(p, sched),
@@ -408,11 +414,16 @@ def hero(title: str, lead: str) -> str:
 
 def page_index(current: Page) -> str:
     open_flags = [f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()]
+    # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
+    assigned = sum(
+        1 for p in PRODUCTS
+        if p.get("commission_rate_pct") is not None and p.get("commission_category_official")
+    )
     kpis = [
-        ("3 of 3", "Products with verified ASIN, category, brand and specification table"),
-        ("5", "Marketing pages built: 3 articles, 1 comparison, 1 buying guide"),
+        (f"{len(PRODUCTS)} of {len(PRODUCTS)}", "Products with verified ASIN, category, brand and specification table"),
+        (str(len(MARKETING["articles"])), "Marketing pages built: 3 articles, 1 comparison, 1 buying guide"),
         ("0", "Amazon prices published (policy F-02)"),
-        ("0 of 3", "ASIN commission-category assignments confirmed (F-01)"),
+        (f"{assigned} of {len(PRODUCTS)}", "ASIN commission-category assignments confirmed (F-01)"),
         (str(len(open_flags)), "Open items for your review (Flagged for review page)"),
     ]
     kpi_html = "".join(
