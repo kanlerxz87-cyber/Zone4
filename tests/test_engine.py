@@ -202,7 +202,7 @@ class TestCliSurface(unittest.TestCase):
         self.assertTrue(kitchen["source"].startswith("https://affiliate-program.amazon.com/"),
                         "a published rate must cite the official table")
         other = json.loads(self._run("rates", "--category", "Something Amazon Does Not List"))
-        self.assertEqual(other["rate_pct"], 4.0, "unknown categories fall to the All Other band, never a guess")
+        self.assertIsNone(other["rate_pct"], "unknown categories must remain blank, not inherit the catch-all rate")
 
     def test_audit_is_not_failed_by_correctly_blocked_drafts(self):
         """Blocking is the intended state; only an unresolved-but-READY draft may fail the gate."""
@@ -276,8 +276,17 @@ class TestCommission(unittest.TestCase):
         self.assertEqual(s.rate_for_category("Toys"), 3.0)
         self.assertEqual(s.rate_for_category("Televisions"), 2.0)
 
-    def test_unknown_category_uses_the_official_catchall(self):
-        self.assertEqual(store().rate_for_category("Something Else"), 4.0)
+    def test_catchall_rate_requires_explicit_category_label(self):
+        self.assertEqual(store().rate_for_category("All Other Categories"), 4.0)
+        self.assertIsNone(store().rate_for_category("Something Else"))
+
+    def test_browse_path_does_not_map_to_commission_band(self):
+        s = store()
+        browse_path = "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers"
+        self.assertIsNone(s.rate_for_category(browse_path))
+        self.assertIsNone(rate_for(s, browse_path))
+        self.assertTrue(all(p.get("commission_rate_pct") is None
+                            for p in json.loads((ROOT / "data" / "products.json").read_text())["products"]))
 
     def test_no_category_returns_nothing_not_zero(self):
         self.assertIsNone(store().rate_for_category(None))
@@ -313,6 +322,13 @@ class TestEconomics(unittest.TestCase):
         self.assertIsNone(m["projected_revenue_per_month"])
         self.assertFalse(m["publishable"])
         self.assertGreaterEqual(len(m["missing_inputs"]), 3)
+
+    def test_browse_path_does_not_receive_catchall_rate_in_economics(self):
+        browse_path = "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers"
+        model = revenue_model(store(), browse_path, None)
+        self.assertIsNone(model["commission_rate_pct"])
+        self.assertIsNone(model["commission_per_order"])
+        self.assertIn("product-specific commission category/rate (unverified)", model["missing_inputs"])
 
     def test_attribution_windows_match_policy(self):
         self.assertEqual(SESSION_HOURS, 24)

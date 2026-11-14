@@ -207,9 +207,10 @@ def page_rates(store: Datastore, report: dict) -> str:
                 table(["Rule", "Status", "Source", "Verdict"], attr_rows),
                 eyebrow="SESSION MODEL")
         + panel("Unit economics per requested product",
-                "Commission per order = verified price × verified category rate. Because no product page could "
-                "be matched, every price is blank and the arithmetic is not computable. Nothing is estimated.",
-                table(["Reference", "Category", "Rate", "Price", "Earning per order", "Rate source", "State"], econ_rows),
+                "Commission per order = verified price × the applicable product commission rate. The product "
+                "pages are identified, but their Amazon browse path does not establish an Associates category; "
+                "prices are also withheld. Per-ASIN rates and earnings stay blank rather than estimated.",
+                table(["Reference", "Amazon browse category", "Product-specific rate", "Price", "Earning per order", "Standard rate table", "State"], econ_rows),
                 pill_html='<span class="pill warn">0 of 3 computable</span>',
                 eyebrow="REVENUE MODEL")
         + '<div class="notice amber"><b>Why there is no revenue forecast</b><span>Earnings need clicks and '

@@ -43,9 +43,9 @@ def rate_for(store: Datastore, category: str | None) -> Rate | None:
     if pct is None:
         return None
     for row in store.commission_rows():
-        if any(part.strip().lower() == (category or "").strip().lower() for part in row["categories"].split(",")):
+        if any(part.strip().lower() == category.strip().lower() for part in row["categories"].split(",")):
             return Rate(row["categories"], pct)
-    return Rate("All Other Categories", pct)
+    return None
 
 
 @dataclass
@@ -78,9 +78,9 @@ class UnitEconomics:
     def missing(self) -> list[str]:
         out = []
         if self.price is None:
-            out.append("price (no verified Amazon product page)")
+            out.append("price (unverified or withheld)")
         if self.rate_pct is None:
-            out.append("category commission rate (category unknown)")
+            out.append("product-specific commission category/rate (unverified)")
         return out
 
     def explain(self) -> str:

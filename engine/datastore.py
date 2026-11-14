@@ -233,10 +233,9 @@ class Datastore:
             for part in row["categories"].split(","):
                 if part.strip().lower() == needle:
                     return float(row["rate_pct"])
-        other = [r for r in self.commission_rows()
-                 if r["categories"].strip().lower() == "all other categories"]
-        if other and needle not in {"", "unknown"}:
-            return float(other[0]["rate_pct"])  # table's explicit catch-all row
+        # Do not apply the table's catch-all rate to an unknown or broad browse
+        # path. It is only available when the caller explicitly names the
+        # official "All Other Categories" band, which was handled above.
         return None
 
     def bounties(self) -> list[dict]:
