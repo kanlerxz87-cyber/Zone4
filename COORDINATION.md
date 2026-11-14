@@ -12,7 +12,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
-| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, requirements register, commission rate from the official table, engine integration, PR to `main`, Pages deploy check | **in progress**; 15 pages built and verified locally, QA audit passing, 81 engine tests passing; merging `origin/main` (PRs #17, #20, #21, #23, #28, #30 to #33) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
+| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, requirements register, commission rate from the official table, engine integration, PR to `main`, Pages deploy check | **done**; PR [#35](https://github.com/kanlerxz87-cyber/Zone4/pull/35) merged at `a5180c6`; all four workflows passed on the merge commit; Pages `built` | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
 
 | Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **done** on the branch; PR and merge recorded in the log below | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
@@ -493,3 +493,36 @@ passed with 0 failures and 5 advisory warnings. `python3 -m unittest discover -s
 reports **0 of 7 drafts ready, all 7 blocked by gates** — the engine refuses to publish, which is the correct behaviour. `python3 -m engine.cli build`
 and `python3 tools/check_links.py` pass. A separate cross-check confirmed every flag and rule reference resolves, every source and requirement source
 is on an official host, and no tracking metric carries a value.
+
+
+### Session arena/3036372b-zone4 — PR, merge and deployment record (2026-11-14, UTC)
+
+- **Pull request:** [#35](https://github.com/kanlerxz87-cyber/Zone4/pull/35) — "Final integration: verified site, marketing kit, requirements register,
+  engine and official commission rate", from `arena/3036372b-zone4` to `main`. The body lists the changes, the full set of official sources for manual
+  review, and every irregularity with its flag ID.
+- **Merge:** merged with a merge commit at `a5180c6ef8ad0da9b3560b1887274ad00a397116` on 2026-11-14 10:44:28 UTC, without waiting for review, as the brief
+  requires. All three pull-request checks passed before the merge:
+  - **Site checks** — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586632452 (success)
+  - **QA audit** — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586632443 (success)
+  - **CI — engine tests, preview build, site integrity** — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586632489 (success)
+- **Deployment on the merge commit `a5180c6`:** all four workflows succeeded —
+  - Site checks — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586701420
+  - CI — engine tests, preview build, site integrity — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586701397
+  - QA audit — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586701430
+  - pages build and deployment — https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43586700791
+- **Pages status:** the GitHub Pages API reports `built` for commit `a5180c6`, source `main` `/` (legacy build), HTTPS enforced, public. The root
+  `index.html` redirects to `docs/index.html`. Live entry point: https://kanlerxz87-cyber.github.io/Zone4/
+- **Live confirmation:** the deployed site was fetched after the merge. `docs/requirements.html` serves the full 30-row requirement register with the
+  Operating Agreement disclosure, the IP License 2(k) content notice, working flag links into `docs/flagged.html#F-xx`, and the official table cited
+  on every row. Nothing is broken and no page is stale.
+- **One correction after the merge:** REQ-08 was still citing the sign-in-protected commission schedule. It now cites the public official table it
+  actually relies on, `https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ`, together with the Program Policies page. This
+  correction is recorded in the following commit.
+- **Final state of the site:** 15 generated pages — dashboard, executive summary, requirements, all products, three category subpages, marketing
+  content, automation and tracking, analysis and findings, verification log, policy compliance, analytics, flagged for review, sources — plus the
+  stylesheet, the app script and the tracker script. Data: 3 product records, 30 policy rules, 35 flags, 27 sources, 15 analysis findings, 5 marketing
+  pieces with 53 sourced fact rows, 13 pipeline stages with 10 blank metrics, 7 Agent Terms, 30 requirement rows.
+- **Final verification:** `python3 scripts/build_site.py` regenerated all 15 pages; `python3 scripts/verify.py` passed; `python3 qa/audit_site.py` passed
+  with 0 failures and 5 advisory warnings; `python3 -m unittest discover -s tests` passed 81 of 81 engine tests; `python3 -m engine.cli audit` reports
+  0 of 7 drafts ready, all blocked by gates, which is the intended behaviour; `python3 tools/check_links.py` passed; `git diff --exit-code -- docs`
+  confirmed the committed HTML matches a fresh build.
