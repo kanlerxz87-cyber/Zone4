@@ -1,2 +1,7 @@
 __pycache__/
 *.py[cod]
+.DS_Store
+config.json
+data/tracking.local.jsonl
+data/report.json
+build/

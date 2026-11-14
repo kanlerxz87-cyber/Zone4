@@ -50,10 +50,16 @@
         "F-15",
         "F-18",
         "F-25",
-        "F-27"
+        "F-27",
+        "F-50"
       ],
       "manufacturer": "",
-      "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10"
+      "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10",
+      "commission_category_official": "Kitchen",
+      "commission_rate_pct": 4.5,
+      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "independent_reverification": "Re-followed https://link.amazon/B04G1MEwY on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B0CDY277D3, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L1 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
     },
     {
       "id": "P2",
@@ -101,17 +107,23 @@
         "F-18",
         "F-25",
         "F-26",
-        "F-27"
+        "F-27",
+        "F-50"
       ],
       "brand_note": "Item details table (re-read 2026-11-14). Earlier byline 'Innovation IQ' and store 'Emeril Store' were not seen in this read (F-05).",
       "manufacturer": "Emeril Lagasse",
-      "competitor_carousel_label": "not labelled 'Sponsored' on either read"
+      "competitor_carousel_label": "not labelled 'Sponsored' on either read",
+      "commission_category_official": "Kitchen",
+      "commission_rate_pct": 4.5,
+      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "independent_reverification": "Re-followed https://link.amazon/B02NbDxp3 on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B09B7SB46R, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L2 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
     },
     {
       "id": "P3",
       "asin": "B08DKYBTPH",
       "name_short": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
-      "name_listing": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "name_listing": "Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "subcategory": "Single-basket air fryers",
       "brand": "Chefman",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
@@ -125,12 +137,12 @@
       "competitors": [
         {
           "asin": "B0CNY1YVDD",
-          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes",
+          "label": "Chefman Air Fryer \u2013 6 QT Compact Airfryer for Quick & Easy Meals in Minutes",
           "url": "https://www.amazon.com/dp/B0CNY1YVDD"
         },
         {
           "asin": "B0D5FX6VRL",
-          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals",
+          "label": "Chefman Air Fryer \u2013 6 QT Compact Airfryer for Quick & Easy Meals",
           "url": "https://www.amazon.com/dp/B0D5FX6VRL"
         },
         {
@@ -151,10 +163,16 @@
         "F-15",
         "F-18",
         "F-25",
-        "F-27"
+        "F-27",
+        "F-50"
       ],
       "manufacturer": "",
-      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10"
+      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10",
+      "commission_category_official": "Kitchen",
+      "commission_rate_pct": 4.5,
+      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "independent_reverification": "Re-followed https://link.amazon/B00hJ57DV on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B08DKYBTPH, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L3 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
     }
   ]
 }

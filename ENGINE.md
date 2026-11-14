@@ -1,0 +1,113 @@
+# Engine guide
+
+`engine/` is the automation layer. It is **not** a chatbot: it is a deterministic
+pipeline whose central guarantee is that an unverified fact cannot reach a
+published page.
+
+```
+data/*.json  ──►  engine.datastore (integrity audit)
+                        │
+                        ├─► research   identifier + product-page verification
+                        ├─► economics  official rate table → unit economics
+                        ├─► scoring    opportunity scores (withheld without inputs)
+                        ├─► content    review / comparison / buying-guide drafts
+                        ├─► links      Special Link builder + link-safety rules
+                        ├─► policy     Amazon + FTC compliance gates (blocking)
+                        ├─► tracking  click/conversion ledger + attribution windows
+                        └─► sitegen   renders the Pages site from the same data
+```
+
+## Commands
+
+```bash
+python3 -m engine.cli status         # verification + publish-gate state as JSON
+python3 -m engine.cli verify         # re-run ASIN + product-page checks (--online to hit amazon.com)
+python3 -m engine.cli rates          # print the official commission table
+python3 -m engine.cli rates --category Kitchen
+python3 -m engine.cli economics      # per-product unit economics, with missing inputs listed
+python3 -m engine.cli audit          # compliance evaluation of every generated draft
+python3 -m engine.cli audit --strict # non-zero exit if any draft is blocked
+python3 -m engine.cli content        # placeholder + disclosure status per draft
+python3 -m engine.cli links URL...   # would a compliant Special Link build from this URL?
+python3 -m engine.cli tracking       # rollups from data/tracking.jsonl
+python3 -m engine.cli build          # regenerate the site from data/*.json
+```
+
+Tests and CI:
+
+```bash
+python3 -m unittest discover -s tests     # 71 tests, stdlib only
+python3 tools/check_links.py              # links, per-row sourcing, CSS, disclosure
+```
+
+## How the "no hallucination" rule is enforced
+
+| Layer | Enforcement |
+|---|---|
+| `claims.Claim` | Raises `ValueError` if a non-verified status carries a value, or if a verified claim has no source. |
+| `datastore.Datastore.audit` | Build fails if any row asserting a fact has an unresolvable `source_id`, or if a flag has no evidence URL. |
+| `scoring` | Returns `None` + a list of missing verified inputs instead of a score. |
+| `economics` | `None` propagates through every calculation; no default rate, no averaging. |
+| `content` | Unverified fields become `[[UNVERIFIED: … ]]`; any surviving placeholder blocks publication. |
+| `policy.evaluate` | Blocking findings on missing disclosure, price alerts, incentives, bot clicks, self-purchases, cloaking, framing, extensions, ML-training use, competing-retailer promotion. |
+| `sitegen._self_check` | Refuses to write a page containing a leaked `None`, an unresolved placeholder, or a tagged link on a redirect host. |
+| `tracking.Ledger` | Empty ledger ⇒ every metric `null`; events tagged `synthetic-example` are rejected. |
+
+## Configuration
+
+Everything is optional. The engine must run with no credentials — and when it
+does, it reports *why it produced nothing* rather than producing something anyway.
+
+```jsonc
+// config.json (git-ignored). Never commit secrets.
+{
+  "marketplace": { "code": "US", "host": "www.amazon.com", "partner_tag": "yourtag-20" },
+  "require_clean_verification": true,
+  "price_display_allowed": false
+}
+```
+
+Environment overrides: `ZONE4_PARTNER_TAG`, `ZONE4_AMAZON_HOST`,
+`ZONE4_DATA_DIR`, `ZONE4_OAUTH_CLIENT_ID`, `ZONE4_OAUTH_CLIENT_SECRET`.
+
+## Connecting live Amazon data (the currently open path)
+
+Prerequisites are Amazon's, verified 2026-11-14 from
+[the official Creators API introduction](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction):
+
+1. enrolment in Amazon Associates for the target marketplace;
+2. **at least 10 qualifying sales within the past 30 days**;
+3. API registration through Associates Central (primary account owner only);
+4. generated credentials (OAuth 2.0 client-credentials).
+
+Only `engine.research.CreatorsAPIClient` needs to be completed, and only after a
+credential set exists. `GetItems`/`GetBrowseNodes` accept up to 10 ids per call
+([official FAQ](https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions)).
+Quotas are intentionally **not** coded here — see flag **ENG-F-007**: the third-party
+figures (1 TPS / 8,640 TPD) were not confirmed on an official page by this
+workspace, so `MarketplaceConfig.api_tps` / `api_tpd` stay `None` until read.
+
+## Deliberate omissions
+
+* **No price display.** `price_display_allowed=False` until the date/time-stamp
+  clause is confirmed first-hand (**ENG-F-006**).
+* **No earnings projection anywhere.** No authorized reporting is connected (**F-010**).
+* **No shortener/redirect hosts as affiliate links** (Participation Requirements §6(v)–(w)).
+* **No scraping fallback.** Substituting scraped or cached product data for the
+  API would trade a visible gap for an invisible policy violation.
+
+## Relationship to the published site
+
+The published pages in `docs/` are **not** rendered by this engine. They are generated from `data/*.json` by
+`scripts/build_site.py` and gated by `scripts/verify.py`, which enforces its own rules: every table row links
+an official host, every page carries the disclosure sentence, and no Amazon price or star rating may appear
+anywhere. The engine keeps its data in `data/engine-*.json` so the two pipelines never overwrite each other,
+and its own output (`build/site-preview/`) is gitignored and unpublished.
+
+Facts the engine verifies are pushed into the published site by editing the JSON under `data/`, then
+rebuilding — the engine never writes into `docs/`. Flag ids are namespaced accordingly: the site uses
+`F-nn`, the engine uses `ENG-F-nn`, and the two tables must not be merged without that prefix.
+
+Two tests in `tests/test_engine.py` guard this arrangement: one runs the full `build → check_links` cycle on
+the preview, the other re-runs `scripts/build_site.py` and `scripts/verify.py` so a change here cannot break
+what is live.

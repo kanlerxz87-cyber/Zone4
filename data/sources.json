@@ -93,7 +93,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1–2 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)–(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)–(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z). IP License sections 2(k) (text disclaimer) and 4 (Agent Terms), re-read 2026-11-14 (F-23, F-24)."
+      "used_for": "Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1\u20132 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)\u2013(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)\u2013(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z). IP License sections 2(k) (text disclaimer) and 4 (Agent Terms), re-read 2026-11-14 (F-23, F-24)."
     },
     {
       "id": "S-SCHED",
@@ -101,7 +101,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. Re-checked 2026-11-14: the URL still redirects to an Amazon sign-in page, so no rate could be read. The Program Policies Appendix links 'Standard Commission Income' to this same URL, so the rate is not on the policies page."
+      "used_for": "Would hold the category commission rates. Re-checked 2026-11-14: the URL still redirects to an Amazon sign-in page, so no rate could be read. The Program Policies Appendix links 'Standard Commission Income' to this same URL, so the rate is not on the policies page.",
+      "notes": "SUPERSEDED for the rate data on 2026-11-14: this sign-in-gated appendix URL still redirects to a login page, but the same Table 1 is published on the public help topic recorded as S-COMM, so the Kitchen band (4.50%) is now sourced. Kept so the earlier dead end is on record."
     },
     {
       "id": "S-COU",
@@ -150,6 +151,69 @@
       "publisher": "GitHub (official)",
       "accessible": false,
       "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
+    },
+    {
+      "id": "S-COMM",
+      "title": "Amazon Associates Standard Commission Income Statement (official Table 1 rate schedule)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "Fixed commission rates by category, bounty events, fine-art cap, 0.00% exclusions",
+      "notes": "Publicly readable without sign-in on 2026-11-14 (session arena/8592c4f6-zone4). Supersedes the assumption behind S-SCHED."
+    },
+    {
+      "id": "S-POL",
+      "title": "Amazon Associates Program Policies (stated update 2026-04-14)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "Session and attribution windows (24 h, 89-day cart, 180-day ship) and the Participation Requirements prohibitions encoded as site gates",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4; complements S-PP."
+    },
+    {
+      "id": "S-API",
+      "title": "Amazon Creators API documentation \u2014 introduction",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "API operations and the four access prerequisites, including 10 qualifying sales in 30 days",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
+      "id": "S-APIFAQ",
+      "title": "Amazon Creators API documentation \u2014 FAQ",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "OAuth 2.0 client-credentials flow, 10-identifier batching limit, per-marketplace approval",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4. Conflicts with the onboarding page on cross-marketplace use: see F-29."
+    },
+    {
+      "id": "S-ASIN",
+      "title": "Understanding ASINs \u2014 Amazon seller documentation",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "publisher": "Amazon (Sell on Amazon)",
+      "accessible": true,
+      "used_for": "An ASIN is 10 alphanumeric characters and follows /dp/ in the URL, which is why a 9-character short-link token is not an ASIN",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
+      "id": "S-GOOGLE",
+      "title": "Creating helpful, reliable, people-first content",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "Editorial self-assessment applied to generated drafts before the publish gate",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
+    },
+    {
+      "id": "S-IANA",
+      "title": "IANA root zone database \u2014 .amazon",
+      "url": "https://www.iana.org/domains/root/db/.amazon.html",
+      "publisher": "IANA",
+      "accessible": true,
+      "used_for": "'.amazon' is an active gTLD delegated to Amazon Registry Services since 2020-06-02, so link.amazon is Amazon-controlled",
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4."
     }
   ],
   "non_official_reference_only": [

@@ -1,0 +1,68 @@
+name: CI — engine tests, preview build, site integrity
+
+# Scope of this workflow: the automation engine (engine/), its data layer
+# (data/engine-*.json) and the generated preview site (build/site-preview).
+# The published site lives in docs/ and is built from data/*.json by
+# scripts/build_site.py; its own gates are in .github/workflows/site-checks.yml.
+# Both pipelines are run here so a change on either side cannot break the other.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Data files are valid JSON
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          ok = True
+          for f in sorted(pathlib.Path("data").glob("*.json")):
+              try:
+                  json.loads(f.read_text())
+                  print(f"ok   {f}")
+              except Exception as exc:
+                  ok = False
+                  print(f"FAIL {f}: {exc}")
+          sys.exit(0 if ok else 1)
+          PY
+
+      - name: Engine unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Data integrity gate (every asserted row must cite an official source)
+        run: python -c "import sys; sys.path.insert(0,'.'); from engine.datastore import Datastore; from engine.config import Config; Datastore(Config.load().data_dir); print('audit passed')"
+
+      - name: Compliance gate on generated drafts
+        run: python -m engine.cli audit
+
+      - name: Build the preview site (gitignored output dir)
+        run: python -m engine.cli build
+
+      - name: Site integrity check (links, per-row sourcing, CSS, disclosure)
+        run: python tools/check_links.py
+
+      - name: Published site rebuilds from data/
+        run: python3 scripts/build_site.py
+
+      - name: Published site checks (links, anchors, disclosure, row sources, policy guards)
+        run: python3 scripts/verify.py
+
+      - name: Committed docs/ matches the build
+        run: git diff --exit-code -- docs
+
+      - name: No whitespace errors
+        run: git diff --check

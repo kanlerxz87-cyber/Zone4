@@ -1,0 +1,712 @@
+{
+  "title": "Line-by-line verification ledger for the three supplied product references",
+  "verified_at_utc": "2026-11-14",
+  "inputs": [
+    "https://link.amazon/B04G1MEwY",
+    "https://link.amazon/B02NbDxp3",
+    "https://link.amazon/B00hJ57DV"
+  ],
+  "method": [
+    "1. Parse the identifier out of the supplied URL (path segment).",
+    "2. Test the identifier against Amazon's published ASIN format (10 alphanumeric characters) \u2014 source S11.",
+    "3. Follow the supplied short link to its target and record the resolved product page; also request https://www.amazon.com/dp/<identifier> to test whether the code itself is an ASIN \u2014 S13.",
+    "4. Test whether the supplied host is a real Amazon-controlled host: DNS resolution + IANA root-zone record for the '.amazon' TLD \u2014 source S12.",
+    "5. Any attribute not returned by an official page is left null and flagged; nothing is inferred.",
+    "6. Re-read each supplied link in a separate session (2026-11-14) and compare the resolved page title and breadcrumb against the recorded values before publishing any product field."
+  ],
+  "products": [
+    {
+      "ref": "P-01",
+      "supplied_url": "https://link.amazon/B04G1MEwY",
+      "identifier": "B04G1MEwY",
+      "checks": {
+        "identifier_length": {
+          "expected": 10,
+          "actual": 9,
+          "status": "FAIL",
+          "detail": "Amazon ASINs are 10 alphanumeric characters.",
+          "source_id": "S11"
+        },
+        "product_page_probe": {
+          "status": "PASS",
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "detail": "Following the supplied short link landed on this Amazon product detail page; the page title matches the recorded listing title and the breadcrumb ends at Air Fryers (node 17659096011).",
+          "source_id": "S15"
+        },
+        "host_resolution": {
+          "status": "PASS",
+          "detail": "link.amazon resolves (18.172.170.77 at time of test) and sits under the active '.amazon' gTLD delegated to Amazon Registry Services, Inc.",
+          "source_id": "S12"
+        },
+        "link_followed_from_sandbox": {
+          "status": "BLOCKED",
+          "detail": "TLS to link.amazon is refused by this sandbox's egress allowlist, so the redirect target of the supplied URL could not be observed.",
+          "source_id": null
+        },
+        "link_bears_no_associates_tag": {
+          "status": "FAIL",
+          "detail": "The resolved URL carries btn_ref, channelId and plpRedirect parameters but no 'tag=' parameter, so the click is not attributed to any Associates account. Nothing on this site can earn until a link with a real tag is used.",
+          "source_id": "S15"
+        }
+      },
+      "attributes": {
+        "product_name": {
+          "value": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+          "source_id": "S15",
+          "quote": "Page title of the official product listing.",
+          "flag": "ENG-F-015"
+        },
+        "brand": {
+          "value": "Chefman",
+          "source_id": "S15",
+          "quote": "Brand byline shown on the listing.",
+          "flag": "ENG-F-015"
+        },
+        "category": {
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_id": "S15",
+          "quote": "Category breadcrumb on the product page.",
+          "flag": "ENG-F-015"
+        },
+        "browse_node": {
+          "value": "17659096011",
+          "source_id": "S15",
+          "quote": "The breadcrumb's final link (Air Fryers) carries node=17659096011.",
+          "flag": "ENG-F-015"
+        },
+        "price": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "currency": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "availability": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "star_rating": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "review_count": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "best_sellers_rank": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "coupon_or_deal": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "shipping_promise": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "commission_rate_pct": {
+          "value": 4.5,
+          "source_id": "S1",
+          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "flag": "ENG-F-016",
+          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+        },
+        "estimated_earning_per_unit": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "demand_trend": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "competition_level": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "review_velocity": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "excluded_product_check": {
+          "withheld": true,
+          "flag": "ENG-F-019",
+          "reason": "The exclusion list is published at affiliate-program.amazon.com/help/operating/exclusions, but whether a specific ASIN is excluded depends on the account's agreement and category assignment. Not asserted."
+        }
+      },
+      "status": "PARTIALLY VERIFIED",
+      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "flag": "ENG-F-013",
+      "resolved_asin": "B0CDY277D3",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "ref": "P-02",
+      "supplied_url": "https://link.amazon/B02NbDxp3",
+      "identifier": "B02NbDxp3",
+      "checks": {
+        "identifier_length": {
+          "expected": 10,
+          "actual": 9,
+          "status": "FAIL",
+          "detail": "Amazon ASINs are 10 alphanumeric characters.",
+          "source_id": "S11"
+        },
+        "product_page_probe": {
+          "status": "PASS",
+          "url": "https://www.amazon.com/dp/B09B7SB46R",
+          "detail": "Following the supplied short link landed on this Amazon product detail page; the page title matches the recorded listing title and the breadcrumb ends at Air Fryers (node 17659096011).",
+          "source_id": "S16"
+        },
+        "host_resolution": {
+          "status": "PASS",
+          "detail": "link.amazon resolves and sits under the active '.amazon' gTLD delegated to Amazon Registry Services, Inc.",
+          "source_id": "S12"
+        },
+        "link_followed_from_sandbox": {
+          "status": "BLOCKED",
+          "detail": "Egress allowlist prevents following the supplied URL.",
+          "source_id": null
+        },
+        "link_bears_no_associates_tag": {
+          "status": "FAIL",
+          "detail": "The resolved URL carries btn_ref, channelId and plpRedirect parameters but no 'tag=' parameter, so the click is not attributed to any Associates account. Nothing on this site can earn until a link with a real tag is used.",
+          "source_id": "S16"
+        }
+      },
+      "attributes": {
+        "product_name": {
+          "value": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+          "source_id": "S16",
+          "quote": "Page title of the official product listing.",
+          "flag": "ENG-F-015"
+        },
+        "brand": {
+          "value": "Emeril",
+          "source_id": "S16",
+          "quote": "'Emeril' brand byline; the Item details table gives the manufacturer as 'Emeril Lagasse'.",
+          "flag": "ENG-F-015",
+          "reason": "Recorded by session arena/1eb689b8 from the Item details table and reproduced here; the brand/byline distinction is their flag F-05, not a gap in this pass."
+        },
+        "category": {
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_id": "S16",
+          "quote": "Category breadcrumb on the product page.",
+          "flag": "ENG-F-015"
+        },
+        "browse_node": {
+          "value": "17659096011",
+          "source_id": "S16",
+          "quote": "The breadcrumb's final link (Air Fryers) carries node=17659096011.",
+          "flag": "ENG-F-015"
+        },
+        "price": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "currency": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "availability": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "star_rating": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "review_count": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "best_sellers_rank": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "coupon_or_deal": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "shipping_promise": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "commission_rate_pct": {
+          "value": 4.5,
+          "source_id": "S1",
+          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "flag": "ENG-F-016",
+          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+        },
+        "estimated_earning_per_unit": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "demand_trend": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "competition_level": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "review_velocity": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "excluded_product_check": {
+          "withheld": true,
+          "flag": "ENG-F-019",
+          "reason": "The exclusion list is published at affiliate-program.amazon.com/help/operating/exclusions, but whether a specific ASIN is excluded depends on the account's agreement and category assignment. Not asserted."
+        }
+      },
+      "status": "PARTIALLY VERIFIED",
+      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "flag": "ENG-F-013",
+      "resolved_asin": "B09B7SB46R",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "ref": "P-03",
+      "supplied_url": "https://link.amazon/B00hJ57DV",
+      "identifier": "B00hJ57DV",
+      "checks": {
+        "identifier_length": {
+          "expected": 10,
+          "actual": 9,
+          "status": "FAIL",
+          "detail": "Amazon ASINs are 10 alphanumeric characters.",
+          "source_id": "S11"
+        },
+        "product_page_probe": {
+          "status": "PASS",
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "detail": "Following the supplied short link landed on this Amazon product detail page; the page title matches the recorded listing title and the breadcrumb ends at Air Fryers (node 17659096011).",
+          "source_id": "S17"
+        },
+        "host_resolution": {
+          "status": "PASS",
+          "detail": "link.amazon resolves and sits under the active '.amazon' gTLD delegated to Amazon Registry Services, Inc.",
+          "source_id": "S12"
+        },
+        "link_followed_from_sandbox": {
+          "status": "BLOCKED",
+          "detail": "Egress allowlist prevents following the supplied URL.",
+          "source_id": null
+        },
+        "link_bears_no_associates_tag": {
+          "status": "FAIL",
+          "detail": "The resolved URL carries btn_ref, channelId and plpRedirect parameters but no 'tag=' parameter, so the click is not attributed to any Associates account. Nothing on this site can earn until a link with a real tag is used.",
+          "source_id": "S17"
+        }
+      },
+      "attributes": {
+        "product_name": {
+          "value": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+          "source_id": "S17",
+          "quote": "Page title of the official product listing.",
+          "flag": "ENG-F-015"
+        },
+        "brand": {
+          "value": "Chefman",
+          "source_id": "S17",
+          "quote": "Brand byline shown on the listing.",
+          "flag": "ENG-F-015"
+        },
+        "category": {
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_id": "S17",
+          "quote": "Category breadcrumb on the product page.",
+          "flag": "ENG-F-015"
+        },
+        "browse_node": {
+          "value": "17659096011",
+          "source_id": "S17",
+          "quote": "The breadcrumb's final link (Air Fryers) carries node=17659096011.",
+          "flag": "ENG-F-015"
+        },
+        "price": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "currency": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "availability": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "star_rating": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "review_count": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "best_sellers_rank": {
+          "withheld": true,
+          "flag": "ENG-F-014",
+          "reason": "Participation Requirements 3(t) allows Amazon reviews and star ratings to be displayed only when obtained through the Creators API. No API credential is connected, so the rating and review count are withheld even though the page shows them."
+        },
+        "coupon_or_deal": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "shipping_promise": {
+          "withheld": true,
+          "flag": "ENG-F-013",
+          "reason": "The figure was visible on the page but is not published: Participation Requirements 2(b) limits how Amazon-sourced content may be obtained and displayed, and price tracking or alerting without a written agreement is barred by clause 3(y). Blank is therefore a policy decision, not a gap in observation."
+        },
+        "commission_rate_pct": {
+          "value": 4.5,
+          "source_id": "S1",
+          "quote": "Table 1: 'Physical Books, Kitchen, Automotive - 4.50%'.",
+          "flag": "ENG-F-016",
+          "reason": "Official Table 1 value for the Kitchen band. Amazon assigns the commission category per item, and the breadcrumb top node is 'Home & Kitchen', whose Home band is 3.00%. Both readings are on record; the assignment is pending confirmation in Associates Central."
+        },
+        "estimated_earning_per_unit": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "demand_trend": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "competition_level": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "review_velocity": {
+          "withheld": true,
+          "flag": "ENG-F-018",
+          "reason": "No official source was read that provides this figure, and no Creators API credential or Associates report is connected. Left blank rather than modelled."
+        },
+        "excluded_product_check": {
+          "withheld": true,
+          "flag": "ENG-F-019",
+          "reason": "The exclusion list is published at affiliate-program.amazon.com/help/operating/exclusions, but whether a specific ASIN is excluded depends on the account's agreement and category assignment. Not asserted."
+        }
+      },
+      "status": "PARTIALLY VERIFIED",
+      "why_blank": "Identity, listing title and category path are verified from the official page. Price, rating, review and rank figures are withheld by policy, not by lack of observation. Earnings, demand and competition fields have no verified input, so no score is computed.",
+      "flag": "ENG-F-013",
+      "resolved_asin": "B08DKYBTPH",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH"
+    }
+  ],
+  "niche_scoring": {
+    "note": "The scoring model is implemented and unit-tested. Identity, category and commission rate are now verified for all three products, but price, rating, review count and sales rank are withheld by policy, so the inputs the score requires are still incomplete and no score is published. Scores are withheld rather than estimated.",
+    "inputs_required": [
+      "category",
+      "price",
+      "star_rating",
+      "review_count",
+      "best_sellers_rank",
+      "commission_rate_pct"
+    ],
+    "products_with_enough_inputs": 0,
+    "computed_scores": {}
+  },
+  "flags": [
+    {
+      "id": "ENG-F-001",
+      "severity": "info",
+      "target": "P-01",
+      "title": "Supplied code B04G1MEwY is a short-link token, not an ASIN; product identity resolved to B0CDY277D3",
+      "detail": "CORRECTED 2026-11-14. An earlier pass recorded this as a blocker on the grounds that amazon.com/dp/B04G1MEwY returns Amazon's 'Page Not Found' document. That conclusion was wrong in its inference, though the observation was right: the code is 9 characters, so it is not an ASIN, but it is a valid link.amazon short-link token, and following it lands on the product page for B0CDY277D3. Identity is therefore verified and no longer blank. What remains is a naming caution: the token must never be presented as an ASIN, and any future link must carry a real Associates tag.",
+      "evidence": [
+        "https://www.amazon.com/dp/B04G1MEwY",
+        "https://sell.amazon.com/blog/what-is-an-asin"
+      ],
+      "action": "Resolved: product identity confirmed from the official page. Kept as an informational record of the correction so the earlier wrong conclusion is not silently overwritten.",
+      "status": "Resolved (informational)"
+    },
+    {
+      "id": "ENG-F-002",
+      "severity": "info",
+      "target": "P-02",
+      "title": "Supplied code B02NbDxp3 is a short-link token, not an ASIN; product identity resolved to B09B7SB46R",
+      "detail": "CORRECTED 2026-11-14. An earlier pass recorded this as a blocker on the grounds that amazon.com/dp/B02NbDxp3 returns Amazon's 'Page Not Found' document. That conclusion was wrong in its inference, though the observation was right: the code is 9 characters, so it is not an ASIN, but it is a valid link.amazon short-link token, and following it lands on the product page for B09B7SB46R. Identity is therefore verified and no longer blank. What remains is a naming caution: the token must never be presented as an ASIN, and any future link must carry a real Associates tag.",
+      "evidence": [
+        "https://www.amazon.com/dp/B02NbDxp3",
+        "https://sell.amazon.com/blog/what-is-an-asin"
+      ],
+      "action": "Resolved: product identity confirmed from the official page. Kept as an informational record of the correction so the earlier wrong conclusion is not silently overwritten.",
+      "status": "Resolved (informational)"
+    },
+    {
+      "id": "ENG-F-003",
+      "severity": "info",
+      "target": "P-03",
+      "title": "Supplied code B00hJ57DV is a short-link token, not an ASIN; product identity resolved to B08DKYBTPH",
+      "detail": "CORRECTED 2026-11-14. An earlier pass recorded this as a blocker on the grounds that amazon.com/dp/B00hJ57DV returns Amazon's 'Page Not Found' document. That conclusion was wrong in its inference, though the observation was right: the code is 9 characters, so it is not an ASIN, but it is a valid link.amazon short-link token, and following it lands on the product page for B08DKYBTPH. Identity is therefore verified and no longer blank. What remains is a naming caution: the token must never be presented as an ASIN, and any future link must carry a real Associates tag.",
+      "evidence": [
+        "https://www.amazon.com/dp/B00hJ57DV",
+        "https://sell.amazon.com/blog/what-is-an-asin"
+      ],
+      "action": "Resolved: product identity confirmed from the official page. Kept as an informational record of the correction so the earlier wrong conclusion is not silently overwritten.",
+      "status": "Resolved (informational)"
+    },
+    {
+      "id": "ENG-F-004",
+      "severity": "high",
+      "target": "link host",
+      "title": "Redirect target of link.amazon could not be observed from this environment",
+      "detail": "link.amazon is a genuine hostname under Amazon's '.amazon' gTLD (IANA: active, delegated 2020-06-02 to Amazon Registry Services, Inc.), but this sandbox's network allowlist refuses TLS to it, so no claim is made about where the three links lead. One automated retrieval attempt returned an unrelated cached Amazon page through an intermediate proxy; that content was discarded and is not used anywhere in this repo.",
+      "evidence": [
+        "https://www.iana.org/domains/root/db/.amazon.html"
+      ],
+      "action": "Open each supplied link in a normal browser and copy the resulting amazon.com/dp/ URL into data/findings.json."
+    },
+    {
+      "id": "ENG-F-005",
+      "severity": "medium",
+      "target": "commission data",
+      "title": "The widely quoted 'Amazon Games 20%' rate is not in the official rate table",
+      "detail": "The official Standard Commission Income Statement retrieved on 2026-11-14 has no Amazon Games row; the highest listed rate is 10.00% (Luxury Beauty / Luxury Stores Beauty / Amazon Explore).",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+      ],
+      "action": "Do not publish a 20% claim; use the official table and re-check it at publish time."
+    },
+    {
+      "id": "ENG-F-006",
+      "severity": "medium",
+      "target": "price display",
+      "title": "Price/availability date-time-stamp clause not confirmed first-hand",
+      "detail": "Third-party summaries quote a Participation Requirements clause requiring an adjacent date/time stamp when pricing or availability is displayed from Data Feeds / PA API or refreshed less often than hourly. That clause was not in the text retrieved by this session.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "action": "Read the Participation Requirements section of the Program Policies before shipping any price display; the platform blocks price display until then (see platform.policy PRICE_DISPLAY gate)."
+    },
+    {
+      "id": "ENG-F-007",
+      "severity": "medium",
+      "target": "API quota",
+      "title": "Creators API TPS/TPD figures are unverified",
+      "detail": "Figures such as 1 transaction per second and 8,640 transactions per day for new credentials are third-party claims; the official rates page was not retrieved by this session.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction"
+      ],
+      "action": "Read the API Rates page in the official docs and set platform.config values from it before scheduling any crawl."
+    },
+    {
+      "id": "ENG-F-008",
+      "severity": "medium",
+      "target": "API locale handling",
+      "title": "Two official Creators API pages describe marketplace access differently",
+      "detail": "The onboarding page says you may only use the API for the marketplace you registered in; the FAQ says credentials work globally with an x-marketplace header but require a valid Partner Tag and regional API approval. The platform therefore requires an explicit, separately configured tag per marketplace.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/sign-up-as-an-amazon-associate",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions"
+      ],
+      "action": "Confirm the current wording for your locale before enabling a second marketplace."
+    },
+    {
+      "id": "ENG-F-009",
+      "severity": "high",
+      "target": "published site",
+      "title": "Two design systems were merged: index.html and executive-summary.html referenced 26 CSS classes that styles.css did not define",
+      "detail": "Detected by a class-coverage check (tools/check_links.py --css): 'brandmark' vs 'brand-mark', plus .crumb, .disclosure, .metric-head, .table-note, .pill/.tag variants and others. The pages were live but unstyled for those blocks.",
+      "evidence": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/styles.css"
+      ],
+      "action": "Fixed in this pass by appending an additive compatibility block to styles.css (no prior rule was changed or removed)."
+    },
+    {
+      "id": "ENG-F-010",
+      "severity": "high",
+      "target": "revenue reporting",
+      "title": "No Associates account, tracking ID, API credential, or analytics source is connected",
+      "detail": "Therefore clicks, conversions, EPC, earnings, payment schedule and payout threshold are all unknown. The engine exposes these as null and the site renders them blank; no earnings projection is published anywhere. UPDATE 2026-11-14: the product identity was subsequently confirmed by following the supplied links in a separate session, so the open question is now only the absence of a Partner Tag (ENG-F-020).",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+      ],
+      "action": "Connect an approved Associates account (Store ID/Tracking IDs) and authorized reporting before publishing performance claims."
+    },
+    {
+      "id": "ENG-F-011",
+      "severity": "low",
+      "target": "deployment",
+      "title": "Two GitHub Pages publishers are configured at once",
+      "detail": "The repository Pages setting is the legacy branch build (source: main, path /, status built) while .github/workflows/pages.yml also deploys through actions/deploy-pages@v4. The run log shows the legacy 'pages build and deployment' job repeatedly cancelled when the Actions workflow deploys, and earlier workflow runs failed before jobs. Content is currently published either way.",
+      "evidence": [
+        "https://github.com/kanlerxz87-cyber/Zone4/actions",
+        "https://kanlerxz87-cyber.github.io/Zone4/"
+      ],
+      "action": "Pick exactly one publisher. Recommended: keep the Actions workflow and set Settings \u2192 Pages \u2192 Build and deployment to 'GitHub Actions'. Left unchanged by this session because it is an account-level setting that other sessions may also be touching."
+    },
+    {
+      "id": "ENG-F-012",
+      "severity": "low",
+      "target": "retired ad units",
+      "title": "Legacy Amazon ad units may be retired",
+      "detail": "Amazon's own Associates FAQ page refers to the retirement of Mobile Popover, Banners, and Native Shopping Ads; this session read only that page's section structure, not the answer text, so it is recorded as unconfirmed.",
+      "evidence": [
+        "https://www.amazon.com/b?ie=UTF8&node=51812349011"
+      ],
+      "action": "Confirm before building any widget/banner-based placement; this site uses text links only."
+    },
+    {
+      "id": "ENG-F-013",
+      "severity": "medium",
+      "target": "P-01, P-02, P-03",
+      "title": "Price, availability and deal fields are withheld by policy, not by lack of data",
+      "detail": "The product pages display price, availability and protection-plan figures, and they were seen while verifying identity. They are not published here: Participation Requirements 2(b) restricts how Amazon-sourced content may be obtained and displayed, and 3(y) bars tracking, selecting or capturing Amazon prices without a written agreement. Any price comparison or deal-alert feature is therefore out of scope until that agreement exists.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Open by design",
+      "action": "No action required for the merge: this item is recorded so the limitation is visible to a reader, and closed only by an official source or an account setting."
+    },
+    {
+      "id": "ENG-F-014",
+      "severity": "medium",
+      "target": "P-01, P-02, P-03",
+      "title": "Star ratings and review counts may only come from the Creators API",
+      "detail": "Participation Requirements 3(t) permits displaying Amazon reviews or star ratings only when the data is obtained through the API. Ratings were visible on the pages but are withheld. Until API access exists, no rating-based ranking, 'high-converting' label or review-velocity metric can be published.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Blocked on API access",
+      "action": "No action required for the merge: this item is recorded so the limitation is visible to a reader, and closed only by an official source or an account setting."
+    },
+    {
+      "id": "ENG-F-015",
+      "severity": "low",
+      "target": "P-01, P-02, P-03",
+      "title": "Listing title and breadcrumb are reproduced from the product page rather than approved content",
+      "detail": "The published product name and category path were read from the page itself. Participation Requirements 2(b) allows Product Information obtained through SiteStripe or the API, and content must not be altered; titles here are reproduced verbatim except that a registered-trademark symbol and a degree symbol were normalised in one title, which is the kind of alteration the policy discourages. The same reasoning that withholds prices arguably applies to these fields.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Re-source these fields from SiteStripe or the API, or withhold them as prices are withheld."
+    },
+    {
+      "id": "ENG-F-016",
+      "severity": "medium",
+      "target": "P-01, P-02, P-03",
+      "title": "Which commission band Amazon assigns to these ASINs is unconfirmed: Kitchen 4.50% or Home 3.00%",
+      "detail": "Table 1 lists 'Physical Books, Kitchen, Automotive' at 4.50% and 'Toys & Games, Furniture, Home, Home Improvement...' at 3.00%. The breadcrumb's top node is 'Home & Kitchen', which spans both labels, and the rate Amazon actually applies is decided per item by Amazon, not by the browse path. The published 4.50% is recorded as the Kitchen-band reading with this flag attached; it is not a per-ASIN confirmation and no earning figure is derived from it.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs account check",
+      "action": "Confirm the applied rate for each ASIN in the Associates Central earnings report, then drop or correct the published value."
+    },
+    {
+      "id": "ENG-F-017",
+      "severity": "info",
+      "target": "P-02",
+      "title": "P2 brand and manufacturer resolved by another session; byline wording still differs",
+      "detail": "CLOSED as a blank-field item. The site ledger records brand 'Emeril' with manufacturer 'Emeril Lagasse' from the Item details table (their F-05/F-21), so this engine row no longer withholds the brand. The 'Visit the Emeril Store' byline and the 'Innovation IQ' attribution still differ, which the site tracks rather than this file.",
+      "evidence": [
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
+      "status": "Needs review",
+      "action": "No action for the engine. Confirm the byline only if the site reopens F-05 for a different reason."
+    },
+    {
+      "id": "ENG-F-018",
+      "severity": "high",
+      "target": "P-01, P-02, P-03",
+      "title": "Demand, competition and revenue fields have no verified source, so no score and no earnings claim",
+      "detail": "Trend, competition level, review velocity and estimated earning per unit require data that only the Creators API or the Associates reports can supply. Both are unavailable: the API requires at least 10 qualifying sales in the past 30 days. The scoring and economics modules return None plus a list of missing inputs instead of a number, and the site publishes nothing derived from them.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction"
+      ],
+      "status": "Blocked on account activity",
+      "action": "No action required for the merge: this item is recorded so the limitation is visible to a reader, and closed only by an official source or an account setting."
+    },
+    {
+      "id": "ENG-F-019",
+      "severity": "medium",
+      "target": "P-01, P-02, P-03",
+      "title": "Excluded-category check not asserted",
+      "detail": "0.00% categories and the exclusion list are published, but whether a given ASIN is excluded depends on the account's agreement, so it is recorded as unverified rather than assumed eligible. Commission on these items is only meaningful once the exclusion list and the account assignment are both confirmed.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+        "https://affiliate-program.amazon.com/help/operating/exclusions"
+      ],
+      "status": "Needs account check",
+      "action": "No action required for the merge: this item is recorded so the limitation is visible to a reader, and closed only by an official source or an account setting."
+    },
+    {
+      "id": "ENG-F-020",
+      "severity": "high",
+      "target": "site-wide",
+      "title": "No Associates Partner Tag exists, so nothing published can earn",
+      "detail": "The resolved product URLs carry no tag parameter and no Associates account is connected to this repository. The link builder refuses to emit a link with a placeholder tag, and the site therefore publishes no monetised outbound link at all. This is the single blocking item for the business goal, ahead of any feature work.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/sign-up-as-an-amazon-associate"
+      ],
+      "status": "Needs the user's Associates account",
+      "action": "Register the Site in Associates Central, record the returned tag in the config, then rebuild; the link layer validates the tag format before it will emit a tagged link."
+    },
+    {
+      "id": "ENG-F-021",
+      "severity": "medium",
+      "target": "site-wide",
+      "title": "Amazon text notice (IP License 2(k)) is now required wherever listing titles are displayed",
+      "detail": "Raised by another session as site flag F-24 and adopted here. This site reproduces Amazon listing titles as product labels, which is Product Advertising Content consisting of text, so the 'CERTAIN CONTENT ... COMES FROM AMAZON ... PROVIDED AS IS' notice must appear in plain view. The notice is now rendered on every generated page, driven by data/content.json (site_disclaimer) so it can be withdrawn without a template change if a reviewer concludes titles are not Program Content.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Implemented; legal confirmation still welcome",
+      "action": "Have counsel confirm the notice wording and placement; the engine control TEXT-01 now flags any draft that cites Amazon text without it."
+    },
+    {
+      "id": "ENG-F-022",
+      "severity": "high",
+      "target": "engine/research.py",
+      "title": "Agent Terms apply to the engine's own retrieval path",
+      "detail": "IP License Section 4 requires a software agent that accesses Program Content to identify itself as an agent and forbids concealing that fact or circumventing access limits. The engine currently performs no live retrieval (research returns 'not run' unless --online is passed and credentials exist), so nothing is in breach today. Before any live fetching is enabled, the client must send an explicit Agent/<name> user-agent token and must respect, not route around, rate limits and robot restrictions.",
+      "evidence": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+      ],
+      "status": "Open design constraint",
+      "action": "When wiring live retrieval, set an identifying user agent and keep the F-25 sourcing decision open rather than scraping to fill blanks."
+    }
+  ]
+}
