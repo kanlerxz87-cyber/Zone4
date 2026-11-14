@@ -1,19 +1,15 @@
-# Northstar — source-led affiliate research dashboard
+# MarketPilot — Amazon Affiliate Research Desk
 
-A lightweight, static GitHub Pages site for organizing affiliate product research with an evidence-first policy. It includes an overview dashboard, product evidence ledger, strategy and policy summary, and a flagged-for-review page.
+A static GitHub Pages dashboard prototype for evidence-led affiliate product research. It organizes supplied product URLs, summarizes research gaps and surfaces unverified items instead of inventing product attributes or performance claims.
+
+## Pages
+- **Overview** — high-level research status and submitted product table.
+- **Product research** — structured catalog with unverified fields intentionally blank.
+- **Executive summary** — mandate, evidence status, recommendations and compliance guardrails.
+- **Flagged for Review** — source links and unresolved items.
 
 ## Run locally
+Open `index.html` in a browser. The site has no build-time dependencies or backend. GitHub Actions validates in-page links and deploys the static site to GitHub Pages when changes reach `main` (Pages must be enabled with GitHub Actions in repository settings).
 
-Open `index.html` in a browser, or serve the repository root with any static web server. No build step or dependencies are required.
-
-## Publish on GitHub Pages
-
-The workflow in `.github/workflows/pages.yml` deploys the repository root when changes are pushed to `main` or via manual workflow dispatch. In repository settings, configure Pages to use **GitHub Actions**. Deployment cannot be confirmed until that workflow runs in the target repository.
-
-## Research limitations
-
-The three supplied references are listed in `products.html`. Product identity, current product details, pricing, ratings, reviews, demand, competition, commission, and affiliate-link status are intentionally blank because they were not confirmed from official product or Associates sources. See `flagged.html` for unresolved items and `insights.html` for linked official policy sources. No live Amazon APIs, tracking, publishing, or conversion analytics have been implemented; the site does not imply otherwise.
-
-Amazon Associates policies: https://affiliate-program.amazon.com/help/operating/policies
-
-FTC Endorsement Guides FAQ: https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking
+## Evidence limits
+Product identity, prices, categories, ratings, commissions, trends, competition and conversion performance were not independently confirmed. The supplied `link.amazon` URLs are reproduced verbatim; their destination and validity remain unverified. No Amazon API, affiliate account, analytics or publishing service is connected. See the site's **Flagged for Review** page and `COORDINATION.md` for the verification log.
