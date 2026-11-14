@@ -55,10 +55,12 @@
         "F-07",
         "F-09",
         "F-10",
-        "F-15"
+        "F-15",
+        "F-28"
       ],
       "special_feature": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20."
+      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
+      "manufacturer": ""
     },
     {
       "id": "P2",
@@ -66,7 +68,7 @@
       "name_short": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
       "name_listing": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
       "subcategory": "Air fryer toaster ovens",
-      "brand": "Unresolved: store 'Emeril Store'; byline 'Innovation IQ'",
+      "brand": "Emeril",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
       "capacity": "24.6 liters",
@@ -106,10 +108,13 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-26"
+        "F-26",
+        "F-28"
       ],
       "special_feature": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20."
+      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
+      "manufacturer": "Emeril Lagasse",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string is the name of an Amazon Influencer who wrote the customer review attached to this listing, not the brand. The brand is therefore confirmed. See F-05."
     },
     {
       "id": "P3",
@@ -155,10 +160,12 @@
         "F-08",
         "F-09",
         "F-10",
-        "F-15"
+        "F-15",
+        "F-28"
       ],
       "special_feature": "Automatic Shut-Off, LED Shake Reminder, Programmable",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20."
+      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
+      "manufacturer": ""
     }
   ]
 }

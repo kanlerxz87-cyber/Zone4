@@ -10,16 +10,18 @@
       "Pricing and ratings withheld: the Associates Participation Requirements (Section 2(b) for prices and availability, Section 6(t) for star ratings and customer reviews) allow those figures on a site only through Amazon-served links or Creators API / PA API. The pages were read, but no price, rating or review count is published (F-02).",
       "Commission potential not calculable: the category commission schedule is behind an Amazon sign-in, so no rate is entered (F-01). Third-party sources conflict on the Kitchen rate, so they are listed as non-official references and are not used as data.",
       "Attribution unverified: the resolved links carry no Associates tag parameter (F-03). Confirm the links were generated under your Associates ID before relying on any earnings.",
-      "The automation and tracking plan is built and specified, with every metric left blank: click, order, unit-session and revenue reporting need Associates reporting and a tagged link (F-19); price tracking is prohibited by default (F-22); API reuse and model training need prior written approval (F-24).",
+      "The automation and tracking plan is built and specified, with every metric left blank: a first-party, local-only click tracker is implemented and starts at zero (Analytics page), but click-to-order attribution, unit-session and revenue reporting need Associates reporting and a tagged link (F-19); price tracking is prohibited by default (F-22); API reuse and model training need prior written approval (F-24).",
       "Agent Terms apply to the research agent in the brief: any agent that touches Program Content must identify itself as 'Agent/[name]' in the user agent string, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits (F-21).",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content and using robots for extraction (F-11), and Amazon Marks must not be used as search keywords (F-23).",
-      "Site: static GitHub Pages site; the repository root redirects to the site in docs/. Every table row links to an official source, and unverified values are blank and flagged."
+      "Site: static GitHub Pages site; the repository root redirects to the site in docs/. Every table row links to an official source, and unverified values are blank and flagged.",
+      "Measured, not modelled: the Analytics page records real clicks in the visitor's own browser and exports them as JSON or CSV. It sends nothing to any server, it never invents a figure, and the only non-click event it can write is one explicitly labelled a test. The tracked links are the supplied short links, which still carry no visible Associates tag, so a recorded click cannot yet be reconciled against Amazon reporting."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and confirm amazon.com is the intended storefront (F-09).",
       "Read the category commission rate from Associates Central and send it for entry (F-01).",
       "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16, F-25).",
       "Decide whether the research agent may be automated at all, and if so implement the Agent Terms user agent string and transparency rules first (F-21, F-11).",
+      "Confirm whether a local, browser-only click log is acceptable for the audience, and add a cookie or consent notice before enabling it on real traffic.",
       "Decide whether to keep prices and ratings withheld, given that price tracking and alerting are prohibited by default (F-22).",
       "Ask the seller for P2's correct cooking function count and its brand (F-05, F-26)."
     ]
@@ -166,6 +168,15 @@
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
       "confidence": "Verified"
+    },
+    {
+      "id": "A-15",
+      "finding": "First-party click measurement can be built without the Associates API and without violating the artificial-clicks rule.",
+      "basis": "Participation Requirement 6(s) bars artificially generated clicks or impressions. The Analytics page generates no click: it observes real user clicks on tracked links and stores them in the visitor's own browser, with no network call and no estimated figure. Attribution to orders or commission still needs the official Associates reporting and a tagged link, so those cells stay blank. Flag F-19.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
     }
   ],
   "categories": {
@@ -192,13 +203,13 @@
     }
   },
   "not_built": [
-    "Automated product research at scale (needs a compliance decision under the Agent Terms, and Creators API / PA API access rather than page retrieval). Flags F-11, F-21, F-19.",
+    "Conversion, order, unit-session and revenue attribution (needs Associates reporting and a tagged link). The Analytics page records first-party clicks locally and publishes no attributed figure. Flag F-19.",
+    "Automated product research at scale (needs a compliance decision under the Agent Terms, and Creators API access rather than page retrieval). Flags F-11, F-21.",
     "Price, rating and review analysis on the public site (withheld under 2(b) and 6(t), and price tracking is prohibited by default). Flags F-02, F-22.",
     "Commission calculations and earnings projections (needs the category rate from the signed-in schedule). Flag F-01.",
-    "Click, conversion and revenue tracking (needs Associates reporting and a tagged link). Flag F-19.",
     "API integration of any kind, including reusing or fine-tuning on API content (needs express prior written approval). Flags F-16, F-24, F-25.",
     "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
     "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",
-    "Campaign optimisation (needs the tracking data above; the loop itself is specified on the Automation page)."
+    "Campaign optimisation (needs the attributed data above; the loop itself is specified on the Automation page)."
   ]
 }

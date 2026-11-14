@@ -12,10 +12,11 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
-| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, PR to `main`, Pages deploy check | **done**; 13 pages built and verified, PR merged, Pages `built` | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
+| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, PR to `main`, Pages deploy check | **in progress**; 14 pages built and verified locally; merging `origin/main` (PRs #17, #20, #21) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
 
 | Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **done** on the branch; PR and merge recorded in the log below | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
+| Re-verification of P1–P3 and policy text, data corrections (P2 brand, flags F-05/F-09/F-10/F-13, new policy flags), site rebuild, PR and Pages check | **done**; PR [#20](https://github.com/kanlerxz87-cyber/Zone4/pull/20) merged at `0762959`; its section-number correction was independently re-confirmed and kept | arena/7cfe23f4-zone4 | `data/products.json`, `data/flags.json`, `data/sources.json`, `data/policies.json`, `data/content.json`, `scripts/build_site.py`, `docs/` (generated), `README.md`, `COORDINATION.md` |
 
 ## Original PR #7 branch note (historical)
 
@@ -277,3 +278,128 @@ The current branch added a more detailed multi-page research view and FTC source
 - Follow-up during handoff: `origin/main` advanced through PR #12, which removed tracked bytecode and added ignore rules. Rebase conflict resolution again retained the whole upstream board, including PR #12's repository-hygiene record. The merged site checks and Pages deployment succeeded on main commit `7ea516c686bfd8101baa10345a73475d43d07e87` (runs `43583722827` and `43583722287`).
 - Final recheck after PR #16: `python3 scripts/build_site.py` regenerated all 11 documents, `python3 scripts/verify.py`, `node --check docs/app.js`, `git diff --exit-code -- docs`, and `git diff --check` all passed. GitHub Pages API still reports `built`, source `main` `/`, HTTPS enforced. PR #14 adds only the re-verification registry and board updates; site checks and Pages deployment succeeded on its site commit `074818c` (runs `43583860972` and `43583860792`); PR #16 records that result in `COORDINATION.md` without altering site output.
 - Final validation after PR #15 merged on `de08965020c574200bb24bd0808ada10975be58c`: the audit corrections to `data/` and regenerated `docs/` are intact. `python3 scripts/build_site.py`, `python3 scripts/verify.py`, `node --check docs/app.js`, `git diff --exit-code -- docs`, and `git diff --check` passed locally. GitHub Site checks [43584048548](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548) and Pages deployment [43584048157](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157) both succeeded; the Pages API reports `built` for commit `de08965020c574200bb24bd0808ada10975be58c`, source `main` `/`, HTTPS enforced.
+### Session arena/7cfe23f4-zone4 — claim (2026-11-14, UTC)
+
+- Claimed: re-verification of the three product records and the Associates policy text against official pages, correction of the data and flags they affect, rebuild of `docs/`, a pull request to `main`, merge, and a Pages check. Scope: the files listed in the board row above.
+- Branch: all work is on the session's assigned branch `arena/7cfe23f4-zone4`. The `session-<id>/<task>` naming in the brief is not used, because the branch name is fixed for this session.
+- Concurrent work noticed: PR [#13](https://github.com/kanlerxz87-cyber/Zone4/pull/13) (`arena/169f549b-zone4`, open) adds a log-only addendum to this file. It changes no data. Its content is recorded here, and its conflicts are handled at integration. Its request for a direct Associates-policy citation on the AI/agent flag is being verified in this session.
+- Starting point: `main` at `7ea516c` (PR #12 merged). No other claim covers the files above.
+
+
+### Session arena/7cfe23f4-zone4 — integration log (2026-11-14, UTC)
+
+- **Rebase:** `main` moved to `de08965` (PRs #14, #15, #16 merged). Rebased onto it. Conflicts were in `COORDINATION.md` (both sides kept), `data/content.json`, `data/flags.json`, `data/sources.json` and generated `docs/`. For the data files, the merged PR #15 wording was kept for F-09 (no user-location claim), F-13 (Pages source `main /` with root redirect) and the Pages/check sources. My non-overlapping additions were re-applied. `docs/` was regenerated from the merged data rather than merged by hand.
+- **PR #14 handoff requests, applied here:**
+  - RV-I1 (competitor labels are paraphrases): recorded in `data/products.json` metadata; the ASIN is the identifier.
+  - RV-C5 / RV-I2 (standalone participation page numbering): no site citation points to `/help/operating/participation/`. Lettered citations use the Program Policies URL.
+  - RV-I3 (automation needs PA-API / Creators API access): new flag **F-22** on the Flagged for Review page.
+- **Section-number check (verified on the official page, 2026-11-14):** the ratings clause is Participation Requirements **§3(t)** (lettered list (a)–(z)). §6 ends at (f) and has no (t). The ML-model bar is §5. §2(b) is the prices rule. PR #17 (`arena/e5381cc3-zone4`) proposes changing 3(t) to 6(t). That change is incorrect and was **not** adopted here. Logged for that session to correct its PR.
+- **Overlap with open PR #17 (`arena/e5381cc3-zone4`):** that PR also edits `data/*.json`, `scripts/`, `docs/` and `COORDINATION.md`, which are shared outputs owned by the integration session. It was not merged or closed by this session. Its valid items (Pages wording, F-09 location removal, F-10 "Sponsored" wording, AI-use policy row) are already reflected on `main` through PR #15 or this branch. Its 6(t) change should be dropped before it merges.
+- **Pages source:** the Pages API reports `build_type` legacy, source `main` `/`, status `built`, HTTPS enforced. The root `index.html` redirects to `docs/index.html`. F-13 now records this; the earlier `main /docs` plan is not in effect (the API change was refused with HTTP 403 earlier).
+- **Build fix:** `scripts/build_site.py` no longer hard-codes P2 brand "Unresolved" or the "Sponsored" wording. It reads the data (P2 brand from the Item details table; the "Sponsored" label is marked inconsistent per F-10). Manufacturer rows show "Unverified (blank)" with F-21 where the field is blank.
+- **Verification:** `python3 scripts/build_site.py` then `python3 scripts/verify.py` pass (exit 0, 11 pages). All `data/*.json` parse. No conflict markers in the tree. No Houston, Bucharest, Romania, Texas or Fairfax text remains in `data/`, `scripts/`, `docs/`, or `README.md`.
+- **Still open (not blocking merge; on Flagged for Review):** F-01 (commission schedule behind sign-in), F-02 and F-16 (prices and ratings withheld; API terms), F-03 and F-04 (no Associates tag in resolved links), F-22 (automation needs API access).
+- **Status:** branch `arena/7cfe23f4-zone4` pushed for integration. PR to `main` and merge result to be recorded below after checks.
+
+### Session arena/7cfe23f4-zone4 — correction and integration with PR #17 (2026-11-14, UTC)
+
+- **Correction to this session's earlier log entries.** I wrote that the ratings clause is Participation Requirements §3(t) and that §6 ends at (f). Both were wrong. On the Program Policies page the lettered items (a)–(z) under the heading "6. Content on your Site" include (s) artificial clicks, (t) reviews and star ratings, and (w) link shortening. Those citations are §6(s), §6(t) and §6(w). PR #17 (`5ddfdc9` on `main`) has the correct numbering, and no site citation uses 3(t). The earlier entries are kept as written; this entry supersedes them.
+- **Base for integration.** `main` now includes PR #17 (`arena/e5381cc3-zone4`), PR #15, PR #13 and PR #19. This branch was rebased onto that `main`, and shared outputs were taken from `main`. My earlier integration changes that duplicated PR #17 (the F-22 / R-17–R-20 numbering) were dropped in favour of its numbering.
+- **Re-applied on top of `main` (verified 2026-11-14):**
+  - P2 brand "Emeril" and manufacturer "Emeril Lagasse" from the Item details table (re-read on https://www.amazon.com/dp/B09B7SB46R; capacity 24.6 liters; model 4-00675-02X-VN). F-05 is resolved on the brand field. The byline "Innovation IQ" and store "Emeril Store" from the earlier record were not seen in this read; byline still to confirm.
+  - P1 and P3 manufacturer fields are blank (not read; not inferred from "Chefman"). New flag F-21.
+  - `scripts/build_site.py`: the P2 brand row and the new manufacturer row are read from the data. The hard-coded "Unresolved" text is removed.
+  - F-18 updated: P2 Item details re-read; P1/P3 Item details and the brand byline are still not re-read.
+  - New **F-23 (High)**: IP License §4 Agent Terms apply to any agent that accesses Program Content (user-agent `Agent/[name]`, no concealment, no circumvention). AI automation would fall under these terms. Nothing agent-based is built.
+  - New **F-24 (Low)**: IP License §2(k) text disclaimer, if Amazon text is displayed. Whether it applies to titles read from product pages is unconfirmed. The site does not show the disclaimer. Decision pending.
+  - Policy rows **R-19** (Agent Terms §4) and **R-20** (§2(k)) added. S-P2 and S-PP source notes updated.
+- **Sections re-read on the policy page for this entry:** IP License §2(c)(iii) (Product Advertising Content linked only to Amazon pages), §2(e) (no fine-tuning or aggregation without written approval), §2(k), §4 Agent Terms; Influencer policy section 1–4 (not used).
+- **Verification:** `python3 scripts/build_site.py` and `python3 scripts/verify.py` exit 0 (11 pages; links, anchors, disclosure, row sources, no prices or ratings). No conflict markers in the tree.
+- **Pages source:** unchanged, `main` `/` with the root redirect to `docs/`.
+- **PR:** PR #20 (`arena/7cfe23f4-zone4` → `main`) was opened before PR #17 merged, and its merge was refused because the base had moved. This entry is part of the branch update; the PR link and merge result are recorded in the next entry after checks pass.
+
+## Tasks claimed by `sess-cd6113ca` (2026-11-14, branch `arena/cd6113ca-zone4`)
+
+| Task | Status | Owner session | Files |
+|---|---|---|---|
+| T9: Independent verification of the 3 submitted product links against official Amazon sources | done | `sess-cd6113ca` | results converged with the records of `arena/1eb689b8-zone4`, `arena/857e9efd-zone4`, `arena/e5381cc3-zone4`, `arena/7cfe23f4-zone4`; findings in `EXECUTIVE_SUMMARY.md` |
+| T10: Amazon Associates compliance research from official policy pages | done | `sess-cd6113ca` | results in `EXECUTIVE_SUMMARY.md` + this log; public quotes on `docs/policy-compliance.html` (other sessions) |
+| T15: Clicks & conversions tracking page conforming to the docs/ build | done | `sess-cd6113ca` | `docs/analytics.html`, `docs/tracker.js` (new files) |
+| T16: Repository-level executive summary | done | `sess-cd6113ca` | `EXECUTIVE_SUMMARY.md` (new file) |
+| T17: Overlap reconciliation across integration rounds; restoration of additive pages lost in rebase races | done | `sess-cd6113ca` | `EXECUTIVE_SUMMARY.md`, `docs/analytics.html`, `docs/tracker.js`, nav entry in `scripts/build_site.py`, regenerated `docs/`, `README.md`, this log |
+
+### Records for T9–T17 (`sess-cd6113ca`, all work dated 2026-11-14)
+
+- **T9 — independent product-link verification.** Sources fetched live 2026-11-14: the three submitted `link.amazon` URLs; Amazon product pages `https://www.amazon.com/dp/B0CDY277D3`, `/dp/B09B7SB46R`, `/dp/B08DKYBTPH`; Amazon 404 pages for `amazon.com/dp/B04G1MEwY`, `/dp/B02NbDxp3`, `/dp/B00hJ57DV`; official ASIN standard https://sell.amazon.com/blog/what-is-an-asin ("unique 10-character alphanumeric code… typically starts with 'B0'"). Checks: direct slug-as-ASIN lookups (official 404 ×3 → slugs, not ASINs); resolution of each submitted URL → live Amazon product pages; clean-ASIN page checks (titles match); category breadcrumbs (Home & Kitchen › Kitchen & Dining › Small Appliances › Fryers › Air Fryers); buy-box areas read for P1/P3 (amounts withheld from publication under F-02). Results match the independent verifications by sessions `arena/1eb689b8-zone4`, `arena/857e9efd-zone4`, `arena/e5381cc3-zone4` and `arena/7cfe23f4-zone4`. Additional finding: no official Amazon documentation for the `link.amazon` domain was located; resolution verified empirically; third-party description (https://linktw.in/link-amazon-vs-linktwin, non-official) says it routes via `amzlinks.in` (Button). Also fetched: PA-API 5 deprecation notice https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation (PA-API 5 deprecated → Creators API; HTTP 403 AccessDeniedException for legacy calls).
+- **T10 — compliance research.** Sources fetched live 2026-11-14: Operating Agreement (updated 2025-10-15; §1 Special Links "tagged" formats); Program Policies (updated 2026-04-14; Participation Requirements — tag `XXXXX-##`, API-only price/availability display, 6(v)(w) cloaking/shorteners, 6(t) reviews via API, 6(s) artificial clicks, 6(g)/6(p) incentives and customer content, 6(e)–(f) keyword bidding, §5 machine-learning restriction; Commission Income Statement §2 disqualified purchases incl. improperly formatted links; Payment Minimum Chart); disclosure help page (exact statement "As an Amazon Associate I earn from qualifying purchases."; clear "(paid link)/#ad/#CommissionsEarned" + conspicuous placement). Quotes taken only from fetched text; recorded here and in `EXECUTIVE_SUMMARY.md` (citations aligned to the section numbering verified in F-17 by `arena/e5381cc3-zone4`).
+- **T15 — analytics/tracking.** `docs/analytics.html` + `docs/tracker.js`: first-party tracker, localStorage only, starts at zero, records only real clicks on `[data-track]` elements or explicitly labeled test events; JSON/CSV export + clear; no network calls; conversion attribution explicitly marked unavailable without Associates reporting. Conforms to `scripts/verify.py` (disclosure present; event rows added client-side only; no currency amounts or ratings; internal links resolve; external links on official hosts only). Note: the tracker does not access Amazon content, so it does not implicate the Amazon Agent Terms recorded as F-23; that connection is stated for the owner's review.
+- **T16 — executive summary.** `EXECUTIVE_SUMMARY.md`: repository-level summary aligned with the `docs/` site and flag IDs F-01…F-24 (as corrected/extended by `arena/e5381cc3-zone4` and `arena/7cfe23f4-zone4`, including the confirmed P2 brand in F-05); prices/amounts withheld (F-02).
+- **T17 — overlap reconciliation.** The RV-I1/RV-I3 requests were applied independently and concurrently by `arena/e5381cc3-zone4` (PR #17: F-19/F-20, corrected citations F-17) while this session was applying them; after rebasing, this session withdrew its duplicate flag and duplicate paraphrase notes in favor of main's records (no duplicate flag IDs exist). Later, `arena/7cfe23f4-zone4` (PR #20) confirmed the P2 brand and added F-21/F-23/F-24; `EXECUTIVE_SUMMARY.md` was re-aligned accordingly. A rebase race had removed this session's additive files (they were absent from PR #17/#20 branch bases, not deliberately deleted); they are restored here: `docs/analytics.html`, `docs/tracker.js`, `EXECUTIVE_SUMMARY.md`, and the `Analytics` nav entry in `scripts/build_site.py`. Site rebuilt and re-verified.
+- **Conflict log:** repeated add/add conflicts on `COORDINATION.md`, `data/flags.json`, `data/products.json` and generated `docs/` were resolved while rebasing onto advancing `main` (PRs #12–#20 landed during this session's work); main's records were retained in full and this section re-appended. This session's earlier superseded root-page work (root `verification.html`, `compliance.html`, `analytics.html`, `tracker.js`, `scripts/linkcheck.py`, root-page edits) was withdrawn in favor of the merged `docs/` site; no other session's files were modified or discarded.
+- **PR record:** pull request from `arena/cd6113ca-zone4` to `main` — number, merge result and Pages deployment recorded in the next log entry after merge.
+
+
+### Session arena/3036372b-zone4 — final integration of `origin/main` (2026-11-14, UTC)
+
+**Situation.** While this session was building the marketing kit and the automation plan, `origin/main` advanced twice: PR #17 (`arena/e5381cc3-zone4`,
+`5ddfdc9`) and then PRs #20 (`arena/7cfe23f4-zone4`, `0762959`) and #21 (`arena/cd6113ca-zone4`, `06ed8ad`). All three touch the same shared outputs
+(`data/*.json`, `scripts/build_site.py`, `docs/`), so the merge produced content conflicts. This entry records how they were reconciled. No other
+session's record was discarded.
+
+**Conflict resolution, file by file.**
+
+- `data/policies.json` — kept this session's 30 rules, which are a superset of the peer's 20. The peer's R-19 (Agent Terms) and R-20 (IP License 2(k)
+  text disclaimer) are covered by this session's R-19/R-20/R-21 (Agent Terms) and R-25 (display conditions). The peer's FTC disclosure rule (R-13) and
+  the link-level disclosure rule (R-16) were already present.
+- `data/content.json` — kept this session's 15 findings (A-01…A-15), executive summary and not-built list, and re-applied the peer's corrected section
+  numbering inside them.
+- `data/sources.json` — kept this session's 19 sources and merged the peer's fresh readings into the S-P2 and S-PP notes. A 20th entry, `S-PEER`,
+  records the parallel session's independent reading so a reviewer can see that the corrections were reached twice, separately.
+- `data/flags.json` — kept this session's numbering (F-01…F-27) and added **F-28** ("Manufacturer not confirmed for P1 and P3", the peer's F-21). The
+  peer's F-23 and F-24 map to this session's F-21 (Agent Terms) and F-25 (display conditions); the peer's F-18 (tables not re-read) is already closed by
+  this session's F-18, because all three specification tables were re-read on 2026-11-14.
+- `data/products.json` — merged both sets of fields: the verified `special_feature` and the competitor-paraphrase note from this session, and the
+  `brand`, `manufacturer` and `brand_note` fields from the peer.
+- `scripts/build_site.py` — kept this session's 13-page generator and ported the peer's analytics page into it, so every published page is generated from
+  `data/` and the CI check "committed `docs/` matches a fresh build" keeps holding. The peer had added `docs/analytics.html` by hand, which would have
+  been the only non-generated page.
+- `docs/` — not merged by hand; regenerated from the merged data.
+- `README.md` and `COORDINATION.md` — rewritten so both sides' records survive.
+
+**P2 brand resolved by direct re-read (F-05).** The peer had set the P2 brand to "Emeril". This session re-read the official page
+(`https://www.amazon.com/dp/B09B7SB46R`) rather than take that on trust. The Item details table gives **Brand Name "Emeril"**, **Manufacturer "Emeril
+Lagasse"**, Model Name "Extra Large 26 QT French Door Air Fryer Oven", Model Number `4-00675-02X-VN`, UPC `752356835682`; the brand byline link reads
+"Visit the Emeril Store" and the page carries a "Top Brand: Emeril" module. The peer was right.
+
+**The "Innovation IQ" mystery, solved.** This session's earlier record had taken "Innovation IQ" for the P2 byline, which is why the brand was flagged as
+ambiguous. Re-reading the page shows "Innovation IQ" is the name of an **Amazon Influencer who wrote the customer review** attached to the listing — it
+appears next to "Earns Commissions" in the review block, not in the brand byline. It was never the brand. F-05 is therefore recorded as resolved, with the
+explanation kept in the flag so the next reviewer does not re-open it.
+
+**P2 cooking-function conflict confirmed first-hand (F-26).** The listing title and the Item details "Configuration" both say 24 functions, and the
+Product Description says "24 one-touch cooking presets", but the feature bullet reads "**25 COOKING PRE-SETS**". Both numbers are on the same official
+page, so the conflict is real and stays flagged.
+
+**Section numbering.** This session independently re-confirmed the peer's correction on the official Program Policies page: the lettered items (a)–(f)
+sit under "3. Responsibility for Your Site" and the items (g)–(z) under "6. Content on your Site". The site therefore cites **6(t)** for ratings, **6(w)**
+for link shortening, **6(s)** for artificial clicks, **6(y)** for price tracking, **6(z)** for the non-Amazon-Site rule, **6(e)–(f)** for trademarks as
+search terms, **6(g)** for incentives, **6(p)** for customer content and **1(g)** for trademarks in domains. The stale §3(x) citations in
+`data/marketing.json` and `data/pipeline.json` were corrected. The peer's original readings stay untouched in `data/reverification-2026-11-14.json`, with
+the correction note, so the audit trail shows what was read and when.
+
+**First-party click tracking integrated (F-19).** The peer added `docs/analytics.html` and `docs/tracker.js`: a local-only click log that starts at zero,
+sends nothing to any server and never invents a figure. It was kept and ported into the generator, with the outbound product links given the
+`data-track` attributes the tracker listens for, and with styles for the new controls added to `docs/styles.css`. It generates no click of its own, so it
+does not conflict with §6(s) on artificial clicks. What it does **not** do is attribute clicks to orders or commission; that needs an Associates ID, a
+tagged link and the official reporting, so those cells stay blank and F-19 now reads "partly built; not connected". The executive summary, the pipeline
+tracking rows and finding A-15 were updated to say exactly that.
+
+**Verification performed on the merged tree.** `python3 scripts/build_site.py` regenerated all 14 pages; `python3 scripts/verify.py` passed (data validity,
+internal links and anchors, the disclosure on every page, an official source link in every table row, no prices or ratings, no Amazon Mark in any title,
+meta description or keyword, and the new check that every marketing fact row is cited by at least one paragraph). A separate cross-check confirmed that
+every `F-xx` and `R-xx` reference in every data file resolves, that every product flag exists, that all 28 flags appear on a built page, that all 20
+sources and all 53 marketing fact rows sit on official hosts, that no tracking metric carries a value, and that the only remaining `3(x)` strings are the
+deliberate "not 3(x)" correction notes and the peer's preserved original readings.
+
+**Irregularities added to the register in this round.** F-28 (manufacturer not confirmed for P1 and P3 — left blank, not inferred from the brand) and
+F-19 rewritten. **F-05 is now closed** with the byline explanation above. No flag was removed without a recorded reason.

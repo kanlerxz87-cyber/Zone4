@@ -55,14 +55,14 @@
     },
     {
       "id": "F-05",
-      "severity": "Medium",
-      "title": "Brand for P2 is ambiguous",
-      "detail": "The Emeril product page lists 'Visit the Emeril Store' and shows the byline 'Innovation IQ'. The brand is therefore left unresolved rather than assumed to be Emeril Lagasse.",
+      "severity": "Low",
+      "title": "P2 brand and manufacturer confirmed from the Item details table",
+      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link reads 'Visit the Emeril Store' and the page carries a 'Top Brand: Emeril' module. The string 'Innovation IQ' seen in an earlier reading is the name of an Amazon Influencer who wrote the customer review attached to this listing; it is not the brand and is not a byline for the product. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "status": "Needs review",
-      "action": "Confirm the brand/manufacturer from the product's 'Product information' section or the seller page."
+      "status": "Resolved 2026-11-14 (arena/3036372b-zone4)",
+      "action": "None. Keep re-checking the Item details table on every refresh cycle."
     },
     {
       "id": "F-06",
@@ -223,13 +223,13 @@
     {
       "id": "F-19",
       "severity": "High",
-      "title": "Brief's automation goals conflict with Program Policies unless PA-API / Creators API and Associates access exist",
-      "detail": "The brief asks for automated research, AI article generation, publishing, and click and conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA-API / Creators API data. Section 6(s) bars artificially generated clicks or impressions, including by robot or software. Section 6(t) bars review and rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them. (Source: re-verification by arena/857e9efd-zone4, item RV-I3, confirmed in this pass.)",
+      "title": "Attributed click, order and revenue measurement is not connected; a local first-party click log is",
+      "detail": "The brief asks for click and conversion tracking. Two parts of that are built and two are not. Built: a first-party, local-only click log on the Analytics page. It records real user clicks on tracked links in the visitor's own browser, exports them as JSON or CSV, starts at zero, sends nothing to any server and never estimates a figure. It generates no click of its own, so it does not conflict with Participation Requirement 6(s) on artificial clicks. Not built: click-to-order attribution, unit-session percentage, revenue and commission. Those need an Associates ID, a tagged Special Link on every link, and the official Associates reporting, none of which are connected here. The supplied short links carry no visible Associates tag, so a locally recorded click cannot be reconciled against Amazon reporting.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
-      "action": "Obtain Associates and PA-API / Creators API access, and confirm eligibility, before any automation is connected."
+      "status": "Partly built; not connected",
+      "action": "Join the Associates Program, confirm the tag on the supplied links (F-03), then read attributed figures from the official Associates reporting and reconcile them against the local event log. Add a cookie or consent notice before enabling measurement on real traffic."
     },
     {
       "id": "F-20",
@@ -319,6 +319,18 @@
       ],
       "status": "Informational",
       "action": "If outreach is added, make it opt-in only and keep Program Content, Special Links and Amazon Marks out of any offline material."
+    },
+    {
+      "id": "F-28",
+      "severity": "Low",
+      "title": "Manufacturer not confirmed for P1 and P3",
+      "detail": "The Item details table was read for P2 (Brand Name 'Emeril', Manufacturer 'Emeril Lagasse'). For P1 and P3 the Item details table was not read, so the manufacturer field is left blank rather than inferred from the 'Chefman' brand shown in the byline.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Unverified (blank)",
+      "action": "Read the Item details table on both pages, or accept the blank."
     }
   ]
 }

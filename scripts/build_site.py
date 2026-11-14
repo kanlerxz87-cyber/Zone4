@@ -53,6 +53,7 @@ NAV = [
     ("analysis.html", "Analysis & findings"),
     ("verification.html", "Verification log"),
     ("policy-compliance.html", "Policy compliance"),
+    ("analytics.html", "Analytics"),
     ("flagged.html", "Flagged for review"),
     ("sources.html", "Sources"),
 ]
@@ -132,7 +133,8 @@ def competitor_links(p: dict) -> str:
 
 
 def shop_link(p: dict) -> str:
-    return ext(p["short_link"], "Open Amazon link", ' class="shop"')
+    return ext(p["short_link"], "Open Amazon link",
+               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"')
 
 
 # ---------------------------------------------------------------- tables
@@ -185,7 +187,8 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (byline)", p["brand"], "Verified" if p["id"] != "P2" else "Unresolved", src, "F-05" if p["id"] == "P2" else ""),
+            ("Brand", p["brand"], "Verified", src, ""),
+            ("Manufacturer", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-28"),
             ("Category path", p["category_path"], "Verified", src, ""),
             ("Capacity (as listed)", p["capacity"], "Verified as listed", src, fl["capacity"]),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
@@ -201,6 +204,8 @@ def verification_rows(current: Page) -> list[list[str]]:
         ]
         if fl["variant"]:
             items.append(("Cooking function count", "Two counts stated on the page", "Unresolved", src, fl["variant"]))
+        if p.get("brand_note"):
+            items.append(("Brand / manufacturer note", p["brand_note"], "Verified note", src, ""))
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""
             rows.append([esc(p["id"]), esc(field), esc(value), status_pill(status), source, flag_html])
@@ -551,6 +556,66 @@ def page_sources(current: Page) -> str:
     )
 
 
+def page_analytics(current: Page) -> str:
+    """Local-only first-party click log. Records real clicks in the visitor's own browser."""
+    rows = [
+        ("Clicks on tracked links", "0", "Real user clicks recorded in this browser"),
+        ("All local events", "0", "Clicks plus explicitly labelled test events"),
+        ("Conversions / orders", "\u2014", "Requires Associates reporting (not connected). See " + "F-19"),
+        ("Commission earned", "\u2014", "Requires Associates reporting (not connected). See F-01"),
+        ("Last event (UTC)", "\u2014", "Timestamp of the most recent local event"),
+    ]
+    kpis = "".join(
+        f'<div class="kpi"><div class="kpi-value" id="{esc(kpi_id)}">{esc(value)}</div>'
+        f'<div class="kpi-label">{esc(label)}</div></div>'
+        for kpi_id, value, label in (
+            ("m-clicks", rows[0][1], rows[0][2]),
+            ("m-events", rows[1][1], rows[1][2]),
+            ("m-conv", rows[2][1], rows[2][2]),
+            ("m-last", rows[4][1], rows[4][2]),
+        )
+    )
+    return (
+        '<header class="hero"><h1>Clicks &amp; conversions</h1>'
+        '<p class="lead">A first-party, local-only click tracker. It starts at zero, records only real clicks on tracked links plus one clearly '
+        'labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official Associates '
+        'reporting and are not connected here.</p></header>'
+        f'<section class="kpis">{kpis}</section>'
+        '<section>'
+        '<h2>Click event log</h2>'
+        '<p>Events are stored in this browser only (<code>localStorage</code>). This page sends nothing anywhere. Export the log before clearing '
+        'browser data.</p>'
+        '<p id="log-empty" class="small muted">No events recorded yet. Rows appear below when the tracker records a real click or the labelled '
+        'test event.</p>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Timestamp (UTC)</th><th scope="col">Type</th>'
+        '<th scope="col">Target</th><th scope="col">ASIN</th></tr></thead><tbody id="event-rows"></tbody></table></div>'
+        '<div class="btnrow"><button class="btn" id="btn-test" type="button">Add labelled test event</button>'
+        '<button class="btn" id="btn-export-json" type="button">Export JSON</button>'
+        '<button class="btn" id="btn-export-csv" type="button">Export CSV</button>'
+        '<button class="btn danger" id="btn-clear" type="button">Clear log</button></div>'
+        '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
+        'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
+        'product links on this site do.</p>'
+        '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
+        'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
+        '</section>'
+        '<section>'
+        '<h2>Connecting real measurement</h2>'
+        '<ul class="bullets">'
+        f'<li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see {href(current, "policy-compliance.html", "Policy compliance")}).</li>'
+        f'<li>Confirm the tag on the supplied short links before relying on any earnings (see {href(current, "flagged.html", "F-03")}).</li>'
+        f'<li>Authoritative click, order and commission figures come from the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}.</li>'
+        f'<li>Product data served from Amazon must come through the Creators API, and reusing or fine-tuning on API content needs express prior written approval (see {href(current, "flagged.html", "F-24")}).</li>'
+        f'<li>Price tracking and price alerting are prohibited unless Amazon agrees otherwise, so no price history is collected here (see {href(current, "flagged.html", "F-22")}).</li>'
+        '<li>Add a cookie or consent notice appropriate to your audience before enabling measurement on real traffic, consistent with the disclosure '
+        'expectations in the official Program Policies and applicable law.</li>'
+        '</ul>'
+        '</section>'
+        f'<p class="muted small">This page displays no prices, ratings or review counts (withheld under {href(current, "flagged.html", "F-02")}). '
+        f'Verified product facts live in the {href(current, "verification.html", "verification log")}.</p>'
+    )
+
+
 BODIES = {
     "index.html": page_index,
     "executive-summary.html": page_exec,
@@ -563,6 +628,7 @@ BODIES = {
     "analysis.html": page_analysis,
     "verification.html": page_verification,
     "policy-compliance.html": page_policy,
+    "analytics.html": page_analytics,
     "flagged.html": page_flagged,
     "sources.html": page_sources,
 }
@@ -621,7 +687,13 @@ def build() -> list[pathlib.Path]:
         page = Page(path, title, path, "")
         page.body = body_fn(page)
         out = OUT / path
-        out.write_text(render(page), encoding="utf-8")
+        html_text = render(page)
+        if path == "analytics.html":
+            html_text = html_text.replace(
+                "</body>",
+                f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
+            )
+        out.write_text(html_text, encoding="utf-8")
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     return written
