@@ -95,6 +95,25 @@
         "https://link.amazon/B00hJ57DV"
       ],
       "confidence": "Unverified"
+    },
+    {
+      "id": "A-08",
+      "finding": "Pricing analysis is blocked by a rule that is more specific than the price-display rule: the Site must not have price tracking or price alerting functionality.",
+      "basis": "Participation Requirements Section 6(y): 'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.' This sits alongside Section 2(b), which limits price display to Amazon-served links or Creators API / PA API data.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-09",
+      "finding": "What the site can prove, it proves; what it cannot, it leaves blank. That split is enforced, not asserted.",
+      "basis": "scripts/verify.py parses every table body row on every page and fails the build if a row has no link to an official host, if any page lacks the Operating Agreement Section 5 disclosure sentence, or if any page contains a currency amount or a star rating. The Site checks workflow runs it on every push and pull request.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/.github/workflows/site-checks.yml"
+      ],
+      "confidence": "Verified"
     }
   ],
   "categories": {

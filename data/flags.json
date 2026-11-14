@@ -312,6 +312,18 @@
       ],
       "status": "Needs review",
       "action": "Show each competitor list as a dated snapshot, or drop it. Do not treat it as a stable competitor set."
+    },
+    {
+      "id": "F-28",
+      "severity": "Low",
+      "title": "Conditions of Use help URL resolves to a different node id",
+      "detail": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088 is the URL cited on this site and it resolves correctly, but Amazon serves it as node GLSBYFE9MGKKQXXM. The 'License and Access' wording quoted in R-11 and R-12 was read from the served page on 2026-11-14.",
+      "sources": [
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM"
+      ],
+      "status": "Needs review",
+      "action": "None required. If the link ever stops resolving, use node GLSBYFE9MGKKQXXM."
     }
   ]
 }
