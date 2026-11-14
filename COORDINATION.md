@@ -675,3 +675,84 @@ listing-title labels including the previously blank "Nutrichef Double Basket Air
 **Independent corroboration worth noting.** Session `arena/46c18cd1-zone4` working at the same time found the same
 Conditions of Use redirect target (`nodeId=508088` -> `nodeId=GLSBYFE9MGKKQXXM`) completely independently, and recorded it
 in `S-COU`. Two sessions reaching the same node id from separate reads is a good sign for that citation.
+
+### Session arena/c5462690-zone4 — claim (2026-11-14, UTC)
+
+Claimed the final integration and re-verification pass. Scope: `data/products.json`, `data/content.json`, `data/flags.json`, `docs/`,
+`scripts/build_site.py`, `scripts/verify.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. **Scope extended twice, both recorded here:**
+five `delivered` sentences in `data/requirements.json` (REQ-09, REQ-10, REQ-11, REQ-13, REQ-30) had to record that the articles are now also
+published as individual pages; nothing else in that file was changed and no status was altered. `engine/`, `tests/`, `qa/`, `data/policies.json`,
+`data/pipeline.json`, `data/marketing.json`, `data/engine-*.json` and `.github/workflows/` were not touched.
+
+
+### Session arena/c5462690-zone4 — verification performed (2026-11-14, UTC)
+
+Everything below was read from the official source in this session, not taken from another session's record.
+
+- **The three supplied links, resolved and re-read.** [B04G1MEwY](https://link.amazon/B04G1MEwY) → `https://www.amazon.com/dp/B0CDY277D3`,
+  "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe
+  Frying Baskets, Digital Double Air Fryer - Black"; [B02NbDxp3](https://link.amazon/B02NbDxp3) → `https://www.amazon.com/dp/B09B7SB46R`,
+  "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed
+  fan and rotisserie for easy family meals."; [B00hJ57DV](https://link.amazon/B00hJ57DV) → `https://www.amazon.com/dp/B08DKYBTPH`,
+  "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick
+  Dishwasher-Safe Basket | Stainless Steel". For all three, the listing title, the breadcrumb (Home & Kitchen › Kitchen & Dining › Small
+  Appliances › Fryers › Air Fryers) and the also-viewed set matched the published records.
+- **Commission, from the official public table** ([Associates Program Standard Commission Income Statement](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ),
+  no sign-in required): Table 1 lists "Physical Books, Kitchen, Automotive" at **4.50%** and "Toys, Furniture, Home, …" at **3.00%**. Both are
+  exactly as the site states, including the caveat that the Home band exists and is lower.
+- **Two corrections, both of which PR #41 reached independently.** (1) The P1 also-viewed entry `B0CNSB81V6` had a blank label and cited flag
+  **F-27** (offline/email use of Program Content) where it meant **F-29** (the carousel changes between page loads). Its title was visible on this
+  session's read; the same label ("Nutrichef Double Basket Air Fryer 8.8 QT") and the same flag correction were landed by `arena/949aaac1-zone4`,
+  so the two independent reads agree. (2) `data/content.json` and `scripts/build_site.py` still said, in five places, that the commission rate was
+  unavailable behind an Amazon sign-in. All five were stale.
+- **New flag F-38 (recorded, not hidden).** This session could **not** re-read the product-details tables (capacity, dimensions, colour, material,
+  special features, brand, manufacturer, model number): every request for the lower part of each of the three pages returned advertising modules
+  instead of the details table, across repeated attempts on all three ASINs. Those rows therefore rest on the 2026-11-14 reads recorded by
+  `arena/3036372b-zone4` and `arena/01ab2940-zone4`. They are not in doubt, but they are not independently re-confirmed here, so F-38 says so and
+  asks for a re-read at the next review. (Numbered F-38 because PR #41 had already taken F-36 and F-37 while this branch was open; the renumbering
+  is recorded in `data/flags.json` `_meta`.)
+- **Checks:** `python3 scripts/build_site.py` (21 pages) · `python3 scripts/verify.py` (data validity, links and anchors, disclosure on every page,
+  an official source link in every table row, no prices or ratings, no Amazon Mark in any title, meta description or keyword, per-fact citation
+  traceability, requirement-status evidence, and — new — that each article page carries the article's own title tag and meta description) ·
+  `python3 qa/audit_site.py` (**PASS, 0 failures, 0 warnings**) · `python3 -m unittest discover -s tests` (81 engine tests) ·
+  `python3 -m engine.cli audit` (0 of 7 drafts ready, all 7 blocked by gates — the engine refuses to publish, which is correct).
+
+
+### Session arena/c5462690-zone4 — what this session added to the site
+
+- **A marketing landing page** at `docs/index.html`: hero with the verified-facts badge, a KPI strip, "Trending articles" cards, "Shop by category"
+  tiles, the full product table, key findings and a pointer to the flagged items. The KPIs are derived from the data, so they cannot drift from the
+  tables below them.
+- **One page per article** under `docs/articles/`, generated from `data/marketing.json` — so a page can only exist for an article that is in the
+  data — each carrying its own title tag and meta description (the SEO fields in the data were written for exactly this), breadcrumb, finished
+  copy with inline citation chips, its call to action, the fact table it was written from, keyword targets, search metadata, outline, compliance
+  notes and related reading. `docs/articles/index.html` is the hub, grouped by product format. `docs/marketing.html` still carries all five on one
+  page, so nothing that existed was removed.
+- **Grouped sidebar navigation** (Overview / Categories / Content / Articles / Research / Governance).
+- **A category-level commission note** on the products page, so the verified 4.50% Table 1 figure is still published with its source, without being
+  attached to an ASIN.
+
+
+### Session arena/c5462690-zone4 — merge with the parallel sessions, including an error made and corrected
+
+`origin/main` advanced three times while this branch was open: PRs #38 and #40 (`arena/13dd55ca-zone4`) and PR #41 (`arena/949aaac1-zone4`).
+
+- **An error this session made.** While resolving the first rebase conflict, this session ran `git checkout --theirs data/content.json`. Under
+  `git rebase` the sides are swapped — `--theirs` is *this* session's commit — so that discarded the parallel session's `content.json` edits
+  instead of keeping them. The mistake was caught by rebuilding and re-reading the rendered page, and corrected by restoring the other session's
+  version from `ed441d9`. It is recorded here because the coordination rules ask for the conflict log to be honest, and because the same trap
+  applies to anyone resolving a rebase in this repo.
+- **Which reading of F-01 was kept, and why.** Both this session and `arena/13dd55ca-zone4` had independently found the same stale
+  "commission rate is behind a sign-in" statements, but disagreed on the fix. This session published 4.50% on each product row with a caveat; the
+  parallel session left the product-level cells blank. **The stricter reading was kept.** The brief says: *"If a value can't be confirmed from an
+  official source, leave it blank and flag it as unverified. Never infer or fill in values."* The 4.50% Kitchen band is verified at category
+  level, but which commission category Amazon assigns to each of these three ASINs is not confirmable outside Associates Central, so attaching
+  4.50% to a product is an inference. Product-level cells are blank and flagged (F-01), the dashboard KPI reads "0 of 3 ASIN commission-category
+  assignments confirmed", and the verified category-level figure is published on its own, with its source, on the products page.
+- **After PR #41 landed, a second rebase conflicted in the same files.** Rather than resolve a three-way conflict in generated and semi-generated
+  files a second time, this branch was reset to `origin/main` and the remaining delta was re-applied on top of the merged tree. The superseded
+  commits remain in the branch reflog. Everything `arena/949aaac1-zone4` did was kept: the competitor labels shown next to their ASINs, the
+  "Also-viewed ASINs and listing titles" verification row, the re-confirmed Conditions of Use citation (F-30 resolved), the data-derived KPIs,
+  and flags F-36 and F-37.
+- **Kept from this session:** the marketing landing page, the per-article pages and hub, the grouped sidebar navigation, the category-level
+  commission note, flag F-38, and the five `requirements.json` sentences.
