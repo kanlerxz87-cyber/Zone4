@@ -366,3 +366,12 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Checks:** `Site checks` workflow run [43584740623](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584740623) succeeded on the merge commit (`06ed8ad`).
 - **Deployment:** GitHub Pages `pages build and deployment` run [43584740276](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584740276) succeeded; Pages API reports `status: built`, commit `06ed8ad`, source `main` `/` (legacy) with the root redirect to `docs/`, HTTPS enforced, no error. Live entry point: https://kanlerxz87-cyber.github.io/Zone4/ (dashboard), with `docs/analytics.html`, `docs/verification.html`, `docs/flagged.html`, `docs/sources.html` and the root `EXECUTIVE_SUMMARY.md` (served as a raw file) reachable from it.
 - **Post-merge content state:** 12 HTML pages verified by `scripts/verify.py`; flag register F-01…F-24 (23 entries; F-22 unused) with sources; no prices or ratings published; no affiliate links published (F-03); analytics tracker ships at zero events.
+
+### Session arena/cc6e8a46-zone4 — PR and merge result (2026-11-14, UTC)
+
+- **PR:** [#18](https://github.com/kanlerxz87-cyber/Zone4/pull/18) (`arena/cc6e8a46-zone4` → `main`), **merged** with a merge commit at `c3aad42a413ed4be78bf31fe8482d51fd096d536` (2026-11-14 10:22:24 UTC). Merged head `6a9d24e` (Site checks: success). The PR was merged with `--merge` after `main` had been merged into the branch twice more (PRs #20, #21, #26). Its data and docs were verified before merge.
+- **Checks on merge commit:** Site checks success (`c3aad42`). Pages `pages build and deployment` success on `c3aad42`. Later `main` head `77076b2` also passed Site checks and Pages deployment.
+- **Pages:** API reported `build_type legacy`, source `main /`, status `built` after the deployment (checked 2026-11-14). The live URL could not be fetched from this sandbox (outbound allowlist), so the live page itself was not inspected.
+- **Analytics tracker (main's PR #21):** `docs/tracker.js` was read. It records events only in the visitor's browser (localStorage), makes no network calls, and starts at zero, so it fabricates no data. Accepted as a local-only log. It does not report revenue or clicks to Amazon.
+- **Open items after merge (flagged, not blocking):** F-01, F-02, F-03, F-09, F-10, F-19, F-25, F-27 (this session's), plus main's open items. See `flagged.html`.
+- **Branch note:** this log entry was committed to `arena/cc6e8a46-zone4` after the merge. It reaches `main` with the next PR from this branch, if one is opened.
