@@ -507,7 +507,7 @@ The current branch added a more detailed multi-page research view and FTC source
 - **New site flags F-50…F-54** (specification fields displayed without an approved content source · short-link
   host confirmed genuine · API quota figures deliberately not adopted · dual Pages publishers · conflicting
   official wording on cross-marketplace API access).
-- **Engine + gates:** 15 modules, **80** tests. `ci.yml` runs the engine pipeline *and* their site pipeline
+- **Engine + gates:** 15 modules, **81** tests. `ci.yml` runs the engine pipeline *and* their site pipeline
   (including `git diff --exit-code -- docs`) and no longer builds pages into the repository root. Two tests guard
   the pairing by re-running `scripts/build_site.py` and `scripts/verify.py`.
 - **Bug found by CI, not by local runs:** `engine.cli audit` crashed on `item.slug` (the field is `doc_slug`),
