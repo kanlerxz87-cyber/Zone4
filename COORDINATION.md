@@ -10,6 +10,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
+| Re-verification of supplied links and Associates citations (2026-11-14) | in progress; claimed by arena/857e9efd-zone4 | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 
 ## Original PR #7 branch note (historical)
 
