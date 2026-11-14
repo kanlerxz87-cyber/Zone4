@@ -375,3 +375,5 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Analytics tracker (main's PR #21):** `docs/tracker.js` was read. It records events only in the visitor's browser (localStorage), makes no network calls, and starts at zero, so it fabricates no data. Accepted as a local-only log. It does not report revenue or clicks to Amazon.
 - **Open items after merge (flagged, not blocking):** F-01, F-02, F-03, F-09, F-10, F-19, F-25, F-27 (this session's), plus main's open items. See `flagged.html`.
 - **Branch note:** this log entry was committed to `arena/cc6e8a46-zone4` after the merge. It reaches `main` with the next PR from this branch, if one is opened.
+
+- **Correction (this session):** the earlier line "F-22 (main): owner items" is wrong. `data/flags.json` on `main` has no F-22; the IDs run F-01 to F-21, then F-23 to F-27 (26 flags). The gap is left as is, so no ID is reused.
