@@ -15,6 +15,9 @@
     "added_by_949aaac1_2026_11_14": {
       "F-36": "New. The per-product commission rate was published without an official source for the per-ASIN category step. Found independently by two sessions and resolved on main; recorded here as the audit trail.",
       "F-37": "New. Carousel-instability notes in data/products.json cited F-27 where they meant F-29."
+    },
+    "added_by_c5462690_2026_11_14": {
+      "F-38": "New. F-36 and F-37 were already taken by session arena/949aaac1-zone4 (PR #41) for the per-ASIN commission defect and the F-27/F-29 citation error, so this register's own new item continues the sequence at F-38 rather than reusing a number."
     }
   },
   "flags": [
@@ -450,6 +453,19 @@
       ],
       "status": "Corrected 2026-11-14 (arena/949aaac1-zone4); kept as the audit record",
       "action": "None. F-27 keeps its own meaning and is still cited correctly in the not-built list."
+    },
+    {
+      "id": "F-38",
+      "severity": "Low",
+      "title": "Specification-table values rest on earlier same-day reads; this session could not re-read them",
+      "detail": "The final integration session (arena/c5462690-zone4, 2026-11-14) independently re-read the parts of each official product page that were retrievable: the short-link resolution, the listing title, the category breadcrumb and the also-viewed competitor set were re-read for all three products and match the records exactly. The product-details rows themselves (capacity, dimensions, colour, material, special features, brand, manufacturer, model number) could not be re-read by this session: every request for the lower part of the page returned advertising modules rather than the details table, across repeated attempts on all three ASINs, so the specification values published here rest on the 2026-11-14 reads recorded by sessions arena/3036372b-zone4 and arena/01ab2940-zone4, not on a fresh read by this session. They are not in doubt, but they are not independently re-confirmed here either, and that is stated rather than glossed over. The same session did independently confirm the two corrections PR #41 also made (the P1 label for B0CNSB81V6 and the F-27 to F-29 reference), which is a useful cross-check on the parts of the page that were readable.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Needs review",
+      "action": "Re-read the Item details / Product information table on each of the three product pages (or pull the same fields through the Creators API) at the next review, so every published specification row carries a same-session read."
     }
   ]
 }

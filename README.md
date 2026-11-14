@@ -16,7 +16,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (27 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 37 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 38 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
@@ -27,7 +27,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `tests/test_engine.py` | 81 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
-| `docs/` | The published site (15 generated pages plus the stylesheet, app script and tracker script) |
+| `docs/` | The published site (21 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
@@ -38,18 +38,20 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 
 | Page | What it holds |
 |---|---|
-| `index.html` | Dashboard: KPIs, key findings, navigation cards |
+| `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the product table and key findings |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
 | `requirements.html` | All 30 brief items: delivered, blocked or unverifiable, each with the official source |
 | `products.html` | All three products, one row each, every row linked to its source |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
-| `marketing.html` | Ready-to-publish articles, comparison page and buying guide, with a fact table per page |
+| `marketing.html` | The same articles, comparison page and buying guide on one page, with a fact table per article |
+| `articles/index.html` | Articles hub: every article, grouped by the product format it covers |
+| `articles/*.html` | One page per article, with its own title tag and meta description, the finished copy, its call to action and the fact table it was written from |
 | `automation.html` | Pipeline stages, tracking metrics, optimisation loop and the Agent Terms |
 | `analysis.html` | 15 findings with their basis, confidence and source links |
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `flagged.html` | Flagged for Review: 37 irregularities and unverified items |
+| `flagged.html` | Flagged for Review: 38 irregularities and unverified items |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
