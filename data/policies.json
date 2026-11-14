@@ -162,6 +162,14 @@
       "source_ref": "IP License, Section 2(k)",
       "status": "Open (applicability unconfirmed)",
       "site_implementation": "The disclaimer is not shown. Decision pending (F-24)."
+    },
+    {
+      "id": "R-21",
+      "requirement": "Include the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 2(b)",
+      "status": "Not met for source and competitor links (F-25)",
+      "site_implementation": "No tag was supplied, so none was added. Source and competitor links are untagged. Flag F-25."
     }
   ]
 }

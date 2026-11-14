@@ -18,7 +18,7 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
+      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site) On the 2026-11-14 read, carousel positions 2 and 3 differed from the stored list (F-23); the 'Sponsored' label was not seen on that read (F-10).",
       "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location. Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs matched the records. Byline and specification table were not re-read in that pass (F-18)."
     },
     {

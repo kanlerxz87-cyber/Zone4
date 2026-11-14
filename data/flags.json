@@ -240,8 +240,8 @@
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
       ],
-      "status": "Corrected in this session; needs review",
-      "action": "None beyond review. Cite the Program Policies URL for every lettered section."
+      "status": "Corrected; labels replaced (2026-11-14)",
+      "action": "None beyond review of the blank label (F-27)."
     },
     {
       "id": "F-21",
@@ -276,6 +276,42 @@
       ],
       "status": "Needs review",
       "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
+    },
+    {
+      "id": "F-25",
+      "severity": "High",
+      "title": "Amazon links on the site carry no Associates tag",
+      "detail": "Participation Requirements §2(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Needs review",
+      "action": "Supply your Associates ID (tag) so links can be built with it, or confirm that untagged verification-only source links are acceptable."
+    },
+    {
+      "id": "F-26",
+      "severity": "Low",
+      "title": "P2 listing gives two different cooking-function counts",
+      "detail": "The P2 listing subtitle states '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. The Item details table on the 2026-11-14 read gives 'Configuration: Air Fryer Toaster Oven Combo with 24 Functions'. No count is used on the site.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
+      "status": "Needs review",
+      "action": "Confirm the count from the manufacturer's specification before using any number."
+    },
+    {
+      "id": "F-27",
+      "severity": "Medium",
+      "title": "Competitor carousels change between page loads; some labels blank",
+      "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Needs review",
+      "action": "Show each competitor list as a dated snapshot, or drop it. Do not treat it as a stable competitor set."
     }
   ]
 }

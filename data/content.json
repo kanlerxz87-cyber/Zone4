@@ -58,7 +58,7 @@
     {
       "id": "A-04",
       "finding": "Amazon's own 'also viewed' lists show competing air fryers from at least six other brands. P1 and P3 each list another Chefman model.",
-      "basis": "Also-viewed carousel, first three items per product (Gourmia, Nutrichef, Ninja, HotKing, Emeril, Cosori, Chefman). 'Sponsored' labels appeared on some reads (F-10).",
+      "basis": "Also-viewed carousel (stored ASIN lists, first three items per product). On the 2026-11-14 read the P3 carousel is labelled 'Sponsored'; the P1 label was not seen on that read; P2 is not labelled (F-10). Carousel membership changes between page loads, so the lists are snapshots (F-23).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",

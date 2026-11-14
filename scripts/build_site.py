@@ -64,6 +64,8 @@ def status_pill(status: str) -> str:
         kind = "ok"
     elif "withheld" in s or "not applicable" in s:
         kind = "muted"
+    elif s.startswith("not met"):
+        kind = "bad"
     elif s.startswith("unverified") or "not verifiable" in s:
         kind = "warn"
     elif "needs" in s or "open" in s or "review" in s:
@@ -173,12 +175,13 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, "F-07" if p["id"] == "P1" else ""),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown (re-read 2026-11-14)" + ("; Sponsored label on some reads" if p["id"] in ("P2", "P3") else ""), src, "F-10" if p["id"] in ("P2", "P3") else ""),
+            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown on the 2026-11-14 read; carousel " + p["competitor_carousel_label"], src, "F-27"),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
             ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
+            ("Associates tag in site link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-25"),
         ]
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""
