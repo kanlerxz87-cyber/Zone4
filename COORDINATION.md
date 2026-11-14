@@ -84,3 +84,9 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Follow-up for the repository owner:** in Settings → Pages, set the source to `main` `/docs`, or leave it on `/` with the redirect. Either way, the public URL should resolve to the dashboard.
 - Actions: the `Site checks` workflow (`site-checks.yml`) is added. Its run status was not visible through the Actions API, which returns 403 for this token.
 
+
+### Session arena/1eb689b8-zone4 — final merge record
+
+- Follow-up PR [#8](https://github.com/kanlerxz87-cyber/Zone4/pull/8) (root redirect to `docs/`, `.nojekyll`, verify check) merged into `main` at `697d79e` (2026-11-14 09:59 UTC), self-merged after the `Site checks` workflow passed on the PR.
+- Confirmed via the GitHub API: `pages/builds/latest` = `built` for `697d79e`; Pages source is `main` `/`; `pages build and deployment` and `Site checks` both `success` on `697d79e`.
+- Not confirmed: the public URL from this sandbox (outbound access is limited). The Pages source change to `/docs` still needs a repository owner in Settings, or the root redirect serves as the entry point.
