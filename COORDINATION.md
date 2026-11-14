@@ -12,6 +12,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
+| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, PR to `main`, Pages deploy check | **in progress**; claimed by arena/3036372b-zone4 | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
 
 ## Original PR #7 branch note (historical)
 
@@ -172,3 +173,10 @@ The current branch added a more detailed multi-page research view and FTC source
 - Status for this branch's site implementation: **superseded by the merged integration**. Preserve the deployed `/docs` site and do not merge duplicate root pages or a second Pages workflow. This addendum is the only change being carried forward.
 - Follow-up during handoff: `origin/main` advanced through PR #12, which removed tracked bytecode and added ignore rules. Rebase conflict resolution again retained the whole upstream board, including PR #12's repository-hygiene record. The merged site checks and Pages deployment succeeded on main commit `7ea516c686bfd8101baa10345a73475d43d07e87` (runs `43583722827` and `43583722287`).
 
+### Session arena/3036372b-zone4 — claim (2026-11-14, UTC)
+
+- **Claimed:** final integration session. Scope: the full `data/` registry, the `docs/` site, `scripts/build_site.py`, `scripts/verify.py`, `README.md` and this log. No other open claim overlaps these files (PRs #13 and #15 were integrated into this branch first).
+- **Branch:** `arena/3036372b-zone4`, the branch assigned to this session. No alternate branch or worktree was created, because the assigned branch is fixed for this session.
+- **Starting point:** `origin/main` at `eb4b84b` (PR #16 merged), plus PR #15 (`0753da2` merge) and PR #13 (`b991aee` merge) integrated into this branch.
+- **Conflict log (no content discarded):** `git merge pr15` conflicted on `COORDINATION.md`; resolution kept the newer `main` task-board rows and added PR #15's audit row. `git merge pr13` conflicted on `COORDINATION.md`; resolution kept **both** sessions' log entries (PR #13's and PR #15's) in full. A `git pull --rebase origin main` was started and aborted because it replayed commits already present as second-parent merge commits; the branch was left unchanged.
+- **Plan:** (1) re-verify every published value against the official source again; (2) correct the flags whose wording mis-states a policy; (3) build the marketing content the brief asks for (articles, comparison, buying guide) from verified facts only; (4) build the pipeline/tracking plan; (5) re-verify the combined data line by line, build the site, open the PR to `main`, merge, and confirm the Pages deploy.
