@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "description": "Independent re-verification of the three user-supplied Amazon links and the Associates citations used by the site, performed on 2026-11-14 (UTC) by session arena/857e9efd-zone4. Each row lists the official source that was read. Nothing here was inferred: a value is recorded only where the official page showed it.",
+    "scope_files": ["data/reverification-2026-11-14.json", "COORDINATION.md"],
+    "note": "This file does not change the published site. Shared outputs (docs/, data/products.json, data/flags.json) are reserved for the integration session."
+  },
+  "links": [
+    {
+      "id": "RV-L1",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "resolved_page_title_matches_record": true,
+      "asin_matches_record": "B0CDY277D3",
+      "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_asins_matches_record": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+      "official_source": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "id": "RV-L2",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "resolved_page_title_matches_record": true,
+      "asin_matches_record": "B09B7SB46R",
+      "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_asins_matches_record": ["B0BZ52FLKC", "B0FM5KF34G", "B0F92GL7JH"],
+      "official_source": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "id": "RV-L3",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "resolved_page_title_matches_record": true,
+      "asin_matches_record": "B08DKYBTPH",
+      "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_asins_matches_record": ["B0CNY1YVDD", "B0D5FX6VRL", "B0C33CHG99"],
+      "official_source": "https://www.amazon.com/dp/B08DKYBTPH"
+    }
+  ],
+  "citations": [
+    {
+      "id": "RV-C1",
+      "site_citation": "Program Policies, Participation Requirements, Section 2(b)",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_text_summary": "Section 2(b): product prices and availability may be shown only if (a) Amazon serves the link displaying them, or (b) the data is obtained via Creators API or PA API.",
+      "status": "confirmed"
+    },
+    {
+      "id": "RV-C2",
+      "site_citation": "Program Policies, Participation Requirements, Section 3(t)",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_text_summary": "Section 3(t): customer reviews or star ratings may not be displayed unless the link is obtained through Creators API or PA API and the API requirements are met.",
+      "status": "confirmed"
+    },
+    {
+      "id": "RV-C3",
+      "site_citation": "Program Policies, Participation Requirements, Section 3(w)",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_text_summary": "Section 3(w): no link shortening service, button, hyperlink or other ad placement may make it unclear that the link goes to an Amazon Site.",
+      "status": "confirmed"
+    },
+    {
+      "id": "RV-C4",
+      "site_citation": "Program Policies, Participation Requirements, Section 3(s)",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_text_summary": "Section 3(s): no artificially generated clicks or impressions, including by robot or software program.",
+      "status": "confirmed",
+      "relevance": "Relevant to the brief's automated click-tracking and optimization goals."
+    },
+    {
+      "id": "RV-C5",
+      "site_citation": "Associates Participation Requirements page (https://affiliate-program.amazon.com/help/operating/participation/)",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/participation/",
+      "read_text_summary": "This standalone page uses a different, numbered list (1-31). Item 28 covers star ratings; there is no item labelled 2(b) or 3(t) on this page.",
+      "status": "irregularity",
+      "action": "Cite 'Program Policies, Participation Requirements, Section 2(b)/3(t)' with the Program Policies URL, not this page, for those section numbers."
+    }
+  ],
+  "irregularities": [
+    {
+      "id": "RV-I1",
+      "severity": "medium",
+      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page; the labels do not. Example: 'Chefman 6 Quart Dual Basket Air Fryer (Digital Touchscreen)' vs. the listing title.",
+      "action": "Integration session: either quote exact titles or mark labels as paraphrased."
+    },
+    {
+      "id": "RV-I2",
+      "severity": "low",
+      "detail": "The competitor-list citation in the site may point to the wrong Participation Requirements numbering (see RV-C5).",
+      "action": "Integration session: update any citation that uses the standalone participation page for lettered sections."
+    },
+    {
+      "id": "RV-I3",
+      "severity": "high",
+      "detail": "Brief asks for automated research, AI article generation, publishing and click/conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA/Creators API data; Section 3(s) bars artificially generated clicks; Section 3(t) bars review/rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them.",
+      "action": "Owner: obtain Associates/PA-API access and confirm eligibility before any automation is connected."
+    }
+  ]
+}
