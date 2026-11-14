@@ -480,9 +480,9 @@ def page_products(current: Page) -> str:
     return (
         hero("All products",
          "One row per user-supplied link. Prices and ratings are withheld under the Associates policy. The "
-         "commission rate is the official Standard Commission Income Statement value for the category band, "
-         "with the table cited on the row; the per-ASIN category assignment and all trend data remain "
-         "unverified and blank.")
+         "commission category Amazon assigns to each ASIN is not confirmed by any official source, so the "
+         "product-level rate cells are blank and only the official category-level Kitchen rate (4.50%) is "
+         "quoted, with its source; all trend data remains unverified and blank.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
