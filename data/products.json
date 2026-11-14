@@ -35,10 +35,10 @@
           "asin": "B0CNSB81V6",
           "label": "",
           "url": "https://www.amazon.com/dp/B0CNSB81V6",
-          "label_status": "not seen on the 2026-11-14 read; left blank (F-23)"
+          "label_status": "not seen on the 2026-11-14 read; left blank (F-27)"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -49,9 +49,10 @@
         "F-09",
         "F-15",
         "F-18",
-        "F-21",
-        "F-23"
+        "F-25",
+        "F-27"
       ],
+      "manufacturer": "",
       "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10"
     },
     {
@@ -60,7 +61,7 @@
       "name_short": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
       "name_listing": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
       "subcategory": "Air fryer toaster ovens",
-      "brand": "Unresolved: store 'Emeril Store'; byline 'Innovation IQ'",
+      "brand": "Emeril",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
       "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
       "capacity": "24.6 liters",
@@ -86,7 +87,7 @@
           "url": "https://www.amazon.com/dp/B0F92GL7JH"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -98,10 +99,12 @@
         "F-10",
         "F-15",
         "F-18",
-        "F-21",
-        "F-22",
-        "F-23"
+        "F-25",
+        "F-26",
+        "F-27"
       ],
+      "brand_note": "Item details table (re-read 2026-11-14). Earlier byline 'Innovation IQ' and store 'Emeril Store' were not seen in this read (F-05).",
+      "manufacturer": "Emeril Lagasse",
       "competitor_carousel_label": "not labelled 'Sponsored' on either read"
     },
     {
@@ -136,7 +139,7 @@
           "url": "https://www.amazon.com/dp/B0C33CHG99"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -147,9 +150,10 @@
         "F-10",
         "F-15",
         "F-18",
-        "F-21",
-        "F-23"
+        "F-25",
+        "F-27"
       ],
+      "manufacturer": "",
       "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10"
     }
   ]

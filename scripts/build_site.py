@@ -167,19 +167,20 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (byline)", p["brand"], "Unresolved" if p["id"] == "P2" else "Verified (earlier session; byline not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Brand (Item details)", p["brand"], "Verified (Item details)" if p["id"] == "P2" else "Verified (earlier session; Item details not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
+            ("Manufacturer (Item details)", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-21"),
             ("Category path", p["category_path"], "Verified", src, ""),
             ("Capacity (as listed)", p["capacity"], "Verified as listed (earlier session; not re-read, F-18)", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "F-18")),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, "F-07" if p["id"] == "P1" else ""),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown on the 2026-11-14 read; carousel " + p["competitor_carousel_label"], src, "F-23"),
+            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown on the 2026-11-14 read; carousel " + p["competitor_carousel_label"], src, "F-27"),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
             ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
-            ("Associates tag in site link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-21"),
+            ("Associates tag in site link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-25"),
         ]
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""

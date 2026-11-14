@@ -28,7 +28,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3 (re-resolved 2026-11-14). Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs matched. No 'Sponsored' label was seen above the carousel in that read; an earlier snapshot showed one (F-10). Byline and specification table not re-read (F-18)."
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3 (re-resolved 2026-11-14). Item details re-read 2026-11-14: Brand Name Emeril; Manufacturer Emeril Lagasse; model 4-00675-02X-VN; capacity 24.6 liters. Title, breadcrumb and also-viewed ASINs matched. 'Sponsored' label above 'Brands in this category' in this read (F-10). Byline 'Innovation IQ' and 'Emeril Store' not seen in this read (F-05)."
     },
     {
       "id": "S-P3",
@@ -93,7 +93,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1–2 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)–(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)–(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z)."
+      "used_for": "Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1–2 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)–(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)–(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z). IP License sections 2(k) (text disclaimer) and 4 (Agent Terms), re-read 2026-11-14 (F-23, F-24)."
     },
     {
       "id": "S-SCHED",

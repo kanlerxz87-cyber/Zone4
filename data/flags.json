@@ -55,14 +55,14 @@
     },
     {
       "id": "F-05",
-      "severity": "Medium",
-      "title": "Brand for P2 is ambiguous",
-      "detail": "The Emeril product page lists 'Visit the Emeril Store' and shows the byline 'Innovation IQ'. The brand is therefore left unresolved rather than assumed to be Emeril Lagasse.",
+      "severity": "Low",
+      "title": "P2 brand confirmed from Item details; byline to confirm",
+      "detail": "The P2 Item details table (re-read 2026-11-14) lists Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse'. An earlier verification recorded a store name 'Emeril Store' and a byline 'Innovation IQ'. Neither appeared in the 2026-11-14 read, so neither is used on the site.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "status": "Needs review",
-      "action": "Confirm the brand/manufacturer from the product's 'Product information' section or the seller page."
+      "status": "Resolved (brand field)",
+      "action": "Optional: check the byline on the live page if you want it shown."
     },
     {
       "id": "F-06",
@@ -210,15 +210,15 @@
     {
       "id": "F-18",
       "severity": "Medium",
-      "title": "Brand byline and specification tables not re-read in the 2026-11-14 pass",
-      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, the page titles, the category breadcrumbs and the also-viewed ASINs. It did not re-read the brand byline or the specification table (capacity, dimensions, colour, material) on P1, P2 or P3. Those values remain as recorded by the earlier verification session and are marked as not re-read.",
+      "title": "Brand byline and P1/P3 specification tables not re-read in the 2026-11-14 pass",
+      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
       "status": "Open (not re-read)",
-      "action": "A second reviewer should read the byline and specification tables on each page and confirm the values."
+      "action": "A second reviewer should read the brand byline and the P1/P3 Item details tables."
     },
     {
       "id": "F-19",
@@ -235,16 +235,50 @@
       "id": "F-20",
       "severity": "Medium",
       "title": "Competitor labels are paraphrases; standalone participation page uses different numbering",
-      "detail": "Competitor labels were earlier shortened paraphrases. In the 2026-11-14 integration they were replaced with the first part of each listing title as read on that date; a label not seen on that read is left blank (F-23). The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1–31) and has no item labelled 2(b) or 3(t). All lettered citations point to the Program Policies page.",
+      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page, and the labels are now marked as paraphrased. The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1–31) and has no item labelled 2(b) or 3(t). All lettered citations on this site point to the Program Policies page. (Source: re-verification by arena/857e9efd-zone4, items RV-I1, RV-C5 and RV-I2.)",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
       ],
-      "status": "Corrected; labels replaced",
-      "action": "None beyond review of the blank labels (F-23)."
+      "status": "Corrected; labels replaced (2026-11-14)",
+      "action": "None beyond review of the blank label (F-27)."
     },
     {
       "id": "F-21",
+      "severity": "Low",
+      "title": "Manufacturer not confirmed for P1 and P3",
+      "detail": "The Item details table was read for P2 (Manufacturer 'Emeril Lagasse'). For P1 and P3 it was not read in this pass, so the manufacturer field is left blank rather than inferred from the 'Chefman' brand.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Unverified (blank)",
+      "action": "Read the Item details table on both pages, or accept the blank."
+    },
+    {
+      "id": "F-23",
+      "severity": "High",
+      "title": "Amazon Agent Terms apply to any automated agent that accesses Program Content",
+      "detail": "IP License Section 4 (Agent Terms) applies if an autonomous or semi-autonomous software agent accesses, uses or interacts with Program Content. Such an agent must identify itself in the user-agent string as 'Agent/[agent name]', must not conceal or obfuscate that it is an agent, and must not circumvent measures that limit agent access. The brief's AI automation would fall under these terms. No agent is built.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Obtain written approval and confirm eligibility before any agent accesses Amazon data."
+    },
+    {
+      "id": "F-24",
+      "severity": "Low",
+      "title": "Amazon text disclaimer required if Amazon text is displayed",
+      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
+    },
+    {
+      "id": "F-25",
       "severity": "High",
       "title": "Amazon links on the site carry no Associates tag",
       "detail": "Participation Requirements §2(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
@@ -258,18 +292,18 @@
       "action": "Supply your Associates ID (tag) so links can be built with it, or confirm that untagged verification-only source links are acceptable."
     },
     {
-      "id": "F-22",
+      "id": "F-26",
       "severity": "Low",
       "title": "P2 listing gives two different cooking-function counts",
-      "detail": "The P2 listing subtitle states '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. Neither count is used on the site.",
+      "detail": "The P2 listing subtitle states '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. The Item details table on the 2026-11-14 read gives 'Configuration: Air Fryer Toaster Oven Combo with 24 Functions'. No count is used on the site.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
       "status": "Needs review",
-      "action": "Confirm the count from the manufacturer's specification before using either number."
+      "action": "Confirm the count from the manufacturer's specification before using any number."
     },
     {
-      "id": "F-23",
+      "id": "F-27",
       "severity": "Medium",
       "title": "Competitor carousels change between page loads; some labels blank",
       "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
