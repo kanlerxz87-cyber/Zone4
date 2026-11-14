@@ -11,7 +11,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | in progress; claimed by arena/857e9efd-zone4 | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
-| Current-session factual audit of deployed content; remove unsupported user-location claim | **in progress** | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, generated `docs/flagged.html`, `data/content.json` only if needed |
+| Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
 
 ## Original PR #7 branch note (historical)
 
@@ -27,6 +27,16 @@ This session worked on the assigned active Arena branch `arena/00ba40db-zone4`. 
 
 - Claimed a final factual audit of the existing delivered site, focusing on the user-location assertion in F-09. Scope: `COORDINATION.md`, `data/flags.json`, generated `docs/flagged.html`; `data/content.json` only if a related unsupported statement is found. No other active claim overlaps these files.
 - Current assigned branch is `arena/f647313b-zone4`; following the repository/branch constraints, no alternate branch or worktree is being created.
+
+### Session arena/f647313b-zone4 — completion (2026-11-14, UTC)
+
+- Reviewed the delivered repository, data, site output and coordination records; `python3 scripts/verify.py` passed (11 pages, internal links/anchors, per-page disclosure, sourced table rows, and price/rating withholding).
+- Corrected F-09 in `data/flags.json`: removed the unsupported assertion that the user is in Bucharest, Romania. It now states only what the source record supports: product-page snapshots used a US delivery location, which does not establish the user's location or intended storefront; no location-specific prices/availability are published. Replaced the country-program assertion in its action text with a neutral storefront confirmation.
+- Corrected stale deployment statements: `data/content.json` now says the GitHub Pages root redirects to `docs/`; F-13 now records the actual root-source/redirect setup and marks the historic workflow failure resolved. Added official GitHub links for the latest successful checks/deployment; updated `data/sources.json` with the checked Pages configuration and two successful workflow runs. Regenerated all 11 HTML pages.
+- Official source links retained on F-09: Amazon product pages [P1](https://www.amazon.com/dp/B0CDY277D3), [P2](https://www.amazon.com/dp/B09B7SB46R), [P3](https://www.amazon.com/dp/B08DKYBTPH). Source registry entry S-P1 explicitly notes that the snapshot location is not the user's location. No personal-location claim is used.
+- Rebase coordination: `origin/main` advanced to `074818c` with session `arena/857e9efd-zone4` claiming a separate re-verification task. Conflicts were limited to `COORDINATION.md`; both the concurrent claim and this audit are retained, with no edits to that session’s scoped data.
+- Deployment cross-check using GitHub API/CLI: Pages reports `built`, source `main` `/`, HTTPS enforced; latest Site checks [43583722827](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827) and Pages deploy [43583722287](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287) succeeded on `7ea516c`.
+- Validation: `python3 scripts/build_site.py`, `python3 scripts/verify.py`, and `git diff --check` passed; grep of `data/` and `docs/` found no Bucharest/Romania residue. The rest of the product data was not re-fetched from Amazon in this audit; prior product-field checks are recorded under session `arena/1eb689b8-zone4` and sources are linked in `data/sources.json`.
 
 ### Session arena/1eb689b8-zone4 — claim (2026-11-14, UTC)
 
