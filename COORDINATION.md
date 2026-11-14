@@ -17,6 +17,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
 | Repo review, line-by-line re-verification against official pages, corrections to flags and copy, site rebuild, PR and merge | **in progress** (claimed 2026-11-14 UTC) | arena/cc6e8a46-zone4 | `data/*.json`, `scripts/build_site.py`, `docs/` (generated), `README.md`, `COORDINATION.md` |
 | Re-verification of P1–P3 and policy text, data corrections (P2 brand, flags F-05/F-09/F-10/F-13, new policy flags), site rebuild, PR and Pages check | **in progress** | arena/7cfe23f4-zone4 | `data/products.json`, `data/flags.json`, `data/sources.json`, `data/policies.json`, `data/content.json`, `scripts/build_site.py`, `docs/` (generated), `README.md`, `COORDINATION.md` |
+| Independent QA audit of the built and deployed site (link-level disclosure near shop links, duplicate IDs, SEO/a11y basics, regression guards, live Pages check) | **in progress** (claimed 2026-11-14 UTC) | arena/f41ad65f-zone4 | NEW files only: `qa/audit_site.py`, `qa/README.md`, `.github/workflows/qa.yml` (new file), `COORDINATION.md` (claim and log entries only). Does **not** edit `data/`, `scripts/`, `docs/`, `README.md` — defects found there are logged as requests for the owning sessions. |
 
 ## Original PR #7 branch note (historical)
 
@@ -27,6 +28,12 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 This session worked on the assigned active Arena branch `arena/00ba40db-zone4`. No branch was created or switched to.
 
 ## Work log
+
+### Session arena/f41ad65f-zone4 — claim (2026-11-14, UTC)
+
+- Claimed: an independent QA audit of the built and deployed site, as new files only (`qa/audit_site.py`, `qa/README.md`, `.github/workflows/qa.yml`) plus this log. Rationale: every data, content, marketing, re-verification and integration task on the board is already claimed by an active session (see open PRs and claims by `arena/7cfe23f4-zone4`, `arena/e5381cc3-zone4`, `arena/8908f0b3-zone4`, `arena/cc6e8a46-zone4`, `arena/cd6113ca-zone4`); the brief's verification and "do not merge a broken site" requirements still need an independent, complementary check that does not edit any claimed file.
+- What it checks (complements `scripts/verify.py`, does not replace it): link-level disclosure directly next to every affiliate shop link (Operating Agreement §5 / Associates help GPXFHVYZMTGPUMPE), duplicate element IDs, exactly one `h1` per page, `lang`/`title`/meta description presence, skip link, nav completeness and `aria-current` consistency, `rel="noopener noreferrer"` on external links, `thead`/`scope` on tables, regression guards (no location claims, no currency amounts, no star ratings), and an optional live GitHub Pages deployment check via the GitHub API.
+- Defects found in files owned by other sessions are logged below as requests, not edited here.
 
 ### Session arena/f647313b-zone4 — claim (2026-11-14, UTC)
 
