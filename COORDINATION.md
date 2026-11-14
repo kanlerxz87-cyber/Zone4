@@ -29,7 +29,7 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 
 The current active session is working on `arena/13dd55ca-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`). No branch was created or switched to.
 
-| Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, site rebuild, integration (PR, merge, Pages check) | **done** | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
+| Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, stale page captions, site rebuild, integration (PR, merge, Pages check) | **done**; PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) merged at `0aa8583`, follow-up PR [#42](https://github.com/kanlerxz87-cyber/Zone4/pull/42); Pages `built` | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
 
 ## Work log
 
@@ -634,3 +634,23 @@ competitor label is populated, and that all three product-level commission cells
 **Left for the user (unchanged).** F-01 per-ASIN commission band, F-02 prices and ratings (needs the API route), F-03 no
 Associates tag in the supplied links, F-11/F-12 legal review of automated retrieval, and the remaining Medium and Low items
 on the Flagged for Review page.
+
+**Follow-up round (same session, after PR #41 was live).** Reading the deployed products page surfaced two captions that
+the data changes had made false, both typed into `scripts/build_site.py` rather than derived from the data:
+
+- The note under the products table still said "Competitor labels are short paraphrases; the exact listing titles are on the
+  linked pages (F-20)." Both halves were wrong: RV-I1 replaced the paraphrases with verbatim title segments, and the labels
+  are now rendered in the row itself. It now says the labels are the opening segment of each listing title copied as shown,
+  marked "(as listed)", with the ASIN treated as authoritative and the carousel noted as volatile (F-20, F-29).
+- The paragraph above the table still asserted a per-product category-band rate, which main (PR #38) had replaced with blank
+  product-level cells. It now says the per-ASIN category is unconfirmed, the product-level cells are blank, and only the
+  official category-level Kitchen rate (4.50%) is quoted with its source.
+
+Both were found by reading the rendered page rather than the data, which is the same lesson as the "0 of 3" KPI: prose typed
+into the builder does not follow the data when the data changes. Filed as PR #42.
+
+**Integration record.** PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) opened from `arena/949aaac1-zone4`; all
+three CI checks passed (verify x2, audit); merged at `0aa8583` on 2026-11-14. GitHub Pages reports `built` for that commit,
+source `main` `/`, HTTPS enforced; public URL https://kanlerxz87-cyber.github.io/Zone4/. The deployed index, products and
+flagged pages were fetched from the live URL and read back: the KPIs are derived and correct, all three competitor labels
+render, the commission cells are blank with the official category table cited, and F-36 and F-37 are on the Flagged page.
