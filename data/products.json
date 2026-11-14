@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Verified product records for the three user-supplied Amazon links. Values are only what was observed on the cited official Amazon product page. Blank or withheld fields are listed in flags.json.",
+    "observed_utc": "2026-11-14",
+    "method": "Each user link was resolved to its Amazon product page (the redirect target), then the listing's title, byline, breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. Prices and star ratings were read but are NOT published on the site (see flags F-02)."
+  },
+  "products": [
+    {
+      "id": "P1",
+      "asin": "B0CDY277D3",
+      "name_short": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven",
+      "name_listing": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "subcategory": "Dual-basket air fryers",
+      "brand": "Chefman",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+      "capacity": "6 liters",
+      "dimensions": "13.38\"D x 11.81\"W x 10.63\"H",
+      "color": "Black, Gray",
+      "material": "Metal, Plastic",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "canonical_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "competitors": [
+        {"asin": "B0B7C327LK", "label": "Chefman 6 Quart Dual Basket Air Fryer (Digital Touchscreen)", "url": "https://www.amazon.com/dp/B0B7C327LK"},
+        {"asin": "B0BYKGN61Q", "label": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity", "url": "https://www.amazon.com/dp/B0BYKGN61Q"},
+        {"asin": "B0CNSB81V6", "label": "Nutrichef Double Basket Air Fryer 8.8 QT", "url": "https://www.amazon.com/dp/B0CNSB81V6"}
+      ],
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items, on the product page snapshot.",
+      "flags": ["F-01", "F-02", "F-03", "F-04", "F-06", "F-07", "F-09", "F-15"]
+    },
+    {
+      "id": "P2",
+      "asin": "B09B7SB46R",
+      "name_short": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
+      "name_listing": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+      "subcategory": "Air fryer toaster ovens",
+      "brand": "Unresolved: store 'Emeril Store'; byline 'Innovation IQ'",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+      "capacity": "24.6 liters",
+      "dimensions": "16.9\"D x 15.8\"W x 14.8\"H",
+      "color": "Stainless Steel",
+      "material": "Stainless Steel",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "canonical_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "competitors": [
+        {"asin": "B0BZ52FLKC", "label": "Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven", "url": "https://www.amazon.com/dp/B0BZ52FLKC"},
+        {"asin": "B0FM5KF34G", "label": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, FO101", "url": "https://www.amazon.com/dp/B0FM5KF34G"},
+        {"asin": "B0F92GL7JH", "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT", "url": "https://www.amazon.com/dp/B0F92GL7JH"}
+      ],
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items; the carousel was labelled 'Sponsored' on this snapshot (see F-10).",
+      "flags": ["F-01", "F-02", "F-03", "F-04", "F-05", "F-06", "F-09", "F-10", "F-15"]
+    },
+    {
+      "id": "P3",
+      "asin": "B08DKYBTPH",
+      "name_short": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
+      "name_listing": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "subcategory": "Single-basket air fryers",
+      "brand": "Chefman",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "category_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+      "capacity": "8 quarts",
+      "dimensions": "12.75\"D x 13.5\"W x 10\"H",
+      "color": "Stainless steel",
+      "material": "Plastic, Stainless Steel",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "canonical_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "competitors": [
+        {"asin": "B0CNY1YVDD", "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Touchscreen Controls)", "url": "https://www.amazon.com/dp/B0CNY1YVDD"},
+        {"asin": "B0D5FX6VRL", "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Easy-View Window)", "url": "https://www.amazon.com/dp/B0D5FX6VRL"},
+        {"asin": "B0C33CHG99", "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt", "url": "https://www.amazon.com/dp/B0C33CHG99"}
+      ],
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items, on the product page snapshot.",
+      "flags": ["F-01", "F-02", "F-03", "F-04", "F-08", "F-09", "F-15"]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Rebuild the site from data/
+        run: python3 scripts/build_site.py
+      - name: Verify data, links, anchors, disclosure, row sources and policy guards
+        run: python3 scripts/verify.py
+      - name: Confirm committed docs/ matches the build
+        run: git diff --exit-code -- docs

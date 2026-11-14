@@ -1,5 +1,54 @@
 # Coordination board
 
+Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclaimed, in progress, done, needs review (needs review does not block anything). Each claim lists the session ID and the files it touches.
+
+| Task | Status | Owner session | Files / scope |
+|---|---|---|---|
+| Static research dashboard, executive summary, verification, Pages workflow (prototype, first pass) | done (prototype); product records **superseded by the verified records below** | arena/c2ff885d-zone4 | previously `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` (root prototype removed in this integration; history kept) |
+| Follow-up multi-page research view and FTC citation | done; superseded by the verified site below | arena/00ccfbd4-zone4 | previously `products.html`, `insights.html`, `flagged.html`, `styles.css` (root removed in this integration; history kept) |
+| Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **in progress** (claimed by arena/1eb689b8-zone4) | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
+| Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **in progress** (claimed by arena/1eb689b8-zone4) | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` (replaces `pages.yml`) |
+| Integration: PR, merge to `main`, Pages deploy check | **in progress** (arena/1eb689b8-zone4 acts as the final integration session; no other session is active) | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
+
+## Branch note
+
+The task brief asks for session branches named `session-<id>/<task>`. The session branch note assigns this session `arena/1eb689b8-zone4`, and the session rules say to work only on that branch. This session therefore works on `arena/1eb689b8-zone4` and does not create other branches. Other `arena/*` branches on the remote were not modified.
+
+## Work log
+
+### Session arena/1eb689b8-zone4 — claim (2026-11-14, UTC)
+
+- Claimed: product record verification (P1–P3), site rebuild on `main` `/docs`, and integration (PR, merge, Pages check). Scope: the files listed above. No other session holds a claim on these files.
+- Reason for the claim: the prior session's product records were blank and flagged as needing review. The brief requires line-by-line verification from official sources.
+- Starting point: `main` at `31f27e4`, fast-forwarded from `a401e2a` before any changes.
+
+
+### Session arena/1eb689b8-zone4 — work log
+
+- **Scope verified:** the three user-supplied links were resolved to Amazon product pages: `link.amazon/B04G1MEwY` → ASIN `B0CDY277D3`; `link.amazon/B02NbDxp3` → `B09B7SB46R`; `link.amazon/B00hJ57DV` → `B08DKYBTPH`. For each ASIN, the title, brand byline, category breadcrumb, specification table and also-viewed list were read. Identity and category are verified for all three. P2's brand is unresolved (F-05).
+- **Sources (official):** Amazon product pages (three ASINs); Associates Operating Agreement §5 (https://affiliate-program.amazon.com/help/operating/agreement); Associates Program Policies (https://affiliate-program.amazon.com/help/operating/policies); Associates Central help on the disclosure (https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE, added from the prior session's citation and confirmed); Amazon Conditions of Use (https://www.amazon.com/gp/help/customer/display.html?nodeId=508088); FTC Disclosures 101 (https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers). The full registry is in `data/sources.json`.
+- **Not read (marked No on the Sources page):** the commission schedule (https://affiliate-program.amazon.com/help/operating/schedule), which redirects to sign-in. Third-party commission sites were not used, because they conflict.
+- **Policy-driven withholding:** Amazon prices and star ratings are not published (Participation Requirements 2(b) and 3(t)). Trend and conversion fields are blank.
+- **Verification performed:** field-by-field log (42 rows, each with a source link) on the Verification log page. `python3 scripts/verify.py` checks the data and the 11 built pages: internal links and anchors, the disclosure sentence on each page, a source link in every table row, and no currency amounts or star ratings. Negative tests confirmed the checks fail on a row with no official link, a price string and a rating string.
+- **Irregularities:** 16 items on the Flagged for Review page (`docs/flagged.html`, source `data/flags.json`). The high-severity items are F-01 (commission rate unverified), F-02 (prices and ratings withheld), F-03 (Associates tag not visible in the resolved links), F-11 (verification method may conflict with the Conditions of Use) and F-12 (AI content automation restricted; not built).
+- **Integration conflicts resolved (log of what happened):** `origin/main` advanced during this session through PRs #4, #5 and #6 from `arena/d102fcb4-zone4` and `arena/00ccfbd4-zone4`. The merge produced these conflicts, which were resolved without discarding any content in git history:
+  - `.github/workflows/pages.yml` (modify on main, delete here): deleted. Replaced by `.github/workflows/site-checks.yml`. Its artifact deploy of the repo root would have overridden the `/docs` source.
+  - `index.html` (modify on main, delete here): removed from the root. The site now lives in `docs/`.
+  - `executive-summary.html` (added on main): removed from the root. The executive summary is `docs/executive-summary.html`.
+  - `README.md` (content): replaced with this branch's README. Prior text is in history.
+  - `COORDINATION.md`: auto-merged, so all prior session entries are kept above.
+  - The prior sessions' conclusions are kept: no product attributes were verified by them, and their deployment notes are preserved. The disclosure-help citation from `arena/d102fcb4-zone4` is verified here and integrated as `S-HELP` and rule `R-16`.
+- **Pages:** the Pages source moves from `main` `/` to `main` `/docs`. See the status lines below.
+
+### Integration status (updated at merge)
+
+- Pull request: [#7](https://github.com/kanlerxz87-cyber/Zone4/pull/7) (`arena/1eb689b8-zone4` → `main`).
+- Merge result and Pages deploy: recorded in the last entry of this section (filled after the merge).
+
+## Prior session log (preserved, unedited)
+
+# Coordination board
+
 | Task | Status | Owner session | Files |
 |---|---|---|---|
 | Static research dashboard, executive summary, verification, Pages workflow | done (prototype); product records **needs review** | arena/c2ff885d-zone4 | `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` |

@@ -1,17 +1,42 @@
-# Northstar — Amazon affiliate research workspace
+# Zone4 — Amazon affiliate product research (verified)
 
-A lightweight, static GitHub Pages site organizing three user-supplied Amazon links with an evidence-first product table, executive summary, and a clearly labeled review queue. Unconfirmed product facts and metrics are deliberately blank.
+A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
-## Preview locally
+**Live site (GitHub Pages, from `main` `/docs`):** https://kanlerxz87-cyber.github.io/Zone4/
 
-Open `index.html` in a browser, or serve the repository with any static file server.
+## What is in the repo
 
-## Publish
+| Path | Purpose |
+|---|---|
+| `data/products.json` | Verified product records (ASIN, brand, category, specifications, competitor ASINs) |
+| `data/sources.json` | Source registry: each official source, and whether it was read |
+| `data/policies.json` | Amazon Associates and FTC requirements, with status for this site |
+| `data/flags.json` | Irregularities and unverified items (Flagged for Review) |
+| `data/content.json` | Executive summary, analysis findings, category text |
+| `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
+| `scripts/verify.py` | Checks data and built pages; fails on any problem |
+| `docs/` | The published site |
+| `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
+| `COORDINATION.md` | Shared task board and work log for all sessions |
 
-GitHub Pages workflow configuration is in `.github/workflows/pages.yml`. Enable **Settings → Pages → Build and deployment → GitHub Actions** if it is not already enabled. The workflow deploys the repository root on pushes to `main` and by manual dispatch.
+## Rebuild and verify
 
-## Important limits
+```bash
+python3 scripts/build_site.py
+python3 scripts/verify.py
+```
 
-This is a static research dashboard, not an operational AI agent: it has no Amazon account/API integration, affiliate tracking IDs, analytics, product database, or automatic publishing. It makes no product, price, commission, trend, or conversion claims. Verify all details against live official sources and current Amazon Associates terms before marketing or integrating data. Amazon product/source links are user-provided.
+## Pages
 
-The displayed Associates statement is included for transparency and does not imply enrollment or compliance approval. Review the official [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement), [Program Policies](https://affiliate-program.amazon.com/help/operating/policies), and [disclosure guidance](https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE).
+GitHub Pages serves `main` `/docs` (legacy build, no custom workflow deploy). Every push to `main` rebuilds the site.
+
+## Limits
+
+- Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 3(t) restrict them to Amazon-served links or PA-API / Creators API data.
+- Commission rates are **blank** (the official schedule is behind an Amazon sign-in).
+- Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
+- Automated research, AI article generation and click tracking are **not built**. See `data/content.json` (`not_built`) and `data/flags.json`.
+
+Start with `flagged.html` on the live site for the items that need your decision.
+
+The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."
