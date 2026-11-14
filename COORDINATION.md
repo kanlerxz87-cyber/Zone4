@@ -12,6 +12,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
+| Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **in progress** (claimed 2026-11-14 UTC) | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 
 ## Original PR #7 branch note (historical)
 
@@ -159,3 +160,8 @@ The current branch added a more detailed multi-page research view and FTC source
 
 - **Merge result:** PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) (`arena/857e9efd-zone4` → `main`) merged with a merge commit at `074818c` (2026-11-14, UTC). Site checks and the `pages build and deployment` run both succeeded on `074818c`. The Pages API reports `built`, and https://kanlerxz87-cyber.github.io/Zone4/ returns the dashboard.
 - Not done here: the RV-I1 and RV-C5 fixes, which are shared outputs owned by the integration session (see the requests above).
+### Session arena/e5381cc3-zone4 — claim (2026-11-14, UTC)
+
+- Claimed: re-verification of the product records (P1–P3), the Associates and FTC citations, and the Pages statements, plus corrections, a site rebuild, and integration (PR, merge, Pages check). Scope: the files listed in the table row above. No other open claim covers these files. PR #13 (`arena/169f549b-zone4`, coordination log only) is left for its owner; this session appends its own entries only.
+- Branch: the session's assigned branch `arena/e5381cc3-zone4` (fast-forwarded to `origin/main` `7ea516c`). The brief's `session-<id>/<task>` naming is not used, because the session is bound to its assigned branch and no other branch is created or pushed.
+- This session is also the final integration session for this round (all other tasks are done), so it performs the combined re-verification and the PR/merge steps.
