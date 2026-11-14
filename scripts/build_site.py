@@ -44,7 +44,7 @@ NAV = [
     ("analysis.html", "Analysis & findings"),
     ("verification.html", "Verification log"),
     ("policy-compliance.html", "Policy compliance"),
-    ("flagged.html", "Flagged for review"),
+    ("flagged.html", "Flagged for Review"),
     ("sources.html", "Sources"),
 ]
 
@@ -260,7 +260,7 @@ def page_index(current: Page) -> str:
         ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
         ("0", "Amazon prices published (policy F-02)"),
         ("0 of 3", "Commission rates verified (F-01)"),
-        (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for review page)"),
+        (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for Review page)"),
     ]
     kpi_html = "".join(f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>' for v, l in kpis)
     cards = [
@@ -270,7 +270,7 @@ def page_index(current: Page) -> str:
         ("products.html", "All products (table)", "Every row links to its Amazon source"),
         ("analysis.html", "Analysis & findings", "Niche, competition, what can and cannot be concluded"),
         ("verification.html", "Verification log", "Field-by-field check with source and status"),
-        ("flagged.html", "Flagged for review", "Irregularities and unverified items, with sources"),
+        ("flagged.html", "Flagged for Review", "Irregularities and unverified items, with sources"),
     ]
     card_html = "".join(
         f'<a class="card" href="{esc(current.rel(t))}"><div class="card-title">{esc(name)}</div><div class="card-sub">{esc(sub)}</div></a>'
@@ -297,7 +297,7 @@ def page_exec(current: Page) -> str:
         + f'<section><h2>What the verification found</h2><ul class="bullets">{bullets}</ul></section>'
         + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol></section>'
         + f'<section><h2>Not built, and why</h2><ul>{not_built}</ul></section>'
-        + f'<section><h2>Detail</h2><p>See {href(current, "analysis.html", "Analysis & findings")}, {href(current, "flagged.html", "Flagged for review")} and {href(current, "sources.html", "Sources")}.</p></section>'
+        + f'<section><h2>Detail</h2><p>See {href(current, "analysis.html", "Analysis & findings")}, {href(current, "flagged.html", "Flagged for Review")} and {href(current, "sources.html", "Sources")}.</p></section>'
     )
 
 
