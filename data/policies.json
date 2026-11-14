@@ -132,16 +132,6 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-16",
-      "requirement": "Link-level disclosure must be clear and conspicuous and placed near each affiliate link, not hidden on another page.",
-      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
-      "source_ref": "Associates Central help: 'Why do I have to identify myself as an Associate?'",
-      "status": "Implemented",
-      "site_implementation": "The disclosure sentence appears directly under each 'Open Amazon link' button, in the same card or row.",
-      "verified_quote": "“your link-level disclosure must be: 1. Clear. … 2. Conspicuous. It should be placed near any affiliate link or product review in a location that customers will notice easily. They shouldn’t have to hunt for it.”",
-      "reverified": "Confirmed verbatim in the second pass"
-    },
-    {
       "id": "R-14",
       "requirement": "Commission income is paid on Qualifying Revenue, which excludes shipping, gift-wrap, handling, taxes, service charges, credits, rebates, card fees and bad debt.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
@@ -158,6 +148,16 @@
       "status": "Informational",
       "site_implementation": "Links are direct, with no redirect or intermediate page. Search-engine display is not controlled by this site.",
       "reverified": "Not re-read by arena/8908f0b3-zone4 in the second pass"
+    },
+    {
+      "id": "R-16",
+      "requirement": "Link-level disclosure must be clear and conspicuous and placed near each affiliate link, not hidden on another page.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "source_ref": "Associates Central help: 'Why do I have to identify myself as an Associate?'",
+      "status": "Implemented",
+      "site_implementation": "The disclosure sentence appears directly under each 'Open Amazon link' button, in the same card or row.",
+      "verified_quote": "“your link-level disclosure must be: 1. Clear. … 2. Conspicuous. It should be placed near any affiliate link or product review in a location that customers will notice easily. They shouldn’t have to hunt for it.”",
+      "reverified": "Confirmed verbatim in the second pass"
     },
     {
       "id": "R-17",
@@ -194,13 +194,21 @@
       "requirement": "If Amazon text (Product Advertising Content) is displayed, include the Section 2(k) disclaimer in plain view.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "IP License, Section 2(k)",
-      "status": "Open (applicability unconfirmed)",
-      "site_implementation": "The disclaimer is not shown. Decision pending (F-24).",
+      "status": "Implemented (disclaimer shown site-wide)",
+      "site_implementation": "The 2(k) sentence appears in the footer of every page, including the analytics page. Whether 2(k) applies to text read from a product page rather than obtained through an API is unconfirmed (F-24).",
       "verified_quote": "“If you display Product Advertising Content consisting of text on your application, you will include the following disclaimer in plain view to end users of your application: ‘CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.’”",
       "reverified": "Confirmed verbatim in the second pass; the disclaimer is now shown in the footer of every page on this site"
     },
     {
       "id": "R-21",
+      "requirement": "Include the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 2(b)",
+      "status": "Not met for source and competitor links (F-25)",
+      "site_implementation": "No tag was supplied, so none was added. Source and competitor links are untagged. Flag F-25."
+    },
+    {
+      "id": "R-22",
       "requirement": "Do not make inaccurate, overbroad, deceptive or otherwise misleading claims about any Product, an Amazon Site, or Amazon's policies, promotions or prices.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
@@ -210,7 +218,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-22",
+      "id": "R-23",
       "requirement": "Do not give the Site price tracking or price alerting functionality unless Amazon agrees otherwise.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 6(y)",
@@ -220,7 +228,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-23",
+      "id": "R-24",
       "requirement": "When a Special Link points at a page with a Product list, the Site must carry additional original content relevant to that link, and links must point to Products.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
@@ -230,7 +238,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-24",
+      "id": "R-25",
       "requirement": "Display Special Links only after applying to and being accepted in the Associates Program, and never tie a sub-tag to a specific end user.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Sections 2(a) and 2(b)",
@@ -240,7 +248,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-25",
+      "id": "R-26",
       "requirement": "Do not describe an experience with a product you have not tried, and do not make claims that need proof the advertiser does not have.",
       "source_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "source_ref": "FTC Disclosures 101, What Else to Know",
@@ -250,7 +258,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-26",
+      "id": "R-27",
       "requirement": "Remove any link or reference to a limited-time promotion from the Site as soon as that promotion ends on the Amazon Site.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements, Section 2(b)",
@@ -260,7 +268,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-27",
+      "id": "R-28",
       "requirement": "Do not use Amazon's name or trademarks in meta tags or hidden text, and do not frame Amazon content.",
       "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "source_ref": "Conditions of Use, License and Access",
@@ -270,7 +278,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-28",
+      "id": "R-29",
       "requirement": "Do not use Creators API, PA API or Data Feeds to aggregate, analyse, extract or repurpose Product Advertising Content, or for training or fine-tuning a model, without express prior written approval.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(e)",
@@ -280,7 +288,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-29",
+      "id": "R-30",
       "requirement": "If pricing or availability data is shown, put a date/time stamp beside it and include the price-disclaimer sentence.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(i)",
@@ -290,7 +298,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-30",
+      "id": "R-31",
       "requirement": "Product Advertising Content other than images may be stored for caching only up to 24 hours and must then be refreshed; ASINs may be stored indefinitely.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(h)",
@@ -300,7 +308,7 @@
       "reverified": "Confirmed verbatim in the second pass"
     },
     {
-      "id": "R-31",
+      "id": "R-32",
       "requirement": "Use Product Advertising Content only on a site whose principal purpose is advertising an Amazon Site and driving sales, and link each use to the relevant Product page.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Associates Program IP License, Section 2(c)(i) and 2(c)(iii)",

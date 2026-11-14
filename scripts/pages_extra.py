@@ -199,7 +199,7 @@ def page_reverification(ctx, current):
             esc(chk["id"]), esc(chk["check"]), esc(chk["expected"]), esc(chk["result"]),
             ctx.status_pill(chk["status"]), ext(chk["source"], "Official source"),
         ])
-    chips = " ".join(flag_chip(current, f) for f in ("F-12", "F-18", "F-24", "F-25", "F-26", "F-27", "F-28", "F-29", "F-30"))
+    chips = " ".join(flag_chip(current, f) for f in ("F-12", "F-18", "F-24", "F-25", "F-26", "F-27", "F-28", "F-29", "F-30", "F-31", "F-32", "F-33", "F-34"))
     return (
         hero("Independent re-verification pass",
              f"Second pass by session {rev['session']} on {rev['date_utc']} (UTC). {reconfirmed} of {len(rev['checks'])} checks "

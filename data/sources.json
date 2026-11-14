@@ -18,7 +18,7 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
+      "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site) On the 2026-11-14 read, carousel positions 2 and 3 differed from the stored list (F-23); the 'Sponsored' label was not seen on that read (F-10).",
       "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location. Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs matched the records. Byline and specification table were not re-read in that pass (F-18).",
       "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: Title, brand field as rendered, breadcrumb and also-viewed ASINs re-confirmed identically; Item details table absent from this pass (F-18)."
     },
@@ -177,6 +177,15 @@
       "used_for": "Sections 1, 2(c), 2(e), 2(h), 2(i), 2(j), 2(k) and the Agent Terms in section 4; the basis for rules R-27 to R-31 and R-20 and flags F-24, F-29 and F-30.",
       "notes": "Read 2026-11-14 by arena/8908f0b3-zone4. The IP License is part of the Program Policies page rather than a separate URL, so it shares the S-PP address.",
       "reverified": "Quoted verbatim in the second pass."
+    },
+    {
+      "id": "S-API",
+      "title": "PA-API 5 Deprecation Notice (Creators API documentation)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+      "publisher": "Amazon Associates (official)",
+      "accessible": true,
+      "used_for": "Confirms PA-API 5.0 is deprecated and returns 403 AccessDeniedException, so the API path for prices and ratings is the Creators API (F-34).",
+      "notes": "Read 2026-11-14 by arena/8908f0b3-zone4."
     }
   ],
   "non_official_reference_only": [

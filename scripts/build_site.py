@@ -54,6 +54,7 @@ NAV = [
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens"),
     ("analysis.html", "Analysis & findings"),
+    ("analytics.html", "Analytics"),
     ("marketing.html", "Marketing content (drafts)"),
     ("platform.html", "Platform & automation"),
     ("requirements.html", "Requirements coverage"),
@@ -79,6 +80,8 @@ def status_pill(status: str) -> str:
         kind = "ok"
     elif "withheld" in s or "not applicable" in s:
         kind = "muted"
+    elif s.startswith("not met"):
+        kind = "bad"
     elif s.startswith("unverified") or "not verifiable" in s:
         kind = "warn"
     elif "needs" in s or "open" in s or "review" in s:
@@ -194,6 +197,7 @@ RECHECK = {
     "Star rating / review count": "Re-confirmed withheld",
     "Category commission rate": "V-20 still behind sign-in",
     "Trend / conversion": "No official source found",
+    "Associates tag in site link": "Re-confirmed: source links carry no tag",
     "Associates tag in link": "V-11 re-confirmed: no tag",
 }
 
@@ -311,7 +315,7 @@ def hero(title: str, lead: str) -> str:
 def page_index(current: Page) -> str:
     open_flags = len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])
     kpis = [
-        ("3 of 3", "Products with verified ASIN and category (P2 brand recorded from Item details, F-05)"),
+        ("3 of 3", "Products with verified ASIN and category (P2 brand from Item details, F-05)"),
         (str(len(REVERIF["checks"])), "Checks in the second, independent verification pass"),
         (str(len(MARKETING["articles"]) + 2), "Marketing drafts written (3 articles, comparison, buying guide)"),
         (str(len(REQUIREMENTS)), "Requirements from the brief traced to evidence"),

@@ -20,7 +20,7 @@
       "id": "F-02",
       "severity": "High",
       "title": "Prices and star ratings withheld from the public site",
-      "detail": "Participation Requirements Section 2(b) allows prices and availability to be shown only if Amazon serves the link or the data comes from Creators API / PA API. Section 6(t) bars star ratings and review data unless obtained the same way. The verification read prices and ratings, but they are not published. The pricing and rating analysis the brief asks for therefore cannot be shown on a static site.",
+      "detail": "Participation Requirements Section 2(b) allows prices and availability to be shown only if Amazon serves the link or the data comes from Creators API / PA API. Section 6(t) bars star ratings and review data unless obtained the same way. The verification read prices and ratings, but they are not published. The pricing and rating analysis the brief asks for therefore cannot be shown on a static site. Note F-34: PA-API 5 is deprecated, so this path runs through the Creators API.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -139,10 +139,10 @@
       "id": "F-12",
       "severity": "High",
       "title": "AI content automation is restricted by Amazon Conditions of Use",
-      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14). Second pass (arena/8908f0b3-zone4, 2026-11-14) found a second, broader restriction in the Associates Program IP License section 1: Program Content may not be used to develop or improve large language or multimodal models or machine learning models, and IP License section 2(e) additionally bars using API data for “direct training or fine-tuning” of a model without express prior written approval (rules R-17 and R-28).",
+      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14). The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14). Second pass (arena/8908f0b3-zone4, 2026-11-14) found a second, broader restriction in the Associates Program IP License section 1: Program Content may not be used to develop or improve large language or multimodal models or machine learning models, and IP License section 2(e) additionally bars using API data for “direct training or fine-tuning” of a model without express prior written approval (rules R-17 and R-29).",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/policies",
-        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "status": "Needs review",
       "action": "Decide the data sources for AI-generated articles and get a compliance review before automation."
@@ -176,7 +176,7 @@
       "id": "F-15",
       "severity": "Medium",
       "title": "Trend, popularity and conversion signals are unverified",
-      "detail": "The product pages show Amazon badges (for example 'Amazon's Choice' and 'bought in past month') and rank-like signals. These are not published, because reuse of Amazon-displayed sales and review metrics was not confirmed (F-02). No official source provides verified trend or conversion data for these products, so trend and conversion fields are blank.",
+      "detail": "The product pages show Amazon badges (for example 'Amazon's Choice' and 'bought in past month') and rank-like signals. These are not published, because reuse of Amazon-displayed sales and review metrics was not confirmed (F-02). No official source provides verified trend or conversion data for these products, so trend and conversion fields are blank. Note F-34: PA-API 5 is deprecated, so this path runs through the Creators API.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -189,7 +189,7 @@
       "id": "F-16",
       "severity": "Low",
       "title": "Creators API / PA API license terms not reviewed",
-      "detail": "The Program Policies incorporate an 'Associates Program IP License and Usage Requirements' section that governs Creators API and PA API use. It was not read line by line in this pass, so no API integration is claimed.",
+      "detail": "The Program Policies incorporate an 'Associates Program IP License and Usage Requirements' section that governs Creators API and PA API use. It was not read line by line in this pass, so no API integration is claimed. Note F-34: PA-API 5 is deprecated, so this path runs through the Creators API.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -211,7 +211,7 @@
       "id": "F-18",
       "severity": "Medium",
       "title": "Brand byline and P1/P3 specification tables not re-read in the 2026-11-14 pass",
-      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read. Second pass (arena/8908f0b3-zone4): this pass could not re-read the Item details table for any of the three products, including P2, because the table was absent from the page text returned to it; the four specification fields (litre capacity, item dimensions, colour, material) are therefore carried forward from the earlier read on every row, not re-verified. Titles, brand fields as rendered, breadcrumbs and also-viewed ASINs were re-confirmed for all three products.",
+      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read. The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read. Second pass (arena/8908f0b3-zone4): this pass could not re-read the Item details table for any of the three products, including P2, because the table was absent from the page text returned to it; the four specification fields (litre capacity, item dimensions, colour, material) are therefore carried forward from the earlier read on every row, not re-verified. Titles, brand fields as rendered, breadcrumbs and also-viewed ASINs were re-confirmed for all three products.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -224,7 +224,7 @@
       "id": "F-19",
       "severity": "High",
       "title": "Brief's automation goals conflict with Program Policies unless PA-API / Creators API and Associates access exist",
-      "detail": "The brief asks for automated research, AI article generation, publishing, and click and conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA-API / Creators API data. Section 6(s) bars artificially generated clicks or impressions, including by robot or software. Section 6(t) bars review and rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them. (Source: re-verification by arena/857e9efd-zone4, item RV-I3, confirmed in this pass.)",
+      "detail": "The brief asks for automated research, AI article generation, publishing, and click and conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA-API / Creators API data. Section 6(s) bars artificially generated clicks or impressions, including by robot or software. Section 6(t) bars review and rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them. (Source: re-verification by arena/857e9efd-zone4, item RV-I3, confirmed in this pass.) Note F-34: PA-API 5 is deprecated, so this path runs through the Creators API.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -240,8 +240,8 @@
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
       ],
-      "status": "Corrected in this session; needs review",
-      "action": "None beyond review. Cite the Program Policies URL for every lettered section."
+      "status": "Corrected; labels replaced (2026-11-14)",
+      "action": "None beyond review of the blank label (F-27)."
     },
     {
       "id": "F-21",
@@ -270,18 +270,54 @@
       "id": "F-24",
       "severity": "Low",
       "title": "Amazon text disclaimer required if Amazon text is displayed",
-      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API. Update from arena/8908f0b3-zone4 (2026-11-14): the IP License 2(k) sentence was re-read verbatim and is now shown in the footer of every page on this site, so the site carries the disclaimer whichever reading of 2(k) applies. The open question of whether 2(k) reaches titles read from a product page rather than obtained through an API still needs a decision.",
+      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API. IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API. Update from arena/8908f0b3-zone4 (2026-11-14): the IP License 2(k) sentence was re-read verbatim and is now shown in the footer of every page on this site, so the site carries the disclaimer whichever reading of 2(k) applies. The open question of whether 2(k) reaches titles read from a product page rather than obtained through an API still needs a decision.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Implemented pending confirmation",
+      "status": "Needs review",
       "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
     },
     {
       "id": "F-25",
       "severity": "High",
+      "title": "Amazon links on the site carry no Associates tag",
+      "detail": "Participation Requirements §2(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Needs review",
+      "action": "Supply your Associates ID (tag) so links can be built with it, or confirm that untagged verification-only source links are acceptable."
+    },
+    {
+      "id": "F-26",
+      "severity": "Low",
+      "title": "P2 listing gives two different cooking-function counts",
+      "detail": "The P2 listing subtitle states '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. The Item details table on the 2026-11-14 read gives 'Configuration: Air Fryer Toaster Oven Combo with 24 Functions'. No count is used on the site.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
+      "status": "Needs review",
+      "action": "Confirm the count from the manufacturer's specification before using any number."
+    },
+    {
+      "id": "F-27",
+      "severity": "Medium",
+      "title": "Competitor carousels change between page loads; some labels blank",
+      "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Needs review",
+      "action": "Show each competitor list as a dated snapshot, or drop it. Do not treat it as a stable competitor set."
+    },
+    {
+      "id": "F-28",
+      "severity": "High",
       "title": "The brief's pricing analysis collides with two separate rules",
-      "detail": "The brief asks the platform to analyse pricing. Participation Requirements 6(y) bars price tracking or alerting on the Site unless Amazon agrees otherwise (R-22), 2(b) restricts where prices may appear at all (R-02), and IP License 2(i) requires a date/time stamp and a price disclaimer for any pricing shown (R-29). A pricing feature therefore needs either written agreement or an internal-only scope with nothing displayed on the Site.",
+      "detail": "The brief asks the platform to analyse pricing. Participation Requirements 6(y) bars price tracking or alerting on the Site unless Amazon agrees otherwise (R-23), 2(b) restricts where prices may appear at all (R-02), and IP License 2(i) requires a date/time stamp and a price disclaimer for any pricing shown (R-30). A pricing feature therefore needs either written agreement or an internal-only scope with nothing displayed on the Site.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -289,10 +325,10 @@
       "action": "Decide the pricing scope before building any price feature: internal analysis only, or apply to Amazon for agreement and add the 2(i) stamp and disclaimer."
     },
     {
-      "id": "F-26",
+      "id": "F-29",
       "severity": "Medium",
       "title": "No promotion-expiry control exists yet",
-      "detail": "Nothing on the site mentions a price, deal or limited-time offer, which satisfies the removal rule by avoidance (R-26). Once a campaign mentions a promotion, Amazon's rule requires the reference to be removed as soon as the offer ends, and no such expiry step exists in this repository.",
+      "detail": "Nothing on the site mentions a price, deal or limited-time offer, which satisfies the removal rule by avoidance (R-27). Once a campaign mentions a promotion, Amazon's rule requires the reference to be removed as soon as the offer ends, and no such expiry step exists in this repository.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -300,10 +336,10 @@
       "action": "Add an expiry or review cadence to the publish checklist before any promotion is mentioned."
     },
     {
-      "id": "F-27",
+      "id": "F-30",
       "severity": "High",
       "title": "Marketing drafts cannot be published as commercial pages yet",
-      "detail": "Participation Requirements 2(a) permits Special Links only after you have applied to and been accepted in the Associates Program (R-24). No approved account, Associates ID or tag is confirmable in this environment, and the resolved user-supplied links carry no tag parameter (F-03). The drafts therefore stay drafts, and the research site is not a monetised page.",
+      "detail": "Participation Requirements 2(a) permits Special Links only after you have applied to and been accepted in the Associates Program (R-25). No approved account, Associates ID or tag is confirmable in this environment, and the resolved user-supplied links carry no tag parameter (F-03). The drafts therefore stay drafts, and the research site is not a monetised page.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://link.amazon/B04G1MEwY"
@@ -312,7 +348,7 @@
       "action": "Confirm the Associates ID, regenerate each link as a tagged Special Link, then move a draft to a live page."
     },
     {
-      "id": "F-28",
+      "id": "F-31",
       "severity": "Low",
       "title": "A manufacturer page disagrees with the Amazon specification values",
       "detail": "A brand page for a similarly named 8-quart TurboFry model lists 15.4 x 12.6 x 13.5 in, while the P3 listing record shows 12.75\"D x 13.5\"W x 10\"H. Model identity is not established, so no value was substituted, averaged or corrected. The manufacturer URL is recorded in sources.json as reference only, because it is not an Amazon or government source.",
@@ -323,10 +359,10 @@
       "action": "Confirm the model number on the product or manual, then pick one source of truth for dimensions."
     },
     {
-      "id": "F-29",
+      "id": "F-32",
       "severity": "Medium",
       "title": "A static snapshot goes stale against the 24-hour caching rule",
-      "detail": "IP License 2(h) permits storing Product Advertising Content other than images for caching only up to 24 hours, after which it must be refreshed and re-displayed, while ASINs may be stored indefinitely (R-30). This site is a static build whose data was observed on 2026-11-14, and it quotes listing text to identify products. No refresh schedule exists, and whether 2(h) reaches content read from a product page rather than an API is unconfirmed.",
+      "detail": "IP License 2(h) permits storing Product Advertising Content other than images for caching only up to 24 hours, after which it must be refreshed and re-displayed, while ASINs may be stored indefinitely (R-31). This site is a static build whose data was observed on 2026-11-14, and it quotes listing text to identify products. No refresh schedule exists, and whether 2(h) reaches content read from a product page rather than an API is unconfirmed.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -334,15 +370,27 @@
       "action": "Either keep product text to identifiers only, or schedule a rebuild cadence once an approved data source exists."
     },
     {
-      "id": "F-30",
+      "id": "F-33",
       "severity": "High",
       "title": "Automated aggregation and analysis needs written approval even with API access",
-      "detail": "The brief's core is automated research and analysis. IP License 2(e) bars using Creators API, PA API or Data Feeds “for the purpose of aggregating, analyzing, extracting, or repurposing any Product Advertising Content” without express prior written approval (R-28), and Participation Requirements 6(s) bars artificially generated clicks or sessions (R-18). So API access alone does not authorise the automated research loop; the platform blueprint records each stage with the approval it needs.",
+      "detail": "The brief's core is automated research and analysis. IP License 2(e) bars using Creators API, PA API or Data Feeds “for the purpose of aggregating, analyzing, extracting, or repurposing any Product Advertising Content” without express prior written approval (R-29), and Participation Requirements 6(s) bars artificially generated clicks or sessions (R-18). So API access alone does not authorise the automated research loop; the platform blueprint records each stage with the approval it needs.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "status": "Needs review",
       "action": "Apply for written approval, or keep research human-triggered and limit automation to publishing already-verified records."
+    },
+    {
+      "id": "F-34",
+      "severity": "Medium",
+      "title": "The remediation path in several flags cites PA-API access, which is deprecated",
+      "detail": "Participation Requirements 2(b) and 6(t) both allow data obtained via “Creators API or PA API”, and several flags on this site say the fix is to apply for PA-API access. Amazon's official notice states that Product Advertising API 5.0 is deprecated and that calls to it return HTTP 403 with an AccessDeniedException, directing integrations to the Creators API instead. Any unblocking step in F-02, F-15, F-16 and F-19 should therefore target the Creators API; the policy wording still names PA API, so the citation is not wrong, only stale.",
+      "sources": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Apply for Creators API access (not PA-API 5) if prices, ratings or review data are to be shown, and update the flags' action text once granted."
     }
   ]
 }

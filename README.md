@@ -10,8 +10,8 @@ blank and flagged. **Live site (GitHub Pages, `main` branch; the root redirects 
 |---|---|
 | `data/products.json` | Product records (ASIN, brand and manufacturer as recorded, category, specifications, competitor ASINs) |
 | `data/sources.json` | Source registry: each official source, whether it was read, and the second-pass re-check note |
-| `data/policies.json` | 31 Amazon Associates, IP License and FTC requirements, each with a verbatim quote and this site's status |
-| `data/flags.json` | 29 irregularities and unverified items (published on the Flagged for Review page) |
+| `data/policies.json` | 32 Amazon Associates, IP License and FTC requirements, each with a verbatim quote and this site's status |
+| `data/flags.json` | 33 irregularities and unverified items (published on the Flagged for Review page) |
 | `data/content.json` | Executive summary, findings, marketing drafts, requirements coverage, platform blueprint, re-verification log |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations (2026-11-14), with the integration correction note |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only, deterministic) |
@@ -20,11 +20,16 @@ blank and flagged. **Live site (GitHub Pages, `main` branch; the root redirects 
 | `docs/` | The published site |
 | `.github/workflows/site-checks.yml` | CI: rebuild, verify, confirm `docs/` matches the data |
 | `COORDINATION.md` | Shared task board, claims, sources and merge log for all sessions |
+| `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
+| `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 
-## The 15 pages
+## The 16 pages
 
-Dashboard, executive summary, all products, three category pages, analysis and findings, marketing content (drafts), platform and
-automation, requirements coverage, verification log, re-verification pass, policy compliance, flagged for review, sources.
+Dashboard, executive summary, all products, three category pages, analysis and findings, the local-only analytics page (first-party click
+counter, shipped by session `arena/7cfe23f4-zone4`), marketing content (drafts), platform and automation, requirements coverage,
+verification log, re-verification pass, policy compliance, flagged for review, and sources. All sixteen pages carry the Associates
+disclosure sentence and the IP License §2(k) content disclaimer in the footer; `docs/analytics.html` is a static file, so the build does
+not rewrite it and the two shared lines were added to it by hand in this merge.
 
 ## Rebuild and verify
 
@@ -43,18 +48,18 @@ claim the product was tested, no page may reuse Amazon's badge or sales strings,
   also-viewed ASINs and the absence of a tag parameter were re-confirmed, and every policy quote was checked against the live official page.
 * Re-confirmed: all three `link.amazon` short links resolve to ASINs `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`, with no Associates tag.
 * Carried forward, not re-verified in the later pass: the Item details specification fields (litre capacity, dimensions, colour, material) —
-  flag F-18; a brand page disagrees on one dimension (F-28).
+  flag F-18; a brand page disagrees on one dimension (F-31).
 * Deliberately blank: prices, ratings, review counts, commission rate, trend and conversion data — flags F-01, F-02, F-15.
 
 ## Limits
 
 * Amazon prices and star ratings are not published. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links
-  or PA-API / Creators API data.
-* Price tracking or price alerting is not built at all: Participation Requirements 6(y) bars it on the Site (F-25).
+  or PA-API / Creators API data, and PA-API 5 is now deprecated (F-34).
+* Price tracking or price alerting is not built at all: Participation Requirements 6(y) bars it on the Site (F-28).
 * The IP License goes further than the Conditions of Use: API content may not be aggregated, analysed, repurposed or used to train a model
-  without express prior written approval (rules R-17, R-28, flags F-12, F-30), so the automation stages are documented and gated, not built.
+  without express prior written approval (rules R-17, R-29, flags F-12, F-33), so the automation stages are documented and gated, not built.
 * Marketing copy is published as drafts inside this research site, not as monetised pages: no approved Associates account or tagged Special
-  Link is confirmed here (F-27).
+  Link is confirmed here (flags F-25, F-30).
 * Commission rates are blank; the official schedule sits behind an Amazon sign-in (F-01).
 
 Start with `docs/flagged.html` for the items that need a decision.
