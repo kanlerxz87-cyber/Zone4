@@ -111,3 +111,8 @@ The current branch added a more detailed multi-page research view and FTC source
 - Site checks [43583426320](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583426320) passed; GitHub Pages deployment [43583425756](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583425756) passed.
 - GitHub Pages API reports `built`, HTTPS enforced, source `main` `/`. The root index redirects to `docs/index.html`; live entry point: https://kanlerxz87-cyber.github.io/Zone4/.
 - The site build and verifier passed with 11 generated pages, complete internal navigation, sourced table rows, required disclosure and no published prices or ratings. Product/source details are attributed to the official-source verification log by `arena/1eb689b8-zone4`; they were not independently re-fetched by this session.
+
+### PR #11 merge and repository hygiene
+
+- PR [#11](https://github.com/kanlerxz87-cyber/Zone4/pull/11) merged into `main` at `efd0cda2ff1fc16e7421f56fa5a89d7a1f724982`. Its Site checks run [43583547392](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583547392) and Pages deployment [43583546871](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583546871) both succeeded; the Pages API remained `built`.
+- Final cleanup removes a generated tracked Python bytecode file and adds `.gitignore` rules for `__pycache__/` and `*.py[cod]`; this does not alter the site output.
