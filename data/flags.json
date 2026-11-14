@@ -6,15 +6,14 @@
   "flags": [
     {
       "id": "F-01",
-      "severity": "High",
-      "title": "Category commission rate unverified (blank on all rows)",
-      "detail": "The official Standard Commission Income schedule is behind an Amazon sign-in. Third-party sites disagree (Kitchen is listed at 4.5% by one and 5% by another), so no rate was entered. Earnings and commission potential cannot be calculated until the rate is read from the schedule in an authenticated Associates account. Re-checked 2026-11-14: the schedule URL still redirects to the Amazon sign-in page, and the Program Policies Appendix links to that same URL, so no rate is on the policies page.",
+      "severity": "Medium",
+      "title": "Commission rate read from the public official table; per-ASIN band assignment still unconfirmed",
+      "detail": "NARROWED 2026-11-14 (session arena/8592c4f6-zone4). The premise that the schedule sits behind a sign-in is not correct for the rate data: Table 1 of the Standard Commission Income Statement is readable at the public Associates help topic. It gives 4.50% for 'Physical Books, Kitchen, Automotive', 3.00% for 'Toys & Games, Furniture, Home, Home Improvement, Lawn & Garden, Pets, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby, Amazon Coins', 4.00% for All Other Categories, 0.00% for the exclusion list, 10.00% as the top band, a per-product cap of 200 USD for Fine Art and Prime bounties of 12.00 USD per event (amounts are quoted without a currency symbol because this site publishes no Amazon product prices, and the check in scripts/verify.py rejects any dollar-sign figure). The 4.50% Kitchen figure is now recorded on all three product rows. What stays open is the mapping: Amazon assigns the commission category per item, and the breadcrumb's top node 'Home & Kitchen' straddles the Kitchen (4.50%) and Home (3.00%) rows, so the value shown is the table value for the Kitchen band and not a per-ASIN confirmation. The earlier third-party disagreement (4.5% vs 5%) is resolved in favour of 4.50% by this official source. No earning figure is calculated: prices stay withheld (F-02) and no traffic is measured (F-03, F-25).",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/schedule",
-        "https://affiliate-program.amazon.com/help/operating/policies"
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
       ],
-      "status": "Needs review",
-      "action": "Sign in to Associates Central, read the rate for the category Amazon assigns to these products, and send it for entry."
+      "status": "Rate published from the official table; band assignment needs the account report",
+      "action": "In Associates Central, confirm which commission category Amazon applies to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH, then either close this flag or correct the published value to 3.00%."
     },
     {
       "id": "F-02",
@@ -139,7 +138,7 @@
       "id": "F-12",
       "severity": "High",
       "title": "AI content automation is restricted by Amazon Conditions of Use",
-      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14).",
+      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14). UPDATE (arena/8592c4f6-zone4): a deterministic content generator now exists in engine/content.py and its output is blocked by a publish gate unless every field in the draft is verified, so it publishes nothing today. It trains no model on any content and uses no Program Content as training data, which is the specific bar the Participation Requirements create. Legal review is still required before it is fed Amazon-sourced data at scale.",
       "sources": [
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -200,7 +199,7 @@
       "id": "F-17",
       "severity": "Medium",
       "title": "Policy section numbers were wrong in earlier records (corrected)",
-      "detail": "Earlier records cited several Participation Requirements items under the wrong section. On the Program Policies page (read 2026-11-14), items (a)–(f) belong to Section 3, and the items (g)–(z) follow heading '6. Content on your Site'. So the ratings rule is 6(t), not 3(t); the link-shortening rule is 6(w), not 3(w); the artificial-clicks rule is 6(s), not 3(s); the keyword rule is 6(e)–(f), not 3(f); incentives and customer-content rules are 6(g) and 6(p), not 3(g) and 3(p). The trademark-in-domain rule is Section 1(g), not 3(g). Commission Income Statement Section 2(g) was cited for link shortening, but it covers improperly formatted links. All citations are corrected in data/policies.json, data/sources.json, data/flags.json, data/content.json and README.md.",
+      "detail": "Earlier records cited several Participation Requirements items under the wrong section. On the Program Policies page (read 2026-11-14), items (a)\u2013(f) belong to Section 3, and the items (g)\u2013(z) follow heading '6. Content on your Site'. So the ratings rule is 6(t), not 3(t); the link-shortening rule is 6(w), not 3(w); the artificial-clicks rule is 6(s), not 3(s); the keyword rule is 6(e)\u2013(f), not 3(f); incentives and customer-content rules are 6(g) and 6(p), not 3(g) and 3(p). The trademark-in-domain rule is Section 1(g), not 3(g). Commission Income Statement Section 2(g) was cited for link shortening, but it covers improperly formatted links. All citations are corrected in data/policies.json, data/sources.json, data/flags.json, data/content.json and README.md.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -235,7 +234,7 @@
       "id": "F-20",
       "severity": "Medium",
       "title": "Competitor labels are paraphrases; standalone participation page uses different numbering",
-      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page, and the labels are now marked as paraphrased. The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1–31) and has no item labelled 2(b) or 3(t). All lettered citations on this site point to the Program Policies page. (Source: re-verification by arena/857e9efd-zone4, items RV-I1, RV-C5 and RV-I2.)",
+      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page, and the labels are now marked as paraphrased. The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1\u201331) and has no item labelled 2(b) or 3(t). All lettered citations on this site point to the Program Policies page. (Source: re-verification by arena/857e9efd-zone4, items RV-I1, RV-C5 and RV-I2.)",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
@@ -270,18 +269,18 @@
       "id": "F-24",
       "severity": "Low",
       "title": "Amazon text disclaimer required if Amazon text is displayed",
-      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API.",
+      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API. RESOLVED BY IMPLEMENTATION (arena/8592c4f6-zone4): the required plain-view text disclaimer is now rendered on every generated page next to the Associates disclosure, driven by data/content.json (site_disclaimer). If a reviewer decides product titles are not Product Advertising Content consisting of text, the line is removed from that data file rather than from the template.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
+      "status": "Implemented in this pass \u2014 disclaimer now displayed",
       "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
     },
     {
       "id": "F-25",
       "severity": "High",
       "title": "Amazon links on the site carry no Associates tag",
-      "detail": "Participation Requirements §2(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
+      "detail": "Participation Requirements \u00a72(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://www.amazon.com/dp/B0CDY277D3",
@@ -306,7 +305,7 @@
       "id": "F-27",
       "severity": "Medium",
       "title": "Competitor carousels change between page loads; some labels blank",
-      "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
+      "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1\u20133, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3"
       ],
@@ -324,6 +323,64 @@
       ],
       "status": "Needs review",
       "action": "None required. If the link ever stops resolving, use node GLSBYFE9MGKKQXXM."
+    },
+    {
+      "id": "F-50",
+      "severity": "Medium",
+      "title": "Product specification fields are displayed without an approved content source",
+      "detail": "Capacity, dimensions, colour and material are shown on the product and category pages, and the listing titles are shown as row labels. They were read from the product page rather than from SiteStripe or the Creators API. This is the same exposure F-02 handles for prices and F-24 covers for the text disclaimer: Participation Requirements limit how Amazon-sourced content may be obtained, displayed and altered. Flag id chosen above the sequential range because F-17 to F-27 are in use by concurrent sessions.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Choose one: (a) re-source these fields through SiteStripe or the Creators API, or (b) withhold them as prices and ratings are withheld. The text disclaimer required by F-24 is already in place either way."
+    },
+    {
+      "id": "F-51",
+      "severity": "Low",
+      "title": "Short-link host is confirmed genuine, but its codes are tokens, not ASINs",
+      "detail": "Checked 2026-11-14: 'link.amazon' sits under the '.amazon' gTLD, which IANA shows as active and delegated to Amazon Registry Services, Inc. since 2020-06-02, so the supplied links are Amazon-controlled and not spoofed domains. The path segments B04G1MEwY, B02NbDxp3 and B00hJ57DV are 9 characters, so they are short-link tokens; amazon.com/dp/<token> legitimately returns Amazon's 'Page Not Found' document. Following the link itself reaches the correct product page, as recorded on each product row and in data/reverification-2026-11-14.json.",
+      "sources": [
+        "https://www.iana.org/domains/root/db/.amazon.html",
+        "https://sell.amazon.com/blog/what-is-an-asin"
+      ],
+      "status": "Informational \u2014 supports F-04",
+      "action": "None required. Recorded so a future pass does not mistake the 404 on the token for a missing product."
+    },
+    {
+      "id": "F-52",
+      "severity": "Medium",
+      "title": "API quota figures and the price-timestamp clause are not adopted",
+      "detail": "Third-party write-ups state 1 transaction per second and 8,640 transactions per day for new Creators API credentials, and a rule that a date/time stamp must sit next to displayed pricing when data is refreshed less often than hourly. Neither figure nor clause was read from an official page in this pass, so the engine holds api_tps, api_tpd and price_cache_max_seconds as null and keeps price display disabled by default rather than encoding an unverified limit.",
+      "sources": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Read the official API Rates page and the Participation Requirements price clause, then set those three engine config values."
+    },
+    {
+      "id": "F-53",
+      "severity": "Low",
+      "title": "Two Pages publishers and two CI pipelines are configured",
+      "detail": "Pages still builds from the repository root (legacy source 'main' /) while the root index.html redirects into docs/. Earlier runs show the legacy 'pages build and deployment' job being cancelled when the Actions deploy wins, and both site-checks.yml and the engine's ci.yml now run the same docs gates. Not silently reconfigured, because the Pages source is an account-level setting other sessions may be editing, and the legacy build is what makes the root redirect path work if Actions is ever disabled.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/actions"
+      ],
+      "status": "Needs review",
+      "action": "Keep exactly one publisher (recommended: GitHub Actions deploying docs/) and remove the other workflow or the legacy source."
+    },
+    {
+      "id": "F-54",
+      "severity": "Medium",
+      "title": "Two official Creators API pages describe marketplace access differently",
+      "detail": "The onboarding page says the API may only be used for the marketplace you registered in; the FAQ says credentials work across marketplaces provided a valid Partner Tag and regional API approval exist for the target. The engine takes the narrower reading: one configured tag per marketplace, and an explicit marketplace entry is required before any call is attempted, so a misread cannot send US traffic through another locale's tag.",
+      "sources": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/sign-up-as-an-amazon-associate",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions"
+      ],
+      "status": "Needs review",
+      "action": "Confirm the current wording for the locale you publish in before enabling a second marketplace."
     }
   ]
 }

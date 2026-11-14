@@ -1,0 +1,220 @@
+{
+  "registry": "zone4-official-source-registry",
+  "retrieved_by": "arena-8592c4f6",
+  "retrieved_at_utc": "2026-11-14",
+  "evidence_rule": "A value is recorded as 'verified' only if it was read directly from the official page cited on the same row on the retrieval date. Anything else is 'unverified' and must be rendered blank plus a flag.",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Associates Program Standard Commission Income Statement",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "retrieved": "2026-11-14T10:12Z",
+      "access": "public",
+      "supports": [
+        "commission-rate-table",
+        "bounty-events",
+        "fine-art-cap",
+        "free-book-limit"
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Associates Program Policies (includes Participation Requirements)",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "retrieved": "2026-11-14T10:20Z",
+      "page_stated_update": "2026-04-14",
+      "access": "public",
+      "supports": [
+        "qualifying-purchase-session-rules",
+        "prohibitions-f-through-z",
+        "products-statement",
+        "law-compliance-clauses"
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Associates Program Operating Agreement",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "retrieved": "2026-11-14T10:16Z",
+      "access": "public",
+      "supports": [
+        "required-disclosure-statement",
+        "program-description"
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Welcome to Creators API (docs introduction)",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "retrieved": "2026-11-14T10:25Z",
+      "access": "public",
+      "supports": [
+        "api-prerequisites",
+        "api-operations",
+        "paapi-migration-pointer"
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "Sign up as an Amazon Associate (Creators API docs)",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/sign-up-as-an-amazon-associate",
+      "retrieved": "2026-11-14T10:25Z",
+      "access": "public",
+      "supports": [
+        "associate-tag-definition",
+        "locale-reference-table",
+        "locale-lock-rule"
+      ]
+    },
+    {
+      "id": "S6",
+      "title": "Why do I have to identify myself as an Associate?",
+      "publisher": "Amazon (Associates Central Help)",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GHQNZAU6669EZS98",
+      "retrieved": "2026-11-14T10:18Z",
+      "access": "public",
+      "supports": [
+        "link-level-disclosure-guidance"
+      ]
+    },
+    {
+      "id": "S7",
+      "title": "Amazon Associates FAQ (Commissions / Linking / Policies / Product Advertising API sections)",
+      "publisher": "Amazon (amazon.com help node)",
+      "url": "https://www.amazon.com/b?ie=UTF8&node=51812349011",
+      "retrieved": "2026-11-14T10:22Z",
+      "access": "public",
+      "supports": [
+        "faq-section-structure"
+      ],
+      "note": "Only the page header and section anchor list were read by this session; individual answers were not read in full and are therefore not quoted anywhere in this repo."
+    },
+    {
+      "id": "S8",
+      "title": "FTC's Endorsement Guides: What People Are Asking",
+      "publisher": "U.S. Federal Trade Commission",
+      "url": "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking",
+      "retrieved": "2026-11-14T10:19Z",
+      "access": "public",
+      "supports": [
+        "affiliate-disclosure-placement",
+        "inadequate-disclosure-examples",
+        "paid-link-wording"
+      ]
+    },
+    {
+      "id": "S9",
+      "title": "Creating helpful, reliable, people-first content",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "retrieved": "2026-11-14T10:28Z",
+      "access": "public",
+      "supports": [
+        "people-first-self-assessment",
+        "who-how-why",
+        "eeat-guidance"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "Google Search Essentials",
+      "publisher": "Google Search Central",
+      "url": "https://developers.google.com/search/docs/essentials",
+      "retrieved": "2026-11-14",
+      "access": "public",
+      "supports": [
+        "search-essentials-overview",
+        "ranking-systems-index",
+        "reviews-system-pointer"
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "Understanding ASINs: Your guide to Amazon's product identification system",
+      "publisher": "Amazon (Sell on Amazon)",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "retrieved": "2026-11-14T10:30Z",
+      "access": "public",
+      "supports": [
+        "asin-is-10-characters",
+        "asin-found-after-dp-in-url"
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "IANA Root Zone Database entry for .amazon",
+      "publisher": "IANA / ICANN",
+      "url": "https://www.iana.org/domains/root/db/.amazon.html",
+      "retrieved": "2026-11-14T10:27Z",
+      "access": "public",
+      "supports": [
+        "dot-amazon-gtld-is-active",
+        "delegated-2020-06-02",
+        "registry-manager-amazon-registry-services"
+      ]
+    },
+    {
+      "id": "S13",
+      "title": "Amazon product detail page probes for the three supplied identifiers",
+      "publisher": "Amazon (www.amazon.com)",
+      "url": "https://www.amazon.com/dp/B04G1MEwY",
+      "retrieved": "2026-11-14T10:11Z",
+      "access": "public",
+      "supports": [
+        "probe-result-404-b04g1mewy",
+        "probe-result-404-b02nbdxp3",
+        "probe-result-404-b00hj57dv"
+      ],
+      "note": "Probe URLs used: /dp/B04G1MEwY, /dp/B02NbDxp3, /dp/B00hJ57DV. Each returned Amazon's 'Sorry! We couldn't find that page' error document, not a product page."
+    },
+    {
+      "id": "S14",
+      "title": "Creators API \u2014 Frequently Asked Questions",
+      "publisher": "Amazon (Associates Central)",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions",
+      "retrieved": "2026-11-14T10:33Z",
+      "access": "public",
+      "supports": [
+        "oauth-client-credentials",
+        "batching-limit-10",
+        "marketplace-header-rule",
+        "primary-owner-requirement"
+      ]
+    },
+    {
+      "id": "S15",
+      "title": "Amazon product detail page for ASIN B0CDY277D3 (read from the page title and category breadcrumb)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "publisher": "Amazon (www.amazon.com)",
+      "retrieved": "2026-11-14",
+      "note": "Retrieved by session arena-8592c4f6 by following the user-supplied link.amazon short link, which landed on this product page. Only the listing title and the breadcrumb category path are used from it; price, rating and review figures seen on the page are deliberately not recorded."
+    },
+    {
+      "id": "S16",
+      "title": "Amazon product detail page for ASIN B09B7SB46R (read from the page title and category breadcrumb)",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "publisher": "Amazon (www.amazon.com)",
+      "retrieved": "2026-11-14",
+      "note": "Retrieved by session arena-8592c4f6 by following the user-supplied link.amazon short link, which landed on this product page. Only the listing title and the breadcrumb category path are used from it; price, rating and review figures seen on the page are deliberately not recorded."
+    },
+    {
+      "id": "S17",
+      "title": "Amazon product detail page for ASIN B08DKYBTPH (read from the page title and category breadcrumb)",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "publisher": "Amazon (www.amazon.com)",
+      "retrieved": "2026-11-14",
+      "note": "Retrieved by session arena-8592c4f6 by following the user-supplied link.amazon short link, which landed on this product page. Only the listing title and the breadcrumb category path are used from it; price, rating and review figures seen on the page are deliberately not recorded."
+    }
+  ],
+  "explicitly_not_sourced": [
+    "No product name, brand, category, price, rating, review count, stock status, sales rank, or trend for the three supplied identifiers: the identifiers do not resolve to a product page.",
+    "Traffic, clicks, conversions, earnings and EPC for this site: no analytics or Associates reporting is connected.",
+    "Creators API request quotas (transactions per second / per day) and caching windows: often quoted by third parties, but the official rates page was not retrieved by this session, so the values are held as unverified.",
+    "Whether a real Amazon 'Amazon Games 20%' category rate exists: not present in the official statement on the retrieval date."
+  ]
+}

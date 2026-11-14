@@ -22,6 +22,12 @@ A static research site for three user-supplied Amazon product links. It publishe
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
 | `COORDINATION.md` | Shared task board and work log for all sessions |
+| `engine/` | Automation layer: verification, economics, scoring, drafting, link safety, tracking, compliance gates |
+| `data/engine-*.json` | The engine's own sources, program facts and verification ledger (kept separate from the site data) |
+| `data/reverification-2026-11-14.json` | Independent re-verification log of the three links and the citations |
+| `tests/test_engine.py` | 81 tests, including guards that `docs/` stays buildable and verifiable |
+| `tools/check_links.py` | Site integrity checker for the engine's preview build |
+| `.github/workflows/ci.yml` | CI: runs both pipelines (engine and published site) |
 
 ## Requirements traceability
 
@@ -35,6 +41,19 @@ Requirements Section 6(y), which states that the Site must not have price tracki
 ```bash
 python3 scripts/build_site.py
 python3 scripts/verify.py
+git diff --exit-code -- docs    # the build must be deterministic
+
+python3 -m unittest discover -s tests   # engine + integration guards
+python3 -m engine.cli build             # writes the gitignored preview in build/site-preview
+python3 tools/check_links.py            # checks that preview
+```
+
+To read a fact or a rate the engine has already verified, without building anything:
+
+```bash
+python3 -m engine.cli status
+python3 -m engine.cli rates --category Kitchen
+python3 -m engine.cli audit --strict
 ```
 
 ## Pages
@@ -44,7 +63,7 @@ GitHub Pages is a legacy build of `main` `/` (the repository's Pages source). Th
 ## Limits
 
 - Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or PA-API / Creators API data.
-- Commission rates are **blank** (the official schedule is behind an Amazon sign-in).
+- Commission rates are **published from the official rate table**: 4.50% is the Standard Commission Income Statement value for the Kitchen band ([source](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)), recorded on each product row. Which band Amazon applies to a given ASIN is still open (F-01): the breadcrumb top node *Home & Kitchen* straddles the Kitchen (4.50%) and Home (3.00%) rows, and the account's report is the authority. No earning figure is derived, because prices are withheld and no traffic is measured.
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
 - Automated research, AI article generation, price tracking and affiliate click/conversion tracking are **not built**. They are gated by Participation Requirements Sections 5, 6(s) and 6(y), the Conditions of Use AI clause and the IP License Agent Terms. The Requirements page names the blocking rule for each item; see also `data/content.json` (`not_built`) and `data/flags.json`.
 

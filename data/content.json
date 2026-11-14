@@ -12,7 +12,8 @@
       "Attribution unverified: the resolved links contain no Associates tag parameter (F-03). Confirm the links are generated under your Associates ID before relying on any earnings.",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content, data mining and using Amazon content for AI models (F-11, F-12). The AI content automation is therefore NOT built.",
       "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
-      "Site: static GitHub Pages site (source: main, path /; the root index.html redirects to docs/). Every table row links to an official source, and unverified values are blank and flagged."
+      "Site: static GitHub Pages site (source: main, path /; the root index.html redirects to docs/). Every table row links to an official source, and unverified values are blank and flagged.",
+      "Program economics are sourced rather than blank: the official Table 1 rate for the Kitchen band (4.50%) is recorded against all three products with its source, the automation layer is implemented in engine/ behind compliance gates that block any unverified claim, and the Amazon text notice required by IP License Section 2(k) is displayed on every page."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and which Amazon marketplace they should target (F-09).",
@@ -68,13 +69,14 @@
     },
     {
       "id": "A-05",
-      "finding": "Commission potential cannot be estimated on this site.",
-      "basis": "Commission is a percentage of Qualifying Revenue (price less shipping, tax and similar items; Commission Income Statement, Section 1). The category rate is unverified (F-01), and prices may not be published (F-02). No earnings figure is given.",
+      "finding": "Commission percentage is known; commission per sale still cannot be stated on this site.",
+      "basis": "Qualifying Revenue is the price less shipping, tax and similar items (Commission Income Statement, Section 1) and the Kitchen band is 4.50% per the official Table 1 read on 2026-11-14 (see A-08). A per-sale figure still cannot be published because no price may be displayed without approved content sourcing (F-02) and no traffic is measured (F-03, F-25). The rate itself is no longer unverified; the earlier note that the schedule sat behind a sign-in was incorrect.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
-        "https://affiliate-program.amazon.com/help/operating/schedule"
+        "https://affiliate-program.amazon.com/help/operating/schedule",
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
       ],
-      "confidence": "Formula verified; rate unverified"
+      "confidence": "Rate verified; per-sale figure not computable"
     },
     {
       "id": "A-06",
@@ -114,6 +116,52 @@
         "https://github.com/kanlerxz87-cyber/Zone4/blob/main/.github/workflows/site-checks.yml"
       ],
       "confidence": "Verified"
+    },
+    {
+      "id": "A-10",
+      "finding": "Automated product research is gated by account activity, not by code: the Creators API requires an enrolled Associates account plus at least 10 qualifying sales in the past 30 days.",
+      "basis": "Creators API documentation, Prerequisites, read 2026-11-14. The automation layer implements the client boundary and refuses to substitute scraped or invented data while credentials are absent.",
+      "sources": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-11",
+      "finding": "Rates that matter for niche selection: top band is 10.00% (Luxury Beauty, Luxury Stores Beauty, Amazon Explore); the catch-all 'All Other Categories' is 4.00%; gift cards, alcoholic beverages and wireless service plans are 0.00%.",
+      "basis": "Same official Table 1. A 20% 'Amazon Games' rate is widely repeated online, but no such row exists in the table retrieved on 2026-11-14, so no 20% figure is published anywhere here. A niche with no dedicated row still earns the 4.00% catch-all.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-12",
+      "finding": "Program Content may not be used to train machine-learning models without Amazon's written approval, and Amazon reviews or star ratings may be displayed only when obtained through the API.",
+      "basis": "Participation Requirements clauses on content and on reviews/ratings, read 2026-11-14 and encoded as blocking controls in the compliance engine, so a draft that would violate either cannot publish.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-13",
+      "finding": "Content automation exists but has published nothing: every draft is blocked until each field in it is verified.",
+      "basis": "The generator marks any field without an official source as a placeholder and the publish gate refuses drafts that still contain one (7 items currently blocked). Editorial quality checks follow Google's people-first self-assessment.",
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-14",
+      "finding": "Disclosure is the highest-value control here, and a 'DISCLOSURE' button or a comments-section note is explicitly inadequate.",
+      "basis": "Operating Agreement Section 5 wording; Amazon's link-level disclosure help; the FTC's Endorsement Guides FAQ on proximity, clarity and what does not count, including that a superlative claim needs typicality data.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking"
+      ],
+      "confidence": "Verified"
     }
   ],
   "categories": {
@@ -140,11 +188,17 @@
     }
   },
   "not_built": [
-    "Automated product research and niche discovery (needs PA-API / Creators API access and legal review, F-11, F-16).",
-    "Price, rating and review analysis on the public site (withheld, F-02).",
-    "Commission calculations (needs the category rate, F-01).",
-    "Click, conversion and revenue tracking (needs Associates reporting or tracked links, F-03).",
-    "AI-generated articles, comparisons and buying guides (restricted pending review, F-12).",
-    "Campaign optimisation (needs the data above)."
-  ]
+    "Live Amazon product data (blocked by the 10-qualifying-sales Creators API prerequisite, F-16, F-19, F-52).",
+    "Price, rating and review analysis on the public site (withheld, F-02; specification fields pending review, F-50).",
+    "Commission earnings per product (the rate is now sourced at 4.50%, but no price is published and no traffic is measured; F-01 narrowed).",
+    "Click, conversion and revenue tracking (ledger and attribution windows implemented in engine/tracking.py; no authorized reporting is connected, F-03, F-25).",
+    "AI-generated articles, comparisons and buying guides (generator built behind a publish gate; nothing publishes until fields are verified and legal review completes, F-12).",
+    "Campaign optimisation (scoring model implemented; it refuses to rank without verified inputs, so no ranking is published)."
+  ],
+  "site_disclaimer": {
+    "text": "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.",
+    "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+    "source_ref": "IP License, Section 2(k)",
+    "reason": "Required when Product Advertising Content consisting of text is displayed in plain view; this site displays Amazon listing titles, so the text is shown (F-24)."
+  }
 }

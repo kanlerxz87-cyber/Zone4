@@ -48,9 +48,18 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 DOCS = ROOT / "docs"
 DATA = ROOT / "data"
 
+#: Kept in sync with scripts/verify.py by hand: the two lists must stay equal,
+#: otherwise the QA auditor and the build gate disagree about what counts as an
+#: official source and one of them is wrong. If you add a publisher here, add it
+#: there. Hosts below the first block are the authoritative owner of the specific
+#: fact cited for it (Amazon seller documentation, Google Search Central, the IANA
+#: root zone, FTC consumer guidance, the Pages host) — see the notes on the rows in
+#: data/sources.json and the rationale recorded in COORDINATION.md.
 OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
     "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
+    "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
+    "github.io",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")

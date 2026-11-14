@@ -140,6 +140,39 @@ def shop_link(p: dict) -> str:
 
 # ---------------------------------------------------------------- tables
 
+def commission_cell(p: dict) -> str:
+    """Commission rate for a product, sourced from the official rate table.
+
+    Returns the withheld pill when the data carries no rate, so this cell cannot
+    publish a number that the ledger does not attribute to a source. A rate is a
+    program term, not Amazon pricing, so it is displayable under Participation
+    Requirements 2(b)/3(y), which is what the price and rating cells obey.
+    """
+    rate = p.get("commission_rate_pct")
+    url = p.get("commission_rate_source")
+    if rate is None or not url:
+        return pill("Unverified (F-01)", "warn")
+    return (pill(f"{rate:.2f}% ({p.get('commission_category_official', 'category')} band)", "ok")
+            + f' <span class="small">{ext(url, "official Table 1")}</span>'
+            + ' <span class="small muted">Per-ASIN assignment pending (F-01).</span>')
+
+
+def commission_verification_item(p: dict, sched: str) -> tuple[str, str, str, str, str]:
+    """The verification-ledger row for the commission rate.
+
+    Falls back to the blank/unverified row when the data carries no sourced
+    rate, so this cell can never publish a percentage the ledger has not
+    attributed to an official page.
+    """
+    rate = p.get("commission_rate_pct")
+    url = p.get("commission_rate_source")
+    if rate is None or not url:
+        return ("Category commission rate", "Blank", "Unverified", sched, "F-01")
+    return ("Category commission rate", f"{rate:.2f}% ({p.get('commission_category_official', 'category')} band)",
+            "Verified from the official rate table; per-ASIN assignment pending (F-01)",
+            ext(url, "Standard Commission Income Statement"), "F-01")
+
+
 def product_table(current: Page, products: list[dict]) -> str:
     headers = [
         "ID", "Product (source link)", "ASIN", "Brand (as shown)", "Subcategory", "Category (Amazon path)",
@@ -159,7 +192,7 @@ def product_table(current: Page, products: list[dict]) -> str:
             esc(p["dimensions"]),
             pill("Withheld (F-02)", "muted"),
             pill("Withheld (F-02)", "muted"),
-            pill("Unverified (F-01)", "warn"),
+            commission_cell(p),
             pill("Unverified (F-15)", "warn"),
             competitor_links(p),
             shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>',
@@ -187,7 +220,7 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown on the 2026-11-14 read; carousel " + p["competitor_carousel_label"], src, "F-27"),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
-            ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
+            commission_verification_item(p, sched),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
             ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
             ("Associates tag in site link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-25"),
@@ -355,7 +388,11 @@ def page_exec(current: Page) -> str:
 
 def page_products(current: Page) -> str:
     return (
-        hero("All products", "One row per user-supplied link. Prices and ratings are withheld under the Associates policy. Commission rates and trend data are unverified and blank.")
+        hero("All products",
+         "One row per user-supplied link. Prices and ratings are withheld under the Associates policy. The "
+         "commission rate is the official Standard Commission Income Statement value for the category band, "
+         "with the table cited on the row; the per-ASIN category assignment and all trend data remain "
+         "unverified and blank.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied.</p>'
@@ -449,6 +486,17 @@ def render(page: Page) -> str:
         f'{ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) '
         "This site is not endorsed by or affiliated with Amazon.</span></div>"
     )
+    # IP License Section 2(k) requires this text in plain view when Product
+    # Advertising Content consisting of text (here, listing titles) is displayed.
+    # It is data-driven so it can be withdrawn without touching the template.
+    amazon_text = ""
+    notice = CONTENT.get("site_disclaimer") or {}
+    if notice.get("text"):
+        amazon_text = (
+            f'\n<div class="disclosure" role="note"><strong>Amazon content notice:</strong> {esc(notice["text"])}'
+            f' <span class="small">(Source: {ext(notice["source_url"], notice.get("source_ref", "IP License"))}'
+            f')</span></div>'
+        )
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -466,7 +514,7 @@ def render(page: Page) -> str:
   <nav aria-label="Main">{nav}</nav>
 </aside>
 <div class="content">
-{disclosure}
+{disclosure}{amazon_text}
 <main id="main">
 {page.body}
 </main>

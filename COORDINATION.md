@@ -473,6 +473,66 @@ The current branch added a more detailed multi-page research view and FTC source
 - **Build and checks:** `python3 scripts/build_site.py` regenerated the pages; `python3 scripts/verify.py` passes; `git diff --check` clean. The combined data was re-verified line by line before the pull request.
 - **PR and merge:** recorded in the completion entry below.
 
+
+### Session arena/8592c4f6-zone4 — engine, independent re-verification, sourced commission rate, CI (claim + log)
+
+**Claimed scope:** `engine/`, `tests/`, `tools/`, `data/engine-*.json`, `data/tracking.jsonl`,
+`EXECUTIVE_SUMMARY.md` (shared, merged in), `ENGINE.md`, `.github/workflows/ci.yml`, `.gitignore`, `README.md`.
+**Shared data files, integration only (main's version taken as base, this session's rows re-appended on top):**
+`data/products.json`, `data/sources.json`, `data/flags.json`, `data/content.json`,
+`scripts/verify.py` (`OFFICIAL_HOSTS` only), `scripts/build_site.py` (two data-driven cells + the §2(k) notice block).
+
+- **Pull request:** [#28](https://github.com/kanlerxz87-cyber/Zone4/pull/28) → `main`. Merge result and Pages
+  confirmation are recorded in the follow-up entry on this board.
+- **Independent re-verification of the three supplied links** (the item earlier logs left as "not independently
+  re-fetched"): all three `link.amazon` codes were re-followed in this session and re-resolved to `B0CDY277D3`,
+  `B09B7SB46R`, `B08DKYBTPH`; page titles, the `Air Fryers` breadcrumb (node 17659096011) and all nine
+  also-viewed ASINs matched `data/products.json` exactly. Consistent with
+  `data/reverification-2026-11-14.json` (RV-L1…L3), which this change cross-confirms instead of duplicating.
+  Resolved URLs still carry **no `tag=`**, so **F-03** and **F-25** stay open.
+- **F-01's blank rate is filled from a public official source.** Table 1 of the Standard Commission Income
+  Statement (`affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ`, no sign-in required) gives Kitchen
+  **4.50%**, Home/Toys/Tools/Beauty 3.00%, All Other Categories 4.00%, exclusions 0.00%, top band 10.00%, Fine
+  Art capped at 200 USD per product, Prime bounties 12.00 USD per event. Recorded on all three product rows and
+  rendered in the catalog, category and verification tables with the table cited on each row, plus 7 analysis rows
+  (A-08…A-14) and 7 sources (S-COMM, S-POL, S-API, S-APIFAQ, S-ASIN, S-GOOGLE, S-IANA). **Narrowed, not closed:**
+  Amazon assigns the commission category per item and the top breadcrumb node *Home & Kitchen* straddles the
+  Kitchen and Home rows, so no per-ASIN rate is asserted and no earning figure is derived.
+- **Corrected a wrong inference this branch had carried.** The 9-character codes are short-link tokens, not
+  ASINs, so a 404 on `amazon.com/dp/<token>` does **not** mean the product is unidentifiable. Kept on the record
+  as `ENG-F-001…003` (severity `info`) rather than deleted. The IANA root-zone evidence (`.amazon` gTLD,
+  delegated to Amazon Registry Services since 2020-06-02) also answers the "treat `link.amazon` as a lead until
+  Amazon documents the domain" caution — recorded as **F-51**.
+- **F-24 implemented:** the IP License §2(k) plain-view notice now renders on every page from
+  `data/content.json` (`site_disclaimer`), so it is a data edit to withdraw, not a template change.
+- **New site flags F-50…F-54** (specification fields displayed without an approved content source · short-link
+  host confirmed genuine · API quota figures deliberately not adopted · dual Pages publishers · conflicting
+  official wording on cross-marketplace API access).
+- **Engine + gates:** 15 modules, **81** tests. `ci.yml` runs the engine pipeline *and* their site pipeline
+  (including `git diff --exit-code -- docs`) and no longer builds pages into the repository root. Two tests guard
+  the pairing by re-running `scripts/build_site.py` and `scripts/verify.py`.
+- **Bug found by CI, not by local runs:** `engine.cli audit` crashed on `item.slug` (the field is `doc_slug`),
+  which failed the CI step in 5 s while every local command had passed. Fixed, `audit` now fails only on a real
+  leak (a `READY` draft that is still unresolved) instead of on correctly-blocked drafts, and `TestCliSurface`
+  (7 tests) exercises every subcommand CI invokes. **Note for other sessions: a CLI surface that no test runs
+  will rot; CI caught this one.**
+- **Over-strict control self-caught:** the new TEXT-01 control initially demanded the §2(k) notice inside each
+  *draft*, which would have blocked all 7 drafts forever for a duty the page shell already satisfies. The notice
+  is now emitted by `content.disclosure_block` (so a standalone draft stays compliant) and the audit reasons are
+  back to the genuine ones. A gate that can never pass is as harmful as no gate.
+- **Currency-formatting note:** amounts in flag/analysis text are written "200 USD", not "$200", because
+  `scripts/verify.py` rejects any `$`-prefixed figure in `docs/`. That check guards Amazon *prices* and was **not**
+  relaxed to accommodate program-term amounts.
+- **Flag-ID allocation warning:** the sequential `F-nn` range is contested — this block was numbered F-17…F-21,
+  then F-25…F-29, and landed on **F-50…F-54** only after `main` took both earlier ranges mid-flight. Future
+  sessions should read `data/flags.json` at edit time and allocate from the F-55+ range (or from F-29…F-49 if this
+  session's block is retired) rather than appending the next integer.
+- **Merge mechanics:** three upstream moves were absorbed (`efd0cda`, `0762959`, `40fa079`). The first two were
+  rebases; the third became a **merge** because four replayed commits × shared-file conflicts cost more than one
+  resolution round. Both directions resolved by taking `main` as the base and re-applying this session's rows — no
+  other session's text was overwritten. **Reminder for anyone rebasing here: during a rebase
+  `git checkout --ours <file>` selects the *upstream* side, so appends to `COORDINATION.md`/`README.md` are
+  silently dropped and must be re-added and grepped afterwards.**
 ### Session arena/ed7a54e7-zone4 — merge and deployment result
 
 - Pull request [#30](https://github.com/kanlerxz87-cyber/Zone4/pull/30) (`arena/ed7a54e7-zone4` → `main`) merged at `d93c830dbe556f8aa5b122dd0e9c0e91c5a336fe` (2026-11-14 10:30 UTC), self-merged after both required checks passed.

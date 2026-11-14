@@ -1,0 +1,190 @@
+{
+  "title": "Amazon Associates program facts, verified against official pages",
+  "verified_at_utc": "2026-11-14",
+  "status_legend": {
+    "verified": "Read from the cited official page on 2026-11-14.",
+    "verified-partial": "Official page retrieved, but the retrieved text ran out mid-clause; only the retrieved part is asserted.",
+    "unverified": "Not confirmed from an official page by this session. Value is intentionally null and a flag is raised."
+  },
+
+  "commission_table": {
+    "source_id": "S1",
+    "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+    "heading": "Table 1 — Fixed Standard Commission Income Rates for Specific Product Categories",
+    "note": "Rates are a fixed percentage of Qualifying Revenue for the category. Amazon may change the table; re-verify at publish time.",
+    "rows": [
+      {"categories": "Luxury Beauty, Luxury Stores Beauty, Amazon Explore", "rate_pct": 10.00},
+      {"categories": "Digital Music, Physical Music, Handmade, Digital Videos", "rate_pct": 5.00},
+      {"categories": "Physical Books, Kitchen, Automotive", "rate_pct": 4.50},
+      {"categories": "Amazon Fire Tablet Devices, Amazon Kindle Devices, Luxury Stores Fashion, Apparel, Amazon Cloud Cam Devices, Fire TV Edition Smart TVs, Amazon Fire TV Devices, Amazon Echo Devices, Ring Devices, Watches, Jewelry, Luggage, Shoes, and Handbags & Accessories", "rate_pct": 4.00},
+      {"categories": "Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins", "rate_pct": 3.00},
+      {"categories": "PC, PC Components, DVD & Blu-Ray", "rate_pct": 2.50},
+      {"categories": "Televisions, Digital Video Games", "rate_pct": 2.00},
+      {"categories": "Amazon Fresh, Physical Video Games & Video Game Consoles, Grocery, Health & Personal Care", "rate_pct": 1.00},
+      {"categories": "Gift Cards; Wireless Service Plans; Alcoholic Beverages; Digital Kindle Products purchased as a subscription; Vehicles – Leasing and Sales; Pet Prescription Medications; Food prepared and delivered from a restaurant; Amazon Appstore, Prime Now, or Amazon Pay Places", "rate_pct": 0.00},
+      {"categories": "Coach", "rate_pct": 0.00},
+      {"categories": "All Other Categories", "rate_pct": 4.00}
+    ]
+  },
+
+  "commission_caps": [
+    {"id": "fine-art", "claim": "Standard Commission Income for fine art products is capped at a maximum of $200 per Product, regardless of Qualifying Revenue.", "status": "verified", "source_id": "S1"},
+    {"id": "free-books", "claim": "No Standard or Special Commission Income for a month if the Site is primarily promoting free Kindle eBooks and, in that month, 20,000+ free Kindle eBooks are ordered/downloaded via Special Links and at least 80% of all Kindle eBooks ordered/downloaded are free.", "status": "verified", "source_id": "S1"},
+    {"id": "amazon-games-20pct", "claim": "Claim that an 'Amazon Games' category pays 20.00%.", "status": "unverified", "value": null, "reason": "No 'Amazon Games' row exists in the official Table 1 retrieved on 2026-11-14. The figure circulates in third-party blogs only. Flag F-005.", "source_id": "S1"}
+  ],
+
+  "bounty_events": {
+    "source_id": "S1",
+    "heading": "Special Commission Income — (a) Bounty Events (rows read on 2026-11-14)",
+    "note": "Partial list: the official table continues beyond the retrieved text (Prime Video Add-on Subscriptions was cut off). Do not treat as exhaustive.",
+    "rows": [
+      {"program": "Prime Free Trial", "action": "Successful registration of a Free Trial", "rate_usd": 12.00},
+      {"program": "Prime Paid Membership", "action": "Successful purchase of a Membership", "rate_usd": 12.00},
+      {"program": "Prime for Young Adults Trial", "action": "Successful registration of a Trial", "rate_usd": 12.00},
+      {"program": "Prime for Young Adults Paid Membership", "action": "Successful purchase of a Membership", "rate_usd": 12.00},
+      {"program": "Prime Access Free Trial or Paid Membership", "action": "Successful registration of a Free Trial or purchase of a Membership", "rate_usd": 12.00},
+      {"program": "Prime Sign Up at Checkout", "action": "Successful registration or membership purchase during product/Prime-offer checkout", "rate_usd": 12.00},
+      {"program": "Prime Video Free Trial", "action": "Successful registration of a Free Trial", "rate_usd": 2.00},
+      {"program": "Prime Video First Stream", "action": "Successful First Stream by an eligible Prime customer", "rate_usd": 5.00},
+      {"program": "Prime Video Stream", "action": "Successful Stream by an eligible Prime customer", "rate_usd": 0.25}
+    ]
+  },
+
+  "attribution_rules": [
+    {"id": "session-start", "claim": "A Session begins when a customer clicks through a Special Link.", "status": "verified", "source_id": "S2"},
+    {"id": "session-end", "claim": "A Session ends on the first to occur of: 24 hours elapsing from the click; the customer placing an order for a non-digital Product; or the customer clicking a Special Link that is not yours.", "status": "verified", "source_id": "S2"},
+    {"id": "cart-window", "claim": "For a cart-based order, the order must be completed no later than 89 days after the initial click-through.", "status": "verified", "source_id": "S2"},
+    {"id": "one-click", "claim": "A purchase via the 1-Click feature also counts within the Session.", "status": "verified", "source_id": "S2"},
+    {"id": "ship-window", "claim": "The Product must be shipped to, streamed or downloaded by, and paid for by the customer within 180 days of the purchase.", "status": "verified", "source_id": "S2"},
+    {"id": "cross-associate-reset", "claim": "Clicking another publisher's Special Link ends your Session, so a later purchase is not attributed to you.", "status": "verified", "source_id": "S2"},
+    {"id": "price-timestamp-rule", "claim": "A date/time stamp must appear adjacent to displayed pricing or availability when content comes from Data Feeds or PA API, or is refreshed less often than hourly.", "status": "unverified", "value": null, "reason": "Quoted by third-party summaries of the Program Policies, but this clause was not in the text retrieved by this session. Flag F-006 — verify in the Participation Requirements before shipping any price display.", "source_id": "S2"}
+  ],
+
+  "prohibitions": [
+    {"id": "P-f", "rule": "No keyword auctions where the resulting paid search ad is a Prohibited Paid Search Placement; no use of Amazon marks or misspellings ('ammazon', 'amaozn', 'kindel') in search keywords. Organic/unpaid results are allowed if they send users to your Site, not directly (or via a Redirecting Link) to Amazon.", "source_id": "S2"},
+    {"id": "P-g", "rule": "No consideration, reward, or incentive (money, rebate, discount, points, charity donation, other benefit) for using Special Links — including rewards/loyalty programs.", "source_id": "S2"},
+    {"id": "P-h", "rule": "No intercepting, recording, redirecting, reading, interpreting, or filling in the contents of forms or other material submitted to Amazon.", "source_id": "S2"},
+    {"id": "P-i", "rule": "No requesting, collecting, obtaining, storing, caching, or otherwise using customer account information (including usernames/passwords).", "source_id": "S2"},
+    {"id": "P-j", "rule": "No modifying, redirecting, suppressing, or substituting the operation of any button, link, or other feature of an Amazon Site.", "source_id": "S2"},
+    {"id": "P-k", "rule": "No placing orders or transacting on an Amazon Site on behalf of another person or entity, nor authorizing/assisting/encouraging it.", "source_id": "S2"},
+    {"id": "P-l", "rule": "No action that could reasonably cause customer confusion about the relationship with Amazon or about the site on which search/browse/order functions occur.", "source_id": "S2"},
+    {"id": "P-m", "rule": "No Special Links or Program Content in connection with spyware, malware, or software not expressly and knowingly authorized by the user.", "source_id": "S2"},
+    {"id": "P-n", "rule": "No framing an Amazon Site inside your Site, including in an integrated WebView inside a mobile app.", "source_id": "S2"},
+    {"id": "P-o", "rule": "No Special Links or Amazon-promoting content in pop-up/pop-under windows, transitional page ads, or layer ads (limited exception for pop-ups promoting closely associated Products).", "source_id": "S2"},
+    {"id": "P-p", "rule": "No Special Links inside content you place on an Amazon Site (customer reviews, forums, Wish Lists, guides, other customer-generated contexts, or Amazon advertising services).", "source_id": "S2"},
+    {"id": "P-q", "rule": "No circumventing the Commission Income Statement or artificially increasing commission income — e.g., you cannot cause any Amazon page to open in a browser other than by the customer clicking your Special Link.", "source_id": "S2"},
+    {"id": "P-r", "rule": "No intercepting/redirecting traffic from, or diverting commission income from, any site participating in the Associates Program.", "source_id": "S2"},
+    {"id": "P-s", "rule": "No artificially generated clicks or impressions, and no created Sessions on an Amazon Site, by robot, software program, or otherwise.", "source_id": "S2"},
+    {"id": "P-t", "rule": "No display or use of Amazon customer reviews or star ratings, in part or whole, unless the link to that review/rating was obtained through Creators API or PA API and those API license requirements are met.", "source_id": "S2"},
+    {"id": "P-u", "rule": "No purchasing Products or taking a Bounty Event action through your own Special Links (for yourself, friends, relatives, employees, contractors, business relations), and no resale/commercial use of such purchases.", "source_id": "S2"},
+    {"id": "P-v", "rule": "No cloaking, hiding, spoofing, or otherwise obscuring the URL of the Site containing Special Links (including via Redirecting Links) or the user agent, such that Amazon cannot determine where the click came from.", "source_id": "S2"},
+    {"id": "P-w", "rule": "No link shortening service, button, hyperlink, or ad placement used in a way that makes it unclear that the destination is an Amazon Site.", "source_id": "S2"},
+    {"id": "P-x", "rule": "On request, provide written certification of compliance; failure is a material breach.", "source_id": "S2"},
+    {"id": "P-y", "rule": "Your Site must not have price tracking and/or price alerting functionality unless otherwise agreed by Amazon.", "source_id": "S2"},
+    {"id": "P-z", "rule": "No using Program Content to advertise or promote products offered on non-Amazon sites; no use of any Amazon-sourced data, images, text, or content relating to Excluded Products.", "source_id": "S2"},
+    {"id": "P-offline", "rule": "No Promotional Activities in any offline manner: no Amazon marks, Program Content, or Special Links in printed material, ebooks, mailings, or oral solicitation.", "source_id": "S2"},
+    {"id": "P-email", "rule": "Special Links in emails, SMS, and direct messaging are allowed only from your social media Sites and only when the communication is solicited (opted into by the recipient); you are the 'Sender' under CAN-SPAM/TCPA-type law.", "source_id": "S2"},
+    {"id": "P-software", "rule": "No Program Content or Special Link on/with client-side software (browser plug-in, helper object, toolbar, extension, component) other than Approved Mobile Applications; none on TV set-top boxes, streaming players, Blu-ray/DVD players, or Internet-enabled TVs.", "source_id": "S2"},
+    {"id": "P-ml", "rule": "No using, or allowing any third party to use, Special Links or Program Content to develop machine learning models or related technology without Amazon's express prior written approval.", "source_id": "S2"},
+    {"id": "P-content", "rule": "No adding to, deleting from, or otherwise altering Program Content (resize of image proportionally, or truncation that does not change meaning, is permitted); Privacy Information links must stay legible; no resale/redistribution of Program Content or of apps that use it.", "source_id": "S2"},
+    {"id": "P-endorse", "rule": "No using Program Content (including any name or likeness in it) in a way that implies endorsement, sponsorship, or commercial tie-in, e.g. by placing unrelated third-party material close to Program Content.", "source_id": "S2"},
+    {"id": "P-stale", "rule": "Promptly remove from your Site, and delete/destroy, any Program Content that is no longer displayed on an Amazon Site or that Amazon notifies you is no longer available.", "source_id": "S2"}
+  ],
+
+  "legal_clauses": [
+    {"id": "L-law", "claim": "You must comply with applicable laws, including disclosure rules (the U.S. FTC Guides Concerning the Use of Endorsement and Testimonials in Advertising are named), and ePrivacy Directive 2002/58/EC and GDPR (EU) 2016/679 where applicable.", "status": "verified", "source_id": "S2"},
+    {"id": "L-cookies", "claim": "You must disclose accurately and adequately, via a privacy policy or otherwise, the use of cookies, pixels, and other technologies by you and third parties, and visitors' opt-out choices where required by law.", "status": "verified", "source_id": "S2"},
+    {"id": "L-material-breach", "claim": "Violating the Participation Requirements, the IP License, or Section 1 of the Influencer Program Policy is deemed a material breach of the Agreement.", "status": "verified", "source_id": "S2"},
+    {"id": "L-antifake", "claim": "Program Content must be used in compliance with the Amazon Associates Anti-Counterfeit Policy.", "status": "verified", "source_id": "S2", "extra_url": "https://affiliate-program.amazon.com/help/node/topic/GER4LUCFFTZJ2FDC"},
+    {"id": "L-accuracy", "claim": "You are responsible for creating, posting, and ensuring the accuracy, completeness, and appropriateness of materials on your Site, including product descriptions and information associated with Special Links.", "status": "verified", "source_id": "S2"}
+  ],
+
+  "disclosure": {
+    "required_statement": "As an Amazon Associate I earn from qualifying purchases.",
+    "requirement": "Must be stated clearly and prominently on your Site or any other location where Amazon may authorize display or use of Program Content.",
+    "status": "verified",
+    "source_id": "S3",
+    "section": "Operating Agreement, Section 5 — Identifying Yourself as an Associate",
+    "amazon_link_level_guidance": {
+      "status": "verified",
+      "source_id": "S6",
+      "detail": "Amazon's help page requires a legally compliant link-level disclosure that is (1) clear — examples given: '(paid link)', '#ad', '#CommissionsEarned' — and (2) conspicuous, placed near the affiliate link or product review. For social media user-generated content the identification statement must be associated with your account. For Alexa skills the disclosure must be made each time a customer re-engages with a skill containing a tagged Alexa Shopping Action, as close in time as possible to the prompt; putting it only on the skill's details page is not sufficient."
+    },
+    "ftc_guidance": {
+      "status": "verified",
+      "source_id": "S8",
+      "points": [
+        "Disclose a material connection clearly and conspicuously where the audience would not reasonably expect it; for affiliate marketing, say so on the site so readers can weigh the endorsement (e.g. 'I get commissions for purchases made through links in this post.').",
+        "'Paid link' right next to an affiliate link should be an adequate disclosure of the nature of the link.",
+        "'affiliate link' by itself, or a 'buy now' button, is not necessarily adequate because consumers may not understand it.",
+        "A disclosure in the comments of a post, or behind a 'DISCLOSURE'/'LEGAL' button or hyperlink, is easily avoidable and therefore not clear and conspicuous.",
+        "The closer the disclosure is to the recommendation, the better; if the review containing the disclosure and the link are separated, readers may not make the connection.",
+        "For video, a description-only disclosure is not enough on its own; the disclosure should appear in the content itself (ideally both visual and audible)."
+      ]
+    }
+  },
+
+  "content_quality": {
+    "source_id": "S9",
+    "heading": "Google's people-first self-assessment — content and quality questions (as retrieved)",
+    "note": "Used as the automated editorial gate for generated drafts. Only the questions retrieved from the official page are enforced; Google lists further questions that were not retrieved.",
+    "checks": [
+      "Does the content provide original information, reporting, research, or analysis?",
+      "Does the content provide a substantial, complete, or comprehensive description of the topic?",
+      "Does the content provide insightful analysis or interesting information that is beyond the obvious?",
+      "If the content draws on other sources, does it avoid simply copying or rewriting those sources, and instead provide substantial additional value and originality?",
+      "Does the main heading or page title provide a descriptive, helpful summary of the content?",
+      "Does the main heading or page title avoid exaggerating or being shocking in nature?"
+    ],
+    "who_how_why": {
+      "status": "verified",
+      "detail": "The same official page directs creators to answer 'Who, How, and Why' about content: who created it, how it was created, and why it was created (i.e. to help people, not to attract search engines)."
+    }
+  },
+
+  "data_access": {
+    "prerequisites": [
+      {"id": "A1", "claim": "Be enrolled in the Amazon Associates program for your target marketplace.", "status": "verified", "source_id": "S4"},
+      {"id": "A2", "claim": "Have at least 10 qualifying sales within the past 30 days to access the PA API through the Creators API.", "status": "verified", "source_id": "S4"},
+      {"id": "A3", "claim": "Register for API access through Associates Central.", "status": "verified", "source_id": "S4"},
+      {"id": "A4", "claim": "Generate API credentials.", "status": "verified", "source_id": "S4"},
+      {"id": "A5", "claim": "You must register for Amazon Associates before you sign up as a Creators API developer; the API returns an error if you are not a registered or valid Associate.", "status": "verified", "source_id": "S5"},
+      {"id": "A6", "claim": "Only the primary Associates account owner can register for the API (primary-owner access is confirmed by being able to reach payment-method and tax-interview pages).", "status": "verified", "source_id": "S14"},
+      {"id": "A7", "claim": "Product Advertising API 5.0 users are directed to a Migration Guide for transitioning to the Creators API.", "status": "verified", "source_id": "S4"}
+    ],
+    "operations": [
+      {"operation": "SearchItems", "description": "Search for products using keywords, filters, and browse nodes", "source_id": "S4"},
+      {"operation": "GetItems", "description": "Retrieve detailed information for specific products by ASIN or other identifiers", "source_id": "S4"},
+      {"operation": "GetVariations", "description": "Get all variations of a parent product", "source_id": "S4"},
+      {"operation": "GetBrowseNodes", "description": "Fetch category information and browse node hierarchy", "source_id": "S4"}
+    ],
+    "technical": [
+      {"id": "T1", "claim": "Authentication uses OAuth 2.0 client-credentials: exchange credentials for an access token, then call the API with it.", "status": "verified", "source_id": "S14"},
+      {"id": "T2", "claim": "Batching: up to 10 item IDs per GetItems call; up to 10 BrowseNode IDs per GetBrowseNodes call.", "status": "verified", "source_id": "S14"},
+      {"id": "T3", "claim": "Credentials work across marketplaces; select the marketplace with the x-marketplace header and marketplace parameter, but you need a valid Partner Tag for the target marketplace and Creators API access approved in that region.", "status": "verified", "source_id": "S14"},
+      {"id": "T4", "claim": "An Associate tag works only in the locale in which you register; to be an Associate in more than one locale you must register separately for each.", "status": "verified", "source_id": "S5"},
+      {"id": "T5", "claim": "Requests are throttled to a specific number of transactions per second (TPS) and transactions per day (TPD).", "status": "unverified", "value": null, "reason": "Specific figures (e.g. 1 TPS / 8,640 TPD for new credentials, revenue-scaled increases) are quoted by third-party articles; the official 'API Rates' page was not retrieved by this session. Flag F-007 before sizing a crawl budget.", "source_id": "S4"},
+      {"id": "T6", "claim": "Retrieving customer reviews and third-party offer listings through the API.", "status": "unverified", "value": null, "reason": "Third parties state the API does not return customer reviews or third-party offers; not confirmed on an official page retrieved by this session. Note P-t: reviews/star ratings may only be used when obtained via Creators API / PA API.", "source_id": "S2"}
+    ],
+    "docs_inconsistency": {
+      "id": "D1",
+      "claim": "Locale restriction wording differs between two official pages: the onboarding page states you can only use the Creators API for the marketplace you registered in, while the FAQ states credentials work globally and only the Partner Tag/approval is per-marketplace.",
+      "status": "verified-inconsistency",
+      "sources": ["S5", "S14"],
+      "handling": "Build the narrowest interpretation: one Associates account + one approved tag per marketplace, and require an explicit per-marketplace config entry. Flag F-008."
+    }
+  },
+
+  "identity_rules": [
+    {"id": "I1", "claim": "An ASIN (Amazon Standard Identification Number) is a unique 10-character alphanumeric code assigned to every product listed in the Amazon store.", "status": "verified", "source_id": "S11"},
+    {"id": "I2", "claim": "In a product URL the ASIN appears after '/dp/'.", "status": "verified", "source_id": "S11"},
+    {"id": "I3", "claim": "The '.amazon' string is an active generic top-level domain, delegated since 2020-06-02, managed by Amazon Registry Services, Inc. (410 Terry Avenue North, Seattle).", "status": "verified", "source_id": "S12"}
+  ],
+
+  "payment_and_account": [
+    {"id": "PA1", "claim": "Qualifying Purchase requires a click on your Special Link and a purchase within the defined Session (see attribution rules).", "status": "verified", "source_id": "S2"},
+    {"id": "PA2", "claim": "Standard Commission Income is a fixed percentage of Qualifying Revenue for the product category.", "status": "verified", "source_id": "S1"},
+    {"id": "PA3", "claim": "Excluded Products list (Products Statement) removes categories such as products sold on sites linked from an Amazon Site; a clause covering alcoholic beverages advertised by licensed U.S. businesses continues past the retrieved text.", "status": "verified-partial", "source_id": "S2"},
+    {"id": "PA4", "claim": "Current payment schedule, minimum payout threshold, and payment method for this account.", "status": "unverified", "value": null, "reason": "No Associates account is connected to this workspace, so account-specific terms cannot be read. Flag F-010.", "source_id": null}
+  ]
+}
