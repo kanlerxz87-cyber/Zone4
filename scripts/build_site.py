@@ -407,7 +407,7 @@ def hero(title: str, lead: str) -> str:
 def page_index(current: Page) -> str:
     open_flags = [f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()]
     kpis = [
-        ("3 of 3", "Products with verified ASIN, category and specification table (P2 brand unresolved, F-05)"),
+        ("3 of 3", "Products with verified ASIN, category, brand and specification table"),
         ("5", "Marketing pages built: 3 articles, 1 comparison, 1 buying guide"),
         ("0", "Amazon prices published (policy F-02)"),
         ("0 of 3", "Commission rates verified (F-01)"),
