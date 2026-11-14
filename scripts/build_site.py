@@ -259,7 +259,7 @@ def hero(title: str, lead: str) -> str:
 
 def page_index(current: Page) -> str:
     kpis = [
-        ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
+        ("3 of 3", "Products with verified ASIN and category (P2 brand from Item details, F-05)"),
         ("0", "Amazon prices published (policy F-02)"),
         ("0 of 3", "Commission rates verified (F-01)"),
         (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for review page)"),
