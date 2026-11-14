@@ -1,0 +1,193 @@
+{
+  "_meta": {
+    "description": "Line-by-line verification performed on 2026-11-14 (UTC) by session arena/46c18cd1-zone4 (final integration wrap-up, taking over the stale in-progress row of arena/3036372b-zone4 per the handoff rule). Every row names the official source that was read live during this session. No value was inferred; anything not readable from an official source stays blank and flagged.",
+    "method": "Each user-supplied short link was fetched and followed to its Amazon product page. Listing titles, category breadcrumbs, the complete 'Product information' tables (Features & Specs, Measurements, Materials & Care, Additional details, Item details) and the 'Customers who viewed this item also viewed' carousels were read from the returned official pages and compared to data/products.json. Associates Operating Agreement, Program Policies (Participation Requirements and the IP License), the public Standard Commission Income Statement, the disclosure help topic and the Creators API documentation were read at the cited URLs; the Amazon Conditions of Use and the FTC Disclosures 101 brochure were re-read. GitHub Pages state was read from the GitHub REST API.",
+    "session": "arena/46c18cd1-zone4",
+    "observed_utc": "2026-11-14",
+    "observed_window_utc": "19:02-19:45",
+    "concurrency_note": "PR #38/#40 (arena/13dd55ca-zone4) merged mid-session and are adopted as canonical for the commission reconciliation and citation corrections; this registry re-confirms the underlying official readings independently."
+  },
+  "products": [
+    {
+      "id": "P1",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "resolution": "Short link redirects to the ASIN B0CDY277D3 product page. Redirect carries lv, btn_type, gaOptInStatus, btn_ref=srctok-..., channelId and plpRedirect parameters; no tag= parameter (F-03 stands).",
+      "verified_fields": {
+        "title": "Exact match of name_listing: 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black'",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (node 17659096011) — matches category_path and category_url",
+        "special_features": "'+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute' — matches special_feature",
+        "dimensions": "'13.38\"D x 11.81\"W x 10.63\"H' — matches dimensions",
+        "capacity": "'6 liters' — matches capacity; Size row reads '6 Quart'",
+        "material": "'Metal, Plastic' — matches material; Inner Material 'Plastic with Non-Stick Coating' (not published)",
+        "color": "'Black, Gray' — matches color",
+        "item_details": "Brand Name 'Chefman'; Model Name 'Turbo Fry® Touch'; Model Number 'RJ38-SQPF-3TDB-2W'; Part Number 'RJ38-SQPF-3TDB-2W'; UPC '810087845025'; Manufacturer 'Chefman'; ASIN 'B0CDY277D3' — all match brand, model_name, model_number and brand_note",
+        "competitor_carousel": "First three items on this read: B0B7C327LK ('Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen, ...'), B0BYKGN61Q ('Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel ...'), B0CNSB81V6 ('Nutrichef Double Basket Air Fryer 8.8 QT | Family Size Oil Free Airfryer with Transparent Window ...'). The read reproduces the stored snapshot in order and title prefixes; the previously blank B0CNSB81V6 label had been filled from the concurrent session's readable pass (arena/949aaac1-zone4, PR #41) and that fill is canonical. The separate 'Products related to this item' sponsored module lower on the page does change between loads (F-29 records the ad-slot volatility)."
+      },
+      "withheld": "Price and star rating visible on the page are not published, per Participation Requirements 2(b) and 6(t) (F-02). Product-level commission rate is blank pending per-ASIN category confirmation (F-01).",
+      "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "id": "P2",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "resolution": "Short link redirects to the ASIN B09B7SB46R product page. Redirect carries btn_ref=srctok-... and no tag= parameter (F-03 stands).",
+      "verified_fields": {
+        "title": "Exact match of name_listing: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers — matches",
+        "special_features": "'Automatic Shut-Off, Programmable, Temperature Control, Timer' — matches special_feature",
+        "dimensions": "'16.9\"D x 15.8\"W x 14.8\"H' — matches dimensions",
+        "capacity": "'24.6 liters' — matches capacity; Size row reads 'Extra Large'",
+        "material": "Material 'Stainless Steel' (Outer and Inner 'Stainless Steel') — matches",
+        "color": "'Stainless Steel' (Additional details) — matches color",
+        "item_details": "Brand Name 'Emeril'; Manufacturer 'Emeril Lagasse'; Model Name 'Extra Large 26 QT French Door Air Fryer Oven'; Model Number '4-00675-02X-VN'; Part Number '4-00675-02X-VN'; UPC '752356835682'; Configuration 'Air Fryer Toaster Oven Combo with 24 Functions and 7 Accessories'; Item Highlight repeats '24 cooking functions'; Product Description says '24 one-touch cooking presets' — all match. The '25 cooking pre-sets' feature-bullet side of F-26 was not in the chunks re-read today; the recorded conflict stands and stays flagged.",
+        "competitor_carousel": "First three items: B0BZ52FLKC ('Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven ...'), B0FM5KF34G ('Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101 ...'), B0F92GL7JH ('HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven ...') — labels match the stored records; not labelled 'Sponsored' on this read (F-10)."
+      },
+      "withheld": "Price and star rating visible on the page are not published (F-02). Product-level commission rate blank (F-01).",
+      "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "id": "P3",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "resolution": "Short link redirects to the ASIN B08DKYBTPH product page. Redirect carries btn_ref=srctok-... and no tag= parameter (F-03 stands).",
+      "verified_fields": {
+        "title": "Exact match of name_listing: 'Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel'",
+        "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers — matches",
+        "special_features": "'Automatic Shut-Off, LED Shake Reminder, Programmable' — matches special_feature",
+        "dimensions": "'12.75\"D x 13.5\"W x 10\"H' — matches dimensions",
+        "capacity": "'8 quarts' — matches capacity; Size row reads '8 quarts'",
+        "material": "'Plastic, Stainless Steel' — matches material; Inner Material 'Stainless Steel' (not published)",
+        "color": "'Stainless steel' (Additional details) — matches color",
+        "item_details": "Brand Name 'Chefman'; Model Name 'Square Air Fryer'; Model Number 'Large Air Fryer'; Part Number 'RJ38-SQSS-8T'; UPC '816458024518'; Global Trade Identification Number '00816458024518, 10816458024515, 30816458024519, 40816458024516' (four GTINs — F-08 size-variant family confirmed); Manufacturer 'Chefman'; ASIN 'B08DKYBTPH' — all match; model_number is published as the Part Number with the anomalous 'Large Air Fryer' Model Number row documented in brand_note",
+        "competitor_carousel": "First three items: B0CNY1YVDD ('Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes ...'), B0D5FX6VRL ('Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals ...'), B0C33CHG99 ('Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating ...') — labels match the stored records; 'Sponsored' label above the module on this read (F-10)."
+      },
+      "withheld": "Price and star rating visible on the page are not published (F-02). Product-level commission rate blank (F-01).",
+      "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+    }
+  ],
+  "policy_sources": [
+    {
+      "id": "OA-5",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "claim_checked": "Operating Agreement Section 5 'Identifying Yourself as an Associate' requires the site statement.",
+      "result": "MATCH — read verbatim: 'You must clearly and prominently state the following ... on your Site ...: “As an Amazon Associate I earn from qualifying purchases.”'",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "PP-2b",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "claim_checked": "Participation Requirements 2(b): Special Links must carry the Associates ID/tag (XXXXX-##); prices and availability may only be shown when served by Amazon's link or obtained via Creators API / PA API; original relevant content required when linking to product lists.",
+      "result": "MATCH — all sentences read on the live page (page header: 'Updated: April 14, 2026').",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "PP-3",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "claim_checked": "Section 3 'Responsibility for Your Site' is lettered (a)-(f); Section 4 bars offline use and allows only opted-in email/SMS; Section 5 bars machine-learning development with Program Content; Section 6 continues (g)-(z).",
+      "result": "MATCH — 3(a)-(f) confirmed; 4 and 5 confirmed verbatim; 6 items confirmed in the same read: 6(e)-(f) marks as search keywords, 6(g) incentives, 6(p) Special Links inside customer-generated content on Amazon, 6(s) artificial clicks, 6(t) customer reviews and star ratings only via Creators API / PA API, 6(v) no cloaking, 6(w) no link shortening that obscures the destination, 6(y) no price tracking or alerting, 6(z) no promoting non-Amazon products with Program Content. The numbering correction (6(t) under Section 6, not 3(t)) is re-confirmed; PR #38's 3→6 fixes in the engine layer are consistent with the live page.",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "PP-1g",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "claim_checked": "Section 1(g): no Amazon trademark in any domain name, subdomain, tag, Associates ID or social username.",
+      "result": "MATCH — read verbatim.",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "IPL-2",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "claim_checked": "IP License Section 2: (c)(iii) Product Advertising Content must link only to the relevant Amazon page; (e) no aggregating/analyzing/extracting/repurposing and no direct training or fine-tuning of ML/foundational models without express prior written approval; (h) images may not be stored (link up to 24 hours), ASINs storable indefinitely; (i) date/time stamp plus pricing disclaimer adjacent to displayed prices; (k) plain-view text disclaimer 'CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON. THIS CONTENT IS PROVIDED ‘AS IS’ AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.'",
+      "result": "MATCH — all clauses read verbatim on the live page; the (k) notice is shown on every site page (F-25).",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "IPL-4",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "claim_checked": "IP License Section 4 'Agent Terms': agents must identify with 'Agent/[agent name]' in every HTTP/HTTPS user-agent string, must not conceal or obfuscate agent access, must not mimic human interaction patterns, must answer human-vs-machine checks truthfully, must not circumvent access measures; Amazon may limit agent access at its sole discretion.",
+      "result": "MATCH — read verbatim; the engine sends 'Agent/zone4-research ...' and no agent-based retrieval runs against Amazon content in this environment (F-21).",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "COMM",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "claim_checked": "Public Standard Commission Income Statement, Table 1: 'Physical Books, Kitchen, Automotive' at 4.50%; 'Toys, Furniture, Home, ...' at 3.00%.",
+      "result": "MATCH — table read live with no sign-in during this session. Category-level reference confirmed; per the no-inference rule adopted with PR #38, no product-level rate is published because no official source maps these ASINs to a commission category (F-01).",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "CAPI",
+      "source_url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "claim_checked": "Creators API prerequisites: enrolled Associates account; 'at least 10 qualifying sales within the past 30 days' for PA-API access through Creators API; registration through Associates Central; OAuth 2.0 client-credentials authentication (FAQ page).",
+      "result": "MATCH — introduction and FAQ read live; F-16's 'API access needs a qualifying-sales track record' context is accurate.",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "HELP-DISC",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "claim_checked": "Disclosure help topic: link-level disclosure must be clear ('(paid link)', '#ad', '#CommissionsEarned') and conspicuous, placed near the link or review; Operating Agreement statement required verbatim; on social media it must be associated with the account.",
+      "result": "MATCH — read verbatim, including the exact required sentence. PR #38's per-link '(paid link)' tokens satisfy the same guidance.",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "FTC",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "claim_checked": "FTC Disclosures 101 (November 2019): disclose material connections; place disclosures so they are hard to miss and with the endorsement itself; simple and clear language ('advertisement', 'ad', 'sponsored'; #ad/#sponsored acceptable); do not bury in hashtags or place on ABOUT pages; responsibility stays with the endorser; no claims about products not tried or unsupported claims.",
+      "result": "MATCH — brochure re-read in full; site disclosure copy and R-13/R-16 citations follow it.",
+      "date_utc": "2026-11-14"
+    },
+    {
+      "id": "COU",
+      "source_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "claim_checked": "Conditions of Use citation and the 'License and Access' clauses relied on by F-11/F-12/R-12; and the F-30 node-id finding.",
+      "result": "FINDING CONFIRMED — the cited URL redirects to nodeId=GLSBYFE9MGKKQXXM, title 'Conditions of Use', 'Last updated: August 14, 2026'. 'License and Access' read verbatim on the target: the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; 'You will not, and will not allow any third party to, use AI-generated content from the Amazon Services to, directly or indirectly, develop or improve large language or multimodal models, machine learning models or related technology.' The same GLSBYFE9MGKKQXXM URL is what product pages and Amazon's own Creators API docs footer link as 'Conditions of Use'; the old nodeId still works as an Amazon-served redirect. S-COU note and F-30 detail updated; citation refresh is a next-review action, not a content error.",
+      "date_utc": "2026-11-14"
+    }
+  ],
+  "site_build_checks": [
+    {
+      "check": "python3 scripts/build_site.py",
+      "result": "15 pages regenerated; committed docs/ matches a fresh build (git diff --exit-code -- docs)."
+    },
+    {
+      "check": "python3 scripts/verify.py",
+      "result": "PASS — data validity, internal links and anchors, disclosure on every page, official source link in every table row, no prices or ratings, no Amazon Mark in titles/meta/keywords, marketing facts cited, tracking metrics blank, 15 required pages."
+    },
+    {
+      "check": "python3 qa/audit_site.py --strict-warnings",
+      "result": "PASS — 15 pages, 0 failures, 0 warnings (strict mode introduced by PR #38 now that every shop link carries the '(paid link)' token)."
+    },
+    {
+      "check": "python3 -m unittest discover -s tests",
+      "result": "PASS — 81 engine tests."
+    },
+    {
+      "check": "python3 -m engine.cli audit",
+      "result": "0/7 drafts ready, all blocked by compliance gates — correct refusal to publish without authorized data and reporting access."
+    },
+    {
+      "check": "python3 tools/check_links.py (after engine preview build)",
+      "result": "PASS — no broken links, every row sourced or flagged, CSS complete, disclosure present."
+    }
+  ],
+  "this_session_changes": [
+    "data/sources.json: S-COU note records the redirect confirmation (nodeId=508088 -> GLSBYFE9MGKKQXXM) and the verbatim re-read of the 'License and Access' clauses on the canonical node.",
+    "data/flags.json: one appended nuance to F-30 — Amazon's own Creators API docs footers still link nodeId=508088, so keeping the citation is deliberate, not stale.",
+    "data/products.json: _meta.reverification.final_wrapup — pointer to this registry plus the wrap-up result summary.",
+    "data/verification-session-46c18cd1.json: this registry.",
+    "COORDINATION.md: board hygiene (stale arena/3036372b-zone4 row done per the handoff rule; arena/e5381cc3-zone4 row completed from PR #22), this session's claim/completion log, adopted records from open PRs #22 and #34 (both closed with a pointer), and the conflict log for the mid-session PR #38/#40 and pre-merge PR #41 advances (their reconciliations adopted as canonical; this session's duplicate edits dropped in their favour).",
+    "Dropped as duplicates of PR #41 (not shipped by this session): the Nutrichef label fill, the F-27->F-29 reference corrections, the F-29 wrap-up note, the builder products-page intro edit."
+  ],
+  "not_verified_or_unavailable": [
+    "Per-ASIN commission category assignment (needs a signed-in Associates Central; F-01).",
+    "Whether the three short links were generated under the user's Associates ID — no tag= parameter is visible in any resolved URL (F-03).",
+    "Prices, ratings and review counts — withheld under 2(b)/6(t); the live pages show them, the site does not publish them (F-02).",
+    "Traffic, conversion or earnings of any kind — no authorized reporting is connected; all tracking values stay blank (F-19).",
+    "P2's '25 cooking pre-sets' feature bullet — not present in the chunks re-read today; the earlier recorded conflict (F-26) stands unrebutted.",
+    "Creator/PA API Specifications documents — not read; F-16/F-33 unchanged."
+  ],
+  "corrections_to_this_session": [
+    "An interim commit (superseded on rebase) described the P1 carousel read as showing a different order and filled the blank label independently; on the final tree the read reproduces the stored order and the label fill is attributed to PR #41. The interim wording conflated two carousels on the same page; corrected here and in COORDINATION.md, and left visible in this session's superseded branch commits/reflog."
+  ]
+}
