@@ -23,7 +23,7 @@
       "id": "R-03",
       "requirement": "Do not display Amazon customer reviews or star ratings unless obtained through Creators API / PA API.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Program Policies, Participation Requirements, Section 3(t)",
+      "source_ref": "Participation Requirements, Section 6(t)",
       "status": "Implemented (ratings withheld)",
       "site_implementation": "No star ratings or review counts are published. Flag F-02."
     },
@@ -39,7 +39,7 @@
       "id": "R-05",
       "requirement": "Do not use a link shortening service in a way that makes it unclear that the link goes to an Amazon Site.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(w); Commission Income Statement, Section 2(g)",
+      "source_ref": "Participation Requirements, Section 6(w)",
       "status": "Needs review",
       "site_implementation": "The links use link.amazon, Amazon's own short domain, and are labelled as Amazon links. Flag F-04."
     },
@@ -47,7 +47,7 @@
       "id": "R-06",
       "requirement": "Do not include Amazon trademarks in domain names, subdomains or tags.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Section 3(g)",
+      "source_ref": "Participation Requirements, Section 1(g)",
       "status": "Implemented",
       "site_implementation": "Site domain is kanlerxz87-cyber.github.io/Zone4, which contains no Amazon mark."
     },
@@ -55,7 +55,7 @@
       "id": "R-07",
       "requirement": "Do not buy paid search advertisements on keywords that include Amazon trademarks.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Commission Income Statement, Section 2(c); Participation Requirements, Section 3(f)",
+      "source_ref": "Commission Income Statement, Section 2(c); Participation Requirements, Section 6(e)-(f)",
       "status": "Implemented (no paid ads run)",
       "site_implementation": "No paid advertising is connected to this site."
     },
@@ -71,7 +71,7 @@
       "id": "R-09",
       "requirement": "Do not offer incentives for using Special Links, and do not place Special Links in customer reviews or Amazon content.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
-      "source_ref": "Participation Requirements, Sections 3(g) and 3(p)",
+      "source_ref": "Participation Requirements, Sections 6(g) and 6(p)",
       "status": "Implemented",
       "site_implementation": "No incentives or rewards are offered; no links are placed on Amazon."
     },
@@ -130,6 +130,22 @@
       "source_ref": "Commission Income Statement, Sections 1 and 2(d)-(e)",
       "status": "Informational",
       "site_implementation": "Links are direct, with no redirect or intermediate page. Search-engine display is not controlled by this site."
+    },
+    {
+      "id": "R-17",
+      "requirement": "Do not use Special Links or Program Content to develop machine learning models or related technology without express prior written approval from Amazon.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 5 (re-read 2026-11-14)",
+      "status": "Needs review before AI automation",
+      "site_implementation": "No machine-learning model is trained or developed with Special Links or Program Content on this site. Any future AI work needs written approval. Flag F-12."
+    },
+    {
+      "id": "R-18",
+      "requirement": "Do not artificially generate clicks or impressions on your Site or create Sessions on an Amazon Site, whether by robot, software program or otherwise.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements, Section 6(s)",
+      "status": "Constraint on automation",
+      "site_implementation": "The site generates no clicks or sessions and has no click tracking. Automated click tracking is not built (F-19)."
     }
   ]
 }
