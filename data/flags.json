@@ -234,14 +234,14 @@
     {
       "id": "F-20",
       "severity": "Medium",
-      "title": "Competitor labels are paraphrases; standalone participation page uses different numbering",
-      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page, and the labels are now marked as paraphrased. The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1–31) and has no item labelled 2(b) or 3(t). All lettered citations on this site point to the Program Policies page. (Source: re-verification by arena/857e9efd-zone4, items RV-I1, RV-C5 and RV-I2.)",
+      "title": "Competitor labels were paraphrases; the exact listing-title prefixes are now used (RV-I1)",
+      "detail": "This flag recorded that the competitor labels in data/products.json were shortened paraphrases of the listing titles rather than the titles themselves, while the ASINs and the carousel order matched the official page. RV-I1 has now been applied: each label is the first part of the listing title exactly as it was shown on the 2026-11-14 read. Where a title was not seen on that read the label is blank rather than guessed. The ASIN remains the authoritative identifier and the site shows ASINs.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
       ],
-      "status": "Corrected in this session; needs review",
-      "action": "None beyond review. Cite the Program Policies URL for every lettered section."
+      "status": "Corrected in this session; kept as the audit record",
+      "action": "Keep the labels as read; if a label is blank, leave it blank and flag it (F-29)."
     },
     {
       "id": "F-21",
@@ -323,14 +323,38 @@
     {
       "id": "F-28",
       "severity": "Low",
-      "title": "Manufacturer not confirmed for P1 and P3",
-      "detail": "The Item details table was read for P2 (Brand Name 'Emeril', Manufacturer 'Emeril Lagasse'). For P1 and P3 the Item details table was not read, so the manufacturer field is left blank rather than inferred from the 'Chefman' brand shown in the byline.",
+      "title": "Manufacturer confirmed for P1, P2 and P3 from the Item details tables",
+      "detail": "The Item details table was read for P2 (Manufacturer 'Emeril Lagasse') and was not read for P1 and P3, so the manufacturer field was left blank for those two rather than inferred from the brand. The final integration session read the Item details tables on all three product pages on 2026-11-14: P1 gives Brand Name 'Chefman' and Manufacturer 'Chefman' (Model Number RJ38-SQPF-3TDB-2W, UPC 810087845025), P3 gives Brand Name 'Chefman' and Manufacturer 'Chefman' (Part Number RJ38-SQSS-8T, UPC 816458024518), and P2 gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse' (Model Number 4-00675-02X-VN, UPC 752356835682). The manufacturer is now published for all three products. The flag is kept so the earlier blank is on the record.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
-      "status": "Unverified (blank)",
-      "action": "Read the Item details table on both pages, or accept the blank."
+      "status": "Resolved 2026-11-14 (arena/3036372b-zone4)",
+      "action": "None. Re-read the Item details table on every refresh cycle."
+    },
+    {
+      "id": "F-29",
+      "severity": "Medium",
+      "title": "The also-viewed carousel changes between page loads; some labels could not be read",
+      "detail": "The 'Customers who viewed this item also viewed' module does not return the same set, or the same order, on every load of the same product page. On the 2026-11-14 reads of the P2 page the first three entries appeared in two different orders, and on the P1 page one of the three stored ASINs had no readable title on that read, so its label is blank. The stored ASINs and their order are therefore a snapshot of one read, not a stable list, and the module is an advertising slot whose membership can change without notice.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Documented; no ranking or share is derived from the lists",
+      "action": "Re-read the carousel on every refresh cycle; leave an unread label blank rather than filling it in."
+    },
+    {
+      "id": "F-30",
+      "severity": "Low",
+      "title": "The Amazon Conditions of Use help URL now resolves to a different node id",
+      "detail": "The Conditions of Use page is cited throughout this site as https://www.amazon.com/gp/help/customer/display.html?nodeId=508088, last updated August 14, 2026. A parallel session recorded that the same help URL now redirects to a different node id. The 'License and Access' wording this site relies on (the collection and use of product listings, descriptions and prices; the exclusion of data mining, robots and similar extraction tools; the restriction on using Amazon AI-generated content to develop or improve models) was read on 2026-11-14 from that URL, so the citations are accurate as read on that date. The canonical node id should be re-confirmed before the next policy review.",
+      "sources": [
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+      ],
+      "status": "Needs review",
+      "action": "Re-check the Conditions of Use URL and node id at the next policy review, and update the citation if it has moved."
     }
   ]
 }

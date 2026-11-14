@@ -12,7 +12,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
-| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, PR to `main`, Pages deploy check | **in progress**; 14 pages built and verified locally; merging `origin/main` (PRs #17, #20, #21) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
+| Final integration session: full line-by-line re-verification, marketing content kit, pipeline/tracking plan, corrected flags, requirements register, PR to `main`, Pages deploy check | **in progress**; 15 pages built and verified locally, QA audit passing; merging `origin/main` (PRs #17, #20, #21, #23, #30, #31, #32, #33) and preparing the final PR | arena/3036372b-zone4 | `data/marketing.json`, `data/pipeline.json`, `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `COORDINATION.md` |
 
 | Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **done** on the branch; PR and merge recorded in the log below | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
@@ -403,3 +403,50 @@ deliberate "not 3(x)" correction notes and the peer's preserved original reading
 
 **Irregularities added to the register in this round.** F-28 (manufacturer not confirmed for P1 and P3 — left blank, not inferred from the brand) and
 F-19 rewritten. **F-05 is now closed** with the byline explanation above. No flag was removed without a recorded reason.
+
+
+### Session arena/3036372b-zone4 — second integration round: PRs #23, #30, #31, #32 and #33 (2026-11-14, UTC)
+
+**What arrived.** `origin/main` advanced again while this session was reconciling the earlier round. PR #23 (`arena/ebf5c261-zone4`, "Final integration:
+exact competitor listing titles (RV-I1) + verification log") brought `data/verification-session-ebf5c261.json`, `data/requirements.json`,
+`docs/requirements.html`, `qa/audit_site.py`, `qa/README.md`, `.github/workflows/qa.yml` and `scripts/apply_integration.py`. PRs #30 to #33 were
+coordination and deployment records from the same and other sessions. All of them touch the shared outputs.
+
+**What was kept, and why.**
+
+- `data/requirements.json` — **kept and extended.** A 30-row traceability register of the brief was new and valuable. The integration session restated
+  the rows whose status the merged site had changed, because the peer had not had this session's marketing kit or click tracker: REQ-09 (SEO product
+  articles) and REQ-11 (buying guides) are now **Delivered**; REQ-10 (comparisons), REQ-13 (marketing content) and REQ-15 (click and conversion
+  tracking) are now **Delivered (partial)**; REQ-30 (marketing for the three products) is now **Delivered**. The blockers were rewritten to name the
+  real remaining limits (no price, rating or commission figures; no attributed conversions). Flag references were remapped onto this session's
+  numbering. The register is published at `docs/requirements.html`, generated from the data like every other page.
+- `qa/audit_site.py` and `.github/workflows/qa.yml` — **kept.** An independent audit of the committed HTML, separate from the builder, is a better
+  check than one script doing both.
+- `scripts/apply_integration.py` and `data/verification-session-ebf5c261.json` — **kept** as the audit trail of the session that produced them.
+- `data/products.json` — RV-I1 applied: the competitor labels are now the first part of each listing title exactly as it was read on 2026-11-14, and a
+  label that was not seen is left blank rather than paraphrased.
+
+**A real bug found by the independent audit.** The new QA harness reported five failures: "shop link in table row N lacks the disclosure sentence in
+the same row" on `docs/marketing.html`. Investigating showed the failure was in the audit script, not in the site: it attributed every shop link to the
+page-global table-row counter, so a link that sits **outside** any table (the call-to-action button) was charged to the last row of the preceding
+table. The parser now tracks the row it is actually inside and treats a link outside a table as a warning, which is what the script's own message
+intended. The call to action was also tightened: the disclosure sentence now sits in the same paragraph as the affiliate link rather than in a
+paragraph below it, so link-level disclosure is adjacent and unmistakable. The QA audit passes.
+
+**Manufacturer confirmed for all three products (F-28 resolved).** The peer session's verification record stated the manufacturer for P1 and P3. Rather
+than take that on trust, this session read the Item details tables on all three pages itself on 2026-11-14: P1 gives Brand Name "Chefman" and
+Manufacturer "Chefman" (Model Name "Turbo Fry® Touch", Model Number `RJ38-SQPF-3TDB-2W`, UPC 810087845025); P3 gives Brand Name "Chefman" and
+Manufacturer "Chefman" (Model Name "Square Air Fryer", Part Number `RJ38-SQSS-8T`, UPC 816458024518, with four GTINs, confirming the size-variant
+family in F-08); P2 gives Brand Name "Emeril" and Manufacturer "Emeril Lagasse" (Model Number `4-00675-02X-VN`, UPC 752356835682). The peer was
+right, the manufacturer is now published for all three, the model numbers are published as a new verification row, and F-28 is closed with the reading
+recorded.
+
+**Two new flags.** F-29 — the also-viewed carousel changes between page loads (the same product page returned the three entries in two different
+orders during this session's reads), so the stored lists are a snapshot of one read and not a stable set. F-30 — the Conditions of Use help URL cited
+throughout now resolves to a different node id, so the citation should be re-confirmed at the next policy review.
+
+**Verification performed on the merged tree.** `python3 scripts/build_site.py` regenerated all 15 pages; `python3 scripts/verify.py` passed (data
+validity, links and anchors, the disclosure on every page, an official source link in every table row, no prices or ratings, no Amazon Mark in any
+title, meta description or keyword, per-fact citation traceability, and the requirement-status evidence rules); `python3 qa/audit_site.py` passed
+(15 pages, 0 failures, 5 advisory warnings about call-to-action links that sit outside a table); `git diff --exit-code -- docs` confirmed the committed
+HTML matches a fresh build.

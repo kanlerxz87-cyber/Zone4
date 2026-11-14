@@ -28,24 +28,22 @@
       "competitors": [
         {
           "asin": "B0B7C327LK",
-          "label": "Chefman 6 Quart Dual Basket Air Fryer (Digital Touchscreen)",
-          "url": "https://www.amazon.com/dp/B0B7C327LK",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen",
+          "url": "https://www.amazon.com/dp/B0B7C327LK"
         },
         {
           "asin": "B0BYKGN61Q",
-          "label": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity",
-          "url": "https://www.amazon.com/dp/B0BYKGN61Q",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel",
+          "url": "https://www.amazon.com/dp/B0BYKGN61Q"
         },
         {
           "asin": "B0CNSB81V6",
-          "label": "Nutrichef Double Basket Air Fryer 8.8 QT",
+          "label": "",
           "url": "https://www.amazon.com/dp/B0CNSB81V6",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label_status": "not seen on the 2026-11-14 read; left blank (F-27)"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items, on the product page snapshot.",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -56,11 +54,15 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-28"
+        "F-29"
       ],
       "special_feature": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
-      "manufacturer": ""
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "manufacturer": "Chefman",
+      "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10",
+      "model_number": "RJ38-SQPF-3TDB-2W",
+      "model_name": "Turbo Fry® Touch",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Turbo Fry® Touch', Model Number RJ38-SQPF-3TDB-2W, Part Number RJ38-SQPF-3TDB-2W, UPC 810087845025."
     },
     {
       "id": "P2",
@@ -81,23 +83,20 @@
         {
           "asin": "B0BZ52FLKC",
           "label": "Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven",
-          "url": "https://www.amazon.com/dp/B0BZ52FLKC",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "url": "https://www.amazon.com/dp/B0BZ52FLKC"
         },
         {
           "asin": "B0FM5KF34G",
-          "label": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, FO101",
-          "url": "https://www.amazon.com/dp/B0FM5KF34G",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101",
+          "url": "https://www.amazon.com/dp/B0FM5KF34G"
         },
         {
           "asin": "B0F92GL7JH",
-          "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT",
-          "url": "https://www.amazon.com/dp/B0F92GL7JH",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven",
+          "url": "https://www.amazon.com/dp/B0F92GL7JH"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. An earlier snapshot labelled it 'Sponsored'; the 2026-11-14 reads did not show that label (see F-10).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -109,12 +108,15 @@
         "F-10",
         "F-15",
         "F-26",
-        "F-28"
+        "F-29"
       ],
       "special_feature": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
       "manufacturer": "Emeril Lagasse",
-      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string is the name of an Amazon Influencer who wrote the customer review attached to this listing, not the brand. The brand is therefore confirmed. See F-05."
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string is the name of an Amazon Influencer who wrote the customer review attached to this listing, not the brand. The brand is therefore confirmed. See F-05.",
+      "competitor_carousel_label": "not labelled 'Sponsored' on either read",
+      "model_number": "4-00675-02X-VN",
+      "model_name": "Extra Large 26 QT French Door Air Fryer Oven"
     },
     {
       "id": "P3",
@@ -134,24 +136,21 @@
       "competitors": [
         {
           "asin": "B0CNY1YVDD",
-          "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Touchscreen Controls)",
-          "url": "https://www.amazon.com/dp/B0CNY1YVDD",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes",
+          "url": "https://www.amazon.com/dp/B0CNY1YVDD"
         },
         {
           "asin": "B0D5FX6VRL",
-          "label": "Chefman Air Fryer – 6 QT Compact Airfryer (Easy-View Window)",
-          "url": "https://www.amazon.com/dp/B0D5FX6VRL",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals",
+          "url": "https://www.amazon.com/dp/B0D5FX6VRL"
         },
         {
           "asin": "B0C33CHG99",
-          "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt",
-          "url": "https://www.amazon.com/dp/B0C33CHG99",
-          "label_status": "paraphrased from the carousel title; the ASIN is authoritative (F-20)"
+          "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating",
+          "url": "https://www.amazon.com/dp/B0C33CHG99"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. A 'Sponsored' label appeared above it on one 2026-11-14 read of the canonical page (see F-10).",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-27).",
       "flags": [
         "F-01",
         "F-02",
@@ -161,11 +160,15 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-28"
+        "F-29"
       ],
       "special_feature": "Automatic Shut-Off, LED Shake Reminder, Programmable",
-      "competitor_label_note": "The labels above are short paraphrases, not the full Amazon listing titles. The full titles are on the linked product pages. Flag F-20.",
-      "manufacturer": ""
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "manufacturer": "Chefman",
+      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10",
+      "model_number": "RJ38-SQSS-8T",
+      "model_name": "Square Air Fryer",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Square Air Fryer', Model Number 'Large Air Fryer', Part Number RJ38-SQSS-8T, UPC 816458024518. Four GTINs are listed (00816458024518, 10816458024515, 30816458024519, 40816458024516), which confirms the size-variant family recorded in F-08."
     }
   ]
 }

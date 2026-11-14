@@ -39,6 +39,8 @@ FLAG_BY_ID = {f["id"]: f for f in FLAGS}
 CONTENT = load("content.json")
 MARKETING = load("marketing.json")
 PIPELINE = load("pipeline.json")
+REQUIREMENTS_DOC = load("requirements.json")
+REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
 OBSERVED = CONTENT["observed_date"]
 
 NAV = [
@@ -51,6 +53,7 @@ NAV = [
     ("marketing.html", "Marketing content"),
     ("automation.html", "Automation & tracking"),
     ("analysis.html", "Analysis & findings"),
+    ("requirements.html", "Requirements"),
     ("verification.html", "Verification log"),
     ("policy-compliance.html", "Policy compliance"),
     ("analytics.html", "Analytics"),
@@ -189,6 +192,7 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
             ("Brand", p["brand"], "Verified", src, ""),
             ("Manufacturer", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-28"),
+            ("Model number", p.get("model_number") or "Blank", "Verified (Item details)" if p.get("model_number") else "Unverified (blank)", src, "" if p.get("model_number") else "F-28"),
             ("Category path", p["category_path"], "Verified", src, ""),
             ("Capacity (as listed)", p["capacity"], "Verified as listed", src, fl["capacity"]),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
@@ -327,10 +331,11 @@ def marketing_article(current: Page, article: dict) -> str:
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in article["compliance_notes"])
     cta = article["cta"]
     cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"')
+    # The disclosure sits in the same paragraph as the affiliate link, so it is
+    # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
         f'<div class="cta"><p>{esc(cta["text"])}</p>'
-        f"<p>{cta_button}</p>"
-        f'<p class="note"><strong>Disclosure:</strong> {esc(cta["disclosure"])}</p></div>'
+        f'<p>{cta_button} <span class="note"><strong>Disclosure:</strong> {esc(cta["disclosure"])}</span></p></div>'
     )
     return (
         f'<article class="doc" id="{esc(article["id"])}">'
@@ -616,6 +621,49 @@ def page_analytics(current: Page) -> str:
     )
 
 
+def requirement_rows(current: Page) -> list[list[str]]:
+    rows = []
+    for r in REQUIREMENTS:
+        srcs = "<br>".join(ext(u, source_label(u)) for u in r["sources"])
+        rows.append([
+            esc(r["id"]),
+            esc(r["area"]),
+            esc(r["requirement"]),
+            status_pill(r["status"]),
+            esc(r["delivered"]) if r["delivered"] else pill("—", "muted"),
+            esc(r["blocker"]) if r["blocker"] else pill("—", "muted"),
+            srcs,
+            " ".join(flag_chip(current, f) for f in r.get("flags") or []),
+        ])
+    return rows
+
+
+def page_requirements(current: Page) -> str:
+    """Traceability of the project brief: one row per requirement, with its delivery status."""
+    counts = {}
+    for r in REQUIREMENTS:
+        counts[r["status"]] = counts.get(r["status"], 0) + 1
+    summary = " · ".join(f"{esc(k)}: {v}" for k, v in sorted(counts.items()))
+    return (
+        '<header class="hero"><h1>Requirements</h1>'
+        '<p class="lead">Every requirement in the project brief, one row each, with what this site actually delivers, what blocks it, and the official '
+        'source that governs or evidences that status. Nothing is marked Delivered unless it is live on the site.</p>'
+        f'<p class="muted small">{summary}</p></header>'
+        '<section>'
+        '<h2>Requirement register</h2>'
+        + table(
+            ["ID", "Area", "Requirement", "Status", "Delivered on this site", "Blocker or gap (official rule)", "Official sources", "Flags"],
+            requirement_rows(current),
+            "requirements",
+        )
+        + '<p class="note">Statuses are defined in <code>data/requirements.json</code>. A requirement marked <em>Delivered</em> names the page or feature '
+          'that delivers it; a requirement marked <em>Not built</em> names the official rule or the missing access, and nothing is simulated in its '
+          'place. Unverifiable values are blank on the site and listed on the '
+        + href(current, "flagged.html", "Flagged for Review") + ' page.</p>'
+        '</section>'
+    )
+
+
 BODIES = {
     "index.html": page_index,
     "executive-summary.html": page_exec,
@@ -626,6 +674,7 @@ BODIES = {
     "marketing.html": page_marketing,
     "automation.html": page_automation,
     "analysis.html": page_analysis,
+    "requirements.html": page_requirements,
     "verification.html": page_verification,
     "policy-compliance.html": page_policy,
     "analytics.html": page_analytics,

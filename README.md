@@ -10,20 +10,24 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 
 | Path | Purpose |
 |---|---|
-| `data/products.json` | Verified product records (ASIN, brand, category, specifications, competitor ASINs) |
+| `data/products.json` | Verified product records (ASIN, brand, manufacturer, model, category, specifications, competitor ASINs) |
 | `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
 | `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
+| `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (20 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 28 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 30 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
+| `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
-| `docs/` | The published site (14 generated pages plus the stylesheet, app script and tracker script) |
+| `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
+| `docs/` | The published site (15 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
+| `.github/workflows/qa.yml` | CI: independent QA audit of the committed site |
 | `COORDINATION.md` | Shared task board and work log for all sessions |
 
 ## Site pages
@@ -32,6 +36,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 |---|---|
 | `index.html` | Dashboard: KPIs, key findings, navigation cards |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
+| `requirements.html` | All 30 brief items: delivered, blocked or unverifiable, each with the official source |
 | `products.html` | All three products, one row each, every row linked to its source |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
 | `marketing.html` | Ready-to-publish articles, comparison page and buying guide, with a fact table per page |
@@ -40,17 +45,18 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `flagged.html` | Flagged for Review: 28 irregularities and unverified items |
+| `flagged.html` | Flagged for Review: 30 irregularities and unverified items |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
 
 ```bash
-python3 scripts/build_site.py
-python3 scripts/verify.py
+python3 scripts/build_site.py     # regenerate docs/ from data/
+python3 scripts/verify.py         # data + page checks
+python3 qa/audit_site.py          # independent audit of the committed HTML
 ```
 
-The verifier fails the build if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, or if a marketing fact row is never cited by a paragraph.
+The verifier fails the build if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, if a marketing fact row is never cited by a paragraph, or if a requirement row has an undeclared status, no source, or no evidence for its status. The QA audit re-checks the committed HTML on its own, so a hand-edit or a stale commit is caught too.
 
 ## Limits
 
@@ -60,8 +66,7 @@ The verifier fails the build if any table row lacks a link to an official source
 - Attributed click, order, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated. The Analytics page records first-party clicks in the visitor's own browser and publishes no attributed figure.
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
 - Price tracking and price alerting are **not built**: Participation Requirement 6(y) prohibits them unless Amazon agrees otherwise.
-- Manufacturer is **blank** for P1 and P3: the Item details table was not read for those two pages, so it is not inferred from the brand (F-28).
 
-Start with `flagged.html` on the live site for the items that need your decision.
+Start with `flagged.html` on the live site for the items that need your decision, and `requirements.html` for the brief-by-brief delivery status.
 
 The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."
