@@ -33,11 +33,11 @@
         },
         {
           "asin": "B0CNSB81V6",
-          "label": "Nutrichef Double Basket Air Fryer 8.8 QT",
+          "label": "",
           "url": "https://www.amazon.com/dp/B0CNSB81V6"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. Labels are the first part of each listing title as shown on the page (2026-11-14). The carousel is labelled 'Sponsored' on this snapshot, so treat it as a possible paid placement (F-10).",
+      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, P1 showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3. (F-19)",
       "flags": [
         "F-01",
         "F-02",
@@ -48,9 +48,10 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-18"
+        "F-18",
+        "F-19"
       ],
-      "competitor_carousel_label": "labelled 'Sponsored'"
+      "competitor_carousel_label": "label not seen on the 2026-11-14 read (seen on an earlier read; see F-10)"
     },
     {
       "id": "P2",
@@ -80,11 +81,11 @@
         },
         {
           "asin": "B0F92GL7JH",
-          "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT",
+          "label": "HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven",
           "url": "https://www.amazon.com/dp/B0F92GL7JH"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. Labels are the first part of each listing title as shown on the page (2026-11-14). No 'Sponsored' label appears above this carousel on this snapshot (F-10 applies to P1 and P3 only).",
+      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, the stored ASINs appeared in the same order. (F-19)",
       "flags": [
         "F-01",
         "F-02",
@@ -95,9 +96,10 @@
         "F-09",
         "F-15",
         "F-17",
-        "F-18"
+        "F-18",
+        "F-19"
       ],
-      "competitor_carousel_label": "not labelled 'Sponsored' on this snapshot"
+      "competitor_carousel_label": "not labelled 'Sponsored' on either read"
     },
     {
       "id": "P3",
@@ -127,11 +129,11 @@
         },
         {
           "asin": "B0C33CHG99",
-          "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt",
+          "label": "Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating",
           "url": "https://www.amazon.com/dp/B0C33CHG99"
         }
       ],
-      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three items. Labels are the first part of each listing title as shown on the page (2026-11-14). The carousel is labelled 'Sponsored' on this snapshot, so treat it as a possible paid placement (F-10).",
+      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, the stored ASINs appeared in the same order. (F-19)",
       "flags": [
         "F-01",
         "F-02",
@@ -141,9 +143,10 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-18"
+        "F-18",
+        "F-19"
       ],
-      "competitor_carousel_label": "labelled 'Sponsored'"
+      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read"
     }
   ]
 }

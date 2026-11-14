@@ -11,7 +11,7 @@
       "Tagging: Participation Requirements §2(b) require the Associates ID (tag) on every link from the site to an Amazon site. The site's source and competitor links carry no tag (F-18), and the short links show no tag (F-03). No Associates ID was supplied, so none was added.",
       "Attribution unverified: the resolved links contain no Associates tag parameter (F-03). Confirm the links were generated under your Associates ID before relying on any earnings.",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use and the Associates IP License limit collecting listing content, data mining and using Amazon content for AI or ML models (F-11, F-12). The AI content automation is therefore NOT built.",
-      "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
+      "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first. Planned automation conflicts with Participation Requirements 2(b), 3(s), 3(t) and 5 (F-20).",
       "Site: static GitHub Pages site, served from main '/' through a root redirect to docs/ (F-13). Every table row links to an official source, and unverified values are blank and flagged."
     ],
     "decisions_needed": [
@@ -59,13 +59,13 @@
     {
       "id": "A-04",
       "finding": "Amazon's own 'also viewed' lists show competing air fryers from at least six other brands. P1 and P3 each list another Chefman model.",
-      "basis": "Also-viewed carousel, first three items per product (Gourmia, Nutrichef, Ninja, HotKing, Emeril, Cosori, Chefman). The P1 and P3 carousels are labelled 'Sponsored' (F-10); the P2 carousel is not.",
+      "basis": "Also-viewed carousel (stored ASIN lists, first three items per product). On the 2026-11-14 read the P3 carousel is labelled 'Sponsored'; the P1 label was not seen on that read; P2 is not labelled (F-10). Carousel membership changes between page loads, so the lists describe a snapshot only (F-19).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
-      "confidence": "Verified as shown; P1 and P3 lists may be paid"
+      "confidence": "Titles verified on the 2026-11-14 read where shown; P3 list may be paid; lists are snapshots"
     },
     {
       "id": "A-05",

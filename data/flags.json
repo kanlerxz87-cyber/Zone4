@@ -114,15 +114,15 @@
     {
       "id": "F-10",
       "severity": "Medium",
-      "title": "'Sponsored' label above the also-viewed carousel on P1 and P3",
-      "detail": "On the 2026-11-14 snapshots, the 'Customers who viewed this item also viewed' carousel is labelled 'Sponsored' on the P1 and P3 pages. No such label appears above the P2 carousel on its snapshot (an earlier note said it did; that was corrected). Competitor ASINs from a labelled carousel may be paid placements, not organic recommendations.",
+      "title": "'Sponsored' label above the also-viewed carousel: P3 seen, P1 not seen on the latest read",
+      "detail": "On the 2026-11-14 read, the 'Sponsored' label appears above the also-viewed carousel on P3. On the same date it did not appear on P1 (an earlier read had shown it), and it does not appear on P2 in either read. Competitor ASINs from a labelled carousel may be paid placements. The P1 status is therefore unresolved.",
       "sources": [
-        "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
       "status": "Needs review",
-      "action": "Treat the P1 and P3 competitor lists as possible sponsored signals, not as organic competition data."
+      "action": "Treat the P3 competitor list as possibly sponsored. Re-check the P1 label in a signed-out browser before relying on either."
     },
     {
       "id": "F-11",
@@ -221,6 +221,28 @@
       ],
       "status": "Needs review",
       "action": "Supply your Associates ID (tag) so Special Links can be built, or confirm that untagged verification-only source links are acceptable."
+    },
+    {
+      "id": "F-19",
+      "severity": "Medium",
+      "title": "Competitor carousels change between page loads; some labels blank",
+      "detail": "The also-viewed carousel on P1 changed between reads on 2026-11-14: positions 2 and 3 were B0FZF445YL and B08DL8WH9V, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASINs therefore describe the earlier snapshot only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is left blank, not inferred.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Needs review",
+      "action": "Decide whether the site should show one snapshot (dated) or none. Do not treat the list as a stable competitor set."
+    },
+    {
+      "id": "F-20",
+      "severity": "High",
+      "title": "Planned automation (research, AI articles, click tracking) conflicts with Participation Requirements 2(b), 3(s), 3(t) and 5",
+      "detail": "The brief asks for automated product research, AI article generation, publishing and click or conversion tracking. Participation 2(b) allows prices and availability only when Amazon serves the link or via Creators/PA API. Participation 3(s) forbids artificially generated clicks or impressions, including by robot or software. Participation 3(t) forbids showing reviews or star ratings unless obtained through Creators/PA API. Participation 5 forbids using Special Links or Program Content to develop machine learning models without express prior written approval. No PA-API or Creators API credentials, Associates tag or analytics access exist in this environment, so these features are not built and no values were simulated.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "Owner decision: obtain Associates and PA-API access, and written approval where required, before any automation is connected."
     }
   ]
 }

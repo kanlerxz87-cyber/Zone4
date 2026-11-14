@@ -18,8 +18,8 @@
       "url": "https://www.amazon.com/dp/B0CDY277D3",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, also-viewed ASINs (carousel labelled 'Sponsored'), price and rating (withheld from site). Re-checked 2026-11-14.",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. The page showed 'Delivering to Fairfax 22030' (a US delivery location). The page's 'Sponsored' label appears above the also-viewed carousel."
+      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site). Re-checked 2026-11-14: carousel positions 2 and 3 differ from the stored list (F-19); 'Sponsored' label not seen on that read (F-10).",
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. The page showed 'Delivering to Fairfax 22030' (a US delivery location) in an earlier read."
     },
     {
       "id": "S-P2",
@@ -36,7 +36,7 @@
       "url": "https://www.amazon.com/dp/B08DKYBTPH",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, size variants (6, 8, 9 quarts), also-viewed ASINs (carousel labelled 'Sponsored'), price and rating (withheld from site). Re-checked 2026-11-14.",
+      "used_for": "Listing title, brand byline ('Visit the Chefman Store'), category breadcrumb, specification table, size variants (6, 8, 9 quarts), also-viewed ASINs (carousel labelled 'Sponsored' on the 2026-11-14 read), price and rating (withheld from site). Re-checked 2026-11-14.",
       "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size options 6, 8 and 9 quarts appear on the page; the 8-quart variant is shown on the site."
     },
     {
