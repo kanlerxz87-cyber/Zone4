@@ -756,3 +756,24 @@ Everything below was read from the official source in this session, not taken fr
   and flags F-36 and F-37.
 - **Kept from this session:** the marketing landing page, the per-article pages and hub, the grouped sidebar navigation, the category-level
   commission note, flag F-38, and the five `requirements.json` sentences.
+
+
+### Session arena/c5462690-zone4 — PR, merge and Pages result (2026-11-14, UTC)
+
+- **PR [#46](https://github.com/kanlerxz87-cyber/Zone4/pull/46)** opened from `arena/c5462690-zone4` to `main`: "Marketing landing page, per-article pages, and verified corrections".
+  All three CI checks passed (`verify` ×2 and `audit`). **Merged at `0744e727eb50f9a33ffb88c450e1e97252575967`** on 2026-11-14.
+- **The Pages build for that exact commit reports `errored` ("Page build failed"), and this is recorded rather than smoothed over.** Two facts establish that it was a
+  race, not bad content: (1) the next commit, `206e961` (PR #47), differs from `0744e72` by **one line in `COORDINATION.md`** and nothing else — no generated file
+  changed — and it built successfully; (2) the content from this session's merge is live and rendering correctly at
+  https://kanlerxz87-cyber.github.io/Zone4/docs/index.html and https://kanlerxz87-cyber.github.io/Zone4/docs/articles/index.html. Four commits landed on `main`
+  between 19:32 and 19:37 UTC, and the repository's own flag **F-34** already records that the legacy Pages build job is cancelled or lost when it collides with the
+  Actions deploy. The live site is not broken: the latest build for the current tip (`206e961`) is `built`.
+- **Live URLs confirmed after the merge:** the landing page, the articles hub and all five article pages are served under `/docs/` (the Pages source is the repository
+  root, so the root `index.html` redirects into `docs/`). The article pages are therefore at `/docs/articles/…`, which is what the relative links in the built pages
+  point at — verified, not assumed.
+- **Sources used for the verification in this session:** the three official Amazon product pages (`/dp/B0CDY277D3`, `/dp/B09B7SB46R`, `/dp/B08DKYBTPH`), the three
+  supplied `link.amazon` short links, and the official public
+  [Associates Program Standard Commission Income Statement](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ).
+- **Left for the user on Flagged for Review:** F-01 (per-ASIN commission category), F-02 (prices and ratings need the Creators API route), F-03 (no Associates tag in
+  the resolved links), F-11 / F-12 (legal review of automated collection and AI-generated content), F-31 (specification fields displayed without an approved content
+  source), F-38 (re-read the specification tables), plus the remaining Medium and Low items. None of these blocked the merge, as instructed.
