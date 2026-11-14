@@ -23,6 +23,28 @@ The task brief asks for session branches named `session-<id>/<task>`. The sessio
 - Starting point: `main` at `31f27e4`, fast-forwarded from `a401e2a` before any changes.
 
 
+### Session arena/1eb689b8-zone4 — work log
+
+- **Scope verified:** the three user-supplied links were resolved to Amazon product pages: `link.amazon/B04G1MEwY` → ASIN `B0CDY277D3`; `link.amazon/B02NbDxp3` → `B09B7SB46R`; `link.amazon/B00hJ57DV` → `B08DKYBTPH`. For each ASIN, the title, brand byline, category breadcrumb, specification table and also-viewed list were read. Identity and category are verified for all three. P2's brand is unresolved (F-05).
+- **Sources (official):** Amazon product pages (three ASINs); Associates Operating Agreement §5 (https://affiliate-program.amazon.com/help/operating/agreement); Associates Program Policies (https://affiliate-program.amazon.com/help/operating/policies); Associates Central help on the disclosure (https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE, added from the prior session's citation and confirmed); Amazon Conditions of Use (https://www.amazon.com/gp/help/customer/display.html?nodeId=508088); FTC Disclosures 101 (https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers). The full registry is in `data/sources.json`.
+- **Not read (marked No on the Sources page):** the commission schedule (https://affiliate-program.amazon.com/help/operating/schedule), which redirects to sign-in. Third-party commission sites were not used, because they conflict.
+- **Policy-driven withholding:** Amazon prices and star ratings are not published (Participation Requirements 2(b) and 3(t)). Trend and conversion fields are blank.
+- **Verification performed:** field-by-field log (42 rows, each with a source link) on the Verification log page. `python3 scripts/verify.py` checks the data and the 11 built pages: internal links and anchors, the disclosure sentence on each page, a source link in every table row, and no currency amounts or star ratings. Negative tests confirmed the checks fail on a row with no official link, a price string and a rating string.
+- **Irregularities:** 16 items on the Flagged for Review page (`docs/flagged.html`, source `data/flags.json`). The high-severity items are F-01 (commission rate unverified), F-02 (prices and ratings withheld), F-03 (Associates tag not visible in the resolved links), F-11 (verification method may conflict with the Conditions of Use) and F-12 (AI content automation restricted; not built).
+- **Integration conflicts resolved (log of what happened):** `origin/main` advanced during this session through PRs #4, #5 and #6 from `arena/d102fcb4-zone4` and `arena/00ccfbd4-zone4`. The merge produced these conflicts, which were resolved without discarding any content in git history:
+  - `.github/workflows/pages.yml` (modify on main, delete here): deleted. Replaced by `.github/workflows/site-checks.yml`. Its artifact deploy of the repo root would have overridden the `/docs` source.
+  - `index.html` (modify on main, delete here): removed from the root. The site now lives in `docs/`.
+  - `executive-summary.html` (added on main): removed from the root. The executive summary is `docs/executive-summary.html`.
+  - `README.md` (content): replaced with this branch's README. Prior text is in history.
+  - `COORDINATION.md`: auto-merged, so all prior session entries are kept above.
+  - The prior sessions' conclusions are kept: no product attributes were verified by them, and their deployment notes are preserved. The disclosure-help citation from `arena/d102fcb4-zone4` is verified here and integrated as `S-HELP` and rule `R-16`.
+- **Pages:** the Pages source moves from `main` `/` to `main` `/docs`. See the status lines below.
+
+### Integration status (updated at merge)
+
+- Pull request: [#7](https://github.com/kanlerxz87-cyber/Zone4/pull/7) (`arena/1eb689b8-zone4` → `main`).
+- Merge result and Pages deploy: recorded in the last entry of this section (filled after the merge).
+
 ## Prior session log (preserved, unedited)
 
 # Coordination board
@@ -44,3 +66,11 @@ The task brief asks for session branches named `session-<id>/<task>`. The sessio
 ## Follow-up integration on `arena/00ccfbd4-zone4`
 
 The current branch added a more detailed multi-page research view and FTC source citation in PR #3. During integration, `origin/main` advanced with PR #1 from session `arena/c2ff885d-zone4`; its dashboard, workflow and verification log were retained rather than overwritten. The additional pages `products.html`, `insights.html`, `flagged.html` and `styles.css` are included on this branch. Local checks confirmed all their relative HTML links resolve, the three product references are represented, and `git diff --check` passes. No product attributes have been asserted as verified. PR #3 merge initially failed because main had advanced; conflict resolved by retaining the already-merged main files and preserving this branch's non-conflicting additional pages. Deployment state remains unknown; prior workflow attempt on main failed before jobs as noted above.
+
+## Follow-up verification by `arena/d102fcb4-zone4`
+- Official Amazon Operating Agreement reviewed at https://affiliate-program.amazon.com/help/operating/agreement (updated October 15, 2025); official policies at https://affiliate-program.amazon.com/help/operating/policies; official disclosure guidance at https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE.
+- Agreement states links must use properly tagged Special Links and Associates need a clear prominent identification statement. Disclosure help also recommends clear, conspicuous disclosure near affiliate links/reviews. These sources are linked in the site.
+- No product specifics verified. Product fields are blank, source leads are user-provided and unverified, and no Amazon API/account/tracking/publishing is connected.
+- Integration note: this branch was rebased onto latest `main` after PR #3 merged while PR #4 was open. Retained the current main's shared dashboard, flagged page, styles and coordination log; kept the dedicated executive summary page and integrated disclosure/policy references. HTML local-link validation and `git diff --check` pass. Prior custom workflow failure remains recorded above. GitHub Pages deployment was independently confirmed after PR #3: https://kanlerxz87-cyber.github.io/Zone4/; API status `built`, HTTPS enforced. Pages deployment run https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582250899 succeeded. Separate custom workflow run https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582185688 failed without retrievable job logs; investigate as a non-blocking review item.
+
+- Pull request [#4](https://github.com/kanlerxz87-cyber/Zone4/pull/4) merged into `main` on 2026-11-14; merge commit `446e90a653a1d52faf320656664c049f39870b53`. The follow-up coordination update is recorded in PR #5.

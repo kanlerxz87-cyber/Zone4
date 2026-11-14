@@ -108,6 +108,14 @@
       "site_implementation": "The Associates disclosure sentence is shown on every page, including next to each affiliate link."
     },
     {
+      "id": "R-16",
+      "requirement": "Link-level disclosure must be clear and conspicuous and placed near each affiliate link, not hidden on another page.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "source_ref": "Associates Central help: 'Why do I have to identify myself as an Associate?'",
+      "status": "Implemented",
+      "site_implementation": "The disclosure sentence appears directly under each 'Open Amazon link' button, in the same card or row."
+    },
+    {
       "id": "R-14",
       "requirement": "Commission income is paid on Qualifying Revenue, which excludes shipping, gift-wrap, handling, taxes, service charges, credits, rebates, card fees and bad debt.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
