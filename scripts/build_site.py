@@ -10,6 +10,11 @@ import html
 import json
 import pathlib
 import re
+import sys
+from types import SimpleNamespace
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from pages_extra import build_pages  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -17,6 +22,7 @@ OUT = ROOT / "docs"
 
 DISCLOSURE_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
 DISCLOSURE_SOURCE = "https://affiliate-program.amazon.com/help/operating/agreement"
+PUBLISHER_SOURCE = "https://affiliate-program.amazon.com/help/operating/policies"
 
 
 def load(name: str):
@@ -33,6 +39,11 @@ FLAGS = FLAGS_DOC["flags"]
 FLAG_BY_ID = {f["id"]: f for f in FLAGS}
 CONTENT = load("content.json")
 OBSERVED = CONTENT["observed_date"]
+MARKETING = CONTENT["marketing"]
+REQUIREMENTS = CONTENT["requirements"]
+PLATFORM = CONTENT["platform"]
+NICHE = CONTENT["niche"]
+REVERIF = CONTENT["reverification"]
 
 NAV = [
     ("index.html", "Dashboard"),
@@ -42,7 +53,11 @@ NAV = [
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens"),
     ("analysis.html", "Analysis & findings"),
+    ("marketing.html", "Marketing content (drafts)"),
+    ("platform.html", "Platform & automation"),
+    ("requirements.html", "Requirements coverage"),
     ("verification.html", "Verification log"),
+    ("reverification.html", "Re-verification pass"),
     ("policy-compliance.html", "Policy compliance"),
     ("flagged.html", "Flagged for review"),
     ("sources.html", "Sources"),
@@ -55,6 +70,14 @@ def esc(value) -> str:
 
 def pill(label: str, kind: str) -> str:
     return f'<span class="pill pill-{kind}">{esc(label)}</span>'
+
+
+def recheck_pill(text: str) -> str:
+    if text.startswith("Carried forward"):
+        return pill(text, "warn")
+    if text.startswith("Re-confirmed") or text.startswith("V-"):
+        return pill(text, "ok")
+    return pill(text, "muted")
 
 
 def status_pill(status: str) -> str:
@@ -128,11 +151,16 @@ def shop_link(p: dict) -> str:
 
 # ---------------------------------------------------------------- tables
 
+def draft_anchor(current: Page, pid: str) -> str:
+    """Link from a product row to its marketing draft anchor on the content page."""
+    return f'<a href="{esc(current.rel("marketing.html"))}#C-{esc(pid)}">C-{esc(pid)} draft</a>'
+
+
 def product_table(current: Page, products: list[dict]) -> str:
     headers = [
         "ID", "Product (source link)", "ASIN", "Brand (as shown)", "Subcategory", "Category (Amazon path)",
         "Capacity (as listed)", "Dimensions (as listed)", "Price", "Star rating", "Commission rate",
-        "Trend / conversion", "Competition: also-viewed ASINs", "Affiliate link", "Flags",
+        "Trend / conversion", "Competition: also-viewed ASINs", "Affiliate link", "Marketing draft", "Flags",
     ]
     rows = []
     for p in products:
@@ -151,9 +179,29 @@ def product_table(current: Page, products: list[dict]) -> str:
             pill("Unverified (F-15)", "warn"),
             competitor_links(p),
             shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>',
+            draft_anchor(current, p["id"]),
             " ".join(flag_chip(current, f) for f in p["flags"]),
         ])
     return table(headers, rows, "products")
+
+
+# What the independent 2026-11-14 re-verification pass (see reverification.html) concluded per field.
+RECHECK = {
+    "Listing title": "V-04/V-05/V-06 re-confirmed",
+    "ASIN": "V-01/V-02/V-03 re-confirmed",
+    "Brand (byline)": "Re-confirmed on the page byline",
+    "Category path": "V-07 re-confirmed",
+    "Capacity (as listed)": "Carried forward (F-17)",
+    "Dimensions (as listed)": "Carried forward (F-17)",
+    "Colour (as listed)": "Carried forward (F-17)",
+    "Material (as listed)": "Carried forward (F-17)",
+    "Also-viewed ASINs": "V-08/V-09/V-10 re-confirmed",
+    "Price": "Re-confirmed withheld",
+    "Star rating / review count": "Re-confirmed withheld",
+    "Category commission rate": "V-20 still behind sign-in",
+    "Trend / conversion": "No official source found",
+    "Associates tag in link": "V-11 re-confirmed: no tag",
+}
 
 
 def verification_rows(current: Page) -> list[list[str]]:
@@ -180,18 +228,23 @@ def verification_rows(current: Page) -> list[list[str]]:
         ]
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""
-            rows.append([esc(p["id"]), esc(field), esc(value), status_pill(status), source, flag_html])
+            recheck = RECHECK.get(field, "")
+            rows.append([esc(p["id"]), esc(field), esc(value), status_pill(status), recheck_pill(recheck), source, flag_html])
     return rows
 
 
 def policy_rows(current: Page) -> list[list[str]]:
     rows = []
     for r in RULES:
+        quote = r.get("verified_quote", "")
+        quote_html = (f'<blockquote class="quote">{esc(quote)}</blockquote>' if quote
+                      else '<span class="muted small">No verbatim quote recorded for this row.</span>')
         rows.append([
             esc(r["id"]),
             esc(r["requirement"]),
             ext(r["source_url"], r["source_ref"]),
             status_pill(r["status"]),
+            quote_html + f'<div class="note">{esc(r.get("reverified", "Not re-read in the 2026-11-14 pass"))}</div>',
             esc(r["site_implementation"]),
         ])
     return rows
@@ -230,6 +283,7 @@ def source_rows() -> list[list[str]]:
             esc(s["publisher"]),
             pill("Yes" if s["accessible"] else "No", "ok" if s["accessible"] else "warn"),
             esc(s["used_for"]),
+            esc(s.get("reverified", "Not re-read in the 2026-11-14 pass")),
             esc(s.get("notes", "")),
         ])
     return rows
@@ -253,11 +307,14 @@ def hero(title: str, lead: str) -> str:
 
 
 def page_index(current: Page) -> str:
+    open_flags = len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])
     kpis = [
         ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
-        ("0", "Amazon prices published (policy F-02)"),
-        ("0 of 3", "Commission rates verified (F-01)"),
-        (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for review page)"),
+        ("24", "Requirements from the brief traced on the coverage page"),
+        (str(len(MARKETING["articles"]) + 2), "Marketing drafts written (3 articles, comparison, buying guide)"),
+        (str(len(REVERIF["checks"])), "Checks in the independent re-verification pass"),
+        ("0", "Amazon prices or star ratings published (policy F-02)"),
+        (str(open_flags), f"Open items in '{open_flags}' flags for your review"),
     ]
     kpi_html = "".join(f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>' for v, l in kpis)
     cards = [
@@ -267,13 +324,17 @@ def page_index(current: Page) -> str:
         ("products.html", "All products (table)", "Every row links to its Amazon source"),
         ("analysis.html", "Analysis & findings", "Niche, competition, what can and cannot be concluded"),
         ("verification.html", "Verification log", "Field-by-field check with source and status"),
+        ("marketing.html", "Marketing content (drafts)", "Articles, comparison and buying guide, sentence by sentence"),
+        ("platform.html", "Platform & automation", "Pipeline stages, gates, guardrails, niche method"),
+        ("requirements.html", "Requirements coverage", "Every requirement in the brief, traced to evidence"),
+        ("reverification.html", "Re-verification pass", "Second, independent check of every published value"),
         ("flagged.html", "Flagged for review", "Irregularities and unverified items, with sources"),
     ]
     card_html = "".join(
         f'<a class="card" href="{esc(current.rel(t))}"><div class="card-title">{esc(name)}</div><div class="card-sub">{esc(sub)}</div></a>'
         for t, name, sub in cards
     )
-    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:4])
+    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:6])
     return (
         hero("Amazon affiliate product research", CONTENT["executive_summary"]["headline"])
         + f'<section class="kpis">{kpi_html}</section>'
@@ -330,6 +391,8 @@ def page_analysis(current: Page) -> str:
     return (
         hero("Analysis & findings", "Every finding states its basis and confidence. Where a value is unverified, the finding says so instead of estimating it.")
         + table(["ID", "Finding", "Basis", "Confidence", "Source links"], analysis_rows(), "analysis")
+        + f'<p class="small muted">Niche scoring method and its blank inputs: {href(current, "platform.html", "Platform & automation")}. '
+        + f'Marketing drafts that use these findings: {href(current, "marketing.html", "Marketing content")}.</p>' 
     )
 
 
@@ -337,7 +400,7 @@ def page_verification(current: Page) -> str:
     return (
         hero("Verification log", "Field-by-field check for each product. Each row links to the official source it was checked against. Blank or withheld values are flagged.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: P2, Unverified, F-02)" aria-label="Filter table"></p>'
-        + table(["Product", "Field", "Value", "Status", "Source link", "Flag"], verification_rows(current), "verification")
+        + table(["Product", "Field", "Value", "Status", "Re-check pass", "Source link", "Flag"], verification_rows(current), "verification")
         + f'<p class="small muted">Observed {esc(OBSERVED)} (UTC). The verified fields are as shown on the Amazon page at that time. Re-check before publishing.</p>'
     )
 
@@ -361,7 +424,7 @@ def page_flagged(current: Page) -> str:
 def page_sources(current: Page) -> str:
     return (
         hero("Sources", "Every source used, with whether it was read during this verification pass. Unread sources are marked No and nothing is inferred from them.")
-        + table(["ID", "Source (link)", "Publisher", "Read?", "Used for", "Notes"], source_rows(), "sources")
+        + table(["ID", "Source (link)", "Publisher", "Read?", "Used for", "Re-checked 2026-11-14", "Notes"], source_rows(), "sources")
         + non_official_note()
     )
 
@@ -379,6 +442,15 @@ BODIES = {
     "flagged.html": page_flagged,
     "sources.html": page_sources,
 }
+
+
+SITE_CTX = SimpleNamespace(
+    esc=esc, ext=ext, table=table, pill=pill, hero=hero, href=href, flag_chip=flag_chip,
+    status_pill=status_pill, products=PRODUCTS, marketing=MARKETING, requirements=REQUIREMENTS,
+    platform=PLATFORM, niche=NICHE, reverif=REVERIF, disclosure=DISCLOSURE_SENTENCE,
+    policies_url=PUBLISHER_SOURCE,
+)
+BODIES.update(build_pages(SITE_CTX))
 
 
 def render(page: Page) -> str:

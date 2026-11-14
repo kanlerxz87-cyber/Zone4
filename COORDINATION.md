@@ -10,10 +10,10 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
-| Independent re-verification of P1–P3 records and of every policy citation (line-by-line, official sources) | **in progress** | arena/8908f0b3-zone4 | read-only checks of `data/*.json`; writes only to `COORDINATION.md` and `data/sources.json` (re-verify notes) |
-| Brief gap closure: marketing content (product articles, comparison, buying guide), requirements coverage, niche methodology, platform blueprint | **in progress** | arena/8908f0b3-zone4 | `data/content.json`, `data/products.json` (content fields only), `data/policies.json`, `data/flags.json`, `scripts/build_site.py`, `scripts/verify.py`, `docs/**`, `README.md` |
-| Correction of F-09 (assertion about the user's location is unsupported) | **in progress** | arena/8908f0b3-zone4 | `data/flags.json` (F-09 only) |
-| Integration: PR to `main`, merge, Pages deploy check | **in progress** (depends on the two above) | arena/8908f0b3-zone4 | `COORDINATION.md`, GitHub Pages settings |
+| Independent re-verification of P1–P3 records and of every policy citation (line-by-line, official sources) | **done**; 23 checks logged on the Re-verification page; 23 re-confirmed, 2 new findings, 1 correction, 1 carried forward (F-17) | arena/8908f0b3-zone4 | `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `docs/reverification.html` |
+| Brief gap closure: marketing content (3 product articles, comparison, buying guide), requirements coverage, niche methodology, platform blueprint | **done**; 4 new pages, 15 pages total, build and checks green | arena/8908f0b3-zone4 | `data/content.json`, `data/policies.json`, `data/flags.json`, `scripts/build_site.py`, `scripts/pages_extra.py`, `scripts/verify.py`, `docs/**`, `README.md` |
+| Correction of F-09 (assertion about the user's location was unsupported) | **done**; claim removed, marketplace question kept open | arena/8908f0b3-zone4 | `data/flags.json` |
+| Integration: PR to `main`, merge, Pages deploy check | **in progress** | arena/8908f0b3-zone4 | `COORDINATION.md`, GitHub Pages settings |
 
 ## Original PR #7 branch note (historical)
 
@@ -120,3 +120,45 @@ The current branch added a more detailed multi-page research view and FTC source
 
 - PR [#11](https://github.com/kanlerxz87-cyber/Zone4/pull/11) merged into `main` at `efd0cda2ff1fc16e7421f56fa5a89d7a1f724982`. Its Site checks run [43583547392](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583547392) and Pages deployment [43583546871](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583546871) both succeeded; the Pages API remained `built`.
 - Final cleanup removes a generated tracked Python bytecode file and adds `.gitignore` rules for `__pycache__/` and `*.py[cod]`; this does not alter the site output.
+
+### Session arena/8908f0b3-zone4 — work log (2026-11-14, UTC)
+
+- **Claim.** Claimed the four tasks above in the table before editing anything; claim commit pushed first. No other session held a claim on
+  these files at the time (PRs #1–#12 were all merged, no open PRs, `main` at `7ea516c`). `data/products.json` was **not** modified, so no
+  overlap with the earlier product-record task owner.
+- **Repo review.** Read `COORDINATION.md`, `README.md`, all five `data/*.json` files, `scripts/build_site.py`, `scripts/verify.py`, the
+  workflow and the built pages before changing anything.
+- **Independent re-verification (the point of this pass).** Nothing was taken on trust; each published value was re-read from the official
+  page in this session:
+  - `https://link.amazon/B04G1MEwY` → `https://www.amazon.com/dp/B0CDY277D3`, `https://link.amazon/B02NbDxp3` → `.../B09B7SB46R`,
+    `https://link.amazon/B00hJ57DV` → `.../B08DKYBTPH` — all three redirects reproduced exactly, each with no `tag=` parameter (F-03 stands).
+  - Listing titles, the five-level category breadcrumb and the three also-viewed ASINs per product re-confirmed identical on all three pages.
+  - Operating Agreement page dated *Updated: October 15, 2025*; Section 5 disclosure sentence confirmed verbatim. Program Policies page dated
+    *Updated: April 14, 2026*; Participation Requirements 2(a), 2(b), 3(g), 3(p), 3(t), 3(w), 3(y), 3(z) and section 5 quoted verbatim.
+    Conditions of Use *Last updated: August 14, 2026* (canonical node `GLSBYFE9MGKKQXXM`), License and Access confirmed verbatim.
+    FTC *Disclosures 101* (November 2019) confirmed verbatim. Associates Central disclosure help topic confirmed verbatim.
+  - Commission schedule: still redirects to an Amazon sign-in (`return_to` ends in `/home/account/payment/customratecard`), so F-01 stands.
+- **Irregularities found and flagged (6 new flags, F-17 … F-22).**
+  - F-17: the Product-information specification table was not present in the page text returned in this pass, so litre capacity, dimensions,
+    colour and material are **carried forward**, not re-verified. Marked as such in the Verification log's new "Re-check pass" column.
+  - F-18: the brief's "analyze pricing" collides with Participation Requirements 3(y) (no price tracking or alerting on the Site) — added as
+    rule R-21; no pricing module is built.
+  - F-19: Program Content may not be used to develop machine-learning models (Participation Requirements section 5) — added as rule R-17, and
+    a sharper citation for the existing AI restriction F-12.
+  - F-20: no promotion-expiry control exists yet (rule R-20); F-21: no approved Associates account or tag is confirmable here, so marketing copy
+    ships as drafts (rule R-23); F-22: a brand page for a similarly named 8-quart model lists dimensions that disagree with the Amazon listing,
+    recorded as a discrepancy only — no value was substituted or averaged.
+  - F-09 correction: the prior flag text asserted the user's location; no source in this repository supports it and it contradicts the session
+    context, so the claim is removed and the correction is recorded in the flag itself.
+  - Noted, not published: a re-read of the P1 page shows a brand-level "Top Brand" module with counts and a sponsored module carrying a
+    recommended badge, a review count and prices. All withheld; recorded in F-15.
+- **Delivered (gap closure against the brief).** `docs/marketing.html` (three product article drafts, a head-to-head comparison, a buying guide,
+  each sentence tied to the verified field it comes from, plus publish checklist and click/conversion measurement plan); `docs/platform.html`
+  (eight pipeline stages with the gate that blocks each, guardrails, scalability, niche scoring method); `docs/requirements.html` (26 requirements
+  from the brief traced to status, what exists, blocker and evidence); `docs/reverification.html` (23 checks). Policy page now carries verbatim
+  quotes with a re-read stamp; sources page carries a per-source re-check note; verification log gained a re-check column; 24 rules and 22 flags.
+- **Verification of the code.** `python3 scripts/build_site.py && python3 scripts/verify.py` passes on 15 pages. New checks were negative-tested
+  in a scratch copy: a testing claim in copy, a spelled-out price, an unsourced draft sentence, a non-official source in a comparison row, a
+  page unreachable from the sidebar, and a broken nav link — each fails the build; the unmodified tree passes. `git diff --exit-code -- docs`
+  passes, so the committed site matches the data.
+- **Sources for this entry:** the pages listed above; GitHub API for Pages state; this repository's workflow logs.

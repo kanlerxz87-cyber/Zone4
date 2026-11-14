@@ -19,7 +19,8 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location, not the user's location."
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location, not the user's location.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: title, brand byline, breadcrumb and also-viewed ASINs re-confirmed exactly; specification table not returned by this pass (F-17)."
     },
     {
       "id": "S-P2",
@@ -28,7 +29,8 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. 'Sponsored' label appears above the also-viewed carousel."
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3. 'Sponsored' label appears above the also-viewed carousel.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: title, store byline, breadcrumb and also-viewed ASINs re-confirmed exactly; specification table not returned by this pass (F-17)."
     },
     {
       "id": "S-P3",
@@ -37,7 +39,8 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, size variants, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page."
+      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: title, brand byline, breadcrumb and also-viewed ASINs re-confirmed exactly; specification table not returned by this pass (F-17)."
     },
     {
       "id": "S-L1",
@@ -45,7 +48,8 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: redirect re-followed; target ASIN identical; still no tag= parameter in the resolved URL (F-03 stands)."
     },
     {
       "id": "S-L2",
@@ -53,7 +57,8 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: redirect re-followed; target ASIN identical; still no tag= parameter in the resolved URL (F-03 stands)."
     },
     {
       "id": "S-L3",
@@ -61,7 +66,8 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: redirect re-followed; target ASIN identical; still no tag= parameter in the resolved URL (F-03 stands)."
     },
     {
       "id": "S-CAT",
@@ -69,7 +75,8 @@
       "url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
       "publisher": "Amazon.com",
       "accessible": false,
-      "used_for": "Category identity only (breadcrumb text read on the product pages). The browse page itself was not fetched."
+      "used_for": "Category identity only (breadcrumb text read on the product pages). The browse page itself was not fetched.",
+      "reverified": "Not fetched in the 2026-11-14 pass; the breadcrumb links on all three product pages still name the same node."
     },
     {
       "id": "S-OA",
@@ -77,7 +84,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.'"
+      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.'",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: page dated ‘Updated: October 15, 2025’; Section 5 sentence confirmed verbatim."
     },
     {
       "id": "S-HELP",
@@ -85,7 +93,8 @@
       "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
       "publisher": "Amazon Associates (official help)",
       "accessible": true,
-      "used_for": "Link-level disclosure must be clear and conspicuous, placed near each affiliate link. The Operating Agreement statement must clearly and conspicuously appear on the site."
+      "used_for": "Link-level disclosure must be clear and conspicuous, placed near each affiliate link. The Operating Agreement statement must clearly and conspicuously appear on the site.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: topic text confirmed verbatim, including ‘Clear’ (‘(paid link)’, ‘#ad’, ‘#CommissionsEarned’) and ‘Conspicuous’ placement language."
     },
     {
       "id": "S-PP",
@@ -93,7 +102,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement sections 1-3 (qualifying purchases, disqualified purchases, Qualifying Revenue); Participation Requirements sections 2(b), 3(c), 3(f), 3(g), 3(t), 3(w), 3(y), 3(z)."
+      "used_for": "Commission Income Statement sections 1-3; Participation Requirements sections 2(a), 2(b), 3(c), 3(f), 3(g), 3(p), 3(t), 3(w), 3(y), 3(z); section 5 (machine-learning restriction).",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: page dated ‘Updated: April 14, 2026’; sections 2(a), 2(b), 3(g), 3(p), 3(t), 3(w), 3(y), 3(z) and 5 quoted verbatim."
     },
     {
       "id": "S-SCHED",
@@ -101,7 +111,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read."
+      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: still redirects to an Amazon sign-in page (return_to ends in /home/account/payment/customratecard); no rate is readable. F-01 stands."
     },
     {
       "id": "S-COU",
@@ -109,7 +120,9 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section: license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models."
+      "used_for": "'License and Access' section: license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models.",
+      "url_note": "nodeId=508088 redirects to the canonical Conditions of Use page at nodeId=GLSBYFE9MGKKQXXM; both were read.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: ‘License and Access’ re-read: excludes ‘any collection and use of any product listings, descriptions, or prices’ and ‘any use of data mining, robots, or similar data gathering and extraction tools’, and bars using Amazon-derived AI-generated content to develop or improve models."
     },
     {
       "id": "S-FTC",
@@ -117,7 +130,8 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "publisher": "U.S. Federal Trade Commission (official)",
       "accessible": true,
-      "used_for": "Disclosure must be hard to miss, placed with the endorsement, and use simple, clear language; a material connection includes a financial relationship."
+      "used_for": "Disclosure must be hard to miss, placed with the endorsement, and use simple, clear language; a material connection includes a financial relationship.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: page dated November 2019; ‘hard to miss’, ‘placed with the endorsement message itself’ and ‘You can’t talk about your experience with a product you haven’t tried’ confirmed verbatim."
     },
     {
       "id": "S-REPO",
@@ -125,7 +139,8 @@
       "url": "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages",
       "publisher": "GitHub (official API)",
       "accessible": true,
-      "used_for": "Pages was set to legacy build from main root; the latest build status was 'built' for commit 31f27e4. Used to plan the move to main /docs."
+      "used_for": "Pages was set to legacy build from main root; the latest build status was 'built' for commit 31f27e4. Used to plan the move to main /docs.",
+      "reverified": "Re-read 2026-11-14 by arena/8908f0b3-zone4: Pages API returns status 'built', source main / (legacy), https_enforced true."
     },
     {
       "id": "S-WF",
@@ -134,6 +149,15 @@
       "publisher": "GitHub (official)",
       "accessible": false,
       "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
+    },
+    {
+      "id": "S-CAT-P1",
+      "title": "Amazon browse node 17659096011 'Air Fryers', reached from the P1, P2 and P3 breadcrumbs",
+      "url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+      "publisher": "Amazon.com",
+      "accessible": false,
+      "used_for": "Confirms the category path used in the niche analysis. Not fetched in this pass; recorded from the breadcrumb links on the product pages.",
+      "notes": "See S-CAT."
     }
   ],
   "non_official_reference_only": [
@@ -146,6 +170,11 @@
       "title": "EcomChief: Amazon affiliate commission rates 2026",
       "url": "https://ecomchief.com/blogs/news-1/amazon-affiliate-commission-rates-2026",
       "reason": "Third-party. Lists Kitchen at 4.5% in one table and 5% in another, so the sources conflict. Not used as a data value."
+    },
+    {
+      "title": "Chefman manufacturer product pages (chefman.com)",
+      "url": "https://chefman.com/products/turbofry-touch-air-fryer-1",
+      "reason": "Brand page for a similarly named 8-quart TurboFry model lists 15.4 x 12.6 x 13.5 in, which differs from the Amazon listing dimensions. Model identity is not established, so it is recorded as discrepancy F-22 and used for no data value."
     }
   ]
 }

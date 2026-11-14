@@ -27,8 +27,24 @@ OFFICIAL_HOSTS = {
     "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+# Phrases that only ever come from Amazon's own page furniture; publishing them would reuse
+# Amazon-displayed sales, ranking or badge data (Participation Requirements 3(t), flag F-15).
+FORBIDDEN_MARKETING_PHRASES = [
+    "Amazon's Choice", "Best Sellers Rank", "bought in past month", "Top Brand:", "Limited time deal",
+    "protection plan", "Asurion",
+]
+# Claiming to have used a product needs FTC substantiation this site does not have (rule R-19).
+TESTING_CLAIM_RE = re.compile(
+    r"\b(?:we|i)\s+(?:have\s+)?(?:tested|tried|used|reviewed|tried\s+out|hands[- ]on)\b|"
+    r"\b(?:our|my)\s+(?:test|testing|review|hands[- ]on)\b|\bafter\s+\d+\s+(?:weeks?|months?)\s+of\s+use\b",
+    re.IGNORECASE,
+)
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
-PRICE_RE = re.compile(r"\$\s?\d")
+# Any money figure on a page breaks Participation Requirements 2(b) / flag F-02, written with a
+# symbol, spelled out, or attached to the words price/cost.
+PRICE_RE = re.compile(
+    r"\$\s?\d|\bdollars?\b|\bUSD\b|\b€\s?\d|\b£\s?\d|\b(?:price|prices|cost|costs|discount|savings)\s+(?:of\s+)?[\$€£]?\s*\d"
+)
 RATING_RE = re.compile(r"\b\d\.\d\s*(out of 5|stars?)\b", re.IGNORECASE)
 
 failures: list[str] = []
@@ -76,6 +92,46 @@ def check_data() -> None:
         for u in a["sources"]:
             if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
                 fail(f"analysis {a['id']} has a non-official source: {u}")
+    ids = {p["id"] for p in products}
+    mkt = content["marketing"]
+    for art in mkt["articles"]:
+        if art["product_id"] not in ids:
+            fail(f"marketing draft {art['id']} points at unknown product {art['product_id']}")
+        for sec in art["sections"]:
+            for para in sec["paras"]:
+                if not para.get("source"):
+                    fail(f"marketing draft {art['id']} section '{sec['heading']}' has an unsourced sentence")
+                elif (urlparse(para["source"]).hostname or "") not in OFFICIAL_HOSTS:
+                    fail(f"marketing draft {art['id']} cites a non-official source: {para['source']}")
+    for art in mkt["articles"] + [mkt["comparison"], mkt["buying_guide"]]:
+        for field in ("seo_title", "meta_description", "slug"):
+            if not art.get(field):
+                fail(f"marketing draft {art['id']} is missing SEO field {field}")
+        if len(art.get("seo_title", "")) > 65:
+            fail(f"marketing draft {art['id']} SEO title is longer than 65 characters")
+        if len(art.get("meta_description", "")) > 160:
+            fail(f"marketing draft {art['id']} meta description is longer than 160 characters")
+    cmp_ = mkt["comparison"]
+    width = len(cmp_["columns"]) - 1
+    for row in cmp_["rows"]:
+        if len(row["values"]) != width:
+            fail(f"comparison row has {len(row['values'])} values, expected {width}")
+        if (urlparse(row["source"]).hostname or "") not in OFFICIAL_HOSTS:
+            fail(f"comparison row links to a non-official source: {row['source']}")
+    for q in content["requirements"]:
+        if not q.get("status") or not q.get("delivered") or not q.get("blocker"):
+            fail(f"requirement {q['id']} is missing status, delivered text or blocker")
+        host = urlparse(q.get("evidence_url", "")).hostname or ""
+        if host not in OFFICIAL_HOSTS:
+            fail(f"requirement {q['id']} evidence is not on an official host: {q.get('evidence_url')}")
+    for x in content["platform"]["stages"]:
+        if (urlparse(x["source"]).hostname or "") not in OFFICIAL_HOSTS:
+            fail(f"platform stage '{x['stage']}' gate source is not official: {x['source']}")
+    for chk in content["reverification"]["checks"]:
+        if not chk.get("expected") or not chk.get("result"):
+            fail(f"re-verification check {chk['id']} is missing the expected value or the observation")
+        if (urlparse(chk["source"]).hostname or "") not in OFFICIAL_HOSTS:
+            fail(f"re-verification check {chk['id']} cites a non-official source: {chk['source']}")
 
 
 class SiteParser(HTMLParser):
@@ -137,6 +193,36 @@ def check_site() -> None:
             fail(f"{rel}: contains a currency amount (Amazon prices are withheld under Participation Requirements 2(b))")
         if RATING_RE.search(raw):
             fail(f"{rel}: contains a star rating (withheld under Participation Requirements 3(t))")
+        visible = re.sub(r"<[^>]+>", " ", raw)
+        for phrase in FORBIDDEN_MARKETING_PHRASES:
+            if phrase.lower() in visible.lower():
+                fail(f"{rel}: reuses Amazon page furniture '{phrase}' (sales, badge or review data, flag F-15)")
+        hit = TESTING_CLAIM_RE.search(visible)
+        if hit:
+            fail(f"{rel}: claims product testing or first-hand use ('{hit.group(0).strip()}'), which FTC Disclosures 101 bars without it (rule R-19)")
+
+    # Navigation must cover every generated page, and every nav entry must exist on disk.
+    pages = [p for p in pages if p.suffix == ".html"]
+    for page in pages:
+        txt = page.read_text(encoding="utf-8")
+        nav = re.search(r'<nav aria-label="Main">(.*?)</nav>', txt, re.S)
+        if not nav:
+            fail(f"{page.relative_to(ROOT)}: no main navigation block")
+            continue
+        for target in re.findall(r'<a href="([^"]+)"', nav.group(1)):
+            clean = target.split("#")[0]
+            if clean and not (page.parent / clean).exists():
+                fail(f"{page.relative_to(ROOT)}: nav link is broken: {target}")
+        if len(re.findall(r'<a href="', nav.group(1))) != len(list(DOCS.rglob("*.html"))):
+            fail(f"{page.relative_to(ROOT)}: the sidebar does not list every page in docs/")
+
+    # The product table must keep the withheld columns visible rather than dropping them.
+    prod = (DOCS / "products.html").read_text(encoding="utf-8")
+    for col in ("Price", "Star rating", "Commission rate", "Trend / conversion"):
+        if col not in prod:
+            fail(f"products.html dropped the '{col}' column; withheld and unverified fields must stay visible")
+    if prod.count("Withheld (F-02)") < 6:
+        fail("products.html should mark the price and rating columns as withheld for all three products")
 
     for page, sp in parsed.items():
         rel = page.relative_to(ROOT)

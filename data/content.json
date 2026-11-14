@@ -3,7 +3,7 @@
   "disclosure_source": "https://affiliate-program.amazon.com/help/operating/agreement",
   "observed_date": "2026-11-14",
   "executive_summary": {
-    "headline": "Three user-supplied Amazon links resolve to three verified air-fryer product pages. Prices, ratings, commission rates and trend data are not published, because they could not be verified or the Associates policy does not allow them on this site.",
+    "headline": "The three supplied links resolve to three real air-fryer listings, verified twice. The site now also carries the marketing drafts, the full requirement traceability, the platform blueprint and twenty-two flags; prices, ratings, commission rates and trend data stay blank because they are either withheld by policy or unverifiable here.",
     "bullets": [
       "Identity verified: each link resolves to an Amazon product page (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH). All three sit under the same Amazon category path (Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers). Flag F-04 covers the short-link codes.",
       "Pricing and ratings withheld: the Associates Participation Requirements (Section 2(b) and Section 3(t)) allow prices and star ratings on a site only through Amazon-served links or Creators API / PA API. The pages were read, but no price, rating or review count is published (F-02).",
@@ -11,13 +11,22 @@
       "Attribution unverified: the resolved links contain no Associates tag parameter (F-03). Confirm the links are generated under your Associates ID before relying on any earnings.",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content, data mining and using Amazon content for AI models (F-11, F-12). The AI content automation is therefore NOT built.",
       "Not built: automated product research, PA-API integration, click and conversion tracking, AI article generation and campaign optimisation. Each needs PA-API or Associates reporting access, a rate source, or a compliance decision first.",
-      "Site: static GitHub Pages site on main /docs. Every table row links to an official source, and unverified values are blank and flagged."
+      "Site: static GitHub Pages site on main /docs. Every table row links to an official source, and unverified values are blank and flagged.",
+      "Second verification pass (this session): all three link redirects, listing titles, category breadcrumbs, also-viewed ASINs and the absence of a tag parameter were re-read and re-confirmed; every policy quote on the site was checked against the live official page.",
+      "Three marketing drafts are now published as drafts: one article per product, a head-to-head comparison and a buying guide, with every sentence tied to a verified listing field and unclaimable statements listed separately.",
+      "Two new policy findings shape the design: Participation Requirements section 5 bars using Program Content to develop machine learning models (R-17), and section 3(y) bars price tracking or alerting on the Site (R-21), which limits the brief's pricing-analysis request.",
+      "Specification-table values (litre capacity, dimensions, colour, material) are carried forward from the earlier session's read rather than re-verified, because that table was not present in the page text this pass (F-17). A brand page for a similarly named model lists different dimensions (F-22).",
+      "An unsupported statement about the user's location was found in the prior flag text and removed; the marketplace question remains open (F-09).",
+      "Publishing the drafts still needs two things no environment here can supply: an approved Associates account with tagged links (F-21) and, for prices and ratings, PA-API or Creators API access (F-02)."
     ],
     "decisions_needed": [
       "Confirm whether the links were generated under your Associates ID (F-03), and which Amazon marketplace they should target (F-09).",
       "Read the category commission rate from Associates Central and send it for entry (F-01).",
       "Choose whether to apply for PA-API / Creators API access so prices and ratings can be shown (F-02, F-16).",
-      "Decide whether automated research and AI article generation may use Amazon-derived data, after review (F-11, F-12)."
+      "Decide whether automated research and AI article generation may use Amazon-derived data, after review (F-11, F-12).",
+      "Confirm the pricing scope: on-site price display needs PA-API data, and price alerting is barred outright (F-18).",
+      "Confirm whether a content generator may be connected at all, given the machine-learning restrictions in both the Conditions of Use and the Program Policies (F-12, F-19).",
+      "Re-check the four specification fields by hand, or accept them as carried forward (F-17, F-22)."
     ]
   },
   "analysis": [
@@ -25,67 +34,154 @@
       "id": "A-01",
       "finding": "All three products are in one niche: countertop air fryers and air-fry toaster ovens.",
       "basis": "Breadcrumb on all three product pages: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "confidence": "Verified"
     },
     {
       "id": "A-02",
       "finding": "Two of the three products share a brand (Chefman). The third brand is unresolved.",
       "basis": "Brand byline on P1 and P3 reads Chefman. P2 shows store 'Emeril Store' and byline 'Innovation IQ' (F-05).",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B08DKYBTPH", "https://www.amazon.com/dp/B09B7SB46R"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
       "confidence": "Verified for P1 and P3; unresolved for P2"
     },
     {
       "id": "A-03",
       "finding": "The set spans three formats: a 6-litre dual-basket oven (P1), an 8-quart single-basket air fryer (P3) and a 24.6-litre French-door toaster oven (P2).",
       "basis": "Capacity fields as listed. The units differ across title and specification (F-06), so values are shown as listed, not compared numerically.",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "confidence": "Verified as listed"
     },
     {
       "id": "A-04",
       "finding": "Amazon's own 'also viewed' lists show competing air fryers from at least six other brands. P1 and P3 each list another Chefman model.",
       "basis": "Also-viewed carousel, first three items per product (Gourmia, Nutrichef, Ninja, HotKing, Emeril, Cosori, Chefman). P2's carousel is labelled 'Sponsored' (F-10).",
-      "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
       "confidence": "Verified as shown; P2 list may be paid"
     },
     {
       "id": "A-05",
       "finding": "Commission potential cannot be estimated on this site.",
       "basis": "Commission is a percentage of Qualifying Revenue (price less shipping, tax and similar items; Commission Income Statement, Section 1). The category rate is unverified (F-01), and prices may not be published (F-02). No earnings figure is given.",
-      "sources": ["https://affiliate-program.amazon.com/help/operating/policies", "https://affiliate-program.amazon.com/help/operating/schedule"],
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/operating/schedule"
+      ],
       "confidence": "Formula verified; rate unverified"
     },
     {
       "id": "A-06",
       "finding": "Trend and conversion performance cannot be measured from verified sources.",
       "basis": "No official trend or conversion data was available. Amazon's on-page popularity badges are not reproduced (F-15).",
-      "sources": ["https://affiliate-program.amazon.com/help/operating/policies"],
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
       "confidence": "Unverified (blank)"
     },
     {
       "id": "A-07",
       "finding": "Attribution to the user's Associates account is not confirmed.",
       "basis": "The resolved product URLs carry no 'tag=' parameter (F-03).",
-      "sources": ["https://link.amazon/B04G1MEwY", "https://link.amazon/B02NbDxp3", "https://link.amazon/B00hJ57DV"],
+      "sources": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV"
+      ],
       "confidence": "Unverified"
+    },
+    {
+      "id": "A-08",
+      "finding": "A second, independent read of every source reproduced the published record exactly for identity, category and competition fields.",
+      "basis": "Re-verification log V-01 to V-11, all re-confirmed by arena/8908f0b3-zone4 on 2026-11-14.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV"
+      ],
+      "confidence": "Verified twice"
+    },
+    {
+      "id": "A-09",
+      "finding": "Amazon's Program Policies carry two clauses that shape this platform: Program Content may not be used to develop machine learning models, and the Site may not have price tracking or alerting.",
+      "basis": "Participation Requirements section 5 and section 3(y), quoted verbatim on the Policy compliance page.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified verbatim"
+    },
+    {
+      "id": "A-10",
+      "finding": "Marketing copy can be written for P1 and P3 from the listing title alone; for P2 the brand field blocks any brand claim.",
+      "basis": "P2's store name and byline disagree on the page, recorded as F-05, and the draft states that disagreement instead of resolving it.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified as shown"
+    },
+    {
+      "id": "A-11",
+      "finding": "Four specification fields are carried forward rather than re-verified, which is the main residual data risk in the record.",
+      "basis": "The Product-information table was not present in the page text returned by the second pass (F-17); a brand page disagrees on one of them (F-22).",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "confidence": "Carried forward"
+    },
+    {
+      "id": "A-12",
+      "finding": "Nothing on the site monetises traffic: the links are the user-supplied short links without a tag, so no commission attribution is implied.",
+      "basis": "F-03 re-confirmed in this pass; publishing monetised links requires an approved account and tagged Special Links (R-23, F-21).",
+      "sources": [
+        "https://link.amazon/B04G1MEwY",
+        "https://link.amazon/B02NbDxp3",
+        "https://link.amazon/B00hJ57DV",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
     }
   ],
   "categories": {
     "dual-basket-air-fryers": {
       "title": "Dual-basket air fryers",
       "intro": "Air fryers with two cooking baskets. Covers P1 (CHEFMAN 6 Quart Dual Basket Air Fryer Oven).",
-      "product_ids": ["P1"]
+      "product_ids": [
+        "P1"
+      ]
     },
     "single-basket-air-fryers": {
       "title": "Single-basket air fryers",
       "intro": "Countertop air fryers with one basket. Covers P3 (Chefman Air Fryer 8 Qt TurboFry 4-in-1). The P3 page lists size variants of 6, 8 and 9 quarts (F-08).",
-      "product_ids": ["P3"]
+      "product_ids": [
+        "P3"
+      ]
     },
     "air-fryer-toaster-ovens": {
       "title": "Air-fry toaster ovens",
       "intro": "Larger multi-function ovens that also air fry, toast and roast. Covers P2 (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven). Brand unresolved (F-05).",
-      "product_ids": ["P2"]
+      "product_ids": [
+        "P2"
+      ]
     }
   },
   "not_built": [
@@ -94,6 +190,1046 @@
     "Commission calculations (needs the category rate, F-01).",
     "Click, conversion and revenue tracking (needs Associates reporting or tracked links, F-03).",
     "AI-generated articles, comparisons and buying guides (restricted pending review, F-12).",
-    "Campaign optimisation (needs the data above)."
-  ]
+    "Campaign optimisation (needs the data above).",
+    "Price tracking or alerting on the Site (barred by Participation Requirements 3(y) unless Amazon agrees, F-18).",
+    "Any niche ranking by demand or profitability (no official demand or earnings source, F-01, F-15)."
+  ],
+  "reverification": {
+    "session": "arena/8908f0b3-zone4",
+    "date_utc": "2026-11-14",
+    "method": "Every product and policy value published on this site was re-read in a second, independent pass using automated retrieval of the official Amazon and FTC pages. A value is marked re-confirmed only if the same string appeared in this pass. Anything this pass could not reach is labelled 'carried forward' and flagged, never restated as verified.",
+    "checks": [
+      {
+        "id": "V-01",
+        "check": "Short link 1 resolves to the ASIN recorded for P1",
+        "expected": "https://www.amazon.com/dp/B0CDY277D3",
+        "result": "https://www.amazon.com/dp/B0CDY277D3",
+        "status": "Re-confirmed",
+        "source": "https://link.amazon/B04G1MEwY"
+      },
+      {
+        "id": "V-02",
+        "check": "Short link 2 resolves to the ASIN recorded for P2",
+        "expected": "https://www.amazon.com/dp/B09B7SB46R",
+        "result": "https://www.amazon.com/dp/B09B7SB46R",
+        "status": "Re-confirmed",
+        "source": "https://link.amazon/B02NbDxp3"
+      },
+      {
+        "id": "V-03",
+        "check": "Short link 3 resolves to the ASIN recorded for P3",
+        "expected": "https://www.amazon.com/dp/B08DKYBTPH",
+        "result": "https://www.amazon.com/dp/B08DKYBTPH",
+        "status": "Re-confirmed",
+        "source": "https://link.amazon/B00hJ57DV"
+      },
+      {
+        "id": "V-04",
+        "check": "P1 listing title matches the recorded string",
+        "expected": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven … Digital Double Air Fryer - Black",
+        "result": "Identical page title returned",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B0CDY277D3"
+      },
+      {
+        "id": "V-05",
+        "check": "P2 listing title matches the recorded string",
+        "expected": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven",
+        "result": "Identical page title returned",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B09B7SB46R"
+      },
+      {
+        "id": "V-06",
+        "check": "P3 listing title matches the recorded string",
+        "expected": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 … Stainless Steel",
+        "result": "Identical page title returned",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B08DKYBTPH"
+      },
+      {
+        "id": "V-07",
+        "check": "Category breadcrumb on all three pages",
+        "expected": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "result": "Same five levels and node ids on all three pages",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B0CDY277D3"
+      },
+      {
+        "id": "V-08",
+        "check": "P1 also-viewed ASINs",
+        "expected": "B0B7C327LK, B0BYKGN61Q, B0CNSB81V6",
+        "result": "Same three ASINs in the same order",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B0CDY277D3"
+      },
+      {
+        "id": "V-09",
+        "check": "P2 also-viewed ASINs",
+        "expected": "B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH",
+        "result": "Same three ASINs in the same order",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B09B7SB46R"
+      },
+      {
+        "id": "V-10",
+        "check": "P3 also-viewed ASINs",
+        "expected": "B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99",
+        "result": "Same three ASINs in the same order",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/dp/B08DKYBTPH"
+      },
+      {
+        "id": "V-11",
+        "check": "No Associates tag parameter in any resolved link",
+        "expected": "no 'tag=' in the redirect target",
+        "result": "Only lv, btn_type, gaOptInStatus, btn_ref, channelId, plpRedirect and th appear",
+        "status": "Re-confirmed (F-03 stands)",
+        "source": "https://link.amazon/B04G1MEwY"
+      },
+      {
+        "id": "V-12",
+        "check": "Operating Agreement date and Section 5 disclosure sentence",
+        "expected": "Updated October 15, 2025; ‘As an Amazon Associate I earn from qualifying purchases.’",
+        "result": "Confirmed verbatim",
+        "status": "Re-confirmed",
+        "source": "https://affiliate-program.amazon.com/help/operating/agreement"
+      },
+      {
+        "id": "V-13",
+        "check": "Program Policies date and the price-display restriction",
+        "expected": "Updated April 14, 2026; Participation Requirements 2(b)",
+        "result": "Confirmed verbatim",
+        "status": "Re-confirmed",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "id": "V-14",
+        "check": "Restriction on customer reviews and star ratings",
+        "expected": "Participation Requirements 3(t)",
+        "result": "Confirmed verbatim",
+        "status": "Re-confirmed",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "id": "V-15",
+        "check": "Machine-learning restriction relevant to the AI goal",
+        "expected": "not previously recorded as a rule",
+        "result": "Found in Participation Requirements section 5; added as rule R-17 and flag F-19",
+        "status": "New finding this pass",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "id": "V-16",
+        "check": "Price tracking and alerting restriction",
+        "expected": "not previously recorded as a rule",
+        "result": "Found in Participation Requirements section 3(y); added as rule R-21 and flag F-18",
+        "status": "New finding this pass",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "id": "V-17",
+        "check": "Conditions of Use, License and Access",
+        "expected": "excludes collection of listings, descriptions or prices; data mining or robots; model training on Amazon-derived AI content",
+        "result": "Confirmed verbatim; canonical node is GLSBYFE9MGKKQXXM",
+        "status": "Re-confirmed",
+        "source": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+      },
+      {
+        "id": "V-18",
+        "check": "FTC Disclosures 101 placement and experience rules",
+        "expected": "hard to miss, placed with the endorsement, no claims about products not tried",
+        "result": "Confirmed verbatim; page dated November 2019",
+        "status": "Re-confirmed and expanded (rule R-19)",
+        "source": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+      },
+      {
+        "id": "V-19",
+        "check": "Associates Central disclosure help topic",
+        "expected": "clear and conspicuous link-level disclosure",
+        "result": "Confirmed verbatim, with the examples ‘(paid link)’, ‘#ad’ and ‘#CommissionsEarned’",
+        "status": "Re-confirmed",
+        "source": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE"
+      },
+      {
+        "id": "V-20",
+        "check": "Commission schedule reachability",
+        "expected": "readable rate for the category",
+        "result": "Redirects to an Amazon sign-in page; still unreadable",
+        "status": "Unverified (F-01 stands)",
+        "source": "https://affiliate-program.amazon.com/help/operating/schedule"
+      },
+      {
+        "id": "V-21",
+        "check": "Specification table (capacity in litres, dimensions, colour, material)",
+        "expected": "match the recorded values",
+        "result": "The table was not present in the page text this pass, so the four fields are carried forward, not re-verified",
+        "status": "Carried forward (F-17)",
+        "source": "https://www.amazon.com/dp/B0CDY277D3"
+      },
+      {
+        "id": "V-22",
+        "check": "Prior flag text about the user's location",
+        "expected": "a sourced statement",
+        "result": "No source in the repository supports it and it contradicts the session context; the claim is removed and recorded as an irregularity",
+        "status": "Corrected this pass (F-09)",
+        "source": "https://github.com/kanlerxz87-cyber/Zone4"
+      },
+      {
+        "id": "V-23",
+        "check": "Pages deployment state",
+        "expected": "Pages serves the site",
+        "result": "GitHub Pages API: status built, source main / , https enforced",
+        "status": "Re-confirmed",
+        "source": "https://github.com/kanlerxz87-cyber/Zone4/pages"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "id": "Q-01",
+      "brief": "Automate product research",
+      "status": "Blocked — credentials required",
+      "delivered": "Research is scripted and data-driven (build from data/*.json), but no live product-research automation runs.",
+      "blocker": "Needs PA-API / Creators API credentials, and Amazon's Conditions of Use restrict scraping listing data (F-11).",
+      "evidence_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "evidence": "Amazon Conditions of Use"
+    },
+    {
+      "id": "Q-02",
+      "brief": "Identify trending and high-converting products",
+      "status": "Not built — no verified data source",
+      "delivered": "Trend and conversion columns exist in the product table and are deliberately blank.",
+      "blocker": "No official source in this environment provides trend or conversion data; Amazon's on-page badges and counts are withheld (F-15).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 3(t)"
+    },
+    {
+      "id": "Q-03",
+      "brief": "Analyze pricing",
+      "status": "Partial — limited by policy",
+      "delivered": "Price fields are recorded as withheld rather than omitted, so the gap is visible on every row.",
+      "blocker": "Prices may only be shown through Amazon-served links or PA-API (R-02); price tracking and alerting are barred on the Site (R-21, F-18).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 2(b), 3(y)"
+    },
+    {
+      "id": "Q-04",
+      "brief": "Analyze reviews",
+      "status": "Blocked — API required",
+      "delivered": "No review text or rating is published anywhere on the site.",
+      "blocker": "Customer reviews and star ratings may only be displayed if obtained via Creators API or PA API (R-03, F-02).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 3(t)"
+    },
+    {
+      "id": "Q-05",
+      "brief": "Analyze competition",
+      "status": "Delivered with limits",
+      "delivered": "Each product lists the three competing ASINs shown in Amazon's own also-viewed module, with a note where the module is sponsored.",
+      "blocker": "No share-of-search or sales-rank data is available from an official source, so competitive depth is not quantified.",
+      "evidence_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "evidence": "P1 also-viewed module"
+    },
+    {
+      "id": "Q-06",
+      "brief": "Analyze commission potential",
+      "status": "Not calculable",
+      "delivered": "The commission column is present on every row and marked unverified.",
+      "blocker": "The Standard Commission Income schedule sits behind an Amazon sign-in (F-01); third-party rates conflict and are not used as data.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/schedule",
+      "evidence": "Commission schedule (sign-in)"
+    },
+    {
+      "id": "Q-07",
+      "brief": "Generate SEO-optimized product articles",
+      "status": "Drafted this session",
+      "delivered": "Three per-product drafts with SEO title, meta description, slug, keyword targets and a per-sentence substantiation audit.",
+      "blocker": "Publication awaits an approved Associates account and tagged links (F-21); no model is trained on Amazon content (R-17, F-19).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 2(a), section 5"
+    },
+    {
+      "id": "Q-08",
+      "brief": "Generate comparisons",
+      "status": "Drafted this session",
+      "delivered": "A three-product comparison table built only from listing-title facts, with withheld price and rating columns.",
+      "blocker": "A price-comparison format additionally requires the lowest new and used Amazon prices, which cannot be published here (R-10).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 2(b)"
+    },
+    {
+      "id": "Q-09",
+      "brief": "Generate buying guides",
+      "status": "Drafted this session",
+      "delivered": "A buying guide keyed to the listed capacity, format and function claims, with FAQ text restricted to sourced facts.",
+      "blocker": "No performance, health or safety claims are allowed without advertiser substantiation (R-19).",
+      "evidence_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "evidence": "FTC Disclosures 101, What Else to Know"
+    },
+    {
+      "id": "Q-10",
+      "brief": "Identify profitable niches",
+      "status": "Method published, values blank",
+      "delivered": "A niche-scoring method with each input marked available, blocked or blank, applied to the one niche the data supports.",
+      "blocker": "Demand, competition and earnings inputs require PA-API or Associates reporting; none are available (F-01, F-15).",
+      "evidence_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+      "evidence": "Amazon Air Fryers node"
+    },
+    {
+      "id": "Q-11",
+      "brief": "Publish and manage affiliate links",
+      "status": "Not published",
+      "delivered": "Links are managed in data/products.json and rendered with a disclosure beside every one; the build fails if one is missing.",
+      "blocker": "Publishing monetised links requires an approved Associates account and tagged Special Links (R-23, F-21).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 2(a)"
+    },
+    {
+      "id": "Q-12",
+      "brief": "Track clicks and conversions",
+      "status": "Not built",
+      "delivered": "A compliant measurement plan is documented, keyed to Associates reporting rather than on-site user tracking.",
+      "blocker": "Sub-tags may not be tied to individual end users (R-23); no analytics account is connected.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Participation Requirements 2(b)"
+    },
+    {
+      "id": "Q-13",
+      "brief": "Continuously optimize campaigns",
+      "status": "Not built",
+      "delivered": "The optimisation loop is specified in the platform blueprint with its gates and inputs.",
+      "blocker": "It consumes the click, conversion and earnings data that is not available in this environment.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "evidence": "Operating Agreement section 1"
+    },
+    {
+      "id": "Q-14",
+      "brief": "Prioritize automation",
+      "status": "Delivered for the pipeline, not for live posting",
+      "delivered": "Content is generated from data files by scripts/build_site.py; CI rebuilds and verifies every push.",
+      "blocker": "Live product research and posting remain gated on API access and legal review (F-11, F-12, F-19).",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "Repository build scripts"
+    },
+    {
+      "id": "Q-15",
+      "brief": "Scalability",
+      "status": "Delivered",
+      "delivered": "Adding a product means adding one record to data/products.json; tables, categories, verification rows and drafts regenerate deterministically.",
+      "blocker": "None for the site itself; the data feed is the scaling limit.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "Repository data-driven build"
+    },
+    {
+      "id": "Q-16",
+      "brief": "Data-driven decisions",
+      "status": "Delivered",
+      "delivered": "Every published row carries an official source link; unverified values are blank and flagged, and the build fails a row that lacks a source.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "scripts/verify.py in the repository"
+    },
+    {
+      "id": "Q-17",
+      "brief": "Compliance with Amazon Associates policies",
+      "status": "Delivered",
+      "delivered": "Twenty-four requirements are listed with their official section references, verbatim quotes and the site's status.",
+      "blocker": "Two items need your decision: pricing scope (F-18) and account confirmation (F-21).",
+      "evidence_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "evidence": "Associates Program Policies"
+    },
+    {
+      "id": "Q-18",
+      "brief": "Disclosure requirements",
+      "status": "Delivered",
+      "delivered": "The Operating Agreement sentence appears on every page and under every affiliate link, plus the not-endorsed note.",
+      "blocker": "None.",
+      "evidence_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "evidence": "Associates Central disclosure help"
+    },
+    {
+      "id": "Q-19",
+      "brief": "Marketing for the three supplied products",
+      "status": "Delivered as drafts",
+      "delivered": "All three products have an article draft, appear in the comparison and in the buying guide, and each links to its own listing.",
+      "blocker": "Third-party claims about P2's brand remain unresolved (F-05), so its draft avoids brand claims.",
+      "evidence_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "evidence": "P2 listing"
+    },
+    {
+      "id": "Q-20",
+      "brief": "GitHub Pages site, landing page and category subpages",
+      "status": "Delivered",
+      "delivered": "Fifteen pages: dashboard, executive summary, all-products table, three category pages, analysis, marketing drafts, platform, requirements coverage, verification log, re-verification pass, policy compliance, flagged for review and sources.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "Repository Pages settings and workflow"
+    },
+    {
+      "id": "Q-21",
+      "brief": "Simple dashboard with all entries in tables",
+      "status": "Delivered",
+      "delivered": "Sidebar navigation, KPI cards and one filterable table per view; no external assets or frameworks.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "docs/ site in the repository"
+    },
+    {
+      "id": "Q-22",
+      "brief": "Every row sourced; unverified values blank and flagged",
+      "status": "Delivered",
+      "delivered": "Enforced by scripts/verify.py: any table row without an official-host link fails the build, as does any price or star-rating string.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "scripts/verify.py in the repository"
+    },
+    {
+      "id": "Q-23",
+      "brief": "Flagged for Review page",
+      "status": "Delivered",
+      "delivered": "Twenty-two flags, each with severity, detail, source links, status and the action requested.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "Flagged for Review page in the repository"
+    },
+    {
+      "id": "Q-24",
+      "brief": "Coordination between parallel sessions",
+      "status": "Delivered",
+      "delivered": "COORDINATION.md carries claims, file scopes, handoffs and the merge log; this session pushed its claim before editing.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/COORDINATION.md",
+      "evidence": "COORDINATION.md"
+    },
+    {
+      "id": "Q-25",
+      "brief": "Pull request, merge and Pages confirmation",
+      "status": "Delivered",
+      "delivered": "PR raised from this branch, merged to main after checks pass, then Pages build status read back from the GitHub API.",
+      "blocker": "None. The public URL itself is not reachable from this sandbox (allowed hosts exclude github.io).",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4/actions",
+      "evidence": "GitHub Actions runs"
+    },
+    {
+      "id": "Q-26",
+      "brief": "No manual input required in the session",
+      "status": "Delivered",
+      "delivered": "This session made its decisions from official sources and published open questions to the Flagged page instead of asking.",
+      "blocker": "None.",
+      "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "evidence": "Session log in COORDINATION.md"
+    }
+  ],
+  "marketing": {
+    "status": "Drafts held in the repository, not published as monetised pages. Reasons: no approved Associates account or tag is confirmed (F-21), prices and ratings may not be shown here (F-02), and no model may be trained on Amazon content without written approval (R-17, F-19).",
+    "writing_rules": [
+      "Only attributes visible in the verified listing title, the brand byline or the category breadcrumb are asserted as facts (R-18).",
+      "Prices, discounts, star ratings, review counts, badges and sales figures never appear (R-02, R-03, F-02, F-15).",
+      "No first-person testing, tasting or long-term-use language, and no claim needing proof the advertiser does not have (R-19).",
+      "The Operating Agreement disclosure sentence sits above the fold on the page and again immediately before each affiliate link (R-01, R-16).",
+      "Every link is a tagged Special Link to a Product page, never to a search or department page, and no link is placed on Amazon (R-04, R-22, R-23).",
+      "Promotional copy that mentions a limited-time offer carries an expiry task; these drafts mention none (R-20)."
+    ],
+    "articles": [
+      {
+        "id": "C-P1",
+        "product_id": "P1",
+        "type": "Product overview article",
+        "seo_title": "CHEFMAN 6 Quart Dual Basket Air Fryer: Two 3-Quart Baskets",
+        "meta_description": "What the CHEFMAN 6 Quart dual basket air fryer lists: two independent 3-quart baskets, Sync Finish, Hi-Fry, auto shutoff and viewing windows.",
+        "slug": "chefman-6-quart-dual-basket-air-fryer-overview",
+        "h1": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven: what the listing states",
+        "keywords": [
+          {
+            "term": "chefman 6 quart dual basket air fryer",
+            "basis": "Words in the verified listing title",
+            "volume": "Blank — no official volume source",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "dual basket air fryer",
+            "basis": "Verified listing title and the subcategory used for this page",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "air fryer with two baskets and viewing window",
+            "basis": "Verified listing title (Easy View Windows)",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          }
+        ],
+        "lead": "A summary of what Amazon's own listing for ASIN B0CDY277D3 states, written for a reader comparing dual-basket air fryers.",
+        "sections": [
+          {
+            "heading": "What it is",
+            "paras": [
+              {
+                "text": "The listing describes a 6 Quart dual basket air fryer oven from CHEFMAN, sold on Amazon under ASIN B0CDY277D3.",
+                "basis": "Title of the Amazon listing page",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "It is described as having two independent 3-quart baskets rather than one shared cavity.",
+                "basis": "'2 Independent 3Qt … Baskets' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "Amazon places it under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+                "basis": "Category breadcrumb on the listing page",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              }
+            ]
+          },
+          {
+            "heading": "Functions named in the listing",
+            "paras": [
+              {
+                "text": "The title names Sync Finish, which is the listing's term for the two baskets finishing together.",
+                "basis": "'Sync Finish' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "It also names a Hi-Fry option and an auto shutoff.",
+                "basis": "'Hi-Fry, Auto Shutoff' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "Two easy-view windows are named, so progress can be watched without opening a basket.",
+                "basis": "'with Easy View Windows' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "The baskets are described as nonstick and dishwasher safe.",
+                "basis": "'Nonstick Dishwasher Safe Frying Baskets' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "Controls are described as digital, and the finish as black.",
+                "basis": "'Digital Double Air Fryer - Black' in the listing title",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              }
+            ]
+          },
+          {
+            "heading": "Where it sits in Amazon's own list",
+            "paras": [
+              {
+                "text": "Amazon's also-viewed module for this product shows another Chefman dual-basket model, a 10-quart Gourmia and an 8.8-quart Nutrichef.",
+                "basis": "Also-viewed carousel on the P1 listing page",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              },
+              {
+                "text": "That places the product against other large-capacity dual-basket units rather than compact single-basket fryers.",
+                "basis": "Reading of the same also-viewed module",
+                "source": "https://www.amazon.com/dp/B0CDY277D3"
+              }
+            ]
+          }
+        ],
+        "cta": {
+          "label": "See the product on Amazon",
+          "url": "https://link.amazon/B04G1MEwY"
+        },
+        "cannot_claim": [
+          "Price, discounts or value for money (F-02)",
+          "Star rating or review sentiment (R-03)",
+          "Health, oil-reduction or cooking-result outcomes (R-19)",
+          "Best, top-rated or number one rankings (no official ranking source)"
+        ],
+        "source": "https://www.amazon.com/dp/B0CDY277D3"
+      },
+      {
+        "id": "C-P2",
+        "product_id": "P2",
+        "type": "Product overview article",
+        "seo_title": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: The Spec",
+        "meta_description": "What Amazon's listing states for the 26QT French door air fryer toaster oven: 24 cooking functions, dual-speed fan and rotisserie, and how to check the brand.",
+        "slug": "emergil-lagasse-26qt-french-door-air-fryer-oven-spec",
+        "h1": "26QT French Door Air Fryer Toaster Oven: what the listing states",
+        "keywords": [
+          {
+            "term": "26qt french door air fryer toaster oven",
+            "basis": "Words in the verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "air fryer oven with french doors",
+            "basis": "Verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "rotisserie air fryer oven 24 functions",
+            "basis": "'24 cooking functions' and 'rotisserie' in the verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          }
+        ],
+        "lead": "A summary of the listing for ASIN B09B7SB46R, plus the one field that a buyer should check before trusting a brand name.",
+        "sections": [
+          {
+            "heading": "What it is",
+            "paras": [
+              {
+                "text": "The listing describes a 26QT air fryer oven with French doors, sold under ASIN B09B7SB46R.",
+                "basis": "Title of the Amazon listing page",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              },
+              {
+                "text": "It is positioned as a multi-function air fryer toaster oven rather than a basket fryer.",
+                "basis": "'Multi-Function Air Fryer Toaster Oven' in the listing title",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              },
+              {
+                "text": "Amazon places it in the same Air Fryers category as the other two products here.",
+                "basis": "Category breadcrumb on the listing page",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              }
+            ]
+          },
+          {
+            "heading": "Functions named in the listing",
+            "paras": [
+              {
+                "text": "Twenty-four cooking functions are listed.",
+                "basis": "'24 cooking functions' in the listing title",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              },
+              {
+                "text": "A dual-speed fan is listed.",
+                "basis": "'dual-speed fan' in the listing title",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              },
+              {
+                "text": "A rotisserie is listed among the included functions.",
+                "basis": "'and rotisserie' in the listing title",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              }
+            ]
+          },
+          {
+            "heading": "The brand field needs checking",
+            "paras": [
+              {
+                "text": "The listing shows a store named Emeril Store while the byline reads Innovation IQ, so the manufacturer is not settled from the page alone.",
+                "basis": "Brand byline and store name on the P2 listing page",
+                "source": "https://www.amazon.com/dp/B09B7SB46R"
+              },
+              {
+                "text": "This page therefore does not state a brand, because an unsupported manufacturer name in an article is exactly the kind of overbroad claim Amazon's rules prohibit.",
+                "basis": "Site rule against unverified claims (R-18, flag F-05)",
+                "source": "https://affiliate-program.amazon.com/help/operating/policies"
+              }
+            ]
+          }
+        ],
+        "cta": {
+          "label": "See the product on Amazon",
+          "url": "https://link.amazon/B02NbDxp3"
+        },
+        "cannot_claim": [
+          "Any statement about which company manufactures it (F-05)",
+          "Price or discounts (F-02)",
+          "Star rating or review counts (R-03)",
+          "Family-size or capacity-suitability conclusions, because the title says 26QT while the specification table says 24.6 litres (F-06)"
+        ],
+        "source": "https://www.amazon.com/dp/B09B7SB46R"
+      },
+      {
+        "id": "C-P3",
+        "product_id": "P3",
+        "type": "Product overview article",
+        "seo_title": "Chefman 8 Qt TurboFry Air Fryer: 4-in-1 Listing Details",
+        "meta_description": "What Amazon's listing states for the Chefman 8 Qt TurboFry 4-in-1: a 450F Hi-Fry option, bake, dehydrate and frozen settings, and a dishwasher-safe basket.",
+        "slug": "chefman-8-qt-turbofry-air-fryer-listing-details",
+        "h1": "Chefman Air Fryer 8 Qt TurboFry 4-in-1: what the listing states",
+        "keywords": [
+          {
+            "term": "chefman 8 qt air fryer",
+            "basis": "Words in the verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "turbofry air fryer",
+            "basis": "'TurboFry' in the verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          },
+          {
+            "term": "air fryer with dehydrate function",
+            "basis": "'Bake, Dehydrate, Frozen' in the verified listing title",
+            "volume": "Blank — not verified",
+            "competition": "Blank",
+            "status": "Candidate term only"
+          }
+        ],
+        "lead": "A summary of the listing for ASIN B08DKYBTPH, the single-basket unit in this set.",
+        "sections": [
+          {
+            "heading": "What it is",
+            "paras": [
+              {
+                "text": "The listing describes an 8 Qt Chefman air fryer using the TurboFry name, sold under ASIN B08DKYBTPH.",
+                "basis": "Title of the Amazon listing page",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              },
+              {
+                "text": "Four functions are named in the title, described as 4-in-1: air frying with bake, dehydrate and frozen settings.",
+                "basis": "'4-in-1 … Bake, Dehydrate, Frozen' in the listing title",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              },
+              {
+                "text": "Amazon places it in Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+                "basis": "Category breadcrumb on the listing page",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              }
+            ]
+          },
+          {
+            "heading": "Details named in the listing",
+            "paras": [
+              {
+                "text": "A Hi-Fry option is listed at 450 degrees Fahrenheit.",
+                "basis": "'450°F Hi-Fry Option' in the listing title",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              },
+              {
+                "text": "The basket is described as XL, nonstick and dishwasher safe.",
+                "basis": "'XL Nonstick Dishwasher-Safe Basket' in the listing title",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              },
+              {
+                "text": "The finish is given as stainless steel.",
+                "basis": "'Stainless Steel' in the listing title",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              },
+              {
+                "text": "An earlier session recorded size options for this listing at 6, 8 and 9 quarts; that was not re-checked in the latest pass, so the variant question stays open (F-08, F-17).",
+                "basis": "Prior session note against the same listing page",
+                "source": "https://www.amazon.com/dp/B08DKYBTPH"
+              }
+            ]
+          }
+        ],
+        "cta": {
+          "label": "See the product on Amazon",
+          "url": "https://link.amazon/B00hJ57DV"
+        },
+        "cannot_claim": [
+          "Crispiness or cooking outcomes, even though the title says 'for Crispier Results' — that is the seller's wording, not an independent finding",
+          "Price or discounts (F-02)",
+          "Star rating or review counts (R-03)",
+          "Which size variant a buyer will be sent to, until the variant question is settled (F-08)"
+        ],
+        "source": "https://www.amazon.com/dp/B08DKYBTPH"
+      }
+    ],
+    "comparison": {
+      "id": "C-CMP",
+      "type": "Head-to-head comparison",
+      "seo_title": "Dual Basket, Single Basket or French Door: 3 Listings",
+      "meta_description": "A side-by-side read of three Amazon listings: a 6 quart dual basket fryer, an 8 quart single basket fryer and a 26QT French door air fryer toaster oven.",
+      "slug": "dual-basket-vs-single-basket-vs-french-door-air-fryer-comparison",
+      "note": "Built only from what the three listings state. Price and rating columns are withheld on policy grounds (F-02), so this is a feature comparison, not a value comparison. Amazon's own price-comparison rule (R-10) would require the lowest new and used Amazon prices, which cannot be shown here.",
+      "columns": [
+        "Product",
+        "Format",
+        "Listed capacity",
+        "Functions named in the listing",
+        "Brand byline on the page",
+        "Price",
+        "Star rating",
+        "Source"
+      ],
+      "rows": [
+        {
+          "values": [
+            "P1 — CHEFMAN 6 Quart Dual Basket Air Fryer Oven",
+            "Two independent baskets",
+            "6 Quart described as 2 × 3Qt (the specification table lists 6 litres; see F-06, F-17)",
+            "Sync Finish, Hi-Fry, Auto Shutoff, easy-view windows, digital controls",
+            "Chefman",
+            "Withheld (F-02)",
+            "Withheld (F-02)"
+          ],
+          "source": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "values": [
+            "P3 — Chefman Air Fryer 8 Qt TurboFry 4-in-1",
+            "One basket",
+            "8 Qt (the earlier session recorded 6, 8 and 9 quart variants; see F-08)",
+            "4-in-1: air fry, bake, dehydrate, frozen; 450 degrees Fahrenheit Hi-Fry option; dishwasher-safe basket",
+            "Chefman",
+            "Withheld (F-02)",
+            "Withheld (F-02)"
+          ],
+          "source": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "values": [
+            "P2 — 26QT French Door Multi-Function Air Fryer Toaster Oven",
+            "French-door oven",
+            "26QT in the title, 24.6 litres in the earlier specification read (F-06)",
+            "24 cooking functions, dual-speed fan, rotisserie",
+            "Unresolved: store Emeril Store, byline Innovation IQ (F-05)",
+            "Withheld (F-02)",
+            "Withheld (F-02)"
+          ],
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "verdict_paras": [
+        {
+          "text": "The three listings cover three different jobs: two zones at once, one large basket, or a multi-function oven cavity.",
+          "basis": "Format fields read from the three listing titles",
+          "source": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "text": "Only P1 and P3 let this site name a brand with confidence; P2's manufacturer field is unresolved on the page itself.",
+          "basis": "Brand byline on the three listing pages",
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "text": "Capacity values are quoted as the sellers write them, because the title and specification units differ on P1 and P2, so the numbers are not directly comparable.",
+          "basis": "Capacity fields on the three listing pages (F-06)",
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "source": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+    },
+    "buying_guide": {
+      "id": "C-BG",
+      "type": "Buying guide",
+      "seo_title": "Choosing an Air Fryer on Amazon: What the Listings Actually Say",
+      "meta_description": "How to read an air fryer listing: basket count, capacity units, function names and the brand field, with the three listings on this site as worked examples.",
+      "slug": "air-fryer-buying-guide-what-listings-say",
+      "intro": "A guide to reading the listing, not a recommendation. It avoids performance claims, because those need proof the seller must supply (R-19), and it avoids prices, because this site may not show them (R-02).",
+      "decision_paths": [
+        {
+          "question": "Do you need two foods finished at the same time?",
+          "grounding": "P1's listing title names two independent 3-quart baskets and Sync Finish, which is the only two-zone configuration in this set.",
+          "source": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "question": "Do you need a single large basket instead of two small ones?",
+          "grounding": "P3's listing title names one XL basket at 8 Qt with bake, dehydrate and frozen settings.",
+          "source": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "question": "Do you need oven-style functions such as a rotisserie?",
+          "grounding": "P2's listing title names 24 cooking functions, a dual-speed fan and a rotisserie in a French-door cavity.",
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "question": "Does the capacity unit match across the page?",
+          "grounding": "On P1 the title says 6 Quart while the specification table says 6 litres, and on P2 the title says 26QT while the specification says 24.6 litres, so treat capacity as listed rather than comparable (F-06).",
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "question": "Is the manufacturer stated plainly?",
+          "grounding": "On P2 the store name and the byline differ, which is why this site leaves the brand unresolved (F-05).",
+          "source": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "faq": [
+        {
+          "q": "Are these the best-selling air fryers on Amazon?",
+          "a": "Not answered. No official sales-rank source is available in this environment, and Amazon's on-page badges and counts are withheld here (F-15).",
+          "status": "Cannot answer",
+          "source": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        {
+          "q": "How much do they cost?",
+          "a": "Not published. Participation Requirements section 2(b) allows prices only through Amazon-served links or PA-API data (F-02).",
+          "status": "Withheld",
+          "source": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        {
+          "q": "Do shoppers rate them well?",
+          "a": "Not published. Section 3(t) bars displaying Amazon customer reviews or star ratings unless obtained via Creators API or PA API (R-03).",
+          "status": "Withheld",
+          "source": "https://affiliate-program.amazon.com/help/operating/policies"
+        },
+        {
+          "q": "Which one should I buy?",
+          "a": "This site does not choose for you: the comparison table states what each listing claims, and the decision paths above show which claim answers which question.",
+          "status": "Editorial framing, no product claim",
+          "source": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "q": "Is the price likely to change?",
+          "a": "The listing itself warns that product prices and availability may vary from time to time, which is one reason this site publishes none (R-02).",
+          "status": "Policy text",
+          "source": "https://affiliate-program.amazon.com/help/operating/policies"
+        }
+      ],
+      "source": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    "publish_checklist": [
+      "Confirm the Associates account and generate each link as a tagged Special Link so the tag parameter is present (F-03, F-21).",
+      "Re-read the specification table on each listing by hand before publishing capacity, dimension, colour or material figures (F-17).",
+      "Set the marketplace the pages target, since the listings here were read as US pages (F-09).",
+      "Keep the disclosure above the fold and repeat it immediately before every link, as the Associates help requires (R-16).",
+      "Leave prices, ratings, badges and sales counts out unless PA-API or Creators API access is approved (F-02).",
+      "Record a removal date for any future promotion mention, because the reference must go as soon as the offer ends (R-20, F-20).",
+      "Do not feed listing text into any model that trains on its inputs (R-17, F-19).",
+      "Rebuild with python3 scripts/build_site.py and let verify.py fail the publish if a row loses its source."
+    ],
+    "measurement_plan": [
+      {
+        "metric": "Clicks through each Special Link",
+        "how": "Read from Associates Central reporting, per tagged link; no on-site click tracking is required",
+        "limit": "Sub-tags may not be tied to a specific end user (R-23)",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "metric": "Sessions and items added to basket",
+        "how": "Associates Central reporting columns, reviewed on a fixed cadence",
+        "limit": "Reporting access is not connected in this environment",
+        "source": "https://affiliate-program.amazon.com/help/operating/agreement"
+      },
+      {
+        "metric": "Orders and Qualifying Revenue",
+        "how": "Associates Central earnings reports, which follow the Commission Income Statement definition of Qualifying Revenue",
+        "limit": "No earnings figures are published on this site",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "metric": "Commission income",
+        "how": "Rate read from the Standard Commission Income schedule, applied to Qualifying Revenue",
+        "limit": "The schedule sits behind a sign-in, so no rate is recorded yet (F-01)",
+        "source": "https://affiliate-program.amazon.com/help/operating/schedule"
+      },
+      {
+        "metric": "Content performance by page",
+        "how": "Search console style impressions and clicks per article, once a site property exists",
+        "limit": "No analytics property is connected here",
+        "source": "https://github.com/kanlerxz87-cyber/Zone4"
+      }
+    ]
+  },
+  "niche": {
+    "method": [
+      "Start from the category Amazon assigns to the products, not from a guessed topic.",
+      "List the competing products Amazon itself shows beside each listing, and note whether that module is sponsored.",
+      "Score each candidate niche on demand, competition, ticket size, commission rate and content angle.",
+      "Leave an input blank when no official source supplies it, and record why on the Flagged page.",
+      "Re-score only when a data source changes, for example after PA-API access is granted."
+    ],
+    "candidate_niches": [
+      {
+        "niche": "Countertop air fryers and air fryer toaster ovens",
+        "demand": "Blank — no official demand source",
+        "competition": "Amazon's also-viewed modules show at least six other brands across the three listings",
+        "ticket_size": "Blank — prices may not be published (F-02)",
+        "commission_rate": "Blank — schedule behind a sign-in (F-01)",
+        "content_angle": "Three formats in one category make a comparison and buying-guide cluster possible",
+        "evidence_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+        "evidence": "Amazon Air Fryers node",
+        "status": "Only niche in scope: the three supplied links all sit here"
+      },
+      {
+        "niche": "Anything else",
+        "demand": "Blank",
+        "competition": "Blank",
+        "ticket_size": "Blank",
+        "commission_rate": "Blank",
+        "content_angle": "Not assessed",
+        "evidence_url": "https://github.com/kanlerxz87-cyber/Zone4",
+        "evidence": "Repository scope",
+        "status": "Out of scope: the brief names three products, and no wider catalogue was supplied or verified"
+      }
+    ],
+    "note": "A profitable-niche ranking needs demand and earnings inputs. Neither is available from an official source in this environment, so the table publishes the method and the qualitative observations, and leaves the numeric columns blank rather than estimating them."
+  },
+  "platform": {
+    "summary": "The brief describes an AI platform. This repository is the data-driven research and content layer of that platform, built so that each stage can be automated only once its gate clears: a data source for research, a rate source for earnings, an account for links, and a compliance decision for automated generation. Nothing is faked to look automated.",
+    "stages": [
+      {
+        "stage": "1. Product discovery",
+        "automation": "Query PA-API or Creators API for candidates in an assigned node",
+        "gate": "API access and its license terms, which have not been reviewed (F-16)",
+        "status": "Blocked",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "stage": "2. Enrichment and analysis",
+        "automation": "Pull title, brand, category, specification fields; compute the comparison matrix",
+        "gate": "Manual or API-sourced data; scraping listing text conflicts with the Conditions of Use (F-11)",
+        "status": "Partly manual, scripted today",
+        "source": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+      },
+      {
+        "stage": "3. Scoring and ranking",
+        "automation": "Score trend, conversion, competition and commission potential",
+        "gate": "Trend, conversion and rate inputs are unverified, so no ranking is produced (F-01, F-15)",
+        "status": "Blocked",
+        "source": "https://affiliate-program.amazon.com/help/operating/schedule"
+      },
+      {
+        "stage": "4. Content generation",
+        "automation": "Draft article, comparison and buying guide from the verified field set only",
+        "gate": "Written here by hand from the verified record; connecting a generator requires a no-training term (R-17, F-19)",
+        "status": "Drafted, not automated",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "stage": "5. Compliance gate",
+        "automation": "Refuse to publish a page that lacks a disclosure sentence, a source link per row, or that contains a price or rating string",
+        "gate": "None",
+        "status": "Built into the build",
+        "source": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE"
+      },
+      {
+        "stage": "6. Publish",
+        "automation": "Build docs/ and deploy to GitHub Pages on merge to main",
+        "gate": "None for the research site; monetised pages need an approved account first (F-21)",
+        "status": "Built",
+        "source": "https://github.com/kanlerxz87-cyber/Zone4"
+      },
+      {
+        "stage": "7. Measure",
+        "automation": "Read Associates reporting on a schedule, per tagged link",
+        "gate": "No account credentials in this environment",
+        "status": "Blocked",
+        "source": "https://affiliate-program.amazon.com/help/operating/agreement"
+      },
+      {
+        "stage": "8. Optimise",
+        "automation": "Re-rank, refresh or retire content from the measured data",
+        "gate": "Depends on stage 7",
+        "status": "Blocked",
+        "source": "https://affiliate-program.amazon.com/help/operating/agreement"
+      }
+    ],
+    "guardrails": [
+      "verify.py fails the build if any table row lacks an official-host link, so a source-free claim cannot ship.",
+      "verify.py fails if any price string or star-rating string appears on any page, enforcing R-02 and R-03 mechanically.",
+      "verify.py fails if the disclosure sentence is missing from any page, enforcing R-01.",
+      "verify.py fails if marketing copy claims a personal test or trial of a product, enforcing R-19.",
+      "External links are restricted to an allow-list of official hosts, so third-party stats cannot creep in.",
+      "The build is deterministic from data/*.json, and CI rebuilds it and diffs the result, so the published site always matches the reviewed data."
+    ],
+    "scalability": "Product records are data, so the site scales by rows: a new product adds one object to data/products.json and gains a table row, a verification block, a category entry and a content draft automatically. The scaling limit is verified data, not the site.",
+    "not_connected": [
+      "Amazon Associates account or API keys",
+      "PA-API or Creators API access",
+      "Analytics or search console property",
+      "Content management or email system",
+      "Any paid promotion channel"
+    ]
+  }
 }
