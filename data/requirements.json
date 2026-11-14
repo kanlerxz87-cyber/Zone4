@@ -339,7 +339,7 @@
       "area": "Site",
       "requirement": "Live site with a clean landing page and subpages organized by category.",
       "status": "Delivered",
-      "delivered": "Thirteen pages: a dashboard landing page, three category pages (dual-basket air fryers, single-basket air fryers, air-fry toaster ovens), and the executive summary, all-products, analysis, verification, policy, requirements, analytics, flagged and sources pages. Deployed by GitHub Pages from main.",
+      "delivered": "Twenty-one generated pages: the marketing landing page, executive summary, requirements, all-products catalogue, three category pages, combined marketing page, articles hub, five individual article pages, automation/tracking, analysis, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site from main.",
       "blocker": "",
       "sources": [
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"

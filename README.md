@@ -24,7 +24,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
 | `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
-| `tests/test_engine.py` | 81 unit tests for the engine |
+| `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
 | `docs/` | The published site (21 generated pages plus the stylesheet, app script and tracker script) |
@@ -61,7 +61,7 @@ python3 scripts/build_site.py     # regenerate docs/ from data/
 python3 scripts/verify.py         # data + page checks
 python3 qa/audit_site.py          # independent audit of the committed HTML
 
-python3 -m unittest discover -s tests   # 81 engine tests
+python3 -m unittest discover -s tests   # 83 engine tests
 python3 -m engine.cli status            # what is verified, withheld or blocked
 python3 -m engine.cli audit             # compliance gate on the engine's drafts
 python3 tools/check_links.py            # link and per-row sourcing check
