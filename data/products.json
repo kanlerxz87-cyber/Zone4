@@ -2,7 +2,7 @@
   "_meta": {
     "description": "Verified product records for the three user-supplied Amazon links. Values are only what was observed on the cited official Amazon product page. Blank or withheld fields are listed in flags.json.",
     "observed_utc": "2026-11-14",
-    "method": "Each user link was resolved to its Amazon product page (the redirect target), then the listing's title, byline, breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. Prices and star ratings were read but are NOT published on the site (see flags F-02). Re-checked on 2026-11-14 in the integration session: product title, byline, spec table, category breadcrumb, also-viewed ASINs and short-link resolution matched the snapshot. Prices and ratings were read but are not published."
+    "method": "Each user link was resolved to its Amazon product page (the redirect target), then the listing's title, byline, breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. Prices and star ratings were read but are NOT published on the site (see flags F-02)."
   },
   "products": [
     {
@@ -34,10 +34,11 @@
         {
           "asin": "B0CNSB81V6",
           "label": "",
-          "url": "https://www.amazon.com/dp/B0CNSB81V6"
+          "url": "https://www.amazon.com/dp/B0CNSB81V6",
+          "label_status": "not seen on the 2026-11-14 read; left blank (F-23)"
         }
       ],
-      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, P1 showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1–3. (F-19)",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
       "flags": [
         "F-01",
         "F-02",
@@ -46,12 +47,12 @@
         "F-06",
         "F-07",
         "F-09",
-        "F-10",
         "F-15",
         "F-18",
-        "F-19"
+        "F-21",
+        "F-23"
       ],
-      "competitor_carousel_label": "label not seen on the 2026-11-14 read (seen on an earlier read; see F-10)"
+      "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10"
     },
     {
       "id": "P2",
@@ -85,7 +86,7 @@
           "url": "https://www.amazon.com/dp/B0F92GL7JH"
         }
       ],
-      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, the stored ASINs appeared in the same order. (F-19)",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
       "flags": [
         "F-01",
         "F-02",
@@ -94,10 +95,12 @@
         "F-05",
         "F-06",
         "F-09",
+        "F-10",
         "F-15",
-        "F-17",
         "F-18",
-        "F-19"
+        "F-21",
+        "F-22",
+        "F-23"
       ],
       "competitor_carousel_label": "not labelled 'Sponsored' on either read"
     },
@@ -133,7 +136,7 @@
           "url": "https://www.amazon.com/dp/B0C33CHG99"
         }
       ],
-      "competitor_source_note": "Carousel shown as 'Customers who viewed this item also viewed'. Labels are the first part of each listing title as shown on the 2026-11-14 read; a blank label means the title was not seen on that read. The carousel membership and order change between page loads: on the 2026-11-14 read, the stored ASINs appeared in the same order. (F-19)",
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items. Labels are the first part of each listing title as shown on the 2026-11-14 read; blank means not seen on that read. Carousel membership changes between page loads (F-23).",
       "flags": [
         "F-01",
         "F-02",
@@ -144,9 +147,10 @@
         "F-10",
         "F-15",
         "F-18",
-        "F-19"
+        "F-21",
+        "F-23"
       ],
-      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read"
+      "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10"
     }
   ]
 }

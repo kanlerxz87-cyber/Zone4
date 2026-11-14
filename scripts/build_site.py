@@ -44,7 +44,7 @@ NAV = [
     ("analysis.html", "Analysis & findings"),
     ("verification.html", "Verification log"),
     ("policy-compliance.html", "Policy compliance"),
-    ("flagged.html", "Flagged for Review"),
+    ("flagged.html", "Flagged for review"),
     ("sources.html", "Sources"),
 ]
 
@@ -167,19 +167,19 @@ def verification_rows(current: Page) -> list[list[str]]:
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
-            ("Brand (byline)", p["brand"], "Verified" if p["id"] != "P2" else "Unresolved", src, "F-05" if p["id"] == "P2" else ""),
+            ("Brand (byline)", p["brand"], "Unresolved" if p["id"] == "P2" else "Verified (earlier session; byline not re-read, F-18)", src, "F-05" if p["id"] == "P2" else "F-18"),
             ("Category path", p["category_path"], "Verified", src, ""),
-            ("Capacity (as listed)", p["capacity"], "Verified as listed", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "")),
+            ("Capacity (as listed)", p["capacity"], "Verified as listed (earlier session; not re-read, F-18)", src, "F-06" if p["id"] in ("P1", "P2") else ("F-08" if p["id"] == "P3" else "F-18")),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, "F-07" if p["id"] == "P1" else ""),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
-            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown; carousel " + p["competitor_carousel_label"], src, "F-10" if "F-10" in p["flags"] else ""),
-            ("Associates tag in source link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-18"),
+            ("Also-viewed ASINs", ", ".join(c["asin"] for c in p["competitors"]), "Verified as shown on the 2026-11-14 read; carousel " + p["competitor_carousel_label"], src, "F-23"),
             ("Price", "Not published", "Withheld (policy)", src, "F-02"),
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             ("Category commission rate", "Blank", "Unverified", sched, "F-01"),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
             ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
+            ("Associates tag in site link", "Not present (no tag= parameter)", "Not met (Participation Requirements 2(b))", src, "F-21"),
         ]
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""
@@ -260,7 +260,7 @@ def page_index(current: Page) -> str:
         ("3 of 3", "Products with verified ASIN and category (P2 brand unresolved, F-05)"),
         ("0", "Amazon prices published (policy F-02)"),
         ("0 of 3", "Commission rates verified (F-01)"),
-        (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for Review page)"),
+        (str(len([f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()])), "Open items for your review (Flagged for review page)"),
     ]
     kpi_html = "".join(f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>' for v, l in kpis)
     cards = [
@@ -270,7 +270,7 @@ def page_index(current: Page) -> str:
         ("products.html", "All products (table)", "Every row links to its Amazon source"),
         ("analysis.html", "Analysis & findings", "Niche, competition, what can and cannot be concluded"),
         ("verification.html", "Verification log", "Field-by-field check with source and status"),
-        ("flagged.html", "Flagged for Review", "Irregularities and unverified items, with sources"),
+        ("flagged.html", "Flagged for review", "Irregularities and unverified items, with sources"),
     ]
     card_html = "".join(
         f'<a class="card" href="{esc(current.rel(t))}"><div class="card-title">{esc(name)}</div><div class="card-sub">{esc(sub)}</div></a>'
@@ -297,7 +297,7 @@ def page_exec(current: Page) -> str:
         + f'<section><h2>What the verification found</h2><ul class="bullets">{bullets}</ul></section>'
         + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol></section>'
         + f'<section><h2>Not built, and why</h2><ul>{not_built}</ul></section>'
-        + f'<section><h2>Detail</h2><p>See {href(current, "analysis.html", "Analysis & findings")}, {href(current, "flagged.html", "Flagged for Review")} and {href(current, "sources.html", "Sources")}.</p></section>'
+        + f'<section><h2>Detail</h2><p>See {href(current, "analysis.html", "Analysis & findings")}, {href(current, "flagged.html", "Flagged for review")} and {href(current, "sources.html", "Sources")}.</p></section>'
     )
 
 
