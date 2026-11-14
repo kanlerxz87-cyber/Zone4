@@ -171,8 +171,8 @@
       "url": "https://www.amazon.com/dp/B09B7SB46R",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. Re-read 2026-11-14 by arena/3036372b-zone4: title, store and byline, breadcrumb, the full specification table and the also-viewed carousel all match. On this pass the 'Sponsored' label did NOT appear above this carousel, while it did appear on the P1 and P3 carousels; the label is therefore not product specific. See F-10. Redirect target of https://link.amazon/B02NbDxp3 (re-resolved 2026-11-14). Item details re-read 2026-11-14: Brand Name Emeril; Manufacturer Emeril Lagasse; model 4-00675-02X-VN; capacity 24.6 liters. Title, breadcrumb and also-viewed ASINs matched. 'Sponsored' label above 'Brands in this category' in this read (F-10). Byline 'Innovation IQ' and 'Emeril Store' not seen in this read (F-05)."
+      "used_for": "Listing title, Item details brand/manufacturer, category breadcrumb, specification table, also-viewed ASINs, and the separate store and creator/review blocks; price and rating withheld.",
+      "notes": "The product page's Item details table lists Brand Name Emeril and Manufacturer Emeril Lagasse. The page separately links to the Emeril Store and displays an Innovation IQ creator/review block; that block is not used as the product-brand field. P2's capacity and function-count inconsistencies and the changing also-viewed carousel are flagged."
     },
     {
       "id": "S-P3",

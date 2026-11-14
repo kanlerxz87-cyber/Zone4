@@ -23,9 +23,9 @@
     {
       "id": "PL-2",
       "stage": "Identity, brand and category extraction",
-      "what_it_does": "Reads the listing title, brand byline, store link and category breadcrumb from each product page.",
+      "what_it_does": "Reads the product-page title, the explicit Item details brand/manufacturer fields, store link and category breadcrumb; treats any creator/review block separately from product identity.",
       "status": "Implemented",
-      "output": "Brand byline for P1 and P3; P2 brand and manufacturer verified from its Item details table (F-05 resolved); one shared category path for all three.",
+      "output": "P1 and P3 brand/manufacturer values are Chefman/Chefman; P2 Item details list Emeril/Emeril Lagasse. P2’s separate creator/review block is not used as the product brand. All three share the recorded category path.",
       "requirement": "Program Content may not be altered, and material posted on the site must be accurate, complete and appropriate.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements 3(c) and 6(a)"

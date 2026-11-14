@@ -59,8 +59,8 @@ for p in products["products"]:
         p["brand_source_note"] = (
             "Item details table on the official product page: 'Brand Name | Emeril', "
             "'Manufacturer | Emeril Lagasse' (read 2026-11-14, session arena/ebf5c261-zone4). "
-            "The page also shows store 'Emeril Store' and a byline 'Innovation IQ'; the brand "
-            "field uses the Item details values."
+            "The page links to the Emeril Store and shows a separate Innovation IQ "
+            "creator/review block; the brand field uses the Item details values."
         )
         p["flags"] = [f for f in p["flags"] if f != "F-05"]
 
@@ -75,8 +75,8 @@ by_id["F-05"]["status"] = "Resolved"
 by_id["F-05"]["detail"] = (
     "Resolved on 2026-11-14 by session arena/ebf5c261-zone4: the official product page's own "
     "'Item details' table lists 'Brand Name | Emeril' and 'Manufacturer | Emeril Lagasse'. The "
-    "brand is recorded as 'Emeril'. The page also shows store 'Emeril Store' and a byline "
-    "'Innovation IQ' (seen in the earlier snapshot); the Item details values are used because "
+    "brand is recorded as 'Emeril'. The page links to the Emeril Store and shows a separate "
+    "Innovation IQ creator/review block (seen in the earlier snapshot); the Item details values are used because "
     "they are Amazon's structured product-information fields."
 )
 by_id["F-05"]["action"] = "None. Resolved from the official Item details table."
@@ -118,7 +118,7 @@ for a in content["analysis"]:
         a["basis"] = (
             "Brand byline on P1 and P3 reads Chefman. P2's official page lists 'Brand Name | Emeril' "
             "and 'Manufacturer | Emeril Lagasse' in its Item details table (F-05 resolved 2026-11-14). "
-            "The P2 page also shows store 'Emeril Store' and a byline 'Innovation IQ'."
+            "The P2 page links to the Emeril Store and shows a separate Innovation IQ creator/review block."
         )
         a["confidence"] = "Verified"
 

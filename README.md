@@ -24,7 +24,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
 | `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
-| `tests/test_engine.py` | 81 unit tests for the engine |
+| `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
 | `docs/` | The published site (21 generated pages plus the stylesheet, app script and tracker script) |
@@ -61,7 +61,7 @@ python3 scripts/build_site.py     # regenerate docs/ from data/
 python3 scripts/verify.py         # data + page checks
 python3 qa/audit_site.py          # independent audit of the committed HTML
 
-python3 -m unittest discover -s tests   # 81 engine tests
+python3 -m unittest discover -s tests   # 83 engine tests
 python3 -m engine.cli status            # what is verified, withheld or blocked
 python3 -m engine.cli audit             # compliance gate on the engine's drafts
 python3 tools/check_links.py            # link and per-row sourcing check
@@ -76,7 +76,7 @@ The verifier fails the build if any table row lacks a link to an official source
 ## Limits
 
 - Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or Creators API / PA API data.
-- The public official Standard Commission Income Statement Table 1 lists the Kitchen category at **4.50%**. This is a category-level reference only: the commission category Amazon assigns to each supplied ASIN is not confirmed from the official sources reviewed, so all product-level rate cells are blank and flagged (F-01). No product-level earnings estimate is published.
+- The [public Standard Commission Income Statement, Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) lists the Kitchen category at **4.50%**. This is a category-level reference only: the commission category Amazon assigns to each supplied ASIN is not confirmed from the official sources reviewed, so all product-level rate cells are blank and flagged (F-01). No product-level earnings estimate is published.
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
 - Attributed click, order, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated. The Analytics page records first-party clicks in the visitor's own browser and publishes no attributed figure.
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.

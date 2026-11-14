@@ -74,7 +74,7 @@
       "id": "F-05",
       "severity": "Low",
       "title": "P2 brand and manufacturer confirmed from the Item details table",
-      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link reads 'Visit the Emeril Store' and the page carries a 'Top Brand: Emeril' module. The string 'Innovation IQ' appears as the creator associated with a customer-review video and links to Amazon Influencer information; it is not the product brand or product byline. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
+      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The page links to the Emeril Store and carries a 'Top Brand: Emeril' module. The separate 'Innovation IQ' creator/review block is not a product brand or byline. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
@@ -227,8 +227,8 @@
     {
       "id": "F-18",
       "severity": "Medium",
-      "title": "Brand byline and specification tables: re-read on 2026-11-14 and matching",
-      "detail": "The earlier pass re-checked each short link's resolved ASIN, the page titles, the category breadcrumbs and the also-viewed ASINs, but not the brand byline or the specification table. Session arena/3036372b-zone4 read both on all three product pages on 2026-11-14. Every brand byline ('Chefman' on P1 and P3, store 'Emeril Store' with byline 'Innovation IQ' on P2) and every specification row (special features, dimensions, colour, capacity, material) matched the published record exactly, and the special-feature row is now published as a new field. The gap this flag recorded is closed.",
+      "title": "Brand, manufacturer and specification fields re-read on 2026-11-14",
+      "detail": "The 2026-11-14 re-read checked explicit Item details brand/manufacturer fields and specification rows on all three product pages. P1 and P3 list Brand Name Chefman and Manufacturer Chefman; P2 lists Brand Name Emeril and Manufacturer Emeril Lagasse. P2’s separate store link says “Visit the Emeril Store”; a separate creator/review block shows “Innovation IQ”. That creator/review label is not a product byline or brand. The listed specification fields were also checked. This gap is resolved; F-05 records the P2 brand/manufacturer confirmation.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
