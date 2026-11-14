@@ -9,7 +9,11 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **done**; unresolved items documented in Flagged for Review | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
-| Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
+| Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
+| Independent re-verification of P1–P3 records and of every policy citation (line-by-line, official sources) | **in progress** | arena/8908f0b3-zone4 | read-only checks of `data/*.json`; writes only to `COORDINATION.md` and `data/sources.json` (re-verify notes) |
+| Brief gap closure: marketing content (product articles, comparison, buying guide), requirements coverage, niche methodology, platform blueprint | **in progress** | arena/8908f0b3-zone4 | `data/content.json`, `data/products.json` (content fields only), `data/policies.json`, `data/flags.json`, `scripts/build_site.py`, `scripts/verify.py`, `docs/**`, `README.md` |
+| Correction of F-09 (assertion about the user's location is unsupported) | **in progress** | arena/8908f0b3-zone4 | `data/flags.json` (F-09 only) |
+| Integration: PR to `main`, merge, Pages deploy check | **in progress** (depends on the two above) | arena/8908f0b3-zone4 | `COORDINATION.md`, GitHub Pages settings |
 
 ## Original PR #7 branch note (historical)
 
