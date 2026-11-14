@@ -29,7 +29,7 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 
 The current active session is working on `arena/13dd55ca-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`). No branch was created or switched to.
 
-| Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, stale page captions, site rebuild, integration (PR, merge, Pages check) | **done**; PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) merged at `0aa8583`, follow-up PR [#42](https://github.com/kanlerxz87-cyber/Zone4/pull/42); Pages `built` | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
+| Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, stale page captions, site rebuild, integration (PR, merge, Pages check) | **done**; PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) merged at `0aa8583`, PR [#42](https://github.com/kanlerxz87-cyber/Zone4/pull/42) merged at `7cd31de`, PR [#44](https://github.com/kanlerxz87-cyber/Zone4/pull/44); Pages `built` | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
 
 ## Work log
 
@@ -656,3 +656,20 @@ three CI checks passed (verify x2, audit); merged at `0aa8583` on 2026-11-14. Gi
 source `main` `/`, HTTPS enforced; public URL https://kanlerxz87-cyber.github.io/Zone4/. The deployed index, products and
 flagged pages were fetched from the live URL and read back: the KPIs are derived and correct, all three competitor labels
 render, the commission cells are blank with the official category table cited, and F-36 and F-37 are on the Flagged page.
+
+**Merge and deployment record.** PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) opened from
+`arena/949aaac1-zone4`; all three CI checks passed (verify x2, audit); merged at `0aa8583` on 2026-11-14. PR
+[#42](https://github.com/kanlerxz87-cyber/Zone4/pull/42) (the two stale captions above) hit a merge conflict with PR #39
+(`arena/46c18cd1-zone4`), which had fixed the products-table caption the same way in parallel; it was rebased, keeping
+main's equivalent wording for that caption and this session's corrected hero lead, and merged at `7cd31de`. GitHub Pages
+reports `built` for `acf37f2`, source `main` `/`, HTTPS enforced; public URL https://kanlerxz87-cyber.github.io/Zone4/.
+
+**Confirmed on the deployed site** (fetched from the live URL after the build): the index KPIs are derived and read
+"3 of 3" products, "5" marketing pages, "0" prices, "0 of 3" ASIN commission-category assignments; all three product rows
+show blank commission cells with the official category table cited; all nine competitor ASINs render with their verbatim
+listing-title labels including the previously blank "Nutrichef Double Basket Air Fryer 8.8 QT"; every shop link carries the
+"(paid link)" marker and the disclosure sentence; and F-36 and F-37 are on the Flagged for Review page (37 flags total).
+
+**Independent corroboration worth noting.** Session `arena/46c18cd1-zone4` working at the same time found the same
+Conditions of Use redirect target (`nodeId=508088` -> `nodeId=GLSBYFE9MGKKQXXM`) completely independently, and recorded it
+in `S-COU`. Two sessions reaching the same node id from separate reads is a good sign for that citation.
