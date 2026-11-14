@@ -70,7 +70,8 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section, read 2026-11-14: the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology."
+      "used_for": "'License and Access' section, read 2026-11-14: the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology.",
+      "notes": "Re-confirmed 2026-11-14 (final wrap-up, arena/46c18cd1-zone4): the cited nodeId=508088 URL redirects to nodeId=GLSBYFE9MGKKQXXM ('Conditions of Use', last updated August 14, 2026); the 'License and Access' clauses above were re-read verbatim on that target. Amazon's own docs pages still link the old URL. Citation update is a next-review action (F-30)."
     },
     {
       "id": "S-DEPLOY",

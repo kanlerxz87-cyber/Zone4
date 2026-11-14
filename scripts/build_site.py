@@ -486,7 +486,8 @@ def page_products(current: Page) -> str:
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
-        'Competitor labels are short paraphrases; the exact listing titles are on the linked pages (F-20).</p>'
+        'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
+        'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
     )
 
 
