@@ -28,7 +28,7 @@ python3 scripts/verify.py
 
 ## Pages
 
-GitHub Pages serves `main` `/docs` (legacy build, no custom workflow deploy). Every push to `main` rebuilds the site.
+GitHub Pages is a legacy build of `main` `/` (the repository's Pages source). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. `scripts/verify.py` fails if the redirect is missing. Switching the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless. Every push to `main` rebuilds the site.
 
 ## Limits
 
