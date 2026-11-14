@@ -2,7 +2,7 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
-**Live site (GitHub Pages, from `main` `/docs`):** https://kanlerxz87-cyber.github.io/Zone4/
+**Live site (GitHub Pages, from `main` `/`, with a root redirect to `docs/`):** https://kanlerxz87-cyber.github.io/Zone4/
 
 ## What is in the repo
 

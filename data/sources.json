@@ -19,7 +19,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Snapshot showed a US delivery location, not the user's location."
+      "notes": "Redirect target of https://link.amazon/B04G1MEwY. Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs confirmed. 'Sponsored' label above the also-viewed heading on the channelId=500 snapshot. Brand and manufacturer fields not read this session."
     },
     {
       "id": "S-P2",
@@ -27,8 +27,8 @@
       "url": "https://www.amazon.com/dp/B09B7SB46R",
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
-      "used_for": "Listing title, store and byline, category breadcrumb, specification table, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B02NbDxp3. 'Sponsored' label appears above the also-viewed carousel."
+      "used_for": "Listing title, Item details (brand, manufacturer, capacity, dimensions), breadcrumb, also-viewed ASINs, price and rating (withheld from site)",
+      "notes": "Redirect target of https://link.amazon/B02NbDxp3. Item details read 2026-11-14: Brand Name Emeril; Manufacturer Emeril Lagasse; model 4-00675-02X-VN; capacity 24.6 liters. Buy-box snapshot showed a US delivery location. No 'Sponsored' label above the also-viewed carousel in the two snapshots read."
     },
     {
       "id": "S-P3",
@@ -37,7 +37,7 @@
       "publisher": "Amazon.com (retailer, official product page)",
       "accessible": true,
       "used_for": "Listing title, brand byline, category breadcrumb, specification table, size variants, also-viewed ASINs, price and rating (withheld from site)",
-      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page."
+      "notes": "Redirect target of https://link.amazon/B00hJ57DV, with variation parameter th=1. Size variants 6, 8 and 9 quarts are offered on the page. Re-read 2026-11-14: title, breadcrumb and also-viewed ASINs confirmed. Item details not read this session."
     },
     {
       "id": "S-L1",
@@ -45,7 +45,8 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter.",
+      "notes": "Re-resolved 2026-11-14 to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter."
     },
     {
       "id": "S-L2",
@@ -53,7 +54,8 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter.",
+      "notes": "Re-resolved 2026-11-14 to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter."
     },
     {
       "id": "S-L3",
@@ -61,7 +63,8 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter."
+      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter.",
+      "notes": "Re-resolved 2026-11-14 to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter."
     },
     {
       "id": "S-CAT",
@@ -77,7 +80,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.'"
+      "used_for": "Section 5: required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.' Re-read 2026-11-14 (updated October 15, 2025)."
     },
     {
       "id": "S-HELP",
@@ -93,7 +96,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement sections 1-3 (qualifying purchases, disqualified purchases, Qualifying Revenue); Participation Requirements sections 2(b), 3(c), 3(f), 3(g), 3(t), 3(w), 3(y), 3(z)."
+      "used_for": "Commission Income Statement sections 1-3; Participation Requirements sections 2(b), 3(c), 3(f), 3(g), 3(t), 3(w), 3(y), 3(z) and 5; IP License sections 1, 2(b), 2(c), 2(e), 2(h), 2(k) and 4 (Agent Terms). Read 2026-11-14 (page dated April 14, 2026)."
     },
     {
       "id": "S-SCHED",
@@ -101,7 +104,7 @@
       "url": "https://affiliate-program.amazon.com/help/operating/schedule",
       "publisher": "Amazon Associates (official)",
       "accessible": false,
-      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page, so no rate could be read."
+      "used_for": "Would hold the category commission rates. The URL redirects to an Amazon sign-in page; re-tested 2026-11-14 with the same result, so no rate could be read."
     },
     {
       "id": "S-COU",
@@ -109,7 +112,7 @@
       "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
       "publisher": "Amazon.com (official)",
       "accessible": true,
-      "used_for": "'License and Access' section: license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models."
+      "used_for": "'License and Access' section, re-read 2026-11-14 (last updated August 14, 2026): license excludes collection and use of product listings, descriptions or prices, and data mining or robots; and bars use of Amazon Services AI-generated content to develop or improve models."
     },
     {
       "id": "S-FTC",
@@ -117,7 +120,7 @@
       "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
       "publisher": "U.S. Federal Trade Commission (official)",
       "accessible": true,
-      "used_for": "Disclosure must be hard to miss, placed with the endorsement, and use simple, clear language; a material connection includes a financial relationship."
+      "used_for": "Re-read 2026-11-14 (November 2019 edition). Disclosure must be hard to miss and placed with the endorsement; use simple, clear language; a material connection includes a financial relationship."
     },
     {
       "id": "S-REPO",
