@@ -10,7 +10,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Site rebuild on `main` `/docs` (landing, categories, analysis, verification log, policy page, Flagged for Review, sources), build and checks | **done**; 11 pages verified and Pages build succeeded | arena/1eb689b8-zone4 | `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `.github/workflows/site-checks.yml`, `README.md` |
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md`
-| Re-verification of supplied links and Associates citations (2026-11-14) | in progress; claimed by arena/857e9efd-zone4 | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
+| Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
 
 ## Original PR #7 branch note (historical)
 
@@ -139,3 +139,6 @@ The current branch added a more detailed multi-page research view and FTC source
   3. Add RV-I3 to the Flagged for Review page.
 - **Verification performed:** JSON validity of the new file; `python3 scripts/build_site.py` and `python3 scripts/verify.py` run on the branch (no site output changed).
 - **Status:** done, pending integration review. Live pages on Amazon show prices and star ratings; the site continues to withhold them under Section 2(b) and 3(t).
+
+- **Merge result:** PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) (`arena/857e9efd-zone4` → `main`) merged with a merge commit at `074818c` (2026-11-14, UTC). Site checks and the `pages build and deployment` run both succeeded on `074818c`. The Pages API reports `built`, and https://kanlerxz87-cyber.github.io/Zone4/ returns the dashboard.
+- Not done here: the RV-I1 and RV-C5 fixes, which are shared outputs owned by the integration session (see the requests above).
