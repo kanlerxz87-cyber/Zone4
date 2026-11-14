@@ -103,3 +103,87 @@ table.tracking td:nth-child(4) { min-width: 120px; }
 .btn:hover { background: #eef3fb; }
 .btn.danger { color: var(--bad-ink); }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+
+/* ---------------------------------------------------------------------------
+   Landing page and article pages (added by session arena/c5462690-zone4).
+   Same tokens as the dashboard; these are layout additions only.
+--------------------------------------------------------------------------- */
+
+/* Sidebar groups */
+.sidebar .nav-group { margin-bottom: 12px; }
+.sidebar .nav-group-title {
+  display: block; padding: 0 10px 4px; font-size: 10.5px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: #8b98b4;
+}
+
+/* Marketing hero */
+.mhero {
+  background: linear-gradient(150deg, #16233f 0%, #1f3a6b 58%, #24538f 100%);
+  color: #eaf1fb; border-radius: 14px; padding: 30px 30px 26px; margin: 18px 0 6px;
+}
+.mhero .badge {
+  display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22);
+  color: #dce8fa; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 600; margin-bottom: 14px;
+}
+.mhero h1 { margin: 0 0 10px; font-size: 32px; line-height: 1.2; max-width: 22ch; }
+.mhero .lead { color: #c3d4ea; max-width: 78ch; font-size: 15.5px; }
+.mhero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.mhero-actions .btn {
+  display: inline-block; text-decoration: none; border-radius: 9px; padding: 10px 16px;
+  font-size: 14px; font-weight: 650; border: 1px solid rgba(255,255,255,.35); color: #eaf1fb; background: transparent;
+}
+.mhero-actions .btn:hover { background: rgba(255,255,255,.12); }
+.mhero-actions .btn-primary { background: #ffb703; border-color: #ffb703; color: #2a1c00; }
+.mhero-actions .btn-primary:hover { background: #ffc63d; }
+
+.section-lead { color: var(--muted); margin: 0 0 12px; max-width: 90ch; }
+
+/* Article cards */
+.agrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 10px 0 6px; }
+.acard {
+  display: flex; flex-direction: column; gap: 7px; text-decoration: none; color: var(--ink);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px;
+  transition: border-color .12s ease, transform .12s ease;
+}
+.acard:hover { border-color: var(--accent); transform: translateY(-2px); }
+.acard-top { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-block; background: #e8f0fd; color: #1c4d94; border-radius: 999px;
+  padding: 2px 10px; font-size: 11.5px; font-weight: 650;
+}
+.chip-quiet { background: var(--muted-bg); color: var(--muted-ink); }
+.acard-title { font-size: 16.5px; font-weight: 680; line-height: 1.32; }
+.acard-dek { color: var(--muted); font-size: 13.5px; line-height: 1.45; }
+.acard-meta { color: var(--muted); font-size: 12px; margin-top: auto; padding-top: 4px; }
+
+/* Category tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 10px 0 6px; }
+.tile {
+  display: block; text-decoration: none; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 16px 18px;
+}
+.tile:hover { border-color: var(--accent); border-left-color: var(--accent); }
+.tile-title { font-weight: 680; font-size: 16px; }
+.tile-sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.tile-go { color: var(--accent); font-size: 13px; font-weight: 650; margin-top: 10px; }
+
+/* Article page */
+.post {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 8px 26px 24px; margin: 16px 0 8px; max-width: 96ch;
+}
+.post h1 { font-size: 29px; line-height: 1.22; margin: 6px 0 10px; }
+.post h2 { font-size: 20px; margin: 30px 0 10px; border-top: 1px solid var(--line); padding-top: 20px; }
+.post p { line-height: 1.65; }
+.dek { color: var(--muted); font-size: 16px; line-height: 1.55; margin: 0 0 18px; }
+.ameta { color: var(--muted); font-size: 12.5px; margin: 6px 0 2px; }
+.crumbs { font-size: 13px; color: var(--muted); margin: 10px 0 2px; }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .mhero { padding: 22px 18px; }
+  .mhero h1 { font-size: 25px; max-width: none; }
+  .post { padding: 6px 16px 18px; }
+  .post h1 { font-size: 24px; }
+}

@@ -14,6 +14,7 @@ Standard library only. No network access is needed.
 """
 from __future__ import annotations
 
+import html
 import json
 import pathlib
 import re
@@ -52,6 +53,11 @@ def fail(msg: str) -> None:
 
 def load(name: str):
     return json.loads((DATA / name).read_text(encoding="utf-8"))
+
+
+def html_escape(value: str) -> str:
+    """Escape the way the builder does, so the checks below match its output."""
+    return html.escape(str(value), quote=True)
 
 
 def is_official(url: str) -> bool:
@@ -299,6 +305,20 @@ def check_required_pages() -> None:
     for rel in required:
         if not (DOCS / rel).exists():
             fail(f"docs/{rel} is missing")
+    # Article pages are derived from data/marketing.json, so the check is derived
+    # from the same data: an article in the data must have a page, and the page
+    # must carry the article's own SEO fields.
+    for a in load("marketing.json")["articles"]:
+        rel = "articles/" + a["slug"].strip("/") + ".html"
+        page = DOCS / rel
+        if not page.exists():
+            fail(f"docs/{rel} is missing (article {a['id']} has no page)")
+            continue
+        raw = page.read_text(encoding="utf-8")
+        if f'<meta name="description" content="{html_escape(a["meta_description"])}">' not in raw:
+            fail(f"docs/{rel} does not carry the article's own meta description")
+        if f"<title>{html_escape(a['title_tag'])} |" not in raw:
+            fail(f"docs/{rel} does not carry the article's own title tag")
 
 
 def check_root_entry() -> None:

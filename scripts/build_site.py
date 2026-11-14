@@ -28,7 +28,8 @@ def load(name: str):
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
-PRODUCTS = load("products.json")["products"]
+PRODUCTS_DOC = load("products.json")
+PRODUCTS = PRODUCTS_DOC["products"]
 SOURCES_DOC = load("sources.json")
 SOURCES = {s["id"]: s for s in SOURCES_DOC["sources"]}
 NON_OFFICIAL = SOURCES_DOC["non_official_reference_only"]
@@ -44,22 +45,82 @@ REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
 OBSERVED = CONTENT["observed_date"]
 
 NAV = [
-    ("index.html", "Dashboard"),
-    ("executive-summary.html", "Executive summary"),
-    ("products.html", "All products"),
-    ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers"),
-    ("categories/single-basket-air-fryers.html", "Single-basket air fryers"),
-    ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens"),
-    ("marketing.html", "Marketing content"),
-    ("automation.html", "Automation & tracking"),
-    ("analysis.html", "Analysis & findings"),
-    ("requirements.html", "Requirements"),
-    ("verification.html", "Verification log"),
-    ("policy-compliance.html", "Policy compliance"),
-    ("analytics.html", "Analytics"),
-    ("flagged.html", "Flagged for review"),
-    ("sources.html", "Sources"),
+    ("index.html", "Dashboard", "Overview"),
+    ("executive-summary.html", "Executive summary", "Overview"),
+    ("products.html", "All products", "Overview"),
+    ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
+    ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
+    ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
+    ("marketing.html", "Marketing content", "Content"),
+    ("automation.html", "Automation & tracking", "Research"),
+    ("analysis.html", "Analysis & findings", "Research"),
+    ("requirements.html", "Requirements", "Research"),
+    ("verification.html", "Verification log", "Governance"),
+    ("policy-compliance.html", "Policy compliance", "Governance"),
+    ("analytics.html", "Analytics", "Governance"),
+    ("flagged.html", "Flagged for review", "Governance"),
+    ("sources.html", "Sources", "Governance"),
 ]
+NAV_LABEL = {target: label for target, label, _group in NAV}
+NAV_ORDER = [
+    ("Overview", [t for t, _l, g in NAV if g == "Overview"]),
+    ("Categories", [t for t, _l, g in NAV if g == "Categories"]),
+    ("Content", [t for t, _l, g in NAV if g == "Content"]),
+    ("Research", [t for t, _l, g in NAV if g == "Research"]),
+    ("Governance", [t for t, _l, g in NAV if g == "Governance"]),
+]
+
+# --- Article pages -------------------------------------------------------
+# Each marketing article in data/marketing.json is published as its own page,
+# so every piece of content is individually addressable and carries the title
+# tag and meta description that were written for it. Pages are derived from the
+# data rather than hand-listed: adding an article to the data adds a page, and
+# a page can never exist for an article that is not in the data.
+CATEGORY_BY_PRODUCT = {
+    "P1": "dual-basket-air-fryers",
+    "P2": "air-fryer-toaster-ovens",
+    "P3": "single-basket-air-fryers",
+}
+CATEGORY_TITLE = {t: l for t, l, _g in NAV if t.startswith("categories/")}
+PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS}
+ARTICLES_HUB = "articles/index.html"
+
+
+def article_path(a: dict) -> str:
+    """docs-relative path for an article, taken from its own suggested slug."""
+    return "articles/" + a["slug"].strip("/") + ".html"
+
+
+def article_category(a: dict) -> str:
+    return CATEGORY_BY_PRODUCT.get(a.get("product_id"), "")
+
+
+def article_label(a: dict) -> str:
+    p = PRODUCT_BY_ID.get(a.get("product_id"))
+    return p["name_short"] if p else a["page_type"]
+
+
+def article_word_count(a: dict) -> int:
+    return sum(len(par["text"].split()) for par in a["body"])
+
+
+def article_read_minutes(a: dict) -> int:
+    """Reading time derived from the article's own word count at 220 wpm.
+
+    This is arithmetic on the site's own copy, not a claim about the product,
+    so it needs no external source. It is rounded up to keep it stable.
+    """
+    return max(1, -(-article_word_count(a) // 220))
+
+
+ARTICLES = MARKETING["articles"]
+ARTICLE_PATHS = [(a, article_path(a)) for a in ARTICLES]
+ARTICLE_BY_PATH = {path: a for a, path in ARTICLE_PATHS}
+
+for _a, _path in ARTICLE_PATHS:
+    NAV_LABEL[_path] = article_label(_a)
+NAV_LABEL[ARTICLES_HUB] = "Articles hub"
+NAV_ORDER.insert(3, ("Articles", [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS]))
 
 
 def esc(value) -> str:
@@ -86,11 +147,17 @@ def status_pill(status: str) -> str:
 
 
 class Page:
-    def __init__(self, path: str, title: str, active: str, body: str):
+    def __init__(self, path: str, title: str, active: str, body: str,
+                 description: str | None = None, title_tag: str | None = None):
         self.path = path
         self.title = title
         self.active = active
         self.body = body
+        # Per-page SEO fields. Article pages supply their own title tag and meta
+        # description from data/marketing.json; every other page keeps the
+        # site-wide defaults so nothing changes for them.
+        self.description = description
+        self.title_tag = title_tag
 
     @property
     def depth(self) -> int:
@@ -412,6 +479,26 @@ def hero(title: str, lead: str) -> str:
     return f'<header class="hero"><h1>{esc(title)}</h1><p class="lead">{esc(lead)}</p></header>'
 
 
+def article_card(current: Page, a: dict, show_category: bool = True) -> str:
+    """A teaser card for one article: category chip, headline, dek and metadata.
+
+    `show_category` is off on the articles hub, where the group heading above the
+    card already names the category.
+    """
+    key = article_category(a)
+    cat_label = CATEGORY_TITLE.get("categories/" + key + ".html", "") if key else ""
+    chip = f'<span class="chip">{esc(cat_label)}</span>' if (show_category and cat_label) else ""
+    return (
+        f'<a class="acard" href="{esc(current.rel(article_path(a)))}">'
+        f'<div class="acard-top">{chip}<span class="chip chip-quiet">{esc(a["page_type"])}</span></div>'
+        f'<div class="acard-title">{esc(a["h1"])}</div>'
+        f'<div class="acard-dek">{esc(a["meta_description"])}</div>'
+        f'<div class="acard-meta">{article_read_minutes(a)} min read \u00b7 '
+        f'{len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+        "</a>"
+    )
+
+
 def page_index(current: Page) -> str:
     open_flags = [f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()]
     # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
@@ -421,7 +508,9 @@ def page_index(current: Page) -> str:
     )
     kpis = [
         (f"{len(PRODUCTS)} of {len(PRODUCTS)}", "Products with verified ASIN, category, brand and specification table"),
-        (str(len(MARKETING["articles"])), "Marketing pages built: 3 articles, 1 comparison, 1 buying guide"),
+        (str(len(ARTICLES)), f"Published articles: {sum(1 for a in ARTICLES if a['page_type'] == 'Product article')} reviews, "
+                             f"{sum(1 for a in ARTICLES if a['page_type'] == 'Comparison')} comparison, "
+                             f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guide"),
         ("0", "Amazon prices published (policy F-02)"),
         (f"{assigned} of {len(PRODUCTS)}", "ASIN commission-category assignments confirmed (F-01)"),
         (str(len(open_flags)), "Open items for your review (Flagged for review page)"),
@@ -430,30 +519,148 @@ def page_index(current: Page) -> str:
         f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
         for v, l in kpis
     )
-    cards = [
-        ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "P1: CHEFMAN 6 Quart Dual Basket Air Fryer Oven"),
-        ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "P3: Chefman Air Fryer 8 Qt TurboFry 4-in-1"),
-        ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "P2: Emeril Lagasse 26QT French Door Air Fryer Toaster Oven"),
-        ("products.html", "All products (table)", "Every row links to its Amazon source"),
-        ("marketing.html", "Marketing content", "Articles, a comparison and a buying guide, ready to publish"),
-        ("automation.html", "Automation & tracking", "The pipeline, the metrics and what blocks each stage"),
-        ("analysis.html", "Analysis & findings", "Niche, competition, what can and cannot be concluded"),
-        ("verification.html", "Verification log", "Field-by-field check with source and status"),
-        ("flagged.html", "Flagged for review", "Irregularities and unverified items, with sources"),
-    ]
-    card_html = "".join(
-        f'<a class="card" href="{esc(current.rel(t))}"><div class="card-title">{esc(name)}</div>'
-        f'<div class="card-sub">{esc(sub)}</div></a>'
-        for t, name, sub in cards
+    trending = "".join(article_card(current, a) for a in ARTICLES)
+    cat_tiles = "".join(
+        f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
+        f'<div class="tile-sub">{esc(next(p["name_short"] for p in PRODUCTS if CATEGORY_BY_PRODUCT.get(p["id"]) == key))}</div>'
+        f'<div class="tile-go">Open category \u2192</div></a>'
+        for target, label, key in
+        ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
     )
-    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:5])
+    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:4])
     return (
-        hero("Affiliate product research", CONTENT["executive_summary"]["headline"])
+        '<div class="mhero">'
+        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 {len(PRODUCTS)} products \u00b7 a source link on every table row</span>'
+        "<h1>Countertop air fryers, researched down to the specification table</h1>"
+        f'<p class="lead">{esc(CONTENT["executive_summary"]["headline"])}</p>'
+        '<div class="mhero-actions">'
+        f'<a class="btn btn-primary" href="{esc(current.rel(ARTICLES_HUB))}">Read the articles</a>'
+        f'<a class="btn" href="{esc(current.rel("products.html"))}">See the product table</a>'
+        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">What is flagged</a>'
+        "</div></div>"
         + f'<section class="kpis">{kpi_html}</section>'
+        + '<section><h2>Trending articles</h2>'
+        '<p class="section-lead">Each article is built only from figures read off the official product page, and every '
+        "fact it states is a row in a table that links back to that page.</p>"
+        f'<div class="agrid">{trending}</div></section>'
+        + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
+        + '<section><h2>Products at a glance</h2>'
+        + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C\u2026, Flag F-02)" aria-label="Filter table"></p>'
+        + product_table(current, PRODUCTS)
+        + commission_category_note()
+        + '<p class="small muted">Every row links to its official product page as the source. Short links are the links you '
+        "supplied. Competitor ASINs come from the also-viewed carousel and change between page loads (F-29).</p></section>"
         + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
         + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
-        + '<section><h2>Explore</h2><div class="cards">' + card_html + "</div></section>"
         + f'<p class="muted small">Data observed {esc(OBSERVED)} (UTC). Verification scope and method: {href(current, "sources.html", "sources")}.</p>'
+    )
+
+
+def page_articles_index(current: Page) -> str:
+    """The articles hub: every published article, grouped by the category it covers."""
+    groups: list[tuple[str, list[dict]]] = []
+    for key in ("dual-basket-air-fryers", "single-basket-air-fryers", "air-fryer-toaster-ovens"):
+        items = [a for a in ARTICLES if article_category(a) == key]
+        if items:
+            groups.append((CATEGORY_TITLE.get("categories/" + key + ".html", key), items))
+    cross = [a for a in ARTICLES if not article_category(a)]
+    if cross:
+        groups.append(("Comparisons and guides", cross))
+
+    blocks = []
+    for title, items in groups:
+        cards = "".join(article_card(current, a, show_category=False) for a in items)
+        link = ""
+        key = next((k for k in CATEGORY_BY_PRODUCT.values() if CATEGORY_TITLE.get("categories/" + k + ".html") == title), "")
+        if key:
+            link = (f'<p class="small">{href(current, "categories/" + key + ".html", "See the category record →")}</p>')
+        blocks.append(f'<section><h2>{esc(title)}</h2><div class="agrid">{cards}</div>{link}</section>')
+    return (
+        hero("Articles", "Every article published on this site, grouped by the product format it covers. "
+                         "The copy is written here, not republished from the listings, and each piece carries the "
+                         "fact table it was written from.")
+        + "".join(blocks)
+        + '<section><h2>How these are written</h2>'
+        + "<p>"
+        + esc(MARKETING["_meta"]["method"])
+        + "</p>"
+        + marketing_seo_rules_table()
+        + "</section>"
+    )
+
+
+def page_article(current: Page, a: dict) -> str:
+    """One article, published as a page with its own title tag and meta description."""
+    facts_by_id = {f["id"]: f for f in a["facts"]}
+    body_html = []
+    for para in a["body"]:
+        cites = "".join(
+            f'<a class="cite" href="{esc(facts_by_id[fid]["source_url"])}" rel="noopener noreferrer">{esc(fid)}</a>'
+            for fid in para["fact_ids"] if fid in facts_by_id
+        )
+        body_html.append(f'<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
+    outline_html = "".join(
+        f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
+        f'<span class="muted">(facts: {esc(", ".join(o["facts_used"]))})</span></li>'
+        for o in a["outline"]
+    )
+    notes_html = "".join(f"<li>{esc(n)}</li>" for n in a["compliance_notes"])
+    cta = a["cta"]
+    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"')
+    # The disclosure and a plain-language paid-link label sit in the same
+    # paragraph as the affiliate link, not below it, so both are adjacent to the
+    # link they qualify. qa/audit_site.py fails the build if either is missing.
+    cta_html = (
+        f'<div class="cta"><p>{esc(cta["text"])}</p>'
+        f'<p>{cta_button} <span class="note">(paid link)</span>'
+        f' <span class="note"><strong>Disclosure:</strong> {esc(cta["disclosure"])}</span></p></div>'
+    )
+
+    key = article_category(a)
+    cat_label = CATEGORY_TITLE.get("categories/" + key + ".html", "") if key else ""
+    crumb = (
+        f'<nav class="crumbs" aria-label="Breadcrumb">{href(current, "index.html", "Home")} \u203a '
+        f'{href(current, ARTICLES_HUB, "Articles")}'
+        + (f' \u203a {href(current, "categories/" + key + ".html", cat_label)}' if key else "")
+        + f" \u203a <span>{esc(a['page_type'])}</span></nav>"
+    )
+    meta_line = (
+        f'<div class="ameta">{esc(a["page_type"])}'
+        + (f' \u00b7 <span class="chip">{esc(cat_label)}</span>' if cat_label else "")
+        + f' \u00b7 {article_read_minutes(a)} min read \u00b7 {len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+    )
+    seo_html = (
+        "<dl class=\"seo\">"
+        f"<dt>Suggested URL slug</dt><dd><code>{esc(a['slug'])}</code></dd>"
+        f"<dt>Title tag</dt><dd>{esc(a['title_tag'])}</dd>"
+        f"<dt>Meta description</dt><dd>{esc(a['meta_description'])}</dd>"
+        f"<dt>Page type</dt><dd>{esc(a['page_type'])}</dd>"
+        "</dl>"
+    )
+    # Related reading: the other articles, with the category record first when there is one.
+    related = [x for x in ARTICLES if x["id"] != a["id"]]
+    if key:
+        related.sort(key=lambda x: 0 if article_category(x) == key else 1)
+    related_html = "".join(article_card(current, x) for x in related[:3])
+
+    return (
+        "<article class=\"post\">"
+        + crumb
+        + meta_line
+        + f'<h1>{esc(a["h1"])}</h1>'
+        + f'<p class="dek">{esc(a["meta_description"])}</p>'
+        + "".join(body_html)
+        + cta_html
+        + "<h2>Fact basis (every row links to its official source)</h2>"
+        + marketing_fact_table(a)
+        + "<h2>Keyword targets</h2>"
+        + marketing_keyword_table(a)
+        + "<h2>Search metadata</h2>"
+        + seo_html
+        + "<h2>Outline</h2><ul class=\"outline\">" + outline_html + "</ul>"
+        + "<h2>Compliance notes</h2><ul>" + notes_html + "</ul>"
+        + "</article>"
+        + '<section><h2>Related reading</h2><div class="agrid">' + related_html + "</div></section>"
     )
 
 
@@ -476,6 +683,26 @@ def page_exec(current: Page) -> str:
     )
 
 
+def commission_category_note() -> str:
+    """The verified category-level rate, published without attaching it to an ASIN.
+
+    The official Table 1 rate is a real, sourced figure, but which commission
+    category Amazon assigns to each of these ASINs is not confirmable from
+    outside Associates Central, so the product rows stay blank and this note
+    carries the verified fact on its own, with its source.
+    """
+    note = PRODUCTS_DOC.get("_meta", {}).get("commission_note")
+    if not note:
+        return ""
+    url = next((p.get("commission_rate_source") for p in PRODUCTS if p.get("commission_rate_source")), None)
+    link = ext(url, "Associates Program Standard Commission Income Statement") if url else ""
+    return (
+        '<div class="cta"><p><strong>Commission, at category level only.</strong> '
+        f"{esc(note)} {link} "
+        f'{flag_chip(Page("products.html", "", "", ""), "F-01")}</p></div>'
+    )
+
+
 def page_products(current: Page) -> str:
     return (
         hero("All products",
@@ -485,6 +712,7 @@ def page_products(current: Page) -> str:
          "quoted, with its source; all trend data remains unverified and blank.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
+        + commission_category_note()
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
         'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
@@ -735,11 +963,19 @@ BODIES = {
 
 
 def render(page: Page) -> str:
-    nav_items = []
-    for target, label in NAV:
-        cls = ' class="active" aria-current="page"' if target == page.path else ""
-        nav_items.append(f'<a href="{esc(page.rel(target))}"{cls}>{esc(label)}</a>')
-    nav = "".join(nav_items)
+    nav_groups = []
+    for group, targets in NAV_ORDER:
+        items = []
+        for target in targets:
+            label = NAV_LABEL.get(target, target)
+            cls = ' class="active" aria-current="page"' if target == page.active else ""
+            items.append(f'<a href="{esc(page.rel(target))}"{cls}>{esc(label)}</a>')
+        nav_groups.append(
+            f'<div class="nav-group"><span class="nav-group-title">{esc(group)}</span>'
+            + "".join(items)
+            + "</div>"
+        )
+    nav = "".join(nav_groups)
     disclosure = (
         f'<div class="disclosure" role="note"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
         f'<span class="small">(Source: '
@@ -762,8 +998,8 @@ def render(page: Page) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{esc(page.title)} | {esc(SITE_TITLE_SUFFIX)}</title>
-<meta name="description" content="{esc(SITE_DESCRIPTION)}">
+<title>{esc(page.title_tag or page.title)} | {esc(SITE_TITLE_SUFFIX)}</title>
+<meta name="description" content="{esc(page.description or SITE_DESCRIPTION)}">
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
 <body>
@@ -789,21 +1025,41 @@ def render(page: Page) -> str:
 """
 
 
+def collect_pages() -> list[Page]:
+    """Every page on the site, in navigation order.
+
+    The article pages are derived from data/marketing.json, so a page can only
+    exist for an article that is actually in the data.
+    """
+    pages: list[Page] = []
+    for path, body_fn in BODIES.items():
+        page = Page(path, NAV_LABEL.get(path, path), path, "")
+        page.body = body_fn(page)
+        pages.append(page)
+    hub = Page(ARTICLES_HUB, NAV_LABEL[ARTICLES_HUB], ARTICLES_HUB, "")
+    hub.body = page_articles_index(hub)
+    pages.append(hub)
+    for a, path in ARTICLE_PATHS:
+        page = Page(path, article_label(a), path, "",
+                    description=a["meta_description"], title_tag=a["title_tag"])
+        page.body = page_article(page, a)
+        pages.append(page)
+    return pages
+
+
 def build() -> list[pathlib.Path]:
     OUT.mkdir(exist_ok=True)
     (OUT / "categories").mkdir(exist_ok=True)
+    (OUT / "articles").mkdir(exist_ok=True)
     written = []
-    for path, body_fn in BODIES.items():
-        title = next(label for target, label in NAV if target == path)
-        page = Page(path, title, path, "")
-        page.body = body_fn(page)
-        out = OUT / path
+    for page in collect_pages():
         html_text = render(page)
-        if path == "analytics.html":
+        if page.path == "analytics.html":
             html_text = html_text.replace(
                 "</body>",
                 f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
             )
+        out = OUT / page.path
         out.write_text(html_text, encoding="utf-8")
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")

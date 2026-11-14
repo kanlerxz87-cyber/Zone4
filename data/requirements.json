@@ -142,7 +142,7 @@
       "area": "Content generation",
       "requirement": "Generate SEO-optimized product articles.",
       "status": "Delivered",
-      "delivered": "Three product articles are published on the Marketing content page, one for each supplied product. Each has a suggested slug, a title tag, a meta description, an H1, three keyword targets with the search-volume cell left blank, an outline mapped to fact IDs, finished copy, a call to action carrying the disclosure, and a fact table in which every row links to its official source. 53 fact rows in total across the five pieces. The copy is written in this site's own words and republishes no Amazon listing prose.",
+      "delivered": "Three product articles are published on the Marketing content page, one for each supplied product. Each has a suggested slug, a title tag, a meta description, an H1, three keyword targets with the search-volume cell left blank, an outline mapped to fact IDs, finished copy, a call to action carrying the disclosure, and a fact table in which every row links to its official source. 53 fact rows in total across the five pieces. The copy is written in this site's own words and republishes no Amazon listing prose. Each piece is additionally published as its own page under /articles/ with its own title tag and meta description, and is listed in the articles hub grouped by product category.",
       "blocker": "No blocker for the articles themselves. Two limits still apply to the content and are recorded rather than worked around: the Amazon AI clauses restrict training or fine-tuning on Amazon content, not the writing of pages with an AI tool from verified fields (finding A-08), and no price, rating, review count or commission figure appears in any article because those are withheld (F-02, F-01). A human owner should still read the copy before publishing it.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
@@ -158,7 +158,7 @@
       "area": "Content generation",
       "requirement": "Generate product comparisons.",
       "status": "Delivered (partial)",
-      "delivered": "A comparison page is published on the Marketing content page, comparing the three supplied products on the attributes that were verified from their official pages: format, listed capacity, listed dimensions, listed colour, listed material, listed special features, control method and category path. Every row of its fact table links to its official source.",
+      "delivered": "A comparison page is published on the Marketing content page, comparing the three supplied products on the attributes that were verified from their official pages: format, listed capacity, listed dimensions, listed colour, listed material, listed special features, control method and category path. Every row of its fact table links to its official source. Each piece is additionally published as its own page under /articles/ with its own title tag and meta description, and is listed in the articles hub grouped by product category.",
       "blocker": "The comparison has no price, rating or review columns, because those are withheld under Sections 2(b) and 6(t). Section 2(b) also requires that a comparison format display both the lowest new and the lowest used Amazon price, which cannot be met without a Creators API or PA API feed.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -172,7 +172,7 @@
       "area": "Content generation",
       "requirement": "Generate buying guides.",
       "status": "Delivered",
-      "delivered": "A buying guide is published on the Marketing content page: a decision-oriented guide that walks through the three formats, states the verified specifications for each, and names the unresolved listing inconsistencies a buyer should know about. Every row of its fact table links to its official source.",
+      "delivered": "A buying guide is published on the Marketing content page: a decision-oriented guide that walks through the three formats, states the verified specifications for each, and names the unresolved listing inconsistencies a buyer should know about. Every row of its fact table links to its official source. Each piece is additionally published as its own page under /articles/ with its own title tag and meta description, and is listed in the articles hub grouped by product category.",
       "blocker": "No blocker for the guide itself. Participation Requirement 6(a) bars altering Program Content and Section 3(c) makes the Associate responsible for the accuracy of every product description posted on the site, so the guide cites verified fields only and links to the official pages rather than restating listing prose. No price, rating or commission figure appears in it (F-02, F-01).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -205,7 +205,7 @@
       "area": "Content generation",
       "requirement": "Create engaging marketing content.",
       "status": "Delivered (partial)",
-      "delivered": "The marketing content kit is published on the Marketing content page: three product articles, one comparison page, one buying guide, each with a title tag, meta description, keyword targets, finished copy and a call to action carrying the required disclosure, plus an eight-rule SEO checklist and a seven-step publishing checklist.",
+      "delivered": "The marketing content kit is published on the Marketing content page: three product articles, one comparison page, one buying guide, each with a title tag, meta description, keyword targets, finished copy and a call to action carrying the required disclosure, plus an eight-rule SEO checklist and a seven-step publishing checklist. Each piece is additionally published as its own page under /articles/ with its own title tag and meta description, and is listed in the articles hub grouped by product category.",
       "blocker": "Ad copy, email, social and landing-page copy are not produced. Any such content would be built on the withheld price, rating and commission data (F-01, F-02) and would need the REQ-01 compliance review first.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -436,7 +436,7 @@
       "area": "Delivery",
       "requirement": "Build marketing for the three supplied products.",
       "status": "Delivered",
-      "delivered": "All three supplied products have marketing: one article each, plus one comparison page covering all three and one buying guide covering the three formats, all published on the Marketing content page with sourced fact tables, title tags, meta descriptions, keyword targets and disclosure-carrying calls to action. Each product also has its own verified record on a category page with its disclosure and competitor context.",
+      "delivered": "All three supplied products have marketing: one article each, plus one comparison page covering all three and one buying guide covering the three formats, all published on the Marketing content page with sourced fact tables, title tags, meta descriptions, keyword targets and disclosure-carrying calls to action. Each product also has its own verified record on a category page with its disclosure and competitor context. Each piece is additionally published as its own page under /articles/ with its own title tag and meta description, and is listed in the articles hub grouped by product category.",
       "blocker": "No blocker. The marketing copy deliberately carries no price, rating, review count or commission figure, because those are withheld or unverified (F-01, F-02), and no Amazon listing prose is republished. An owner should read the copy before publishing it.",
       "sources": [
         "https://link.amazon/B04G1MEwY",
