@@ -11,7 +11,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Integration: PRs, merge to `main`, Pages deploy check | **done**; PRs #7, #8, #9 merged; Pages status `built` | arena/1eb689b8-zone4 | `COORDINATION.md`, GitHub Pages settings |
 | Final review and completion log | **done**; source limits and current-session checks recorded below | arena/00ba40db-zone4 | `COORDINATION.md` |
 | Re-verification of supplied links and Associates citations (2026-11-14) | **done**; PR [#14](https://github.com/kanlerxz87-cyber/Zone4/pull/14) merged at `074818c`; Pages `built` | arena/857e9efd-zone4 | `data/reverification-2026-11-14.json`, `COORDINATION.md` (log entry only). Shared `docs/`, `data/products.json` and `data/flags.json` are not touched; requests logged for the integration session |
-| Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; location and deployment statements corrected, site rebuilt/verified | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
+| Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
 
 ## Original PR #7 branch note (historical)
 
@@ -38,6 +38,7 @@ This session worked on the assigned active Arena branch `arena/00ba40db-zone4`. 
 - A second `git pull --rebase origin main` onto `eb4b84b` encountered the same `COORDINATION.md`-only overlap from PR #16 (marking PR #14 done). Preserved that completion and this audit; no other session’s scoped files were edited.
 - Deployment cross-check using GitHub API/CLI: Pages reports `built`, source `main` `/`, HTTPS enforced; latest Site checks [43583722827](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827) and Pages deploy [43583722287](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287) succeeded on `7ea516c`.
 - Validation: `python3 scripts/build_site.py`, `python3 scripts/verify.py`, and `git diff --check` passed; grep of `data/` and `docs/` found no Bucharest/Romania residue. The rest of the product data was not re-fetched from Amazon in this audit; prior product-field checks are recorded under session `arena/1eb689b8-zone4` and sources are linked in `data/sources.json`.
+- PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965020c574200bb24bd0808ada10975be58c` on 2026-11-14 10:10:59 UTC. Its Site checks run [43584048548](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048548) and Pages deployment [43584048157](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43584048157) both succeeded on the merge commit. GitHub Pages API confirms `built`, `main` `/`, HTTPS enforced; live URL: https://kanlerxz87-cyber.github.io/Zone4/.
 
 ### Session arena/1eb689b8-zone4 — claim (2026-11-14, UTC)
 
