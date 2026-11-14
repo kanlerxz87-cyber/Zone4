@@ -80,10 +80,10 @@
       "id": "F-09",
       "severity": "Medium",
       "title": "Snapshot was taken for a US delivery location",
-      "detail": "The product pages were read with a US delivery location set. The user is in Bucharest, Romania. Any price or availability would differ by location, and Amazon's returns and shipping terms are US-specific. Nothing location-specific is published.",
+      "detail": "The product-page snapshots were read with a US delivery location set. This does not establish the user's location or intended storefront. Prices and availability may vary by delivery location; no location-specific prices or availability are published.",
       "sources": ["https://www.amazon.com/dp/B0CDY277D3", "https://www.amazon.com/dp/B09B7SB46R", "https://www.amazon.com/dp/B08DKYBTPH"],
       "status": "Needs review",
-      "action": "Decide which Amazon marketplace the links should target (the Associates programme is country-specific)."
+      "action": "Confirm amazon.com is the intended storefront before promotion; if another marketplace is intended, verify its product links and local program terms."
     },
     {
       "id": "F-10",
@@ -115,11 +115,11 @@
     {
       "id": "F-13",
       "severity": "Medium",
-      "title": "Prior GitHub Pages workflow failed; Pages now uses main /docs",
-      "detail": "The prior session's 'Deploy static site to GitHub Pages' workflow failed before creating any jobs (its deploy job referenced a step output in the job-level environment URL). The repository Pages build was a legacy build from main root. This integration replaces that workflow with a checks-only workflow and moves the Pages source to main /docs.",
-      "sources": ["https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565"],
-      "status": "Fixed in this integration; needs review",
-      "action": "Confirm the live site after merge."
+      "title": "Earlier Pages workflow failure (resolved; root redirect is used)",
+      "detail": "An earlier 'Deploy static site to GitHub Pages' workflow failed before creating jobs. The repository's Pages source is main root (/); the root index redirects to docs/index.html. The failure was resolved by replacing the deployment workflow with site checks and confirming the subsequent Pages deployment succeeded (deployment details are in COORDINATION.md).",
+      "sources": ["https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43582130565", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722827", "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/43583722287"],
+      "status": "Resolved; historical record",
+      "action": "See COORDINATION.md for the successful deployment and site-check run links."
     },
     {
       "id": "F-14",
