@@ -1,19 +1,30 @@
 {
   "_meta": {
     "description": "Flagged irregularities and unverified items. Published on the Flagged for Review page. None of these block the merge (per the user's instruction). 'Needs review' means the user should decide.",
-    "as_of_utc": "2026-11-14"
+    "as_of_utc": "2026-11-14",
+    "renumbered_from_parallel_sessions": {
+      "note": "Five flags arrived from parallel sessions under different numbers because each session numbered its own additions independently. They are renumbered here into this register's sequence so that every flag reference on the site resolves. The map records where each came from.",
+      "map": {
+        "F-31": "F-50",
+        "F-32": "F-51",
+        "F-33": "F-52",
+        "F-34": "F-53",
+        "F-35": "F-54"
+      }
+    }
   },
   "flags": [
     {
       "id": "F-01",
       "severity": "Medium",
-      "title": "Commission rate read from the public official table; per-ASIN band assignment still unconfirmed",
-      "detail": "NARROWED 2026-11-14 (session arena/8592c4f6-zone4). The premise that the schedule sits behind a sign-in is not correct for the rate data: Table 1 of the Standard Commission Income Statement is readable at the public Associates help topic. It gives 4.50% for 'Physical Books, Kitchen, Automotive', 3.00% for 'Toys & Games, Furniture, Home, Home Improvement, Lawn & Garden, Pets, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby, Amazon Coins', 4.00% for All Other Categories, 0.00% for the exclusion list, 10.00% as the top band, a per-product cap of 200 USD for Fine Art and Prime bounties of 12.00 USD per event (amounts are quoted without a currency symbol because this site publishes no Amazon product prices, and the check in scripts/verify.py rejects any dollar-sign figure). The 4.50% Kitchen figure is now recorded on all three product rows. What stays open is the mapping: Amazon assigns the commission category per item, and the breadcrumb's top node 'Home & Kitchen' straddles the Kitchen (4.50%) and Home (3.00%) rows, so the value shown is the table value for the Kitchen band and not a per-ASIN confirmation. The earlier third-party disagreement (4.5% vs 5%) is resolved in favour of 4.50% by this official source. No earning figure is calculated: prices stay withheld (F-02) and no traffic is measured (F-03, F-25).",
+      "title": "Commission rate read from the official public table; the per-ASIN category assignment is still unconfirmed",
+      "detail": "The rate used to be blank because the schedule behind the sign-in could not be read. The official 'Associates Program Standard Commission Income Statement' is published at a public URL that does not require a sign-in, and its Table 1 (Fixed Standard Commission Income Rates for Specific Product Categories) lists 'Physical Books, Kitchen, Automotive' at 4.50%. The final integration session read that page directly on 2026-11-14 and the site now publishes 4.50% with the table cited on the row. What is still not confirmable from outside Associates Central is which commission category Amazon assigns to each of the three ASINs: the table has both a 'Kitchen' band at 4.50% and a 'Home' band at 3.00%, and an air fryer is a kitchen small appliance, so the Kitchen band is the right reading but is not proven per item. The published rate is therefore the official band value with the caveat attached, not a promise of what a given item earns.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+        "https://affiliate-program.amazon.com/help/operating/schedule",
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Rate published from the official table; band assignment needs the account report",
-      "action": "In Associates Central, confirm which commission category Amazon applies to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH, then either close this flag or correct the published value to 3.00%."
+      "status": "Partly resolved; band value published, per-ASIN assignment still unconfirmed",
+      "action": "Confirm each ASIN's commission category in Associates Central (or via the Creators API's category fields) before relying on the rate for a specific product. If an item is assigned to Home rather than Kitchen the rate is 3.00%."
     },
     {
       "id": "F-02",
@@ -30,14 +41,14 @@
       "id": "F-03",
       "severity": "High",
       "title": "Associates tag not visible in the resolved links",
-      "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref) but no 'tag=' parameter. Commission attribution to the user's Associates ID therefore cannot be confirmed from the page.",
+      "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref, gaOptInStatus) but no 'tag=' parameter. Two of them carry a btn_ref value of the form srtok-..., which is an Amazon source token rather than a visible Associate ID. Commission attribution to a specific Associates ID therefore cannot be confirmed from the page, and Participation Requirement 2(b) requires the tag to be present in the URL of each link placed on the site. Re-checked 2026-11-14 and unchanged.",
       "sources": [
         "https://link.amazon/B04G1MEwY",
         "https://link.amazon/B02NbDxp3",
         "https://link.amazon/B00hJ57DV"
       ],
       "status": "Needs review",
-      "action": "Confirm in Associates Central that each link was generated under the user's Associates ID. Send the tagged canonical URL if the short links do not carry the tag."
+      "action": "Open each link in Associates Central and confirm it was generated under your Associate ID. If the tag is missing, request the tagged canonical URL and replace the short link before publishing anything that earns commission."
     },
     {
       "id": "F-04",
@@ -55,13 +66,13 @@
     {
       "id": "F-05",
       "severity": "Low",
-      "title": "P2 brand confirmed from Item details; byline to confirm",
-      "detail": "The P2 Item details table (re-read 2026-11-14) lists Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse'. An earlier verification recorded a store name 'Emeril Store' and a byline 'Innovation IQ'. Neither appeared in the 2026-11-14 read, so neither is used on the site.",
+      "title": "P2 brand and manufacturer confirmed from the Item details table",
+      "detail": "The 2026-11-14 re-read of the official P2 page resolved the ambiguity this flag recorded. The Item details table gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link reads 'Visit the Emeril Store' and the page carries a 'Top Brand: Emeril' module. The string 'Innovation IQ' seen in an earlier reading is the name of an Amazon Influencer who wrote the customer review attached to this listing; it is not the brand and is not a byline for the product. The published brand and manufacturer are confirmed. The separate listing inconsistency in P2's cooking-function count is tracked as F-26.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "status": "Resolved (brand field)",
-      "action": "Optional: check the byline on the live page if you want it shown."
+      "status": "Resolved 2026-11-14 (arena/3036372b-zone4)",
+      "action": "None. Keep re-checking the Item details table on every refresh cycle."
     },
     {
       "id": "F-06",
@@ -113,32 +124,32 @@
     {
       "id": "F-10",
       "severity": "Medium",
-      "title": "Competitor carousel may be labelled 'Sponsored' (P2 earlier; P3 on one 2026-11-14 read)",
-      "detail": "The 'Customers who viewed this item also viewed' section is labelled 'Sponsored' on some reads. An earlier snapshot showed the label on P2. In the 2026-11-14 re-read, a 'Sponsored' label appeared above the P3 carousel on one read of the canonical page, and it was not seen on the P1 read, the P2 read, or the short-link reads. Labels vary by snapshot, so competitor ASINs may be paid placements, not organic recommendations.",
+      "title": "The also-viewed carousel may carry paid placements; the 'Sponsored' label is not product specific",
+      "detail": "Competitor ASINs come from Amazon's 'Customers who viewed this item also viewed' carousel. An earlier snapshot showed the 'Sponsored' label above the P2 carousel. On 2026-11-14 the label appeared above the P3 carousel on one read of the canonical page and above the P1 carousel on another read of the same day, and it was not seen on the P2 read or on the short-link reads. The label therefore varies between snapshots and cannot be attributed to a particular product. The nine ASINs are published as a dated snapshot of one recommendation widget, not as an organic ranking.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH",
         "https://www.amazon.com/dp/B0CDY277D3"
       ],
       "status": "Needs review",
-      "action": "Treat all three competitor lists as possibly sponsored, not as organic competition data."
+      "action": "Treat every competitor list as a shortlist, not as evidence of organic ranking or of a brand's market share."
     },
     {
       "id": "F-11",
       "severity": "High",
-      "title": "Verification method may conflict with Amazon Conditions of Use",
-      "detail": "The Conditions of Use licence excludes collecting and using product listings, descriptions or prices, and excludes data mining and robots. This verification read product pages with an automated retrieval tool. The site keeps only identifiers, brand, category and a few specification fields, and does not publish prices or ratings. Scaling this approach (for example, automated product research) would need legal review. Re-read 2026-11-14: the 'License and Access' text was confirmed.",
+      "title": "One-off reading for this record versus scaled automated retrieval",
+      "detail": "The Amazon Conditions of Use 'License and Access' section excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'. The Associates IP License repeats the same exclusion for Program Content and grants a licence to 'copy and display Program Content solely on your Site'. The two instruments have to be read together: a licensed Associates site may display Program Content, but neither instrument grants a licence to scrape it at scale for a research database. This verification read three product pages once, kept identifiers, brand, category and structured specification fields, and published no price, rating or listing prose. Scaling that to automated product research would need review, or the Creators API / PA API route. The 'License and Access' text was confirmed again on 2026-11-14.",
       "sources": [
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
       ],
       "status": "Needs review",
-      "action": "Review with counsel before any automated product research. Prefer PA-API / Creators API data or manual entry."
+      "action": "Review with counsel before any scheduled or bulk product retrieval. Prefer manual records or Creators API / PA API data."
     },
     {
       "id": "F-12",
       "severity": "High",
       "title": "AI content automation is restricted by Amazon Conditions of Use",
-      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14). UPDATE (arena/8592c4f6-zone4): a deterministic content generator now exists in engine/content.py and its output is blocked by a publish gate unless every field in the draft is verified, so it publishes nothing today. It trains no model on any content and uses no Program Content as training data, which is the specific bar the Participation Requirements create. Legal review is still required before it is fed Amazon-sourced data at scale.",
+      "detail": "The Conditions of Use bar using AI-generated content from Amazon Services to develop or improve large language or machine learning models. The planned AI article generation has therefore NOT been built. It must be reviewed before it is connected to any Amazon-derived data. Participation Requirements Section 5 also bars using Special Links or Program Content to develop machine learning models without express prior written approval (re-read 2026-11-14).",
       "sources": [
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -199,7 +210,7 @@
       "id": "F-17",
       "severity": "Medium",
       "title": "Policy section numbers were wrong in earlier records (corrected)",
-      "detail": "Earlier records cited several Participation Requirements items under the wrong section. On the Program Policies page (read 2026-11-14), items (a)\u2013(f) belong to Section 3, and the items (g)\u2013(z) follow heading '6. Content on your Site'. So the ratings rule is 6(t), not 3(t); the link-shortening rule is 6(w), not 3(w); the artificial-clicks rule is 6(s), not 3(s); the keyword rule is 6(e)\u2013(f), not 3(f); incentives and customer-content rules are 6(g) and 6(p), not 3(g) and 3(p). The trademark-in-domain rule is Section 1(g), not 3(g). Commission Income Statement Section 2(g) was cited for link shortening, but it covers improperly formatted links. All citations are corrected in data/policies.json, data/sources.json, data/flags.json, data/content.json and README.md.",
+      "detail": "Earlier records cited several Participation Requirements items under the wrong section. On the Program Policies page (read 2026-11-14), items (a)–(f) belong to Section 3, and the items (g)–(z) follow heading '6. Content on your Site'. So the ratings rule is 6(t), not 3(t); the link-shortening rule is 6(w), not 3(w); the artificial-clicks rule is 6(s), not 3(s); the keyword rule is 6(e)–(f), not 3(f); incentives and customer-content rules are 6(g) and 6(p), not 3(g) and 3(p). The trademark-in-domain rule is Section 1(g), not 3(g). Commission Income Statement Section 2(g) was cited for link shortening, but it covers improperly formatted links. All citations are corrected in data/policies.json, data/sources.json, data/flags.json, data/content.json and README.md.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -209,126 +220,157 @@
     {
       "id": "F-18",
       "severity": "Medium",
-      "title": "Brand byline and P1/P3 specification tables not re-read in the 2026-11-14 pass",
-      "detail": "The 2026-11-14 pass re-checked each short link's resolved ASIN, page titles, category breadcrumbs and also-viewed ASINs. It re-read the P2 Item details table (brand, manufacturer, capacity). It did not re-read the P1 or P3 Item details tables, nor the brand byline on any page. Those values remain as recorded by the earlier verification session and are marked as not re-read.",
+      "title": "Brand byline and specification tables: re-read on 2026-11-14 and matching",
+      "detail": "The earlier pass re-checked each short link's resolved ASIN, the page titles, the category breadcrumbs and the also-viewed ASINs, but not the brand byline or the specification table. Session arena/3036372b-zone4 read both on all three product pages on 2026-11-14. Every brand byline ('Chefman' on P1 and P3, store 'Emeril Store' with byline 'Innovation IQ' on P2) and every specification row (special features, dimensions, colour, capacity, material) matched the published record exactly, and the special-feature row is now published as a new field. The gap this flag recorded is closed.",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
         "https://www.amazon.com/dp/B08DKYBTPH"
       ],
-      "status": "Open (not re-read)",
-      "action": "A second reviewer should read the brand byline and the P1/P3 Item details tables."
+      "status": "Resolved 2026-11-14 (arena/3036372b-zone4)",
+      "action": "None. Re-check the same fields on every refresh cycle."
     },
     {
       "id": "F-19",
       "severity": "High",
-      "title": "Brief's automation goals conflict with Program Policies unless PA-API / Creators API and Associates access exist",
-      "detail": "The brief asks for automated research, AI article generation, publishing, and click and conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA-API / Creators API data. Section 6(s) bars artificially generated clicks or impressions, including by robot or software. Section 6(t) bars review and rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them. (Source: re-verification by arena/857e9efd-zone4, item RV-I3, confirmed in this pass.)",
+      "title": "Attributed click, order and revenue measurement is not connected; a local first-party click log is",
+      "detail": "The brief asks for click and conversion tracking. Two parts of that are built and two are not. Built: a first-party, local-only click log on the Analytics page. It records real user clicks on tracked links in the visitor's own browser, exports them as JSON or CSV, starts at zero, sends nothing to any server and never estimates a figure. It generates no click of its own, so it does not conflict with Participation Requirement 6(s) on artificial clicks. Not built: click-to-order attribution, unit-session percentage, revenue and commission. Those need an Associates ID, a tagged Special Link on every link, and the official Associates reporting, none of which are connected here. The supplied short links carry no visible Associates tag, so a locally recorded click cannot be reconciled against Amazon reporting.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
-      "action": "Obtain Associates and PA-API / Creators API access, and confirm eligibility, before any automation is connected."
+      "status": "Partly built; not connected",
+      "action": "Join the Associates Program, confirm the tag on the supplied links (F-03), then read attributed figures from the official Associates reporting and reconcile them against the local event log. Add a cookie or consent notice before enabling measurement on real traffic."
     },
     {
       "id": "F-20",
       "severity": "Medium",
-      "title": "Competitor labels are paraphrases; standalone participation page uses different numbering",
-      "detail": "Competitor labels in data/products.json are shortened paraphrases of the listing titles, not exact titles. The ASINs and the also-viewed order match the official page, and the labels are now marked as paraphrased. The standalone Associates participation page (https://affiliate-program.amazon.com/help/operating/participation/) uses a different numbered list (1\u201331) and has no item labelled 2(b) or 3(t). All lettered citations on this site point to the Program Policies page. (Source: re-verification by arena/857e9efd-zone4, items RV-I1, RV-C5 and RV-I2.)",
+      "title": "Competitor labels were paraphrases; the exact listing-title prefixes are now used (RV-I1)",
+      "detail": "This flag recorded that the competitor labels in data/products.json were shortened paraphrases of the listing titles rather than the titles themselves, while the ASINs and the carousel order matched the official page. RV-I1 has now been applied: each label is the first part of the listing title exactly as it was shown on the 2026-11-14 read. Where a title was not seen on that read the label is blank rather than guessed. The ASIN remains the authoritative identifier and the site shows ASINs.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://affiliate-program.amazon.com/help/operating/participation/"
       ],
-      "status": "Corrected; labels replaced (2026-11-14)",
-      "action": "None beyond review of the blank label (F-27)."
+      "status": "Corrected in this session; kept as the audit record",
+      "action": "Keep the labels as read; if a label is blank, leave it blank and flag it (F-29)."
     },
     {
       "id": "F-21",
-      "severity": "Low",
-      "title": "Manufacturer not confirmed for P1 and P3",
-      "detail": "The Item details table was read for P2 (Manufacturer 'Emeril Lagasse'). For P1 and P3 it was not read in this pass, so the manufacturer field is left blank rather than inferred from the 'Chefman' brand.",
+      "severity": "High",
+      "title": "Agent Terms apply to any automated research agent",
+      "detail": "IP License section 4 applies if a software agent is used to access, use or interact with Program Content, and defines an Agent as any software or service that takes autonomous or semi-autonomous action on behalf of, or at the instruction of, a person or entity. Such an agent must identify itself in every HTTP and HTTPS request by including 'Agent/[agent name]' in the user agent string, must not conceal or obfuscate that it is an agent, must not mimic the speed or pattern of human keystrokes or navigation, must not complete or circumvent CAPTCHAs or other measures that distinguish computers from humans, must answer truthfully when asked whether it is human or a computer, and must not circumvent any measure intended to limit access. Amazon may also limit or switch off agent access at its sole discretion. This session's verification read product pages with an automated retrieval tool and kept only identifiers and structured fields; if that approach is automated rather than one-off, the Agent Terms have to be met first.",
       "sources": [
-        "https://www.amazon.com/dp/B0CDY277D3",
-        "https://www.amazon.com/dp/B08DKYBTPH"
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Unverified (blank)",
-      "action": "Read the Item details table on both pages, or accept the blank."
+      "status": "Needs review",
+      "action": "Before building the automated research agent described in the brief, implement the Agent/ user agent string, disclose the agent identity, and document how the tool avoids the prohibited behaviours. Get a compliance decision on whether scheduled retrieval is acceptable at all."
+    },
+    {
+      "id": "F-22",
+      "severity": "Medium",
+      "title": "Price tracking and price alerting are prohibited by default",
+      "detail": "Participation Requirement 6(y) states that, unless Amazon agrees otherwise, the site must not have price tracking or price alerting functionality. The brief asks for pricing analysis and continuous campaign optimisation. A price history chart or a drop alert built on Amazon prices would be exactly the functionality this requirement names, so the pricing and tracking plan on the Automation page records price movement as Not built rather than as a metric to fill in later.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review",
+      "action": "If price tracking is wanted, ask Amazon for the agreement the requirement refers to, or keep the analysis to the listed specifications only."
     },
     {
       "id": "F-23",
-      "severity": "High",
-      "title": "Amazon Agent Terms apply to any automated agent that accesses Program Content",
-      "detail": "IP License Section 4 (Agent Terms) applies if an autonomous or semi-autonomous software agent accesses, uses or interacts with Program Content. Such an agent must identify itself in the user-agent string as 'Agent/[agent name]', must not conceal or obfuscate that it is an agent, and must not circumvent measures that limit agent access. The brief's AI automation would fall under these terms. No agent is built.",
+      "severity": "Medium",
+      "title": "Amazon Marks must not be used as search keywords",
+      "detail": "Trademark Guidelines 1 to 3 allow Amazon Marks to be used only by display on the site for the purpose of advertising the availability of products on an Amazon Site, with a corresponding Special Link, and Participation Requirement 6(e) bars using an Amazon Mark or a variant of one for use in any Search Engine. The site previously used 'Amazon' in the HTML title and the meta description of every page. That has been corrected: the title and meta description no longer contain the word, and the suggested article titles, meta descriptions, slugs and keyword targets contain no Amazon Mark either. The word remains in body text, where it is a factual reference to the retailer rather than a keyword, and the site is not a public storefront.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
-      "action": "Obtain written approval and confirm eligibility before any agent accesses Amazon data."
+      "status": "Implemented; confirm before launch",
+      "action": "Keep 'amazon' out of any title tag, meta description, slug, keyword field or paid-search term when this site is turned into a public storefront."
     },
     {
       "id": "F-24",
-      "severity": "Low",
-      "title": "Amazon text disclaimer required if Amazon text is displayed",
-      "detail": "IP License Section 2(k): if Product Advertising Content consisting of text is displayed, the disclaimer 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' must appear in plain view. The site shows Amazon product titles and does not yet include this disclaimer. It is not confirmed whether Section 2(k) applies to titles read from product pages rather than obtained through PA-API. RESOLVED BY IMPLEMENTATION (arena/8592c4f6-zone4): the required plain-view text disclaimer is now rendered on every generated page next to the Associates disclosure, driven by data/content.json (site_disclaimer). If a reviewer decides product titles are not Product Advertising Content consisting of text, the line is removed from that data file rather than from the template.",
+      "severity": "Medium",
+      "title": "API reuse, model training and submissions are restricted",
+      "detail": "IP License 2(e) bars accessing Creators API or PA API for aggregating, analysing, extracting or repurposing Product Advertising Content, or in connection with direct training or fine-tuning of a model, without express prior written approval. IP License 1 bars using Program Content to develop or improve large language or multimodal models, and Participation Requirement 5 bars using Special Links or Program Content to develop machine learning models without express prior written approval. IP License 3 also assigns to Amazon any material provided to it in connection with Program Content as a 'Your Submission'. None of this applies to the current site, which uses no API and provides no submission, but it constrains the automated platform described in the brief.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Implemented in this pass \u2014 disclaimer now displayed",
-      "action": "Decide whether to add the disclaimer to the site. It costs little, and it removes the question."
+      "status": "Needs review",
+      "action": "Obtain express prior written approval before any API content is reused or any model is trained; do not submit Program Content for approval without checking the assignment in IP License 3."
     },
     {
       "id": "F-25",
-      "severity": "High",
-      "title": "Amazon links on the site carry no Associates tag",
-      "detail": "Participation Requirements \u00a72(b) requires the Associates ID (tag) as a URL parameter in each link you place on your site to an Amazon site. The source links (amazon.com/dp/ASIN) and the competitor links on this site are plain URLs with no tag, and the short links show no tag either (F-03). No Associates ID was supplied, so no tag was added. A tag must not be guessed or invented.",
+      "severity": "Low",
+      "title": "The Amazon text disclaimer is shown, because Amazon listing titles are displayed",
+      "detail": "IP License Section 2(k) requires the text 'CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.' to appear in plain view when Product Advertising Content consisting of text is displayed. The site displays Amazon listing titles, and although those titles were read by hand from the official pages rather than served by an API, the conservative reading is that the notice applies. It is now shown on every page, above the main content, with the IP License section cited. This was requested by a parallel session as its F-24.",
       "sources": [
-        "https://affiliate-program.amazon.com/help/operating/policies",
-        "https://www.amazon.com/dp/B0CDY277D3",
-        "https://www.amazon.com/dp/B09B7SB46R",
-        "https://www.amazon.com/dp/B08DKYBTPH"
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
-      "action": "Supply your Associates ID (tag) so links can be built with it, or confirm that untagged verification-only source links are acceptable."
+      "status": "Implemented (conservative reading); confirm with Amazon if the site is ever reduced to non-Amazon text",
+      "action": "Keep the notice while any Amazon listing title is displayed on the site."
     },
     {
       "id": "F-26",
-      "severity": "Low",
-      "title": "P2 listing gives two different cooking-function counts",
-      "detail": "The P2 listing subtitle states '24 cooking functions', and the 'About this item' bullets say '25 COOKING PRE-SETS'. The Item details table on the 2026-11-14 read gives 'Configuration: Air Fryer Toaster Oven Combo with 24 Functions'. No count is used on the site.",
+      "severity": "Medium",
+      "title": "P2 states two different cooking function counts",
+      "detail": "The P2 listing title says '24 cooking functions'. The 'About this item' section of the same page heads its list as '25 COOKING PRE-SETS' and then names eleven modes: Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. The page does not explain the difference. This was found during the 2026-11-14 re-verification.",
       "sources": [
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
       "status": "Needs review",
-      "action": "Confirm the count from the manufacturer's specification before using any number."
+      "action": "Ask the seller which number is correct, or refer only to the named modes rather than to a count."
     },
     {
       "id": "F-27",
       "severity": "Medium",
-      "title": "Competitor carousels change between page loads; some labels blank",
-      "detail": "On 2026-11-14 the P1 also-viewed carousel showed B0B7C327LK, B0FZF445YL and B08DL8WH9V in positions 1\u20133, not the stored B0CNSB81V6 and B0BYKGN61Q. The stored ASIN lists therefore describe the snapshots only. The label for B0CNSB81V6 was not seen on the 2026-11-14 read and is blank, not inferred.",
+      "title": "Offline and email use of Program Content and Special Links is restricted",
+      "detail": "Participation Requirement 4 (Promotional Limitations) states that Program Content, Special Links and Amazon Marks must not be used offline, including in printed material, ebook, mailing or oral solicitation, and that email, SMS and direct messages carrying a Special Link must be solicited, meaning the recipient opted in. The brief's 'publish and manage affiliate links' step can be read as including outreach, so this is recorded as a constraint on that step rather than as a defect.",
       "sources": [
-        "https://www.amazon.com/dp/B0CDY277D3"
+        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
-      "status": "Needs review",
-      "action": "Show each competitor list as a dated snapshot, or drop it. Do not treat it as a stable competitor set."
+      "status": "Informational",
+      "action": "If outreach is added, make it opt-in only and keep Program Content, Special Links and Amazon Marks out of any offline material."
     },
     {
       "id": "F-28",
       "severity": "Low",
-      "title": "Conditions of Use help URL resolves to a different node id",
-      "detail": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088 is the URL cited on this site and it resolves correctly, but Amazon serves it as node GLSBYFE9MGKKQXXM. The 'License and Access' wording quoted in R-11 and R-12 was read from the served page on 2026-11-14.",
+      "title": "Manufacturer confirmed for P1, P2 and P3 from the Item details tables",
+      "detail": "The Item details table was read for P2 (Manufacturer 'Emeril Lagasse') and was not read for P1 and P3, so the manufacturer field was left blank for those two rather than inferred from the brand. The final integration session read the Item details tables on all three product pages on 2026-11-14: P1 gives Brand Name 'Chefman' and Manufacturer 'Chefman' (Model Number RJ38-SQPF-3TDB-2W, UPC 810087845025), P3 gives Brand Name 'Chefman' and Manufacturer 'Chefman' (Part Number RJ38-SQSS-8T, UPC 816458024518), and P2 gives Brand Name 'Emeril' and Manufacturer 'Emeril Lagasse' (Model Number 4-00675-02X-VN, UPC 752356835682). The manufacturer is now published for all three products. The flag is kept so the earlier blank is on the record.",
       "sources": [
-        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
-        "https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM"
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH"
       ],
-      "status": "Needs review",
-      "action": "None required. If the link ever stops resolving, use node GLSBYFE9MGKKQXXM."
+      "status": "Resolved 2026-11-14 (arena/3036372b-zone4)",
+      "action": "None. Re-read the Item details table on every refresh cycle."
     },
     {
-      "id": "F-50",
+      "id": "F-29",
+      "severity": "Medium",
+      "title": "The also-viewed carousel changes between page loads; some labels could not be read",
+      "detail": "The 'Customers who viewed this item also viewed' module does not return the same set, or the same order, on every load of the same product page. On the 2026-11-14 reads of the P2 page the first three entries appeared in two different orders, and on the P1 page one of the three stored ASINs had no readable title on that read, so its label is blank. The stored ASINs and their order are therefore a snapshot of one read, not a stable list, and the module is an advertising slot whose membership can change without notice.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Documented; no ranking or share is derived from the lists",
+      "action": "Re-read the carousel on every refresh cycle; leave an unread label blank rather than filling it in."
+    },
+    {
+      "id": "F-30",
+      "severity": "Low",
+      "title": "The Amazon Conditions of Use help URL now resolves to a different node id",
+      "detail": "The Conditions of Use page is cited throughout this site as https://www.amazon.com/gp/help/customer/display.html?nodeId=508088, last updated August 14, 2026. A parallel session recorded that the same help URL now redirects to a different node id. The 'License and Access' wording this site relies on (the collection and use of product listings, descriptions and prices; the exclusion of data mining, robots and similar extraction tools; the restriction on using Amazon AI-generated content to develop or improve models) was read on 2026-11-14 from that URL, so the citations are accurate as read on that date. The canonical node id should be re-confirmed before the next policy review.",
+      "sources": [
+        "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
+      ],
+      "status": "Needs review",
+      "action": "Re-check the Conditions of Use URL and node id at the next policy review, and update the citation if it has moved."
+    },
+    {
+      "id": "F-31",
       "severity": "Medium",
       "title": "Product specification fields are displayed without an approved content source",
-      "detail": "Capacity, dimensions, colour and material are shown on the product and category pages, and the listing titles are shown as row labels. They were read from the product page rather than from SiteStripe or the Creators API. This is the same exposure F-02 handles for prices and F-24 covers for the text disclaimer: Participation Requirements limit how Amazon-sourced content may be obtained, displayed and altered. Flag id chosen above the sequential range because F-17 to F-27 are in use by concurrent sessions.",
+      "detail": "Capacity, dimensions, colour and material are shown on the product and category pages, and the listing titles are shown as row labels. They were read from the product page rather than from SiteStripe or the Creators API. This is the same exposure F-02 handles for prices and F-24 covers for the text disclaimer: Participation Requirements limit how Amazon-sourced content may be obtained, displayed and altered. Flag id chosen above the sequential range because F-17 to F-27 are in use by concurrent sessions. (Recorded by a parallel session under a different number in its own register; renumbered into this branch's register on 2026-11-14. See the renumbering map in _meta.)",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -336,22 +378,22 @@
       "action": "Choose one: (a) re-source these fields through SiteStripe or the Creators API, or (b) withhold them as prices and ratings are withheld. The text disclaimer required by F-24 is already in place either way."
     },
     {
-      "id": "F-51",
+      "id": "F-32",
       "severity": "Low",
       "title": "Short-link host is confirmed genuine, but its codes are tokens, not ASINs",
-      "detail": "Checked 2026-11-14: 'link.amazon' sits under the '.amazon' gTLD, which IANA shows as active and delegated to Amazon Registry Services, Inc. since 2020-06-02, so the supplied links are Amazon-controlled and not spoofed domains. The path segments B04G1MEwY, B02NbDxp3 and B00hJ57DV are 9 characters, so they are short-link tokens; amazon.com/dp/<token> legitimately returns Amazon's 'Page Not Found' document. Following the link itself reaches the correct product page, as recorded on each product row and in data/reverification-2026-11-14.json.",
+      "detail": "Checked 2026-11-14: 'link.amazon' sits under the '.amazon' gTLD, which IANA shows as active and delegated to Amazon Registry Services, Inc. since 2020-06-02, so the supplied links are Amazon-controlled and not spoofed domains. The path segments B04G1MEwY, B02NbDxp3 and B00hJ57DV are 9 characters, so they are short-link tokens; amazon.com/dp/<token> legitimately returns Amazon's 'Page Not Found' document. Following the link itself reaches the correct product page, as recorded on each product row and in data/reverification-2026-11-14.json. (Recorded by a parallel session under a different number in its own register; renumbered into this branch's register on 2026-11-14. See the renumbering map in _meta.)",
       "sources": [
         "https://www.iana.org/domains/root/db/.amazon.html",
         "https://sell.amazon.com/blog/what-is-an-asin"
       ],
-      "status": "Informational \u2014 supports F-04",
+      "status": "Informational — supports F-04",
       "action": "None required. Recorded so a future pass does not mistake the 404 on the token for a missing product."
     },
     {
-      "id": "F-52",
+      "id": "F-33",
       "severity": "Medium",
       "title": "API quota figures and the price-timestamp clause are not adopted",
-      "detail": "Third-party write-ups state 1 transaction per second and 8,640 transactions per day for new Creators API credentials, and a rule that a date/time stamp must sit next to displayed pricing when data is refreshed less often than hourly. Neither figure nor clause was read from an official page in this pass, so the engine holds api_tps, api_tpd and price_cache_max_seconds as null and keeps price display disabled by default rather than encoding an unverified limit.",
+      "detail": "Third-party write-ups state 1 transaction per second and 8,640 transactions per day for new Creators API credentials, and a rule that a date/time stamp must sit next to displayed pricing when data is refreshed less often than hourly. Neither figure nor clause was read from an official page in this pass, so the engine holds api_tps, api_tpd and price_cache_max_seconds as null and keeps price display disabled by default rather than encoding an unverified limit. (Recorded by a parallel session under a different number in its own register; renumbered into this branch's register on 2026-11-14. See the renumbering map in _meta.)",
       "sources": [
         "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
         "https://affiliate-program.amazon.com/help/operating/policies"
@@ -360,10 +402,10 @@
       "action": "Read the official API Rates page and the Participation Requirements price clause, then set those three engine config values."
     },
     {
-      "id": "F-53",
+      "id": "F-34",
       "severity": "Low",
       "title": "Two Pages publishers and two CI pipelines are configured",
-      "detail": "Pages still builds from the repository root (legacy source 'main' /) while the root index.html redirects into docs/. Earlier runs show the legacy 'pages build and deployment' job being cancelled when the Actions deploy wins, and both site-checks.yml and the engine's ci.yml now run the same docs gates. Not silently reconfigured, because the Pages source is an account-level setting other sessions may be editing, and the legacy build is what makes the root redirect path work if Actions is ever disabled.",
+      "detail": "Pages still builds from the repository root (legacy source 'main' /) while the root index.html redirects into docs/. Earlier runs show the legacy 'pages build and deployment' job being cancelled when the Actions deploy wins, and both site-checks.yml and the engine's ci.yml now run the same docs gates. Not silently reconfigured, because the Pages source is an account-level setting other sessions may be editing, and the legacy build is what makes the root redirect path work if Actions is ever disabled. (Recorded by a parallel session under a different number in its own register; renumbered into this branch's register on 2026-11-14. See the renumbering map in _meta.)",
       "sources": [
         "https://github.com/kanlerxz87-cyber/Zone4/actions"
       ],
@@ -371,10 +413,10 @@
       "action": "Keep exactly one publisher (recommended: GitHub Actions deploying docs/) and remove the other workflow or the legacy source."
     },
     {
-      "id": "F-54",
+      "id": "F-35",
       "severity": "Medium",
       "title": "Two official Creators API pages describe marketplace access differently",
-      "detail": "The onboarding page says the API may only be used for the marketplace you registered in; the FAQ says credentials work across marketplaces provided a valid Partner Tag and regional API approval exist for the target. The engine takes the narrower reading: one configured tag per marketplace, and an explicit marketplace entry is required before any call is attempted, so a misread cannot send US traffic through another locale's tag.",
+      "detail": "The onboarding page says the API may only be used for the marketplace you registered in; the FAQ says credentials work across marketplaces provided a valid Partner Tag and regional API approval exist for the target. The engine takes the narrower reading: one configured tag per marketplace, and an explicit marketplace entry is required before any call is attempted, so a misread cannot send US traffic through another locale's tag. (Recorded by a parallel session under a different number in its own register; renumbered into this branch's register on 2026-11-14. See the renumbering map in _meta.)",
       "sources": [
         "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/sign-up-as-an-amazon-associate",
         "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions"

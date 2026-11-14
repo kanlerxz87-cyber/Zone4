@@ -2,71 +2,85 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
-**Live site (GitHub Pages, `main` branch; the root redirects to `docs/`):** https://kanlerxz87-cyber.github.io/Zone4/
+**Live site (GitHub Pages):** https://kanlerxz87-cyber.github.io/Zone4/
+
+The repository's Pages source is `main` `/` (legacy build). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. Setting the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
 
 ## What is in the repo
 
 | Path | Purpose |
 |---|---|
-| `data/products.json` | Verified product records (ASIN, brand, category, specifications, competitor ASINs) |
-| `data/requirements.json` | Every requirement in the project brief, with its delivery status and the official source for that status |
-| `data/sources.json` | Source registry: each official source, and whether it was read |
-| `data/policies.json` | Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | Irregularities and unverified items (Flagged for Review) |
-| `data/content.json` | Executive summary, analysis findings, category text |
-| `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations (2026-11-14), with the integration correction note |
+| `data/products.json` | Verified product records (ASIN, brand, manufacturer, model, category, specifications, competitor ASINs) |
+| `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
+| `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
+| `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
+| `data/sources.json` | Source registry (27 entries): each official source, and whether it was read |
+| `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
+| `data/flags.json` | 35 irregularities and unverified items (Flagged for Review) |
+| `data/content.json` | Executive summary, 15 analysis findings, category text |
+| `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
+| `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
-| `docs/` | The published site |
+| `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
+| `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
+| `tests/test_engine.py` | 81 unit tests for the engine |
+| `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
+| `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
+| `docs/` | The published site (15 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
+| `.github/workflows/qa.yml` | CI: independent QA audit of the committed site |
 | `COORDINATION.md` | Shared task board and work log for all sessions |
-| `engine/` | Automation layer: verification, economics, scoring, drafting, link safety, tracking, compliance gates |
-| `data/engine-*.json` | The engine's own sources, program facts and verification ledger (kept separate from the site data) |
-| `data/reverification-2026-11-14.json` | Independent re-verification log of the three links and the citations |
-| `tests/test_engine.py` | 81 tests, including guards that `docs/` stays buildable and verifiable |
-| `tools/check_links.py` | Site integrity checker for the engine's preview build |
-| `.github/workflows/ci.yml` | CI: runs both pipelines (engine and published site) |
 
-## Requirements traceability
+## Site pages
 
-The Requirements page (`docs/requirements.html`) maps all 30 items in the project brief to one of five statuses
-(Delivered, Delivered (partial), Not built - blocked (policy), Not built - needs access, Unverifiable (blank + flagged)),
-each with the official source for that status. Blocked rows name the rule that gates them, for example Participation
-Requirements Section 6(y), which states that the Site must not have price tracking or price alerting functionality.
+| Page | What it holds |
+|---|---|
+| `index.html` | Dashboard: KPIs, key findings, navigation cards |
+| `executive-summary.html` | Headline findings, decisions needed, and what is not built |
+| `requirements.html` | All 30 brief items: delivered, blocked or unverifiable, each with the official source |
+| `products.html` | All three products, one row each, every row linked to its source |
+| `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
+| `marketing.html` | Ready-to-publish articles, comparison page and buying guide, with a fact table per page |
+| `automation.html` | Pipeline stages, tracking metrics, optimisation loop and the Agent Terms |
+| `analysis.html` | 15 findings with their basis, confidence and source links |
+| `verification.html` | Field-by-field verification log for every product |
+| `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
+| `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
+| `flagged.html` | Flagged for Review: 35 irregularities and unverified items |
+| `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
 
 ```bash
-python3 scripts/build_site.py
-python3 scripts/verify.py
-git diff --exit-code -- docs    # the build must be deterministic
+python3 scripts/build_site.py     # regenerate docs/ from data/
+python3 scripts/verify.py         # data + page checks
+python3 qa/audit_site.py          # independent audit of the committed HTML
 
-python3 -m unittest discover -s tests   # engine + integration guards
-python3 -m engine.cli build             # writes the gitignored preview in build/site-preview
-python3 tools/check_links.py            # checks that preview
+python3 -m unittest discover -s tests   # 81 engine tests
+python3 -m engine.cli status            # what is verified, withheld or blocked
+python3 -m engine.cli audit             # compliance gate on the engine's drafts
+python3 tools/check_links.py            # link and per-row sourcing check
 ```
 
-To read a fact or a rate the engine has already verified, without building anything:
+The engine is offline by default: with no OAuth credentials it raises rather than returning stand-in data, and its network probe path degrades to
+`BLOCKED` so that "Amazon has no such page" stays distinct from "this environment cannot reach the network". Any request it does make identifies itself
+as `Agent/zone4-research`, as the Agent Terms in IP License Section 4(c) require.
 
-```bash
-python3 -m engine.cli status
-python3 -m engine.cli rates --category Kitchen
-python3 -m engine.cli audit --strict
-```
-
-## Pages
-
-GitHub Pages is a legacy build of `main` `/` (the repository's Pages source). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. `scripts/verify.py` fails if the redirect is missing. Switching the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless. Every push to `main` rebuilds the site.
+The verifier fails the build if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, if a marketing fact row is never cited by a paragraph, or if a requirement row has an undeclared status, no source, or no evidence for its status. The QA audit re-checks the committed HTML on its own, so a hand-edit or a stale commit is caught too.
 
 ## Limits
 
-- Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or PA-API / Creators API data.
-- Commission rates are **published from the official rate table**: 4.50% is the Standard Commission Income Statement value for the Kitchen band ([source](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ)), recorded on each product row. Which band Amazon applies to a given ASIN is still open (F-01): the breadcrumb top node *Home & Kitchen* straddles the Kitchen (4.50%) and Home (3.00%) rows, and the account's report is the authority. No earning figure is derived, because prices are withheld and no traffic is measured.
+- Amazon prices and star ratings are **not published**. Associates Participation Requirements 2(b) and 6(t) restrict them to Amazon-served links or Creators API / PA API data.
+- The commission rate is published as **4.50%**, the official Table 1 rate for the Kitchen band, read directly from the public Standard Commission
+  Income Statement. Which band Amazon assigns to each individual ASIN is not confirmable from outside Associates Central, so that caveat is on the row.
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
-- Automated research, AI article generation, price tracking and affiliate click/conversion tracking are **not built**. They are gated by Participation Requirements Sections 5, 6(s) and 6(y), the Conditions of Use AI clause and the IP License Agent Terms. The Requirements page names the blocking rule for each item; see also `data/content.json` (`not_built`) and `data/flags.json`.
+- Attributed click, order, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated. The Analytics page records first-party clicks in the visitor's own browser and publishes no attributed figure.
+- Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
+- Price tracking and price alerting are **not built**: Participation Requirement 6(y) prohibits them unless Amazon agrees otherwise.
 
-Start with `flagged.html` on the live site for the items that need your decision.
+Start with `flagged.html` on the live site for the items that need your decision, and `requirements.html` for the brief-by-brief delivery status.
 
 The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."

@@ -101,7 +101,8 @@ class PageParser(HTMLParser):
         self.bad_rows: list[int] = []
         self.row_texts: list[str] = []
         self.row_text: list[str] | None = None
-        self.shop_links: list[tuple[str, int]] = []     # (href, row number)
+        self.shop_links: list[tuple[str, int]] = []     # (href, row number; 0 = outside any table row)
+        self.current_row_no = 0                          # row number of the row being parsed, 0 outside a row
         self.tables = 0
         self.tables_with_thead = 0
         self.current_table_has_thead = False
@@ -139,7 +140,9 @@ class PageParser(HTMLParser):
                         self.aria_current.append(url)
                     cls = a.get("class") or ""
                     if "shop" in cls.split():
-                        self.shop_links.append((url, self.rows_total))
+                        # row 0 means the link is not inside a table row at all; the
+                        # page-global row counter must not be used for that case.
+                        self.shop_links.append((url, self.current_row_no))
         if tag == "nav":
             self.in_nav = True
         if tag == "table":
@@ -155,6 +158,7 @@ class PageParser(HTMLParser):
             self.row_links = []
             self.row_text = []
             self.rows_total += 1
+            self.current_row_no = self.rows_total
         if tag == "a" and self.row_links is not None:
             url = a.get("href")
             if url:
@@ -172,6 +176,7 @@ class PageParser(HTMLParser):
             self.in_tbody = False
         if tag == "tr" and self.row_links is not None:
             row_no = self.rows_total
+            self.current_row_no = 0
             if not any((urlparse(h).hostname or "") in OFFICIAL_HOSTS for h in self.row_links):
                 self.bad_rows.append(row_no)
             self.row_links = None
@@ -320,11 +325,13 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     for href, row_no in sp.shop_links:
         if href not in short_links:
             fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
-        if 1 <= row_no <= len(sp.row_texts):
+        if row_no == 0:
+            warn(f"{rel}: shop link outside a table row (link-level disclosure not checked): {href}")
+        elif 1 <= row_no <= len(sp.row_texts):
             if DISCLOSURE not in sp.row_texts[row_no - 1]:
                 fail(f"{rel}: shop link in table row {row_no} lacks the disclosure sentence in the same row")
         else:
-            warn(f"{rel}: shop link outside a table row (link-level disclosure not checked): {href}")
+            warn(f"{rel}: shop link in row {row_no} could not be matched to a table row: {href}")
 
 
 def check_products_coverage(asins: set[str], short_links: set[str]) -> None:

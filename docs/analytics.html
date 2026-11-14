@@ -3,53 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Analytics | Amazon affiliate product research</title>
-<meta name="description" content="First-party click tracking for the affiliate research site. Starts at zero; no fabricated data; conversion attribution requires Amazon Associates reporting.">
+<title>Analytics | Zone4 affiliate research</title>
+<meta name="description" content="Verified affiliate research on three countertop air fryers: product records, marketing content, analysis, policy checks and an official source link on every table row.">
 <link rel="stylesheet" href="styles.css">
-<style>
-.btnrow { display: flex; gap: 9px; flex-wrap: wrap; margin: 12px 0 4px; }
-.btn { border: 1px solid var(--line); background: #fff; color: var(--accent); font: 600 13px system-ui, sans-serif; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
-.btn:hover { background: #eef3fb; }
-.btn.danger { color: var(--bad-ink); }
-.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="layout">
 <aside class="sidebar">
   <a class="brand" href="index.html">Affiliate research</a>
-  <nav aria-label="Main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="products.html">All products</a><a href="categories/dual-basket-air-fryers.html">Dual-basket air fryers</a><a href="categories/single-basket-air-fryers.html">Single-basket air fryers</a><a href="categories/air-fryer-toaster-ovens.html">Air-fry toaster ovens</a><a href="analysis.html">Analysis &amp; findings</a><a href="verification.html">Verification log</a><a href="policy-compliance.html">Policy compliance</a><a href="analytics.html" class="active" aria-current="page">Analytics</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
+  <nav aria-label="Main"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="products.html">All products</a><a href="categories/dual-basket-air-fryers.html">Dual-basket air fryers</a><a href="categories/single-basket-air-fryers.html">Single-basket air fryers</a><a href="categories/air-fryer-toaster-ovens.html">Air-fry toaster ovens</a><a href="marketing.html">Marketing content</a><a href="automation.html">Automation &amp; tracking</a><a href="analysis.html">Analysis &amp; findings</a><a href="requirements.html">Requirements</a><a href="verification.html">Verification log</a><a href="policy-compliance.html">Policy compliance</a><a href="analytics.html" class="active" aria-current="page">Analytics</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a></nav>
 </aside>
 <div class="content">
 <div class="disclosure" role="note"><strong>Disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. <span class="small">(Source: <a href="https://affiliate-program.amazon.com/help/operating/agreement" rel="noopener noreferrer">Associates Operating Agreement, Section 5</a>) This site is not endorsed by or affiliated with Amazon.</span></div>
+<div class="disclosure" role="note"><strong>Amazon content notice:</strong> CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME. <span class="small">(Source: <a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener noreferrer">IP License, Section 2(k)</a>)</span></div>
 <main id="main">
-<header class="hero"><h1>Clicks &amp; conversions</h1><p class="lead">A first-party, local-only tracker that starts at zero and records only real or explicitly labeled test events. Nothing here is estimated: Amazon-side conversion attribution (orders, commission income) requires an Associates account and its official reporting, which are not connected.</p></header><section class="kpis"><div class="kpi"><div class="kpi-value" id="m-clicks">0</div><div class="kpi-label">Tracked clicks in this browser (real clicks on tracked links)</div></div><div class="kpi"><div class="kpi-value" id="m-events">0</div><div class="kpi-label">All events recorded locally (clicks + labeled test events)</div></div><div class="kpi"><div class="kpi-value">—</div><div class="kpi-label">Conversions: requires Associates reporting (not connected; see <a href="flagged.html">F-03</a>)</div></div><div class="kpi"><div class="kpi-value" id="m-last">—</div><div class="kpi-label">Last event (UTC)</div></div></section>
-<section>
-<h2>Click event log</h2>
-<p>Events are stored in this browser only (localStorage); nothing is transmitted anywhere by this page. Export before clearing your browser data.</p>
-<p id="log-empty" class="small muted">No events recorded yet — rows appear below when the tracker records a real or explicitly labeled test event. No data is invented.</p>
-<div class="table-wrap"><table><thead><tr><th scope="col">Timestamp (UTC)</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">ASIN</th></tr></thead><tbody id="event-rows"></tbody></table></div>
-<div class="btnrow"><button class="btn" id="btn-test" type="button">Add labeled test event</button><button class="btn" id="btn-export-json" type="button">Export JSON</button><button class="btn" id="btn-export-csv" type="button">Export CSV</button><button class="btn danger" id="btn-clear" type="button">Clear log</button></div>
-<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be verified end-to-end; it is never counted as a product click. Real product clicks are recorded automatically when a visitor activates any element carrying <code>data-track</code> attributes — none are placed on this site yet, because no compliant Special Link exists (see <a href="flagged.html">flag F-03</a>).</p>
-</section>
-<section>
-<h2>Connecting real measurement (no steps pre-completed)</h2>
-<ul class="bullets">
-<li>Join the Amazon Associates Program with the final site and receive an Associates ID/tag; links must use the tagged Special Link formats (see <a href="policy-compliance.html">Policy compliance</a>).</li>
-<li>Place tracked links with <code>data-track</code> attributes; this page then logs clicks locally and independently of Amazon.</li>
-<li>Authoritative click, order and commission figures come from <a href="https://affiliate-program.amazon.com/" rel="noopener noreferrer">Associates Central reporting</a>.</li>
-<li>Programmatic product data must target the Creators API — PA-API 5 is deprecated (<a href="https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation" rel="noopener noreferrer">official notice</a>; see <a href="flagged.html">flag F-16</a>).</li>
-<li>Add a cookie/consent notice appropriate to your audience before enabling any measurement on real traffic, per the disclosure expectations in the <a href="https://affiliate-program.amazon.com/help/operating/policies" rel="noopener noreferrer">Participation Requirements</a> and applicable law.</li>
-</ul>
-</section>
-<p class="muted small">This page does not display Amazon prices or ratings (withheld under flags F-02/F-16 policy scope). Verified product facts live in the <a href="verification.html">verification log</a>.</p>
+<header class="hero"><h1>Clicks &amp; conversions</h1><p class="lead">A first-party, local-only click tracker. It starts at zero, records only real clicks on tracked links plus one clearly labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official Associates reporting and are not connected here.</p></header><section class="kpis"><div class="kpi"><div class="kpi-value" id="m-clicks">0</div><div class="kpi-label">Real user clicks recorded in this browser</div></div><div class="kpi"><div class="kpi-value" id="m-events">0</div><div class="kpi-label">Clicks plus explicitly labelled test events</div></div><div class="kpi"><div class="kpi-value" id="m-conv">—</div><div class="kpi-label">Requires Associates reporting (not connected). See F-19</div></div><div class="kpi"><div class="kpi-value" id="m-last">—</div><div class="kpi-label">Timestamp of the most recent local event</div></div></section><section><h2>Click event log</h2><p>Events are stored in this browser only (<code>localStorage</code>). This page sends nothing anywhere. Export the log before clearing browser data.</p><p id="log-empty" class="small muted">No events recorded yet. Rows appear below when the tracker records a real click or the labelled test event.</p><div class="table-wrap"><table><thead><tr><th scope="col">Timestamp (UTC)</th><th scope="col">Type</th><th scope="col">Target</th><th scope="col">ASIN</th></tr></thead><tbody id="event-rows"></tbody></table></div><div class="btnrow"><button class="btn" id="btn-test" type="button">Add labelled test event</button><button class="btn" id="btn-export-json" type="button">Export JSON</button><button class="btn" id="btn-export-csv" type="button">Export CSV</button><button class="btn danger" id="btn-clear" type="button">Clear log</button></div><p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the product links on this site do.</p><p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see <a class="flag-chip" href="flagged.html#F-03">F-03</a>).</p></section><section><h2>Connecting real measurement</h2><ul class="bullets"><li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see <a href="policy-compliance.html">Policy compliance</a>).</li><li>Confirm the tag on the supplied short links before relying on any earnings (see <a href="flagged.html">F-03</a>).</li><li>Authoritative click, order and commission figures come from the official <a href="https://affiliate-program.amazon.com/" rel="noopener noreferrer">Associates Central reporting</a>.</li><li>Product data served from Amazon must come through the Creators API, and reusing or fine-tuning on API content needs express prior written approval (see <a href="flagged.html">F-24</a>).</li><li>Price tracking and price alerting are prohibited unless Amazon agrees otherwise, so no price history is collected here (see <a href="flagged.html">F-22</a>).</li><li>Add a cookie or consent notice appropriate to your audience before enabling measurement on real traffic, consistent with the disclosure expectations in the official Program Policies and applicable law.</li></ul></section><p class="muted small">This page displays no prices, ratings or review counts (withheld under <a href="flagged.html">F-02</a>). Verified product facts live in the <a href="verification.html">verification log</a>.</p>
 </main>
 <footer>
   <p class="small">Data observed 2026-11-14 (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>
 </div>
+<script src="app.js"></script>
 <script src="tracker.js"></script>
 </body>
 </html>

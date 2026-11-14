@@ -20,7 +20,10 @@ from .datastore import PRODUCT_FIELDS, Datastore
 from .links import build_link
 
 AMAZON_404_MARKER = "Sorry! We couldn't find that page"
-USER_AGENT = "zone4-research/0.1 (evidence-first affiliate research)"
+# IP License Section 4(c): any agent that accesses Program Content must put
+# "Agent/[agent name]" in the user agent string of every HTTP and HTTPS request,
+# and must not conceal that it is an agent. Flag F-21.
+USER_AGENT = "Agent/zone4-research (evidence-first affiliate research)"
 
 
 @dataclass

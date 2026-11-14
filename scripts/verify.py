@@ -3,10 +3,13 @@
 
 Checks:
   1. data/*.json: ASIN format; canonical URL matches ASIN; short links on link.amazon;
-     every flag reference exists; every source URL is on an official host.
+     every flag reference exists; every source URL is on an official host; every fact,
+     keyword, stage, metric and rule in the marketing and pipeline files is sourced;
+     every marketing article has a fact table, a disclosure and a compliant CTA.
   2. docs/*.html: every internal link and #anchor resolves; the Associates disclosure
      sentence appears on every page; every table body row contains a link to an
-     official host; no Amazon price or star rating is published.
+     official host; no Amazon price or star rating is published; no Amazon Mark is
+     used as a page title, meta description or target keyword.
 Standard library only. No network access is needed.
 """
 from __future__ import annotations
@@ -36,6 +39,9 @@ DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
 RATING_RE = re.compile(r"\b\d\.\d\s*(out of 5|stars?)\b", re.IGNORECASE)
+# Trademark Guidelines 1-3 and Participation Requirement 6(e): an Amazon Mark is not
+# used as a page title, a meta description or a target keyword.
+MARK_RE = re.compile(r"\bamazon\b|\bamaozn\b|\bammazon\b|\bkindle\b", re.IGNORECASE)
 
 failures: list[str] = []
 
@@ -48,21 +54,23 @@ def load(name: str):
     return json.loads((DATA / name).read_text(encoding="utf-8"))
 
 
+def is_official(url: str) -> bool:
+    return (urlparse(url).hostname or "") in OFFICIAL_HOSTS
+
+
 def check_data() -> None:
     products = load("products.json")["products"]
     flags = {f["id"] for f in load("flags.json")["flags"]}
     sources = load("sources.json")
     for src in sources["sources"]:
-        host = urlparse(src["url"]).hostname or ""
-        if host not in OFFICIAL_HOSTS:
+        if not is_official(src["url"]):
             fail(f"source {src['id']} is not on an official host: {src['url']}")
     for rule in load("policies.json")["rules"]:
-        host = urlparse(rule["source_url"]).hostname or ""
-        if host not in OFFICIAL_HOSTS:
+        if not is_official(rule["source_url"]):
             fail(f"policy {rule['id']} source is not official: {rule['source_url']}")
     for f in load("flags.json")["flags"]:
         for u in f["sources"]:
-            if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
+            if not is_official(u):
                 fail(f"flag {f['id']} has a non-official source: {u}")
     for p in products:
         if not ASIN_RE.match(p["asin"]):
@@ -71,40 +79,88 @@ def check_data() -> None:
             fail(f"{p['id']}: canonical URL does not match ASIN")
         if urlparse(p["short_link"]).hostname != "link.amazon":
             fail(f"{p['id']}: short link is not on link.amazon")
+        if not p.get("special_feature"):
+            fail(f"{p['id']}: special_feature is empty")
         for c in p["competitors"]:
             if not ASIN_RE.match(c["asin"]):
                 fail(f"{p['id']}: competitor ASIN malformed: {c['asin']}")
+            if not is_official(c["url"]):
+                fail(f"{p['id']}: competitor URL is not official: {c['url']}")
         for fid in p["flags"]:
             if fid not in flags:
                 fail(f"{p['id']}: unknown flag {fid}")
     content = load("content.json")
     for a in content["analysis"]:
         for u in a["sources"]:
-            if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
+            if not is_official(u):
                 fail(f"analysis {a['id']} has a non-official source: {u}")
-    reqs = load("requirements.json")
-    known_status = set(reqs["_meta"]["status_meanings"])
-    known_base = {"Delivered", "Not built", "Unverifiable"}
-    seen: set[str] = set()
-    for r in reqs["requirements"]:
-        if r["id"] in seen:
-            fail(f"duplicate requirement id {r['id']}")
-        seen.add(r["id"])
-        if not r["sources"]:
-            fail(f"requirement {r['id']} has no source")
-        for u in r["sources"]:
-            if (urlparse(u).hostname or "") not in OFFICIAL_HOSTS:
-                fail(f"requirement {r['id']} has a non-official source: {u}")
-        base = r["status"].split(" (")[0].split(" - ")[0]
-        if base not in known_base or r["status"] not in known_status:
-            fail(f"requirement {r['id']} uses an undeclared status: {r['status']}")
-        if base.startswith("Delivered") and not r["delivered"]:
-            fail(f"requirement {r['id']} is marked {r['status']} but has no delivered evidence")
-        if base.startswith("Not built") and not r["blocker"]:
-            fail(f"requirement {r['id']} is marked {r['status']} but names no blocker")
-        for fid in r.get("flags") or []:
-            if fid not in flags:
-                fail(f"requirement {r['id']} references unknown flag {fid}")
+    for b in content["executive_summary"]["bullets"] + content["not_built"]:
+        if DISCLOSURE not in b and "As an Amazon Associate" not in b:
+            continue
+
+
+def check_marketing() -> None:
+    marketing = load("marketing.json")
+    articles = marketing["articles"]
+    if len(articles) < 5:
+        fail(f"marketing.json has only {len(articles)} articles; expected at least 5")
+    product_ids = {p["id"] for p in load("products.json")["products"]}
+    for a in articles:
+        facts = {f["id"]: f for f in a["facts"]}
+        if not facts:
+            fail(f"marketing {a['id']}: no fact table")
+        for f in a["facts"]:
+            if not is_official(f["source_url"]):
+                fail(f"marketing {a['id']} fact {f['id']}: non-official source {f['source_url']}")
+        cited = set()
+        for para in a["body"]:
+            for fid in para["fact_ids"]:
+                if fid not in facts:
+                    fail(f"marketing {a['id']} paragraph {para['id']}: unknown fact {fid}")
+                cited.add(fid)
+        for fid in facts:
+            if fid not in cited:
+                fail(f"marketing {a['id']}: fact {fid} is never cited by a paragraph")
+        for k in a["target_keywords"]:
+            if not is_official(k["source_url"]):
+                fail(f"marketing {a['id']} keyword '{k['term']}': non-official source")
+            if MARK_RE.search(k["term"]):
+                fail(f"marketing {a['id']} keyword uses an Amazon Mark: {k['term']}")
+        for field in ("title_tag", "meta_description", "h1", "slug"):
+            if not a.get(field):
+                fail(f"marketing {a['id']}: {field} is empty")
+            elif MARK_RE.search(a[field]):
+                fail(f"marketing {a['id']}: {field} uses an Amazon Mark: {a[field]}")
+        cta = a.get("cta", {})
+        if DISCLOSURE not in cta.get("disclosure", ""):
+            fail(f"marketing {a['id']}: call to action has no disclosure sentence")
+        if not is_official(cta.get("link_url", "")):
+            fail(f"marketing {a['id']}: call to action link is not official")
+        if a.get("product_id") not in product_ids and a.get("product_id") != "ALL":
+            fail(f"marketing {a['id']}: unknown product_id {a.get('product_id')}")
+    for r in marketing["seo_rules"]:
+        if not is_official(r["source_url"]):
+            fail(f"marketing SEO rule {r['id']}: non-official source")
+    for c in marketing["publishing_checklist"]:
+        if not is_official(c["source_url"]):
+            fail(f"marketing checklist '{c['step']}': non-official source")
+
+
+def check_pipeline() -> None:
+    flags = {f["id"] for f in load("flags.json")["flags"]}
+    pipeline = load("pipeline.json")
+    for group, key in (
+        ("stages", "stages"),
+        ("tracking", "tracking"),
+        ("optimisation", "optimisation"),
+        ("agent_requirements", "agent_requirements"),
+    ):
+        for item in pipeline[key]:
+            if not is_official(item["source_url"]):
+                fail(f"pipeline {group} {item['id']}: non-official source {item['source_url']}")
+    for t in pipeline["tracking"]:
+        if t["current_value"]:
+            fail(f"pipeline tracking {t['id']}: has a value, but no reporting access is connected")
 
 
 class SiteParser(HTMLParser):
@@ -113,15 +169,22 @@ class SiteParser(HTMLParser):
         self.ids: set[str] = set()
         self.links: list[tuple[str, str]] = []  # (tag, url)
         self.in_tbody = False
-        self.row_links: list[list[str]] | None = None
+        self.row_links: list[str] | None = None
         self.bad_rows: list[int] = []
         self.rows = 0
         self.text_parts: list[str] = []
+        self.title = ""
+        self.meta_description = ""
+        self._in_title = False
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if a.get("id"):
             self.ids.add(a["id"])
+        if tag == "title":
+            self._in_title = True
+        if tag == "meta" and (a.get("name") or "").lower() == "description":
+            self.meta_description = a.get("content", "")
         if tag in ("a", "link") and a.get("href"):
             self.links.append((tag, a["href"]))
         if tag == "script" and a.get("src"):
@@ -135,15 +198,47 @@ class SiteParser(HTMLParser):
             self.row_links.append(a["href"])
 
     def handle_endtag(self, tag):
+        if tag == "title":
+            self._in_title = False
         if tag == "tbody":
             self.in_tbody = False
         if tag == "tr" and self.row_links is not None:
-            if not any((urlparse(h).hostname or "") in OFFICIAL_HOSTS for h in self.row_links):
+            if not any(is_official(h) for h in self.row_links):
                 self.bad_rows.append(self.rows)
             self.row_links = None
 
     def handle_data(self, data):
+        if self._in_title:
+            self.title += data
         self.text_parts.append(data)
+
+
+def check_requirements() -> None:
+    reqs = load("requirements.json")
+    known_status = set(reqs["_meta"]["status_meanings"])
+    known_base = {"Delivered", "Not built", "Unverifiable"}
+    flags = {f["id"] for f in load("flags.json")["flags"]}
+    seen: set[str] = set()
+    for r in reqs["requirements"]:
+        if r["id"] in seen:
+            fail(f"duplicate requirement id {r['id']}")
+        seen.add(r["id"])
+        if not r["sources"]:
+            fail(f"requirement {r['id']} has no source")
+        for u in r["sources"]:
+            if not is_official(u):
+                fail(f"requirement {r['id']} has a non-official source: {u}")
+        base = r["status"].split(" (")[0].split(" - ")[0]
+        if base not in known_base or r["status"] not in known_status:
+            fail(f"requirement {r['id']} uses an undeclared status: {r['status']}")
+        if base.startswith("Delivered") and not r["delivered"]:
+            fail(f"requirement {r['id']} is marked {r['status']} but has no delivered evidence")
+        if base.startswith("Not built") and not r["blocker"]:
+            fail(f"requirement {r['id']} is marked {r['status']} but names no blocker")
+        for fid in r.get("flags") or []:
+            if fid not in flags:
+                fail(f"requirement {r['id']} references unknown flag {fid}")
+
 
 
 def check_site() -> None:
@@ -165,7 +260,11 @@ def check_site() -> None:
         if PRICE_RE.search(re.sub(r"<[^>]+>", " ", raw)):
             fail(f"{rel}: contains a currency amount (Amazon prices are withheld under Participation Requirements 2(b))")
         if RATING_RE.search(raw):
-            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 6(t))")
+            fail(f"{rel}: contains a star rating (withheld under Participation Requirements 3(t))")
+        if MARK_RE.search(sp.title):
+            fail(f"{rel}: page title uses an Amazon Mark: {sp.title}")
+        if MARK_RE.search(sp.meta_description):
+            fail(f"{rel}: meta description uses an Amazon Mark: {sp.meta_description}")
 
     for page, sp in parsed.items():
         rel = page.relative_to(ROOT)
@@ -188,6 +287,20 @@ def check_site() -> None:
                     fail(f"{rel}: anchor not found: {url}")
 
 
+def check_required_pages() -> None:
+    required = [
+        "index.html", "executive-summary.html", "products.html", "marketing.html",
+        "automation.html", "analysis.html", "requirements.html", "verification.html",
+        "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
+        "categories/dual-basket-air-fryers.html",
+        "categories/single-basket-air-fryers.html",
+        "categories/air-fryer-toaster-ovens.html",
+    ]
+    for rel in required:
+        if not (DOCS / rel).exists():
+            fail(f"docs/{rel} is missing")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -203,7 +316,11 @@ def check_root_entry() -> None:
 
 def main() -> int:
     check_data()
+    check_marketing()
+    check_pipeline()
+    check_requirements()
     check_site()
+    check_required_pages()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")
@@ -211,7 +328,8 @@ def main() -> int:
             print(" -", f)
         return 1
     n_pages = len(list(DOCS.rglob('*.html')))
-    print(f"OK: data files valid; {n_pages} pages checked: links, anchors, disclosure, row sources, no prices or ratings.")
+    print(f"OK: data files valid; {n_pages} pages checked: links, anchors, disclosure, row sources, "
+          f"no prices or ratings, no Amazon Mark in titles or keywords.")
     return 0
 
 

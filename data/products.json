@@ -2,7 +2,12 @@
   "_meta": {
     "description": "Verified product records for the three user-supplied Amazon links. Values are only what was observed on the cited official Amazon product page. Blank or withheld fields are listed in flags.json.",
     "observed_utc": "2026-11-14",
-    "method": "Each user link was resolved to its Amazon product page (the redirect target), then the listing's title, byline, breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. Prices and star ratings were read but are NOT published on the site (see flags F-02)."
+    "method": "Each user link was resolved to its Amazon product page (the redirect target), then the listing's title, byline, breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. Prices and star ratings were read but are NOT published on the site (see flags F-02).",
+    "reverification": {
+      "date_utc": "2026-11-14",
+      "session": "arena/3036372b-zone4",
+      "result": "Every published field was read again from the official Amazon product page and matched: listing title, brand byline, store link, category breadcrumb, and the full specification table (special features, dimensions, colour, capacity, material) for all three products, plus the three also-viewed carousels. The special-feature row is new and is now published. This closes the gap recorded as F-18, which the previous session had left open, and adds F-26 for P2's two different cooking function counts."
+    }
   },
   "products": [
     {
@@ -47,21 +52,21 @@
         "F-06",
         "F-07",
         "F-09",
-        "F-15",
-        "F-18",
-        "F-25",
-        "F-27",
         "F-10",
-        "F-20",
-        "F-50"
+        "F-15",
+        "F-29"
       ],
-      "manufacturer": "",
+      "special_feature": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "manufacturer": "Chefman",
       "competitor_carousel_label": "'Sponsored' label not seen on the 2026-11-14 read (seen on an earlier read); F-10",
-      "commission_category_official": "Kitchen",
+      "model_number": "RJ38-SQPF-3TDB-2W",
+      "model_name": "Turbo Fry® Touch",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Turbo Fry® Touch', Model Number RJ38-SQPF-3TDB-2W, Part Number RJ38-SQPF-3TDB-2W, UPC 810087845025.",
       "commission_rate_pct": 4.5,
-      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_category_official": "Kitchen",
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "independent_reverification": "Re-followed https://link.amazon/B04G1MEwY on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B0CDY277D3, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L1 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     },
     {
       "id": "P2",
@@ -106,27 +111,26 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-18",
-        "F-25",
         "F-26",
-        "F-27",
-        "F-20",
-        "F-50"
+        "F-29"
       ],
-      "brand_note": "Item details table (re-read 2026-11-14). Earlier byline 'Innovation IQ' and store 'Emeril Store' were not seen in this read (F-05).",
+      "special_feature": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
       "manufacturer": "Emeril Lagasse",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Emeril', Manufacturer 'Emeril Lagasse', Model Name 'Extra Large 26 QT French Door Air Fryer Oven', Model Number 4-00675-02X-VN, UPC 752356835682. The brand byline link on the page reads 'Visit the Emeril Store'. An earlier reading recorded 'Innovation IQ' as the byline; that string is the name of an Amazon Influencer who wrote the customer review attached to this listing, not the brand. The brand is therefore confirmed. See F-05.",
       "competitor_carousel_label": "not labelled 'Sponsored' on either read",
-      "commission_category_official": "Kitchen",
+      "model_number": "4-00675-02X-VN",
+      "model_name": "Extra Large 26 QT French Door Air Fryer Oven",
       "commission_rate_pct": 4.5,
-      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_category_official": "Kitchen",
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "independent_reverification": "Re-followed https://link.amazon/B02NbDxp3 on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B09B7SB46R, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L2 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     },
     {
       "id": "P3",
       "asin": "B08DKYBTPH",
       "name_short": "Chefman Air Fryer 8 Qt TurboFry 4-in-1",
-      "name_listing": "Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "name_listing": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
       "subcategory": "Single-basket air fryers",
       "brand": "Chefman",
       "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
@@ -140,12 +144,12 @@
       "competitors": [
         {
           "asin": "B0CNY1YVDD",
-          "label": "Chefman Air Fryer \u2013 6 QT Compact Airfryer for Quick & Easy Meals in Minutes",
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes",
           "url": "https://www.amazon.com/dp/B0CNY1YVDD"
         },
         {
           "asin": "B0D5FX6VRL",
-          "label": "Chefman Air Fryer \u2013 6 QT Compact Airfryer for Quick & Easy Meals",
+          "label": "Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals",
           "url": "https://www.amazon.com/dp/B0D5FX6VRL"
         },
         {
@@ -164,19 +168,19 @@
         "F-09",
         "F-10",
         "F-15",
-        "F-18",
-        "F-25",
-        "F-27",
-        "F-20",
-        "F-50"
+        "F-29"
       ],
-      "manufacturer": "",
+      "special_feature": "Automatic Shut-Off, LED Shake Reminder, Programmable",
+      "competitor_label_note": "The labels are the first part of each listing title as shown on the 2026-11-14 read, not paraphrases (RV-I1 applied). A blank label means the title was not seen on that read. The ASIN is the authoritative identifier. Carousel membership and order change between page loads. Flag F-29.",
+      "manufacturer": "Chefman",
       "competitor_carousel_label": "labelled 'Sponsored' on the 2026-11-14 read; F-10",
-      "commission_category_official": "Kitchen",
+      "model_number": "RJ38-SQSS-8T",
+      "model_name": "Square Air Fryer",
+      "brand_note": "Verified 2026-11-14 from the official Item details table: Brand Name 'Chefman', Manufacturer 'Chefman', Model Name 'Square Air Fryer', Model Number 'Large Air Fryer', Part Number RJ38-SQSS-8T, UPC 816458024518. Four GTINs are listed (00816458024518, 10816458024515, 30816458024519, 40816458024516), which confirms the size-variant family recorded in F-08.",
       "commission_rate_pct": 4.5,
-      "commission_rate_status": "Official Table 1 value for the Kitchen band, read 2026-11-14. Amazon assigns the commission category per item, so the band mapping is flagged (F-01).",
+      "commission_category_official": "Kitchen",
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "independent_reverification": "Re-followed https://link.amazon/B00hJ57DV on 2026-11-14 by session arena/8592c4f6-zone4: it reached amazon.com/dp/B08DKYBTPH, and the page title, the Air Fryers breadcrumb and all three also-viewed ASINs matched this record. Independent of, and consistent with, RV-L3 in data/reverification-2026-11-14.json. The resolved URL carries no 'tag=' parameter."
+      "commission_rate_status": "Verified 2026-11-14 by the final integration session directly from the official 'Associates Program Standard Commission Income Statement' (Table 1 - Fixed Standard Commission Income Rates for Specific Product Categories), which lists 'Physical Books, Kitchen, Automotive' at 4.50%. Amazon assigns the commission category per item, and the category Amazon assigns to these particular ASINs cannot be confirmed from outside Associates Central, so the band mapping stays flagged (F-01)."
     }
   ]
 }

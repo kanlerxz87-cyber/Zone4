@@ -1,0 +1,1272 @@
+{
+  "_meta": {
+    "description": "Marketing content kit for the three supplied air-fryer products: one article per product, one comparison page, one buying guide, an SEO rule set and a publishing checklist. Every factual statement is a row in a 'facts' table with an official source link. Copy is written in original words; it does not reproduce Amazon listing prose.",
+    "observed_utc": "2026-11-14",
+    "method": "Each article may use only: the product's Amazon listing title as an identifier (always linked), the brand byline, the category breadcrumb, and the structured fields of the Amazon product-details table (Special Feature, Product Dimensions, Color, Capacity, Material), plus the factual statements on the product page that are listed in that product's 'facts' table with a source link. Prices, star ratings, review counts, 'Amazon's Choice' and 'bought in past month' badges are excluded (Participation Requirements 2(b) and 6(t)).",
+    "excluded": [
+      "Amazon prices and availability - Participation Requirement 2(b): a site may show them only if Amazon serves the link, or the data comes from Creators API / PA API. Neither is connected, so no price appears.",
+      "Star ratings, review counts and Amazon popularity badges - Participation Requirement 6(t): these may be displayed only if obtained through Creators API or PA API.",
+      "Any sentence, bullet or phrase copied from the Amazon listing - Participation Requirement 6(a) forbids altering Program Content, and this site does not republish it.",
+      "Search-volume or trend figures - no official source publishes them, so the cells are blank and marked unverified.",
+      "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
+    ]
+  },
+  "articles": [
+    {
+      "id": "M-P1",
+      "product_id": "P1",
+      "page_type": "Product article",
+      "slug": "/chefman-6-quart-dual-basket-air-fryer-oven/",
+      "target_keywords": [
+        {
+          "term": "dual basket air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "6 quart dual basket air fryer oven",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "term": "chefman dual basket air fryer",
+          "intent": "Brand + product",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        }
+      ],
+      "title_tag": "Dual Basket Air Fryer: Chefman 6 Quart Oven Specs and Alternatives",
+      "meta_description": "Verified specifications for the Chefman 6 quart dual basket air fryer oven: capacity, dimensions, basket format, controls and colour, plus the alternatives readers compare it with.",
+      "h1": "Chefman 6 Quart Dual Basket Air Fryer Oven: what the specification table shows",
+      "outline": [
+        {
+          "h2": "What the dual basket format changes",
+          "purpose": "Explain the two-basket format before any brand is named.",
+          "facts_used": [
+            "M-P1-F2",
+            "M-P1-F3"
+          ]
+        },
+        {
+          "h2": "Chefman 6 quart dual basket: specification table",
+          "purpose": "Present the structured fields exactly as listed.",
+          "facts_used": [
+            "M-P1-F1",
+            "M-P1-F4",
+            "M-P1-F5",
+            "M-P1-F6",
+            "M-P1-F7"
+          ]
+        },
+        {
+          "h2": "Capacity: 6 quart or 6 liters?",
+          "purpose": "Address the unit mismatch honestly instead of converting it.",
+          "facts_used": [
+            "M-P1-F3",
+            "M-P1-F9"
+          ]
+        },
+        {
+          "h2": "Controls, temperature range and daily use",
+          "purpose": "Cover the features the specification table lists plus the stated temperature range.",
+          "facts_used": [
+            "M-P1-F7",
+            "M-P1-F8"
+          ]
+        },
+        {
+          "h2": "Where it sits in the air fryer category",
+          "purpose": "Show the verified category path and the products Amazon lists alongside it.",
+          "facts_used": [
+            "M-P1-F10",
+            "M-P1-F11"
+          ]
+        },
+        {
+          "h2": "Alternatives readers ask about",
+          "purpose": "List the three products Amazon's own also-viewed carousel pairs with this one.",
+          "facts_used": [
+            "M-P1-F11"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-P1-B1",
+          "text": "A dual basket air fryer is a countertop fryer with two separate cooking baskets instead of one. Two baskets means two dishes can be cooked side by side, and a setting that lets the two finish at the same time removes the need to start one dish in advance. The format matters more than any single number on the box, because it changes how a weeknight meal is actually cooked.",
+          "fact_ids": [
+            "M-P1-F2"
+          ]
+        },
+        {
+          "id": "M-P1-B2",
+          "text": "The product covered here is the Chefman 6 quart dual basket air fryer oven, listed under ASIN B0CDY277D3 and filed by Amazon under Home and Kitchen, Kitchen and Dining, Small Appliances, Fryers, Air Fryers. It is the dual-basket member of the three products in this research set.",
+          "fact_ids": [
+            "M-P1-F1",
+            "M-P1-F9",
+            "M-P1-F10"
+          ]
+        },
+        {
+          "id": "M-P1-B3",
+          "text": "Amazon's product details table lists the capacity as 6 liters, while the listing title describes the same product as a 6 quart unit. The two numbers are not converted on this page, because the listing does not state which unit the manufacturer intends. Anyone comparing capacity across brands should treat the figure as listed and check it against the physical product before buying.",
+          "fact_ids": [
+            "M-P1-F3",
+            "M-P1-F4"
+          ]
+        },
+        {
+          "id": "M-P1-B4",
+          "text": "The remaining structured fields are a footprint of 13.38 inches deep by 11.81 inches wide by 10.63 inches high, a colour listed as Black and Gray, and a material listed as Metal and Plastic. The listed special features are a 2 minute button, automatic shut-off, dual zone features, Hi-Fry and Mute. Each of these is quoted as listed rather than interpreted.",
+          "fact_ids": [
+            "M-P1-F4",
+            "M-P1-F5",
+            "M-P1-F6",
+            "M-P1-F7"
+          ]
+        },
+        {
+          "id": "M-P1-B5",
+          "text": "For everyday use the listing describes a digital dual basket temperature range of 200 to 450 degrees Fahrenheit, removable non-stick coated baskets that are dishwasher safe, and a cETL listing with a one-year assurance from Chefman at 120 volts and 1700 watts. The baskets are listed as two independent 3 quart baskets, which is the practical reason to choose this format over a single basket.",
+          "fact_ids": [
+            "M-P1-F2",
+            "M-P1-F8"
+          ]
+        },
+        {
+          "id": "M-P1-B6",
+          "text": "Amazon's own also-viewed carousel on this listing pairs it with three other listings: another Chefman dual basket model, a Gourmia 10 quart dual basket air fryer and a Nutrichef 8.8 quart double basket air fryer. That set is a useful shortlist of alternatives, but it is a snapshot of one recommendation widget rather than a ranking, and the widget can carry paid placements, so the three listings are offered as starting points rather than as a recommendation.",
+          "fact_ids": [
+            "M-P1-F11",
+            "M-P1-F12"
+          ]
+        },
+        {
+          "id": "M-P1-B7",
+          "text": "The listing is sold as a digital double air fryer in black, and the product page is the authority for every figure quoted above. Where this page cannot confirm something, such as a current price or a customer rating, it says so rather than estimating, because Amazon's Associates rules only permit those to be shown when Amazon serves the link or when the data comes from an approved Amazon API.",
+          "fact_ids": [
+            "M-P1-F4",
+            "M-P1-F13"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-P1-F1",
+          "field": "Brand (byline)",
+          "value": "Chefman",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Brand byline on the Amazon product page",
+          "note": ""
+        },
+        {
+          "id": "M-P1-F2",
+          "field": "Basket format and stated capacity of each basket",
+          "value": "Dual basket; 2 independent 3 qt baskets; combined 6-quart capacity",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing title and 'About this item' section",
+          "note": "Stated in the listing title; see F-06 for the unit difference against the specification table."
+        },
+        {
+          "id": "M-P1-F3",
+          "field": "Capacity (product details table)",
+          "value": "6 liters",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table, 'Capacity' row",
+          "note": "Differs in unit from the 6 quart in the listing title. Flag F-06."
+        },
+        {
+          "id": "M-P1-F4",
+          "field": "Product dimensions",
+          "value": "13.38\"D x 11.81\"W x 10.63\"H",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table, 'Product Dimensions' row",
+          "note": ""
+        },
+        {
+          "id": "M-P1-F5",
+          "field": "Colour",
+          "value": "Black, Gray",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table, 'Color' row",
+          "note": "The listing title ends in 'Black'. Flag F-07."
+        },
+        {
+          "id": "M-P1-F6",
+          "field": "Material",
+          "value": "Metal, Plastic",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table, 'Material' row",
+          "note": ""
+        },
+        {
+          "id": "M-P1-F7",
+          "field": "Special features (as listed)",
+          "value": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table, 'Special Feature' row",
+          "note": "Quoted exactly as the table shows it, including the '+' prefix."
+        },
+        {
+          "id": "M-P1-F8",
+          "field": "Stated controls, temperature range and electrical details",
+          "value": "Digital dual basket temperature settings 200-450 degrees F; removable non-stick dishwasher-safe baskets; cETL; 1-year assurance by Chefman; 120 Volts / 1700 Watts",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "'About this item' section",
+          "note": "Facts only; the listing prose is not reproduced."
+        },
+        {
+          "id": "M-P1-F9",
+          "field": "ASIN",
+          "value": "B0CDY277D3",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Resolved URL of the supplied short link https://link.amazon/B04G1MEwY",
+          "note": ""
+        },
+        {
+          "id": "M-P1-F10",
+          "field": "Category path",
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "source_ref": "Breadcrumb on the Amazon product page",
+          "note": ""
+        },
+        {
+          "id": "M-P1-F11",
+          "field": "Also-viewed listings on the product page",
+          "value": "B0B7C327LK (Chefman dual basket), B0BYKGN61Q (Gourmia 10 qt dual basket), B0CNSB81V6 (Nutrichef 8.8 qt double basket)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "'Customers who viewed this item also viewed' carousel, first three entries",
+          "note": "Snapshot of one widget. May include paid placements; see F-10."
+        },
+        {
+          "id": "M-P1-F12",
+          "field": "Competitor label wording",
+          "value": "Short labels, not the full listing titles",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Linked product pages carry the full Amazon listing titles",
+          "note": "Flag F-20."
+        },
+        {
+          "id": "M-P1-F13",
+          "field": "Price and customer rating",
+          "value": "",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
+          "note": "Withheld: a site may show prices only if Amazon serves the link or the data comes from Creators API / PA API; ratings and reviews only through those APIs. Flag F-02."
+        }
+      ],
+      "cta": {
+        "text": "Check the current listing and availability",
+        "link_label": "Open the Chefman 6 quart dual basket listing",
+        "link_url": "https://link.amazon/B04G1MEwY",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or Amazon popularity badge appears in this article.",
+        "The listing title appears only as a linked identifier, never as republished copy.",
+        "Capacity is quoted with its unit exactly as the product details table shows it."
+      ]
+    },
+    {
+      "id": "M-P2",
+      "product_id": "P2",
+      "page_type": "Product article",
+      "slug": "/26qt-french-door-air-fryer-toaster-oven/",
+      "target_keywords": [
+        {
+          "term": "french door air fryer toaster oven",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "26 quart air fryer toaster oven",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "term": "air fryer oven with rotisserie",
+          "intent": "Feature-led search",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "title_tag": "French Door Air Fryer Toaster Oven: 26 Quart Specs and Comparison",
+      "meta_description": "Verified specifications for a 26 quart French door air fryer toaster oven: capacity, dimensions, cooking functions, material and the alternatives listed beside it on the product page.",
+      "h1": "26 Quart French Door Air Fryer Toaster Oven: what the specification table shows",
+      "outline": [
+        {
+          "h2": "Toaster oven or air fryer? What the format does",
+          "purpose": "Set expectations for a multi-function countertop oven.",
+          "facts_used": [
+            "M-P2-F2"
+          ]
+        },
+        {
+          "h2": "Specification table: capacity, size, finish",
+          "purpose": "Present the structured fields exactly as listed.",
+          "facts_used": [
+            "M-P2-F3",
+            "M-P2-F4",
+            "M-P2-F5",
+            "M-P2-F6"
+          ]
+        },
+        {
+          "h2": "Capacity: 26QT against 24.6 liters",
+          "purpose": "Address the unit mismatch honestly.",
+          "facts_used": [
+            "M-P2-F3",
+            "M-P2-F9"
+          ]
+        },
+        {
+          "h2": "Cooking functions and pre-sets: 24 or 25?",
+          "purpose": "Report the two different counts the page shows.",
+          "facts_used": [
+            "M-P2-F7",
+            "M-P2-F10"
+          ]
+        },
+        {
+          "h2": "Brand and store",
+          "purpose": "State what the page does and does not establish about the brand.",
+          "facts_used": [
+            "M-P2-F8"
+          ]
+        },
+        {
+          "h2": "Alternatives to compare",
+          "purpose": "List the three listings Amazon's also-viewed carousel pairs with this one.",
+          "facts_used": [
+            "M-P2-F11",
+            "M-P2-F12"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-P2-B1",
+          "text": "An air fryer toaster oven is a countertop oven that air fries as well as baking, toasting and roasting. The format trades countertop space for one appliance that does several jobs, which is why it is usually compared against a dedicated air fryer rather than against a conventional toaster oven.",
+          "fact_ids": [
+            "M-P2-F2"
+          ]
+        },
+        {
+          "id": "M-P2-B2",
+          "text": "The listing covered here is filed under ASIN B09B7SB46R and sits in the same Amazon category as the other two products in this set: Home and Kitchen, Kitchen and Dining, Small Appliances, Fryers, Air Fryers. The listing title names the product as a 26 quart French door multi-function air fryer toaster oven.",
+          "fact_ids": [
+            "M-P2-F9",
+            "M-P2-F10"
+          ]
+        },
+        {
+          "id": "M-P2-B3",
+          "text": "Amazon's product details table lists the capacity as 24.6 liters, while the listing title and the feature section describe a 26 quart unit. Both are shown here as written, because the listing does not reconcile them and a conversion would be an assumption rather than a source value.",
+          "fact_ids": [
+            "M-P2-F3",
+            "M-P2-F9"
+          ]
+        },
+        {
+          "id": "M-P2-B4",
+          "text": "The other structured fields are a footprint of 16.9 inches deep by 15.8 inches wide by 14.8 inches high, a colour of Stainless Steel, and a material of Stainless Steel. That footprint is the single most useful number for a buyer who already owns an air fryer, because it decides whether the two appliances can share a counter.",
+          "fact_ids": [
+            "M-P2-F4",
+            "M-P2-F5",
+            "M-P2-F6"
+          ]
+        },
+        {
+          "id": "M-P2-B5",
+          "text": "The listed special features are Automatic Shut-Off, Programmable, Temperature Control and Timer. The feature section adds a dual-speed fan, a rotisserie that the listing says can handle a 6 lb chicken, a 12 inch pizza, and French doors with an interior light. The listing also gives a serving note of 4 to 6 people for the stated capacity.",
+          "fact_ids": [
+            "M-P2-F2",
+            "M-P2-F7",
+            "M-P2-F13"
+          ]
+        },
+        {
+          "id": "M-P2-B6",
+          "text": "There is a genuine ambiguity in the function count. The listing title says 24 cooking functions, while the feature section heads its list as 25 cooking pre-sets and then names Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. This page does not pick one number; it reports both and leaves the difference open for the seller to clarify.",
+          "fact_ids": [
+            "M-P2-F7",
+            "M-P2-F10"
+          ]
+        },
+        {
+          "id": "M-P2-B7",
+          "text": "The brand is the other open point. The page shows the store 'Emeril Store' and a byline of 'Innovation IQ', while the listing title carries the name Emeril Lagasse. Rather than assume the brand, this research records it as unresolved and links the product page so a reader can check the store listing directly.",
+          "fact_ids": [
+            "M-P2-F8",
+            "M-P2-F1"
+          ]
+        },
+        {
+          "id": "M-P2-B8",
+          "text": "Amazon's also-viewed carousel on this listing pairs it with a 25 quart Emeril Lagasse dual zone air fryer oven, a 20.3 quart Ninja French door air fry oven and a 28 quart HotKing dual-zone air fryer toaster oven. Those three make a natural comparison set for the format, although the widget is a point-in-time snapshot rather than a ranking.",
+          "fact_ids": [
+            "M-P2-F11",
+            "M-P2-F12",
+            "M-P2-F14"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-P2-F1",
+          "field": "Brand",
+          "value": "Unresolved - page shows the store 'Emeril Store' and the byline 'Innovation IQ'",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Store link and byline on the Amazon product page",
+          "note": "Flag F-05."
+        },
+        {
+          "id": "M-P2-F2",
+          "field": "Format and stated features",
+          "value": "French door multi-function air fryer toaster oven; dual-speed fan; rotisserie; interior light; stated for 4-6 people; 12 inch pizza and 6 lb chicken capacity noted",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing title and 'About this item' section",
+          "note": "Facts only; the listing prose is not reproduced."
+        },
+        {
+          "id": "M-P2-F3",
+          "field": "Capacity (product details table)",
+          "value": "24.6 liters",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table, 'Capacity' row",
+          "note": "Differs in unit from the 26QT in the listing title. Flag F-06."
+        },
+        {
+          "id": "M-P2-F4",
+          "field": "Product dimensions",
+          "value": "16.9\"D x 15.8\"W x 14.8\"H",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table, 'Product Dimensions' row",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F5",
+          "field": "Colour",
+          "value": "Stainless Steel",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table, 'Color' row",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F6",
+          "field": "Material",
+          "value": "Stainless Steel",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table, 'Material' row",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F7",
+          "field": "Special features (as listed)",
+          "value": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table, 'Special Feature' row",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F8",
+          "field": "Store and byline shown on the page",
+          "value": "'Visit the Emeril Store'; byline 'Innovation IQ'",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Brand and byline block on the Amazon product page",
+          "note": "The byline block on this listing carries an 'Earns Commissions' label."
+        },
+        {
+          "id": "M-P2-F9",
+          "field": "ASIN",
+          "value": "B09B7SB46R",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Resolved URL of the supplied short link https://link.amazon/B02NbDxp3",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F10",
+          "field": "Cooking function count as stated",
+          "value": "Listing title: 24 cooking functions. Feature section: 25 cooking pre-sets, naming Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm.",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing title and 'About this item' section",
+          "note": "Two different counts on the same page. Flag F-26."
+        },
+        {
+          "id": "M-P2-F11",
+          "field": "Also-viewed listings on the product page",
+          "value": "B0BZ52FLKC (Emeril Lagasse 25QT dual zone), B0FM5KF34G (Ninja FO101 20.3 Qt French door), B0F92GL7JH (HotKing 28 QT dual-zone)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "'Customers who viewed this item also viewed' carousel, first three entries",
+          "note": "Snapshot of one widget. May include paid placements; see F-10."
+        },
+        {
+          "id": "M-P2-F12",
+          "field": "Competitor label wording",
+          "value": "Short labels, not the full listing titles",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Linked product pages carry the full Amazon listing titles",
+          "note": "Flag F-20."
+        },
+        {
+          "id": "M-P2-F13",
+          "field": "Category path",
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "source_ref": "Breadcrumb on the Amazon product page",
+          "note": ""
+        },
+        {
+          "id": "M-P2-F14",
+          "field": "Price and customer rating",
+          "value": "",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
+          "note": "Withheld. Flag F-02."
+        }
+      ],
+      "cta": {
+        "text": "Check the current listing and availability",
+        "link_label": "Open the 26QT French door air fryer toaster oven listing",
+        "link_url": "https://link.amazon/B02NbDxp3",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or Amazon popularity badge appears in this article.",
+        "The brand is not asserted; the page reports what the listing shows and flags the gap.",
+        "Both the 24 and the 25 function counts are reported, with the discrepancy flagged."
+      ]
+    },
+    {
+      "id": "M-P3",
+      "product_id": "P3",
+      "page_type": "Product article",
+      "slug": "/chefman-8-quart-single-basket-air-fryer/",
+      "target_keywords": [
+        {
+          "term": "8 quart air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "single basket air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "chefman 4 in 1 air fryer",
+          "intent": "Brand + feature",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        }
+      ],
+      "title_tag": "8 Quart Single Basket Air Fryer: Chefman TurboFry Specs",
+      "meta_description": "Verified specifications for the Chefman 8 quart single basket air fryer: capacity, dimensions, presets, temperature range, material and the size variants in the family.",
+      "h1": "Chefman 8 Quart Single Basket Air Fryer: what the specification table shows",
+      "outline": [
+        {
+          "h2": "Single basket and multi-function: what the format does",
+          "purpose": "Explain the four-in-one function list before naming the brand.",
+          "facts_used": [
+            "M-P3-F2"
+          ]
+        },
+        {
+          "h2": "Specification table",
+          "purpose": "Present the structured fields exactly as listed.",
+          "facts_used": [
+            "M-P3-F3",
+            "M-P3-F4",
+            "M-P3-F5",
+            "M-P3-F6",
+            "M-P3-F7"
+          ]
+        },
+        {
+          "h2": "The 6, 8 and 9 quart size family",
+          "purpose": "Explain that the supplied link points at one variant of a family.",
+          "facts_used": [
+            "M-P3-F8"
+          ]
+        },
+        {
+          "h2": "Presets, temperature range and cleaning",
+          "purpose": "Cover the everyday-use facts the page lists.",
+          "facts_used": [
+            "M-P3-F2",
+            "M-P3-F9"
+          ]
+        },
+        {
+          "h2": "Alternatives in the same category",
+          "purpose": "List the three listings Amazon's also-viewed carousel pairs with this one.",
+          "facts_used": [
+            "M-P3-F10",
+            "M-P3-F11"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-P3-B1",
+          "text": "A single basket air fryer cooks in one basket rather than two. The trade is a smaller cooking area than a dual basket unit in exchange for a shorter body, a simpler set of controls and a price point that usually sits below the dual basket models. Inside this set it is the direct alternative to the dual basket oven.",
+          "fact_ids": [
+            "M-P3-F2"
+          ]
+        },
+        {
+          "id": "M-P3-B2",
+          "text": "The listing covered here is the Chefman Air Fryer 8 Qt, filed under ASIN B08DKYBTPH and placed in the Air Fryers category. The listing title describes it as a four-in-one unit that bakes, dehydrates and cooks frozen food, with an XL non-stick dishwasher-safe basket in stainless steel.",
+          "fact_ids": [
+            "M-P3-F8",
+            "M-P3-F9",
+            "M-P3-F1",
+            "M-P3-F12"
+          ]
+        },
+        {
+          "id": "M-P3-B3",
+          "text": "Amazon's product details table lists the capacity as 8 quarts, a footprint of 12.75 inches deep by 13.5 inches wide by 10 inches high, a colour of Stainless steel and a material of Plastic and Stainless Steel. The listed special features are Automatic Shut-Off, LED Shake Reminder and Programmable.",
+          "fact_ids": [
+            "M-P3-F3",
+            "M-P3-F4",
+            "M-P3-F5",
+            "M-P3-F6",
+            "M-P3-F7"
+          ]
+        },
+        {
+          "id": "M-P3-B4",
+          "text": "One point is worth flagging for buyers: this is a size-variant family, not a single product. The same page offers 6, 8 and 9 quart options, and the supplied link resolves specifically to the 8 quart variant. Every figure on this page therefore describes the 8 quart variant and not the other two sizes.",
+          "fact_ids": [
+            "M-P3-F8"
+          ]
+        },
+        {
+          "id": "M-P3-B5",
+          "text": "For everyday use the listing describes four presets, a touch control with adjustable time and temperature, a temperature range of 200 to 400 degrees Fahrenheit, a dishwasher-safe non-stick basket and flat tray, and a cETL listing with a one-year warranty from Chefman at 1000 watts on 120 volts. The page also shows a newer model of this item in the same family.",
+          "fact_ids": [
+            "M-P3-F2",
+            "M-P3-F9"
+          ]
+        },
+        {
+          "id": "M-P3-B6",
+          "text": "Amazon's also-viewed carousel on this listing pairs it with two smaller Chefman 6 quart compact models and a 6 quart Cosori 9-in-1 TurboBlaze air fryer. That is a useful shortlist at the budget end of the category, and it is again a snapshot of one recommendation widget rather than a ranking.",
+          "fact_ids": [
+            "M-P3-F10",
+            "M-P3-F11",
+            "M-P3-F13"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-P3-F1",
+          "field": "Brand (byline)",
+          "value": "Chefman",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Brand byline on the Amazon product page",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F2",
+          "field": "Format and stated features",
+          "value": "Single basket; 4 presets; touch control; 200-400 degrees F temperature range; dishwasher-safe non-stick basket and flat tray; cETL; 1-year warranty by Chefman; 1000 Watts / 120 Volts; 4-in-1 function list (Bake, Dehydrate, Frozen)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing title and 'About this item' section",
+          "note": "Facts only; the listing prose is not reproduced."
+        },
+        {
+          "id": "M-P3-F3",
+          "field": "Capacity (product details table)",
+          "value": "8 quarts",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table, 'Capacity' row",
+          "note": "For the 8 qt variant only. Flag F-08."
+        },
+        {
+          "id": "M-P3-F4",
+          "field": "Product dimensions",
+          "value": "12.75\"D x 13.5\"W x 10\"H",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table, 'Product Dimensions' row",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F5",
+          "field": "Colour",
+          "value": "Stainless steel",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table, 'Color' row",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F6",
+          "field": "Material",
+          "value": "Plastic, Stainless Steel",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table, 'Material' row",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F7",
+          "field": "Special features (as listed)",
+          "value": "Automatic Shut-Off, LED Shake Reminder, Programmable",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table, 'Special Feature' row",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F8",
+          "field": "Size variants offered on the page",
+          "value": "6, 8 and 9 quarts; the supplied link resolves to the 8 qt variant (ASIN B08DKYBTPH, variation parameter th=1)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Size option list on the Amazon product page and the resolved short link",
+          "note": "Flag F-08. The page also shows a newer model of this item in the family."
+        },
+        {
+          "id": "M-P3-F9",
+          "field": "ASIN",
+          "value": "B08DKYBTPH",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Resolved URL of the supplied short link https://link.amazon/B00hJ57DV",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F10",
+          "field": "Also-viewed listings on the product page",
+          "value": "B0CNY1YVDD (Chefman 6 QT compact, touchscreen), B0D5FX6VRL (Chefman 6 QT compact, easy-view window), B0C33CHG99 (Cosori TurboBlaze 6 Qt 9-in-1)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "'Customers who viewed this item also viewed' carousel, first three entries",
+          "note": "Snapshot of one widget. May include paid placements; see F-10."
+        },
+        {
+          "id": "M-P3-F11",
+          "field": "Competitor label wording",
+          "value": "Short labels, not the full listing titles",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Linked product pages carry the full Amazon listing titles",
+          "note": "Flag F-20."
+        },
+        {
+          "id": "M-P3-F12",
+          "field": "Category path",
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "source_ref": "Breadcrumb on the Amazon product page",
+          "note": ""
+        },
+        {
+          "id": "M-P3-F13",
+          "field": "Price and customer rating",
+          "value": "",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
+          "note": "Withheld. Flag F-02."
+        }
+      ],
+      "cta": {
+        "text": "Check the current listing and availability",
+        "link_label": "Open the Chefman 8 quart air fryer listing",
+        "link_url": "https://link.amazon/B00hJ57DV",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or Amazon popularity badge appears in this article.",
+        "Every capacity and dimension figure is stated for the 8 qt variant only, because the page also offers 6 and 9 qt sizes.",
+        "The listing title appears only as a linked identifier."
+      ]
+    },
+    {
+      "id": "M-CMP",
+      "product_id": "ALL",
+      "page_type": "Comparison",
+      "slug": "/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer/",
+      "target_keywords": [
+        {
+          "term": "air fryer comparison",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "dual basket vs single basket air fryer",
+          "intent": "Comparison",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "term": "air fryer toaster oven vs air fryer",
+          "intent": "Comparison",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "title_tag": "Dual Basket vs Single Basket vs Toaster Oven Air Fryer",
+      "meta_description": "Side-by-side comparison of three countertop air fryers on capacity, footprint, material and format, using only verified listing specifications.",
+      "h1": "Dual basket, single basket or toaster oven: comparing three countertop air fryers",
+      "outline": [
+        {
+          "h2": "The three formats in one table",
+          "purpose": "Answer the format question first, with verified fields only.",
+          "facts_used": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3",
+            "M-CMP-F4"
+          ]
+        },
+        {
+          "h2": "Capacity, and why the units are not converted",
+          "purpose": "Show the two unit conventions side by side without inventing a conversion.",
+          "facts_used": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3"
+          ]
+        },
+        {
+          "h2": "Counter footprint",
+          "purpose": "Let the reader rule the appliances in or out on space alone.",
+          "facts_used": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3"
+          ]
+        },
+        {
+          "h2": "What the comparison cannot tell you",
+          "purpose": "Be explicit about the withheld fields instead of leaving readers to guess.",
+          "facts_used": [
+            "M-CMP-F4"
+          ]
+        },
+        {
+          "h2": "How each product is positioned against the others",
+          "purpose": "Use Amazon's own also-viewed widgets, labelled as snapshots.",
+          "facts_used": [
+            "M-CMP-F5"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-CMP-B1",
+          "text": "Three countertop air fryers sit in this comparison, and they are not three sizes of the same machine. One is a dual basket oven that cooks two dishes at once. One is a single basket fryer with a four-in-one function list. One is a French door toaster oven that also air fries. Choosing between them is a decision about format and footprint, not about a single specification.",
+          "fact_ids": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3",
+            "M-CMP-F6"
+          ]
+        },
+        {
+          "id": "M-CMP-B2",
+          "text": "On capacity the three listings quote different units. The dual basket oven's product details table says 6 liters while its title says 6 quart. The single basket fryer says 8 quarts in both places. The toaster oven's table says 24.6 liters while its title says 26QT. Because the pages state both conventions, this comparison prints each value with its unit and converts nothing. A reader who wants a like-for-like number should compare basket counts and household size instead.",
+          "fact_ids": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3"
+          ]
+        },
+        {
+          "id": "M-CMP-B3",
+          "text": "Footprint separates them cleanly. The dual basket oven measures 13.38 by 11.81 by 10.63 inches. The single basket fryer is 12.75 by 13.5 by 10 inches. The toaster oven is 16.9 by 15.8 by 14.8 inches, which is the largest of the three by a clear margin and is usually the deciding factor when a second appliance has to share the counter.",
+          "fact_ids": [
+            "M-CMP-F1",
+            "M-CMP-F2",
+            "M-CMP-F3"
+          ]
+        },
+        {
+          "id": "M-CMP-B4",
+          "text": "The table below deliberately omits prices, star ratings and review counts. Amazon's Associates rules allow a site to show prices only when Amazon serves the link or when the data comes from an approved Amazon API, and they allow ratings and reviews only through that same API. Neither route is connected here, so those cells stay empty rather than being filled with an estimate. Anyone comparing on price should open the product page, where the current figures are shown by the retailer itself.",
+          "fact_ids": [
+            "M-CMP-F4"
+          ]
+        },
+        {
+          "id": "M-CMP-B5",
+          "text": "Amazon's recommendation widgets point the three listings at each other's main rivals: the dual basket oven sits beside another Chefman dual basket model, a Gourmia 10 quart dual basket and a Nutrichef 8.8 quart double basket; the single basket fryer sits beside two compact Chefman 6 quart models and a Cosori 6 quart 9-in-1; the toaster oven sits beside a 25 quart Emeril Lagasse dual zone oven, a 20.3 quart Ninja French door oven and a 28 quart HotKing dual-zone unit. These are snapshots of one on-page widget, not a ranking, and the widget can carry paid placements, so they are listed as starting points for further research.",
+          "fact_ids": [
+            "M-CMP-F5"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-CMP-F1",
+          "field": "P1 dual basket oven: capacity, dimensions, colour, material",
+          "value": "6 liters (title: 6 quart); 13.38\"D x 11.81\"W x 10.63\"H; Black, Gray; Metal, Plastic",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details table on the Amazon product page",
+          "note": "Units not converted. Flag F-06."
+        },
+        {
+          "id": "M-CMP-F2",
+          "field": "P3 single basket fryer: capacity, dimensions, colour, material",
+          "value": "8 quarts; 12.75\"D x 13.5\"W x 10\"H; Stainless steel; Plastic, Stainless Steel",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Product details table on the Amazon product page",
+          "note": "8 qt variant only. Flag F-08."
+        },
+        {
+          "id": "M-CMP-F3",
+          "field": "P2 toaster oven: capacity, dimensions, colour, material",
+          "value": "24.6 liters (title: 26QT); 16.9\"D x 15.8\"W x 14.8\"H; Stainless Steel; Stainless Steel",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details table on the Amazon product page",
+          "note": "Units not converted. Flag F-06."
+        },
+        {
+          "id": "M-CMP-F4",
+          "field": "Price, star rating and review count",
+          "value": "",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
+          "note": "Withheld for all three products. Flag F-02."
+        },
+        {
+          "id": "M-CMP-F5",
+          "field": "Also-viewed listings across the three product pages",
+          "value": "Nine distinct ASINs across three carousels: B0B7C327LK, B0BYKGN61Q, B0CNSB81V6, B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH, B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "'Customers who viewed this item also viewed' carousels on the three product pages",
+          "note": "Snapshots; may include paid placements. Flag F-10."
+        },
+        {
+          "id": "M-CMP-F6",
+          "field": "Common category path",
+          "value": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "source_ref": "Breadcrumb on all three Amazon product pages",
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "Open the listing for the format you are considering",
+        "link_label": "Dual basket listing",
+        "link_url": "https://link.amazon/B04G1MEwY",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating or review count appears anywhere in the comparison table.",
+        "Capacity units are shown exactly as listed and are not converted.",
+        "The brand of P2 is not asserted in the comparison."
+      ]
+    },
+    {
+      "id": "M-BUY",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "/air-fryer-buying-guide-2026/",
+      "target_keywords": [
+        {
+          "term": "air fryer buying guide",
+          "intent": "Informational to commercial",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "how to choose an air fryer",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "dual basket vs toaster oven air fryer",
+          "intent": "Comparison",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "title_tag": "Air Fryer Buying Guide: Basket Count, Capacity and Footprint",
+      "meta_description": "A decision-first air fryer buying guide: how basket count, listed capacity, countertop footprint and function count change the choice, with verified specifications.",
+      "h1": "Air fryer buying guide: start with the format, then the numbers",
+      "outline": [
+        {
+          "h2": "Step one: pick the format",
+          "purpose": "Basket count and oven form decide the use case before any specification.",
+          "facts_used": [
+            "M-BUY-F1"
+          ]
+        },
+        {
+          "h2": "Step two: read the capacity unit carefully",
+          "purpose": "Explain why the listings mix quarts and liters and how to handle it.",
+          "facts_used": [
+            "M-BUY-F2"
+          ]
+        },
+        {
+          "h2": "Step three: measure the counter",
+          "purpose": "Use the verified footprints to rule appliances in or out.",
+          "facts_used": [
+            "M-BUY-F3"
+          ]
+        },
+        {
+          "h2": "Step four: check the function list",
+          "purpose": "Show how the function counts differ and where they disagree.",
+          "facts_used": [
+            "M-BUY-F4"
+          ]
+        },
+        {
+          "h2": "Step five: check the variant you are actually buying",
+          "purpose": "Warn about size families and about open brand questions.",
+          "facts_used": [
+            "M-BUY-F5",
+            "M-BUY-F6"
+          ]
+        },
+        {
+          "h2": "What this guide cannot tell you",
+          "purpose": "State the withheld fields plainly.",
+          "facts_used": [
+            "M-BUY-F7"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-BUY-B1",
+          "text": "Most air fryer comparisons start with capacity, and that is backwards. Capacity only means something once you know how many baskets you are feeding and how much counter you have. Start with the format: a single basket for one dish at a time, two baskets for two dishes side by side, or a toaster oven that also air fries and takes over most of the work a separate oven would do. Every other specification is a filter on top of that choice.",
+          "fact_ids": [
+            "M-BUY-F1"
+          ]
+        },
+        {
+          "id": "M-BUY-B2",
+          "text": "Capacity is the second step, and it needs care. Across these three listings the product details tables quote 6 liters, 8 quarts and 24.6 liters, while the listing titles quote 6 quart, 8 quarts and 26QT. Two unit conventions appear on the same pages, so no honest guide can present a single converted figure. Read the number with its unit, count the baskets, and size the appliance against the number of people you cook for.",
+          "fact_ids": [
+            "M-BUY-F2"
+          ]
+        },
+        {
+          "id": "M-BUY-B3",
+          "text": "Footprint is the step people skip and then regret. The verified dimensions are 13.38 by 11.81 by 10.63 inches for the dual basket oven, 12.75 by 13.5 by 10 inches for the single basket fryer, and 16.9 by 15.8 by 14.8 inches for the toaster oven. That last number is the one to take to the kitchen and measure against the gap between the wall and the wall cabinet.",
+          "fact_ids": [
+            "M-BUY-F3"
+          ]
+        },
+        {
+          "id": "M-BUY-B4",
+          "text": "Function lists are useful, but they are marketing statements and they are not always internally consistent. The toaster oven listing states 24 cooking functions in its title and 25 cooking pre-sets in its feature section, and names Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. Where a page disagrees with itself, treat the named modes as the reliable part and the count as the soft part.",
+          "fact_ids": [
+            "M-BUY-F4"
+          ]
+        },
+        {
+          "id": "M-BUY-B5",
+          "text": "Two product traps deserve a line each. The single basket fryer is a family of 6, 8 and 9 quart sizes on one page, so a link can point at one size while a review describes another. The toaster oven listing carries the store name and a byline that do not match the name in its own title, so the brand should be confirmed with the seller rather than assumed from the title.",
+          "fact_ids": [
+            "M-BUY-F5",
+            "M-BUY-F6"
+          ]
+        },
+        {
+          "id": "M-BUY-B6",
+          "text": "One thing this guide will not do is quote prices, ratings or review counts. Amazon's Associates rules allow a site to publish prices only when Amazon serves the link or when the data comes from an approved Amazon API, and they allow customer ratings and reviews only through that API. Neither route is connected to this site, so those figures are left out and the product page remains the place where the current numbers are shown by the retailer itself.",
+          "fact_ids": [
+            "M-BUY-F7"
+          ]
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-BUY-F1",
+          "field": "Formats covered",
+          "value": "Dual basket oven (P1), single basket 4-in-1 fryer (P3), French door multi-function air fryer toaster oven (P2)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing titles and product details tables on the three Amazon product pages",
+          "note": ""
+        },
+        {
+          "id": "M-BUY-F2",
+          "field": "Capacity units as listed",
+          "value": "P1: 6 liters (title 6 quart). P3: 8 quarts. P2: 24.6 liters (title 26QT).",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Product details tables and listing titles on the three Amazon product pages",
+          "note": "Units not converted. Flags F-06 and F-08."
+        },
+        {
+          "id": "M-BUY-F3",
+          "field": "Footprints as listed",
+          "value": "P1: 13.38\"D x 11.81\"W x 10.63\"H. P3: 12.75\"D x 13.5\"W x 10\"H. P2: 16.9\"D x 15.8\"W x 14.8\"H.",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Product details tables on the three Amazon product pages",
+          "note": ""
+        },
+        {
+          "id": "M-BUY-F4",
+          "field": "Function counts as stated",
+          "value": "P3: 4-in-1 (Bake, Dehydrate, Frozen) with 4 presets. P2: title says 24 cooking functions; feature section says 25 cooking pre-sets. P1: no function count stated; special features listed as + 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute.",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing titles, 'About this item' sections and product details tables",
+          "note": "P2 discrepancy. Flag F-26."
+        },
+        {
+          "id": "M-BUY-F5",
+          "field": "Size-variant family",
+          "value": "P3 offers 6, 8 and 9 quart sizes on one page; the supplied link resolves to the 8 qt variant",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Size option list on the Amazon product page",
+          "note": "Flag F-08."
+        },
+        {
+          "id": "M-BUY-F6",
+          "field": "Brand not established for P2",
+          "value": "Store 'Emeril Store'; byline 'Innovation IQ'; listing title names Emeril Lagasse",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Brand and byline block on the Amazon product page",
+          "note": "Flag F-05."
+        },
+        {
+          "id": "M-BUY-F7",
+          "field": "Price, rating and review count",
+          "value": "",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Participation Requirements 2(b) and 6(t)",
+          "note": "Withheld. Flag F-02."
+        }
+      ],
+      "cta": {
+        "text": "Open the listing for the format that fits your kitchen",
+        "link_label": "Single basket fryer listing",
+        "link_url": "https://link.amazon/B00hJ57DV",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating or review count appears in the guide.",
+        "Every step is tied to a verified field; no step depends on a withheld value.",
+        "Unresolved brand and unit questions are stated openly instead of being smoothed over."
+      ]
+    }
+  ],
+  "seo_rules": [
+    {
+      "id": "SEO-01",
+      "rule": "Do not use an Amazon Mark in the page title, meta description, domain name or keyword text.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 1(g) and 6(e); Trademark Guidelines 1 to 3",
+      "applied": "None of the suggested title tags, meta descriptions or keyword targets contains the word 'amazon'."
+    },
+    {
+      "id": "SEO-02",
+      "rule": "When linking to pages with product lists, the site must carry additional original content relevant to the link.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 2(b)",
+      "applied": "Every article, the comparison and the buying guide are original copy written for this site; the category and product pages link out to the retailer only from that copy."
+    },
+    {
+      "id": "SEO-03",
+      "rule": "Every product claim must be accurate; no inaccurate, overbroad, deceptive or misleading claim about any product, price or policy.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 2(b)",
+      "applied": "Each claim in the fact tables carries a source link. Capacity units are not converted, and open brand and variant questions are stated rather than resolved by assumption."
+    },
+    {
+      "id": "SEO-04",
+      "rule": "Material content posted on the site must be accurate, complete and appropriate.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 3(c)",
+      "applied": "The same fact tables act as the accuracy record for each published page."
+    },
+    {
+      "id": "SEO-05",
+      "rule": "Program Content may not be altered, and text taken from an API must carry the 'CERTAIN CONTENT THAT APPEARS ... COMES FROM AMAZON ...' disclaimer.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 6(a); IP License 2(k)",
+      "applied": "No Amazon listing prose is reproduced in the copy. If API content is ever displayed, the required disclaimer and the date and time stamp must be added first."
+    },
+    {
+      "id": "SEO-06",
+      "rule": "Disclose the material connection clearly and conspicuously, placed with the endorsement, in simple language; do not talk about a product you have not used.",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "source_ref": "FTC Disclosures 101, 'How to Disclose' and 'What Else to Know'",
+      "applied": "Each article carries the disclosure next to its link, and the copy contains no first-hand use claims; every statement is sourced to the listing instead."
+    },
+    {
+      "id": "SEO-07",
+      "rule": "Prices may be shown only if Amazon serves the link or the data comes from Creators API / PA API; ratings and reviews only through those APIs.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 2(b) and 6(t)",
+      "applied": "The content kit contains no price, rating, review count or popularity badge. Any future price field needs the API route and the IP License 2(i) timestamp and disclaimer."
+    },
+    {
+      "id": "SEO-08",
+      "rule": "A site must not have price tracking or price alerting functionality unless Amazon agrees otherwise.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 6(y)",
+      "applied": "No price tracking or price alerting is built or planned on this site."
+    }
+  ],
+  "publishing_checklist": [
+    {
+      "step": "Confirm the Associate tag",
+      "detail": "Every Special Link must carry the Associates ID as a URL parameter. The three supplied short links resolve without a visible tag, so the tagged URL must be confirmed in Associates Central before anything is published.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 2(b)"
+    },
+    {
+      "step": "Place the disclosure next to the link",
+      "detail": "The disclosure sentence must appear with the endorsement, not only on a separate page.",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "source_ref": "Associates Central help, 'Why do I have to identify myself as an Associate?'"
+    },
+    {
+      "step": "Keep the site disclosure prominent",
+      "detail": "'As an Amazon Associate I earn from qualifying purchases.' must be clearly and prominently stated on the site.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "source_ref": "Operating Agreement, Section 5"
+    },
+    {
+      "step": "Do not add an Amazon Mark to the title or keywords",
+      "detail": "Keep 'amazon' out of the title tag, meta description, slug and keyword targets.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 6(e); Trademark Guidelines 1"
+    },
+    {
+      "step": "Re-check every fact before republishing",
+      "detail": "Listing titles, prices, availability and the recommendation carousels all change. Re-read the source page on every refresh cycle.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "IP License 2(h) and 2(i)"
+    },
+    {
+      "step": "Do not republish Amazon prose",
+      "detail": "Keep the copy in the site's own words; do not paste listing bullets into an article.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 6(a)"
+    },
+    {
+      "step": "Record every link you publish",
+      "detail": "Keep the published URL list so a later review can confirm each link carries the right tag and points at the right listing.",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Participation Requirements 2(b) and 6(w)"
+    }
+  ]
+}

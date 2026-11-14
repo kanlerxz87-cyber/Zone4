@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Full list of requirements taken from the project brief, one row each, with the delivery status of this site and the official source that governs or evidences that status. Nothing is inferred: a requirement is marked Delivered only where the site actually does it, and Not built / Unverifiable otherwise, with the official rule or missing access named in the blocker column.",
+    "description": "Full list of requirements taken from the project brief, one row each, with the delivery status of this site and the official source that governs or evidences that status. Nothing is inferred: a requirement is marked Delivered only where the site actually does it, and Not built / Unverifiable otherwise, with the official rule or missing access named in the blocker column. Updated by the final integration session (arena/3036372b-zone4) on 2026-11-14: the content-generation, tracking and delivery rows were restated against the merged site, which now publishes the marketing content kit and a local first-party click log.",
     "as_of_utc": "2026-11-14",
     "status_meanings": {
       "Delivered": "Working on the published site now.",
@@ -24,7 +24,8 @@
       ],
       "flags": [
         "F-12",
-        "F-19"
+        "F-21",
+        "F-24"
       ]
     },
     {
@@ -40,7 +41,7 @@
       ],
       "flags": [
         "F-11",
-        "F-19"
+        "F-21"
       ]
     },
     {
@@ -80,7 +81,7 @@
       "requirement": "Analyze pricing.",
       "status": "Not built - blocked (policy)",
       "delivered": "",
-      "blocker": "Participation Requirements Section 2(b): a site 'may only show prices and availability if: (a) we serve the link in which that price and availability data are displayed, or (b) you obtain Product pricing and availability data via Creators API or PA API'. Section 6(y): 'your Site must not have price tracking and/or price alerting functionality.' The verifier (scripts/verify.py) fails the build if any page contains a currency amount.",
+      "blocker": "Pricing analysis stays blocked. Participation Requirement 2(b) permits prices and availability only if Amazon serves the link or the data comes from the Creators API, and 6(y) prohibits price tracking and price alerting functionality unless Amazon agrees otherwise. The commission rate is published because it is a program term rather than Amazon pricing; no price is published (F-02).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
@@ -117,49 +118,35 @@
       ],
       "flags": [
         "F-10",
-        "F-20"
+        "F-29"
       ]
     },
     {
       "id": "REQ-08",
       "area": "Commission analysis",
       "requirement": "Analyze commission potential.",
-      "status": "Unverifiable (blank + flagged)",
-      "delivered": "The formula is documented with its source: Commission Income Statement Section 3, 'Commission Income is calculated as a percentage of Qualifying Revenue', and Section 1 defines Qualifying Revenue.",
-      "blocker": "The rate itself is in the Appendix, reached from https://affiliate-program.amazon.com/help/operating/schedule, which redirects to an Amazon sign-in. No rate is entered, so no earnings figure is calculated. Third-party commission tables conflict and are not used.",
+      "status": "Delivered (partial)",
+      "delivered": "The official Standard Commission Income Statement is published at a public URL that needs no sign-in, and its Table 1 lists the Kitchen band at 4.50%. The site publishes that rate on every product row and in the verification log, with the table cited on the row.",
+      "blocker": "The commission category Amazon assigns to each of the three ASINs cannot be confirmed from outside Associates Central. Table 1 has both a 'Kitchen' band at 4.50% and a 'Home' band at 3.00%, and an air fryer is a kitchen small appliance, so the Kitchen band is the right reading but is not proven per item. Commission income is also paid on Qualifying Revenue, which excludes shipping, tax and similar items, so a rate is not a per-order amount. Flag F-01.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/schedule",
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
-        "F-01"
+        "F-01",
+        "F-02"
       ]
     },
     {
       "id": "REQ-09",
       "area": "Content generation",
       "requirement": "Generate SEO-optimized product articles.",
-      "status": "Not built - blocked (policy)",
-      "delivered": "",
-      "blocker": "Same gate as REQ-01: Participation Requirements Section 5 (no Special Links or Program Content to develop machine learning models without express prior written approval) and Conditions of Use 'License and Access' (no Amazon AI-generated content for model development). No article has been generated from Amazon-derived data.",
+      "status": "Delivered",
+      "delivered": "Three product articles are published on the Marketing content page, one for each supplied product. Each has a suggested slug, a title tag, a meta description, an H1, three keyword targets with the search-volume cell left blank, an outline mapped to fact IDs, finished copy, a call to action carrying the disclosure, and a fact table in which every row links to its official source. 53 fact rows in total across the five pieces. The copy is written in this site's own words and republishes no Amazon listing prose.",
+      "blocker": "No blocker for the articles themselves. Two limits still apply to the content and are recorded rather than worked around: the Amazon AI clauses restrict training or fine-tuning on Amazon content, not the writing of pages with an AI tool from verified fields (finding A-08), and no price, rating, review count or commission figure appears in any article because those are withheld (F-02, F-01). A human owner should still read the copy before publishing it.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
-      ],
-      "flags": [
-        "F-12",
-        "F-19"
-      ]
-    },
-    {
-      "id": "REQ-10",
-      "area": "Content generation",
-      "requirement": "Generate product comparisons.",
-      "status": "Not built - blocked (policy)",
-      "delivered": "",
-      "blocker": "A comparison table needs price or rating columns, which are withheld under Sections 2(b) and 6(t). Section 2(b) also requires that any 'comparison' format display both the lowest new and lowest used Amazon price. Without a Creators API or PA API feed the comparison cannot be built compliantly.",
-      "sources": [
-        "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
         "F-02",
@@ -167,18 +154,31 @@
       ]
     },
     {
-      "id": "REQ-11",
+      "id": "REQ-10",
       "area": "Content generation",
-      "requirement": "Generate buying guides.",
-      "status": "Not built - blocked (policy)",
-      "delivered": "",
-      "blocker": "Same gate as REQ-09. Participation Requirements Section 6(a) also bars altering Program Content, and Section 3(c) makes the Associate responsible for the accuracy of every product description posted on the site.",
+      "requirement": "Generate product comparisons.",
+      "status": "Delivered (partial)",
+      "delivered": "A comparison page is published on the Marketing content page, comparing the three supplied products on the attributes that were verified from their official pages: format, listed capacity, listed dimensions, listed colour, listed material, listed special features, control method and category path. Every row of its fact table links to its official source.",
+      "blocker": "The comparison has no price, rating or review columns, because those are withheld under Sections 2(b) and 6(t). Section 2(b) also requires that a comparison format display both the lowest new and the lowest used Amazon price, which cannot be met without a Creators API or PA API feed.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
-        "F-12",
-        "F-19"
+        "F-02"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "area": "Content generation",
+      "requirement": "Generate buying guides.",
+      "status": "Delivered",
+      "delivered": "A buying guide is published on the Marketing content page: a decision-oriented guide that walks through the three formats, states the verified specifications for each, and names the unresolved listing inconsistencies a buyer should know about. Every row of its fact table links to its official source.",
+      "blocker": "No blocker for the guide itself. Participation Requirement 6(a) bars altering Program Content and Section 3(c) makes the Associate responsible for the accuracy of every product description posted on the site, so the guide cites verified fields only and links to the official pages rather than restating listing prose. No price, rating or commission figure appears in it (F-02, F-01).",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "flags": [
+        "F-02"
       ]
     },
     {
@@ -204,16 +204,15 @@
       "id": "REQ-13",
       "area": "Content generation",
       "requirement": "Create engaging marketing content.",
-      "status": "Not built - blocked (policy)",
-      "delivered": "",
-      "blocker": "No ad copy, email, social or landing-page copy has been generated. Any such content would be built on the withheld price, rating and commission data (F-01, F-02) and would need the REQ-01 compliance review first.",
+      "status": "Delivered (partial)",
+      "delivered": "The marketing content kit is published on the Marketing content page: three product articles, one comparison page, one buying guide, each with a title tag, meta description, keyword targets, finished copy and a call to action carrying the required disclosure, plus an eight-rule SEO checklist and a seven-step publishing checklist.",
+      "blocker": "Ad copy, email, social and landing-page copy are not produced. Any such content would be built on the withheld price, rating and commission data (F-01, F-02) and would need the REQ-01 compliance review first.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
         "F-01",
-        "F-02",
-        "F-12"
+        "F-02"
       ]
     },
     {
@@ -238,15 +237,15 @@
       "id": "REQ-15",
       "area": "Tracking",
       "requirement": "Track clicks and conversions.",
-      "status": "Not built - needs access",
-      "delivered": "",
-      "blocker": "Click and conversion reporting is produced by Amazon, not by this site: Commission Income Statement Section 6, 'We will use commercially reasonable efforts to accurately and comprehensively track Qualifying Purchases ... and creating and distributing to you our reports'. No Associates account or reporting feed is connected, and Sections 2(b) and 6(z) restrict attaching non-Amazon analytics to Special Links. No click, conversion or revenue figure is published.",
+      "status": "Delivered (partial)",
+      "delivered": "A first-party click tracker is published on the Analytics page. It records real clicks on the site's tracked links in the visitor's own browser, plus one event explicitly labelled as a test, and exports the log as JSON or CSV. It starts at zero, sends nothing to any server and never estimates a figure, so it does not conflict with Section 6(s) on artificial clicks.",
+      "blocker": "Conversion and revenue attribution is not built and no click, conversion or revenue figure is published. Click and conversion reporting is produced by Amazon, not by this site: Commission Income Statement Section 6 states that Amazon will use commercially reasonable efforts to track Qualifying Purchases and to create and distribute the reports. No Associates account or reporting feed is connected, and the supplied links carry no 'tag=' parameter, so a locally recorded click cannot yet be reconciled against Amazon reporting (F-03, F-19).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "flags": [
         "F-03",
-        "F-15"
+        "F-19"
       ]
     },
     {
@@ -278,7 +277,7 @@
       "flags": [
         "F-11",
         "F-12",
-        "F-19"
+        "F-21"
       ]
     },
     {
@@ -435,17 +434,17 @@
       "id": "REQ-30",
       "area": "Delivery",
       "requirement": "Build marketing for the three supplied products.",
-      "status": "Delivered (partial)",
-      "delivered": "Each of the three supplied links is resolved to its Amazon listing, verified, and published on a category page with its disclosure and its competitor context.",
-      "blocker": "No marketing copy, comparison or buying guide is published for them, because that is gated by REQ-09 to REQ-13. This page is the honest inventory of what is and is not in place.",
+      "status": "Delivered",
+      "delivered": "All three supplied products have marketing: one article each, plus one comparison page covering all three and one buying guide covering the three formats, all published on the Marketing content page with sourced fact tables, title tags, meta descriptions, keyword targets and disclosure-carrying calls to action. Each product also has its own verified record on a category page with its disclosure and competitor context.",
+      "blocker": "No blocker. The marketing copy deliberately carries no price, rating, review count or commission figure, because those are withheld or unverified (F-01, F-02), and no Amazon listing prose is republished. An owner should read the copy before publishing it.",
       "sources": [
         "https://link.amazon/B04G1MEwY",
         "https://link.amazon/B02NbDxp3",
         "https://link.amazon/B00hJ57DV"
       ],
       "flags": [
-        "F-12",
-        "F-19"
+        "F-01",
+        "F-02"
       ]
     }
   ]
