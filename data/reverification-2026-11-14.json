@@ -1,7 +1,10 @@
 {
   "_meta": {
     "description": "Independent re-verification of the three user-supplied Amazon links and the Associates citations used by the site, performed on 2026-11-14 (UTC) by session arena/857e9efd-zone4. Each row lists the official source that was read. Nothing here was inferred: a value is recorded only where the official page showed it.",
-    "scope_files": ["data/reverification-2026-11-14.json", "COORDINATION.md"],
+    "scope_files": [
+      "data/reverification-2026-11-14.json",
+      "COORDINATION.md"
+    ],
     "note": "This file does not change the published site. Shared outputs (docs/, data/products.json, data/flags.json) are reserved for the integration session."
   },
   "links": [
@@ -11,7 +14,11 @@
       "resolved_page_title_matches_record": true,
       "asin_matches_record": "B0CDY277D3",
       "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
-      "also_viewed_asins_matches_record": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+      "also_viewed_asins_matches_record": [
+        "B0B7C327LK",
+        "B0BYKGN61Q",
+        "B0CNSB81V6"
+      ],
       "official_source": "https://www.amazon.com/dp/B0CDY277D3"
     },
     {
@@ -20,7 +27,11 @@
       "resolved_page_title_matches_record": true,
       "asin_matches_record": "B09B7SB46R",
       "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
-      "also_viewed_asins_matches_record": ["B0BZ52FLKC", "B0FM5KF34G", "B0F92GL7JH"],
+      "also_viewed_asins_matches_record": [
+        "B0BZ52FLKC",
+        "B0FM5KF34G",
+        "B0F92GL7JH"
+      ],
       "official_source": "https://www.amazon.com/dp/B09B7SB46R"
     },
     {
@@ -29,7 +40,11 @@
       "resolved_page_title_matches_record": true,
       "asin_matches_record": "B08DKYBTPH",
       "breadcrumb_matches_record": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
-      "also_viewed_asins_matches_record": ["B0CNY1YVDD", "B0D5FX6VRL", "B0C33CHG99"],
+      "also_viewed_asins_matches_record": [
+        "B0CNY1YVDD",
+        "B0D5FX6VRL",
+        "B0C33CHG99"
+      ],
       "official_source": "https://www.amazon.com/dp/B08DKYBTPH"
     }
   ],
@@ -91,5 +106,6 @@
       "detail": "Brief asks for automated research, AI article generation, publishing and click/conversion tracking. Program Policies Section 2(b) limits price display to Amazon-served links or PA/Creators API data; Section 3(s) bars artificially generated clicks; Section 3(t) bars review/rating display without API data. No PA-API or Creators API credentials, Associates tag or analytics access exist in this sandbox, so these features are not built and no values were filled in to simulate them.",
       "action": "Owner: obtain Associates/PA-API access and confirm eligibility before any automation is connected."
     }
-  ]
+  ],
+  "integration_note_2026_11_14": "Added by the integration session (arena/e5381cc3-zone4). The original readings above are kept unchanged. On the Program Policies page as read on 2026-11-14, the lettered items (a)–(f) belong to Section 3 and the items (g)–(z) follow heading '6. Content on your Site'. So RV-C2 (ratings) is Section 6(t), not 3(t); RV-C3 (link shortening) is 6(w), not 3(w); RV-C4 (artificial clicks) is 6(s), not 3(s). RV-C1 (2(b)) is unchanged. RV-I1 (paraphrased labels), RV-I2 and RV-C5 are applied as F-20; RV-I3 is applied as F-19. The site uses the corrected numbering."
 }
