@@ -35,14 +35,14 @@
     },
     {
       "id": "A-02",
-      "finding": "Two of the three products share a brand (Chefman). The third brand is unresolved.",
+      "finding": "Two of the three products share a brand (Chefman). The third is Emeril (Item details table; byline to confirm, F-05).",
       "basis": "Brand byline on P1 and P3 reads Chefman. P2 shows store 'Emeril Store' and byline 'Innovation IQ' (F-05).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B08DKYBTPH",
         "https://www.amazon.com/dp/B09B7SB46R"
       ],
-      "confidence": "Verified for P1 and P3 by the earlier session (byline not re-read, F-18); unresolved for P2"
+      "confidence": "P2 brand from the Item details table, re-read 2026-11-14 (byline to confirm, F-05); P1 and P3 from the earlier session (byline not re-read, F-18)"
     },
     {
       "id": "A-03",
@@ -114,7 +114,7 @@
     },
     "air-fryer-toaster-ovens": {
       "title": "Air-fry toaster ovens",
-      "intro": "Larger multi-function ovens that also air fry, toast and roast. Covers P2 (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven). Brand unresolved (F-05).",
+      "intro": "Larger multi-function ovens that also air fry, toast and roast. Covers P2 (Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven). Brand Emeril from the Item details table; byline to confirm (F-05).",
       "product_ids": [
         "P2"
       ]
