@@ -14,11 +14,13 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
 | `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
 | `data/requirements.json` | The 30 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
-| `data/sources.json` | Source registry (27 entries): each official source, and whether it was read |
+| `data/sources.json` | Source registry (31 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 38 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 44 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
+| `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
+| `DESIGN_PROMPT.md` | Ready-to-paste redesign brief (suggestion S-14, decision D-20); fills its bracketed slots from the recorded picks |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `data/verification-session-d8564cd0.json` | 2026-11-15 verification pass by `arena/d8564cd0-zone4`: commission table re-read, P1/P2/P3 page reads, flag F-44 record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
@@ -28,9 +30,9 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
-| `data/suggestions.json` | The change backlog: 12 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
-| `data/questions.json` | 15 open questions that must be answered before a change can be made, each naming what is already known, how the missing piece is discovered and who can answer it |
-| `data/decisions.json` | The decision queue (12 choices with options, cost and reversibility) and the log of decisions actually taken |
+| `data/suggestions.json` | The change backlog: 16 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
+| `data/questions.json` | 19 open questions that must be answered before a change can be made, each naming what is already known, how the missing piece is discovered and who can answer it |
+| `data/decisions.json` | The decision queue (20 choices with options, cost and reversibility) and the log of decisions actually taken |
 | `docs/` | The published site (24 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
@@ -56,9 +58,9 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
 | `suggestions.html` | Suggestions: every change worth making, costed and risk-assessed, waiting on a decision rather than already applied |
-| `questions.html` | Open questions: 15 items that must be answered first, with what is known, what is missing and who can supply it |
-| `decisions.html` | Decision log: the 12 open choices with their options, plus the record of decisions taken |
-| `flagged.html` | Flagged for Review: 43 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
+| `questions.html` | Open questions: 19 items that must be answered first, with what is known, what is missing and who can supply it |
+| `decisions.html` | Decision log: the 20 open choices with their options, plus the record of decisions taken |
+| `flagged.html` | Flagged for Review: 44 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify

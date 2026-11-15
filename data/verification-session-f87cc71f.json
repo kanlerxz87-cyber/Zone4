@@ -1,0 +1,93 @@
+{
+  "_meta": {
+    "description": "Independent re-verification performed on 2026-11-15 (UTC) by session arena/f87cc71f-zone4. Every check names the official source that was read on 2026-11-15. Nothing was inferred: values that could not be re-read from an official source on this pass are recorded as 'not re-read on 2026-11-15' and keep their flag. Where the live page disagreed with the stored snapshot in a way already covered by a flag, the difference is recorded rather than smoothed over.",
+    "method": "Each user-supplied short link was fetched and its redirect target read from the returned official Amazon page. Listing-title tags, category breadcrumbs and 'Customers who viewed this item also viewed' carousels were read from the returned pages and compared field by field with data/products.json. The public Standard Commission Income Statement was re-read at its official URL and Table 1 compared with the figures the site publishes. The Associates Program Operating Agreement was re-read through Section 7 and its Section 5 disclosure sentence compared with the sentence the site prints on every page. The FTC 'Disclosures 101 for Social Media Influencers' page was re-read. Attempts to re-read the Item-details/specification tables returned advertising modules (P1), a bot checkpoint (P2) or the same advertising modules (P3 via the mobile route, which served the desktop layout), so those rows are NOT re-confirmed on this pass and F-38 stands.",
+    "session": "arena/f87cc71f-zone4",
+    "observed_utc": "2026-11-15",
+    "environment_note": "One page load of the P2 product page returned an Amazon 'checkpoint/continue' bot-verification page instead of the product page. A later load of the P1 page succeeded. Page-level variability and bot checks are recorded here so a later reviewer knows why some fields were not re-read, not as a doubt about the stored values."
+  },
+  "products": [
+    {
+      "id": "P1",
+      "short_link": "https://link.amazon/B04G1MEwY",
+      "resolved_url_observed": "https://www.amazon.com/dp/B0CDY277D3 (redirect target; carries lv, channelId, plpRedirect, btn_type, btn_ref, gaOptInStatus parameters)",
+      "resolution_match": "MATCH — resolves to the stored ASIN B0CDY277D3; no tag= parameter present (F-03 unchanged)",
+      "verified_fields_2026_11_15": {
+        "title_tag": "MATCH — the page <title> minus the ': Home & Kitchen' suffix equals the stored name_listing verbatim",
+        "category_path": "MATCH — Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "also_viewed_asins": "MATCH 3 of 3, stored order: B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen…), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel…), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT…)",
+        "specification_table": "NOT RE-READ on 2026-11-15 — requests for the lower part of the page returned advertising modules only (same failure mode as F-38). Capacity, dimensions, colour, material, special features, brand and model number therefore rest on the 2026-11-14 reads recorded by arena/3036372b-zone4, arena/01ab2940-zone4 and arena/46c18cd1-zone4."
+      },
+      "official_source": "https://www.amazon.com/dp/B0CDY277D3",
+      "status": "Identity, breadcrumb and carousel re-verified 2026-11-15; specification table not re-read (F-38 stands)"
+    },
+    {
+      "id": "P2",
+      "short_link": "https://link.amazon/B02NbDxp3",
+      "resolved_url_observed": "https://www.amazon.com/dp/B09B7SB46R (redirect target; carries lv, channelId, plpRedirect, btn_type, btn_ref, gaOptInStatus parameters)",
+      "resolution_match": "MATCH — resolves to the stored ASIN B09B7SB46R; no tag= parameter present (F-03 unchanged)",
+      "verified_fields_2026_11_15": {
+        "title_tag": "PARTIAL — the page <title> reads 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. The segment before the first ' | ' matches the stored name_listing verbatim; the subtitle differs from the stored listing-title subtitle ('26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie…'). Amazon's meta title and on-page listing title can carry different text, and the on-page listing title could not be re-read on this pass (bot checkpoint / advertising modules), so the stored subtitle is NOT re-confirmed and NOT contradicted. The meta title's '24 One-Touch Preset Options' is consistent with the stored '24 cooking functions' side of the F-26 discrepancy.",
+        "category_path": "MATCH — Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "also_viewed_asins": "PARTIAL 2 of 3, stored order: B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven…) and B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101…) MATCH. The third slot showed B0D1BGLW25 (Midea Flexify Classic French Door Toaster Oven Air Fryer Combo, 26.4 QT…) instead of the stored B0F92GL7JH (HotKing…). This is the carousel rotation F-29 documents; the stored snapshot is retained as a dated record and no list is treated as stable.",
+        "specification_table": "NOT RE-READ on 2026-11-15 — the page body returned a bot checkpoint on one attempt and advertising modules on another (same failure mode as F-38). Capacity 24.6 liters, dimensions, colour, material, special features, brand and manufacturer rest on the 2026-11-14 reads."
+      },
+      "official_source": "https://www.amazon.com/dp/B09B7SB46R",
+      "status": "Identity prefix, breadcrumb and two carousel slots re-verified 2026-11-15; listing-title subtitle and specification table not re-read (F-38 stands); third carousel slot rotated (F-29 evidence)"
+    },
+    {
+      "id": "P3",
+      "short_link": "https://link.amazon/B00hJ57DV",
+      "resolved_url_observed": "https://www.amazon.com/dp/B08DKYBTPH (redirect target; carries lv, channelId, plpRedirect, btn_type, btn_ref, gaOptInStatus, th parameters)",
+      "resolution_match": "MATCH — resolves to the stored ASIN B08DKYBTPH; no tag= parameter present (F-03 unchanged)",
+      "verified_fields_2026_11_15": {
+        "title_tag": "MATCH — the page <title> minus the ': Home & Kitchen' suffix equals the stored name_listing verbatim ('Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel')",
+        "category_path": "MATCH — Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+        "also_viewed_asins": "PARTIAL 2 of 3, stored order: B0CNY1YVDD (Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals in Minutes…) and B0D5FX6VRL (Chefman Air Fryer – 6 QT Compact Airfryer for Quick & Easy Meals…) MATCH. The third slot showed B09MR7QWKZ (Gourmia Air Fryer - 8 Qt Basket Capacity, 12 Presets, Stainless Steel…) instead of the stored B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt…). Carousel rotation per F-29; stored snapshot retained as a dated record.",
+        "specification_table": "NOT RE-READ on 2026-11-15 — the mobile route (gp/aw/d) served the desktop layout and the lower page returned advertising modules (same failure mode as F-38). Capacity 8 quarts, dimensions, colour, material, special features and brand rest on the 2026-11-14 reads."
+      },
+      "official_source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "status": "Identity, breadcrumb and two carousel slots re-verified 2026-11-15; specification table not re-read (F-38 stands); third carousel slot rotated (F-29 evidence)"
+    }
+  ],
+  "policy_and_rate_checks_2026_11_15": [
+    {
+      "item": "Standard Commission Income Statement, Table 1",
+      "observed": "RE-READ and MATCH — the live public statement lists 'Physical Books, Kitchen, Automotive | 4.50%' and 'Toys, Furniture, Home, Home Improvement, Lawn & Garden, … | 3.00%', exactly as the site publishes at category level. The statement also lists 'All Other Categories | 4.00%'. No reviewed official source maps the three ASINs to a commission category, so product-level rate cells remain blank (F-01 unchanged).",
+      "official_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+    },
+    {
+      "item": "Associates Program Operating Agreement, Section 5 (Identifying Yourself as an Associate)",
+      "observed": "RE-READ and MATCH — Section 5 states: 'You must clearly and prominently state the following … on your Site …: “As an Amazon Associate I earn from qualifying purchases.”' The sentence the site prints on every page matches verbatim. The agreement page shows 'Updated: October 15, 2025'. Section 5 also bars misrepresenting the relationship and requires advance written permission for other public communications about participation (basis of F-25).",
+      "official_source": "https://affiliate-program.amazon.com/help/operating/agreement"
+    },
+    {
+      "item": "FTC, Disclosures 101 for Social Media Influencers",
+      "observed": "RE-READ and consistent — material connections must be disclosed clearly and conspicuously with the endorsement itself; 'You can't talk about your experience with a product you haven't tried.' This supports the site's policy of making no hands-on performance claims (the articles state listed specifications only) and of printing the affiliate disclosure at the top of every page.",
+      "official_source": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+    }
+  ],
+  "summary": {
+    "checks_passed": [
+      "All three short links resolve to the stored ASINs (3 of 3)",
+      "No tag= parameter in any resolved URL (F-03 re-confirmed, unchanged)",
+      "Listing-title tags match the stored name_listing verbatim for P1 and P3",
+      "P2 title-tag prefix matches the stored listing-title prefix (subtitle not re-confirmed)",
+      "Category breadcrumb matches for all three products (3 of 3)",
+      "Also-viewed carousel: 8 of 9 stored entries reappeared in the stored order with matching title prefixes",
+      "Commission Table 1 category bands match the published figures verbatim (Kitchen 4.50%, Home 3.00%)",
+      "Operating Agreement Section 5 disclosure sentence matches the site's disclosure verbatim",
+      "FTC Disclosures 101 page re-read; supports the no-hands-on-claims policy"
+    ],
+    "not_reconfirmed_on_this_pass": [
+      "Specification/Item-details tables for all three products (advertising modules / bot checkpoint) — F-38 stands, now with a second independent session unable to re-read them",
+      "P2 on-page listing-title subtitle (meta title differs; on-page title not re-readable on this pass)",
+      "Also-viewed third slots for P2 and P3 (rotated to B0D1BGLW25 and B09MR7QWKZ respectively on this read — F-29 evidence)"
+    ],
+    "new_observations": [
+      "F-29 carousel rotation is now observed directly on a later date: the third P2 slot showed B0D1BGLW25 (Midea Flexify 26.4 QT) and the third P3 slot showed B09MR7QWKZ (Gourmia 8 Qt), replacing the stored B0F92GL7JH and B0C33CHG99 snapshots. The stored snapshots are kept as dated records; no ranking or share is derived from them.",
+      "The P2 page <title> subtitle ('Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included') differs from the stored listing-title subtitle; Amazon's meta title and on-page listing title can differ, so neither is treated as wrong. Recorded so the next re-read compares the on-page title specifically."
+    ],
+    "values_changed_in_data": "None. No stored value was contradicted by an official source on this pass, so no product record was edited. The flags F-03, F-29 and F-38 carry dated update notes only."
+  }
+}

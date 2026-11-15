@@ -576,6 +576,175 @@
         }
       ]
     }
+,
+    {
+      "id": "D-17",
+      "question": "Which topics should the content program publish first?",
+      "linked_question": "Q-16, Q-06",
+      "linked_suggestions": [
+        "S-13"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Foundational four first (sizes, format-choice guide, glossary, checklist)",
+          "commits_to": "Four wave-one articles are written from the verified field set and interlinked with the format pages; wave two waits on their data.",
+          "effort": "Four working sessions after the voice decision.",
+          "reversible": "Yes - unpublished topics cost nothing."
+        },
+        {
+          "key": "B",
+          "label": "The full calendar of eight",
+          "commits_to": "All eight working titles are scheduled over a quarter, with the editorial review load that implies.",
+          "effort": "Eight working sessions after the voice decision.",
+          "reversible": "Yes, though abandoning half-published series is messier."
+        },
+        {
+          "key": "C",
+          "label": "Hold until the brand and voice picks are recorded",
+          "commits_to": "No article work until D-18 and the S-12 voice question settle, avoiding any rewrite.",
+          "effort": "None now; momentum cost later.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The foundational four answer the highest-intent format questions and can be written today from sourced specs; they also create the link hub the existing reviews need. C is the safe fallback if the brand decision lands soon.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful content guidance"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "ref": "P3 product page: example of the verified rows the topics are built from"
+        }
+      ]
+    },
+    {
+      "id": "D-18",
+      "question": "Which visual direction and brand name should the site adopt?",
+      "linked_question": "Q-12, Q-19",
+      "linked_suggestions": [
+        "S-15"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Warm editorial (kitchen-magazine), name to be chosen",
+          "commits_to": "Serif display, warm palette, story-led hero; the redesign prompt is filled with this direction and one brand name that clears Q-19.",
+          "effort": "An afternoon of choice; the overhaul is scoped by S-14.",
+          "reversible": "Until external assets carry the name."
+        },
+        {
+          "key": "B",
+          "label": "Crisp data-journalism",
+          "commits_to": "The dashboard bones stay; the verified-facts framing is sharpened into a trust-first publication look.",
+          "effort": "Lighter than A; mostly typography and layout passes.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Bold deal-finder",
+          "commits_to": "High-contrast badges and urgency - with the caveat that price-led tactics stay blocked while F-02 holds.",
+          "effort": "Same as A.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A, with the name cleared against Q-19 first. A matches the brief's polished-marketing wording and absorbs the compliance furniture gracefully; C is largely blocked by the price and rating rules.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first presentation"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: disclosures must remain clear in any design"
+        }
+      ]
+    },
+    {
+      "id": "D-19",
+      "question": "What evidence rule governs 'trending' and popularity claims in marketing copy?",
+      "linked_question": "Q-06",
+      "linked_suggestions": [
+        "S-16"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Dated snapshots of official pages only",
+          "commits_to": "A popularity claim must name the official page and the read date; bare adjectives are out of the copy rules.",
+          "effort": "One checklist entry.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "No popularity claims at all",
+          "commits_to": "The safest copy; removes the 'trending' class of engaging headlines entirely.",
+          "effort": "None.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "First-party data only, after measurement exists",
+          "commits_to": "Claims about what readers read here, sourced to this site's own data and never generalised to the market.",
+          "effort": "Depends on S-09 and the analytics decision.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A now, with C layered in once measurement exists. It keeps trendy copy possible while every claim stays checkable.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "ref": "Official Air Fryers category page (Amazon's own popularity ordering)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-20",
+      "question": "Should the prepared design-prompt draft be adopted as the brief for the visual overhaul?",
+      "linked_question": "Q-12",
+      "linked_suggestions": [
+        "S-14"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Adopt as drafted, after filling the bracketed picks",
+          "commits_to": "DESIGN_PROMPT.md becomes the brief handed to a designer or design tool, with the compliance block non-negotiable.",
+          "effort": "Ten minutes of slot-filling once D-17 to D-19 are recorded.",
+          "reversible": "Yes - it is a document, not a build."
+        },
+        {
+          "key": "B",
+          "label": "Revise the draft first",
+          "commits_to": "You mark the sections to change before it becomes the working brief.",
+          "effort": "One review pass.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Hold the overhaul",
+          "commits_to": "The site stays in its current presentation layer until further notice.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A once D-17 to D-19 are recorded - the draft's bracketed slots exist exactly for those picks - unless you want changes marked in it first (B).",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/DESIGN_PROMPT.md",
+          "ref": "The prepared draft in this repository"
+        }
+      ]
+    }
   ],
   "log": [
     {
