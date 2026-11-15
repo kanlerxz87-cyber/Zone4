@@ -18,6 +18,13 @@
     },
     "added_by_c5462690_2026_11_14": {
       "F-38": "New. F-36 and F-37 were already taken by session arena/949aaac1-zone4 (PR #41) for the per-ASIN commission defect and the F-27/F-29 citation error, so this register's own new item continues the sequence at F-38 rather than reusing a number."
+    },
+    "added_by_00ba6c2e_2026_11_15": {
+      "F-39": "New. Two product names in shipped code. Found by reading docs/tracker.js and engine/sitegen.py against the published brand.",
+      "F-40": "New. Identical meta description on 16 of 21 pages, counted from the committed docs/ output.",
+      "F-41": "New. KPI label versus the set it computes, verified by evaluating the builder's own predicate against data/flags.json (21 vs 28).",
+      "F-42": "New. Documentation drift: test count, a check command that fails on a clean checkout, and generator ambiguity. Each item reproduced before it was recorded.",
+      "F-43": "New. Wrong flag cross-reference in data/sources.json (F-29 where F-35 was meant). Corrected in the same session that found it; the row is retained as the audit trail."
     }
   },
   "flags": [
@@ -466,6 +473,67 @@
       ],
       "status": "Needs review",
       "action": "Re-read the Item details / Product information table on each of the three product pages (or pull the same fields through the Creators API) at the next review, so every published specification row carries a same-session read."
+    },
+    {
+      "id": "F-39",
+      "severity": "Low",
+      "title": "Two product names in the repository; both appear in shipped code",
+      "detail": "The published site is branded 'Zone4 affiliate research' (SITE_TITLE_SUFFIX in scripts/build_site.py, and the sidebar brand 'Affiliate research'). The click tracker shipped as docs/tracker.js is commented and titled as the 'Northstar' tracker, its export filenames are northstar-tracker-events.json/csv, and engine/sitegen.py renders a separate preview layout whose brand mark and page titles say 'northstar.ai' / 'Northstar'. None of this reaches a published page except the export filenames, which a visitor sees when they export their own click log. Recorded because a brand, if the site is ever launched as one, has to be one name, and the name must not contain an Amazon Mark.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/engine/sitegen.py"
+      ],
+      "status": "Needs review",
+      "action": "Choose one product name and apply it to the tracker, the engine preview and the site header together. Item S-10 / decision D-10; the naming question is Q-12."
+    },
+    {
+      "id": "F-40",
+      "severity": "Medium",
+      "title": "Sixteen of twenty-one pages share one identical meta description",
+      "detail": "scripts/build_site.py falls back to a single SITE_DESCRIPTION for every page that does not supply its own. Only the five article pages supply one, so docs/index.html, executive-summary.html, products.html, the three category pages, marketing.html, automation.html, analysis.html, requirements.html, verification.html, policy-compliance.html, analytics.html, flagged.html, sources.html and articles/index.html all carry the same <meta name=\"description\"> text. Checked by counting distinct descriptions across docs/**/*.html: 6 distinct values across 21 pages. Google's snippet guidance asks for a unique description on each page. This does not affect any published fact; every value on the pages is unchanged. Update 2026-11-15 (arena/00ba6c2e-zone4): corrected in the same session that found it. Every page now supplies its own description from PAGE_DESCRIPTIONS in scripts/build_site.py, and scripts/verify.py fails the build if two pages share one. The committed site now carries 24 distinct descriptions across 24 pages, counted after the rebuild.",
+      "sources": [
+        "https://developers.google.com/search/docs/appearance/snippet",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py"
+      ],
+      "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
+      "action": "None outstanding, except the underlying writing judgement (S-04 / D-04) if you want the descriptions changed rather than merely unique."
+    },
+    {
+      "id": "F-41",
+      "severity": "Medium",
+      "title": "The landing-page KPI counts a narrower set than its label implies",
+      "detail": "The index KPI is computed as flags whose status contains 'review' and not 'resolved', which yields 21, and is labelled 'Open items for your review'. The register holds 38 flags, of which 28 carry a status that is not Resolved and not Corrected (for example 'Unverified (blank)', 'Informational', 'Documented', 'Partly built; not connected', 'Open review item', 'Implemented; confirm before launch'). So 7 flags that are still open by any ordinary reading are not counted. The number itself is derived from the data and is correct for the set it computes; the label describes a different set. No published fact is affected. Update 2026-11-15 (arena/00ba6c2e-zone4): corrected in the same session that found it. The KPI is now computed from one predicate (flag_group(...) == 'Needs your decision', which is the same predicate the Flagged for review page groups by) and reads 'Flags awaiting your decision, of 43 recorded'. The review page now separates the three groups: 32 need a decision, 4 are corrected, 7 are resolved.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json"
+      ],
+      "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
+      "action": "None outstanding. Whether a given flag should stay open is a separate question, answered flag by flag on the review page."
+    },
+    {
+      "id": "F-42",
+      "severity": "Low",
+      "title": "Documentation and a documented check disagree with the code",
+      "detail": "Three separate mismatches. (1) ENGINE.md states '81 tests, stdlib only'; `python3 -m unittest discover -s tests` currently runs 83, all passing. (2) README.md and ENGINE.md both present `python3 tools/check_links.py` as a check command, but on a clean checkout that command exits non-zero with 'no stylesheet found - cannot verify CSS coverage', because the directory it inspects (build/site-preview) is generated by `python3 -m engine.cli build`, ignored by .gitignore, and not present in a fresh clone. Running the engine build first makes it pass (6 pages, 71 CSS lines, no broken links). (3) The README describes the engine as the automation layer while the published site is generated by scripts/build_site.py; both statements are true of their own file but the README reads as if the engine produces the live site. Update 2026-11-15 (arena/00ba6c2e-zone4): the documentation corrections are prepared but deliberately not applied in this session, because ENGINE.md and README.md are listed in another session's scope on the board. The three mismatches are reproduced above and the fix is item S-10 / decision D-10.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/README.md",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/tools/check_links.py"
+      ],
+      "status": "Needs review",
+      "action": "Correct the test count, make the preview build an explicit prior step in the documented command, and say plainly which generator produces the live pages (S-10 / D-10)."
+    },
+    {
+      "id": "F-43",
+      "severity": "Low",
+      "title": "A source note points at the wrong flag",
+      "detail": "data/sources.json entry S-APIFAQ records 'Conflicts with the onboarding page on cross-marketplace use: see F-29.' F-29 is the also-viewed carousel flag. The cross-marketplace conflict is F-35 ('Two official Creators API pages describe marketplace access differently'). The note reaches the Sources page as published text. The underlying substance is correct; only the cross-reference is wrong. Found in this session's line-by-line review and not previously corrected. Verified after correction: data/sources.json S-APIFAQ now reads 'see F-35', and the Sources page renders that text.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/sources.json",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/frequently-asked-questions"
+      ],
+      "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
+      "action": "None outstanding. The note now points at F-35; this row is kept so the correction is visible."
     }
   ]
 }

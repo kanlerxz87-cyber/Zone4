@@ -8,7 +8,8 @@
       "Not built - blocked (policy)": "Building it as described would breach a rule that is cited in the Blocker / official rule column. Not attempted.",
       "Not built - needs access": "Not blocked by policy, but needs an Associates account, an API key or reporting data this repository does not have.",
       "Unverifiable (blank + flagged)": "No official source provides the value. The field is left blank on the site and flagged for review."
-    }
+    },
+    "updated_00ba6c2e_2026_11_15": "REQ-22 and REQ-23 delivery text updated because the site grew from 21 to 24 pages. No status changed: both were already Delivered and remain so. The three added pages are the decision-support layer requested in this session's brief (suggestions, open questions, decision log)."
   },
   "requirements": [
     {
@@ -339,7 +340,7 @@
       "area": "Site",
       "requirement": "Live site with a clean landing page and subpages organized by category.",
       "status": "Delivered",
-      "delivered": "Twenty-one generated pages: the marketing landing page, executive summary, requirements, all-products catalogue, three category pages, combined marketing page, articles hub, five individual article pages, automation/tracking, analysis, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site from main.",
+      "delivered": "Twenty-four generated pages: the landing page, executive summary, requirements, all-products catalogue, three category pages, combined marketing page, articles hub, five individual article pages, automation/tracking, analysis, suggestions, open questions, decision log, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site from main.",
       "blocker": "",
       "sources": [
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"
@@ -351,7 +352,7 @@
       "area": "Site",
       "requirement": "Clean, user friendly, simple, easy to use UI, like a simple dashboard.",
       "status": "Delivered",
-      "delivered": "One fixed sidebar navigates every page; the landing page uses KPI tiles and cards; wide tables scroll inside their own container and the two long tables have a live filter box.",
+      "delivered": "One fixed sidebar navigates every page, grouped by purpose (overview, categories, content, research, decide, governance). The landing page uses KPI tiles and article cards; wide tables scroll inside their own container and the long tables carry a live filter box; the suggestion register pairs a scannable summary table with one card per proposal.",
       "blocker": "",
       "sources": [
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"

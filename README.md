@@ -27,7 +27,10 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
-| `docs/` | The published site (21 generated pages plus the stylesheet, app script and tracker script) |
+| `data/suggestions.json` | The change backlog: 12 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
+| `data/questions.json` | 15 open questions that must be answered before a change can be made, each naming what is already known, how the missing piece is discovered and who can answer it |
+| `data/decisions.json` | The decision queue (12 choices with options, cost and reversibility) and the log of decisions actually taken |
+| `docs/` | The published site (24 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
@@ -38,10 +41,9 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 
 | Page | What it holds |
 |---|---|
-| `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the product table and key findings |
+| `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the decision queue, the product table and key findings |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
 | `requirements.html` | All 30 brief items: delivered, blocked or unverifiable, each with the official source |
-| `suggestions.html` | Decision worksheet: clear questions, known/unknown evidence, options and proposed next steps with official sources |
 | `products.html` | All three products, one row each, every row linked to its source |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
 | `marketing.html` | The same articles, comparison page and buying guide on one page, with a fact table per article |
@@ -52,7 +54,10 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `flagged.html` | Flagged for Review: 38 irregularities and unverified items |
+| `suggestions.html` | Suggestions: every change worth making, costed and risk-assessed, waiting on a decision rather than already applied |
+| `questions.html` | Open questions: 15 items that must be answered first, with what is known, what is missing and who can supply it |
+| `decisions.html` | Decision log: the 12 open choices with their options, plus the record of decisions taken |
+| `flagged.html` | Flagged for Review: 43 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
@@ -62,6 +67,7 @@ python3 scripts/build_site.py     # regenerate docs/ from data/
 python3 scripts/verify.py         # data + page checks
 python3 qa/audit_site.py          # independent audit of the committed HTML
 
+python3 -m engine.cli build       # builds the engine preview into build/site-preview (needed by the next line)
 python3 -m unittest discover -s tests   # 83 engine tests
 python3 -m engine.cli status            # what is verified, withheld or blocked
 python3 -m engine.cli audit             # compliance gate on the engine's drafts
@@ -72,7 +78,8 @@ The engine is offline by default: with no OAuth credentials it raises rather tha
 `BLOCKED` so that "Amazon has no such page" stays distinct from "this environment cannot reach the network". Any request it does make identifies itself
 as `Agent/zone4-research`, as the Agent Terms in IP License Section 4(c) require.
 
-The verifier fails the build if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, if a marketing fact row is never cited by a paragraph, or if a requirement row has an undeclared status, no source, or no evidence for its status. The QA audit re-checks the committed HTML on its own, so a hand-edit or a stale commit is caught too.
+The verifier fails the build if any two pages share a meta description, if a suggestion, question or decision points at a
+record that does not exist, if a recorded decision is missing from the log, if any table row lacks a link to an official source, if a link or anchor is broken, if the required disclosure is missing from a page, if a price or star rating appears, if an Amazon Mark is used as a page title, meta description or target keyword, if a marketing fact row is never cited by a paragraph, or if a requirement row has an undeclared status, no source, or no evidence for its status. The QA audit re-checks the committed HTML on its own, so a hand-edit or a stale commit is caught too.
 
 ## Limits
 
@@ -83,6 +90,11 @@ The verifier fails the build if any table row lacks a link to an official source
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
 - Price tracking and price alerting are **not built**: Participation Requirement 6(y) prohibits them unless Amazon agrees otherwise.
 
-Start with `suggestions.html` on the live site for the question-by-question decision worksheet; use `flagged.html` for the evidence-backed items needing review and `requirements.html` for the brief-by-brief delivery status.
+Start with `suggestions.html` on the live site for the costed backlog, `questions.html` for what must be answered before any of
+it can be built, `decisions.html` for the choice itself, `flagged.html` for the defects found, and `requirements.html` for the
+brief-by-brief delivery status.
+
+Nothing in this repository acts on a suggestion by itself. Every change is proposed, costed and left in the queue until the owner
+records a decision.
 
 The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."

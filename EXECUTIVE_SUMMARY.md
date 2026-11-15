@@ -1,6 +1,6 @@
 # Executive Summary — Zone4 Amazon Affiliate Research Site
 
-**Date:** 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
+**Date:** 2026-11-15 (UTC) — decision-support layer added; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
 
 ---
 
@@ -12,7 +12,7 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 
 ## 2. What the repository delivers
 
-1. **A live, evidence-first research site** on GitHub Pages — 22 generated pages: a marketing landing page (`docs/index.html`), executive summary, **requirements**, a dedicated **suggestions & decisions** worksheet, product catalogue, three category subpages (dual-basket air fryers / single-basket air fryers / air-fry toaster ovens), **marketing content**, an **articles hub**, **five individual article pages**, **automation & tracking**, analysis & findings, field-by-field **verification log**, **policy compliance**, **clicks & conversions** (Analytics), **Flagged for review**, and **sources**. Every table row carries a link to its official source; withheld values are labelled, never inferred.
+1. **A live, evidence-first research site** on GitHub Pages — 24 generated pages: a marketing landing page (`docs/index.html`), executive summary, **requirements**, product catalogue, three category subpages (dual-basket air fryers / single-basket air fryers / air-fry toaster ovens), **marketing content**, an **articles hub**, **five individual article pages**, **automation & tracking**, analysis & findings, **suggestions**, **open questions**, **decision log**, field-by-field **verification log**, **policy compliance**, **clicks & conversions** (Analytics), **Flagged for review**, and **sources**. Every table row carries a link to its official source; withheld values are labelled, never inferred.
 2. **Verified product identities** for all three submitted links (ASINs, listing titles, brands, manufacturers, model numbers, category paths, listed specifications, competitor ASINs) — `data/products.json`, `docs/verification.html`.
 3. **A marketing content kit, published as real pages** — three product articles, one comparison page and one buying guide, each with a title tag, meta description, keyword targets, an outline, finished copy, a call to action and a fact table in which every row links to its official source (`data/marketing.json`). Each article is also published as its own page under `docs/articles/` with its own title tag and meta description, and is grouped by product format in the hub at `docs/articles/index.html`; `docs/marketing.html` carries the same five pieces on one page.
 4. **An automation and tracking plan** — 13 pipeline stages, 10 tracking metrics (every value deliberately blank), five optimisation steps and seven Agent Terms requirements (`data/pipeline.json`, `docs/automation.html`).
@@ -21,7 +21,38 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 7. **A first-party click tracker** — `docs/analytics.html` + `docs/tracker.js`. Starts at zero, stores events in the visitor's own browser only, records only real clicks plus one explicitly labelled test event, exports as JSON or CSV. It generates no click of its own and sends nothing to any server.
 8. **Automated checks** — `scripts/verify.py` (data validity, official-host-only links, per-page disclosure, per-row sources, no prices or ratings published, no Amazon Mark in titles or keywords, per-fact citation traceability, requirement-status evidence) runs in CI (`.github/workflows/site-checks.yml`) and confirms that the committed `docs/` matches a fresh build. An independent audit of the committed HTML, `qa/audit_site.py`, runs separately in CI (`.github/workflows/qa.yml`).
 9. **Coordination across parallel sessions** via `COORDINATION.md` (task board, claims, conflict log, merge and deployment records).
-10. **Decision support** at `docs/suggestions.html`: explicit questions, known and missing information, options, evidence-linked recommendations, and a proposed order of work. No option is preselected; account access, permissions and owner preferences are not assumed.
+
+## 2a. Decision support (added 2026-11-15)
+
+The brief asks for a section where suggestions can be reviewed and a path chosen **before** anything is implemented, and for a
+clear list of the questions and missing information that block a reasonable decision. Three pages now do that, and nothing in
+them has been applied:
+
+| Page | What it holds | Count |
+|---|---|---|
+| `docs/suggestions.html` | Every change worth making, with the problem, the proposal, the effort, the risk, the check that would prove it worked and the official rule that constrains it. A scannable summary table plus one card per proposal. | 12 suggestions, in three priority bands |
+| `docs/questions.html` | What must be answered before any of them can be acted on: what is already known from an official source, what is missing, how the missing piece is discovered and who can supply it. | 15 questions: 1 discoverable, 4 not discoverable from here, 10 owner decisions |
+| `docs/decisions.html` | The choice itself: every open decision with its options, what each option commits the site to, its cost and whether it is reversible, plus a recommendation labelled as an argument rather than a decision. A log records decisions actually taken. | 12 open decisions, 0 recorded |
+
+**The three that decide whether this project can earn at all**, in order of dependency:
+
+1. **D-01 / Q-01 — the Associates tag.** The three supplied links resolve correctly but carry no `tag=` parameter, so no click can be
+   attributed. Until this is answered the site's own disclosure sentence describes an earning relationship that the links cannot
+   deliver (F-03, F-04).
+2. **D-02 / Q-02 — API access for prices and ratings.** Associates rules permit prices and star ratings only through an Amazon-served
+   link or an approved Amazon API (Participation Requirements 2(b), 6(t)). Amazon's stated prerequisite is 10 qualifying sales in 30
+   days. Without it the site cannot show a price or a rating, which is what a buyer arrives for (F-02).
+3. **D-08 / Q-03 — the per-ASIN commission category.** The public Table 1 lists Kitchen at 4.50%, but no public source maps an ASIN to
+   a commission band. A category figure sitting next to a product it may not apply to invites a wrong calculation (F-01, F-36).
+
+**Three more decide whether the site can honestly describe itself:** who reviews the copy before publishing (D-03 / Q-05), whether any
+product is actually tested (D-06 / Q-06), and whether the automated collection and AI-assisted writing need a legal opinion before the
+site takes traffic (Q-07). The remaining decisions are presentation and operations choices with named owners.
+
+**What this layer deliberately does not do:** it does not action anything. No suggestion has been implemented, no question has been
+closed by inference, and the decision log states explicitly that no owner decision has been recorded. The site's content and its
+withheld values are exactly as they were; the build gate now fails if a suggestion points at a decision that does not exist, if a
+recorded decision is missing from the log, or if two pages share a meta description.
 
 ## 3. Product verification results (official Amazon sources, observed 2026-11-14)
 
@@ -48,7 +79,7 @@ The official [Standard Commission Income Statement, Table 1](https://affiliate-p
 - **PA-API 5 is officially deprecated** in favour of the **Creators API** (https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation); license terms not yet reviewed (F-16).
 - The **Standard Commission Income Statement is published at a public URL that needs no sign-in** (https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ). Its Table 1 lists "Physical Books, Kitchen, Automotive" at **4.50%**. That is a category-level reference only; no official source reviewed confirms which band Amazon assigns to these individual ASINs, so each product-level rate is left blank (F-01).
 - Amazon Conditions of Use (updated 2026-08-14) additionally constrain scraping/data mining and the use of Amazon content to improve models (F-11, F-12).
-- The complete flag register (**F-01 … F-38**, 38 items, all used) is published at `docs/flagged.html` with sources.
+- The complete flag register (**F-01 … F-43**, 43 items) is published at `docs/flagged.html` with sources, grouped into the 32 that need a decision, the 4 that were corrected in the session that found them (F-40, F-41, F-43 and F-05's original correction) and the 7 resolved items kept as the audit record.
 
 ## 5. Flagged for review — headline items (complete register: `docs/flagged.html`)
 
@@ -75,6 +106,9 @@ Nothing is simulated in place of a blocked or unverified requirement.
 
 ## 6. Recommended next steps (owner, when ready)
 
+Steps 1–7 below are the same actions, restated as twelve numbered decisions with options, costs and reversibility on `docs/decisions.html`. Work them from D-01 downward rather than in the order listed here.
+
+
 1. Join or confirm the Amazon Associates Program for the final site and provide the Associates tag; generate Special Links for `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`.
 2. Keep the site-wide and per-link disclosures (already templated) and re-verify the current policy pages at launch.
 3. Commission product content only from verified data; target the Creators API (not PA-API 5) once eligible, and review its license terms first (F-16).
@@ -97,5 +131,15 @@ Nothing is simulated in place of a blocked or unverified requirement.
 10. Amazon 404 evidence for slug-as-ASIN lookups — https://www.amazon.com/dp/B04G1MEwY (and the other two slugs)
 11. FTC Disclosures 101 for Social Media Influencers — https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers
 12. Third-party, non-official corroboration of the `link.amazon` domain — https://linktw.in/link-amazon-vs-linktwin (flagged as non-official)
+13. Google Search Central — Creating helpful, reliable, people-first content (who/how/why, effort, originality, the caution against fabricated authorship) — https://developers.google.com/search/docs/fundamentals/creating-helpful-content *(read 2026-11-15)*
+14. Google Search Central — Spam policies for Google web search (thin affiliation, scaled content abuse, paid-link qualification) — https://developers.google.com/search/docs/essentials/spam-policies *(read 2026-11-15)*
+15. Google Search Central — Control your snippets in search results (unique meta description per page) — https://developers.google.com/search/docs/appearance/snippet *(read 2026-11-15)*
+16. Google Search Central — Qualify outbound links (`rel="sponsored"` for paid links) — https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links *(read 2026-11-15)*
+17. Google Search Central — Understanding page experience in Google Search results — https://developers.google.com/search/docs/appearance/page-experience *(read 2026-11-15)*
+
+**A note on why Google's documentation is cited here.** Amazon's rules govern whether this site may publish a fact. Google's
+documentation governs whether the page can be found and whether it is the kind of page a search engine wants to rank. The two are
+different questions and both matter to the brief, which asks for organic traffic. Only Google's own documentation is used for the
+second, and no ranking, traffic or growth figure is published anywhere on the site.
 
 *Every table row above carries its source; values that could not be confirmed from an official source are blank, withheld, or flagged — never inferred.*

@@ -9,7 +9,8 @@
       "www.ftc.gov",
       "api.github.com",
       "github.com"
-    ]
+    ],
+    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43)."
   },
   "sources": [
     {
@@ -28,7 +29,7 @@
       "publisher": "Amazon Associates Central",
       "accessible": true,
       "used_for": "OAuth 2.0 client-credentials flow, 10-identifier batching limit, per-marketplace approval",
-      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4. Conflicts with the onboarding page on cross-marketplace use: see F-29."
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4. Conflicts with the onboarding page on cross-marketplace use: see F-35."
     },
     {
       "id": "S-ASIN",
@@ -242,6 +243,42 @@
       "publisher": "GitHub (official)",
       "accessible": false,
       "used_for": "Recorded failure in the prior session's log in COORDINATION.md. Not re-read in this pass; the failing workflow was replaced."
+    },
+    {
+      "id": "S-SPAM",
+      "title": "Google Search Central — Spam policies for Google web search",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "Thin affiliation (copied merchant descriptions without added value), scaled content abuse (many pages generated without value), and link-spam qualification of paid links.",
+      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
+    },
+    {
+      "id": "S-SNIP",
+      "title": "Google Search Central — Control your snippets in search results",
+      "url": "https://developers.google.com/search/docs/appearance/snippet",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "The requirement to write a unique meta description for each page, which is the basis of S-04 and F-40.",
+      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
+    },
+    {
+      "id": "S-PEXP",
+      "title": "Google Search Central — Understanding page experience in Google Search results",
+      "url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "Page-experience self-assessment questions used for S-09 and D-09.",
+      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
+    },
+    {
+      "id": "S-OUTL",
+      "title": "Google Search Central — Qualify outbound links",
+      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "rel=\"sponsored\" for paid links, which is the basis of S-05 and D-05.",
+      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
     }
   ],
   "non_official_reference_only": [

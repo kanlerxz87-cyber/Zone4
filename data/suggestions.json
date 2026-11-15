@@ -1,0 +1,237 @@
+{
+  "_meta": {
+    "description": "The change backlog for this site, written so a reviewer can choose a path before anything is implemented. Every suggestion states what it changes, why it is worth doing, what it costs, what it risks, how it can be checked, whether any official rule constrains it, and what evidence would show it worked. Nothing here is implemented: the register is a decision surface, not a changelog.",
+    "created_utc": "2026-11-15",
+    "created_by": "arena/00ba6c2e-zone4",
+    "priorities": {
+      "P1 - Decide first": "A decision here changes what other suggestions are even possible, or the item blocks the site from doing its job.",
+      "P2 - Adds real value": "The site works without it; adding it materially improves reader trust, usefulness or search eligibility.",
+      "P3 - Housekeeping": "Accuracy or consistency of the records themselves. Low risk, no reader-visible gain."
+    },
+    "statuses": {
+      "Awaiting decision": "Written and costed, waiting on a decision from the site owner in the Decision queue.",
+      "Needs a decision first": "Cannot be implemented until an open question is answered or another decision is made.",
+      "Blocked by policy": "Implementing it as usually described would breach a cited Amazon rule. The row records the rule and the narrower alternative.",
+      "Recommended, no decision needed": "A correction with one correct answer. Recorded so the change is visible, not because it needs a vote."
+    },
+    "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
+    "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran."
+  },
+  "suggestions": [
+    {
+      "id": "S-01",
+      "priority": "P1 - Decide first",
+      "title": "Put an Associates tag on every outbound product link, or stop calling them affiliate links",
+      "problem": "The three supplied link.amazon short links resolve to the correct product pages, but the resolved URLs carry no tag= parameter, so a click cannot be credited to an Associates account. Flags F-03 and F-04 record this. The site currently calls these links 'paid links' next to a disclosure that says the site earns from qualifying purchases.",
+      "proposal": "Sign in to Associates Central, generate a Special Link for each of the three ASINs under the account's own Partner Tag, and replace the three short links site-wide with the tagged links. If no Associates account exists yet, relabel the calls to action as plain product links and withdraw the earning claim until one does.",
+      "why": "Every other revenue step depends on this one. Untagged links produce clicks the programme cannot attribute, so the site cannot earn regardless of how good the content is. The disclosure sentence is also only accurate when the links actually carry the tag.",
+      "effort": "About 15 minutes once account access exists: three links to build, one data field per product to update, one rebuild.",
+      "risk": "Wrong or duplicate tags split attribution. Amazon requires the tag on the link, and the Associates Operating Agreement Section 5 disclosure must stay on the site either way.",
+      "check": "Re-resolve each published link and confirm a tag= parameter matching the account's Partner Tag appears, then confirm one test click appears in Associates Central reporting.",
+      "sources": [
+        {"url": "https://affiliate-program.amazon.com/help/operating/agreement", "ref": "Operating Agreement, Section 5 (required disclosure)"},
+        {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Program Policies, Participation Requirements (Special Links)"}
+      ],
+      "flags": ["F-03", "F-04"],
+      "status": "Awaiting decision",
+      "decision": "D-01"
+    },
+    {
+      "id": "S-02",
+      "priority": "P1 - Decide first",
+      "title": "Apply for Creators API access so prices and ratings can be published lawfully",
+      "problem": "Prices, star ratings and review counts are deliberately blank across the site because the Associates Participation Requirements allow them only when Amazon serves the link or the data comes from an approved Amazon API (Section 2(b) and 6(t)). Twelve of the site's twenty-one pages therefore tell a reader less than the product page does. Flag F-02.",
+      "proposal": "Enrol in Amazon Associates, reach the qualifying-sales prerequisite Amazon states for API registration, register for the Creators API through Associates Central, and feed a cached, timestamped price and rating through the build. Until that exists, keep the cells blank exactly as they are now.",
+      "why": "A buying guide without a price or a rating is a specification sheet. Readers comparing three air fryers will leave for a page that answers the obvious question, and search engines have little reason to prefer this page over the listing itself. Adding price and rating is the single largest reader-value gain available.",
+      "effort": "Prerequisite sales volume is the real cost and it cannot be shortcut; registration itself is an administrative step. The build change is small: one cached field per product plus the existing disclosure.",
+      "risk": "Amazon's own documentation states the API is only for the marketplace registered and requires prior written approval for certain reuse. A stale cached price shown as current would be a consumer-protection problem as well as a policy one, so the timestamp must be visible.",
+      "check": "A published price carries a visible observation timestamp and reconciles with the value the API returned in the same run; any product without a fresh value shows blank, not an old number.",
+      "sources": [
+        {"url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "ref": "Creators API introduction: access prerequisites, including the qualifying-sales requirement"},
+        {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Participation Requirements 2(b) prices and availability; 6(t) ratings and reviews"}
+      ],
+      "flags": ["F-02", "F-16", "F-33", "F-35"],
+      "status": "Needs a decision first",
+      "decision": "D-02"
+    },
+    {
+      "id": "S-03",
+      "priority": "P1 - Decide first",
+      "title": "Say plainly who writes the site, and how the content is produced",
+      "problem": "No page states who is responsible for the content, and the articles read as machine output: identical structure, identical sentence rhythm, the same hedged qualifier in every piece. Google's guidance on people-first content asks who created a page, how it was created, and why, and treats unmanaged generative output as low effort; it also warns that fabricated author identities are a deception signal. The honest answer here is 'a research pipeline, reviewed by the site owner', and that is publishable.",
+      "proposal": "Add a short editorial note, repeated in the article footer: what the pipeline collects, what a human reviews before publishing, the date of the last review, and a contact route. Do not invent an author name, headshot or credential. If the owner is willing to be named as the reviewer, name them; if not, describe the review process without inventing a person.",
+      "why": "This is the difference between a site a reader trusts and one that reads as bulk output, and it is what the 'does not read like AI slop' request is actually about. It also converts an unavoidable fact, automation, into a stated method rather than something a reader has to guess.",
+      "effort": "One data field, one template block, one rebuild. Under an hour.",
+      "risk": "A vague or boilerplate editorial note is worse than none. It has to name a real review step; if no human reviews the copy, the note must say so.",
+      "check": "Every article page shows the note; the note names a review step that actually happened on the stated date; no invented person appears anywhere on the site.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Who / How / Why; effort and originality; fabricated authorship warning"}
+      ],
+      "flags": ["F-12", "F-38"],
+      "status": "Awaiting decision",
+      "decision": "D-03"
+    },
+    {
+      "id": "S-04",
+      "priority": "P1 - Decide first",
+      "title": "Give every page its own title and meta description",
+      "problem": "Sixteen of the twenty-one pages share one identical meta description, so every page a search engine sees describes itself the same way. Google's snippet guidance asks for a unique description per page. The five article pages already do this correctly, which proves the template can.",
+      "proposal": "Write one meta description and one title per page from what the page actually contains, extending the field the article pages already use to every page in the builder.",
+      "why": "Duplicate descriptions make the site look like one repeated page to a crawler and give a reader no reason to pick one result over another. It is the cheapest visible improvement available and it touches nothing that needs a policy review.",
+      "effort": "Fifteen short texts plus a small builder change. Two to three hours including review.",
+      "risk": "Descriptions must not promise what the page withholds; a description that implies a price when the price is blank is a new accuracy defect.",
+      "check": "The build fails if any two pages share a meta description, and each description is checked against the page's own headings.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "Create unique descriptions for each page on your site"}
+      ],
+      "flags": [],
+      "status": "Recommended, no decision needed",
+      "decision": "D-04"
+    },
+    {
+      "id": "S-05",
+      "priority": "P2 - Adds real value",
+      "title": "Mark the affiliate links rel=\"sponsored\" without breaking the required disclosure",
+      "problem": "Outbound product links carry rel=\"noopener noreferrer\" only. Google's link-qualification guidance says paid links should be qualified with rel=\"sponsored\" (or nofollow), and its spam policy treats undisclosed payment-for-links arrangements as link spam. Amazon separately requires the visible disclosure, which no attribute can replace.",
+      "proposal": "Add rel=\"sponsored\" alongside the existing rel values on the three product calls to action, and keep both the adjacent '(paid link)' label and the Operating Agreement sentence exactly where they are.",
+      "why": "It costs one attribute and removes a plausible reading of the outbound links as unqualified paid links. It does not change what a reader sees, so it cannot cost conversions.",
+      "effort": "One template change, one rebuild.",
+      "risk": "None identified for the reader. The temptation to treat the attribute as a substitute for the disclosure must be resisted; the guidance is explicit that qualification does not replace a visible disclosure, and Amazon's rule does not accept an attribute in place of the sentence.",
+      "check": "Every outbound product link carries rel=\"sponsored\" and still sits next to a paid-link label and the disclosure sentence; the QA audit fails if either the attribute or the disclosure goes missing.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "ref": "rel=\"sponsored\" for paid links"},
+        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Link spam: paid links must be qualified"},
+        {"url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE", "ref": "Associates help: disclosure must be clear and conspicuous, placed near the link"}
+      ],
+      "flags": [],
+      "status": "Awaiting decision",
+      "decision": "D-05"
+    },
+    {
+      "id": "S-06",
+      "priority": "P2 - Adds real value",
+      "title": "Add the one thing a listing cannot tell a reader: what the appliance is like to live with",
+      "problem": "Every article is a restatement of the specification table. No page records noise, how a basket actually cleans, how long a preheat takes, or whether the footprint fits under a cabinet. A reader can get the specification table from the listing in one click, so the site currently adds nothing over the source it cites.",
+      "proposal": "Do not invent experience. Either (a) buy, borrow or borrow-time with one unit per format and record dated, first-person notes with photographs, or (b) keep the site explicitly positioned as a specification and decision-tool site, state that no unit was tested, and drop the review vocabulary that implies otherwise.",
+      "why": "This is the substance behind Google's thin-affiliation policy, which names rigorous testing and original reviews as what separates a good affiliate page from a copied one. It is also the only sustainable reason a reader would choose this page over the listing.",
+      "effort": "(a) is weeks and has a real cash cost. (b) is a copy edit and a positioning decision.",
+      "risk": "(a) creates a conflict-of-interest question that must be disclosed: a unit supplied free by a seller cannot be presented as an independent purchase. (b) gives up any claim to be a review site.",
+      "check": "Either every testing claim is backed by a dated note and a photograph taken by the site, or the site states in one visible sentence that no unit was tested and no page uses the word 'review' to describe its own content.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Thin affiliation: good affiliate pages offer meaningful content such as original reviews, rigorous testing, navigation and comparisons"},
+        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Effort, originality, and the 'How' question for product reviews"},
+        {"url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "ref": "Disclosure obligations when a relationship exists with a seller"}
+      ],
+      "flags": ["F-11", "F-31"],
+      "status": "Awaiting decision",
+      "decision": "D-06"
+    },
+    {
+      "id": "S-07",
+      "priority": "P2 - Adds real value",
+      "title": "Answer the questions people actually type, one page per question",
+      "problem": "The five published articles target product nouns ('dual basket air fryer', '8 quart air fryer'). They do not answer the format-choice questions a buyer types before they know which product they want, and no page addresses the two inconsistencies the research found (capacity units, the P2 function count) as a standalone answer.",
+      "proposal": "Publish a small set of decision-first pages built from the same verified fact tables: 'dual basket or single basket for a family of four', '6 quart versus 6 litre: why the numbers differ', 'air fryer footprint versus counter depth', and 'what 24 versus 25 cooking functions means on one listing'. Each answers one question and links to the three product records as the worked example.",
+      "why": "Format questions arrive before brand questions, so they are winnable earlier for a new site, and they are answerable entirely from facts already verified here. They also give the site a reason to exist beyond three product pages, which is what both the thin-affiliation and scaled-content policies look for.",
+      "effort": "Half a day per page including verification, because the facts already exist.",
+      "risk": "Volume without value trips the scaled-content policy. The guard is that each page must answer a different question; if two pages would say the same thing, they must be one page.",
+      "check": "No two question pages share a thesis; every claim on each page resolves to an existing sourced fact row; the number of pages is driven by distinct questions, not by a target count.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Scaled content abuse and thin affiliation"},
+        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Substantial, complete, insightful treatment of a topic"}
+      ],
+      "flags": ["F-06", "F-26"],
+      "status": "Awaiting decision",
+      "decision": "D-07"
+    },
+    {
+      "id": "S-08",
+      "priority": "P2 - Adds real value",
+      "title": "Replace the 4.50% category figure with the rate that actually applies to these ASINs",
+      "problem": "The site quotes Amazon's public Table 1 Kitchen rate of 4.50% while marking every product cell blank, because no official source maps a specific ASIN to a commission category (F-01). A reader gets a number that is real but not about them, and the site gets a number it cannot use.",
+      "proposal": "Read the assigned commission category for each ASIN in Associates Central (the account owner is the only party who can), record it against the product, and publish the per-ASIN rate with that assignment as its source. If the assignment cannot be read, delete the 4.50% quote entirely rather than leaving a figure that cannot be applied.",
+      "why": "Half-publishing a rate is worse than not publishing one: it invites a reader to multiply and gives them a wrong answer. Either the per-ASIN figure is sourced, or the whole commission discussion belongs on an internal analysis page rather than the landing page.",
+      "effort": "Minutes in Associates Central once the account exists; otherwise a copy deletion.",
+      "risk": "The assignment can change. A published rate needs the date it was read, in the same way a price would.",
+      "check": "Every published rate has a named category assignment, a read date and a source; if any is missing the cell is blank rather than defaulted.",
+      "sources": [
+        {"url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "ref": "Standard Commission Income Statement, Table 1 (category-level rates)"},
+        {"url": "https://affiliate-program.amazon.com/", "ref": "Associates Central, where the per-ASIN category assignment is visible to the account owner"}
+      ],
+      "flags": ["F-01", "F-36"],
+      "status": "Needs a decision first",
+      "decision": "D-08"
+    },
+    {
+      "id": "S-09",
+      "priority": "P2 - Adds real value",
+      "title": "Ship a social preview image and structured data, then measure whether search traffic arrives",
+      "problem": "The site has no Open Graph or Twitter card metadata and no per-page preview image, so a shared link renders as bare text. It also has no verification of whether any search engine has indexed it, because no Search Console property is connected.",
+      "proposal": "Add a per-page Open Graph title, description and one image, then verify the property in Google Search Console and record impressions and clicks as measured data, not estimates. The image must be generated from the site's own layout, not a photograph of a product the site has not licensed.",
+      "why": "Without measurement the whole 'organic traffic' goal stays an assertion. Search Console is the only official source for the site's own impressions and queries, and it costs nothing.",
+      "effort": "Two to three hours plus the wait for verification.",
+      "risk": "A product photograph used in a preview card raises the Program Content question in flag F-25 and the IP License; a self-made layout image avoids it. Search Console data must not be presented as Amazon conversion data.",
+      "check": "A shared link renders with an image and the intended description; Search Console shows the property verified and the site's own impressions appear as measured figures with their date.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/appearance/page-experience", "ref": "Page experience and mobile presentation guidance"},
+        {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "How snippets and previews are generated from page content and metadata"}
+      ],
+      "flags": ["F-15", "F-19", "F-25"],
+      "status": "Awaiting decision",
+      "decision": "D-09"
+    },
+    {
+      "id": "S-10",
+      "priority": "P3 - Housekeeping",
+      "title": "Bring the documentation in line with the code, and get every published check to run from a clean checkout",
+      "problem": "ENGINE.md says the suite has 81 tests; it currently runs 83. tools/check_links.py fails on a clean checkout because the engine preview build it inspects (build/) is generated, ignored and absent; README presents it as a plain check command. Separately, 'Northstar' appears as the product name in the tracker and the engine's preview generator while the published site is branded 'Zone4 affiliate research'.",
+      "proposal": "Correct the test count, make the preview build a prerequisite step in the documented command, and settle on one name for the product in code, data and documentation.",
+      "why": "A reader who follows the README and sees a failure loses trust in every other claim the repository makes. These are cheap corrections with no policy dimension.",
+      "effort": "Under an hour.",
+      "risk": "Renaming touches generated output; the build must be re-run and re-verified in the same change.",
+      "check": "The documented command sequence runs green from a fresh clone, the stated test count matches the actual run, and one product name appears in the repository.",
+      "sources": [
+        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md", "ref": "ENGINE.md test-count line"},
+        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/README.md", "ref": "README check commands"}
+      ],
+      "flags": [],
+      "status": "Recommended, no decision needed",
+      "decision": "D-10"
+    },
+    {
+      "id": "S-11",
+      "priority": "P3 - Housekeeping",
+      "title": "Fix one wrong flag cross-reference and split the open, resolved and historical items on the review page",
+      "problem": "data/sources.json points the Creators API cross-marketplace conflict at flag F-29, which is the also-viewed carousel; the correct flag is F-35. On the review page, resolved and historical flags sit in the same table as open ones, and the landing-page KPI counts 21 'open items' while the register holds 38 flags of which 28 are not resolved.",
+      "proposal": "Correct the cross-reference. Give the review page three clearly labelled groups (needs your decision, resolved, historical record) and state in the KPI exactly what the number counts.",
+      "why": "A cross-reference that points at the wrong flag is a correctness defect in exactly the kind of record this site exists to publish, and a mixed table makes the review job harder than it needs to be.",
+      "effort": "Under an hour.",
+      "risk": "None.",
+      "check": "Grep finds no flag reference pointing at a flag whose subject does not match; the review page states its own grouping rule; the KPI label matches the set it counts.",
+      "sources": [
+        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/sources.json", "ref": "S-APIFAQ notes field"}
+      ],
+      "flags": ["F-29", "F-35"],
+      "status": "Recommended, no decision needed",
+      "decision": "D-11"
+    },
+    {
+      "id": "S-12",
+      "priority": "P2 - Adds real value",
+      "title": "Decide the site's voice, and rewrite the articles to it once",
+      "problem": "The copy is accurate and unreadable. Every article opens by defining its own category, every paragraph ends with a hedging clause, and the same rhetorical shape repeats five times. Nothing on the site makes a recommendation, which is what a buyer came for. The cause is a writing rule that permits only restatement of verified fields; the effect is that the site answers nothing.",
+      "proposal": "Keep the fact rule and change the writing rule: allow the writer to conclude, rank within the verified facts, and address the reader directly, while every factual claim still resolves to a sourced row. Rewrite the five pieces to that standard and let the fact table carry the audit trail instead of the prose.",
+      "why": "This is the difference between the site as it reads now and a polished marketing site. A comparison page that refuses to compare is a table with sentences around it. Allowing judgement on top of verified facts adds originality without adding risk, and Google's guidance on helpful content rewards exactly that while treating pure restatement as low value.",
+      "effort": "Two days for five pieces plus review, most of it writing.",
+      "risk": "The moment the writer is allowed to conclude, the fact rule starts to slip. The guard has to be mechanical: a claim without a fact id fails the build, and a ranking claim must cite the field that supports it.",
+      "check": "Every paragraph still resolves to at least one fact row; each product article states who the product suits; the comparison page ranks the three formats on at least one listed attribute; no sentence asserts a fact that is not in a fact table.",
+      "sources": [
+        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Originality, insight beyond the obvious, and value to the reader"},
+        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Thin affiliation: content copied from the merchant without added value"}
+      ],
+      "flags": ["F-12", "F-31"],
+      "status": "Awaiting decision",
+      "decision": "D-12"
+    }
+  ]
+}

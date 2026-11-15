@@ -190,3 +190,139 @@ table.suggestions td:last-child { min-width: 190px; }
   .post { padding: 6px 16px 18px; }
   .post h1 { font-size: 24px; }
 }
+
+/* ---------------------------------------------------------------------------
+   Decision-support pages (suggestions, open questions, decision log) and the
+   readability pass added by session arena/00ba6c2e-zone4. Same tokens as the
+   rest of the site; these are layout and typography additions only.
+--------------------------------------------------------------------------- */
+
+/* Long prose is easier to read at a shorter measure than a wide table. */
+.aiwrap { max-width: 78ch; }
+
+/* Stacked explanatory cards (they carry sentences, not numbers). */
+.kpis-stack { grid-template-columns: repeat(auto-fit, minmax(275px, 1fr)); }
+.kpi-text { font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+.kpis-stack .kpi-label { font-size: 13px; line-height: 1.5; }
+
+/* Priority chips: P1 is the one that stops everything else. */
+.prio {
+  display: inline-block; border-radius: 6px; padding: 2px 8px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .02em; white-space: nowrap;
+}
+.prio-p1 { background: var(--bad-bg); color: var(--bad-ink); }
+.prio-p2 { background: #e8f0fd; color: #1c4d94; }
+.prio-p3 { background: var(--muted-bg); color: var(--muted-ink); }
+
+/* Suggestion cells hold a problem/proposal/why block rather than a sentence. */
+.sug { max-width: 62ch; }
+.sug p { margin: 0 0 8px; line-height: 1.6; }
+.sug .sug-problem { color: var(--muted); }
+.sug .seo { grid-template-columns: 120px 1fr; margin: 10px 0 0; }
+.sug .seo dt { font-weight: 650; }
+.suggestion-row-none { display: none; }
+table.suggestions td:nth-child(3) { min-width: 210px; font-weight: 650; }
+table.questions td:nth-child(3) { min-width: 240px; font-weight: 650; }
+table.questions td:nth-child(6) { min-width: 220px; }
+table.questions td:nth-child(7) { min-width: 220px; }
+table.decision-log td { vertical-align: top; }
+
+/* Decision cards: options side by side, recommendation underneath. */
+.decision {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 6px 20px 18px; margin: 18px 0; scroll-margin-top: 16px;
+}
+.decision:target { outline: 2px solid var(--accent); }
+.decision-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; justify-content: space-between; }
+.decision-head h2 { font-size: 17.5px; margin: 14px 0 6px; max-width: 60ch; }
+.optrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 10px 0 4px; }
+.opt {
+  display: flex; gap: 10px; background: #fbfcfe; border: 1px solid var(--line);
+  border-radius: 10px; padding: 12px 14px;
+}
+.opt-key {
+  flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--side); color: #fff;
+  font-weight: 700; font-size: 13px; display: grid; place-items: center;
+}
+.opt-label { font-weight: 680; font-size: 14px; line-height: 1.35; margin-bottom: 4px; }
+.opt-body { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.opt-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; font-size: 11.5px; color: var(--muted); }
+.rec { background: #f2f7ff; border-left: 3px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 13.5px; line-height: 1.55; }
+
+/* Article typography: a real reading measure, calmer heading rhythm. */
+.post p { font-size: 16.5px; line-height: 1.72; color: #232a38; max-width: 72ch; }
+.post h2 { font-size: 19.5px; letter-spacing: -0.01em; }
+.post .dek { font-size: 17px; color: var(--muted); max-width: 68ch; }
+.post .ameta { text-transform: uppercase; letter-spacing: .07em; font-size: 11px; font-weight: 650; }
+.post .cites { display: inline-flex; flex-wrap: wrap; gap: 3px; vertical-align: baseline; margin-left: 2px; }
+
+/* The landing hero: less gradient, more weight in the type. */
+.mhero h1 { letter-spacing: -0.015em; }
+.mhero .lead { font-size: 16px; line-height: 1.6; }
+
+/* Tables that carry prose read better with a slightly taller row. */
+table.suggestions td, table.questions td { line-height: 1.55; }
+
+@media (max-width: 860px) {
+  .post p { font-size: 16px; }
+  .decision { padding: 4px 14px 14px; }
+}
+
+/* Suggestion cards (added with the summary table) */
+.scards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 12px 0 6px; }
+.scard {
+  background: var(--panel); border: 1px solid var(--line); border-left: 4px solid #c9d4ea;
+  border-radius: 12px; padding: 14px 20px 16px; scroll-margin-top: 16px; max-width: 100ch;
+}
+.scard:target { outline: 2px solid var(--accent); border-left-color: var(--accent); }
+.scard-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.scard-head > div { display: flex; gap: 8px; align-items: center; }
+.scard-id { font-weight: 700; font-size: 12.5px; letter-spacing: .05em; color: var(--muted); }
+.scard h3 { margin: 2px 0 8px; font-size: 18.5px; line-height: 1.3; letter-spacing: -0.01em; max-width: 62ch; }
+.scard p { margin: 0 0 9px; line-height: 1.65; max-width: 76ch; }
+.scard .scard-problem { color: var(--muted); border-left: 2px solid var(--line); padding-left: 12px; }
+.sgrid { display: grid; grid-template-columns: 178px 1fr; gap: 4px 14px; margin: 12px 0 10px; font-size: 13.5px; }
+.sgrid dt { color: var(--muted); font-weight: 650; }
+.sgrid dd { margin: 0; line-height: 1.55; }
+.scard-foot { display: flex; flex-wrap: wrap; gap: 18px; font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; margin-top: 4px; }
+.scard-src { margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; }
+.scard-src li { margin-bottom: 3px; }
+@media (max-width: 860px) { .sgrid { grid-template-columns: 1fr; } .scard { padding: 12px 14px 14px; } }
+
+/* Decision cards on the landing page */
+.dcard {
+  display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--ink);
+  background: var(--panel); border: 1px solid var(--line); border-top: 4px solid #ffb703;
+  border-radius: 12px; padding: 16px 18px; transition: border-color .12s ease, transform .12s ease;
+}
+.dcard:hover { border-color: var(--accent); border-top-color: #ffb703; transform: translateY(-2px); }
+.dcard-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.dcard-id { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--muted); }
+.dcard-q { font-size: 16px; font-weight: 680; line-height: 1.35; }
+.dcard-rec { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.dcard-go { margin-top: auto; padding-top: 6px; color: var(--accent); font-size: 13px; font-weight: 650; }
+
+/* Tables that were named in the builder but never styled. They inherit the
+   shared table rules; these set a readable minimum width per column so long
+   findings and requirement texts do not squeeze into a single word column. */
+table.analysis td:nth-child(2) { min-width: 260px; font-weight: 600; }
+table.analysis td:nth-child(3) { min-width: 300px; }
+table.verification td:nth-child(2) { min-width: 150px; }
+table.verification td:nth-child(3) { min-width: 150px; }
+table.policy td:nth-child(2) { min-width: 280px; }
+table.policy td:nth-child(5) { min-width: 240px; }
+table.requirements td:nth-child(3) { min-width: 200px; font-weight: 600; }
+table.requirements td:nth-child(5), table.requirements td:nth-child(6) { min-width: 200px; }
+table.sources td:nth-child(2) { min-width: 220px; }
+table.sources td:nth-child(5) { min-width: 200px; }
+
+/* Print: a reviewer may well print the decision queue. */
+@media print {
+  .sidebar, .disclosure, .skip, .mhero-actions, .filter, .btnrow { display: none; }
+  .layout { display: block; }
+  main { max-width: none; padding: 0; }
+  .table-wrap { overflow: visible; border: none; }
+  table { font-size: 10.5pt; }
+  a { color: inherit; text-decoration: none; }
+  .scard, .decision, .post { break-inside: avoid; border-color: #bbb; }
+}

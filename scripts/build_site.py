@@ -42,6 +42,15 @@ MARKETING = load("marketing.json")
 PIPELINE = load("pipeline.json")
 REQUIREMENTS_DOC = load("requirements.json")
 REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
+# Decision-support layer: the backlog a reviewer chooses from, the questions that
+# must be answered first, and the record of decisions actually taken.
+SUGGESTIONS_DOC = load("suggestions.json")
+SUGGESTIONS = SUGGESTIONS_DOC["suggestions"]
+QUESTIONS_DOC = load("questions.json")
+QUESTIONS = QUESTIONS_DOC["questions"]
+DECISIONS_DOC = load("decisions.json")
+DECISIONS = DECISIONS_DOC["decisions"]
+DECISION_LOG = DECISIONS_DOC["log"]
 OBSERVED = CONTENT["observed_date"]
 
 NAV = [
@@ -55,7 +64,9 @@ NAV = [
     ("automation.html", "Automation & tracking", "Research"),
     ("analysis.html", "Analysis & findings", "Research"),
     ("requirements.html", "Requirements", "Research"),
-    ("suggestions.html", "Suggestions & decisions", "Research"),
+    ("suggestions.html", "Suggestions", "Decide"),
+    ("questions.html", "Open questions", "Decide"),
+    ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
     ("analytics.html", "Analytics", "Governance"),
@@ -68,6 +79,7 @@ NAV_ORDER = [
     ("Categories", [t for t, _l, g in NAV if g == "Categories"]),
     ("Content", [t for t, _l, g in NAV if g == "Content"]),
     ("Research", [t for t, _l, g in NAV if g == "Research"]),
+    ("Decide", [t for t, _l, g in NAV if g == "Decide"]),
     ("Governance", [t for t, _l, g in NAV if g == "Governance"]),
 ]
 
@@ -338,9 +350,34 @@ def policy_rows(current: Page) -> list[list[str]]:
     return rows
 
 
-def flag_table(current: Page) -> str:
+def flag_group(status: str) -> str:
+    """Sort a flag into the group a reviewer needs it in.
+
+    Resolved and corrected items are kept (they are the audit trail) but they
+    must not sit in the same list as the items still waiting on a decision.
+    """
+    s = status.lower()
+    if s.startswith("resolved"):
+        return "Resolved"
+    if s.startswith("corrected"):
+        return "Corrected (kept as the audit record)"
+    return "Needs your decision"
+
+
+FLAG_GROUPS = [
+    ("Needs your decision",
+     "Open items. Some need a value only you can supply (an account, a tag, a seller's answer); others need a decision. "
+     "None of them blocks the site from being live."),
+    ("Corrected (kept as the audit record)",
+     "Defects that were found and fixed. They stay listed so the correction is visible rather than quietly disappearing."),
+    ("Resolved",
+     "Items closed by a later verification pass, with the resolving session named in the status."),
+]
+
+
+def flag_table(current: Page, flags: list[dict]) -> str:
     rows = []
-    for f in FLAGS:
+    for f in flags:
         sources = "<br>".join(ext(u, source_label(u)) for u in f["sources"])
         rows.append([
             f'<span id="{esc(f["id"])}"><strong>{esc(f["id"])}</strong></span>',
@@ -510,8 +547,45 @@ def article_card(current: Page, a: dict, show_category: bool = True) -> str:
     )
 
 
+def decision_queue_section(current: Page) -> str:
+    """The decisions that gate the rest, as cards rather than another table.
+
+    The site is a proposal, not a finished product: much of what the brief asks
+    for cannot be built without an answer only the owner can give. Saying so on
+    the landing page is more useful to a reader than another product card, and a
+    card reads better here than a four-column table of prose.
+    """
+    open_decisions = [d for d in DECISIONS if d["status"].startswith("Open")]
+    top = open_decisions[:3]
+    if not top:
+        return ""
+    cards = "".join(
+        f'<a class="dcard" href="{esc(current.rel("decisions.html"))}#{esc(d["id"])}">'
+        f'<div class="dcard-top"><span class="dcard-id">{esc(d["id"])}</span>'
+        f'<span class="chip chip-quiet">Gate</span></div>'
+        f'<div class="dcard-q">{esc(d["question"])}</div>'
+        f'<div class="dcard-rec"><strong>Recommended.</strong> {esc(d["recommendation"])}</div>'
+        f'<div class="dcard-go">Open the options &rarr;</div></a>'
+        for d in top
+    )
+    return (
+        f'<section><h2>Before anything else: {len(open_decisions)} decisions are yours</h2>'
+        '<p class="section-lead">This site publishes only what an official source supports, which means a number of things the '
+        'brief asks for cannot be built until you answer. The three that gate the rest are below. Each one lists its options, '
+        'what each option commits the site to, and what would prove it worked.</p>'
+        f'<div class="agrid">{cards}</div>'
+        + '<p>'
+        + href(current, "decisions.html", "Work through all " + str(len(open_decisions)) + " decisions →")
+        + " &nbsp; "
+        + href(current, "suggestions.html", f"{len(SUGGESTIONS)} costed suggestions")
+        + " &nbsp; "
+        + href(current, "questions.html", f"{len(QUESTIONS)} open questions")
+        + "</p></section>"
+    )
+
+
 def page_index(current: Page) -> str:
-    open_flags = [f for f in FLAGS if "review" in f["status"].lower() and "resolved" not in f["status"].lower()]
+    open_flags = [f for f in FLAGS if flag_group(f["status"]) == "Needs your decision"]
     # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
     assigned = sum(
         1 for p in PRODUCTS
@@ -524,7 +598,9 @@ def page_index(current: Page) -> str:
                              f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guide"),
         ("0", "Amazon prices published (policy F-02)"),
         (f"{assigned} of {len(PRODUCTS)}", "ASIN commission-category assignments confirmed (F-01)"),
-        (str(len(open_flags)), "Open items for your review (Flagged for review page)"),
+        (str(len(open_flags)),
+         f"Flags awaiting your decision, of {len(FLAGS)} recorded (the rest are corrected or resolved and kept as "
+         "the audit record on the Flagged for review page)"),
     ]
     kpi_html = "".join(
         f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
@@ -555,6 +631,7 @@ def page_index(current: Page) -> str:
         "fact it states is a row in a table that links back to that page.</p>"
         f'<div class="agrid">{trending}</div></section>'
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
+        + decision_queue_section(current)
         + '<section><h2>Products at a glance</h2>'
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C\u2026, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
@@ -683,10 +760,12 @@ def page_exec(current: Page) -> str:
     return (
         hero("Executive summary", es["headline"])
         + f'<section><h2>What the verification found</h2><ul class="bullets">{bullets}</ul></section>'
-        + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol></section>'
+        + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol>'
+        + f'<p class="small muted">Each of these is written up on the {href(current, "decisions.html", "Decision log")} with its options, '
+          f'cost and reversibility, and each one unlocks a costed entry on the {href(current, "suggestions.html", "Suggestions")} page. '
+          f'The unknowns behind them are on {href(current, "questions.html", "Open questions")}.</p></section>'
         + f'<section><h2>Not built, and why</h2><ul>{not_built}</ul></section>'
-        + '<section><h2>Detail</h2><p>For a question-by-question worksheet with knowns, gaps, options and suggested next steps, see '
-        + href(current, "suggestions.html", "Suggestions & decisions") + ". Further detail: "
+        + '<section><h2>Detail</h2><p>See '
         + href(current, "analysis.html", "Analysis & findings") + ", "
         + href(current, "marketing.html", "Marketing content") + ", "
         + href(current, "automation.html", "Automation & tracking") + ", "
@@ -836,11 +915,35 @@ def page_policy(current: Page) -> str:
 
 
 def page_flagged(current: Page) -> str:
+    grouped: dict[str, list[dict]] = {name: [] for name, _blurb in FLAG_GROUPS}
+    for f in FLAGS:
+        grouped[flag_group(f["status"])].append(f)
+    counts = "".join(
+        f'<div class="kpi"><div class="kpi-value">{len(grouped[name])}</div>'
+        f'<div class="kpi-label">{esc(name)}</div></div>'
+        for name, _blurb in FLAG_GROUPS
+    )
+    sections = []
+    for name, blurb in FLAG_GROUPS:
+        items = grouped[name]
+        if not items:
+            continue
+        sections.append(
+            f'<section><h2>{esc(name)} <span class="muted">({len(items)})</span></h2>'
+            f'<p class="section-lead">{esc(blurb)}</p>'
+            + flag_table(current, items)
+            + "</section>"
+        )
     return (
         '<header class="hero flagged-hero"><h1>Flagged for Review</h1>'
-        '<p class="lead">These irregularities and unverified items are published for your review after the site is live. '
-        "They do not block the merge. Each one links to its source, and the action column says what is needed.</p></header>"
-        + flag_table(current)
+        '<p class="lead">Every irregularity and unverified item found while building this site, grouped by what it needs '
+        'from you. Each one links to its source, and the action column says what is needed. None of these blocks the site '
+        'from being live.</p></header>'
+        f'<section class="kpis">{counts}</section>'
+        + "".join(sections)
+        + f'<p class="small muted">Every flag is also a row in <code>data/flags.json</code>. Where a flag points at a change '
+          f'worth making, the {href(current, "suggestions.html", "Suggestions")} page costs it and the '
+          f'{href(current, "decisions.html", "Decision log")} page records the choice.</p>'
     )
 
 
@@ -955,108 +1058,279 @@ def page_requirements(current: Page) -> str:
     )
 
 
-def suggestion_rows(current: Page) -> list[list[str]]:
-    """Decision worksheet: recommendations are proposals, never presented as facts."""
-    decisions = [
-        {
-            "id": "D-01", "area": "Product selection",
-            "question": "Are these the three products you intended to promote?",
-            "known": "The supplied short links resolve to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH; the short codes are not the ASINs.",
-            "missing": "Your confirmation that each resolved ASIN is the intended item; any replacement products.",
-            "options": "A. Confirm all three ASINs. B. Replace any link with the intended product’s official tagged link.",
-            "suggestion": "Confirm the resolved ASINs before publishing campaigns; treat the ASIN, not the short-link token, as the product identifier.",
-            "sources": [("https://link.amazon/B04G1MEwY", "P1 supplied link"), ("https://link.amazon/B02NbDxp3", "P2 supplied link"), ("https://link.amazon/B00hJ57DV", "P3 supplied link")],
-            "flags": ["F-04"],
-        },
-        {
-            "id": "D-02", "area": "Affiliate attribution",
-            "question": "Which Associates marketplace and tracking ID should receive purchases?",
-            "known": "The resolved supplied links do not expose a `tag=` parameter, so attribution to an Associates ID is unverified.",
-            "missing": "The account/marketplace and confirmation that each final link was generated for the correct Associate ID.",
-            "options": "A. Verify the current links inside Associates Central. B. Generate and substitute official tagged links for the chosen marketplace.",
-            "suggestion": "Do not rely on earnings attribution until the three final links are confirmed in the account and tested.",
-            "sources": [("https://affiliate-program.amazon.com/", "Associates Central"), ("https://affiliate-program.amazon.com/help/operating/policies", "Participation Requirements")],
-            "flags": ["F-03"],
-        },
-        {
-            "id": "D-03", "area": "Data access and automation",
-            "question": "What research automation is authorized, and what source may it use?",
-            "known": "The official Conditions of Use and Associates rules restrict collection/use of listings and program content; the API documentation describes a controlled access route. No automated collector is enabled here.",
-            "missing": "Your current account’s API eligibility, written permissions if required, marketplace approvals, and the precise permitted fields/use.",
-            "options": "A. Keep research manual and publish only reviewed facts. B. Confirm eligibility and terms, then use the authorized API scope. C. Obtain Amazon’s express written approval before any otherwise restricted agent/model use.",
-            "suggestion": "Keep automation disabled until the applicable terms and written approvals are confirmed; never train or improve models with Program Content without required approval.",
-            "sources": [("https://www.amazon.com/gp/help/customer/display.html?nodeId=508088", "Conditions of Use"), ("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies"), ("https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "Creators API documentation")],
-            "flags": ["F-11", "F-12", "F-21", "F-24"],
-        },
-        {
-            "id": "D-04", "area": "Pricing, reviews and trend signals",
-            "question": "Should the site pursue approved API data, or launch without price/rating claims?",
-            "known": "Public prices, star ratings and review metrics are withheld on this site; no API/account feed is connected and no trend data has been measured.",
-            "missing": "API access approval, allowed fields, refresh limits, current data, and an evidence-based definition of a trend or conversion signal.",
-            "options": "A. Launch with verified product facts and editorial comparisons only. B. Apply for the documented API and publish only fields/metrics allowed by its current terms.",
-            "suggestion": "Start without price, rating or trend claims. Add data-driven comparisons only after access and each displayed field are verified.",
-            "sources": [("https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "Creators API documentation"), ("https://affiliate-program.amazon.com/help/operating/policies", "Participation Requirements")],
-            "flags": ["F-02", "F-33"],
-        },
-        {
-            "id": "D-05", "area": "Economics and success criteria",
-            "question": "What verified commission and performance data should guide investment?",
-            "known": "The public schedule lists category-level rates, including a Kitchen band; the category assigned to each ASIN is not verified. Clicks, orders and revenue are not connected, so no conversion or earnings figures exist.",
-            "missing": "Per-ASIN category confirmation, correct tagged links, account reporting/API access, chosen costs and a target time horizon.",
-            "options": "A. Keep product-level commission and ROI blank. B. Confirm each ASIN category in the account and use actual attributed reports before setting targets.",
-            "suggestion": "Use a small, explicitly time-boxed pilot after attribution is verified; evaluate on actual reported outcomes, not assumed conversion rates.",
-            "sources": [("https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "Standard Commission Income Statement"), ("https://affiliate-program.amazon.com/", "Associates Central reporting")],
-            "flags": ["F-01", "F-03"],
-        },
-        {
-            "id": "D-06", "area": "Editorial and SEO direction",
-            "question": "Who is the intended reader, and what original experience or evidence will make the content useful?",
-            "known": "The repository contains five article drafts/pages based on sourced facts. It does not contain first-hand product testing or evidence of search demand, reader behavior or conversion lift.",
-            "missing": "Audience, use cases, editorial voice, real testing access, author/reviewer, target region and a way to evaluate helpfulness without fabricated results.",
-            "options": "A. Publish clearly labeled research/comparison guides limited to cited facts. B. Arrange real hands-on testing and add attributed observations after review.",
-            "suggestion": "Prioritize specific decision-helpful topics and human fact/editorial review; do not claim experience, performance or search trends that have not been established.",
-            "sources": [("https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "Google Search Central"), ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC disclosure guidance")],
-            "flags": ["F-12"],
-        },
-        {
-            "id": "D-07", "area": "Tracking and privacy",
-            "question": "What measurement is acceptable, and what privacy/consent review is needed before scaling it?",
-            "known": "The current analytics page records clicks only in the visitor’s own browser; it has no connected conversion reporting and does not report revenue.",
-            "missing": "Target jurisdictions, retention period, consent requirements, privacy notice, access controls and approval for any server-side analytics or audience tracking.",
-            "options": "A. Keep browser-local, opt-in/manual reporting only. B. Add first-party measurement only after privacy/legal review and a documented retention/consent design.",
-            "suggestion": "Keep the current local-only approach until the audience and applicable obligations are known; do not describe clicks as sales or conversions.",
-            "sources": [("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies"), ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC disclosure guidance")],
-            "flags": ["F-02", "F-03"],
-        },
-    ]
+# ------------------------------------------------- decision-support pages
+# The three pages below answer one question each: what could we change, what do
+# we still not know, and what has already been decided. They render from
+# data/suggestions.json, data/questions.json and data/decisions.json so a row
+# and its counterpart in the registers can never disagree.
+
+def _decision_status_pill(status: str) -> str:
+    s = status.lower()
+    if s.startswith("recorded"):
+        return pill(status, "ok")
+    if "blocked" in s:
+        return pill(status, "bad")
+    if s.startswith("needs"):
+        return pill(status, "warn")
+    if s.startswith("recommended"):
+        return pill(status, "ok")
+    return pill(status, "warn")
+
+
+def _priority_chip(priority: str) -> str:
+    key = priority.split(" ")[0]
+    return f'<span class="prio prio-{esc(key.lower())}">{esc(key)}</span>'
+
+
+def _link_flags(current: Page, ids: list[str]) -> str:
+    return " ".join(flag_chip(current, f) for f in ids) if ids else ""
+
+
+def suggestion_summary_rows(current: Page) -> list[list[str]]:
+    """One scannable line per suggestion. The argument lives in the card below."""
     rows = []
-    for d in decisions:
-        sources = "<br>".join(ext(url, label) for url, label in d["sources"])
-        flags = " ".join(flag_chip(current, fid) for fid in d["flags"])
+    for s in SUGGESTIONS:
+        src = s["sources"][0]
         rows.append([
-            f'<strong>{esc(d["id"])}</strong><br>{esc(d["area"])}',
-            f'<strong>{esc(d["question"])}</strong><br><span class="small">{flags}</span>',
-            esc(d["known"]), esc(d["missing"]), esc(d["options"]), esc(d["suggestion"]), sources,
+            f'<span id="{esc(s["id"])}"><strong>{esc(s["id"])}</strong></span>',
+            _priority_chip(s["priority"]),
+            esc(s["title"]),
+            _decision_status_pill(s["status"]),
+            href(current, "decisions.html", s["decision"]) if s.get("decision") else "&mdash;",
+            ext(src["url"], src["ref"]),
+            _link_flags(current, s.get("flags") or []),
         ])
     return rows
 
 
-def page_suggestions(current: Page) -> str:
+def suggestion_card(current: Page, s: dict, number: int) -> str:
+    """The case for one suggestion: problem, proposal, cost, risk, proof."""
+    srcs = "".join(
+        f'<li>{ext(x["url"], x["ref"])}</li>' for x in s["sources"]
+    )
     return (
-        '<header class="hero"><h1>Suggestions &amp; decisions</h1>'
-        '<p class="lead">A review worksheet—not an authorization to change account settings or publish new claims. Each row separates what the repository establishes from what is still unknown, lists practical paths, and offers a recommendation for someone to accept or reject.</p>'
-        '<p class="muted small">No option is preselected. The recommendations are proposals, not verified facts. Follow the linked official sources and the Flagged for Review record before implementation.</p></header>'
-        '<section><h2>Decision register</h2>'
-        + table(["Area", "Question to answer", "Known from current evidence", "Missing information", "Options to compare", "Suggested path (not selected)", "Official sources"], suggestion_rows(current), "suggestions")
-        + '<p class="note">The linked flags contain the detailed evidence and follow-up actions. A blank or missing value is intentional where the reviewed sources do not establish it. Account access, legal review and user preferences are not inferred.</p></section>'
-        '<section><h2>Suggested order of work</h2><ol class="bullets">'
-        '<li>Confirm that the resolved ASINs match the intended products and that the final links carry the correct Associates tracking ID.</li>'
-        '<li>Resolve the applicable program terms and API permissions before automating collection, using Program Content in an agent, or publishing API-derived data.</li>'
-        '<li>Only then decide whether to add product-level economics, trend analysis or conversion tracking; keep unknown fields blank until sourced.</li>'
-        '<li>Choose the audience and editorial approach, then require human review of source-backed claims and clear affiliate disclosures.</li>'
-        '</ol><p>For the full factual gap register, see the ' + href(current, "flagged.html", "Flagged for Review") + ' page; for the brief-by-brief delivery status, see ' + href(current, "requirements.html", "Requirements") + '.</p></section>'
+        f'<article class="scard" id="detail-{esc(s["id"])}">'
+        f'<div class="scard-head"><div><span class="scard-id">{esc(s["id"])}</span>'
+        f'{_priority_chip(s["priority"])}</div>'
+        f'{_decision_status_pill(s["status"])}</div>'
+        f'<h3>{esc(s["title"])}</h3>'
+        f'<p class="scard-problem">{esc(s["problem"])}</p>'
+        f'<p><strong>What to change.</strong> {esc(s["proposal"])}</p>'
+        f'<p><strong>Why it is worth doing.</strong> {esc(s["why"])}</p>'
+        f'<dl class="sgrid">'
+        f'<dt>Cost</dt><dd>{esc(s["effort"])}</dd>'
+        f'<dt>Risk</dt><dd>{esc(s["risk"])}</dd>'
+        f'<dt>How you would know it worked</dt><dd>{esc(s["check"])}</dd>'
+        f'</dl>'
+        f'<p class="scard-foot"><span>Decision: '
+        f'{href(current, "decisions.html", s["decision"]) if s.get("decision") else "&mdash;"}</span>'
+        f'<span>Flags: {_link_flags(current, s.get("flags") or []) or "&mdash;"}</span></p>'
+        f'<ul class="scard-src">{srcs}</ul>'
+        f'</article>'
     )
 
+
+def page_suggestions(current: Page) -> str:
+    open_count = sum(1 for s in SUGGESTIONS if s["status"].startswith("Awaiting"))
+    first = sum(1 for s in SUGGESTIONS if s["priority"].startswith("P1"))
+    cards = [
+        ("What this page is",
+         "A backlog you approve before anything is built. Each entry states the problem, the proposed change, what it costs, "
+         "what it risks and the check that would prove it worked. Nothing here has been implemented."),
+        (f"{first} decisions come first",
+         "The P1 entries change what the other suggestions are even possible: the link tag, the API route, the editorial note "
+         "and the per-page metadata. Working up from P3 would waste the effort."),
+        (f"{open_count} of {len(SUGGESTIONS)} await your answer",
+         "The rest are corrections with one right answer, listed so the change is visible rather than silent. They are recorded "
+         "as recommended, not as decided."),
+    ]
+    card_html = "".join(
+        f'<div class="kpi"><div class="kpi-value kpi-text">{esc(title)}</div>'
+        f'<div class="kpi-label">{esc(body)}</div></div>' for title, body in cards
+    )
+    groups = [
+        ("P1 - Decide first", "Decisions that gate everything else."),
+        ("P2 - Adds real value", "The site works without these; adding them is what makes it worth reading."),
+        ("P3 - Housekeeping", "Accuracy and consistency of the records."),
+    ]
+    blocks = []
+    number = 0
+    for key, blurb in groups:
+        items = [s for s in SUGGESTIONS if s["priority"] == key]
+        if not items:
+            continue
+        inner = []
+        for s in items:
+            number += 1
+            inner.append(suggestion_card(current, s, number))
+        blocks.append(
+            f'<section><h2>{esc(key)}</h2>'
+            f'<p class="section-lead">{esc(blurb)} {len(items)} suggestion{"s" if len(items) != 1 else ""}.</p>'
+            f'<div class="scards">{"".join(inner)}</div></section>'
+        )
+    return (
+        '<header class="hero"><h1>Suggestions</h1>'
+        '<p class="lead">Every change worth making to this site, costed and risk-assessed, waiting on a decision rather than '
+        'already applied. Pick a path here before anything is built.</p></header>'
+        f'<section class="kpis kpis-stack">{card_html}</section>'
+        '<section><h2>At a glance</h2>'
+        '<p class="section-lead">One line per suggestion. The full case for each is in the section below it.</p>'
+        + '<p><input id="filter" class="filter" type="search" placeholder="Filter suggestions (for example: P1, tag, commission)" aria-label="Filter suggestions"></p>'
+        + table(["ID", "Priority", "Suggestion", "Status", "Decision", "Primary source (official)", "Flags"],
+                suggestion_summary_rows(current), "suggestions")
+        + '<p class="note">Every row links to the official source that constrains it. Where a suggestion has no external rule '
+          'behind it, the source column names the repository file the problem was observed in.</p></section>'
+        + "".join(blocks)
+        + f'<p class="small muted">Choosing a path happens on the {href(current, "decisions.html", "Decision log")} page. '
+        f'The unknowns that gate these entries are on {href(current, "questions.html", "Open questions")}. '
+        f'Defects already found in the published site are on {href(current, "flagged.html", "Flagged for review")}.</p>'
+    )
+
+
+def question_rows() -> list[list[str]]:
+    rows = []
+    for q in QUESTIONS:
+        rows.append([
+            f'<span id="{esc(q["id"])}"><strong>{esc(q["id"])}</strong></span>',
+            esc(q["area"]),
+            esc(q["question"]),
+            esc(q["why_it_matters"]),
+            pill(q["kind"], {"Known": "ok", "Owner decision": "warn"}.get(q["kind"], "bad" if q["kind"].startswith("Unknown") else "muted")),
+            f'<span class="muted">{esc(q["known"])}</span>',
+            esc(q["how_to_discover"]),
+            esc(q["answerable_by"]),
+            "<br>".join(ext(x["url"], x["ref"]) for x in q["sources"]),
+        ])
+    return rows
+
+
+def page_questions(current: Page) -> str:
+    kinds = {
+        k: sum(1 for q in QUESTIONS if q["kind"] == k)
+        for k in QUESTIONS_DOC["_meta"]["kinds"]
+        if any(q["kind"] == k for q in QUESTIONS)
+    }
+    summary = " &middot; ".join(f'<strong>{esc(k)}</strong>: {v}' for k, v in kinds.items())
+    return (
+        '<header class="hero"><h1>Open questions</h1>'
+        '<p class="lead">What has to be answered before any suggestion can reasonably be acted on, separated into what is already '
+        'known, what is missing, and who can supply it. Most of these are not research problems: they need an account, a seller or '
+        'a lawyer, and no further reading will close them.</p>'
+        f'<p class="muted small">{len(QUESTIONS)} questions &middot; {summary}</p></header>'
+        '<section><h2>The register</h2>'
+        '<p class="section-lead">The &ldquo;known&rdquo; column states what the repository can already support, so a reviewer does not '
+        'have to re-derive it. The &ldquo;how to discover&rdquo; column is the shortest route to an answer, not a guess at one.</p>'
+        + table(["ID", "Area", "Question", "Why it blocks a decision", "Kind", "What is already known",
+                 "How the missing piece is discovered", "Answerable by", "Sources (official)"],
+                question_rows(), "questions")
+        + '<p class="note">A question closes only on a named source, a named party&rsquo;s answer, or an owner decision recorded in the '
+        'Decision log. It is never closed by inference.</p>'
+        '</section>'
+        '<section><h2>Why this page exists</h2>'
+        '<p>Three of these gaps decide whether this project can earn at all: the Associates tag (Q-01), API access for prices and '
+        'ratings (Q-02), and the per-ASIN commission category (Q-03). Three more decide whether it can honestly describe itself: who '
+        'reviews the copy (Q-05), whether anything was tested (Q-06), and whether automated collection needs a legal opinion (Q-07). '
+        'The rest are presentation and operations choices with named owners.</p>'
+        f'<p class="small muted">Related: {href(current, "suggestions.html", "Suggestions")} for what each answer would unlock, '
+        f'{href(current, "decisions.html", "Decision log")} for the choices already recorded (none, as of {esc(OBSERVED)}).</p>'
+        '</section>'
+    )
+
+
+def page_decisions(current: Page) -> str:
+    open_items = [d for d in DECISIONS if d["status"].startswith("Open")]
+    cards = [
+        (str(len(open_items)), "Decisions waiting on you"),
+        (str(len(DECISIONS) - len(open_items)), "Decisions recorded"),
+        (str(len(SUGGESTIONS)), "Suggestions these decisions unlock"),
+    ]
+    kpi_html = "".join(
+        f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
+        for v, l in cards
+    )
+    blocks = []
+    for d in DECISIONS:
+        opts = []
+        for o in d["options"]:
+            opts.append(
+                f'<div class="opt"><div class="opt-key">{esc(o["key"])}</div><div>'
+                f'<div class="opt-label">{esc(o["label"])}</div>'
+                f'<div class="opt-body">{esc(o["commits_to"])}</div>'
+                f'<div class="opt-meta"><span>Effort: {esc(o["effort"])}</span>'
+                f'<span>Reversible: {esc(o["reversible"])}</span></div></div></div>'
+            )
+        links = " ".join(
+            f'<a class="flag-chip" href="{esc(current.rel("suggestions.html"))}#{esc(sid)}">{esc(sid)}</a>'
+            for sid in d["linked_suggestions"]
+        )
+        q = d.get("linked_question")
+        qlink = ""
+        if q:
+            qlink = " ".join(
+                f'<a class="flag-chip" href="{esc(current.rel("questions.html"))}#{esc(x.strip())}">{esc(x.strip())}</a>'
+                for x in q.split(",")
+            )
+        blocks.append(
+            f'<section class="decision" id="{esc(d["id"])}">'
+            f'<div class="decision-head"><h2>{esc(d["id"])} &middot; {esc(d["question"])}</h2>'
+            f'{_decision_status_pill(d["status"])}</div>'
+            f'<div class="optrow">{"".join(opts)}</div>'
+            f'<p class="rec"><strong>Recommendation.</strong> {esc(d["recommendation"])}</p>'
+            f'<p class="small">Unlocks: {links}'
+            + (f' &middot; Gated by: {qlink}' if qlink else "")
+            + f' &middot; Source: {ext(d["sources"][0]["url"], d["sources"][0]["ref"])}'
+            + (f' {ext(d["sources"][1]["url"], d["sources"][1]["ref"])}' if len(d["sources"]) > 1 else "")
+            + "</p></section>"
+        )
+    log_rows = []
+    register = "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/decisions.json"
+    for n, entry in enumerate(DECISION_LOG, start=1):
+        log_rows.append([
+            esc(entry["date_utc"]), esc(entry["decision"]), esc(entry["choice"]),
+            esc(entry["recorded_by"]), esc(entry["evidence"]),
+            ext(register, f"data/decisions.json, log entry {n}"),
+        ])
+    return (
+        '<header class="hero"><h1>Decision log</h1>'
+        '<p class="lead">The queue you work through before any suggestion is built, and the record of what has actually been '
+        'decided. Nothing in this repository acts on an option by itself: the site stays exactly as it is until a choice is recorded here.</p></header>'
+        f'<section class="kpis">{kpi_html}</section>'
+        '<p class="small muted">Pick an option and the site owner records it in the log at the bottom of this page, with the date. '
+        'The recommendation is an argument, not a decision, and it is labelled as one.</p>'
+        + "".join(blocks)
+        + '<section><h2>Recorded decisions</h2>'
+        + table(["Date (UTC)", "Decision", "Choice", "Recorded by", "Evidence", "Where it is recorded"],
+                log_rows, "decision-log")
+        + '<p class="note">Empty is a valid and honest state. As of this build no owner decision has been recorded, so every row above '
+          'is still open and no suggestion has been implemented.</p></section>'
+    )
+
+
+# Every page states what it contains, in its own words. Google's snippet
+# guidance asks for a unique description per page; the article pages already
+# carried their own, and these cover the rest. The build fails if two pages
+# share one (see scripts/verify.py), so this cannot silently regress.
+PAGE_DESCRIPTIONS = {
+    "index.html": "A dashboard of verified air-fryer research: three product records, five sourced articles, a policy check on every claim, and an official source link on every table row.",
+    "executive-summary.html": "What the verification found, the seven decisions that need an owner, and what is deliberately not built. Each statement links to the official source behind it.",
+    "products.html": "Three air-fryer product records side by side: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
+    "categories/dual-basket-air-fryers.html": "The dual-basket air-fryer category: the Chefman 6 quart record, its listed specifications, the competing ASINs shown beside it on the listing, and the article written from those facts.",
+    "categories/single-basket-air-fryers.html": "The single-basket air-fryer category: the Chefman 8 quart record, its listed presets and footprint, the size variants on the same page, and the article written from those facts.",
+    "categories/air-fryer-toaster-ovens.html": "The air-fry toaster oven category: the Emeril Lagasse 26 quart record, its listed functions and footprint, and the two specification inconsistencies disclosed rather than resolved.",
+    "marketing.html": "The full marketing content kit on one page: three product articles, a comparison and a buying guide, each with the fact table it was written from and a disclosure-carrying call to action.",
+    "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
+    "analysis.html": "Fifteen findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
+    "requirements.html": "All thirty items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
+    "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
+    "policy-compliance.html": "Thirty Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
+    "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
+    "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
+    "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
+    "articles/index.html": "Every article on the site, grouped by product format, each one built from a fact table in which every row links to the official product page it was read from.",
+    "suggestions.html": "Twelve changes worth making to this site, costed, risk-assessed and waiting on a decision rather than already applied, each tied to the official rule that constrains it.",
+    "questions.html": "Fifteen questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
+    "decisions.html": "The decision queue for this site: every open choice with its options, cost and reversibility, plus the record of decisions actually taken (currently none).",
+}
 
 BODIES = {
     "index.html": page_index,
@@ -1069,9 +1343,11 @@ BODIES = {
     "automation.html": page_automation,
     "analysis.html": page_analysis,
     "requirements.html": page_requirements,
-    "suggestions.html": page_suggestions,
     "verification.html": page_verification,
     "policy-compliance.html": page_policy,
+    "suggestions.html": page_suggestions,
+    "questions.html": page_questions,
+    "decisions.html": page_decisions,
     "analytics.html": page_analytics,
     "flagged.html": page_flagged,
     "sources.html": page_sources,
@@ -1149,7 +1425,8 @@ def collect_pages() -> list[Page]:
     """
     pages: list[Page] = []
     for path, body_fn in BODIES.items():
-        page = Page(path, NAV_LABEL.get(path, path), path, "")
+        page = Page(path, NAV_LABEL.get(path, path), path, "",
+                    description=PAGE_DESCRIPTIONS.get(path))
         page.body = body_fn(page)
         pages.append(page)
     hub = Page(ARTICLES_HUB, NAV_LABEL[ARTICLES_HUB], ARTICLES_HUB, "")

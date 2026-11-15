@@ -1,0 +1,479 @@
+{
+  "_meta": {
+    "description": "Everything that must be answered before a decision can reasonably be made, separated into what the repository already knows, what it does not know, and how the missing piece could be discovered. Each gap names the owner who can actually answer it, because most of these are not research problems: they are facts only the account holder, a seller, or a lawyer can supply.",
+    "created_utc": "2026-11-15",
+    "created_by": "arena/00ba6c2e-zone4",
+    "kinds": {
+      "Known": "Answered from an official source that was read, with the source linked. Listed so a reviewer does not have to re-derive it.",
+      "Unknown - discoverable": "Not known yet, but an official source or a reachable party can supply it. The row says exactly where to look.",
+      "Unknown - not discoverable from here": "No public official source exists for it in this environment. It needs an account, a legal opinion or a seller. Listed so nobody spends another session looking for it.",
+      "Owner decision": "Not a fact at all. A choice only the site owner can make; the row lists the options and what each one commits the site to."
+    },
+    "rule": "An Unknown is never closed by inference. It is closed by a named source, a named party's answer, or an explicit owner decision recorded in the Decision log.",
+    "ported_00ba6c2e_2026_11_15": "Q-16 to Q-19 were ported from the parallel session's decision worksheet (arena/bb85f073-zone4, PR #50), which asked about the audience, privacy and consent, budget and time horizon, and trade-name clearance. Those four gaps were not in this register and are kept rather than dropped. Their seven-row worksheet itself was merged into decisions.json D-15/D-16 to avoid two conflicting D-01 numbering schemes."
+  },
+  "questions": [
+    {
+      "id": "Q-01",
+      "area": "Money",
+      "question": "Does an Amazon Associates account exist for this site, and what is its Partner Tag?",
+      "why_it_matters": "Without an account there is no tag, and without a tag no click can be attributed. Every revenue figure the brief asks for is downstream of this single fact.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "No tag parameter appears in any of the three resolved links. The short links themselves are genuine link.amazon links and do resolve to the correct product pages.",
+      "how_to_discover": "Sign in to Associates Central. The Partner Tag is shown in the account settings and in every link the account generates.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-01",
+        "S-02",
+        "S-08",
+        "Revenue measurement"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement (the agreement that creates the account and the tag)"
+        }
+      ],
+      "flags": [
+        "F-03",
+        "F-04"
+      ]
+    },
+    {
+      "id": "Q-02",
+      "area": "Money",
+      "question": "Has the account met Amazon's stated prerequisite for API access (at least 10 qualifying sales in the past 30 days)?",
+      "why_it_matters": "Prices and ratings cannot lawfully be published without an approved Amazon API, and the API has a hard prerequisite. If the prerequisite is not met, no amount of engineering makes a price publishable.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "Amazon's own Creators API introduction states the prerequisite. The site currently publishes no price or rating (F-02).",
+      "how_to_discover": "Associates Central shows qualifying sales. The API registration page states whether the account is eligible.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-02"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+          "ref": "Creators API introduction: access prerequisites"
+        }
+      ],
+      "flags": [
+        "F-02",
+        "F-16"
+      ]
+    },
+    {
+      "id": "Q-03",
+      "area": "Money",
+      "question": "Which commission category has Amazon assigned to each of the three ASINs, and what rate applies?",
+      "why_it_matters": "The public Table 1 rate is a category-level figure. The three ASINs sit under Air Fryers, but the programme's commission categorisation is not the same thing as the browse tree, and no public source maps an ASIN to a commission band.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "Table 1 lists Kitchen at 4.50%. All three products sit in the Amazon browse path Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "how_to_discover": "The commission category for an ASIN appears in Associates Central reporting once the product has generated activity. Before that, Amazon's category mapping is not exposed publicly.",
+      "answerable_by": "The site owner, through Associates Central",
+      "blocks": [
+        "S-08",
+        "Any earnings estimate"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement, Table 1"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "Per-product browse path, read on the product page"
+        }
+      ],
+      "flags": [
+        "F-01",
+        "F-36"
+      ]
+    },
+    {
+      "id": "Q-04",
+      "area": "Money",
+      "question": "Is amazon.com the correct storefront for the intended audience?",
+      "why_it_matters": "Programme enrolment, the tag and the commission table are per marketplace. A US tag on a link shown to a Japanese audience converts poorly and may breach the operating agreement.",
+      "kind": "Owner decision",
+      "known": "The product pages were served with US delivery settings and the short links resolve to amazon.com. That does not establish where the audience is.",
+      "how_to_discover": "Not a discovery question. The owner states the target marketplace; everything else follows from it.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-01",
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement (per-marketplace enrolment)"
+        }
+      ],
+      "flags": [
+        "F-09"
+      ]
+    },
+    {
+      "id": "Q-05",
+      "area": "Content",
+      "question": "Will a human read every page before it is published, and who is that human?",
+      "why_it_matters": "It determines what the site can honestly say about itself. If nobody reviews the copy, the editorial note must say so, and the site cannot claim editorial oversight. If somebody does, naming the review step is the cheapest trust signal available.",
+      "kind": "Owner decision",
+      "known": "No page currently states who is responsible for the content. The copy in the repository was generated and checked against fact tables, and several sessions reviewed it for accuracy, not for editorial judgement.",
+      "how_to_discover": "Not a discovery question.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-03",
+        "S-06",
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Who created the content; avoid fabricated authorship"
+        }
+      ],
+      "flags": [
+        "F-12"
+      ]
+    },
+    {
+      "id": "Q-06",
+      "area": "Content",
+      "question": "Will the site test any product, or position itself as a specification and decision tool only?",
+      "why_it_matters": "It decides whether the site can use the language of review at all, and it is the difference between a page that adds value over the listing and one that restates it.",
+      "kind": "Owner decision",
+      "known": "No unit was tested. Every article is a restatement of fields read from the listing, which is why the copy hedges.",
+      "how_to_discover": "Not a discovery question. Testing requires buying or being loaned units; either route has a disclosure consequence.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-06",
+        "S-07",
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Thin affiliation: original reviews and rigorous testing as added value"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosure when a material connection exists"
+        }
+      ],
+      "flags": [
+        "F-11",
+        "F-31"
+      ]
+    },
+    {
+      "id": "Q-07",
+      "area": "Legal",
+      "question": "Does automated collection and AI-assisted writing need legal review before this site takes traffic?",
+      "why_it_matters": "Two separate limits apply: the Associates Program rules on using Program Content to develop models, and the Amazon Conditions of Use AI clause. The repository's reading is that neither bars writing articles, but a reading is not a legal opinion.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "Both clauses are quoted verbatim in the repository and in flag F-12 and finding A-08. The narrower reading, that the clauses restrict training on Amazon content rather than the writing of original copy, is recorded there with its sources.",
+      "how_to_discover": "Counsel reads the cited clauses. Nothing on the public web resolves it, and no further reading of the same pages will change the answer.",
+      "answerable_by": "A lawyer, or Amazon Associates support in writing",
+      "blocks": [
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies, Participation Requirements 5 and IP License 2(e)"
+        },
+        {
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+          "ref": "Conditions of Use, License and Access (AI clause)"
+        }
+      ],
+      "flags": [
+        "F-12",
+        "F-21",
+        "F-24"
+      ]
+    },
+    {
+      "id": "Q-08",
+      "area": "Legal",
+      "question": "Who is liable for the reader-facing claims if a listed specification is wrong?",
+      "why_it_matters": "Every specification on the site is quoted from a seller's listing, and listings contain errors: the research already found a capacity unit mismatch and a function-count mismatch. A reader who buys on the strength of a quoted figure has a complaint against this site, not against the listing it copied.",
+      "kind": "Owner decision",
+      "known": "Two listing inconsistencies are documented (F-06, F-26) and are disclosed in the affected articles rather than silently resolved.",
+      "how_to_discover": "Not a discovery question. The mitigation is a visible statement that specifications are as listed and can change.",
+      "answerable_by": "The site owner, with counsel if the site reaches meaningful traffic",
+      "blocks": [
+        "S-06",
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC guidance on endorsements and substantiation"
+        }
+      ],
+      "flags": [
+        "F-06",
+        "F-26",
+        "F-31"
+      ]
+    },
+    {
+      "id": "Q-09",
+      "area": "Product data",
+      "question": "Are the three supplied links the products the owner intends to promote, and is the P2 variant the right one?",
+      "why_it_matters": "P3 resolves to a size-variant family where the same page offers 6, 8 and 9 quart options, and the supplied link lands on the 8 quart variant. If a reader switches variant, the commission and the specification both change. P2 is a 26 quart French-door oven in a set that otherwise contains basket fryers, which may or may not be intended.",
+      "kind": "Owner decision",
+      "known": "All three short links were resolved and matched to their ASINs. The P3 variant behaviour and the P2 format difference are both documented (F-08).",
+      "how_to_discover": "Not a discovery question: the links are what they are. It is a confirmation that these three are the intended set.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-07",
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://link.amazon/B00hJ57DV",
+          "ref": "P3 supplied short link, resolves to the 8 quart variant"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "ref": "P3 product page showing the size variants"
+        }
+      ],
+      "flags": [
+        "F-08"
+      ]
+    },
+    {
+      "id": "Q-10",
+      "area": "Measurement",
+      "question": "What counts as success, and over what period?",
+      "why_it_matters": "The brief asks for click and conversion tracking, but a new site with no traffic will show zeros for months. Without a stated threshold and window there is no way to tell a failing campaign from a site that has not been indexed yet, and the temptation is to fill the emptiness with estimates.",
+      "kind": "Owner decision",
+      "known": "The site publishes no attributed click, order or revenue figure because no reporting access is connected. The local tracker records real clicks in the visitor's own browser only.",
+      "how_to_discover": "Not a discovery question. A reasonable first checkpoint is whether the site is indexed at all; Search Console answers that, and it is the only official source for the site's own impressions.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Page experience guidance for a new site"
+        }
+      ],
+      "flags": [
+        "F-15",
+        "F-19"
+      ]
+    },
+    {
+      "id": "Q-11",
+      "area": "Operations",
+      "question": "Who rebuilds and re-verifies the site, and how often?",
+      "why_it_matters": "Every figure on the site is a dated snapshot. Listings change, carousels change, and a specification read today can be wrong next month. A site that presents itself as verified and then decays is worse than one that never made the claim.",
+      "kind": "Owner decision",
+      "known": "Every page footer states the observation date, and the build is deterministic, so a rebuild reproduces the site exactly. There is no scheduled re-verification job.",
+      "how_to_discover": "Not a discovery question. The mechanism already exists; the only missing piece is a cadence and an owner.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-03",
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+          "ref": "The verification gate that would run on each rebuild"
+        }
+      ],
+      "flags": [
+        "F-38"
+      ]
+    },
+    {
+      "id": "Q-12",
+      "area": "Operations",
+      "question": "Should the repository, the site and the code carry one product name?",
+      "why_it_matters": "The published site is branded 'Zone4 affiliate research', while the click tracker and the engine's preview generator both use 'Northstar'. If the site is ever launched as a brand, the name has to be one name, and it must not contain an Amazon Mark.",
+      "kind": "Owner decision",
+      "known": "The inconsistency is real and is recorded in flag F-39. No Amazon Mark appears in any page title or keyword.",
+      "how_to_discover": "Not a discovery question. The owner picks one name; the rename is mechanical.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-10"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Trademark usage: Amazon Marks may not be used in a site name or domain"
+        }
+      ],
+      "flags": [
+        "F-39"
+      ]
+    },
+    {
+      "id": "Q-13",
+      "area": "Content",
+      "question": "Which of the two supported readings of the commission table should the site publish?",
+      "why_it_matters": "The site currently quotes the 4.50% Kitchen band while blanking the product cells, which is accurate but useless to a reader. The alternative is to publish no rate at all until the per-ASIN assignment is known. Both are defensible; only one should be live.",
+      "kind": "Owner decision",
+      "known": "Table 1 takes precedence over the operating agreement schedule where they differ, per the commission statement's own text, and it lists Kitchen at 4.50%. The per-ASIN assignment is unknown (Q-03).",
+      "how_to_discover": "Not a discovery question. It is a presentation choice constrained by Q-03.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-08"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement, Table 1 and its precedence note"
+        }
+      ],
+      "flags": [
+        "F-01",
+        "F-36"
+      ]
+    },
+    {
+      "id": "Q-14",
+      "area": "Analytics",
+      "question": "Is a browser-local click log acceptable for this audience, or is a consent notice required first?",
+      "why_it_matters": "The tracker stores events in localStorage on the visitor's device and sends nothing anywhere. That is privacy-favourable but it still writes to a device, and the site has no consent notice. Enabling it on real traffic without a decision is the kind of thing that becomes a complaint later.",
+      "kind": "Owner decision",
+      "known": "The tracker makes no network request and holds no personal data beyond a timestamp, a target URL and an ASIN. It is off until a visitor arrives on the Analytics page.",
+      "how_to_discover": "Not a discovery question. Depends on the audience's jurisdiction, which follows from Q-04.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosure expectations for commercial content"
+        }
+      ],
+      "flags": [
+        "F-19"
+      ]
+    },
+    {
+      "id": "Q-15",
+      "area": "Product data",
+      "question": "Can the P2 function-count discrepancy be resolved from the seller, and does it matter to a buyer?",
+      "why_it_matters": "The P2 listing says 24 cooking functions in the title and heads its feature list as 25 pre-sets. The site discloses the discrepancy rather than picking one. If the owner can reach the seller, a single sentence would replace a hedge that currently sits in three articles.",
+      "kind": "Unknown - discoverable",
+      "known": "Both figures were read verbatim from the official product page and are recorded as listed. No other official source reconciles them.",
+      "how_to_discover": "Ask the seller through the listing's seller contact. Alternatively, accept the discrepancy as permanent and keep the disclosure.",
+      "answerable_by": "The seller of the P2 listing",
+      "blocks": [
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B09B7SB46R",
+          "ref": "P2 product page: title and feature section"
+        }
+      ],
+      "flags": [
+        "F-26"
+      ]
+    },
+    {
+      "id": "Q-16",
+      "area": "Product data",
+      "question": "What are this audience's actual use cases, and does the site know of any reader it is written for?",
+      "why_it_matters": "The copy addresses nobody in particular. 'A weeknight meal' and 'a family of four' are guesses, and every recommendation in the register (testing, question pages, voice) assumes an answer that has never been stated. Without an audience, a buying guide cannot say who a product suits.",
+      "kind": "Owner decision",
+      "known": "No page states who the site is for, and no reader, query or audience data has been measured. The three products span a 6 quart basket fryer, an 8 quart single-basket fryer and a 26 quart French-door oven, which suggests different households but does not establish one.",
+      "how_to_discover": "Not a discovery question. The owner states the audience and the region it sits in; Search Console then supplies the real queries once the site is indexed (Q-10).",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-06",
+        "S-07",
+        "S-12"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Why the content was created, and for whom"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ]
+    },
+    {
+      "id": "Q-17",
+      "area": "Measurement",
+      "question": "What retention period, consent basis and privacy notice apply if any measurement beyond the local browser log is ever added?",
+      "why_it_matters": "The current tracker writes to the visitor's device and reports nothing. The moment anyone adds server-side analytics, a jurisdiction question becomes a legal one, and it is cheaper to decide before a tool is installed than after.",
+      "kind": "Owner decision",
+      "known": "The tracker stores a timestamp, a target URL and an ASIN in localStorage on the visitor's own device. It makes no network request and there is no consent notice.",
+      "how_to_discover": "Not a discovery question. It follows from the audience and region answers (Q-04, Q-16).",
+      "answerable_by": "The site owner, with counsel if server-side measurement is planned",
+      "blocks": [
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC guidance on disclosures for commercial content"
+        }
+      ],
+      "flags": [
+        "F-19"
+      ]
+    },
+    {
+      "id": "Q-18",
+      "area": "Money",
+      "question": "What budget and time horizon is the pilot judged over, and what counts as a failed pilot?",
+      "why_it_matters": "Every costed suggestion in the register assumes someone is prepared to spend either money (testing units, API eligibility through sales) or time (writing). A pilot with no budget and no stop condition drifts, and its numbers get filled in by guesswork.",
+      "kind": "Owner decision",
+      "known": "No budget, cost or time horizon is recorded anywhere in the repository, and no earnings, cost or return figure is published because none can be sourced.",
+      "how_to_discover": "Not a discovery question.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-02",
+        "S-06",
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement (the only official rate source available)"
+        }
+      ],
+      "flags": [
+        "F-01",
+        "F-15"
+      ]
+    },
+    {
+      "id": "Q-19",
+      "area": "Legal",
+      "question": "Is the site's own trade name cleared, and does it contain an Amazon Mark?",
+      "why_it_matters": "Participation Requirement 1(g) and the Trademark Guidelines restrict Amazon Marks in domain names, tags and site names, and a name can also collide with an existing trademark that has nothing to do with Amazon. The site currently has no public domain of its own: it is served under a github.io subpath.",
+      "kind": "Unknown - discoverable",
+      "known": "No Amazon Mark appears in any page title, meta description or target keyword, and the verifier fails the build if one does. The site is published at a github.io URL, not on a domain the owner controls.",
+      "how_to_discover": "Re-read the Trademark Guidelines section on domain names and site names, then run the chosen name through a trademark search before registering a domain.",
+      "answerable_by": "The site owner, with a trademark search",
+      "blocks": [
+        "S-09"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Trademark Guidelines: Amazon Marks and domain or site names"
+        }
+      ],
+      "flags": [
+        "F-23",
+        "F-39"
+      ]
+    }
+  ]
+}
