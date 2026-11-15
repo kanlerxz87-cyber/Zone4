@@ -4,6 +4,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 
 | Task | Status | Owner session | Files / scope |
 |---|---|---|---|
+| Decision-support page: explicit open questions, known/unknown answers, options and suggested next steps with official-source links | **in progress** | arena/bb85f073-zone4 | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, generated `docs/` (new `suggestions.html`) |
 | Static research dashboard, executive summary, verification, Pages workflow (prototype, first pass) | done (prototype); product records **superseded by the verified records below** | arena/c2ff885d-zone4 | previously `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` (root prototype removed in this integration; history kept) |
 | Follow-up multi-page research view and FTC citation | done; superseded by the verified site below | arena/00ccfbd4-zone4 | previously `products.html`, `insights.html`, `flagged.html`, `styles.css` (root removed in this integration; history kept) |
 | Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **done**; unresolved items documented in Flagged for Review | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
