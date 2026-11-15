@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "description": "Line-by-line verification performed on 2026-11-15 (UTC) by session arena/d8564cd0-zone4. Every recorded observation names the official page it was read from. Nothing was inferred; anything not readable from an official source is recorded as not re-readable, not guessed. Prices and star ratings that appeared on the live pages were noted as present but are NOT published here (F-02).",
+    "session": "arena/d8564cd0-zone4",
+    "observed_utc": "2026-11-15",
+    "method": "The Associates commission statement was fetched directly. The P2 short link was fetched and followed to its Amazon product page. The P1 and P3 product pages and the P2 page (direct fetch) were fetched and the readable regions were read: page title, category breadcrumb, also-viewed carousel. Deeper page regions (product details / Item details tables) returned advertising modules on the chunks probed and were not re-read. Third-party search results were used only as corroboration and are not a source for any published value.",
+    "scope_note": "This session does not edit products.json or other sessions' registers. Where a live read differs from a stored record, the difference is recorded here and, where new, as flag F-44. The stored records cite their own read dates and remain the published values."
+  },
+  "official_sources_read": [
+    {
+      "id": "V-COMM",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "read": true,
+      "observed": "Associates Program Standard Commission Income Statement, Table 1: 'Physical Books, Kitchen, Automotive' 4.50%; 'Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, ...' 3.00%; 'All Other Categories' 4.00%. Matches the category-level rates published on the site. The table assigns no category to any specific ASIN, so product-level rate cells stay blank (F-01)."
+    },
+    {
+      "id": "V-P2-SHORTLINK",
+      "url": "https://link.amazon/B02NbDxp3",
+      "read": true,
+      "observed": "Followed to the official product page https://www.amazon.com/dp/B09B7SB46R (page title begins 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven'). No Associates tag= parameter was observed on the resolved URL (F-03 stands)."
+    },
+    {
+      "id": "V-P1-PAGE",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": true,
+      "observed": "Listing title in the page title matches the stored name_listing exactly: 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black'. Category breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (browse node 17659096011), matching the stored category path. Also-viewed carousel showed the same three ASINs in the stored order: B0B7C327LK, B0BYKGN61Q, B0CNSB81V6, with title prefixes matching the stored labels (B0B7C327LK 'Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen, Smart Sync Finish, Hi-Fry, Auto Shutoff...'; B0BYKGN61Q 'Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel | Digital Display...'; B0CNSB81V6 'Nutrichef Double Basket Air Fryer 8.8 QT | Family Size Oil Free Airfryer with Transparent Window...'). Prices and star ratings were visible on the page and are withheld from publication (F-02)."
+    },
+    {
+      "id": "V-P3-PAGE",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": true,
+      "observed": "Listing title in the page title matches the stored name_listing exactly: 'Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel'. Category breadcrumb matches the stored path (Home & Kitchen > ... > Air Fryers). Also-viewed carousel: positions 1 and 2 match the stored records (B0CNY1YVDD Chefman 6 QT compact 'in Minutes'; B0D5FX6VRL Chefman 6 QT compact with Easy-View Window); position 3 showed B09MR7QWKZ ('Gourmia Air Fryer - 8 Qt Basket Capacity, 12 Presets, Stainless Steel | Digital Display, Touch Controls, 90-400F Adjustable Temperature, Dishwasher-Safe Basket & Crisper Tray') where the stored record has B0C33CHG99 (Cosori TurboBlaze). The stored record cites its own 2026-11-14 read; this 2026-11-15 read is recorded verbatim here. This is a live instance of carousel instability, which flag F-29 already documents; the stored Cosori record is kept and this observation is recorded, not silently substituted."
+    },
+    {
+      "id": "V-P2-PAGE",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": true,
+      "observed": "First direct fetch returned Amazon's 'To continue, please click the Continue shopping button' checkpoint page, so the P2 page was read via the followed short link instead. Read page title: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. The first title segment matches the stored record; the second segment differs from the stored name_listing ('26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'). The difference is recorded verbatim as flag F-44; the stored record is kept, citing its own read dates. Category breadcrumb matches the stored path. Also-viewed carousel: positions 1 and 2 match the stored records (B0BZ52FLKC Emeril Lagasse Dual Zone 25QT; B0FM5KF34G Ninja French Door Premier FO101 20.3 Qt); position 3 showed B0D1BGLW25 ('Midea Flexify Classic French Door Toaster Oven Air Fryer Combo, 26.4 QT | 10-in-1 ...') where the stored record has B0F92GL7JH (HotKing Dual-Zone 28 QT). Another live F-29 instance, recorded verbatim here. Prices and star ratings were visible on the page and are withheld from publication (F-02)."
+    }
+  ],
+  "not_re_readable": [
+    {
+      "id": "V-SPECS",
+      "fields": ["capacity", "dimensions", "colour", "material", "special features", "brand/manufacturer/model fields"],
+      "products": ["P1", "P2", "P3"],
+      "reason": "The product details / Item details regions were not reached: the P1 chunks probed (2 of 17) returned advertising modules (brand-store and sponsored blocks), the direct P2 fetch returned the checkpoint page, and the P3 read was limited to the top region. Consistent with flag F-38: those rows rest on the 2026-11-14 reads recorded by arena/3036372b-zone4 and arena/01ab2940-zone4 and remain pending the same-session re-read F-38 asks for. Nothing was inferred to fill them."
+    }
+  ],
+  "reference_only_corroboration": {
+    "note": "Third-party search results, used only as a cross-check on P1's identity. They are not official sources and no published value rests on them.",
+    "items": [
+      "Search results for B0CDY277D3 (dualairfryers.com review page; ubuy.ke and tiendamia.com.pe retail pages) consistently describe a Chefman 6-quart dual basket air fryer, model RJ38-SQPF-3TDB-2W, 1700 W / 120 V, 13.38\"D x 11.81\"W x 10.63\"H - the same identity the official page was read to establish."
+    ]
+  },
+  "conclusions": [
+    "Category-level commission rates re-confirmed from the official public table (Kitchen 4.50%, Home 3.00%); per-ASIN assignment remains unverified (F-01 open).",
+    "P1 and P3 listing titles, breadcrumbs and P1's full carousel re-confirmed; P2's title first segment, breadcrumb and carousel positions 1-2 re-confirmed.",
+    "New flag F-44 opened for the P2 title second-segment difference; two additional live carousel-change observations recorded under F-29.",
+    "Specification tables still lack a same-session re-read (F-38 unchanged).",
+    "No price, star rating or review count was published anywhere (F-02 respected on this session's own reads)."
+  ]
+}

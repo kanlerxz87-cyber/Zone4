@@ -53,6 +53,8 @@ DECISIONS = DECISIONS_DOC["decisions"]
 DECISION_LOG = DECISIONS_DOC["log"]
 OBSERVED = CONTENT["observed_date"]
 
+SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
+
 NAV = [
     ("index.html", "Dashboard", "Overview"),
     ("executive-summary.html", "Executive summary", "Overview"),
@@ -161,7 +163,8 @@ def status_pill(status: str) -> str:
 
 class Page:
     def __init__(self, path: str, title: str, active: str, body: str,
-                 description: str | None = None, title_tag: str | None = None):
+                 description: str | None = None, title_tag: str | None = None,
+                 head_extra: str = ""):
         self.path = path
         self.title = title
         self.active = active
@@ -171,6 +174,9 @@ class Page:
         # site-wide defaults so nothing changes for them.
         self.description = description
         self.title_tag = title_tag
+        # Optional extra <head> content (JSON-LD). Kept inline so no external
+        # host is ever added to the page. Added by session arena/d8564cd0-zone4.
+        self.head_extra = head_extra
 
     @property
     def depth(self) -> int:
@@ -606,7 +612,12 @@ def page_index(current: Page) -> str:
         f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
         for v, l in kpis
     )
-    trending = "".join(article_card(current, a) for a in ARTICLES)
+    # Articles presented in decision order (buying guide, then comparison, then
+    # the product reviews), per suggestion S-02/S-03 of session arena/d8564cd0-zone4.
+    trending = "".join(article_card(current, a) for a in sorted(
+        ARTICLES,
+        key=lambda a: {"Buying guide": 0, "Comparison": 1}.get(a["page_type"], 2),
+    ))
     cat_tiles = "".join(
         f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
         f'<div class="tile-sub">{esc(next(p["name_short"] for p in PRODUCTS if CATEGORY_BY_PRODUCT.get(p["id"]) == key))}</div>'
@@ -618,17 +629,19 @@ def page_index(current: Page) -> str:
     return (
         '<div class="mhero">'
         f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 {len(PRODUCTS)} products \u00b7 a source link on every table row</span>'
-        "<h1>Countertop air fryers, researched down to the specification table</h1>"
+        "<h1>Choosing between three countertop air fryers? Start with every listed figure checked.</h1>"
         f'<p class="lead">{esc(CONTENT["executive_summary"]["headline"])}</p>'
         '<div class="mhero-actions">'
-        f'<a class="btn btn-primary" href="{esc(current.rel(ARTICLES_HUB))}">Read the articles</a>'
-        f'<a class="btn" href="{esc(current.rel("products.html"))}">See the product table</a>'
-        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">What is flagged</a>'
+        f'<a class="btn btn-primary" href="{esc(current.rel(ARTICLE_PATHS[-1][1]))}">Start with the buying guide</a>'
+        f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the three formats</a>'
+        f'<a class="btn" href="{esc(current.rel("suggestions.html"))}">Pick a path</a>'
+        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what is flagged</a>'
         "</div></div>"
         + f'<section class="kpis">{kpi_html}</section>'
-        + '<section><h2>Trending articles</h2>'
-        '<p class="section-lead">Each article is built only from figures read off the official product page, and every '
-        "fact it states is a row in a table that links back to that page.</p>"
+        + '<section><h2>The articles, in decision order</h2>'
+        '<p class="section-lead">Start with the buying guide, compare the three formats, then read the review for the '
+        "product that fits your kitchen. Each article is built only from figures read off the official product page, and "
+        "every fact it states is a row in a table that links back to that page.</p>"
         f'<div class="agrid">{trending}</div></section>'
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
         + decision_queue_section(current)
@@ -682,11 +695,15 @@ def page_article(current: Page, a: dict) -> str:
     facts_by_id = {f["id"]: f for f in a["facts"]}
     body_html = []
     for para in a["body"]:
+        # An optional subheading per paragraph: editorial structure only. The
+        # heading is not a factual claim and never appears in the fact tables.
+        # Added by session arena/d8564cd0-zone4 (suggestion S-03).
+        sub = f'<h2 class="phead">{esc(para["h"])}</h2>' if para.get("h") else ""
         cites = "".join(
             f'<a class="cite" href="{esc(facts_by_id[fid]["source_url"])}" rel="noopener noreferrer">{esc(fid)}</a>'
             for fid in para["fact_ids"] if fid in facts_by_id
         )
-        body_html.append(f'<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
+        body_html.append(f'{sub}<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
         f'<span class="muted">(facts: {esc(", ".join(o["facts_used"]))})</span></li>'
@@ -1184,6 +1201,48 @@ def page_suggestions(current: Page) -> str:
         + f'<p class="small muted">Choosing a path happens on the {href(current, "decisions.html", "Decision log")} page. '
         f'The unknowns that gate these entries are on {href(current, "questions.html", "Open questions")}. '
         f'Defects already found in the published site are on {href(current, "flagged.html", "Flagged for review")}.</p>'
+        + design_prompt_block(current)
+    )
+
+
+def design_prompt_block(current: Page) -> str:
+    """A paste-ready design brief for whoever runs the next site-design pass.
+
+    Added by session arena/d8564cd0-zone4 as an additive section (suggestion
+    S-01/S-02 direction). It is a proposal, labelled as one; it contains no
+    product claims, so it needs no external source, but it encodes the
+    compliance constraints already recorded on this site so that any design
+    produced from it still has to pass the same checks.
+    """
+    return (
+        '<section><h2>A prompt-ready design brief</h2>'
+        '<p class="section-lead">For whoever runs the next design pass: a brief that can be pasted into a design prompt '
+        'as-is. It encodes the constraints above rather than replacing them; edit it freely before use.</p>'
+        '<div class="promptblock">'
+        '<pre>Redesign the Zone4 affiliate research site as a polished, trustworthy buying-advice site '
+        'for countertop air fryers, without changing its verification rules.\n\n'
+        'Audience: shoppers choosing between a dual-basket air fryer, a single-basket air fryer and a '
+        'French-door air fryer toaster oven, who want honest, sourced specifications before they click through to a store.\n\n'
+        'Visual direction: warm kitchen palette (warm amber accent on deep slate and warm off-white surfaces), one clear type scale, '
+        'card-based layout with soft shadows and rounded corners, generous whitespace, prominent verification badge. '
+        'No external fonts or frameworks; one stylesheet; system font stack.\n\n'
+        'Structure: decision-first landing page (who this is for, what to do next, one primary action); '
+        'buying guide as the top-of-funnel page linking to a comparison and three product reviews; '
+        'each review with scannable subheadings, a "who this suits" box built only from cited facts, '
+        'and one clearly labelled call to action after the substance, with the affiliate disclosure adjacent.\n\n'
+        'Hard constraints: every table row keeps a link to its official source; no prices, no star ratings, no review counts; '
+        'no Amazon marks in page titles or keywords; the disclosure stays on every page; no product images unless they come '
+        'from an approved Amazon-served route; the site never claims testing, ranking or trends it cannot evidence.\n\n'
+        'Trust layer: keep the Flagged for Review, Open questions, Decision log and Verification pages one click from the homepage; '
+        'a reader should be able to trace any published number to its official source in one click.</pre>'
+        '<p class="note">Proposal prepared by session arena/d8564cd0-zone4 (2026-11-15). First steps already shipped in the '
+        'current build with no decision needed: the warm-identity stylesheet refresh, subheaded article copy (facts unchanged), '
+        'Article/WebSite JSON-LD that states only what each page visibly shows, and a generated '
+        '<code>docs/sitemap.xml</code>. Everything else waits on a decision on the '
+        + href(current, "decisions.html", "Decision log") + ' page; the compliance constraints it encodes live on the '
+        + href(current, "policy-compliance.html", "policy page") + ' and in the '
+        + href(current, "flagged.html", "flag register") + '.</p>'
+        '</div></section>'
     )
 
 
@@ -1392,6 +1451,7 @@ def render(page: Page) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(page.title_tag or page.title)} | {esc(SITE_TITLE_SUFFIX)}</title>
 <meta name="description" content="{esc(page.description or SITE_DESCRIPTION)}">
+{page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
 <body>
@@ -1417,6 +1477,50 @@ def render(page: Page) -> str:
 """
 
 
+def article_jsonld(a: dict) -> str:
+    """JSON-LD Article metadata for one article page.
+
+    States only what the page visibly shows: the article's own headline,
+    description and dates, and the site itself. No ratings, no prices, no
+    offers - the site publishes none, and structured-data guidelines forbid
+    marking up content the user cannot see. Added by session arena/d8564cd0-zone4.
+    """
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": a["h1"],
+        "description": a["meta_description"],
+        "datePublished": OBSERVED,
+        "dateModified": OBSERVED,
+        "inLanguage": "en",
+        "author": {"@type": "Organization", "name": SITE_TITLE_SUFFIX},
+        "publisher": {"@type": "Organization", "name": SITE_TITLE_SUFFIX},
+        "mainEntityOfPage": SITE_URL + "articles/" + a["slug"].strip("/") + ".html",
+    }
+    return (
+        '<script type="application/ld+json">'
+        + json.dumps(data, ensure_ascii=False)
+        + "</script>"
+    )
+
+
+def website_jsonld() -> str:
+    """JSON-LD WebSite metadata for the landing page (own-site facts only)."""
+    data = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_TITLE_SUFFIX,
+        "url": SITE_URL,
+        "description": SITE_DESCRIPTION,
+        "inLanguage": "en",
+    }
+    return (
+        '<script type="application/ld+json">'
+        + json.dumps(data, ensure_ascii=False)
+        + "</script>"
+    )
+
+
 def collect_pages() -> list[Page]:
     """Every page on the site, in navigation order.
 
@@ -1428,6 +1532,8 @@ def collect_pages() -> list[Page]:
         page = Page(path, NAV_LABEL.get(path, path), path, "",
                     description=PAGE_DESCRIPTIONS.get(path))
         page.body = body_fn(page)
+        if path == "index.html":
+            page.head_extra = website_jsonld()
         pages.append(page)
     hub = Page(ARTICLES_HUB, NAV_LABEL[ARTICLES_HUB], ARTICLES_HUB, "")
     hub.body = page_articles_index(hub)
@@ -1436,6 +1542,7 @@ def collect_pages() -> list[Page]:
         page = Page(path, article_label(a), path, "",
                     description=a["meta_description"], title_tag=a["title_tag"])
         page.body = page_article(page, a)
+        page.head_extra = article_jsonld(a)
         pages.append(page)
     return pages
 
@@ -1456,6 +1563,18 @@ def build() -> list[pathlib.Path]:
         out.write_text(html_text, encoding="utf-8")
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    # A generated sitemap of the site's own pages: every URL in it is one this
+    # build produced, on the Pages host for this repository. Nothing here is a
+    # claim about products; submission to a search console is a user decision
+    # (suggestion S-06 / open questions register). Added by arena/d8564cd0-zone4.
+    site_urls = [SITE_URL + p.path for p in collect_pages()]
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{u}</loc></url>\n" for u in site_urls)
+        + "</urlset>\n"
+    )
+    (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     return written
 
 
