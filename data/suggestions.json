@@ -232,6 +232,108 @@
       "flags": ["F-12", "F-31"],
       "status": "Awaiting decision",
       "decision": "D-12"
+    },
+    {
+      "id": "S-13",
+      "priority": "P2 - Adds real value",
+      "title": "Approve a format-first topic calendar: eight catchy, spec-backed articles",
+      "problem": "The brief asks for catchy, trendy articles and topics that can earn organic traffic, but the content program stops at five pieces and the register carries no topic plan. Without an approved list, each new article is invented ad hoc and the internal link structure that makes a small site findable never gets built.",
+      "proposal": "Adopt these eight working titles as the calendar, in two waves. Wave one, the foundational four: 'Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT - What Actually Fits Your Counter'; 'Choosing an Air Fryer in 2026: The Format-First Method' (a rewrite of the published guide); 'Hi-Fry, Sync Finish, Shake Reminder: An Air Fryer Feature Glossary'; 'The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy'. Wave two: 'Two Baskets or One? The Sync-Finish Question, Answered With Specs'; 'French Door Air Fryer Ovens: Big Capacity, Bigger Footprint?'; 'Compact Countertop Cooking: The Small-Kitchen Air Fryer Format'; \"What '24 Cooking Functions' Really Means (and Why Titles Disagree)\". Every piece is written from the verified listing fields already in data/products.json and links to the format pages, so wave one needs no new verification.",
+      "why": "Format, size and feature questions are how people actually shop for air fryers, and each of these topics can be answered honestly from the sourced field set - catchy without a single unearned superlative. The four foundational pieces also build the link hub the five existing reviews need to become findable.",
+      "effort": "One article per working session once the voice decision (S-12) is recorded; wave one is four pieces.",
+      "risk": "Search demand is unmeasured (F-15): these are reasoned topic picks, not volume data. Writing before the voice decision risks a rewrite under S-12.",
+      "check": "Each published topic carries its own sourced fact table and links to at least two format pages; first-party Search Console data shows impressions for the topic cluster within a quarter.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content - the editorial standard these titles are written to"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 product page: the verified capacity, dimension and feature rows the topics are built from"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-17"
+    },
+    {
+      "id": "S-14",
+      "priority": "P2 - Adds real value",
+      "title": "Adopt the prepared design-prompt draft as the brief for the visual overhaul",
+      "problem": "The brief asks for suggestions that feed a prompt to design the site as a polished marketing affiliate website. Without an assembled brief, the redesign starts from scratch and can quietly drop the compliance constraints this repository exists to enforce.",
+      "proposal": "DESIGN_PROMPT.md (repository root) now holds the ready-to-paste draft: goal, the three products by format, the required pages, the SEO-first traffic program, the non-negotiable compliance block (disclosure on every page, no prices or ratings without the approved route, no marketplace trademarks in titles or keywords, every table row source-linked, unverified values blank and flagged, no unearned experience claims), and the suggestion-review workflow itself. It carries bracketed slots for the picks this queue is about to record: brand, visual direction, voice, topic wave. Fill the slots after D-17 to D-19 are recorded, then hand the prompt to a designer or a design tool. The Suggestions page also carries a shorter paste-ready brief from session arena/d8564cd0-zone4; D-20 decides which draft becomes the working brief.",
+      "why": "It turns the suggestions on this page into an executable brief, and it hard-codes the compliance rules so no visual idea can override them. Preparing it costs nothing; adopting it prevents a redesign that has to be re-done.",
+      "effort": "Ten minutes to fill the bracketed slots once the picks exist.",
+      "risk": "Freezing the brief before the picks would bake in placeholders; that is why adoption is sequenced after D-17 to D-19.",
+      "check": "The adopted prompt names every recorded pick, and the redesign it produces keeps the disclosure on every page and leaves unverified cells blank and flagged.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/DESIGN_PROMPT.md",
+          "ref": "The prepared draft in this repository"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: the people-first standard the prompt encodes"
+        }
+      ],
+      "flags": [],
+      "status": "Awaiting decision",
+      "decision": "D-20"
+    },
+    {
+      "id": "S-15",
+      "priority": "P2 - Adds real value",
+      "title": "Choose the visual direction and settle the brand name",
+      "problem": "The brief asks for a polished marketing affiliate website that does not read like machine output. The current look is compliant and legible but neutral, a warm identity refresh has since shipped as a no-decision-needed first step (session arena/d8564cd0-zone4) though the visual direction itself was never put to a decision, and the repository still carries two product names (F-39). The identity itself - name, tone of the hero, the shape of the first screen - is undecided, and external branding waits on it.",
+      "proposal": "Pick one direction: A. Warm editorial (kitchen-magazine): serif display, cream and terracotta, story-led hero - the stylesheet's theme layer is a light preview of this. B. Crisp data-journalism: keep the dashboard bones and sharpen the verified-facts framing into a trust-first publication. C. Bold deal-finder: high-contrast badges and urgency, though most of its price-led playbook is blocked by the price and rating rules (F-02). Settle the brand name in the same decision, and close F-39 with it.",
+      "why": "The look is the first thing the brief judges, and the name is the most expensive thing to change later. One decision here prevents a rename that resets every external signal the site earns.",
+      "effort": "The decision itself is an afternoon; the overhaul it authorises is scoped by DESIGN_PROMPT.md (S-14).",
+      "risk": "Choosing C would push against the withheld-price constraints; choosing a name without clearing it risks the trade-name problem in Q-19.",
+      "check": "One name appears in the repository, the site and the code (F-39 closed), and the first screen matches the chosen direction without losing the disclosure or the sourced-table discipline.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first presentation guidance"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: the disclosure must stay clear and hard to miss in any design"
+        }
+      ],
+      "flags": [
+        "F-39"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-18"
+    },
+    {
+      "id": "S-16",
+      "priority": "P2 - Adds real value",
+      "title": "Adopt a written evidence rule for 'trending' and popularity claims",
+      "problem": "The brief asks for trending-product analysis, but no trend or conversion signal is verified (F-15). The word 'trending' is exactly where marketing copy turns into unverifiable hype, and this project exists to prevent that.",
+      "proposal": "Write the rule into the publishing checklist: a popularity claim is allowed only as a dated snapshot of an official page - for example, a stated position on the official Air Fryers category ordering, read on a stated date - and never as a bare adjective. Later, first-party Search Console data may describe what readers read here, attributed to this site's own data and never to the market.",
+      "why": "It keeps the door open to genuinely trendy, engaging copy while every claim stays checkable against a dated official source.",
+      "effort": "One checklist entry and a sentence in the voice rule.",
+      "risk": "Over-tightening (option B of the decision) removes a whole class of engaging copy; under-tightening reintroduces unsourced superlatives.",
+      "check": "A sample of published copy contains no popularity adjective without a dated source line next to it.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011",
+          "ref": "Official Air Fryers category page: the kind of dated snapshot the rule would allow"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: reliable, people-first content"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-19"
     }
   ]
 }
