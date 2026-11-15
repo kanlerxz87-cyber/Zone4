@@ -1,0 +1,582 @@
+{
+  "_meta": {
+    "description": "The queue a reviewer works through before anything in the Suggestion register is built, plus a log of decisions already taken. A decision is only recorded as taken when the owner states it; this file never assumes one. Each entry names the options, what each option commits the site to, and the cheapest reversible first step.",
+    "created_utc": "2026-11-15",
+    "created_by": "arena/00ba6c2e-zone4",
+    "how_to_use": "Read the question, pick an option, and record it in the log at the bottom with the date. Until then the site stays exactly as it is. Nothing in this repository acts on a suggestion automatically.",
+    "statuses": {
+      "Open - needs your answer": "Waiting on the owner. The site does nothing in the meantime.",
+      "Recorded": "The owner has stated the decision and it is written in the log."
+    },
+    "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19."
+  },
+  "decisions": [
+    {
+      "id": "D-01",
+      "question": "Do the three product links carry an Associates tag, or should the site stop describing them as earning links?",
+      "linked_question": "Q-01",
+      "linked_suggestions": [
+        "S-01"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Tag the links and keep the earning claim",
+          "commits_to": "Requires an Associates account. The three short links get replaced with tagged Special Links, the site keeps its disclosure sentence, and clicks become attributable.",
+          "effort": "Minutes, once account access exists.",
+          "reversible": "Yes. Reverting to untagged links is a data change and a rebuild."
+        },
+        {
+          "key": "B",
+          "label": "Keep the links untagged and relabel the calls to action",
+          "commits_to": "The site keeps sending readers to the products but stops claiming it earns from them, because it cannot. The disclosure sentence would have to be withdrawn, which in turn affects every page.",
+          "effort": "One template change plus a policy-page rewrite.",
+          "reversible": "Yes, but withdrawing and re-adding the disclosure across 21 pages is the largest single visible change the site could make."
+        },
+        {
+          "key": "C",
+          "label": "Do nothing yet",
+          "commits_to": "The current inconsistency stays live: the site says it earns from qualifying purchases while carrying no tag.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A, if an Associates account exists or can be opened. Failing that, B is the only internally consistent option; C is the one that looks worst to a careful reader.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 5"
+        }
+      ]
+    },
+    {
+      "id": "D-02",
+      "question": "Should the site pursue Creators API access so prices and ratings can be published?",
+      "linked_question": "Q-02",
+      "linked_suggestions": [
+        "S-02"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, work toward API access",
+          "commits_to": "Enrolment, the qualifying-sales prerequisite, and a cached price and rating per product with a visible observation timestamp. Largest reader-value gain available.",
+          "effort": "The prerequisite cannot be shortcut; the build change is small.",
+          "reversible": "Yes, but a published price history cannot be un-published from a reader's memory."
+        },
+        {
+          "key": "B",
+          "label": "No, stay a specification site",
+          "commits_to": "Prices and ratings stay blank permanently. The site must then compete on something other than numbers, which is the testing route in D-06.",
+          "effort": "None today.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A if the site is meant to sell; B is honest and cheap but leaves the reader's obvious question unanswered indefinitely.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+          "ref": "Creators API introduction and prerequisites"
+        }
+      ]
+    },
+    {
+      "id": "D-03",
+      "question": "What will the site say about who writes it and how?",
+      "linked_question": "Q-05",
+      "linked_suggestions": [
+        "S-03"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Name the human reviewer and describe the pipeline",
+          "commits_to": "A named person becomes responsible for the copy. That person must actually read it before each publish.",
+          "effort": "One editorial note and a review step in the process.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Describe the pipeline without naming a person",
+          "commits_to": "States that a research pipeline drafts and the owner approves, without inventing a byline. Honest, slightly colder.",
+          "effort": "One editorial note.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Add a byline with a pen name and an avatar",
+          "commits_to": "Google's guidance names fabricated creator profiles, including AI-generated headshots and made-up names, as a deception signal. Not recommended.",
+          "effort": "Low.",
+          "reversible": "Technically yes; reputationally no."
+        }
+      ],
+      "recommendation": "A or B. C is the one option the cited guidance explicitly warns against.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Who / How / Why, and the fabricated-authorship warning"
+        }
+      ]
+    },
+    {
+      "id": "D-04",
+      "question": "Should every page get its own title tag and meta description?",
+      "linked_question": null,
+      "linked_suggestions": [
+        "S-04"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, write all 21",
+          "commits_to": "A build rule that fails on duplicate descriptions. No policy dimension.",
+          "effort": "Two to three hours.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Only the pages meant to be found in search",
+          "commits_to": "Internal-only pages keep the shared description and are marked noindex so they cannot compete with the articles.",
+          "effort": "About an hour.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. Sixteen pages sharing one description is a defect whichever way the site is aimed.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Create unique descriptions for each page on your site"
+        }
+      ]
+    },
+    {
+      "id": "D-05",
+      "question": "Should the product links carry rel=\"sponsored\"?",
+      "linked_question": null,
+      "linked_suggestions": [
+        "S-05"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, add the attribute and keep the visible disclosure",
+          "commits_to": "One attribute per link. The visible paid-link label and the Operating Agreement sentence both stay.",
+          "effort": "One template line.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "No, leave the links as they are",
+          "commits_to": "Outbound paid links stay unqualified, which Google's guidance treats as a link-spam risk.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. The cost is one attribute and there is no reader-visible downside.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "rel=\"sponsored\" for paid links"
+        }
+      ]
+    },
+    {
+      "id": "D-06",
+      "question": "Will any product be tested, or is this a specification site?",
+      "linked_question": "Q-06",
+      "linked_suggestions": [
+        "S-06",
+        "S-12"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Test at least one unit per format",
+          "commits_to": "Real purchase or loan, dated notes, original photographs, and a disclosure if any unit was supplied free. Unlocks the language of review.",
+          "effort": "Weeks, plus cash.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Position as a specification and decision tool",
+          "commits_to": "One visible sentence saying no unit was tested, and removal of review vocabulary from the copy. Cheap and honest.",
+          "effort": "One copy pass.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "Whichever is chosen, choose it explicitly. The current copy implies evaluation it has not done, which is the weakest position of the three.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Thin affiliation: original reviews and rigorous testing as added value"
+        }
+      ]
+    },
+    {
+      "id": "D-07",
+      "question": "Should the site publish question-led pages beyond the three products?",
+      "linked_question": "Q-09",
+      "linked_suggestions": [
+        "S-07"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, a small set of distinct question pages",
+          "commits_to": "Each page must answer a different question from existing sourced facts. Guard against volume with no value.",
+          "effort": "Half a day per page.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "No, keep the site to the three products",
+          "commits_to": "Six pages total. Easy to keep accurate, hard to attract organic traffic.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A, sized to the questions that can actually be answered from verified facts, not to a page count.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Scaled content abuse"
+        }
+      ]
+    },
+    {
+      "id": "D-08",
+      "question": "Publish the per-ASIN commission rate once known, or publish no rate at all?",
+      "linked_question": "Q-03, Q-13",
+      "linked_suggestions": [
+        "S-08"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Publish per-ASIN rates with a read date",
+          "commits_to": "Requires the Associates Central assignment. The 4.50% category quote is replaced by a figure that applies to the actual product.",
+          "effort": "Minutes once the account exists.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Remove the rate discussion from the public pages entirely",
+          "commits_to": "The 4.50% figure moves to the internal analysis page only. Readers see no commission content, which is normal for an affiliate site.",
+          "effort": "One copy change and a rebuild.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "B until A is possible. A number that cannot be applied to the product it sits next to invites a wrong calculation.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement, Table 1"
+        }
+      ]
+    },
+    {
+      "id": "D-09",
+      "question": "Should the site be connected to Search Console and given social preview metadata?",
+      "linked_question": "Q-10",
+      "linked_suggestions": [
+        "S-09"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, verify the property and add preview metadata",
+          "commits_to": "The site starts collecting its own impressions and click data, and shared links render with an image. Adds a dependency on an external console.",
+          "effort": "Two to three hours plus verification wait.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Not yet",
+          "commits_to": "The organic-traffic goal stays unmeasured and unverifiable.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. Without it, nothing on the site can be shown to have worked.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Page experience and presentation"
+        }
+      ]
+    },
+    {
+      "id": "D-10",
+      "question": "Should the documentation be corrected and one product name adopted?",
+      "linked_question": "Q-12",
+      "linked_suggestions": [
+        "S-10"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, correct and rename",
+          "commits_to": "Documentation matches the code; one name across the repository.",
+          "effort": "Under an hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Correct the errors, keep the names",
+          "commits_to": "Accuracy fixed; the branding split stays.",
+          "effort": "Minutes.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. These are the cheapest credibility fixes on the list.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+          "ref": "The stale test-count line"
+        }
+      ]
+    },
+    {
+      "id": "D-11",
+      "question": "Should the review page separate open, resolved and historical items?",
+      "linked_question": null,
+      "linked_suggestions": [
+        "S-11"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, three groups and an accurate KPI",
+          "commits_to": "The review page becomes a work queue rather than an archive.",
+          "effort": "Under an hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Leave one table",
+          "commits_to": "A reviewer keeps reading 38 rows to find the 28 that are unresolved.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json",
+          "ref": "The flag register this page renders"
+        }
+      ]
+    },
+    {
+      "id": "D-12",
+      "question": "Should the copy be rewritten to take positions, or stay strictly descriptive?",
+      "linked_question": "Q-05, Q-06",
+      "linked_suggestions": [
+        "S-12"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Rewrite with judgement, guarded by the fact rule",
+          "commits_to": "The writer may conclude and rank within verified facts; every factual claim still needs a fact row and the build still fails without one.",
+          "effort": "Two days.",
+          "reversible": "Yes, at the cost of the writing time."
+        },
+        {
+          "key": "B",
+          "label": "Keep the descriptive style",
+          "commits_to": "The site stays accurate, complete and unreadable. Readers get no answer to the question they arrived with.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. This is the single biggest factor in whether the site reads as a real publication or as output.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Originality and insight beyond the obvious"
+        }
+      ]
+    },
+    {
+      "id": "D-13",
+      "question": "Are the three supplied links the intended products? (Ported from the parallel session's worksheet, item D-01.)",
+      "linked_question": "Q-09",
+      "linked_suggestions": [
+        "S-07"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Confirm all three resolved ASINs",
+          "commits_to": "The site keeps publishing these three records. The ASIN, not the short-link token, is treated as the product identifier.",
+          "effort": "One confirmation.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Replace any link with the intended product's official tagged link",
+          "commits_to": "A new product record has to be verified from its official page before anything is published about it.",
+          "effort": "One verification pass per replaced product.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A, unless one of the three was supplied in error. Confirming the resolved ASINs before publishing campaigns is the parallel session's recommendation and this register adopts it.",
+      "sources": [
+        {
+          "url": "https://link.amazon/B04G1MEwY",
+          "ref": "P1 supplied link"
+        },
+        {
+          "url": "https://link.amazon/B02NbDxp3",
+          "ref": "P2 supplied link"
+        },
+        {
+          "url": "https://link.amazon/B00hJ57DV",
+          "ref": "P3 supplied link"
+        }
+      ]
+    },
+    {
+      "id": "D-14",
+      "question": "Which Associates marketplace and tracking ID should receive purchases? (Ported; item D-02 in the parallel worksheet.)",
+      "linked_question": "Q-01, Q-04",
+      "linked_suggestions": [
+        "S-01"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Verify the current links inside Associates Central",
+          "commits_to": "If a tag is present but invisible in the resolved URL, the earning claim is already valid and only needs evidence.",
+          "effort": "Minutes.",
+          "reversible": "n/a"
+        },
+        {
+          "key": "B",
+          "label": "Generate and substitute official tagged links for the chosen marketplace",
+          "commits_to": "Three new Special Links and a rebuild; the earning claim becomes true.",
+          "effort": "Minutes once the account exists.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "Do not rely on earnings attribution until the three final links are confirmed in the account and tested. This is the parallel session's recommendation and this register adopts it, and it is the same conclusion as D-01.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies, Participation Requirements"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/",
+          "ref": "Associates Central"
+        }
+      ]
+    },
+    {
+      "id": "D-15",
+      "question": "What research automation is authorised, and from what source may it read? (Ported; item D-03 in the parallel worksheet.)",
+      "linked_question": "Q-07",
+      "linked_suggestions": [
+        "S-12"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Keep research manual and publish only reviewed facts",
+          "commits_to": "The current mode. Slow, but no clause is strained.",
+          "effort": "Ongoing human time.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Confirm eligibility and terms, then use the authorised API scope",
+          "commits_to": "Depends on the qualifying-sales prerequisite (Q-02) and on each displayed field being permitted.",
+          "effort": "Administrative plus a build change.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Obtain Amazon's express written approval before any otherwise restricted agent or model use",
+          "commits_to": "A written permission, which is the only route that removes the doubt rather than narrowing it.",
+          "effort": "Unknown; depends on Amazon.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "Keep automation disabled for Program Content until the applicable terms and any written approvals are confirmed, and never train or improve models with Program Content without the required approval. Ported from the parallel worksheet.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+          "ref": "Conditions of Use, License and Access"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies, Participation Requirements"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+          "ref": "Creators API introduction"
+        }
+      ]
+    },
+    {
+      "id": "D-16",
+      "question": "What measurement is acceptable, and what privacy or consent review is needed before scaling it? (Ported; item D-07 in the parallel worksheet.)",
+      "linked_question": "Q-14, Q-17",
+      "linked_suggestions": [
+        "S-09"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Keep browser-local, manual reporting only",
+          "commits_to": "The tracker stays as it is: no network call, no attributed figure, no consent question because nothing leaves the device.",
+          "effort": "None.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Add first-party measurement only after privacy and legal review",
+          "commits_to": "A documented retention period, a consent basis and a privacy notice before any server-side tool is installed.",
+          "effort": "Legal review plus implementation.",
+          "reversible": "Partly; collected data cannot be uncollected."
+        }
+      ],
+      "recommendation": "Keep the current local-only approach until the audience and applicable obligations are known, and do not describe clicks as sales or conversions. Ported from the parallel worksheet.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies, Participation Requirements"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ]
+    }
+  ],
+  "log": [
+    {
+      "date_utc": "2026-11-15",
+      "decision": "—",
+      "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open.",
+      "recorded_by": "arena/00ba6c2e-zone4",
+      "evidence": "Not applicable: nothing has been decided."
+    }
+  ]
+}

@@ -4,7 +4,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 
 | Task | Status | Owner session | Files / scope |
 |---|---|---|---|
-| Decision-support page: explicit open questions, known/unknown answers, options and suggested next steps with official-source links | **done** — PR [#50](https://github.com/kanlerxz87-cyber/Zone4/pull/50) merged at `e67729e`; checks green; Pages built and live at `/docs/suggestions.html` | arena/bb85f073-zone4 | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/` (new `suggestions.html`) |
+| Decision-support page: explicit open questions, known/unknown answers, options and suggested next steps with official-source links | **done** — PR [#50](https://github.com/kanlerxz87-cyber/Zone4/pull/50) merged at `e67729e`; checks green; Pages built and live at `/docs/suggestions.html`. **Integrated, not replaced:** `arena/00ba6c2e-zone4` kept this worksheet's unique content and moved it into the shared data layer — its four uncovered decisions became `decisions.json` D-13…D-16 (with their options and recommendations preserved) and its four unique gaps became `questions.json` Q-16…Q-19 (audience, privacy/consent, budget and time horizon, trade-name clearance). Its other three rows map onto D-02/D-08, D-08/D-09 and D-03/D-06/D-12. The `suggestions.html` page is now generated from `data/suggestions.json`, `data/questions.json` and `data/decisions.json` rather than from a list inside `scripts/build_site.py`, so the register, the questions and the decision queue cannot disagree. | arena/bb85f073-zone4 | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/` (new `suggestions.html`) |
 | Static research dashboard, executive summary, verification, Pages workflow (prototype, first pass) | done (prototype); product records **superseded by the verified records below** | arena/c2ff885d-zone4 | previously `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` (root prototype removed in this integration; history kept) |
 | Follow-up multi-page research view and FTC citation | done; superseded by the verified site below | arena/00ccfbd4-zone4 | previously `products.html`, `insights.html`, `flagged.html`, `styles.css` (root removed in this integration; history kept) |
 | Product record verification for P1–P3 (Amazon product pages, short-link resolution), Associates policy and FTC checks, flags | **done**; unresolved items documented in Flagged for Review | arena/1eb689b8-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json` |
@@ -17,6 +17,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final integration wrap-up: independent line-by-line re-verification of `main` against live official sources (three supplied links, product pages, Associates agreements/policies, public commission table, FTC, Pages state); board hygiene; disposition of open coordination PRs #22 and #34; rebuild + verify + QA + engine gates; PR to `main`, merge, Pages deploy confirmation | **done**; PRs [#39](https://github.com/kanlerxz87-cyber/Zone4/pull/39) (data + log) and [#43](https://github.com/kanlerxz87-cyber/Zone4/pull/43) (record) merged at `5547a6e` and `acf37f2`; all four workflows green on both; Pages `built` for `acf37f2`; PRs #22/#34 closed with adopted records; full result in the log below | arena/46c18cd1-zone4 | `COORDINATION.md` (board rows + log), `data/sources.json` (S-COU note), `data/flags.json` (one F-30 nuance sentence), `data/products.json` (`_meta.reverification.final_wrapup` only), `data/verification-session-46c18cd1.json` (new), regenerated `docs/`. Concurrent-session overlap: PRs #38/#40 (`arena/13dd55ca-zone4`) landed mid-session — its reconciliation of `data/content.json`, `data/pipeline.json`, `data/policies.json`, `data/marketing.json`, `data/requirements.json`, `EXECUTIVE_SUMMARY.md`, `README.md`, `qa/` and `scripts/` is **kept as canonical** and this session's equivalent in-progress edits were dropped in its favour; PR #41 (`arena/949aaac1-zone4`) merged before this session's PR — its label fill, F-27→F-29 corrections, F-30 resolution, F-36/F-37 additions and builder intro fix are likewise **kept as canonical**, and this session's duplicate versions of those edits were dropped on rebase |
 | Post-deployment fact-consistency audit: reconcile live pages and generated content with current verified records; re-run quality gates and integrate corrections | **done**; PR #38 merged at `077bb3e`; Pages `built`; all four main workflows passed | arena/13dd55ca-zone4 | `COORDINATION.md`, `data/content.json`, `data/pipeline.json`, `data/products.json`, `data/requirements.json`, `data/flags.json`, `data/marketing.json`, `data/sources.json`, `data/engine-verification.json`, `scripts/build_site.py`, `scripts/verify.py`, `scripts/apply_integration.py`, `qa/audit_site.py`, `qa/README.md`, generated `docs/`, `EXECUTIVE_SUMMARY.md`, `README.md` |
 | Follow-up evidence audit and engine safeguard: re-check official category rates vs. per-ASIN mapping, P2 Item details brand vs. marketing, and reject fallback rates for unmatched browse paths | **in progress**; rebased onto `main` at `5547a6e`, preserving PRs #38/#41/#39 canonical content. The engine's unmatched-category fallback is removed, engine product-rate evidence is blank, and remaining P2/source wording and marketing source links are reconciled. Post-rebase build/verify, QA (21 pages, 0 warnings), 83 tests, engine gates and preview-link checks pass; commit/push, PR checks/merge and Pages confirmation remain. | arena/327b5ad0-zone4 | `COORDINATION.md`, `data/products.json`, `data/content.json`, `data/marketing.json`, `data/flags.json`, `data/requirements.json`, `data/pipeline.json`, `data/policies.json`, `data/sources.json`, `data/engine-verification.json`, `data/reverification-2026-11-14.json`, `data/verification-session-ebf5c261.json`, `data/report.json` (local generated, ignored), `engine/datastore.py`, `engine/economics.py`, `engine/content.py`, `engine/sitegen.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `scripts/build_site.py`, `scripts/verify.py`, `scripts/apply_integration.py` (historical helper, wording only), `docs/` (generated), `tests/test_engine.py` |
+| **Decision-support layer (2026-11-15):** build the missing "review before implementing" surfaces — a Suggestions register with an explicit decision queue, an Open Questions register (what is unknown, why it blocks a decision, and how to discover it), a decision log, plus the site polish that removes the machine-generated feel; find and flag irregularities line by line; rebuild, verify, QA, PR to `main`, merge, Pages check, completion log | **in progress** | **arena/00ba6c2e-zone4** | `data/suggestions.json` (new), `data/questions.json` (new), `data/decisions.json` (new), `data/sources.json`, `data/flags.json`, `data/content.json`, `scripts/build_site.py`, `scripts/verify.py`, `docs/` (generated) + `docs/decisions.js` (new static file), `qa/audit_site.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `ENGINE.md` (stale test count only), `COORDINATION.md`. Does not touch `engine/*.py` logic, `tests/test_engine.py`, `data/products.json`, `data/marketing.json`, `data/policies.json`, `data/pipeline.json`, `data/requirements.json`, or `.github/workflows/`. |
 
 | Re-verification of P1–P3 and policy/FTC citations; correction of policy section numbers, Pages-source statements, sponsored-label and location irregularities; site rebuild; integration (PR, merge, Pages check) | **done**; PR [#17](https://github.com/kanlerxz87-cyber/Zone4/pull/17) merged at `5ddfdc9`; Site checks and Pages deployment passed; Pages `built`; the session's final record was still only on open PR #22 when `main` advanced — the integration wrap-up (`arena/46c18cd1-zone4`) adopted the record below and closed PR #22 | arena/e5381cc3-zone4 | `data/products.json`, `data/sources.json`, `data/policies.json`, `data/flags.json`, `data/content.json`, `README.md`, `docs/` (rebuilt only), `scripts/build_site.py`, `scripts/verify.py`, `COORDINATION.md`. Does not touch `.github/workflows/`. |
 | Current-session factual audit of deployed content; remove unsupported user-location claim | **done**; PR [#15](https://github.com/kanlerxz87-cyber/Zone4/pull/15) merged at `de08965`; checks and Pages deploy passed | arena/f647313b-zone4 | `COORDINATION.md`, `data/flags.json`, `data/content.json`, `data/sources.json`, generated `docs/` |
@@ -31,7 +32,9 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 
 ## Current branch note
 
-The current active session is working on `arena/327b5ad0-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`). No branch was created or switched to.
+The current active session is working on `arena/00ba6c2e-zone4` (branched from `923738406c0a4c961754ac079ec4e76b6d5d8e76`). No branch was created or switched to.
+
+> Prior note (kept for the audit trail): the session running when this section was last edited worked on `arena/327b5ad0-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`).
 
 | Independent fourth-pass verification (2026-11-14): competitor-label gap, flag-reference correction, Conditions-of-Use citation resolution, KPIs derived from data, stale page captions, site rebuild, integration (PR, merge, Pages check) | **done**; PR [#41](https://github.com/kanlerxz87-cyber/Zone4/pull/41) merged at `0aa8583`, PR [#42](https://github.com/kanlerxz87-cyber/Zone4/pull/42) merged at `7cd31de`, PR [#45](https://github.com/kanlerxz87-cyber/Zone4/pull/45); Pages `built` | arena/949aaac1-zone4 | `data/products.json` (P1 competitor label and the carousel flag references), `data/flags.json` (F-29 update, F-30 resolved, F-36 and F-37 added), `data/verification-session-949aaac1.json` (new), `scripts/build_site.py` (index KPIs derived from data; competitor labels rendered), `docs/` (regenerated), `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `.github/workflows/`, `engine/`, `tests/`, `qa/`, `tools/`, `data/marketing.json`, `data/requirements.json`, `data/policies.json`, `data/pipeline.json`, `data/sources.json`. Commission-rate display left to `arena/13dd55ca-zone4` (PR #38). |
 
@@ -805,3 +808,54 @@ Everything below was read from the official source in this session, not taken fr
 - Read the deployed Suggestions & Decisions page at https://kanlerxz87-cyber.github.io/Zone4/docs/suggestions.html and confirmed it contains the seven decision rows, source links, disclosure and navigation. Since the repository currently publishes from the legacy root source and redirects the root entry into `docs/`, the correct public path for this subpage is `/docs/suggestions.html`; `/suggestions.html` at the root is not a published route.
 - Final checks remain: build/verify (22 pages), QA (0 warnings), 83 unit tests, engine preview-link audit, and diff whitespace checks all pass. The engine audit intentionally blocks 7/7 generated drafts pending unresolved evidence and link-disclosure gates.
 - Flagged items remain intentionally unresolved as listed above; no account-level fact was inferred.
+
+### Session arena/00ba6c2e-zone4 — decision-support layer: claim, conflict and result (2026-11-15, UTC)
+
+**Claim.** Written to the board before any file was touched, committed and pushed as `a3285de`. Scope: the three new data files, the
+builder and verifier, the generated `docs/`, the two documentation files and `COORDINATION.md`. No other live claim overlapped it at the
+time of claiming.
+
+**Merge conflict, and how it was resolved.** `origin/main` advanced twice while this session worked: PR #50/#51 (`arena/bb85f073-zone4`)
+merged a decision worksheet at `4da34dc` with its own `suggestions.html` and its own D-01…D-07 numbering. Rebasing onto `fcd2b3f`
+conflicted in 25 files, mostly generated `docs/` plus `scripts/build_site.py`, `README.md` and `EXECUTIVE_SUMMARY.md`. The conflicting
+`scripts/build_site.py` hunks were resolved in favour of **this session's** version, because both sessions had written a `page_suggestions`
+function into the same file and the two cannot coexist. Nothing from the other session's work was discarded: its unique decisions were
+ported into `data/decisions.json` as D-13…D-16 with their options and recommendations intact, and its unique open questions into
+`data/questions.json` as Q-16…Q-19. Its mapping onto existing rows is recorded in `_meta.ported_00ba6c2e_2026_11_15` in both files and
+in the board row above. Its `COORDINATION.md` entries and PR links were preserved verbatim.
+
+**What was found, line by line (all reproduced before being recorded).** Five irregularities are new to the register as F-39…F-43:
+
+- **F-39** Two product names in shipped code: the site and README say one thing, the click tracker and the engine preview generator say
+  "Northstar", and a visitor sees `northstar-tracker-events.json` when they export their own log.
+- **F-40** Sixteen of twenty-one pages shared one identical meta description (6 distinct descriptions across 21 pages,
+  counted from the committed HTML). Corrected in this session; the site now carries 24 distinct descriptions across 24 pages and the
+  build fails if two pages share one.
+- **F-41** The landing-page KPI labelled "Open items for your review" computed a narrower set (21) than the register's unresolved flags
+  (28). Corrected: the KPI and the review page now use one predicate, and the review page groups flags into needs-a-decision,
+  corrected and resolved.
+- **F-42** Documentation drift: `ENGINE.md` says 81 tests and the suite runs 83; `README.md` bills `tools/check_links.py` as a plain check
+  although it fails on a clean checkout until `python3 -m engine.cli build` has run; the README blurs which generator produces the live
+  site. Reproduced, then recorded. **Not fixed in this session**, because `ENGINE.md` and `README.md` are inside another claim's scope on
+  the board; the fix is costed as S-10 / D-10.
+- **F-43** `data/sources.json` pointed the Creators API cross-marketplace conflict at F-29 (the carousel) instead of F-35. Corrected, and
+  the correction is kept as the audit record.
+
+**Sources read in this session (all official).** The three supplied `link.amazon` short links, re-resolved: `B04G1MEwY` → `B0CDY277D3`,
+`B02NbDxp3` → `B09B7SB46R`, `B00hJ57DV` → `B08DKYBTPH`. Titles, brand bylines and breadcrumbs matched the stored records; no `tag=`
+parameter appeared in any resolved URL, so **F-03 stands** and **F-01 stands**. New sources added to the registry because the
+decision-support pages cite them: Google Search Central on people-first content, spam policies, snippets, outbound-link qualification and
+page experience (all read 2026-11-15), plus the Amazon Associates disclosure help page. Every specific section relied on is named in the
+`used_for` field rather than cited generically.
+
+**Verification performed.** `scripts/build_site.py` (24 pages), `scripts/verify.py` (green: links, anchors, per-row sources, disclosure,
+no prices or ratings, no Amazon Mark in titles or keywords, unique meta descriptions, register cross-references), `qa/audit_site.py`
+(24 pages, 0 warnings), `python3 -m unittest discover -s tests` (83 tests, OK), `python3 -m engine.cli build` followed by
+`python3 tools/check_links.py` (6 preview pages, 0 broken links), and `python3 -m engine.cli audit` (0/7 drafts ready, which is the
+engine refusing to publish unverified fields — the designed behaviour, not a regression). Two new build guards were added and both were
+tested by deliberately breaking the data: a suggestion pointing at a nonexistent decision fails the build, and two pages sharing a meta
+description fail the build.
+
+**Not done, and why.** `ENGINE.md`/`README.md` corrections (another session's scope, recorded as S-10). No suggestion in the register
+has been implemented: the register exists to be decided, not acted on, and the decision log records that no owner decision has been
+received. No price, rating, click, order, revenue or ranking figure is published anywhere on the site.

@@ -206,6 +206,83 @@ def check_pipeline() -> None:
             fail(f"pipeline tracking {t['id']}: has a value, but no reporting access is connected")
 
 
+def check_decision_support() -> None:
+    """The suggestion, question and decision registers must agree with each other.
+
+    A cross-reference that points nowhere is exactly the class of defect this
+    site exists to catch, so the build refuses to produce one.
+    """
+    suggestions = load("suggestions.json")["suggestions"]
+    questions = load("questions.json")["questions"]
+    decisions_doc = load("decisions.json")
+    decisions = decisions_doc["decisions"]
+    flag_ids = {f["id"] for f in load("flags.json")["flags"]}
+
+    question_ids = {q["id"] for q in questions}
+    decision_ids = {d["id"] for d in decisions}
+    if len(question_ids) != len(questions):
+        fail("questions.json has duplicate ids")
+    if len(decision_ids) != len(decisions):
+        fail("decisions.json has duplicate ids")
+    if len({s["id"] for s in suggestions}) != len(suggestions):
+        fail("suggestions.json has duplicate ids")
+
+    for s in suggestions:
+        d = s.get("decision")
+        if d and d not in decision_ids:
+            fail(f"suggestion {s['id']} points at unknown decision {d}")
+        if not d:
+            fail(f"suggestion {s['id']} has no decision row")
+        if not s["sources"]:
+            fail(f"suggestion {s['id']} cites no source")
+        for source in s["sources"]:
+            if not is_official(source["url"]) and "github.com" not in source["url"]:
+                fail(f"suggestion {s['id']} cites a non-official source: {source['url']}")
+        for fid in s.get("flags") or []:
+            if fid not in flag_ids:
+                fail(f"suggestion {s['id']} references unknown flag {fid}")
+        if s["priority"].split(" ")[0] not in {"P1", "P2", "P3"}:
+            fail(f"suggestion {s['id']} has an undeclared priority: {s['priority']}")
+        if s["status"] not in load("suggestions.json")["_meta"]["statuses"]:
+            fail(f"suggestion {s['id']} has an undeclared status: {s['status']}")
+
+    for q in questions:
+        if q["kind"] not in load("questions.json")["_meta"]["kinds"]:
+            fail(f"question {q['id']} has an undeclared kind: {q['kind']}")
+        if not q["sources"]:
+            fail(f"question {q['id']} cites no source")
+        for source in q["sources"]:
+            if not is_official(source["url"]):
+                fail(f"question {q['id']} cites a non-official source: {source['url']}")
+        for fid in q.get("flags") or []:
+            if fid not in flag_ids:
+                fail(f"question {q['id']} references unknown flag {fid}")
+
+    for d in decisions:
+        if d["linked_question"]:
+            for qid in [x.strip() for x in d["linked_question"].split(",")]:
+                if qid and qid not in question_ids:
+                    fail(f"decision {d['id']} points at unknown question {qid}")
+        for sid in d["linked_suggestions"]:
+            if sid not in {s["id"] for s in suggestions}:
+                fail(f"decision {d['id']} points at unknown suggestion {sid}")
+        for o in d["options"]:
+            if not o["key"] or not o["label"] or not o["commits_to"]:
+                fail(f"decision {d['id']} has an incomplete option")
+        if d["status"] not in load("decisions.json")["_meta"]["statuses"]:
+            fail(f"decision {d['id']} has an undeclared status: {d['status']}")
+        for source in d["sources"]:
+            if not is_official(source["url"]):
+                fail(f"decision {d['id']} cites a non-official source: {source['url']}")
+
+    # A recorded decision must appear in the log, and the log must not claim one
+    # that is still open.
+    recorded = {d["id"] for d in decisions if d["status"].lower().startswith("recorded")}
+    logged = {entry["decision"] for entry in decisions_doc["log"] if entry["decision"] != "\u2014"}
+    if recorded != logged:
+        fail(f"decision log and register disagree: recorded={sorted(recorded)} logged={sorted(logged)}")
+
+
 class SiteParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
@@ -309,6 +386,16 @@ def check_site() -> None:
         if MARK_RE.search(sp.meta_description):
             fail(f"{rel}: meta description uses an Amazon Mark: {sp.meta_description}")
 
+    # Google's snippet guidance asks for a unique description per page. Two pages
+    # sharing one is a presentation defect the build must not reintroduce.
+    by_description: dict[str, list[str]] = {}
+    for page, sp in parsed.items():
+        if sp.meta_description:
+            by_description.setdefault(sp.meta_description, []).append(str(page.relative_to(ROOT)))
+    for description, pages_using in by_description.items():
+        if len(pages_using) > 1:
+            fail("meta description is shared by " + ", ".join(sorted(pages_using)) + ": " + description[:80])
+
     for page, sp in parsed.items():
         rel = page.relative_to(ROOT)
         for tag, url in sp.links:
@@ -335,6 +422,7 @@ def check_required_pages() -> None:
         "index.html", "executive-summary.html", "products.html", "marketing.html",
         "automation.html", "analysis.html", "requirements.html", "suggestions.html", "verification.html",
         "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
+        "suggestions.html", "questions.html", "decisions.html",
         "categories/dual-basket-air-fryers.html",
         "categories/single-basket-air-fryers.html",
         "categories/air-fryer-toaster-ovens.html",
@@ -376,6 +464,7 @@ def main() -> int:
     check_marketing()
     check_pipeline()
     check_requirements()
+    check_decision_support()
     check_site()
     check_required_pages()
     check_root_entry()
