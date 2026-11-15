@@ -16,7 +16,7 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 2. **Verified product identities** for all three submitted links (ASINs, listing titles, brands, manufacturers, model numbers, category paths, listed specifications, competitor ASINs) — `data/products.json`, `docs/verification.html`.
 3. **A marketing content kit, published as real pages** — three product articles, one comparison page and one buying guide, each with a title tag, meta description, keyword targets, an outline, finished copy, a call to action and a fact table in which every row links to its official source (`data/marketing.json`). Each article is also published as its own page under `docs/articles/` with its own title tag and meta description, and is grouped by product format in the hub at `docs/articles/index.html`; `docs/marketing.html` carries the same five pieces on one page.
 4. **An automation and tracking plan** — 13 pipeline stages, 10 tracking metrics (every value deliberately blank), five optimisation steps and seven Agent Terms requirements (`data/pipeline.json`, `docs/automation.html`).
-5. **A compliance framework** quoting the official Operating Agreement, Program Policies, disclosure guidance, FTC guidance, Conditions of Use and the PA-API 5 → Creators API deprecation notice — `data/policies.json` (30 rules), `data/sources.json` (27 sources), `docs/policy-compliance.html`.
+5. **A compliance framework** quoting the official Operating Agreement, Program Policies, disclosure guidance, FTC guidance, Conditions of Use and the PA-API 5 → Creators API deprecation notice — `data/policies.json` (30 rules), `data/sources.json` (32 sources), `docs/policy-compliance.html`.
 6. **A requirements register** — all 30 items from the brief, one row each, with what the site delivers, what blocks it, and the official source that governs the status (`data/requirements.json`, `docs/requirements.html`).
 7. **A first-party click tracker** — `docs/analytics.html` + `docs/tracker.js`. Starts at zero, stores events in the visitor's own browser only, records only real clicks plus one explicitly labelled test event, exports as JSON or CSV. It generates no click of its own and sends nothing to any server.
 8. **Automated checks** — `scripts/verify.py` (data validity, official-host-only links, per-page disclosure, per-row sources, no prices or ratings published, no Amazon Mark in titles or keywords, per-fact citation traceability, requirement-status evidence) runs in CI (`.github/workflows/site-checks.yml`) and confirms that the committed `docs/` matches a fresh build. An independent audit of the committed HTML, `qa/audit_site.py`, runs separately in CI (`.github/workflows/qa.yml`).
@@ -30,9 +30,9 @@ them has been applied:
 
 | Page | What it holds | Count |
 |---|---|---|
-| `docs/suggestions.html` | Every change worth making, with the problem, the proposal, the effort, the risk, the check that would prove it worked and the official rule that constrains it. A scannable summary table plus one card per proposal. | 12 suggestions, in three priority bands |
-| `docs/questions.html` | What must be answered before any of them can be acted on: what is already known from an official source, what is missing, how the missing piece is discovered and who can supply it. | 15 questions: 1 discoverable, 4 not discoverable from here, 10 owner decisions |
-| `docs/decisions.html` | The choice itself: every open decision with its options, what each option commits the site to, its cost and whether it is reversible, plus a recommendation labelled as an argument rather than a decision. A log records decisions actually taken. | 12 open decisions, 0 recorded |
+| `docs/suggestions.html` | Every change worth making, with the problem, the proposal, the effort, the risk, the check that would prove it worked and the official rule that constrains it. A scannable summary table plus one card per proposal. | 31 suggestions, in three priority bands |
+| `docs/questions.html` | What must be answered before any of them can be acted on: what is already known from an official source, what is missing, how the missing piece is discovered and who can supply it. | 37 questions: 14 already answered from an official source, 2 discoverable, 4 not discoverable from here, 17 owner decisions |
+| `docs/decisions.html` | The choice itself: every open decision with its options, what each option commits the site to, its cost and whether it is reversible, plus a recommendation labelled as an argument rather than a decision. A log records decisions actually taken. | 34 open decisions, 0 recorded |
 
 **The three that decide whether this project can earn at all**, in order of dependency:
 
@@ -87,7 +87,7 @@ The official [Standard Commission Income Statement, Table 1](https://affiliate-p
 - **PA-API 5 is officially deprecated** in favour of the **Creators API** (https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation); license terms not yet reviewed (F-16).
 - The **Standard Commission Income Statement is published at a public URL that needs no sign-in** (https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ). Its Table 1 lists "Physical Books, Kitchen, Automotive" at **4.50%**. That is a category-level reference only; no official source reviewed confirms which band Amazon assigns to these individual ASINs, so each product-level rate is left blank (F-01).
 - Amazon Conditions of Use (updated 2026-08-14) additionally constrain scraping/data mining and the use of Amazon content to improve models (F-11, F-12).
-- The complete flag register (**F-01 … F-44**, 44 items) is published at `docs/flagged.html` with sources, grouped into the items that need a decision, those corrected in the session that found them and the resolved items kept as the audit record. **F-44** (added 2026-11-15 by `arena/d8564cd0-zone4`): the P2 listing title's second segment differed on a 2026-11-15 read, and two carousels changed membership again — both recorded verbatim in `data/verification-session-d8564cd0.json` with the stored records kept; first numbered F-39 in that session's superseded commits and renumbered on rebase because `arena/00ba6c2e-zone4` had taken F-39…F-43 concurrently.
+- The complete flag register (**F-01 … F-46**, 46 items) is published at `docs/flagged.html` with sources, grouped into the items that need a decision, those corrected in the session that found them and the resolved items kept as the audit record. **F-44** (added 2026-11-15 by `arena/d8564cd0-zone4`): the P2 listing title's second segment differed on a 2026-11-15 read, and two carousels changed membership again — both recorded verbatim in `data/verification-session-d8564cd0.json` with the stored records kept; first numbered F-39 in that session's superseded commits and renumbered on rebase because `arena/00ba6c2e-zone4` had taken F-39…F-43 concurrently. A second session, `arena/d2a62d6b-zone4`, read the same drift independently on the same day and recorded it as its own F-44 before the merge; the duplicate was dropped rather than published twice, and the two reads agree. **F-45** (same session): a second dated attempt to re-read the product-details tables returned advertising modules plus one automated-traffic interstitial, which was **not** circumvented, because the Agent Terms (IP License §4) prohibit working around access limits (F-38, F-11). **F-46**: the editorial redesign and navigation split that session shipped are a proposed path until the owner signs them off, so they are recorded rather than assumed (S-17, S-21, D-21).
 
 ## 5. Flagged for review — headline items (complete register: `docs/flagged.html`)
 
@@ -112,6 +112,22 @@ Every item in the brief, one row each, is published at `docs/requirements.html` 
 
 Nothing is simulated in place of a blocked or unverified requirement.
 
+## 5b. Re-verification performed on 2026-11-15 by `arena/d2a62d6b-zone4`
+
+| Item checked | Result | Source |
+|---|---|---|
+| P1 title, identity, breadcrumb | Matched the stored record; no change made | [P1 official page](https://www.amazon.com/dp/B0CDY277D3) |
+| P2 title | **Drifted** again on this session's read: the official page begins "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven \| Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included", not the stored 2026-11-14 string. Identity unchanged; the stored record was **not** overwritten. Recorded independently as F-44 by `arena/d8564cd0-zone4` | [P2 official page](https://www.amazon.com/dp/B09B7SB46R) |
+| P3 title, identity, breadcrumb | Matched the stored record; no change made | [P3 official page](https://www.amazon.com/dp/B08DKYBTPH) |
+| "Also viewed" carousel, all three | Drifted again (P2 slot 3, P3 slot 3), as F-29 records it does between loads | Same three pages |
+| Product-details (specification) tables | Not renderable on a second dated attempt: advertising modules returned instead, plus one automated-traffic interstitial, which was not circumvented (F-45) | Same three pages |
+| Operating Agreement §1, §4, §5 | Re-read: tagged link formats; no representation about traffic or earnings; the required disclosure sentence | [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) |
+| Programme Policies 6(f), 6(y), 6(z), 2(b), 6(t) | Re-read: paid-search restriction, price-tracking prohibition, single-retailer rule, price and rating display limits | [Programme Policies](https://affiliate-program.amazon.com/help/operating/policies) |
+| Public Standard Commission Income Statement | Kitchen category **4.50%**; still no public mapping from ASIN to band, so product cells stay blank (F-01) | [Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| FTC Disclosures 101 | Re-read: disclosure must be hard to miss and placed with the endorsement; no claimed experience with an untried product | [FTC](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) |
+| Google: AI-generated content | Read in full; quoted verbatim into the questions register (Q-23…Q-37) | [Google Search Central](https://developers.google.com/search/blog/2023/02/google-search-and-ai-content) |
+| Google: creating helpful content | Read; the standard the editorial suggestions are judged against | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
+
 ## 6. Recommended next steps (owner, when ready)
 
 Steps 1–7 below are the same actions, restated as twelve numbered decisions with options, costs and reversibility on `docs/decisions.html`. Work them from D-01 downward rather than in the order listed here.
@@ -124,6 +140,14 @@ Steps 1–7 below are the same actions, restated as twelve numbered decisions wi
 5. Enable the first-party tracker on real traffic, add a cookie or consent notice, and reconcile local clicks against Associates Central reporting (F-19, F-03).
 6. Ask the seller for P2's correct cooking-function count (F-26). The Conditions of Use citation has been re-confirmed (F-30, resolved) — re-check it at the next policy review.
 7. Re-verify volatile values and confirm the intended marketplace/storefront (F-09).
+8. Decide on the editorial redesign: D-21 and Q-37 exist because a redesign and a navigation split were shipped on the owner's
+   behalf before they were approved, so they need a decision (accept, amend or revert) rather than being treated as settled
+   (F-46, S-17, S-21).
+9. Decide where product photography comes from (D-22, S-18). No generated or copied photograph of a specific product may be used,
+   because that is a claim about that product.
+10. Work the fifteen suggestions ported from `arena/d2a62d6b-zone4` (S-17…S-31, decisions D-21…D-34) in priority order: the
+    "which one is for you" chooser, the mobile pass and the "what we could not verify" block change what a reader gets from the
+    site; the paid-search, deals-section and single-retailer rows are guardrails that keep it inside the Programme Policies.
 
 ## 7. Official sources used (fetched live 2026-11-14 unless noted)
 
@@ -144,6 +168,7 @@ Steps 1–7 below are the same actions, restated as twelve numbered decisions wi
 15. Google Search Central — Control your snippets in search results (unique meta description per page) — https://developers.google.com/search/docs/appearance/snippet *(read 2026-11-15)*
 16. Google Search Central — Qualify outbound links (`rel="sponsored"` for paid links) — https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links *(read 2026-11-15)*
 17. Google Search Central — Understanding page experience in Google Search results — https://developers.google.com/search/docs/appearance/page-experience *(read 2026-11-15)*
+18. Google Search Central — Google Search and AI-generated content: automation used to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains, and bylines and automation disclosures are worth considering — https://developers.google.com/search/blog/2023/02/google-search-and-ai-content *(read in full 2026-11-15; quoted verbatim in the questions register as Q-23…Q-37 — `S-GSC-AI` in `data/sources.json`)*
 
 **A note on why Google's documentation is cited here.** Amazon's rules govern whether this site may publish a fact. Google's
 documentation governs whether the page can be found and whether it is the kind of page a search engine wants to rank. The two are

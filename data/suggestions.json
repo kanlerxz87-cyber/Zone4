@@ -15,7 +15,8 @@
       "Recommended, no decision needed": "A correction with one correct answer. Recorded so the change is visible, not because it needs a vote."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
-    "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran."
+    "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
+    "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21)."
   },
   "suggestions": [
     {
@@ -29,10 +30,19 @@
       "risk": "Wrong or duplicate tags split attribution. Amazon requires the tag on the link, and the Associates Operating Agreement Section 5 disclosure must stay on the site either way.",
       "check": "Re-resolve each published link and confirm a tag= parameter matching the account's Partner Tag appears, then confirm one test click appears in Associates Central reporting.",
       "sources": [
-        {"url": "https://affiliate-program.amazon.com/help/operating/agreement", "ref": "Operating Agreement, Section 5 (required disclosure)"},
-        {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Program Policies, Participation Requirements (Special Links)"}
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 5 (required disclosure)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies, Participation Requirements (Special Links)"
+        }
       ],
-      "flags": ["F-03", "F-04"],
+      "flags": [
+        "F-03",
+        "F-04"
+      ],
       "status": "Awaiting decision",
       "decision": "D-01"
     },
@@ -47,10 +57,21 @@
       "risk": "Amazon's own documentation states the API is only for the marketplace registered and requires prior written approval for certain reuse. A stale cached price shown as current would be a consumer-protection problem as well as a policy one, so the timestamp must be visible.",
       "check": "A published price carries a visible observation timestamp and reconciles with the value the API returned in the same run; any product without a fresh value shows blank, not an old number.",
       "sources": [
-        {"url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "ref": "Creators API introduction: access prerequisites, including the qualifying-sales requirement"},
-        {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Participation Requirements 2(b) prices and availability; 6(t) ratings and reviews"}
+        {
+          "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+          "ref": "Creators API introduction: access prerequisites, including the qualifying-sales requirement"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 2(b) prices and availability; 6(t) ratings and reviews"
+        }
       ],
-      "flags": ["F-02", "F-16", "F-33", "F-35"],
+      "flags": [
+        "F-02",
+        "F-16",
+        "F-33",
+        "F-35"
+      ],
       "status": "Needs a decision first",
       "decision": "D-02"
     },
@@ -65,9 +86,15 @@
       "risk": "A vague or boilerplate editorial note is worse than none. It has to name a real review step; if no human reviews the copy, the note must say so.",
       "check": "Every article page shows the note; the note names a review step that actually happened on the stated date; no invented person appears anywhere on the site.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Who / How / Why; effort and originality; fabricated authorship warning"}
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Who / How / Why; effort and originality; fabricated authorship warning"
+        }
       ],
-      "flags": ["F-12", "F-38"],
+      "flags": [
+        "F-12",
+        "F-38"
+      ],
       "status": "Awaiting decision",
       "decision": "D-03"
     },
@@ -82,7 +109,10 @@
       "risk": "Descriptions must not promise what the page withholds; a description that implies a price when the price is blank is a new accuracy defect.",
       "check": "The build fails if any two pages share a meta description, and each description is checked against the page's own headings.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "Create unique descriptions for each page on your site"}
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Create unique descriptions for each page on your site"
+        }
       ],
       "flags": [],
       "status": "Recommended, no decision needed",
@@ -99,9 +129,18 @@
       "risk": "None identified for the reader. The temptation to treat the attribute as a substitute for the disclosure must be resisted; the guidance is explicit that qualification does not replace a visible disclosure, and Amazon's rule does not accept an attribute in place of the sentence.",
       "check": "Every outbound product link carries rel=\"sponsored\" and still sits next to a paid-link label and the disclosure sentence; the QA audit fails if either the attribute or the disclosure goes missing.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "ref": "rel=\"sponsored\" for paid links"},
-        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Link spam: paid links must be qualified"},
-        {"url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE", "ref": "Associates help: disclosure must be clear and conspicuous, placed near the link"}
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "rel=\"sponsored\" for paid links"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Link spam: paid links must be qualified"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+          "ref": "Associates help: disclosure must be clear and conspicuous, placed near the link"
+        }
       ],
       "flags": [],
       "status": "Awaiting decision",
@@ -118,11 +157,23 @@
       "risk": "(a) creates a conflict-of-interest question that must be disclosed: a unit supplied free by a seller cannot be presented as an independent purchase. (b) gives up any claim to be a review site.",
       "check": "Either every testing claim is backed by a dated note and a photograph taken by the site, or the site states in one visible sentence that no unit was tested and no page uses the word 'review' to describe its own content.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Thin affiliation: good affiliate pages offer meaningful content such as original reviews, rigorous testing, navigation and comparisons"},
-        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Effort, originality, and the 'How' question for product reviews"},
-        {"url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "ref": "Disclosure obligations when a relationship exists with a seller"}
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Thin affiliation: good affiliate pages offer meaningful content such as original reviews, rigorous testing, navigation and comparisons"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Effort, originality, and the 'How' question for product reviews"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosure obligations when a relationship exists with a seller"
+        }
       ],
-      "flags": ["F-11", "F-31"],
+      "flags": [
+        "F-11",
+        "F-31"
+      ],
       "status": "Awaiting decision",
       "decision": "D-06"
     },
@@ -137,10 +188,19 @@
       "risk": "Volume without value trips the scaled-content policy. The guard is that each page must answer a different question; if two pages would say the same thing, they must be one page.",
       "check": "No two question pages share a thesis; every claim on each page resolves to an existing sourced fact row; the number of pages is driven by distinct questions, not by a target count.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Scaled content abuse and thin affiliation"},
-        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Substantial, complete, insightful treatment of a topic"}
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Scaled content abuse and thin affiliation"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Substantial, complete, insightful treatment of a topic"
+        }
       ],
-      "flags": ["F-06", "F-26"],
+      "flags": [
+        "F-06",
+        "F-26"
+      ],
       "status": "Awaiting decision",
       "decision": "D-07"
     },
@@ -155,10 +215,19 @@
       "risk": "The assignment can change. A published rate needs the date it was read, in the same way a price would.",
       "check": "Every published rate has a named category assignment, a read date and a source; if any is missing the cell is blank rather than defaulted.",
       "sources": [
-        {"url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "ref": "Standard Commission Income Statement, Table 1 (category-level rates)"},
-        {"url": "https://affiliate-program.amazon.com/", "ref": "Associates Central, where the per-ASIN category assignment is visible to the account owner"}
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement, Table 1 (category-level rates)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/",
+          "ref": "Associates Central, where the per-ASIN category assignment is visible to the account owner"
+        }
       ],
-      "flags": ["F-01", "F-36"],
+      "flags": [
+        "F-01",
+        "F-36"
+      ],
       "status": "Needs a decision first",
       "decision": "D-08"
     },
@@ -173,10 +242,20 @@
       "risk": "A product photograph used in a preview card raises the Program Content question in flag F-25 and the IP License; a self-made layout image avoids it. Search Console data must not be presented as Amazon conversion data.",
       "check": "A shared link renders with an image and the intended description; Search Console shows the property verified and the site's own impressions appear as measured figures with their date.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/appearance/page-experience", "ref": "Page experience and mobile presentation guidance"},
-        {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "How snippets and previews are generated from page content and metadata"}
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Page experience and mobile presentation guidance"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "How snippets and previews are generated from page content and metadata"
+        }
       ],
-      "flags": ["F-15", "F-19", "F-25"],
+      "flags": [
+        "F-15",
+        "F-19",
+        "F-25"
+      ],
       "status": "Awaiting decision",
       "decision": "D-09"
     },
@@ -191,8 +270,14 @@
       "risk": "Renaming touches generated output; the build must be re-run and re-verified in the same change.",
       "check": "The documented command sequence runs green from a fresh clone, the stated test count matches the actual run, and one product name appears in the repository.",
       "sources": [
-        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md", "ref": "ENGINE.md test-count line"},
-        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/README.md", "ref": "README check commands"}
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+          "ref": "ENGINE.md test-count line"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/README.md",
+          "ref": "README check commands"
+        }
       ],
       "flags": [],
       "status": "Recommended, no decision needed",
@@ -209,9 +294,15 @@
       "risk": "None.",
       "check": "Grep finds no flag reference pointing at a flag whose subject does not match; the review page states its own grouping rule; the KPI label matches the set it counts.",
       "sources": [
-        {"url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/sources.json", "ref": "S-APIFAQ notes field"}
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/sources.json",
+          "ref": "S-APIFAQ notes field"
+        }
       ],
-      "flags": ["F-29", "F-35"],
+      "flags": [
+        "F-29",
+        "F-35"
+      ],
       "status": "Recommended, no decision needed",
       "decision": "D-11"
     },
@@ -226,10 +317,19 @@
       "risk": "The moment the writer is allowed to conclude, the fact rule starts to slip. The guard has to be mechanical: a claim without a fact id fails the build, and a ranking claim must cite the field that supports it.",
       "check": "Every paragraph still resolves to at least one fact row; each product article states who the product suits; the comparison page ranks the three formats on at least one listed attribute; no sentence asserts a fact that is not in a fact table.",
       "sources": [
-        {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Originality, insight beyond the obvious, and value to the reader"},
-        {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Thin affiliation: content copied from the merchant without added value"}
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Originality, insight beyond the obvious, and value to the reader"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Thin affiliation: content copied from the merchant without added value"
+        }
       ],
-      "flags": ["F-12", "F-31"],
+      "flags": [
+        "F-12",
+        "F-31"
+      ],
       "status": "Awaiting decision",
       "decision": "D-12"
     },
@@ -334,6 +434,362 @@
       ],
       "status": "Awaiting decision",
       "decision": "D-19"
+    },
+    {
+      "id": "S-17",
+      "priority": "P2 - Adds real value",
+      "title": "Rebuild the front page as an editorial homepage: hero, featured articles, category tiles, then the data",
+      "problem": "The previous front page led with research apparatus. A visitor arriving from search wants the answer first and the evidence one click away.",
+      "proposal": "Implemented on 2026-11-15 by session arena/d2a62d6b-zone4 and fully reversible; it still needs the owner's sign-off (F-46). A hero with the promise and two calls to action, a strip of verified-fact counts, three featured article cards, three category tiles, the full product table, then the key findings. Governance tables move below the fold rather than leading the page.",
+      "why": "Impact on the site is judged high, at M effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "M",
+      "risk": "Design judgement. No published fact changed. Risk: Low - presentation only; no published value changes.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Recommended, no decision needed",
+      "decision": "D-21",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: provide a great page experience"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4",
+          "ref": "This repository, the site it is generated from"
+        }
+      ],
+      "flags": [
+        "F-46"
+      ]
+    },
+    {
+      "id": "S-18",
+      "priority": "P2 - Adds real value",
+      "title": "Add real product photography, and never generated or copied photography",
+      "problem": "Photography is the single biggest conversion lever on a shopping page, and it is also the easiest place to break the rules. A generated image of a real product would be a fabricated claim about that product.",
+      "proposal": "Photograph the actual units in a real kitchen, shoot the baskets open and closed, and use those images in the article headers and the category tiles.",
+      "why": "Impact on the site is judged high, at L effort. Recommendation from the session that wrote it: Adopt after D-08.",
+      "effort": "L",
+      "risk": "Design judgement, bounded by the official definition of Program Content below. Risk: High if images are copied or generated instead of photographed. Low if they are your own.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-22",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 1: Program Content includes data, images and text"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosures 101: you can't make up claims about a product"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-19",
+      "priority": "P2 - Adds real value",
+      "title": "Add a three-question 'which one is for you' chooser above the comparison table",
+      "problem": "The three products differ on exactly those axes, and all three values are already published from the official listings. It answers the reader's actual question in one interaction.",
+      "proposal": "Three questions - how many people you cook for, how much counter depth you have, whether you want two foods finishing at once - routing the reader to one of the three products, with the reasoning shown.",
+      "why": "Impact on the site is judged medium, at M effort. Recommendation from the session that wrote it: Adopt after D-03.",
+      "effort": "M",
+      "risk": "Product judgement, using only values already published from the official pages below. Risk: Low - it routes to records that already exist and cites them.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-23",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 capacity and dimensions as listed"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "ref": "P3 capacity and dimensions as listed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-20",
+      "priority": "P2 - Adds real value",
+      "title": "Mobile-first pass: type scale, tap targets, sticky comparison bar",
+      "problem": "Shopping research happens on phones. The tables already scroll horizontally; the surrounding chrome should not fight the thumb.",
+      "proposal": "Set a fluid type scale, make every card and button at least a comfortable thumb target, and keep a slim bar on article pages with the product name and one link to the listing.",
+      "why": "Impact on the site is judged medium, at M effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "M",
+      "risk": "Design judgement, judged against the official page-experience guidance below. Risk: Low",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-24",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: provide a great page experience"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-21",
+      "priority": "P2 - Adds real value",
+      "title": "Split the site into a public magazine and a research appendix",
+      "problem": "Evidence is the site's differentiator, but leading with it makes the site read as internal documentation. Keep the evidence, move it one level down.",
+      "proposal": "Implemented on 2026-11-15 by session arena/d2a62d6b-zone4 and fully reversible; it still needs the owner's sign-off (F-46). Public navigation: Home, Articles, the three categories, Comparison, Buying guide. Research appendix: verification log, sources, flagged items, requirements, policy, analytics. Both stay one click apart.",
+      "why": "Impact on the site is judged medium, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Information-architecture judgement. Risk: Low - nothing is removed, only regrouped in the navigation.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Recommended, no decision needed",
+      "decision": "D-21",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4",
+          "ref": "This repository, docs/ navigation"
+        }
+      ],
+      "flags": [
+        "F-46"
+      ]
+    },
+    {
+      "id": "S-22",
+      "priority": "P2 - Adds real value",
+      "title": "Put a 'what we could not verify' block at the top of every article",
+      "problem": "Every competitor hides its gaps. Publishing them is honest, it pre-empts the reader's doubt, and it converts the site's biggest constraint into its most distinctive feature.",
+      "proposal": "Three lines above the fold on each article: price not published and why, rating not published and why, commission category unconfirmed. Each line links to the flag on the Flagged for Review page.",
+      "why": "Impact on the site is judged high, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Editorial judgement, justified by the official rules below that create the gaps. Risk: Low",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-25",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(t): ratings only through Creators API or PA API"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Public commission table: category level only"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-23",
+      "priority": "P2 - Adds real value",
+      "title": "Publish the counter-space analysis: capacity per centimetre of counter depth",
+      "problem": "It is arithmetic on values already published from the official listings, so it adds no unverified claim, and it answers a question no listing answers. This is the kind of original analysis Google's guidance singles out.",
+      "proposal": "A short piece of original analysis: take the published dimensions and capacities for the three products and work out how much cooking capacity each one gives per unit of counter depth it occupies, with the arithmetic shown.",
+      "why": "Impact on the site is judged medium, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Original analysis proposed by this session. The inputs are the published values below; the arithmetic would be shown in full. Risk: Low - derived from published values with the arithmetic shown, and labelled as derived.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-26",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 dimensions and capacity as listed"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B09B7SB46R",
+          "ref": "P2 dimensions and capacity as listed"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "ref": "P3 dimensions and capacity as listed"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: does the content provide original information, reporting, research or analysis?"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-24",
+      "priority": "P2 - Adds real value",
+      "title": "Complete the internal linking: every article reaches the comparison, the buying guide and its category pillar",
+      "problem": "Internal links carry both readers and ranking signals. The comparison and buying guide already exist and are under-linked from the articles.",
+      "proposal": "A standing rule: no article is published without at least one link to the comparison, one to the buying guide and one to its category page, with descriptive anchor text.",
+      "why": "Impact on the site is judged medium, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Technical judgement, bounded by the official rules below on how links may be presented. Risk: Low",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-27",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(v) and 6(w): do not obscure where a link goes"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4",
+          "ref": "This repository, the pages that would be linked"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-25",
+      "priority": "P2 - Adds real value",
+      "title": "Grow organic traffic on the verification angle, not on volume",
+      "problem": "The site cannot out-publish the big review sites on volume. It can out-evidence them, and evidence is what earns links.",
+      "proposal": "Pitch the site's method to the places that care about evidence: a public changelog, an open data file, and a short note on how the verification is done. Ask for nothing; publish the method.",
+      "why": "Impact on the site is judged medium, at M effort. Recommendation from the session that wrote it: Adopt after D-04.",
+      "effort": "M",
+      "risk": "Distribution judgement, bounded by the official statement below. Risk: Low. Note that the Operating Agreement makes no representation about the traffic any site can expect, so no outcome is promised.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-28",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 4: no representation about traffic or commission income"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: original information, reporting, research or analysis"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-26",
+      "priority": "P2 - Adds real value",
+      "title": "Guardrail, not a growth idea: never bid on Amazon Marks or their misspellings",
+      "problem": "Purchases are disqualified when a customer is referred through a prohibited paid search placement, so a campaign built on those keywords would disqualify the very sales it produces.",
+      "proposal": "If paid search is ever used, exclude every Amazon Mark and every variation or misspelling from the keyword list, and land the click on your own page rather than on the retailer.",
+      "why": "Impact on the site is judged high, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Not a judgement: this is a direct consequence of the official rule quoted below. Risk: None if followed. Account-ending if ignored.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-29",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Commission Income Statement 2(c): prohibited paid search placements"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(f): paid search on Proprietary Terms"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-27",
+      "priority": "P2 - Adds real value",
+      "title": "Rejected: a 'deals' or price-drop section",
+      "problem": "The Participation Requirements state that, unless otherwise agreed, the site must not have price tracking or price alerting functionality. The whole premise of a deals section is prohibited by default.",
+      "proposal": "Considered and rejected. Do not build price tracking, price history or price-drop alerts.",
+      "why": "Impact on the site is judged -, at - effort. Recommendation from the session that wrote it: Do not adopt.",
+      "effort": "-",
+      "risk": "Not a judgement: the official rule below decides it. Risk: Account-ending if built.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Blocked by policy",
+      "decision": "D-30",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(y): no price tracking or price alerting"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-28",
+      "priority": "P1 - Decide first",
+      "title": "Keep the site single-retailer for these products",
+      "problem": "Program Content may not be used to advertise or promote products offered on any site that is not an Amazon Site.",
+      "proposal": "Do not add competing retailers' products or prices alongside these three, using data or images obtained from the program.",
+      "why": "Impact on the site is judged low, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Not a judgement: the official rule below decides it. Risk: High if ignored.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-31",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(z): no promotion of non-Amazon-site products with Program Content"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-29",
+      "priority": "P2 - Adds real value",
+      "title": "Move the disclosure to the top of every article, not only the footer and header",
+      "problem": "The FTC warns that a disclosure is likely to be missed if it appears only at the end of a post or on a separate page. Leading with it is the safest reading and costs one line.",
+      "proposal": "Repeat the required sentence immediately under each article headline, in the same size as the byline, in addition to the site header and the link-adjacent disclosure.",
+      "why": "Impact on the site is judged medium, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Design judgement, bounded by the official guidance below. Risk: Low",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Awaiting decision",
+      "decision": "D-32",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosures 101: place it so it's hard to miss"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 5: clearly and prominently"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-30",
+      "priority": "P2 - Adds real value",
+      "title": "Connect real measurement before building the optimisation loop",
+      "problem": "The brief asks the platform to optimise continuously. Optimisation against an unattributed signal is noise, and every metric on this site is deliberately blank until a real one exists.",
+      "proposal": "Confirm the tag, turn on Associates reporting, and only then use the metrics pipeline to decide what to write next. Keep the local click log as a secondary signal, with a consent notice.",
+      "why": "Impact on the site is judged high, at M effort. Recommendation from the session that wrote it: Adopt after D-01.",
+      "effort": "M",
+      "risk": "Not a judgement: measurement has to be real before it can be optimised. The rule below is why no figure is published today. Risk: Low - the alternative is optimising against a number that does not exist.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-33",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Commission Income Statement 2(g): untracked purchases are disqualified"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4",
+          "ref": "This repository, docs/analytics.html (local-only click log)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-31",
+      "priority": "P2 - Adds real value",
+      "title": "Do not automate the crawler until the Agent Terms are implemented and reviewed",
+      "problem": "The Agent Terms govern any software that takes automatic or semi-automatic action on Program Content, and the Conditions of Use restrict automated collection. The engine in this repository is deliberately built to refuse to publish rather than to scrape.",
+      "proposal": "Keep research manual. Before any agent touches the listings, implement the required self-identification in the user agent, the transparency requirements and the prohibition on working around access limits, and have the collection question reviewed.",
+      "why": "Impact on the site is judged high, at S effort. Recommendation from the session that wrote it: Adopt now.",
+      "effort": "S",
+      "risk": "Not a judgement: the official clauses below decide it. Risk: High if ignored; zero if followed.",
+      "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
+      "status": "Needs a decision first",
+      "decision": "D-34",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "IP License Section 4: Agent Terms"
+        },
+        {
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+          "ref": "Conditions of Use, License and Access"
+        }
+      ],
+      "flags": []
     }
   ]
 }

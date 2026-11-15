@@ -52,6 +52,10 @@ DECISIONS_DOC = load("decisions.json")
 DECISIONS = DECISIONS_DOC["decisions"]
 DECISION_LOG = DECISIONS_DOC["log"]
 OBSERVED = CONTENT["observed_date"]
+# The date the three supplied links and the cited official policy pages were last
+# re-read from their official sources. Kept separate from OBSERVED, which is the
+# date of the product-page snapshot the records hold.
+RECHECKED = CONTENT.get("rechecked_utc", OBSERVED)
 
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 
@@ -626,9 +630,25 @@ def page_index(current: Page) -> str:
         ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
     )
     bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:4])
+    # The gaps are stated on the front page rather than only on the review page: a
+    # reader deserves to know what this site refuses to publish before they trust
+    # what it does publish, and no competitor states theirs at all.
+    withheld = "".join(
+        f"<li><strong>{esc(k)}</strong> \u2014 {esc(v)}</li>"
+        for k, v in (
+            ("Prices", "withheld until an approved Amazon API supplies them. The listings show them; this site does not (F-02)"),
+            ("Star ratings and review counts", "withheld for the same reason (F-02)"),
+            ("Per-product commission rate",
+             "blank: no official source states which commission category these ASINs sit in (F-01)"),
+            ("Hands-on testing",
+             "none claimed. Nobody on this project has cooked in these appliances, and the site says so"),
+            ("Traffic or earnings forecasts",
+             "none published. The Operating Agreement states Amazon makes no representation about either"),
+        )
+    )
     return (
         '<div class="mhero">'
-        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 {len(PRODUCTS)} products \u00b7 a source link on every table row</span>'
+        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 links re-checked {esc(RECHECKED)} \u00b7 a source link on every table row</span>'
         "<h1>Choosing between three countertop air fryers? Start with every listed figure checked.</h1>"
         f'<p class="lead">{esc(CONTENT["executive_summary"]["headline"])}</p>'
         '<div class="mhero-actions">'
@@ -651,9 +671,17 @@ def page_index(current: Page) -> str:
         + commission_category_note()
         + '<p class="small muted">Every row links to its official product page as the source. Short links are the links you '
         "supplied. Competitor ASINs come from the also-viewed carousel and change between page loads (F-29).</p></section>"
+        + '<section><h2>What this site deliberately does not publish</h2>'
+        '<p class="section-lead">These gaps are the point. They are stated here rather than buried, and each one names the '
+        'official rule or the flag that explains it.</p>'
+        '<ul class="bullets">' + withheld + "</ul>"
+        + f'<p class="small muted">Full list: {href(current, "flagged.html", "Flagged for Review")}.</p></section>'
         + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
         + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
-        + f'<p class="muted small">Data observed {esc(OBSERVED)} (UTC). Verification scope and method: {href(current, "sources.html", "sources")}.</p>'
+        + '<p class="muted small">'
+        + "Product records observed " + esc(OBSERVED) + " (UTC); supplied links and cited policy pages re-read "
+        + esc(RECHECKED) + " (UTC). Verification scope and method: "
+        + href(current, "sources.html", "sources") + '.</p>'
     )
 
 
@@ -1378,7 +1406,7 @@ PAGE_DESCRIPTIONS = {
     "categories/air-fryer-toaster-ovens.html": "The air-fry toaster oven category: the Emeril Lagasse 26 quart record, its listed functions and footprint, and the two specification inconsistencies disclosed rather than resolved.",
     "marketing.html": "The full marketing content kit on one page: three product articles, a comparison and a buying guide, each with the fact table it was written from and a disclosure-carrying call to action.",
     "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
-    "analysis.html": "Fifteen findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
+    "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
     "requirements.html": "All thirty items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
     "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
     "policy-compliance.html": "Thirty Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
@@ -1386,8 +1414,8 @@ PAGE_DESCRIPTIONS = {
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
     "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
     "articles/index.html": "Every article on the site, grouped by product format, each one built from a fact table in which every row links to the official product page it was read from.",
-    "suggestions.html": "Twelve changes worth making to this site, costed, risk-assessed and waiting on a decision rather than already applied, each tied to the official rule that constrains it.",
-    "questions.html": "Fifteen questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
+    "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed, risk-assessed and waiting on a decision rather than already applied, each tied to the official rule that constrains it.",
+    "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
     "decisions.html": "The decision queue for this site: every open choice with its options, cost and reversibility, plus the record of decisions actually taken (currently none).",
 }
 

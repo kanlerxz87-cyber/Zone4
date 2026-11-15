@@ -279,6 +279,15 @@
       "accessible": true,
       "used_for": "rel=\"sponsored\" for paid links, which is the basis of S-05 and D-05.",
       "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
+    },
+    {
+      "id": "S-GSC-AI",
+      "title": "Google Search's guidance about AI-generated content (official Google Search Central blog post, 8 February 2023)",
+      "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+      "publisher": "Google Search Central",
+      "accessible": true,
+      "used_for": "The standard the editorial suggestions are judged against: automation used primarily to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains in search, and bylines and automation disclosures are worth considering.",
+      "notes": "Read in full on 2026-11-15 by session arena/d2a62d6b-zone4 and quoted verbatim in the questions register (Q-23 to Q-37). Google's own wording is repeated rather than paraphrased wherever it is relied on."
     }
   ],
   "non_official_reference_only": [

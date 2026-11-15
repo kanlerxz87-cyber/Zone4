@@ -26,7 +26,12 @@
       "F-42": "New. Documentation drift: test count, a check command that fails on a clean checkout, and generator ambiguity. Each item reproduced before it was recorded.",
       "F-43": "New. Wrong flag cross-reference in data/sources.json (F-29 where F-35 was meant). Corrected in the same session that found it; the row is retained as the audit trail."
     },
-    "added_by_d8564cd0_2026_11_15": "F-44 added by session arena/d8564cd0-zone4 (2026-11-15) from its own reads; full read record in data/verification-session-d8564cd0.json. First recorded as F-39 in that session's superseded commits; renumbered on rebase because arena/00ba6c2e-zone4 had taken F-39..F-43 concurrently. No existing flag was altered."
+    "added_by_d8564cd0_2026_11_15": "F-44 added by session arena/d8564cd0-zone4 (2026-11-15) from its own reads; full read record in data/verification-session-d8564cd0.json. First recorded as F-39 in that session's superseded commits; renumbered on rebase because arena/00ba6c2e-zone4 had taken F-39..F-43 concurrently. No existing flag was altered.",
+    "added_by_d2a62d6b_2026_11_15": {
+      "F-45": "New. A second dated attempt (2026-11-15, session arena/d2a62d6b-zone4) to re-read the product-details tables, including one automated-traffic interstitial, which was not circumvented because the Agent Terms prohibit working around access limits. Extends F-38 with a fresh date rather than repeating it.",
+      "F-46": "New. The editorial redesign and navigation split that session shipped are a proposed path until the owner signs them off, so they are recorded rather than assumed (S-17, S-21, D-21).",
+      "note": "That session also recorded the P2 listing-title drift that main already carries as F-44, found independently by arena/d8564cd0-zone4 on the same day. Its duplicate is not re-added; the two reads agree."
+    }
   },
   "flags": [
     {
@@ -548,6 +553,30 @@
       ],
       "status": "Needs review",
       "action": "Re-read the P2 listing title on another visit to see whether the second segment is stable or request-dependent; if it has genuinely changed, update products.json name_listing through a session that owns that file, and check the P2 article's function-count wording (flag F-26) against the fresh read."
+    },
+    {
+      "id": "F-45",
+      "severity": "Medium",
+      "title": "Sixteen of twenty-one pages share one identical meta description",
+      "detail": "scripts/build_site.py falls back to a single SITE_DESCRIPTION for every page that does not supply its own. Only the five article pages supply one, so docs/index.html, executive-summary.html, products.html, the three category pages, marketing.html, automation.html, analysis.html, requirements.html, verification.html, policy-compliance.html, analytics.html, flagged.html, sources.html and articles/index.html all carry the same <meta name=\"description\"> text. Checked by counting distinct descriptions across docs/**/*.html: 6 distinct values across 21 pages. Google's snippet guidance asks for a unique description on each page. This does not affect any published fact; every value on the pages is unchanged. Update 2026-11-15 (arena/00ba6c2e-zone4): corrected in the same session that found it. Every page now supplies its own description from PAGE_DESCRIPTIONS in scripts/build_site.py, and scripts/verify.py fails the build if two pages share one. The committed site now carries 24 distinct descriptions across 24 pages, counted after the rebuild.",
+      "sources": [
+        "https://developers.google.com/search/docs/appearance/snippet",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py"
+      ],
+      "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
+      "action": "None outstanding, except the underlying writing judgement (S-04 / D-04) if you want the descriptions changed rather than merely unique."
+    },
+    {
+      "id": "F-46",
+      "severity": "Medium",
+      "title": "The landing-page KPI counts a narrower set than its label implies",
+      "detail": "The index KPI is computed as flags whose status contains 'review' and not 'resolved', which yields 21, and is labelled 'Open items for your review'. The register holds 38 flags, of which 28 carry a status that is not Resolved and not Corrected (for example 'Unverified (blank)', 'Informational', 'Documented', 'Partly built; not connected', 'Open review item', 'Implemented; confirm before launch'). So 7 flags that are still open by any ordinary reading are not counted. The number itself is derived from the data and is correct for the set it computes; the label describes a different set. No published fact is affected. Update 2026-11-15 (arena/00ba6c2e-zone4): corrected in the same session that found it. The KPI is now computed from one predicate (flag_group(...) == 'Needs your decision', which is the same predicate the Flagged for review page groups by) and reads 'Flags awaiting your decision, of 43 recorded'. The review page now separates the three groups: 32 need a decision, 4 are corrected, 7 are resolved.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json"
+      ],
+      "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
+      "action": "None outstanding. Whether a given flag should stay open is a separate question, answered flag by flag on the review page."
     }
   ]
 }

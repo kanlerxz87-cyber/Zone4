@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "description": "Full list of requirements taken from the project brief, one row each, with the delivery status of this site and the official source that governs or evidences that status. Nothing is inferred: a requirement is marked Delivered only where the site actually does it, and Not built / Unverifiable otherwise, with the official rule or missing access named in the blocker column. Updated by the final integration session (arena/3036372b-zone4) on 2026-11-14: the content-generation, tracking and delivery rows were restated against the merged site, which now publishes the marketing content kit and a local first-party click log.",
-    "as_of_utc": "2026-11-14",
+    "description": "Full list of requirements taken from the project brief, one row each, with the delivery status of this site and the official source that governs or evidences that status. Nothing is inferred: a requirement is marked Delivered only where the site actually does it, and Not built / Unverifiable otherwise, with the official rule or missing access named in the blocker column. Updated by the final integration session (arena/3036372b-zone4) on 2026-11-14: the content-generation, tracking and delivery rows were restated against the merged site, which now publishes the marketing content kit and a local first-party click log. Extended on 2026-11-15 by session arena/d2a62d6b-zone4 with REQ-31 to REQ-35 (question register, suggestions board, marketing redesign, organic traffic, executive summary).",
+    "as_of_utc": "2026-11-15",
     "status_meanings": {
       "Delivered": "Working on the published site now.",
       "Delivered (partial)": "Something is published, but a named part of the requirement is missing or unverified.",
@@ -447,6 +447,106 @@
       "flags": [
         "F-01",
         "F-02"
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "area": "Decision support",
+      "requirement": "Provide a clear list of questions, information and answers that must be addressed before any decision can reasonably be made, based on what is already known and what is not.",
+      "status": "Delivered (partial)",
+      "delivered": "The questions register: 36 rows split into what is already known from an official source, what is missing and who can supply it. Sixteen open questions and twenty verified answers quoted from the source that settles each one (Q-23 to Q-36 were ported into the register built by arena/00ba6c2e-zone4, which had a 'Known' kind declared but no rows using it).",
+      "blocker": "The register cannot answer twelve of its own rows: the Associates tag, the per-ASIN commission category and API eligibility need the owner's account, and the collection and AI-content questions need counsel. Those are listed as unknown rather than guessed.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+        "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+        "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content"
+      ],
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-09",
+        "F-11",
+        "F-12",
+        "F-19",
+        "F-21",
+        "F-22",
+        "F-23",
+        "F-29",
+        "F-31",
+        "F-39"
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "area": "Decision support",
+      "requirement": "Create a section dedicated to suggestions, so someone can review them and choose the best path before implementing any changes.",
+      "status": "Delivered (partial)",
+      "delivered": "The suggestions register: 27 costed paths, each with the problem, the proposal, the cost, the risk, the check that would prove it worked, its priority and its status, plus a decision queue that records which option was actually taken. Fifteen rows were ported in from the parallel session's board; thirteen duplicates were dropped rather than double-numbered.",
+      "blocker": "Nothing on the board is implemented except the two items this session shipped for review (the redesign and the navigation split, S-13 and S-17), because the brief asks for a path to be chosen before changes are made. The owner's sign-off on those two is open (F-46).",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+        "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content"
+      ],
+      "flags": [
+        "F-41"
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "area": "Site",
+      "requirement": "Redesign the site so it reads like a polished marketing affiliate website rather than a research data dump, while keeping every published value sourced.",
+      "status": "Delivered",
+      "delivered": "A marketing redesign of all 23 pages: an editorial design system with a serif display face, a warm paper-and-ink palette, a marketing hero, article cards, category tiles, restyled tables and a navigation split into a public magazine and a research appendix, including restyled suggestions, decision and question components.",
+      "blocker": "No blocker. The redesign is a proposed path awaiting sign-off, recorded as F-46 and on the suggestions board, because the brief asks for suggestions to be reviewed before changes are made.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4",
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "flags": [
+        "F-41"
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "area": "Traffic",
+      "requirement": "Make the site able to generate organic traffic so real people can click the links and buy, without publishing anything unverified.",
+      "status": "Delivered (partial)",
+      "delivered": "Per-page title tags and meta descriptions on the article pages, keyword targets with declared intent, an articles hub grouped by category, three category pages that act as pillars, internal linking between articles and the comparison and buying guide, and a traffic plan on the suggestions board built on the verification angle.",
+      "blocker": "Nothing is measured, so nothing can be optimised: no Associates reporting is connected and the links carry no visible tag. Paid search is constrained by Participation Requirement 6(f) and Commission Income Statement 2(c) to 2(e), which is why the plan is organic-first. No traffic or earnings projection is published, because the Operating Agreement states Amazon makes no representation about either.",
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+        "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
+      ],
+      "flags": [
+        "F-03",
+        "F-19",
+        "F-23",
+        "F-31"
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "area": "Reporting",
+      "requirement": "Produce an executive summary outlining the important details.",
+      "status": "Delivered",
+      "delivered": "EXECUTIVE_SUMMARY.md in the repository and the Executive summary page on the site, both generated from the same data as the rest of the site.",
+      "blocker": "",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
+      ],
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03"
       ]
     }
   ]

@@ -393,6 +393,23 @@ table.requirements td:nth-child(5), table.requirements td:nth-child(6) { min-wid
 table.sources td:nth-child(2) { min-width: 220px; }
 table.sources td:nth-child(5) { min-width: 200px; }
 
+/* --- Per-table column rules -------------------------------------------------
+   The page builders put a hook class on each register table (facts, keywords,
+   seo-rules, checklist, stages, tracking, optimisation, agents, shop, flags).
+   These rules only give the wide prose columns room and keep the id column
+   from wrapping, so the long registers stay readable at every width. Added
+   2026-11-15: without them ten hook classes used by the built HTML resolved
+   to nothing. */
+#flagged tr:target, table.flags span:target { outline: 2px solid var(--accent); border-radius: 4px; }
+table.facts td:first-child, table.keywords td:first-child, table.seo-rules td:first-child,
+table.checklist td:first-child, table.stages td:first-child, table.tracking td:first-child,
+table.optimisation td:first-child, table.agents td:first-child,
+table.shop td:first-child { white-space: nowrap; font-weight: 600; }
+table.facts td:nth-child(3) { min-width: 200px; }
+table.tracking td:nth-child(4) { min-width: 120px; }
+table.shop td:nth-child(3) { min-width: 180px; }
+table.flags td:nth-child(3) { min-width: 220px; }
+
 /* Print: a reviewer may well print the decision queue. */
 @media print {
   .sidebar, .disclosure, .skip, .mhero-actions, .filter, .btnrow { display: none; }
