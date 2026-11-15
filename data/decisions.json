@@ -123,7 +123,7 @@
     },
     {
       "id": "D-04",
-      "question": "Should every page get its own title tag and meta description?",
+      "question": "Should every page carry its own title tag and meta description? (Already done for descriptions; the wording is still open.)",
       "linked_question": null,
       "linked_suggestions": [
         "S-04"
@@ -132,20 +132,27 @@
       "options": [
         {
           "key": "A",
-          "label": "Yes, write all 21",
-          "commits_to": "A build rule that fails on duplicate descriptions. No policy dimension.",
-          "effort": "Two to three hours.",
+          "label": "Keep the descriptions that were just written, and review the wording",
+          "commits_to": "The duplicate-description defect (F-40) is already fixed and guarded by the build. This option is about whether the 24 new sentences actually read well and say the right thing about each page.",
+          "effort": "An hour of reading and editing.",
           "reversible": "Yes."
         },
         {
           "key": "B",
-          "label": "Only the pages meant to be found in search",
-          "commits_to": "Internal-only pages keep the shared description and are marked noindex so they cannot compete with the articles.",
-          "effort": "About an hour.",
+          "label": "Mark internal-only pages noindex so they cannot compete with the articles",
+          "commits_to": "The reference pages (verification log, policy compliance, analytics, sources, requirements) would stop appearing in search results, leaving the articles and category pages as the only indexable content.",
+          "effort": "One builder change.",
           "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Leave the text as generated",
+          "commits_to": "Unique descriptions, but written in the builder's voice rather than a publisher's.",
+          "effort": "None.",
+          "reversible": "n/a"
         }
       ],
-      "recommendation": "A. Sixteen pages sharing one description is a defect whichever way the site is aimed.",
+      "recommendation": "A, then B if the site is aimed at search traffic. The duplication itself is fixed; what remains is an editorial judgement about 24 sentences, and a decision about whether the internal reference pages should be indexable at all.",
       "sources": [
         {
           "url": "https://developers.google.com/search/docs/appearance/snippet",
