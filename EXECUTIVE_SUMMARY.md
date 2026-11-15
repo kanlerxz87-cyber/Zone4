@@ -54,6 +54,8 @@ closed by inference, and the decision log states explicitly that no owner decisi
 withheld values are exactly as they were; the build gate now fails if a suggestion points at a decision that does not exist, if a
 recorded decision is missing from the log, or if two pages share a meta description.
 
+**Design & marketing polish (added 2026-11-15 by `arena/d8564cd0-zone4`).** In the same decision-support direction, that session also shipped the no-decision-needed first steps: a warm-identity stylesheet refresh (all prior class names preserved, including the decision-support classes), a decision-first landing hero with the articles presented in decision order, article copy rewritten with subheadings and decision-led hooks while every fact and fact_id stayed exactly as verified, Article/WebSite JSON-LD that states only what each page visibly shows, a generated `docs/sitemap.xml`, and a paste-ready design brief at the end of `docs/suggestions.html`. Its same-day verification pass is in `data/verification-session-d8564cd0.json` (flag F-44). The two sessions' registers were reconciled rather than duplicated: that session dropped its own parallel question/suggestion drafts and kept this register canonical — the superseded commits remain in the branch reflog and are described in `COORDINATION.md`.
+
 ## 3. Product verification results (official Amazon sources, observed 2026-11-14)
 
 | # | Submitted link | Resolved ASIN | Official listing title | Category (breadcrumb) | Brand | Manufacturer | Price / rating / reviews | Commission |
@@ -79,7 +81,7 @@ The official [Standard Commission Income Statement, Table 1](https://affiliate-p
 - **PA-API 5 is officially deprecated** in favour of the **Creators API** (https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation); license terms not yet reviewed (F-16).
 - The **Standard Commission Income Statement is published at a public URL that needs no sign-in** (https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ). Its Table 1 lists "Physical Books, Kitchen, Automotive" at **4.50%**. That is a category-level reference only; no official source reviewed confirms which band Amazon assigns to these individual ASINs, so each product-level rate is left blank (F-01).
 - Amazon Conditions of Use (updated 2026-08-14) additionally constrain scraping/data mining and the use of Amazon content to improve models (F-11, F-12).
-- The complete flag register (**F-01 … F-43**, 43 items) is published at `docs/flagged.html` with sources, grouped into the 32 that need a decision, the 4 that were corrected in the session that found them (F-40, F-41, F-43 and F-05's original correction) and the 7 resolved items kept as the audit record.
+- The complete flag register (**F-01 … F-44**, 44 items) is published at `docs/flagged.html` with sources, grouped into the items that need a decision, those corrected in the session that found them and the resolved items kept as the audit record. **F-44** (added 2026-11-15 by `arena/d8564cd0-zone4`): the P2 listing title's second segment differed on a 2026-11-15 read, and two carousels changed membership again — both recorded verbatim in `data/verification-session-d8564cd0.json` with the stored records kept; first numbered F-39 in that session's superseded commits and renumbered on rebase because `arena/00ba6c2e-zone4` had taken F-39…F-43 concurrently.
 
 ## 5. Flagged for review — headline items (complete register: `docs/flagged.html`)
 

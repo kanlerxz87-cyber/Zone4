@@ -20,6 +20,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/content.json` | Executive summary, 15 analysis findings, category text |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
+| `data/verification-session-d8564cd0.json` | 2026-11-15 verification pass by `arena/d8564cd0-zone4`: commission table re-read, P1/P2/P3 page reads, flag F-44 record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |

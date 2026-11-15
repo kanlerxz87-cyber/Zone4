@@ -25,7 +25,8 @@
       "F-41": "New. KPI label versus the set it computes, verified by evaluating the builder's own predicate against data/flags.json (21 vs 28).",
       "F-42": "New. Documentation drift: test count, a check command that fails on a clean checkout, and generator ambiguity. Each item reproduced before it was recorded.",
       "F-43": "New. Wrong flag cross-reference in data/sources.json (F-29 where F-35 was meant). Corrected in the same session that found it; the row is retained as the audit trail."
-    }
+    },
+    "added_by_d8564cd0_2026_11_15": "F-44 added by session arena/d8564cd0-zone4 (2026-11-15) from its own reads; full read record in data/verification-session-d8564cd0.json. First recorded as F-39 in that session's superseded commits; renumbered on rebase because arena/00ba6c2e-zone4 had taken F-39..F-43 concurrently. No existing flag was altered."
   },
   "flags": [
     {
@@ -534,6 +535,19 @@
       ],
       "status": "Corrected 2026-11-15 (arena/00ba6c2e-zone4); kept as the audit record",
       "action": "None outstanding. The note now points at F-35; this row is kept so the correction is visible."
+    },
+    {
+      "id": "F-44",
+      "severity": "Low",
+      "title": "P2 listing title's second segment differs on the 2026-11-15 read; two carousels changed membership again",
+      "detail": "On 2026-11-15 (UTC), session arena/d8564cd0-zone4 read the P2 page https://www.amazon.com/dp/B09B7SB46R (reached via the supplied short link, after a direct fetch returned Amazon's 'Continue shopping' checkpoint). The page title read 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'. The first segment matches the stored name_listing exactly; the second segment differs from the stored record ('26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'), which three sessions read on 2026-11-14. The stored record cites its own read dates and is kept; the newer read is recorded verbatim in data/verification-session-d8564cd0.json. Either the listing text changed between reads or the page renders a different second segment per request; this session does not decide between those readings. The same read also showed two live carousel changes: on P2, position 3 showed B0D1BGLW25 (Midea Flexify Classic French Door Toaster Oven Air Fryer Combo, 26.4 QT) where the stored record has B0F92GL7JH (HotKing Dual-Zone 28 QT); on P3, position 3 showed B09MR7QWKZ (Gourmia Air Fryer - 8 Qt Basket Capacity, 12 Presets) where the stored record has B0C33CHG99 (Cosori TurboBlaze). Both are further instances of the carousel instability that F-29 already documents; no stored competitor record was altered. All three products' identities, breadcrumbs and P1's full competitor set re-confirmed on the same reads. Numbered F-44 because F-39..F-43 were added by arena/00ba6c2e-zone4 while this session was in flight; the same observation was first numbered F-39 in this session's superseded commits (kept in the branch reflog).",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Needs review",
+      "action": "Re-read the P2 listing title on another visit to see whether the second segment is stable or request-dependent; if it has genuinely changed, update products.json name_listing through a session that owns that file, and check the P2 article's function-count wording (flag F-26) against the fresh read."
     }
   ]
 }
