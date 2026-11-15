@@ -403,3 +403,61 @@ table.sources td:nth-child(5) { min-width: 200px; }
   a { color: inherit; text-decoration: none; }
   .scard, .decision, .post { break-inside: avoid; border-color: #bbb; }
 }
+
+/* ---------------------------------------------------------------------------
+   Warm editorial theme layer (arena/f87cc71f-zone4, 2026-11-15).
+   Presentation-only restyle on top of the canonical component styles above:
+   palette, display typography and surface warmth. No layout or class changes.
+--------------------------------------------------------------------------- */
+:root {
+  --bg: #faf6ef;
+  --panel: #fffdf9;
+  --ink: #26201a;
+  --muted: #6f6455;
+  --line: #e9dfcf;
+  --accent: #b45309;
+  --side: #2b2119;
+  --ok-bg: #e7f1e4; --ok-ink: #2e5d38;
+  --warn-bg: #fbefd3; --warn-ink: #7a5710;
+  --bad-bg: #f7e3dc; --bad-ink: #8c2f1d;
+  --muted-bg: #efe8db; --muted-ink: #5c5344;
+}
+body { background: var(--bg); color: var(--ink); }
+a { color: #8c410a; }
+a:hover { color: var(--accent); }
+h1, h2, h3, .mhero h1, .hero h1, .acard-title, .tile-title, .card-title,
+.kpi-value, .post h1, .sidebar .brand, table th {
+  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+}
+table th { font-family: var(--sans, system-ui, sans-serif); }
+.sidebar { background: linear-gradient(180deg, #2b2119 0%, #3a2c20 100%); color: #f0e7d9; }
+.sidebar nav a { color: #d9cbb6; }
+.sidebar nav a:hover { background: rgba(255,255,255,.09); color: #fff; }
+.sidebar nav a.active { background: rgba(255,255,255,.15); color: #fff; }
+.sidebar .nav-group-title { color: #a8937a; }
+.disclosure { background: #fdf3d7; border-bottom-color: #efd9a0; color: #5c4700; }
+.disclosure a { color: #5c4700; }
+footer { background: #f5eee2; }
+th { background: #f3ead9; color: #4b3a24; }
+tbody tr:hover { background: #fbf5ea; }
+.kpi, .card, .acard, .tile, .table-wrap, .doc, .post, .btn {
+  box-shadow: 0 1px 2px rgba(62, 42, 18, .07), 0 4px 14px rgba(62, 42, 18, .05);
+}
+.card, .acard, .tile, .kpi, .table-wrap, .doc, .post { border-radius: 12px; }
+.card:hover, .acard:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(62, 42, 18, .12); }
+.mhero {
+  background: linear-gradient(148deg, #33241a 0%, #7a3d10 56%, #b45309 100%);
+  color: #fdf3e4; border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(90, 50, 12, .18);
+}
+.mhero .badge { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.26); color: #ffe9c9; }
+.mhero h1 { color: #fff; }
+.mhero .lead { color: #f3e2c7; }
+.mhero-actions .btn { color: #fdf3e4; border-color: rgba(255,255,255,.38); }
+.mhero-actions .btn:hover { background: rgba(255,255,255,.13); }
+.mhero-actions .btn-primary { background: #ffd9a8; border-color: #ffd9a8; color: #46260a; }
+.mhero-actions .btn-primary:hover { background: #ffe5c2; }
+.chip { background: #f6e7cd; color: #7c4a0d; }
+.cta { background: #fdf1de; border-color: #eccfa2; }
+.btn:hover { background: #f6ecdc; border-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
