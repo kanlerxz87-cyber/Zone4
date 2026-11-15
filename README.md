@@ -41,6 +41,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the product table and key findings |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
 | `requirements.html` | All 30 brief items: delivered, blocked or unverifiable, each with the official source |
+| `suggestions.html` | Decision worksheet: clear questions, known/unknown evidence, options and proposed next steps with official sources |
 | `products.html` | All three products, one row each, every row linked to its source |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
 | `marketing.html` | The same articles, comparison page and buying guide on one page, with a fact table per article |
@@ -82,6 +83,6 @@ The verifier fails the build if any table row lacks a link to an official source
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
 - Price tracking and price alerting are **not built**: Participation Requirement 6(y) prohibits them unless Amazon agrees otherwise.
 
-Start with `flagged.html` on the live site for the items that need your decision, and `requirements.html` for the brief-by-brief delivery status.
+Start with `suggestions.html` on the live site for the question-by-question decision worksheet; use `flagged.html` for the evidence-backed items needing review and `requirements.html` for the brief-by-brief delivery status.
 
 The site is not endorsed by or affiliated with Amazon. Disclosure, per Associates Operating Agreement Section 5: "As an Amazon Associate I earn from qualifying purchases."

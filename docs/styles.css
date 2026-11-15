@@ -96,6 +96,9 @@ table.checklist td:first-child, table.stages td:first-child, table.tracking td:f
 table.optimisation td:first-child, table.agents td:first-child { white-space: nowrap; font-weight: 600; }
 table.facts td:nth-child(3) { min-width: 200px; }
 table.tracking td:nth-child(4) { min-width: 120px; }
+table.suggestions td { min-width: 220px; line-height: 1.45; }
+table.suggestions td:first-child { min-width: 135px; }
+table.suggestions td:last-child { min-width: 190px; }
 
 /* Analytics page: local click-log controls */
 .btnrow { display: flex; gap: 9px; flex-wrap: wrap; margin: 12px 0 4px; }

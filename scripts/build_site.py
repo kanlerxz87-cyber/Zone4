@@ -55,6 +55,7 @@ NAV = [
     ("automation.html", "Automation & tracking", "Research"),
     ("analysis.html", "Analysis & findings", "Research"),
     ("requirements.html", "Requirements", "Research"),
+    ("suggestions.html", "Suggestions & decisions", "Research"),
     ("verification.html", "Verification log", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
     ("analytics.html", "Analytics", "Governance"),
@@ -684,7 +685,8 @@ def page_exec(current: Page) -> str:
         + f'<section><h2>What the verification found</h2><ul class="bullets">{bullets}</ul></section>'
         + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol></section>'
         + f'<section><h2>Not built, and why</h2><ul>{not_built}</ul></section>'
-        + '<section><h2>Detail</h2><p>See '
+        + '<section><h2>Detail</h2><p>For a question-by-question worksheet with knowns, gaps, options and suggested next steps, see '
+        + href(current, "suggestions.html", "Suggestions & decisions") + ". Further detail: "
         + href(current, "analysis.html", "Analysis & findings") + ", "
         + href(current, "marketing.html", "Marketing content") + ", "
         + href(current, "automation.html", "Automation & tracking") + ", "
@@ -953,6 +955,109 @@ def page_requirements(current: Page) -> str:
     )
 
 
+def suggestion_rows(current: Page) -> list[list[str]]:
+    """Decision worksheet: recommendations are proposals, never presented as facts."""
+    decisions = [
+        {
+            "id": "D-01", "area": "Product selection",
+            "question": "Are these the three products you intended to promote?",
+            "known": "The supplied short links resolve to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH; the short codes are not the ASINs.",
+            "missing": "Your confirmation that each resolved ASIN is the intended item; any replacement products.",
+            "options": "A. Confirm all three ASINs. B. Replace any link with the intended product’s official tagged link.",
+            "suggestion": "Confirm the resolved ASINs before publishing campaigns; treat the ASIN, not the short-link token, as the product identifier.",
+            "sources": [("https://link.amazon/B04G1MEwY", "P1 supplied link"), ("https://link.amazon/B02NbDxp3", "P2 supplied link"), ("https://link.amazon/B00hJ57DV", "P3 supplied link")],
+            "flags": ["F-04"],
+        },
+        {
+            "id": "D-02", "area": "Affiliate attribution",
+            "question": "Which Associates marketplace and tracking ID should receive purchases?",
+            "known": "The resolved supplied links do not expose a `tag=` parameter, so attribution to an Associates ID is unverified.",
+            "missing": "The account/marketplace and confirmation that each final link was generated for the correct Associate ID.",
+            "options": "A. Verify the current links inside Associates Central. B. Generate and substitute official tagged links for the chosen marketplace.",
+            "suggestion": "Do not rely on earnings attribution until the three final links are confirmed in the account and tested.",
+            "sources": [("https://affiliate-program.amazon.com/", "Associates Central"), ("https://affiliate-program.amazon.com/help/operating/policies", "Participation Requirements")],
+            "flags": ["F-03"],
+        },
+        {
+            "id": "D-03", "area": "Data access and automation",
+            "question": "What research automation is authorized, and what source may it use?",
+            "known": "The official Conditions of Use and Associates rules restrict collection/use of listings and program content; the API documentation describes a controlled access route. No automated collector is enabled here.",
+            "missing": "Your current account’s API eligibility, written permissions if required, marketplace approvals, and the precise permitted fields/use.",
+            "options": "A. Keep research manual and publish only reviewed facts. B. Confirm eligibility and terms, then use the authorized API scope. C. Obtain Amazon’s express written approval before any otherwise restricted agent/model use.",
+            "suggestion": "Keep automation disabled until the applicable terms and written approvals are confirmed; never train or improve models with Program Content without required approval.",
+            "sources": [("https://www.amazon.com/gp/help/customer/display.html?nodeId=508088", "Conditions of Use"), ("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies"), ("https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "Creators API documentation")],
+            "flags": ["F-11", "F-12", "F-21", "F-24"],
+        },
+        {
+            "id": "D-04", "area": "Pricing, reviews and trend signals",
+            "question": "Should the site pursue approved API data, or launch without price/rating claims?",
+            "known": "Public prices, star ratings and review metrics are withheld on this site; no API/account feed is connected and no trend data has been measured.",
+            "missing": "API access approval, allowed fields, refresh limits, current data, and an evidence-based definition of a trend or conversion signal.",
+            "options": "A. Launch with verified product facts and editorial comparisons only. B. Apply for the documented API and publish only fields/metrics allowed by its current terms.",
+            "suggestion": "Start without price, rating or trend claims. Add data-driven comparisons only after access and each displayed field are verified.",
+            "sources": [("https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction", "Creators API documentation"), ("https://affiliate-program.amazon.com/help/operating/policies", "Participation Requirements")],
+            "flags": ["F-02", "F-33"],
+        },
+        {
+            "id": "D-05", "area": "Economics and success criteria",
+            "question": "What verified commission and performance data should guide investment?",
+            "known": "The public schedule lists category-level rates, including a Kitchen band; the category assigned to each ASIN is not verified. Clicks, orders and revenue are not connected, so no conversion or earnings figures exist.",
+            "missing": "Per-ASIN category confirmation, correct tagged links, account reporting/API access, chosen costs and a target time horizon.",
+            "options": "A. Keep product-level commission and ROI blank. B. Confirm each ASIN category in the account and use actual attributed reports before setting targets.",
+            "suggestion": "Use a small, explicitly time-boxed pilot after attribution is verified; evaluate on actual reported outcomes, not assumed conversion rates.",
+            "sources": [("https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "Standard Commission Income Statement"), ("https://affiliate-program.amazon.com/", "Associates Central reporting")],
+            "flags": ["F-01", "F-03"],
+        },
+        {
+            "id": "D-06", "area": "Editorial and SEO direction",
+            "question": "Who is the intended reader, and what original experience or evidence will make the content useful?",
+            "known": "The repository contains five article drafts/pages based on sourced facts. It does not contain first-hand product testing or evidence of search demand, reader behavior or conversion lift.",
+            "missing": "Audience, use cases, editorial voice, real testing access, author/reviewer, target region and a way to evaluate helpfulness without fabricated results.",
+            "options": "A. Publish clearly labeled research/comparison guides limited to cited facts. B. Arrange real hands-on testing and add attributed observations after review.",
+            "suggestion": "Prioritize specific decision-helpful topics and human fact/editorial review; do not claim experience, performance or search trends that have not been established.",
+            "sources": [("https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "Google Search Central"), ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC disclosure guidance")],
+            "flags": ["F-12"],
+        },
+        {
+            "id": "D-07", "area": "Tracking and privacy",
+            "question": "What measurement is acceptable, and what privacy/consent review is needed before scaling it?",
+            "known": "The current analytics page records clicks only in the visitor’s own browser; it has no connected conversion reporting and does not report revenue.",
+            "missing": "Target jurisdictions, retention period, consent requirements, privacy notice, access controls and approval for any server-side analytics or audience tracking.",
+            "options": "A. Keep browser-local, opt-in/manual reporting only. B. Add first-party measurement only after privacy/legal review and a documented retention/consent design.",
+            "suggestion": "Keep the current local-only approach until the audience and applicable obligations are known; do not describe clicks as sales or conversions.",
+            "sources": [("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies"), ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC disclosure guidance")],
+            "flags": ["F-02", "F-03"],
+        },
+    ]
+    rows = []
+    for d in decisions:
+        sources = "<br>".join(ext(url, label) for url, label in d["sources"])
+        flags = " ".join(flag_chip(current, fid) for fid in d["flags"])
+        rows.append([
+            f'<strong>{esc(d["id"])}</strong><br>{esc(d["area"])}',
+            f'<strong>{esc(d["question"])}</strong><br><span class="small">{flags}</span>',
+            esc(d["known"]), esc(d["missing"]), esc(d["options"]), esc(d["suggestion"]), sources,
+        ])
+    return rows
+
+
+def page_suggestions(current: Page) -> str:
+    return (
+        '<header class="hero"><h1>Suggestions &amp; decisions</h1>'
+        '<p class="lead">A review worksheet—not an authorization to change account settings or publish new claims. Each row separates what the repository establishes from what is still unknown, lists practical paths, and offers a recommendation for someone to accept or reject.</p>'
+        '<p class="muted small">No option is preselected. The recommendations are proposals, not verified facts. Follow the linked official sources and the Flagged for Review record before implementation.</p></header>'
+        '<section><h2>Decision register</h2>'
+        + table(["Area", "Question to answer", "Known from current evidence", "Missing information", "Options to compare", "Suggested path (not selected)", "Official sources"], suggestion_rows(current), "suggestions")
+        + '<p class="note">The linked flags contain the detailed evidence and follow-up actions. A blank or missing value is intentional where the reviewed sources do not establish it. Account access, legal review and user preferences are not inferred.</p></section>'
+        '<section><h2>Suggested order of work</h2><ol class="bullets">'
+        '<li>Confirm that the resolved ASINs match the intended products and that the final links carry the correct Associates tracking ID.</li>'
+        '<li>Resolve the applicable program terms and API permissions before automating collection, using Program Content in an agent, or publishing API-derived data.</li>'
+        '<li>Only then decide whether to add product-level economics, trend analysis or conversion tracking; keep unknown fields blank until sourced.</li>'
+        '<li>Choose the audience and editorial approach, then require human review of source-backed claims and clear affiliate disclosures.</li>'
+        '</ol><p>For the full factual gap register, see the ' + href(current, "flagged.html", "Flagged for Review") + ' page; for the brief-by-brief delivery status, see ' + href(current, "requirements.html", "Requirements") + '.</p></section>'
+    )
+
+
 BODIES = {
     "index.html": page_index,
     "executive-summary.html": page_exec,
@@ -964,6 +1069,7 @@ BODIES = {
     "automation.html": page_automation,
     "analysis.html": page_analysis,
     "requirements.html": page_requirements,
+    "suggestions.html": page_suggestions,
     "verification.html": page_verification,
     "policy-compliance.html": page_policy,
     "analytics.html": page_analytics,

@@ -333,7 +333,7 @@ def check_site() -> None:
 def check_required_pages() -> None:
     required = [
         "index.html", "executive-summary.html", "products.html", "marketing.html",
-        "automation.html", "analysis.html", "requirements.html", "verification.html",
+        "automation.html", "analysis.html", "requirements.html", "suggestions.html", "verification.html",
         "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
         "categories/dual-basket-air-fryers.html",
         "categories/single-basket-air-fryers.html",
