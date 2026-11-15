@@ -14,7 +14,12 @@
       "Agent Terms apply to the research agent in the brief: any agent that touches Program Content must identify itself as 'Agent/[name]' in the user agent string, must not conceal that it is an agent, and must not solve CAPTCHAs or work around access limits (F-21).",
       "Compliance: the required disclosure sentence appears on every page (R-01). Open legal items: the Conditions of Use limit collecting listing content and using robots for extraction (F-11), and Amazon Marks must not be used as search keywords (F-23).",
       "Site: static GitHub Pages site; the repository root redirects to the site in docs/. Every table row links to an official source, and unverified values are blank and flagged.",
-      "Measured, not modelled: the Analytics page records real clicks in the visitor's own browser and exports them as JSON or CSV. It sends nothing to any server, it never invents a figure, and the only non-click event it can write is one explicitly labelled a test. The tracked links are the supplied short links, which still carry no visible Associates tag, so a recorded click cannot yet be reconciled against Amazon reporting."
+      "Measured, not modelled: the Analytics page records real clicks in the visitor's own browser and exports them as JSON or CSV. It sends nothing to any server, it never invents a figure, and the only non-click event it can write is one explicitly labelled a test. The tracked links are the supplied short links, which still carry no visible Associates tag, so a recorded click cannot yet be reconciled against Amazon reporting.",
+      "Decisions register added (2026-11-15): twelve questions that must be answered before a design, content, traffic or automation decision can reasonably be made, each split into what is verified from an official source, what is missing, why it blocks the decision, the options, the recommended option and the exact steps that would supply the missing information. Fourteen further questions are closed and quoted verbatim from the official source that settles them. See the Decisions page.",
+      "Suggestions board added (2026-11-15): twenty-seven proposals across positioning, design, editorial, organic traffic, monetisation, compliance and automation, each with the concrete change, the reason, a recommendation, effort, impact, risk and the decision it depends on. Twenty-five are awaiting your choice, one is recorded as rejected on an official rule, and the redesign items are marked as implemented and reversible. Nothing on the board is implemented beyond that first tranche.",
+      "Site redesigned (2026-11-15): an editorial design system with a serif display face, a warm paper-and-ink palette, a marketing hero, article cards and category tiles, and a navigation split into a public magazine and a research appendix. No published value changed: every table row still carries its official source link, prices and ratings are still withheld, and the disclosure and paid-link labels are unchanged. The redesign is a proposed path and is flagged for your sign-off (F-41).",
+      "Re-verified on 2026-11-15: all three short links still resolve to the same three ASINs, with no tag parameter visible in any resolved URL (F-03 stands). P1 and P3 still show the recorded listing titles. P2 does not: the official page now shows a different title string from the 2026-11-14 snapshot (F-39). The also-viewed carousels drifted again (F-29). The product-details tables could not be re-read on this pass either (F-40).",
+      "Official sources re-read in full on 2026-11-15 for this pass: the Operating Agreement (Sections 1, 4 and 5), the Program Policies (Participation Requirements 6(f) to 6(z) and Commission Income Statement 2(c) to 2(g)), the public Standard Commission Income Statement Table 1, the FTC Disclosures 101 guidance, and Google's guidance on AI-generated content. Each is quoted on the Decisions page rather than paraphrased."
     ],
     "decisions_needed": [
       "Confirm each ASIN’s commission category in Associates Central before using any category rate for product-level calculations (F-01).",
@@ -24,7 +29,10 @@
       "Confirm whether a local, browser-only click log is acceptable for the audience, and add a cookie or consent notice before enabling it on real traffic.",
       "Decide whether to keep prices and ratings withheld, given that price tracking and alerting are prohibited by default (F-22).",
       "Ask the seller for P2's correct cooking function count (F-26; the brand is confirmed from the Item details table, F-05 resolved).",
-      "Record your picks on the Suggestions & decisions page (visual direction S-01, voice S-02, trend-claims rule S-03, topic calendar S-04): the redesign prompt draft cannot be finalized until those choices exist, and the Questions & answers register shows what each one waits on."
+      "Record your picks on the Suggestions & decisions page (visual direction S-01, voice S-02, trend-claims rule S-03, topic calendar S-04): the redesign prompt draft cannot be finalized until those choices exist, and the Questions & answers register shows what each one waits on.",
+      "Start with D-01 on the Decisions page: confirm the three links carry your Associates tag. Until that is true, nothing else on the site can earn (F-03).",
+      "Read the Suggestions page and accept, reject or park each item before the next tranche is built. The redesign already shipped is itself on that board for your sign-off (F-41).",
+      "Set a re-verification cadence (D-12). The P2 listing title changed between two consecutive reads of the same official page (F-39), so a date on every record is now necessary, not decorative."
     ]
   },
   "analysis": [
@@ -178,6 +186,36 @@
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "confidence": "Verified"
+    },
+    {
+      "id": "A-16",
+      "finding": "Organic growth and paid search are governed by different parts of the same policy document, and the paid route is much narrower than most affiliate playbooks assume.",
+      "basis": "Participation Requirement 6(f) permits buying paid search advertisements, but not on Proprietary Terms (Amazon Marks and their variations or misspellings), and the resulting advertisement must send users to your own site rather than directly or indirectly to an Amazon Site. Separately, Commission Income Statement 2(c), 2(d) and 2(e) disqualify purchases referred by a prohibited paid search placement, by a link displayed on a search engine, and by a redirecting link. The practical consequence is that a campaign built on brand-adjacent keywords would disqualify the very purchases it produces, which is why the Suggestions board proposes organic-first.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-17",
+      "finding": "Google's published standard is about the purpose of automation, not the presence of it, so the anti-slop requirement and the ranking requirement point the same way.",
+      "basis": "Google's official guidance states that using automation, including AI, to generate content with the primary purpose of manipulating ranking in search results is a violation of its spam policies, and that appropriate use of AI or automation is not against its guidelines. It also advises that AI is worth considering as a way to produce content that is helpful and original, and not as an inexpensive way to game rankings. The same publisher asks whether content provides original information, reporting, research or analysis that is beyond the obvious. The redesign and the editorial suggestions are written against that standard rather than against volume.",
+      "sources": [
+        "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "confidence": "Verified"
+    },
+    {
+      "id": "A-18",
+      "finding": "The listings change faster than a static record can, so every published value is a dated snapshot and the date is part of the claim.",
+      "basis": "Re-read on 2026-11-15: the P2 listing title on the official product page is a different string from the one recorded on 2026-11-14 from the same page, while the ASIN, brand and breadcrumb are unchanged (F-39). On the same read, the third slot of the P2 and P3 also-viewed carousels held different ASINs from the stored snapshot, while P1's three slots matched (F-29). The IP License itself says the content is provided as is and is subject to change or removal at any time.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://www.amazon.com/dp/B08DKYBTPH",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "confidence": "Verified"
     }
   ],
   "categories": {
@@ -211,12 +249,15 @@
     "API integration of any kind, including reusing or fine-tuning on API content (needs express prior written approval). Flags F-16, F-24, F-25.",
     "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
     "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",
-    "Campaign optimisation (needs the attributed data above; the loop itself is specified on the Automation page)."
+    "Campaign optimisation (needs the attributed data above; the loop itself is specified on the Automation page).",
+    "Product photography on the site. No image is published, because the only honest routes are your own photographs of the actual units or images served through approved tools, and neither exists yet (F-31, suggestion S-04).",
+    "A paid-search campaign. Not attempted: it is constrained by Participation Requirement 6(f) and Commission Income Statement 2(c) to 2(e), and no budget decision has been made (F-23, decision D-09)."
   ],
   "site_disclaimer": {
     "text": "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.",
     "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
     "source_ref": "IP License, Section 2(k)",
     "reason": "IP License Section 2(k) requires this text in plain view when Product Advertising Content consisting of text is displayed. This site displays Amazon listing titles, so the notice is shown as the conservative reading of the clause. Flag F-25."
-  }
+  },
+  "rechecked_utc": "2026-11-15"
 }

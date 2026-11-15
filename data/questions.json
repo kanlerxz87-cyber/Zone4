@@ -10,7 +10,8 @@
       "Owner decision": "Not a fact at all. A choice only the site owner can make; the row lists the options and what each one commits the site to."
     },
     "rule": "An Unknown is never closed by inference. It is closed by a named source, a named party's answer, or an explicit owner decision recorded in the Decision log.",
-    "ported_00ba6c2e_2026_11_15": "Q-16 to Q-19 were ported from the parallel session's decision worksheet (arena/bb85f073-zone4, PR #50), which asked about the audience, privacy and consent, budget and time horizon, and trade-name clearance. Those four gaps were not in this register and are kept rather than dropped. Their seven-row worksheet itself was merged into decisions.json D-15/D-16 to avoid two conflicting D-01 numbering schemes."
+    "ported_00ba6c2e_2026_11_15": "Q-16 to Q-19 were ported from the parallel session's decision worksheet (arena/bb85f073-zone4, PR #50), which asked about the audience, privacy and consent, budget and time horizon, and trade-name clearance. Those four gaps were not in this register and are kept rather than dropped. Their seven-row worksheet itself was merged into decisions.json D-15/D-16 to avoid two conflicting D-01 numbering schemes.",
+    "ported_d2a62d6b_2026_11_15": "Q-20 to Q-22 are the open questions from the parallel session arena/d2a62d6b-zone4 that this register did not already hold (where product photography comes from, paid versus organic traffic, and whether an email list or an incentive may be tied to the links). Q-23 to Q-37 are that session's verified answers, quoted verbatim from the official source each row cites: the register declared a 'Known' kind but had no rows using it, so the answers were ported in rather than dropped."
   },
   "questions": [
     {
@@ -473,6 +474,353 @@
       "flags": [
         "F-23",
         "F-39"
+      ]
+    },
+    {
+      "id": "Q-20",
+      "area": "Product data",
+      "question": "Where will product imagery come from?",
+      "why_it_matters": "A shopping site without photography converts badly, but copying listing images or inventing product photos is worse than having none. This blocks the visual half of the redesign.",
+      "kind": "Owner decision",
+      "known": "The three product pages carry images. This site reproduces none of them and publishes no images at all today. Program Content is defined in the Operating Agreement to include data, images and text made available through the program, and its use is governed by the IP License.",
+      "how_to_discover": "Read the IP License section of the official Program Policies page for the permitted uses of Program Content, then decide.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-18"
+      ],
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 product page"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 1"
+        }
+      ],
+      "flags": [
+        "F-31"
+      ]
+    },
+    {
+      "id": "Q-21",
+      "area": "Money",
+      "question": "Is the growth plan organic search only, or will you pay for traffic?",
+      "why_it_matters": "A paid-search campaign that bids on an Amazon Mark disqualifies the very purchases it produces. This is not a question of taste; the official terms decide it.",
+      "kind": "Owner decision",
+      "known": "Participation Requirement 6(f): you may buy paid search advertisements, but not on keywords that are Proprietary Terms (Amazon Marks and variations or misspellings), and the resulting ad must send users to your site and not directly or indirectly to an Amazon site. The Commission Income Statement disqualifies purchases referred by a prohibited paid search placement, by a link displayed on a search engine, and by a redirecting link.",
+      "how_to_discover": "Decide the channel, then check each planned keyword against the non-exhaustive trademark list linked from the official policies page.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-26"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(f)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Commission Income Statement, Sections 2(c), 2(d) and 2(e)"
+        }
+      ],
+      "flags": [
+        "F-23"
+      ]
+    },
+    {
+      "id": "Q-22",
+      "area": "Legal",
+      "question": "Will the site run an email list, a rewards scheme or any incentive tied to the links?",
+      "why_it_matters": "A common affiliate playbook is 'subscribe and we will send you the deal'. Tying any reward to link use breaches 6(g), so the list has to be designed around content, not around link clicks.",
+      "kind": "Owner decision",
+      "known": "Participation Requirement 6(g): you may not offer any person or entity any consideration, reward or incentive for using Special Links.",
+      "how_to_discover": "Decide, then draft the sign-up copy against 6(g) before writing any code.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-28"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(g)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-23",
+      "area": "Compliance",
+      "question": "What disclosure text is required, and where must it go?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "You must clearly and prominently state 'As an Amazon Associate I earn from qualifying purchases.' on your site or any other location where Amazon may authorize your display or other use of Program Content.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 5"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-24",
+      "area": "Compliance",
+      "question": "May the site imply any endorsement or affiliation?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "No. 'You will not misrepresent or embellish our relationship with you (including by expressing or implying that we support, sponsor, or endorse you), or express or imply any affiliation between us and you or any other person or entity except as expressly permitted by this Agreement.'",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 5"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-25",
+      "area": "Compliance",
+      "question": "Can the project forecast traffic or earnings?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "'We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.'",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 4"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-26",
+      "area": "Compliance",
+      "question": "What are the published commission rates?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "Table 1 of the public Standard Commission Income Statement lists Physical Books, Kitchen and Automotive at 4.50%; Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products and Amazon Coins at 3.00%; All Other Categories at 4.00%.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Standard Commission Income Statement, Table 1"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-27",
+      "area": "Compliance",
+      "question": "Can prices and star ratings be copied from the product page into the site?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "Star ratings and customer reviews may not be displayed unless obtained through Creators API or PA API, with the API requirements met.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(t)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-28",
+      "area": "Compliance",
+      "question": "Can the site track prices and alert readers to price drops?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "'Unless otherwise agreed by Amazon, your Site must not have price tracking and/or price alerting functionality.'",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(y)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-29",
+      "area": "Compliance",
+      "question": "Can readers be rewarded for clicking through?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "No consideration, reward or incentive may be offered for using Special Links, including money, rebates, discounts, points or donations to charity.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(g)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-30",
+      "area": "Compliance",
+      "question": "Can affiliate links be placed in paid search, and on which keywords?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "You may buy paid search ads and submit links to search engines for organic results, provided you do not bid on Proprietary Terms (Amazon Marks and their variations or misspellings) for a prohibited paid search placement, and provided the results send users to your site and not directly or indirectly via a redirecting link to an Amazon site. Separately, purchases are disqualified when the customer is referred by a link displayed on a search engine.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 6(f); Commission Income Statement 2(c), 2(d), 2(e)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-31",
+      "area": "Compliance",
+      "question": "Can the site use a link shortener, or hide where a link goes?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "You may not cloak, hide, spoof or otherwise obscure the URL of your site containing Special Links, and you may not use a link shortening service, button, hyperlink or other ad placement in a manner that makes it unclear that you are linking to an Amazon Site.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements, 6(v) and 6(w)"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-32",
+      "area": "Content",
+      "question": "Does Google forbid AI-generated content?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "No. 'Appropriate use of AI or automation is not against our guidelines.' What is a spam violation is 'using automation - including AI - to generate content with the primary purpose of manipulating ranking in search results'. Google also advises: 'If you see AI as an essential way to help you produce content that is helpful and original, it might be useful to consider. If you see AI as an inexpensive, easy way to game search engine rankings, then no.'",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search's guidance about AI-generated content"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-33",
+      "area": "Content",
+      "question": "What does Google say makes content worth ranking?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "Google's self-assessment asks, among other things, whether the content provides original information, reporting, research or analysis; whether it is substantial and comprehensive; and whether it provides insightful analysis or interesting information that is beyond the obvious.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Creating helpful, reliable, people-first content"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-34",
+      "area": "Content",
+      "question": "Where must a disclosure sit to satisfy the FTC?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "Place it so it is hard to miss: 'The disclosure should be placed with the endorsement message itself.' It is likely to be missed if it appears only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE. Do not mix the disclosure into a group of hashtags or links.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosures 101 for Social Media Influencers"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-35",
+      "area": "Content",
+      "question": "May the site describe hands-on testing of these appliances?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "No. The FTC states that you cannot talk about your experience with a product you have not tried, and cannot make up claims about a product that would require proof the advertiser does not have.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "Disclosures 101 for Social Media Influencers"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-36",
+      "area": "Content",
+      "question": "Do the three supplied links still resolve to the three products on record?",
+      "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
+      "kind": "Known",
+      "known": "Yes, re-resolved on 2026-11-15: B04G1MEwY resolves to ASIN B0CDY277D3, B02NbDxp3 to B09B7SB46R and B00hJ57DV to B08DKYBTPH. No tag parameter is visible in any resolved URL.",
+      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "answerable_by": "Already answered by the cited official source",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://link.amazon/B04G1MEwY",
+          "ref": "Supplied short links, re-resolved 2026-11-15"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "Q-37",
+      "area": "Content",
+      "question": "Is the editorial redesign shipped on 2026-11-15 the look the site should publish with?",
+      "why_it_matters": "It was built on the owner's behalf by a session that also wrote the suggestion proposing it, so it needs a decision rather than being treated as settled.",
+      "kind": "Owner decision",
+      "known": "The redesign changes presentation only: no price, rating, review count or commission figure was added, every table row still carries its official source link, and the disclosure and paid-link labels are unchanged.",
+      "how_to_discover": "Read suggestions S-13 and S-17 and decision D-17, then accept, amend or revert.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "S-17",
+        "S-21"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ],
+      "flags": [
+        "F-46"
       ]
     }
   ]

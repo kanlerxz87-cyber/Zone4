@@ -8,7 +8,8 @@
       "Open - needs your answer": "Waiting on the owner. The site does nothing in the meantime.",
       "Recorded": "The owner has stated the decision and it is written in the log."
     },
-    "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19."
+    "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19.",
+    "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided."
   },
   "decisions": [
     {
@@ -575,8 +576,7 @@
           "ref": "FTC Disclosures 101"
         }
       ]
-    }
-,
+    },
     {
       "id": "D-17",
       "question": "Which topics should the content program publish first?",
@@ -742,6 +742,526 @@
         {
           "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/DESIGN_PROMPT.md",
           "ref": "The prepared draft in this repository"
+        }
+      ]
+    },
+    {
+      "id": "D-21",
+      "question": "Keep the editorial redesign, amend it, or revert to the previous dashboard styling?",
+      "linked_question": "Q-37",
+      "linked_suggestions": [
+        "S-17",
+        "S-21"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Keep it",
+          "commits_to": "The site keeps the serif editorial design system, the marketing hero, the article cards and the split navigation. No published value changes.",
+          "effort": "None: it is already shipped.",
+          "reversible": "Yes. Reverting is a one-file change to docs/styles.css plus a rebuild."
+        },
+        {
+          "key": "B",
+          "label": "Amend it",
+          "commits_to": "Say which part to change - type, colour, density or navigation - and it is changed before the next content work starts.",
+          "effort": "One design pass.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Revert it",
+          "commits_to": "The previous blue dashboard styling returns and the two suggestions are closed as rejected.",
+          "effort": "One file plus a rebuild.",
+          "reversible": "Yes, but the work is lost."
+        }
+      ],
+      "recommendation": "A or B. The redesign is presentation only, so keeping it costs nothing and reversing it later is a single file.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        }
+      ]
+    },
+    {
+      "id": "D-22",
+      "question": "Where will product photography come from?",
+      "linked_question": "Q-20",
+      "linked_suggestions": [
+        "S-18"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Photograph the actual units",
+          "commits_to": "You buy or borrow the three appliances and shoot them in a real kitchen. Slowest, but the images are yours and are true.",
+          "effort": "A day, plus the cost of the units.",
+          "reversible": "Yes, images can be removed."
+        },
+        {
+          "key": "B",
+          "label": "Images served through approved Amazon tools",
+          "commits_to": "Once the tag exists, use the image route the program provides rather than copying files from the listings.",
+          "effort": "Small, once the account is confirmed.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Stay text-first",
+          "commits_to": "No photography. The site competes on verified analysis and comparison tables instead.",
+          "effort": "None.",
+          "reversible": "Yes, images can be added later."
+        }
+      ],
+      "recommendation": "C for now, then A. Never a generated or copied photograph of a specific product: that would be a fabricated claim about that product.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        }
+      ]
+    },
+    {
+      "id": "D-23",
+      "question": "Build the three-question 'which one is for you' chooser?",
+      "linked_question": "Q-02",
+      "linked_suggestions": [
+        "S-19"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Build it from the published values only",
+          "commits_to": "Three questions on household size, counter depth and two-dish cooking, routing to one of the three products. Uses only capacity and dimensions already published from the official listings.",
+          "effort": "Half a day.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Wait for API data",
+          "commits_to": "Build it once prices and ratings can be shown, so the chooser can weigh value as well as size.",
+          "effort": "Blocked until the API exists.",
+          "reversible": "n/a"
+        },
+        {
+          "key": "C",
+          "label": "Do not build it",
+          "commits_to": "Readers compare the table themselves.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. It answers the reader's actual question and adds no unverified claim, because every input is already published with its source.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 capacity and dimensions as listed"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-24",
+      "question": "Do the mobile-first pass now?",
+      "linked_question": "Q-16",
+      "linked_suggestions": [
+        "S-20"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes",
+          "commits_to": "Fluid type scale, comfortable tap targets and a slim product bar on article pages.",
+          "effort": "A day.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Defer until there is traffic",
+          "commits_to": "Measure the device split first, then spend the effort where the readers are.",
+          "effort": "None now.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. Most shopping research happens on a phone, and the redesign already made the tables scroll cleanly.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-25",
+      "question": "Publish a 'what we could not verify' block on every article?",
+      "linked_question": "Q-06",
+      "linked_suggestions": [
+        "S-22"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, above the fold",
+          "commits_to": "Three lines per article: price, rating and commission category, each linking to the flag that explains the gap.",
+          "effort": "An hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Yes, but below the article",
+          "commits_to": "Same content, placed at the end where it is less prominent.",
+          "effort": "An hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "No",
+          "commits_to": "The gaps stay on the Flagged for Review page only.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. Publishing the gaps is honest, pre-empts the reader's doubt, and is the sort of thing no competitor does.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ]
+    },
+    {
+      "id": "D-26",
+      "question": "Publish the counter-space analysis (capacity per unit of counter depth)?",
+      "linked_question": "Q-16",
+      "linked_suggestions": [
+        "S-23"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Publish it, with the arithmetic shown",
+          "commits_to": "Original analysis derived from the published dimensions and capacities, with every step visible so a reader can check it.",
+          "effort": "A few hours.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Do not publish it",
+          "commits_to": "The site stays strictly descriptive of the listings.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. It is arithmetic on values already cited to their official source, so it adds no unverified claim, and it answers a question no listing answers.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B09B7SB46R",
+          "ref": "P2 dimensions and capacity as listed"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-27",
+      "question": "Enforce a standing internal-linking rule on every article?",
+      "linked_question": "Q-10",
+      "linked_suggestions": [
+        "S-24"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, as a build check",
+          "commits_to": "No article publishes without a link to the comparison, the buying guide and its category page. Enforced in scripts/verify.py so it cannot drift.",
+          "effort": "A few hours.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Yes, as a convention",
+          "commits_to": "Same rule, written down but not enforced in code.",
+          "effort": "An hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "No",
+          "commits_to": "Leave linking to the author.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. An unenforced convention drifts within a few articles; a check does not.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-28",
+      "question": "Grow traffic on the verification angle rather than on volume?",
+      "linked_question": "Q-04",
+      "linked_suggestions": [
+        "S-25"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes",
+          "commits_to": "Publish the method, the changelog and the open data, and let the evidence earn the links.",
+          "effort": "Ongoing, low cost.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Write more product pages instead",
+          "commits_to": "Compete on coverage with the large review sites.",
+          "effort": "High and ongoing.",
+          "reversible": "Hard: the content is written and indexed."
+        }
+      ],
+      "recommendation": "A. The site cannot out-publish the big review sites; it can out-evidence them, and the Operating Agreement makes no representation about the traffic any approach will produce.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: creating helpful, reliable, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-29",
+      "question": "Will paid search ever be used, and on which keywords?",
+      "linked_question": "Q-21",
+      "linked_suggestions": [
+        "S-26"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Never",
+          "commits_to": "Organic search only. The guardrail suggestion is kept as a record of why.",
+          "effort": "None.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Yes, excluding Proprietary Terms",
+          "commits_to": "Buy ads on non-trademark keywords only, always landing the click on this site rather than directly on the retailer.",
+          "effort": "Budget-dependent.",
+          "reversible": "Yes, campaigns can stop."
+        }
+      ],
+      "recommendation": "A for now. If B is ever chosen, exclude every Amazon Mark and every variation or misspelling, because purchases from a prohibited paid search placement are disqualified.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        }
+      ]
+    },
+    {
+      "id": "D-30",
+      "question": "Confirm the site will not build a deals or price-drop section?",
+      "linked_question": "Q-28",
+      "linked_suggestions": [
+        "S-27"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Confirmed: never",
+          "commits_to": "No price tracking, no price history, no alerts. The rule is Participation Requirement 6(y).",
+          "effort": "None.",
+          "reversible": "n/a"
+        },
+        {
+          "key": "B",
+          "label": "Seek written agreement first",
+          "commits_to": "Ask Amazon to agree otherwise before building anything, since 6(y) allows an agreed exception.",
+          "effort": "Unknown: needs a written reply.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. A deals section is the single most common way an affiliate site breaks this rule, and the prohibition is the default.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        }
+      ]
+    },
+    {
+      "id": "D-31",
+      "question": "Keep the site single-retailer for these products?",
+      "linked_question": "Q-09",
+      "linked_suggestions": [
+        "S-28"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes",
+          "commits_to": "Only these three products, only this storefront. No rival retailers' prices or products alongside them using program data.",
+          "effort": "None.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Add other retailers",
+          "commits_to": "Would require data and images that do not come from the program, plus its own compliance review.",
+          "effort": "Significant.",
+          "reversible": "Hard once indexed."
+        }
+      ],
+      "recommendation": "A. Program Content may not be used to promote products offered on a site that is not an Amazon Site.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        }
+      ]
+    },
+    {
+      "id": "D-32",
+      "question": "Move the disclosure to the top of every article?",
+      "linked_question": "Q-34",
+      "linked_suggestions": [
+        "S-29"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, under every headline",
+          "commits_to": "The required sentence repeats immediately under the headline, in addition to the site header and the link-adjacent disclosure.",
+          "effort": "An hour.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Keep it in the header and beside each link",
+          "commits_to": "The current arrangement already places it with the endorsement and next to every link.",
+          "effort": "None.",
+          "reversible": "n/a"
+        }
+      ],
+      "recommendation": "A. The FTC warns that a disclosure is likely to be missed at the end of a post or on a separate page; leading with it is the safest reading and costs one line.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        }
+      ]
+    },
+    {
+      "id": "D-33",
+      "question": "Connect real measurement before building the optimisation loop?",
+      "linked_question": "Q-17",
+      "linked_suggestions": [
+        "S-30"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes: tag, then reporting, then optimisation",
+          "commits_to": "Confirm the tag, turn on Associates reporting, and only then use the metrics pipeline to choose what to write next.",
+          "effort": "Small, once the account exists.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Optimise on the local click log",
+          "commits_to": "Use the browser-local log as the signal while attributed reporting is missing.",
+          "effort": "None.",
+          "reversible": "Yes, but the signal is unattributed."
+        }
+      ],
+      "recommendation": "A. Optimisation against an unattributed signal is noise, and purchases are disqualified where links are not properly formatted.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        }
+      ]
+    },
+    {
+      "id": "D-34",
+      "question": "Keep research manual until the Agent Terms are implemented and reviewed?",
+      "linked_question": "Q-07",
+      "linked_suggestions": [
+        "S-31"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes: manual only",
+          "commits_to": "No agent touches the listings until the required self-identification, the transparency rules and the prohibition on working around access limits are implemented and the collection question is reviewed.",
+          "effort": "None.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Automate after counsel signs off",
+          "commits_to": "Build the agent once a written legal position exists.",
+          "effort": "Weeks, plus the review.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The engine in this repository is deliberately built to refuse to publish rather than to scrape, and the 2026-11-15 attempt to re-read the specification tables was served an automated-traffic interstitial, which the site did not work around (F-45).",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies"
+        },
+        {
+          "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+          "ref": "Conditions of Use, License and Access"
         }
       ]
     }
