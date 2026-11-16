@@ -4,6 +4,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 
 | Task | Status | Owner session | Files / scope |
 |---|---|---|---|
+| Same-day re-verification (2026-11-16) of the three supplied short links and their listing titles, the Associates Table 1 commission band and Program Policies date; re-check date and flags updated; full gate run (build, verify, QA audit, 83 engine tests, engine preview link check); PR from `arena/4c552c78-zone4` to `main`, merge, Pages deploy check | **done on the branch; PR open for merge** — claimed and completed 2026-11-16 by `arena/4c552c78-zone4` (branched from `bab8186`, the tip of `main` at claim time; no other PR was open). PR link and merge result are recorded in the log below after the merge | arena/4c552c78-zone4 | `COORDINATION.md` (this row and the log), `data/products.json` (`_meta.reverification` only), `data/flags.json` (F-03 and F-44 update notes only), `data/content.json` (`rechecked_utc` only), `data/verification-session-4c552c78.json` (new), regenerated `docs/` |
 | Decision-support page: explicit open questions, known/unknown answers, options and suggested next steps with official-source links | **done** — PR [#50](https://github.com/kanlerxz87-cyber/Zone4/pull/50) merged at `e67729e`; checks green; Pages built and live at `/docs/suggestions.html`. **Integrated, not replaced:** `arena/00ba6c2e-zone4` kept this worksheet's unique content and moved it into the shared data layer — its four uncovered decisions became `decisions.json` D-13…D-16 (with their options and recommendations preserved) and its four unique gaps became `questions.json` Q-16…Q-19 (audience, privacy/consent, budget and time horizon, trade-name clearance). Its other three rows map onto D-02/D-08, D-08/D-09 and D-03/D-06/D-12. The `suggestions.html` page is now generated from `data/suggestions.json`, `data/questions.json` and `data/decisions.json` rather than from a list inside `scripts/build_site.py`, so the register, the questions and the decision queue cannot disagree. | arena/bb85f073-zone4 | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `docs/` (new `suggestions.html`) |
 | Static research dashboard, executive summary, verification, Pages workflow (prototype, first pass) | done (prototype); product records **superseded by the verified records below** | arena/c2ff885d-zone4 | previously `index.html`, `README.md`, `.github/workflows/pages.yml`, `COORDINATION.md` (root prototype removed in this integration; history kept) |
 | Follow-up multi-page research view and FTC citation | done; superseded by the verified site below | arena/00ccfbd4-zone4 | previously `products.html`, `insights.html`, `flagged.html`, `styles.css` (root removed in this integration; history kept) |
@@ -37,7 +38,7 @@ The task brief asks for session branches named `session-<id>/<task>`. At the tim
 
 ## Current branch note
 
-The current active session is working on `arena/d8564cd0-zone4` (branched from `923738406c0a4c961754ac079ec4e76b6d5d8e76`; reset to `main`'s tip `f4c81c5` and re-applied per the handoff/reconciliation rule). No branch was created or switched to.
+The session running on 2026-11-16 works on `arena/4c552c78-zone4` (branched from `bab81866b5034a2d49300bb9d05ffc028a49d1d7`, the tip of `main`; no other session's PR is open). Earlier note: the session on `arena/d8564cd0-zone4` (branched from `923738406c0a4c961754ac079ec4e76b6d5d8e76`; reset to `main`'s tip `f4c81c5` and re-applied per the handoff/reconciliation rule). No branch was created or switched to.
 
 > Prior note (kept for the audit trail): the session running when this section was last edited worked on `arena/327b5ad0-zone4` (branched from `aaccf32f72fdefadb4a1281d1b9f5837224c79b9`).
 
@@ -983,6 +984,40 @@ each file so the provenance is not lost.
 ## Session log — `arena/c42349c3-zone4` (2026-11-16)
 
 **Claim.** Re-verification of the supplied links and product pages, the Associates and FTC citations, and the site's re-check date, with new flags for anything that differs. Claimed on the board before any content edit, per the protocol. No other session held an open claim when this was written. The branch name is fixed by the session (`arena/c42349c3-zone4`), so the `session-<id>/<task>` form is not used; the board row is the scope record, as earlier sessions also recorded.
+
+### Session arena/4c552c78-zone4 — same-day re-verification and gate run (2026-11-16, UTC)
+
+**Claim.** Recorded on the board above in commit `4726b29` (pushed before any edit). Scope: the files listed in that row. No other session held a claim; no PR was open on 2026-11-16 at claim time. Branch note: Arena pins this session to `arena/4c552c78-zone4`, so no `session-<id>/<task>` branch was created.
+
+**What was checked, on 2026-11-16, against official sources.** Each read is recorded line by line in `data/verification-session-4c552c78.json`.
+
+| Item | Official source read | Result |
+|---|---|---|
+| Three supplied short links | https://link.amazon/B04G1MEwY, https://link.amazon/B02NbDxp3, https://link.amazon/B00hJ57DV (each resolves to its /dp/ page) | Resolve to B0CDY277D3, B09B7SB46R, B08DKYBTPH. No `tag=` parameter in any resolved URL (F-03 unchanged). |
+| P1 and P3 listing titles | https://www.amazon.com/dp/B0CDY277D3, https://www.amazon.com/dp/B08DKYBTPH | Match `name_listing` exactly. |
+| P2 listing title | https://www.amazon.com/dp/B09B7SB46R | Second segment is the 2026-11-15 string ('Countertop Convection Cooker, 24 One-Touch Preset Options …'), not the stored string. F-44 stays open; stored value not changed. |
+| 'Customers who viewed this item also viewed' | the same three product pages | P1 matches the stored snapshot. Slot 3 differs on P2 (B0D1BGLW25 for the stored B0F92GL7JH) and on P3 (B09MR7QWKZ for the stored B0C33CHG99). F-29 dated note; snapshot not overwritten. |
+| Default offer and seller | the same product pages | P1 and P3 both led with a used item sold by Amazon Resale. New flag **F-49** (Medium), 'Needs review'. |
+| Associates Table 1 | https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ | Kitchen 4.50%, Home 3.00%. Unchanged (F-01: category-level only). |
+| Program Policies, Operating Agreement | https://affiliate-program.amazon.com/help/operating/policies, https://affiliate-program.amazon.com/help/operating/agreement | 'Updated: April 14, 2026' and 'Updated: October 15, 2025'. Unchanged. |
+| Conditions of Use | https://www.amazon.com/gp/help/customer/display.html?nodeId=508088 | 'Last updated: August 14, 2026'. Unchanged. Its licence clauses (data mining, listing collection, AI-generated content) and its meta-tag / hidden-text clause were re-read. |
+| Meta tags and titles on the built site | `docs/**/*.html` (24 pages) | 0 pages use the Amazon name in a title or meta description, before and after the rebuild. |
+
+**Changes made.** `data/flags.json` (a dated note on F-03; new F-49; `_meta.added_by_4c552c78_2026_11_16`). F-29 and F-44 were re-read the same day and match the dated notes that `arena/c42349c3-zone4` had already recorded, so no duplicate note was added; `data/products.json` (`_meta.reverification.same_day_4c552c78_2026_11_16`, summary only); `data/content.json` (`rechecked_utc` 2026-11-16; one executive-summary bullet); `data/sources.json` (dated notes on S-COMM, S-PP, S-POL, S-OA, S-COU, S-L1, S-L2, S-L3); `data/verification-session-4c552c78.json` (new); `README.md` (table rows); `EXECUTIVE_SUMMARY.md` (date line and new section 5c); regenerated `docs/`.
+
+**Checks run before pushing.** `python3 scripts/build_site.py` (24 pages), `python3 scripts/verify.py` (green), `python3 qa/audit_site.py` (24 pages, 0 warnings), `python3 -m unittest discover -s tests` (83 tests, OK), `python3 -m engine.cli build` then `python3 tools/check_links.py` (6 preview pages, no broken links), `python3 -m engine.cli status` and `audit` (0 of 7 ready: the publish gate refusing to publish unverified fields is the designed behaviour). A rebuild leaves `docs/` identical to the committed version except for the changes listed above.
+
+**Not done, and why.** The full product-details tables were not re-read today; they sit many chunks below the buy box, and the 2026-11-14 records were re-read by three earlier sessions. The FTC and Google pages were not re-read today (last read 2026-11-15). No price, rating, review count or commission figure was recorded, in line with F-02.
+
+**Irregularities for owner review.** F-03 (no visible Associates tag), F-29 (carousel changed on two of three pages), F-44 (P2 title drift), F-49 (used default offer on two of three pages, new today). The other session's F-47 (the displayed text of the supplied links lands on a sign-in page) is not re-tested here; it is listed for review under its own record. None of these blocks the merge.
+
+**Merge and deployment result.** Recorded after the merge below.
+
+**Merge conflict with a parallel session, and how it was resolved.** While this branch was open, `arena/c42349c3-zone4` merged PR #60 to `main` (`915b078`) with its own same-day re-verification. It used flag numbers F-47 and F-48 for a display-text finding and a flag-map finding. Its re-read of the P2 and P3 pages matched the values this session read. `git rebase origin/main` conflicted in `COORDINATION.md`, `README.md`, `data/flags.json`, `docs/flagged.html` and `docs/index.html`. Resolution: both sides' log and README rows are kept; `data/flags.json` was rebuilt from `main`'s version with only this session's non-duplicate additions, and this session's new flag was renumbered **F-49** (the next free number). This session's own F-47 references were renumbered to F-49 in its files only; `main`'s F-47 and F-48 are unchanged. The generated `docs/` pages were rebuilt from the resolved data rather than merged by hand. Nothing belonging to the other session was discarded. A second merge followed: PR #61 (`arena/9b706d00-zone4`, `409569e`) landed on `main` while this PR was being prepared. It changed only `COORDINATION.md` (a log section), and that section was kept alongside this one. No data or site file changed in that merge, so `docs/` was not regenerated again.
+
+---
+
+---
 
 **Work performed (2026-11-16, UTC).**
 

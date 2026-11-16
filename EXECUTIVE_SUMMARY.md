@@ -1,6 +1,6 @@
 # Executive Summary — Zone4 Amazon Affiliate Research Site
 
-**Date:** 2026-11-15 (UTC) — decision-support layer added; independent re-verification 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
+**Date:** 2026-11-16 (UTC) — same-day re-verification (section 5c); decision-support layer added 2026-11-15; independent re-verification 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
 
 ---
 
@@ -128,6 +128,23 @@ Nothing is simulated in place of a blocked or unverified requirement.
 | FTC Disclosures 101 | Re-read: disclosure must be hard to miss and placed with the endorsement; no claimed experience with an untried product | [FTC](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) |
 | Google: AI-generated content | Read in full; quoted verbatim into the questions register (Q-23…Q-37) | [Google Search Central](https://developers.google.com/search/blog/2023/02/google-search-and-ai-content) |
 | Google: creating helpful content | Read; the standard the editorial suggestions are judged against | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
+
+## 5c. Same-day re-verification on 2026-11-16 by `arena/4c552c78-zone4`
+
+Full record: `data/verification-session-4c552c78.json`. No stored ASIN, title, competitor label or specification was changed; the stored snapshots stay in place and the differences are recorded as dated notes.
+
+| Item checked | Result on 2026-11-16 | Flag |
+|---|---|---|
+| Three supplied short links | Each resolves to the stored ASIN (B0CDY277D3, B09B7SB46R, B08DKYBTPH); no `tag=` parameter in any resolved URL | F-03 (unchanged) |
+| P1 and P3 listing titles | Match the stored name exactly | — |
+| P2 listing title | Second segment is the 2026-11-15 string, not the stored one | F-44 (still open) |
+| "Also viewed" module | P1 unchanged; slot 3 differs on P2 and on P3 from the stored snapshot | F-29 (dated note) |
+| Default offer on P1 and P3 | A used item sold by Amazon Resale (the buy box names Amazon Resale) | **F-49 (new)** |
+| Associates Table 1 | Kitchen 4.50%, Home 3.00% — unchanged | F-01 (unchanged) |
+| Program Policies / Operating Agreement / Conditions of Use | Dated April 14, 2026 / October 15, 2025 / August 14, 2026 — unchanged | — |
+| Meta tags and titles on the built site | No page title or meta description uses the Amazon name (24 pages) | — |
+
+**What this means for the decision.** The copy must not describe any product as new, because the default offer on two of the three pages was used on this read. Whether to add a note that the condition and seller are shown on the Amazon page at the time of the click is an owner decision (F-49). Nothing has been changed for it.
 
 ## 6. Recommended next steps (owner, when ready)
 

@@ -36,6 +36,9 @@
       "F-47": "New. Displayed link text (link.amazon.com) differs from the link target (link.amazon); the displayed form lands on Amazon's internal sign-in page on three of three requests. Found on the 2026-11-16 re-check.",
       "F-48": "New. The renumbering map in this _meta runs the opposite way from the board log, and the F-50 to F-54 numbers it names are not in the register.",
       "F-44": "Dated update appended on 2026-11-16 (no status change)."
+    },
+    "added_by_4c552c78_2026_11_16": {
+      "F-49": "New. Default offer on the P1 and P3 pages was a used item sold by Amazon Resale on the 2026-11-16 read; found by arena/4c552c78-zone4. F-03 received a dated update note. F-29 and F-44 were re-read the same day and matched the dated notes already recorded by arena/c42349c3-zone4, so no duplicate note was added."
     }
   },
   "flags": [
@@ -66,7 +69,7 @@
       "id": "F-03",
       "severity": "High",
       "title": "Associates tag not visible in the resolved links",
-      "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref, gaOptInStatus) but no 'tag=' parameter. Two of them carry a btn_ref value of the form srtok-..., which is an Amazon source token rather than a visible Associate ID. Commission attribution to a specific Associates ID therefore cannot be confirmed from the page, and Participation Requirement 2(b) requires the tag to be present in the URL of each link placed on the site. Re-checked 2026-11-14 and unchanged. Update 2026-11-15 (arena/f87cc71f-zone4): all three short links re-resolved; still no tag= parameter in any resolved URL. Unchanged.",
+      "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref, gaOptInStatus) but no 'tag=' parameter. Two of them carry a btn_ref value of the form srtok-..., which is an Amazon source token rather than a visible Associate ID. Commission attribution to a specific Associates ID therefore cannot be confirmed from the page, and Participation Requirement 2(b) requires the tag to be present in the URL of each link placed on the site. Re-checked 2026-11-14 and unchanged. Update 2026-11-15 (arena/f87cc71f-zone4): all three short links re-resolved; still no tag= parameter in any resolved URL. Unchanged. Update 2026-11-16 (arena/4c552c78-zone4): all three short links re-resolved on the same day to the stored ASINs (B0CDY277D3, B09B7SB46R, B08DKYBTPH); no tag= parameter in any resolved URL. Unchanged.",
       "sources": [
         "https://link.amazon/B04G1MEwY",
         "https://link.amazon/B02NbDxp3",
@@ -611,6 +614,18 @@
       ],
       "status": "Needs review",
       "action": "Integration session or owner: confirm which direction is correct against PR #28 (merge commit in the board log), correct the _meta map, and either give the engine note's 'F-50 sourcing decision' a register entry or reword it. No published page changes unless the owner decides so."
+    },
+    {
+      "id": "F-49",
+      "severity": "Medium",
+      "title": "On the 2026-11-16 read, the default offer on the P1 and P3 pages was a used item sold by Amazon Resale",
+      "detail": "On the 2026-11-16 read of https://www.amazon.com/dp/B0CDY277D3 the offer block led with a 'Used - Very Good' item, 'Sold by Amazon Resale and Fulfilled by Amazon'. On the 2026-11-16 read of https://www.amazon.com/dp/B08DKYBTPH the offer block led with a 'Used - Like New' item, 'Sold by Amazon Resale and Fulfilled by Amazon'. The buy box on both pages named Amazon Resale as the seller. The stored records do not state an offer condition, and no article in the repository states that a product is new. The site publishes no price (F-02), so no price is affected. The risk is in the copy: a reader who clicks a product link may land on a used offer, so any claim about condition, newness or seller would be wrong on some days. This is an observation from one read on one day; the offer can change at any time.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B08DKYBTPH"
+      ],
+      "status": "Needs review",
+      "action": "Owner decision: whether articles should say that the condition and seller are shown on the Amazon page at the time of the click, and never state that a product is new. No copy was changed by this session."
     }
   ]
 }
