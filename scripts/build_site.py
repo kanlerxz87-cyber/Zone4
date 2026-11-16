@@ -1614,7 +1614,7 @@ def page_design(current: Page) -> str:
         '<section><h2>Headline options for the five published articles</h2>'
         '<p class="section-lead">Three of the five current headlines describe the site\'s own '
         'checking process rather than the reader\'s problem, and two of those differ only by the '
-        'words &ldquo;two baskets&rdquo; and &ldquo;one basket&rdquo; (F-49). Two finished '
+        'words &ldquo;two baskets&rdquo; and &ldquo;one basket&rdquo; (F-52). Two finished '
         'alternatives for each, so the choice is four fields per article and one rebuild.</p>'
         + table(["Article", "Current H1", "Option A: steady", "Option B: punchy", "Note",
                  "Sources (official)"], head_rows, "headline-options")
@@ -1632,7 +1632,7 @@ def page_design(current: Page) -> str:
         + '<p class="wide-note">Google\'s helpful-content guidance lists &ldquo;writing about things '
         'simply because they seem trending&rdquo; among the warning signs of search-engine-first '
         'content, so every topic here is one a buyer of these three formats actually asks and is '
-        'answerable from a field already verified. That tension is recorded as F-47 and decided by '
+        'answerable from a field already verified. That tension is recorded as F-51 and decided by '
         'D-17 and D-19.</p></section>'
         + design_prompt_page_block(current)
         + '<p class="small muted">Related: '

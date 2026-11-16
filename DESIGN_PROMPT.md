@@ -142,5 +142,5 @@ invention this site refuses to publish.
 
 The eight candidate topic titles and their evidence notes live in `data/design.json` under
 `topics`; the evidence discipline behind them is flag **F-15** (no trend claim without a dated
-official snapshot) and **F-47** (the brief's "trendy topics and traffic" ask measured against the
+official snapshot) and **F-51** (the brief's "trendy topics and traffic" ask measured against the
 guidance the site already cites).

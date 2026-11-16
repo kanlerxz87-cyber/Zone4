@@ -830,7 +830,7 @@
    "question": "Does the cited guidance allow a trend-led topic calendar at all?",
    "why_it_matters": "The brief asks for catchy, trendy topics to earn organic traffic. If the guidance this site already cites treats trend-chasing as a warning sign, the topic programme has to be built differently, and that changes D-17 before it is answered.",
    "kind": "Known",
-   "known": "Google's helpful-content guidance lists, among the warning signs of search-engine-first content: 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' and 'Are you using extensive automation to produce content on many topics?'. It also asks 'Does your content provide substantial value when compared to other pages in search results?' and 'Are you mainly summarizing what others have to say without adding much value?'. The same page states that SEO is a helpful activity 'when it is applied to people-first content, rather than search engine-first content'. So a trend-led calendar is allowed, but only where each topic is one this site's audience would want and is answered from something the site can source. Recorded as flag F-47.",
+   "known": "Google's helpful-content guidance lists, among the warning signs of search-engine-first content: 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' and 'Are you using extensive automation to produce content on many topics?'. It also asks 'Does your content provide substantial value when compared to other pages in search results?' and 'Are you mainly summarizing what others have to say without adding much value?'. The same page states that SEO is a helpful activity 'when it is applied to people-first content, rather than search engine-first content'. So a trend-led calendar is allowed, but only where each topic is one this site's audience would want and is answered from something the site can source. Recorded as flag F-51.",
    "how_to_discover": "Read directly from the official guidance, which was re-read on 2026-11-16 by this session. No further discovery needed.",
    "answerable_by": "Already answered by the official source",
    "blocks": [
@@ -850,7 +850,7 @@
     }
    ],
    "flags": [
-    "F-47"
+    "F-51"
    ]
   },
   {
@@ -905,7 +905,7 @@
    ],
    "flags": [
     "F-15",
-    "F-47"
+    "F-51"
    ]
   },
   {
@@ -966,7 +966,7 @@
    "id": "Q-43",
    "area": "Content",
    "question": "Which headline register should the published articles carry: steady, punchy, or matched to the evidence each piece has?",
-   "why_it_matters": "Three of five current headlines describe the site's own checking process rather than the reader's problem, which is the most visible cause of the 'AI slop' complaint (F-49). The register is a taste decision, so it is the owner's, not the build's.",
+   "why_it_matters": "Three of five current headlines describe the site's own checking process rather than the reader's problem, which is the most visible cause of the 'AI slop' complaint (F-52). The register is a taste decision, so it is the owner's, not the build's.",
    "kind": "Owner decision",
    "known": "Two ready-written options exist for every one of the five articles, in data/design.json under headline_options. Two of the punchy options make a comparison claim, so they depend on D-12 letting the comparison page conclude.",
    "how_to_discover": "Not a research question. The options are in D-37.",
@@ -986,7 +986,7 @@
     }
    ],
    "flags": [
-    "F-49"
+    "F-52"
    ]
   },
   {

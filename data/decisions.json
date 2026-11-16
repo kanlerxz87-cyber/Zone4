@@ -10,7 +10,7 @@
   },
   "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19.",
   "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided.",
-  "added_by_89900251_2026_11_16": "D-35 to D-39 are the design and traffic path. D-35 is the executable detail for the three options already in D-18, not a new set of options. D-36 and D-37 cover the copy and headline changes the F-49 and F-50 defects need. D-38 and D-39 are decision-process and build-order items."
+  "added_by_89900251_2026_11_16": "D-35 to D-39 are the design and traffic path. D-35 is the executable detail for the three options already in D-18, not a new set of options. D-36 and D-37 cover the copy and headline changes the F-52 and F-53 defects need. D-38 and D-39 are decision-process and build-order items."
  },
  "decisions": [
   {
@@ -1338,7 +1338,7 @@
     },
     {
      "key": "B",
-     "label": "Run only the two defect fixes (F-49 and F-50)",
+     "label": "Run only the two defect fixes (F-52 and F-53)",
      "commits_to": "The repeated headline construction and the ASIN-in-prose habit are corrected; the rest of the copy is left alone.",
      "effort": "Half a day.",
      "reversible": "Yes."
@@ -1379,7 +1379,7 @@
     {
      "key": "A",
      "label": "Steady: name the number or the decision",
-     "commits_to": "Each headline states a listed figure or the reader's choice. Closes F-49 without any claim that needs a new source.",
+     "commits_to": "Each headline states a listed figure or the reader's choice. Closes F-52 without any claim that needs a new source.",
      "effort": "Four fields per article, one rebuild.",
      "reversible": "Yes."
     },

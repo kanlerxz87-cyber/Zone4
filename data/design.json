@@ -6,7 +6,7 @@
   "status": "Proposal. Nothing in this file has been applied to the published site. Each section is bound to a decision row in data/decisions.json; when that decision is recorded, the change is made and the row's status changes.",
   "source_scope": "Only official sources are cited: the three Amazon product pages, the Associates Operating Agreement, the Associates Program Policies and its help topics, the FTC, and Google Search Central. No third-party SEO or marketing blog is cited for any figure or rule.",
   "evidence_rule": "No row in this file carries a search-volume, traffic, click, conversion or revenue figure. No official source reviewed supplies one for these products (F-15), and the Associates Operating Agreement Section 4 states that Amazon makes no representation about the traffic or commission income any site can expect. Where a topic is described as likely to attract readers, that is a stated judgement about the question the topic answers, not a measured forecast.",
-  "trend_rule": "Google's helpful-content guidance lists 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' among the warning signs of search-engine-first content. A topic in this programme is therefore admissible only if it answers a question a buyer of these three formats actually asks and can be answered from fields this site has already verified. That constraint is recorded as flag F-47 and is decided by D-17 and D-19.",
+  "trend_rule": "Google's helpful-content guidance lists 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' among the warning signs of search-engine-first content. A topic in this programme is therefore admissible only if it answers a question a buyer of these three formats actually asks and can be answered from fields this site has already verified. That constraint is recorded as flag F-51 and is decided by D-17 and D-19.",
   "how_to_use": "Read the directions, pick one (D-18 chooses the family, D-35 the specification to build from). Read the anti-slop checklist and approve the pass (D-36). Read the headline options and pick a register (D-37). Then paste the prompt at the bottom of the Design brief page, or take DESIGN_PROMPT.md from the repository root, to a designer or a design tool.",
   "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs.",
   "launch_path_note": "The five steps are a recommendation, not a rule. They are ordered by what each one unblocks, not by how hard each is: four of the five are cheap, and the one expensive step (the copy pass) is placed third because doing it earlier means doing it twice."
@@ -175,7 +175,7 @@
     }
    ],
    "flags": [
-    "F-49"
+    "F-52"
    ]
   },
   {
@@ -192,7 +192,7 @@
     }
    ],
    "flags": [
-    "F-50"
+    "F-53"
    ]
   },
   {
@@ -703,7 +703,7 @@
    "step": 4,
    "decision": "D-36",
    "choice": "Run the anti-slop pass, or at least the two defect fixes",
-   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change - and F-49 and F-50 are the two most visible defects on the site.",
+   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change - and F-52 and F-53 are the two most visible defects on the site.",
    "cost": "Two days, or half a day for the two defects alone"
   },
   {
