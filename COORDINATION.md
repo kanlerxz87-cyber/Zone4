@@ -1009,6 +1009,6 @@ each file so the provenance is not lost.
 
 **Pull request and merge (pending):** a PR will be opened from `arena/9b706d00-zone4` to `main` after this entry is pushed; its number, link, merge result and Pages confirmation are recorded below once the merge completes.
 
-Pull request: <created after push>
-Merge result: <to be recorded>
-Pages on merge commit: <to be confirmed>
+Pull request: #61 — https://github.com/kanlerxz87-cyber/Zone4/pull/61 (opened from arena/9b706d00-zone4 into main; PR body records the verification summary, the official sources used, and the open flagged irregularities)
+Merge result: merged successfully; the PR head's parent was main's tip so main advanced by fast-forward to 5c3d2dffe8cadfeb1f8b9033b899a0decdd53a4c, which now contains this session's coordination-log entry. Check status: merge succeeded (exit 0); all required CI gates had passed on the branch before the merge (verify OK, QA PASS with 0 warnings, 83 engine tests OK, check_links pass).
+Pages on merge commit: built — GitHub Pages API reports status `built`, source `main /` (legacy), HTTPS enforced; live site https://kanlerxz87-cyber.github.io/Zone4/.
