@@ -978,9 +978,37 @@ written: its flags are F-45 and F-46 (F-39…F-43 went to `arena/00ba6c2e-zone4`
 are S-17…S-31 (S-13…S-16 to `arena/f87cc71f-zone4`) and its decisions are D-21…D-34. The renumbering is recorded in the `_meta` of
 each file so the provenance is not lost.
 
-
 ---
 
 ## Session log — `arena/c42349c3-zone4` (2026-11-16)
 
 **Claim.** Re-verification of the supplied links and product pages, the Associates and FTC citations, and the site's re-check date, with new flags for anything that differs. Claimed on the board before any content edit, per the protocol. No other session held an open claim when this was written. The branch name is fixed by the session (`arena/c42349c3-zone4`), so the `session-<id>/<task>` form is not used; the board row is the scope record, as earlier sessions also recorded.
+
+## Session log — `arena/9b706d00-zone4` (2026-11-16, UTC)
+
+**Claim.** Final integration and independent line-by-line verification session. Scope: `COORDINATION.md` (this log entry only) — no data or site files — because the assigned branch `arena/9b706d00-zone4` is aligned with `origin/main` at `bab8186`, the merge commit of PR #59 (`arena/d2a62d6b-zone4`), which already contains everything the brief asks for: the suggestions register (S-01…S-31), the questions register (Q-01…Q-37; 14 answered from an official source, 23 open), the decision log (D-01…D-34; all open, none recorded), the executive summary, the verified product records P1–P3 (ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH), the marketing content kit (5 articles, 53 sourced facts), the 46-flag register, 24 generated pages, the build/verify/QA gates and the offline-first automation engine. No other session holds a claim on these files.
+
+**Branch note.** The brief's `session-<id>/<task>` naming is not used: the session is bound to its assigned branch and no other branch is created, switched to or pushed.
+
+**Verification performed by this session (no data or site file was changed; every check passes on the checked-out tree):**
+- `python3 scripts/build_site.py` — regenerated all 24 pages; `git diff --exit-code -- docs` is clean, so the committed `docs/` matches a fresh deterministic build.
+- `python3 scripts/verify.py` — OK: valid data files; ASIN/canonical-URL match; short links on link.amazon; every flag reference resolves; every source URL on an official host; every marketing fact, pipeline item and agent requirement sourced; every marketing fact cited by a paragraph; every article carries its own title tag and meta description; all required pages present; root `index.html` redirects to `docs/index.html` and root `.nojekyll` is present; every table row carries a link to an official host; no price or star rating published; no Amazon Mark in titles, meta descriptions or keywords; unique meta description per page.
+- `python3 qa/audit_site.py` — PASS, 24 pages, 0 warnings.
+- `python3 -m unittest discover -s tests` — 83 tests, OK.
+- `python3 -m engine.cli audit` — 0 of 7 drafts ready, 7 blocked by compliance gates (designed behaviour: the engine refuses to publish unverified fields).
+- `python3 -m engine.cli build` + `python3 tools/check_links.py --root build/site-preview` — pass: no broken links, every table row sourced or flagged, CSS complete, disclosure present.
+- GitHub Pages API: status `built`; source `main /` (legacy); HTTPS enforced; live URL https://kanlerxz87-cyber.github.io/Zone4/.
+
+**Sources used (official sources linked below for manual review):** the register in `data/sources.json` (32 entries): the three supplied links and their resolved Amazon product pages, the Associates Operating Agreement (Section 5 disclosure sentence), the Associates Program Policies, the public Standard Commission Income Statement Table 1 (Kitchen 4.50% / Home 3.00%, category-level reference only), Amazon Conditions of Use, FTC Disclosures 101, and Google Search Central guidance cited by the suggestions register. Direct re-fetch of amazon.com, ftc.gov and developers.google.com was not possible from this sandbox — outbound network is limited to github.com, api.github.com, registry.npmjs.org and files.pythonhosted.org — so external values point at the cited official sources for the owner to review; nothing is asserted from a fresh read.
+
+**Irregularities:** none new. Standing open flags published on Flagged for Review: F-01 (per-ASIN commission category unverified), F-02 (prices and star ratings withheld), F-03 (no Associates `tag=` in the resolved links), F-04 (the submitted strings are short-link slugs, not ASINs), F-06/F-07 (specification inconsistencies), F-08 (P3 is a size-variant family), F-09 (US delivery-location snapshot), F-10 (carousel may carry paid placements), F-11/F-12 (legal review of automated collection and AI-assisted writing), F-15 (trend/conversion signals unverified), F-19 (attributed click/order/revenue measurement not connected), F-21 (Agent Terms govern any automated agent), F-22 (price tracking and price alerting prohibited by default), F-24 (API reuse restrictions), F-26 (P2 states two cooking-function counts), F-29 (carousel instability), F-38 (specification tables rest on earlier reads). Corrected/resolved flags are retained as the audit record (F-05 resolved; F-13 resolved; F-17/F-20/F-36/F-37/F-40/F-41/F-43 corrected; F-44/F-45/F-46 pending the owner's review of the design shipments). No price, rating, per-ASIN commission rate, click, order or revenue figure is published anywhere; nothing is inferred or modelled.
+
+**Decisions:** all 34 decisions in `data/decisions.json` are `Open - needs your answer`; the log records that no owner decision has been taken. No suggestion in `data/suggestions.json` is implemented — the register is a decision surface, not a changelog, and nothing is acted on until the owner records a choice.
+
+**Integration:** every task in the brief is already integrated on `main` at this commit: a marketing site for the three products with category-organised subpages (dual-basket air fryers, single-basket air fryers, air-fry toaster ovens) plus per-article pages; an executive summary; a suggestions section where changes are costed, risk-assessed and chosen before implementing; a questions register separating known from unknown with discovery paths; every table row linked to its official source with unverified items blank and flagged; and a live GitHub Pages site. This branch's commit adds only this coordination-log entry.
+
+**Pull request and merge (pending):** a PR will be opened from `arena/9b706d00-zone4` to `main` after this entry is pushed; its number, link, merge result and Pages confirmation are recorded below once the merge completes.
+
+Pull request: <created after push>
+Merge result: <to be recorded>
+Pages on merge commit: <to be confirmed>
