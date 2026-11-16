@@ -118,7 +118,8 @@ OUTPUT. A complete design system (type scale, colour tokens, spacing, card and
 table components, disclosure component, decision-queue component), page
 templates for every required page, and two example article mockups built from
 real verified facts. State which compliance constraint shaped each design
-decision.```
+decision.
+```
 
 ---
 

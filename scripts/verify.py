@@ -367,6 +367,40 @@ def check_design() -> None:
     if figure_re.search(json.dumps(design.get("launch_path", []), ensure_ascii=False)):
         fail("design launch_path: carries a figure no official source supports")
 
+    # DESIGN_PROMPT.md is generated from this data by scripts/render_design_prompt.py.
+    # If someone edits the markdown by hand it stops being the same brief as the
+    # page, so the build refuses to ship the mismatch.
+    prompt_md = ROOT / "DESIGN_PROMPT.md"
+    if not prompt_md.exists():
+        fail("DESIGN_PROMPT.md is missing; run scripts/render_design_prompt.py")
+    else:
+        text = prompt_md.read_text(encoding="utf-8")
+        for d in design["directions"]:
+            if d["one_line"] not in text:
+                fail(f"DESIGN_PROMPT.md is out of date: missing direction {d['id']}")
+        for a in design["anti_slop"]:
+            if a["replacement"] not in text:
+                fail(f"DESIGN_PROMPT.md is out of date: missing anti-pattern {a['id']}")
+
+
+def check_design_page() -> None:
+    """The Design brief page must carry the prompt that the data assembles."""
+    page = DOCS / "design.html"
+    if not page.exists():
+        return
+    raw = page.read_text(encoding="utf-8")
+    design = load("design.json")
+    match = re.search(r'<pre id="design-prompt">(.*?)</pre>', raw, re.S)
+    if not match:
+        fail("docs/design.html: the paste-ready prompt block is missing")
+        return
+    prompt = html.unescape(match.group(1))
+    for d in design["directions"]:
+        if d["one_line"] not in prompt:
+            fail(f"docs/design.html: the prompt is missing direction {d['id']}")
+    if "[DIRECTION]" not in prompt or "[TOPICS]" not in prompt:
+        fail("docs/design.html: the prompt has lost its bracketed slots")
+
 
 class SiteParser(HTMLParser):
     def __init__(self) -> None:
@@ -552,6 +586,7 @@ def main() -> int:
     check_decision_support()
     check_design()
     check_site()
+    check_design_page()
     check_required_pages()
     check_root_entry()
     if failures:

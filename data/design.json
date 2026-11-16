@@ -340,7 +340,7 @@
    "current_h1": "Chefman 6 Quart Dual Basket Air Fryer Oven: two baskets, every figure checked",
    "option_steady": "The Chefman 6 Quart Dual Basket, in numbers you can check: two 3-quart baskets, one Sync Finish, and 13.4 inches of counter",
    "option_punchy": "Two baskets, one dinner: what the Chefman 6 Quart Dual Basket actually gives up for Sync Finish",
-   "note": "Both options name a real listed figure or a real reader problem. Neither uses the word 'verified'. The steady option leads with the number; the punchy one leads with the weeknight that the product is for.",
+   "note": "Both options name a real listed figure or a real reader problem. Neither uses the word 'verified'. The steady option leads with the number; the punchy one leads with the weeknight the product is for, and its 'gives up' trade is checkable against the listed depths (13.38in for this one against 12.75in for the single basket, facts M-P1-F4 and M-P3-F3).",
    "sources": [
     {
      "url": "https://www.amazon.com/dp/B0CDY277D3",
@@ -354,7 +354,7 @@
    "product": "P2",
    "current_h1": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: the listed facts, both function counts included",
    "option_steady": "The Emeril Lagasse 26QT French Door oven: 24 presets on the title, 25 in the features, and 15.8 inches of counter",
-   "option_punchy": "This oven says 24 functions on the box and 25 inside it. Here is what it definitely does",
+   "option_punchy": "This oven's listing says 24 functions in one place and 25 in another. Here is what it definitely does",
    "note": "The discrepancy is the most interesting true thing on the page, and it is currently buried in a clause. Leading with it is honest, it is sourced (fact M-P2-F10 and flag F-26), and it is the kind of headline a real publication would write.",
    "sources": [
     {
@@ -384,8 +384,8 @@
    "product": "ALL",
    "current_h1": "Dual basket, single basket or toaster oven: comparing three countertop air fryers",
    "option_steady": "Dual basket, single basket or French door: which of these three formats fits your counter and your cooking",
-   "option_punchy": "One cooks two dishes, one disappears into a corner, one swallows a pizza. Three air-fryer formats, decided",
-   "note": "The punchy option states three differences drawn from listed capacity and listed footprint (facts M-CMP-F1 to M-CMP-F3). It is the strongest headline on the site if the comparison page is allowed to conclude, which is decision D-12.",
+   "option_punchy": "One cooks two dishes at once, one needs the least counter depth, one is the only one with French doors",
+   "note": "All three clauses are drawn from listed fields: two baskets (fact M-P1-F2), the shallowest listed depth of the three at 12.75 inches (M-P3-F3), and the French-door construction (M-P2-F2). The original draft of this headline said one of the three 'swallows a pizza', which no listed field supports, so it was replaced. The punchy option states three differences and waits on D-12 letting the comparison page conclude.",
    "sources": [
     {
      "url": "https://www.amazon.com/dp/B0CDY277D3",

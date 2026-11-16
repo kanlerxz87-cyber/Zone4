@@ -41,7 +41,8 @@ source. This document is the paste-ready form of the same data.**
 ```
 """
 
-FOOTER = """```
+FOOTER = """
+```
 
 ---
 
