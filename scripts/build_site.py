@@ -17,10 +17,10 @@ OUT = ROOT / "docs"
 
 DISCLOSURE_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
 DISCLOSURE_SOURCE = "https://affiliate-program.amazon.com/help/operating/agreement"
-SITE_TITLE_SUFFIX = "Zone4 affiliate research"
+SITE_TITLE_SUFFIX = "Zone4 - air fryer buying guides"
 SITE_DESCRIPTION = (
-    "Verified affiliate research on three countertop air fryers: product records, marketing content, "
-    "analysis, policy checks and an official source link on every table row."
+    "Spec-checked buying guides for three countertop air fryers: product records, sourced articles, "
+    "and a receipt behind every number. What we cannot verify is flagged, not hidden."
 )
 
 
@@ -102,6 +102,12 @@ CATEGORY_BY_PRODUCT = {
 }
 CATEGORY_TITLE = {t: l for t, l, _g in NAV if t.startswith("categories/")}
 PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS}
+# Canonical listing URLs, used by the chooser's plain-text routing table so every
+# row of it links to the official page its figures were read from.
+P1_URL = PRODUCT_BY_ID["P1"]["canonical_url"]
+P2_URL = PRODUCT_BY_ID["P2"]["canonical_url"]
+P3_URL = PRODUCT_BY_ID["P3"]["canonical_url"]
+CATEGORY_PATH_URL = PRODUCT_BY_ID["P1"]["category_url"]
 ARTICLES_HUB = "articles/index.html"
 
 
@@ -115,6 +121,8 @@ def article_category(a: dict) -> str:
 
 
 def article_label(a: dict) -> str:
+    if a.get("nav_label"):
+        return a["nav_label"]
     p = PRODUCT_BY_ID.get(a.get("product_id"))
     return p["name_short"] if p else a["page_type"]
 
@@ -196,9 +204,9 @@ def href(current: Page, target: str, text: str | None = None, extra: str = "") -
     return f'<a href="{esc(current.rel(target))}"{extra}>{label}</a>'
 
 
-def ext(url: str, text: str | None = None, extra: str = "") -> str:
+def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
     label = esc(text if text is not None else url)
-    return f'<a href="{esc(url)}" rel="noopener noreferrer"{extra}>{label}</a>'
+    return f'<a href="{esc(url)}" rel="{esc(rel)}"{extra}>{label}</a>'
 
 
 def source_label(url: str) -> str:
@@ -230,8 +238,11 @@ def competitor_links(p: dict) -> str:
 
 
 def shop_link(p: dict) -> str:
+    # rel="sponsored" marks the affiliate link for search engines (decision D-05,
+    # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
     return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"')
+               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
+               rel="sponsored noopener noreferrer")
 
 
 # ---------------------------------------------------------------- tables
@@ -434,6 +445,47 @@ def non_official_note() -> str:
     )
 
 
+def not_verified_block(current: Page) -> str:
+    """What this article does not show and why (suggestion S-22, decision D-25).
+
+    Every competitor hides these gaps. Publishing them pre-empts the reader's
+    doubt and turns the site's biggest constraint into its most distinctive
+    feature. Each line names the flag that explains it.
+    """
+    return (
+        '<div class="unverified" role="note"><strong>What this article does not show, and why</strong>'
+        '<ul>'
+        '<li><strong>Prices</strong> \u2014 withheld site-wide until an approved API supplies them; the listing always '
+        'carries the live number. ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>Star ratings and review counts</strong> \u2014 withheld for the same reason. ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>Per-product commission rate</strong> \u2014 blank: no official source maps these ASINs to a '
+        'commission category. ' + flag_chip(current, "F-01") + '</li>'
+        '<li><strong>Hands-on testing</strong> \u2014 none claimed; nobody on this project has cooked in these '
+        'appliances. ' + href(current, "decisions.html#D-06", "Decision D-06") + '</li>'
+        '</ul></div>'
+    )
+
+
+def where_next_block(current: Page, a: dict) -> str:
+    """Standing internal-navigation block on every article (suggestion S-24,
+    decision D-27). scripts/verify.py fails the build if an article omits it.
+    """
+    key = article_category(a)
+    items = []
+    if key:
+        items.append(href(current, "categories/" + key + ".html",
+                          CATEGORY_TITLE.get("categories/" + key + ".html", "The category record")))
+    if a["id"] != "M-CMP":
+        items.append(href(current, "articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html",
+                          "The three-format comparison"))
+    if a["id"] != "M-BUY":
+        items.append(href(current, "articles/air-fryer-buying-guide-2026.html", "The buying guide"))
+    items.append(href(current, "index.html#chooser", "The three-question chooser"))
+    items.append(href(current, ARTICLES_HUB, "All articles and the topic calendar"))
+    return ('<nav class="wherenext" aria-label="Where next"><strong>Where next</strong><ul>'
+            + "".join(f"<li>{x}</li>" for x in items) + "</ul></nav>")
+
+
 def marketing_fact_table(article: dict) -> str:
     rows = []
     for f in article["facts"]:
@@ -496,7 +548,7 @@ def marketing_article(current: Page, article: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in article["compliance_notes"])
     cta = article["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"')
+    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure sits in the same paragraph as the affiliate link, so it is
     # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
@@ -579,18 +631,66 @@ def decision_queue_section(current: Page) -> str:
         for d in top
     )
     return (
-        f'<section><h2>Before anything else: {len(open_decisions)} decisions are yours</h2>'
-        '<p class="section-lead">This site publishes only what an official source supports, which means a number of things the '
-        'brief asks for cannot be built until you answer. The three that gate the rest are below. Each one lists its options, '
-        'what each option commits the site to, and what would prove it worked.</p>'
+        f'<section><h2>Still yours to decide: {len(open_decisions)} questions</h2>'
+        '<p class="section-lead">The design and voice decisions have been recorded and shipped. These are what remains - '
+        'each one needs a fact only you have (an Associates account, a budget, a seller or a lawyer), so no source this '
+        'project can read will ever answer them. The three that gate the rest are below.</p>'
         f'<div class="agrid">{cards}</div>'
         + '<p>'
-        + href(current, "decisions.html", "Work through all " + str(len(open_decisions)) + " decisions →")
+        + href(current, "decisions.html", "Work through all " + str(len(open_decisions)) + " open decisions →")
         + " &nbsp; "
         + href(current, "suggestions.html", f"{len(SUGGESTIONS)} costed suggestions")
         + " &nbsp; "
         + href(current, "questions.html", f"{len(QUESTIONS)} open questions")
         + "</p></section>"
+    )
+
+
+def chooser_section(current: Page) -> str:
+    """The three-question 'which one is for you' chooser (suggestion S-19,
+    decision D-23 recorded 2026-11-16).
+
+    Built only from values already published from the official listings; the
+    routing logic is shown as a plain-text table so the answer is checkable
+    without the script, and every row links to the listing it draws on.
+    """
+    rows = [
+        ["Two dishes finishing at the same time is the weekly need",
+         href(current, "articles/chefman-6-quart-dual-basket-air-fryer-oven.html", "The 6-quart dual basket"),
+         ext(P1_URL, "2 independent 3-quart baskets; Sync Finish named in the title")],
+        ["One big dish at a time, and the shallowest footprint you can get",
+         href(current, "articles/chefman-8-quart-single-basket-air-fryer.html", "The 8-quart single basket"),
+         ext(P3_URL, "8 quarts; 12.75\"D as listed - the shallowest of the three")],
+        ["Feeding a crowd (or hosting), and the counter is deep",
+         href(current, "articles/26qt-french-door-air-fryer-toaster-oven.html", "The 26QT French-door oven"),
+         ext(P2_URL, "24.6 liters listed; 16.9\"D as listed - the largest and deepest")],
+    ]
+    fallback = table(["When the need is", "The format that answers it", "Listed figures behind the route (official)"],
+                     rows, "chooser-fallback")
+    return (
+        '<section id="chooser"><h2>Which air fryer is for you? Three questions</h2>'
+        '<p class="section-lead">Answer three questions and the chooser routes you to the format that fits - using only '
+        'listed specifications, with the reasoning shown. It is editorial routing, not a market claim: every figure it '
+        'uses is a sourced row on the product records.</p>'
+        '<div class="chooser" id="chooser-form">'
+        '<fieldset><legend>1. How many people are you cooking for?</legend>'
+        '<label><input type="radio" name="cook-for" value="small"> One or two</label>'
+        '<label><input type="radio" name="cook-for" value="mid" checked> Three or four</label>'
+        '<label><input type="radio" name="cook-for" value="large"> Five or more, or you host</label></fieldset>'
+        '<fieldset><legend>2. How much counter depth do you have? (measure front to back)</legend>'
+        '<label><input type="radio" name="depth" value="shallow"> Under 13.5 inches</label>'
+        '<label><input type="radio" name="depth" value="mid" checked> 13.5 to 15.5 inches</label>'
+        '<label><input type="radio" name="depth" value="deep"> More than 15.5 inches</label></fieldset>'
+        '<fieldset><legend>3. Do you want two different foods finishing at the same time?</legend>'
+        '<label><input type="radio" name="sync" value="yes" checked> Yes, often</label>'
+        '<label><input type="radio" name="sync" value="no"> No, one dish at a time is fine</label></fieldset>'
+        '<button class="btn btn-primary" type="button" id="chooser-go">Show my match</button>'
+        '</div>'
+        '<div class="chooser-result" id="chooser-result" role="status" aria-live="polite"></div>'
+        '<h3>The routing, in plain text</h3>'
+        '<p class="small muted">The same logic the chooser runs, in a table you can check without scripts.</p>'
+        + fallback
+        + "</section>"
     )
 
 
@@ -601,15 +701,18 @@ def page_index(current: Page) -> str:
         1 for p in PRODUCTS
         if p.get("commission_rate_pct") is not None and p.get("commission_category_official")
     )
+    recorded = sum(1 for d in DECISIONS if d["status"] == "Recorded")
     kpis = [
-        (f"{len(PRODUCTS)} of {len(PRODUCTS)}", "Products with verified ASIN, category, brand and specification table"),
-        (str(len(ARTICLES)), f"Published articles: {sum(1 for a in ARTICLES if a['page_type'] == 'Product article')} reviews, "
-                             f"{sum(1 for a in ARTICLES if a['page_type'] == 'Comparison')} comparison, "
-                             f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guide"),
-        ("0", "Amazon prices published (policy F-02)"),
-        (f"{assigned} of {len(PRODUCTS)}", "ASIN commission-category assignments confirmed (F-01)"),
+        (f"{len(PRODUCTS)} products", "Each one checked against its live listing: identity, category, brand and specifications"),
+        (f"{len(ARTICLES)} guides",
+         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Product article')} spec checks, "
+         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Comparison')} comparison and "
+         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guides - every figure sourced"),
+        ("0 prices, 0 star ratings", "Withheld on purpose (F-02): the programme keeps them off sites like this one"),
+        (f"{recorded} decisions recorded",
+         f"{len(DECISIONS) - recorded} still open - each one needs a fact only the owner has"),
         (str(len(open_flags)),
-         f"Flags awaiting your decision, of {len(FLAGS)} recorded (the rest are corrected or resolved and kept as "
+         f"Flags still open, of {len(FLAGS)} recorded (the rest are corrected or resolved and kept as "
          "the audit record on the Flagged for review page)"),
     ]
     kpi_html = "".join(
@@ -646,19 +749,29 @@ def page_index(current: Page) -> str:
              "none published. The Operating Agreement states Amazon makes no representation about either"),
         )
     )
+    buying_guide_path = next(
+        (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
+    )
     return (
         '<div class="mhero">'
-        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 links re-checked {esc(RECHECKED)} \u00b7 a source link on every table row</span>'
-        "<h1>Choosing between three countertop air fryers? Start with every listed figure checked.</h1>"
-        f'<p class="lead">{esc(CONTENT["executive_summary"]["headline"])}</p>'
+        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 re-checked {esc(RECHECKED)} \u00b7 every table row links to its source</span>'
+        "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
+        '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
+        'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
+        'verify is flagged rather than hidden, and no price or star rating is published because the programme rules keep '
+        'them off sites like this. Start with the chooser and find your format in under a minute.</p>'
         '<div class="mhero-actions">'
-        f'<a class="btn btn-primary" href="{esc(current.rel(ARTICLE_PATHS[-1][1]))}">Start with the buying guide</a>'
-        f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the three formats</a>'
-        f'<a class="btn" href="{esc(current.rel("suggestions.html"))}">Pick a path</a>'
-        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what is flagged</a>'
-        "</div></div>"
+        '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
+        f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
+        f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the formats</a>'
+        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what we flag</a>'
+        '</div>'
+        '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
+        '<span>Written by people-shaped sentences, checked line by line</span></div>'
+        '</div>'
         + f'<section class="kpis">{kpi_html}</section>'
-        + '<section><h2>The articles, in decision order</h2>'
+        + chooser_section(current)
+        + '<section><h2>Start here, then go deeper</h2>'
         '<p class="section-lead">Start with the buying guide, compare the three formats, then read the review for the '
         "product that fits your kitchen. Each article is built only from figures read off the official product page, and "
         "every fact it states is a row in a table that links back to that page.</p>"
@@ -704,11 +817,43 @@ def page_articles_index(current: Page) -> str:
         if key:
             link = (f'<p class="small">{href(current, "categories/" + key + ".html", "See the category record →")}</p>')
         blocks.append(f'<section><h2>{esc(title)}</h2><div class="agrid">{cards}</div>{link}</section>')
+    # The topic calendar (suggestion S-13, decision D-17): catchy, question-shaped
+    # headlines, each written from the verified field set already in the repo.
+    # Written rows link the article; every row links the official facts it draws on.
+    cal_rows = [
+        ["Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT", "Written",
+         href(current, "articles/air-fryer-sizes-explained-6qt-vs-8qt-vs-26qt.html", "Open the guide"),
+         ext(P1_URL, "Listed capacities and dimensions of all three products")],
+        ["Choosing an Air Fryer in 2026: The Format-First Method", "Written",
+         href(current, "articles/air-fryer-buying-guide-2026.html", "Open the guide"),
+         ext(CATEGORY_PATH_URL, "The shared category path and the three format records")],
+        ["Holiday 2026: Gift an Air Fryer by the Counter They Have", "Written (seasonal)",
+         href(current, "articles/holiday-2026-air-fryer-gift-guide.html", "Open the guide"),
+         ext(P2_URL, "Format and footprint figures; price rule from the Programme Policies")],
+        ["Hi-Fry, Sync Finish, Shake Reminder: An Air Fryer Feature Glossary", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
+         ext(P3_URL, "Named features across the three listings")],
+        ["The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
+         ext(P1_URL, "The verified field set: capacity, dimensions, range, presets")],
+        ["Two Baskets or One? The Sync-Finish Question, Answered With Specs", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
+         ext(P1_URL, "Dual-basket format fields (Sync Finish, 2 x 3QT)")],
+        ["French Door Air Fryer Ovens: Big Capacity, Bigger Footprint?", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
+         ext(P2_URL, "26QT oven capacity and dimensions")],
+        ["Compact Countertop Cooking: The Small-Kitchen Air Fryer Format", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
+         ext(P3_URL, "8-quart single-basket dimensions")],
+        ["What \u201c24 Cooking Functions\u201d Really Means (and Why Titles Disagree)", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
+         ext(P2_URL, "The two function-count readings recorded in F-26")],
+    ]
+    calendar = table(["Working title", "Status", "Link", "The verified facts it draws on (official)"], cal_rows, "calendar")
     return (
         hero("Articles", "Every article published on this site, grouped by the product format it covers. "
                          "The copy is written here, not republished from the listings, and each piece carries the "
                          "fact table it was written from.")
         + "".join(blocks)
+        + '<section><h2>The topic calendar</h2>'
+        '<p class="section-lead">Catchy, question-shaped topics are the plan (decision D-17); the difference from a content '
+        'farm is that every one of them is answerable from figures already verified against official listings \u2014 so a '
+        'planned title is a promise, not filler. No popularity or trend claim is made anywhere in the program (D-19).</p>'
+        + calendar + "</section>"
         + '<section><h2>How these are written</h2>'
         + "<p>"
         + esc(MARKETING["_meta"]["method"])
@@ -727,10 +872,14 @@ def page_article(current: Page, a: dict) -> str:
         # heading is not a factual claim and never appears in the fact tables.
         # Added by session arena/d8564cd0-zone4 (suggestion S-03).
         sub = f'<h2 class="phead">{esc(para["h"])}</h2>' if para.get("h") else ""
-        cites = "".join(
-            f'<a class="cite" href="{esc(facts_by_id[fid]["source_url"])}" rel="noopener noreferrer">{esc(fid)}</a>'
-            for fid in para["fact_ids"] if fid in facts_by_id
-        )
+        cites = ""
+        for fid in para["fact_ids"]:
+            fact = facts_by_id.get(fid)
+            if not fact:
+                continue
+            for url in (fact.get("source_urls") or [fact.get("source_url")]):
+                if url:
+                    cites += f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
         body_html.append(f'{sub}<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
@@ -739,7 +888,7 @@ def page_article(current: Page, a: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in a["compliance_notes"])
     cta = a["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"')
+    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure and a plain-language paid-link label sit in the same
     # paragraph as the affiliate link, not below it, so both are adjacent to the
     # link they qualify. qa/audit_site.py fails the build if either is missing.
@@ -782,8 +931,15 @@ def page_article(current: Page, a: dict) -> str:
         + meta_line
         + f'<h1>{esc(a["h1"])}</h1>'
         + f'<p class="dek">{esc(a["meta_description"])}</p>'
+        # The required disclosure sits directly under the headline, in byline
+        # size, as well as at the page top and beside each link (decision D-32;
+        # FTC Disclosures 101: disclosures are missed when they trail the post).
+        + f'<p class="disclosure-inline"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
+          "This article reports listed specifications; no unit was tested, and the shop links are paid links.</p>"
+        + not_verified_block(current)
         + "".join(body_html)
         + cta_html
+        + where_next_block(current, a)
         + "<h2>Fact basis (every row links to its official source)</h2>"
         + marketing_fact_table(a)
         + "<h2>Keyword targets</h2>"
@@ -839,6 +995,35 @@ def commission_category_note() -> str:
     )
 
 
+def counter_space_rows() -> list[list[str]]:
+    """Capacity per inch of listed counter depth (suggestion S-23, decision D-26).
+
+    Pure arithmetic on the published capacity and depth fields, computed here so
+    it cannot drift from the table above it, and labelled as derived rather than
+    as a listing claim. Units are kept as listed - no conversion is made - so the
+    liters row is not a like-for-like ratio against the quart rows.
+    """
+    rows = []
+    for p in PRODUCTS:
+        dm = re.match(r'([\d.]+)"D', p.get("dimensions", ""))
+        cm = re.match(r"([\d.]+)\s*(\w+)", p.get("capacity", ""))
+        if not dm or not cm:
+            continue
+        depth = float(dm.group(1))
+        cap = float(cm.group(1))
+        unit = cm.group(2)
+        per = cap / depth
+        rows.append([
+            ext(p["canonical_url"], p["name_short"]),
+            f"{cap:g} {unit} (as listed)",
+            f'{depth:g} in (as listed)',
+            f"<strong>{per:.2f}</strong> {unit} per inch (derived)",
+            f"{cap:g} {unit} &divide; {depth:g} in = {per:.2f}",
+            ext(p["canonical_url"], "Official listing (capacity and dimensions)"),
+        ])
+    return rows
+
+
 def page_products(current: Page) -> str:
     return (
         hero("All products",
@@ -852,6 +1037,16 @@ def page_products(current: Page) -> str:
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
         'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
+        + '<section><h2>Counter space per inch of depth (derived)</h2>'
+        '<p class="section-lead">A question no listing answers: how much cooking capacity does each unit give back for the '
+        'counter depth it takes? The arithmetic is shown in full, the inputs are the listed values above, and the result is '
+        'labelled derived - it is this site&rsquo;s calculation, not a claim made by any listing (decision D-26).</p>'
+        + table(["Product", "Capacity as listed", "Counter depth as listed", "Capacity per inch of depth",
+                 "The arithmetic", "Source of the inputs (official)"], counter_space_rows(), "derived")
+        + '<p class="note">Units are kept exactly as listed and never converted (F-10): the French-door oven&rsquo;s row is '
+        'in liters, the other two in quarts, so read the ratio within each row rather than ranking the rows against each '
+        'other. Depth is the first dimension as listed; the unit&rsquo;s own footprint also includes its width and height '
+        'on the rows above.</p></section>'
     )
 
 
@@ -1176,18 +1371,19 @@ def suggestion_card(current: Page, s: dict, number: int) -> str:
 
 
 def page_suggestions(current: Page) -> str:
-    open_count = sum(1 for s in SUGGESTIONS if s["status"].startswith("Awaiting"))
-    first = sum(1 for s in SUGGESTIONS if s["priority"].startswith("P1"))
+    open_count = sum(1 for s in SUGGESTIONS if s["status"].startswith(("Awaiting", "Needs")))
+    done_count = sum(1 for s in SUGGESTIONS if s["status"].startswith(("Implemented", "Partly")))
     cards = [
         ("What this page is",
-         "A backlog you approve before anything is built. Each entry states the problem, the proposed change, what it costs, "
-         "what it risks and the check that would prove it worked. Nothing here has been implemented."),
-        (f"{first} decisions come first",
-         "The P1 entries change what the other suggestions are even possible: the link tag, the API route, the editorial note "
-         "and the per-page metadata. Working up from P3 would waste the effort."),
-        (f"{open_count} of {len(SUGGESTIONS)} await your answer",
-         "The rest are corrections with one right answer, listed so the change is visible rather than silent. They are recorded "
-         "as recommended, not as decided."),
+         "The change register. Every entry states the problem, the proposed change, what it costs, what it risks and the "
+         "check that would prove it worked. A reviewer chooses here first; the Decision log records the choice; only then "
+         "does anything ship."),
+        (f"{done_count} shipped or staged on 2026-11-16",
+         "The delegated decision round adopted the voice, brand, topic, chooser, disclosure and guardrail proposals. Each "
+         "shipped item names the decision that released it; the fact rule never moved."),
+        (f"{open_count} still need you",
+         "These wait on a fact only the owner has - an Associates account, an API application, a budget or a lawyer. They "
+         "are recorded as recommended, never as decided."),
     ]
     card_html = "".join(
         f'<div class="kpi"><div class="kpi-value kpi-text">{esc(title)}</div>'
@@ -1213,12 +1409,54 @@ def page_suggestions(current: Page) -> str:
             f'<p class="section-lead">{esc(blurb)} {len(items)} suggestion{"s" if len(items) != 1 else ""}.</p>'
             f'<div class="scards">{"".join(inner)}</div></section>'
         )
+    need_owner = [s for s in SUGGESTIONS if s["status"].startswith(("Awaiting", "Needs"))]
+    shipped = [s for s in SUGGESTIONS if s["status"].startswith(("Implemented", "Partly"))]
+    staged = [s for s in SUGGESTIONS if s["status"].startswith(("Decision recorded", "Not adopted", "Confirmed"))]
+    blocked = [s for s in SUGGESTIONS if s["status"].startswith("Blocked")]
+
+    def _ids(items):
+        return " ".join(
+            f'<a class="flag-chip" href="#{esc(s["id"])}">{esc(s["id"])}</a>' for s in items
+        ) or "<span class=\"muted\">none</span>"
+
+    path_html = (
+        '<section><h2>The recommended path</h2>'
+        '<p class="section-lead">If you only look at one thing on this page, look at this: what to do next, in order, and '
+        'what has already been done on your behalf under the 2026-11-16 delegation.</p>'
+        '<div class="pathgrid">'
+        f'<div class="pathcard"><h3>1. Unlock these - only you can</h3><p>{_ids(need_owner)}</p>'
+        '<p class="small">Each one waits on a fact no official page can supply: your Associates account (S-01, S-02), '
+        'the commission category Amazon assigned (S-08) or a photography decision (S-18). Answer '
+        + href(current, "questions.html", "Q-01 to Q-03") + ' and this column empties.</p></div>'
+        f'<div class="pathcard"><h3>2. Shipped on 2026-11-16 - watch the checks</h3><p>{_ids(shipped)}</p>'
+        '<p class="small">Voice, headline and topic work, the chooser, the disclosure placement, the mobile pass and the '
+        'policy guardrails. Each has a \u201chow you would know it worked\u201d line in its card below.</p></div>'
+        f'<div class="pathcard"><h3>3. Staged, deferred or refused</h3><p>{_ids(staged)} {_ids(blocked)}</p>'
+        '<p class="small">Partly staged (Search Console, topic wave two, documentation), deferred with a reason (the '
+        'magazine/research split), confirmed as standing guardrails (single retailer, no deals, manual research), or '
+        'refused by policy (S-27).</p></div>'
+        '</div></section>'
+    )
+    review_html = (
+        '<section><h2>How to review this register</h2>'
+        '<ol class="steps">'
+        '<li><strong>Scan the table below</strong> in priority order (P1 first). The status chip shows what is already '
+        'decided and what is not.</li>'
+        '<li><strong>Open the card</strong> for the full case: the problem, the change, the cost, the risk and the check '
+        'that would prove it worked.</li>'
+        '<li><strong>Choose before anything changes.</strong> Record the option on the ' + href(current, "decisions.html", "Decision log") +
+        ', or reply with the decision id and option key. Reversible choices are marked as such.</li>'
+        '<li><strong>Implementation follows the record.</strong> Nothing here is built before its decision is logged; '
+        'shipped items name the decision that released them.</li>'
+        '</ol></section>'
+    )
     return (
         '<header class="hero"><h1>Suggestions</h1>'
-        '<p class="lead">Every change worth making to this site, costed and risk-assessed, waiting on a decision rather than '
-        'already applied. Pick a path here before anything is built.</p></header>'
+        '<p class="lead">Every change worth making to this site, costed and risk-assessed, with a decision recorded before '
+        'anything is built. Choose the path here; the Decision log is the receipt.</p></header>'
         f'<section class="kpis kpis-stack">{card_html}</section>'
-        '<section><h2>At a glance</h2>'
+        + path_html + review_html
+        + '<section><h2>At a glance</h2>'
         '<p class="section-lead">One line per suggestion. The full case for each is in the section below it.</p>'
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter suggestions (for example: P1, tag, commission)" aria-label="Filter suggestions"></p>'
         + table(["ID", "Priority", "Suggestion", "Status", "Decision", "Primary source (official)", "Flags"],
@@ -1313,13 +1551,31 @@ def page_questions(current: Page) -> str:
         + '<p class="note">A question closes only on a named source, a named party&rsquo;s answer, or an owner decision recorded in the '
         'Decision log. It is never closed by inference.</p>'
         '</section>'
+        '<section><h2>How the gaps get closed</h2>'
+        '<p class="section-lead">A discovery plan, grouped by who can actually supply the answer. No amount of reading closes '
+        'a gap that only a person or an account can.</p>'
+        '<ul class="bullets">'
+        '<li><strong>From your Associates account</strong> \u2014 the tag on the links (Q-01), API eligibility (Q-02) and, '
+        'once signed in, the commission category behind Q-03. Five minutes in Associates Central answers three of the '
+        'four gating gaps.</li>'
+        '<li><strong>From Amazon&rsquo;s official pages, by re-reading</strong> \u2014 every \u201cKnown\u201d row above. The '
+        're-read dates and the method are recorded in the sources registry; drift shows up as flags (F-29, F-44, F-47).</li>'
+        '<li><strong>From a seller or the brand</strong> \u2014 the P2 function-count discrepancy (Q-15) and product intent '
+        '(Q-09) need a question asked of a person, not a page read.</li>'
+        '<li><strong>From counsel</strong> \u2014 automated collection (Q-07) and liability for listed specs (Q-08). Until '
+        'then the engine stays offline and research stays manual (D-34).</li>'
+        '<li><strong>From you, as decisions</strong> \u2014 audience, success measures, budget and consent (Q-10, Q-14, '
+        'Q-16, Q-18). These are choices, not facts; the Decision log records each one when it is made.</li>'
+        '</ul></section>'
         '<section><h2>Why this page exists</h2>'
         '<p>Three of these gaps decide whether this project can earn at all: the Associates tag (Q-01), API access for prices and '
-        'ratings (Q-02), and the per-ASIN commission category (Q-03). Three more decide whether it can honestly describe itself: who '
-        'reviews the copy (Q-05), whether anything was tested (Q-06), and whether automated collection needs a legal opinion (Q-07). '
-        'The rest are presentation and operations choices with named owners.</p>'
+        'ratings (Q-02), and the per-ASIN commission category (Q-03). Two were closed on 2026-11-16 by recorded decisions: the '
+        'site is a specification tool with no testing claims (Q-06, decision D-06), and it grows on organic search only (Q-21, '
+        'decision D-29). What remains decides whether it can honestly describe itself: who reviews the copy (Q-05) and whether '
+        'automated collection needs a legal opinion (Q-07).</p>'
         f'<p class="small muted">Related: {href(current, "suggestions.html", "Suggestions")} for what each answer would unlock, '
-        f'{href(current, "decisions.html", "Decision log")} for the choices already recorded (none, as of {esc(OBSERVED)}).</p>'
+        f'{href(current, "decisions.html", "Decision log")} for the choices already recorded '
+        f'({sum(1 for d in DECISIONS if d["status"] == "Recorded")} recorded on 2026-11-16 under the owner&rsquo;s delegation).</p>'
         '</section>'
     )
 
@@ -1362,7 +1618,10 @@ def page_decisions(current: Page) -> str:
             f'<div class="decision-head"><h2>{esc(d["id"])} &middot; {esc(d["question"])}</h2>'
             f'{_decision_status_pill(d["status"])}</div>'
             f'<div class="optrow">{"".join(opts)}</div>'
-            f'<p class="rec"><strong>Recommendation.</strong> {esc(d["recommendation"])}</p>'
+            + (f'<p class="recorded"><strong>Recorded {esc(d.get("recorded_date_utc", ""))}.</strong> '
+               f'{esc(d.get("recorded_choice", ""))}</p>'
+               if d["status"] == "Recorded" and d.get("recorded_choice") else "")
+            + f'<p class="rec"><strong>Recommendation.</strong> {esc(d["recommendation"])}</p>'
             f'<p class="small">Unlocks: {links}'
             + (f' &middot; Gated by: {qlink}' if qlink else "")
             + f' &middot; Source: {ext(d["sources"][0]["url"], d["sources"][0]["ref"])}'
@@ -1382,14 +1641,19 @@ def page_decisions(current: Page) -> str:
         '<p class="lead">The queue you work through before any suggestion is built, and the record of what has actually been '
         'decided. Nothing in this repository acts on an option by itself: the site stays exactly as it is until a choice is recorded here.</p></header>'
         f'<section class="kpis">{kpi_html}</section>'
-        '<p class="small muted">Pick an option and the site owner records it in the log at the bottom of this page, with the date. '
-        'The recommendation is an argument, not a decision, and it is labelled as one.</p>'
+        '<p class="small muted">Pick an option and it is recorded in the log at the bottom of this page, with the date. The '
+        'recommendation is an argument, not a decision, and it is labelled as one. Decisions dated 2026-11-16 were recorded '
+        'under the owner&rsquo;s written delegation for this session ("no manual input... work on your own"); they are '
+        'reversible, and each log entry says so.</p>'
         + "".join(blocks)
         + '<section><h2>Recorded decisions</h2>'
         + table(["Date (UTC)", "Decision", "Choice", "Recorded by", "Evidence", "Where it is recorded"],
                 log_rows, "decision-log")
-        + '<p class="note">Empty is a valid and honest state. As of this build no owner decision has been recorded, so every row above '
-          'is still open and no suggestion has been implemented.</p></section>'
+        + f'<p class="note">{sum(1 for d in DECISIONS if d["status"] == "Recorded")} decisions are recorded and '
+          f'{sum(1 for d in DECISIONS if d["status"].startswith("Open"))} remain open. The open ones are not waiting on '
+          'more research: each needs a fact only the owner has - an Associates account, a tracking ID, a budget, a seller '
+          'or a lawyer - so they are listed with exactly what they block rather than guessed at. Reopening any recorded '
+          'decision is one entry in this log.</p></section>'
     )
 
 
@@ -1398,25 +1662,25 @@ def page_decisions(current: Page) -> str:
 # carried their own, and these cover the rest. The build fails if two pages
 # share one (see scripts/verify.py), so this cannot silently regress.
 PAGE_DESCRIPTIONS = {
-    "index.html": "A dashboard of verified air-fryer research: three product records, five sourced articles, a policy check on every claim, and an official source link on every table row.",
-    "executive-summary.html": "What the verification found, the seven decisions that need an owner, and what is deliberately not built. Each statement links to the official source behind it.",
+    "index.html": "Spec-checked air fryer buying guides: a three-question chooser, seven sourced articles, three verified product records, and a receipt behind every number.",
+    "executive-summary.html": f"What the verification found, the {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} decisions that still need the owner and the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} recorded on 2026-11-16, and what is deliberately not built. Each statement links to the official source behind it.",
     "products.html": "Three air-fryer product records side by side: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
     "categories/dual-basket-air-fryers.html": "The dual-basket air-fryer category: the Chefman 6 quart record, its listed specifications, the competing ASINs shown beside it on the listing, and the article written from those facts.",
     "categories/single-basket-air-fryers.html": "The single-basket air-fryer category: the Chefman 8 quart record, its listed presets and footprint, the size variants on the same page, and the article written from those facts.",
     "categories/air-fryer-toaster-ovens.html": "The air-fry toaster oven category: the Emeril Lagasse 26 quart record, its listed functions and footprint, and the two specification inconsistencies disclosed rather than resolved.",
-    "marketing.html": "The full marketing content kit on one page: three product articles, a comparison and a buying guide, each with the fact table it was written from and a disclosure-carrying call to action.",
+    "marketing.html": f"The full marketing content kit on one page: {len(ARTICLES)} articles - product spec checks, a format comparison and buying guides - each with the fact table it was written from and a disclosure-carrying call to action.",
     "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
     "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
-    "requirements.html": "All thirty items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
+    "requirements.html": f"All {len(REQUIREMENTS)} items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
     "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
-    "policy-compliance.html": "Thirty Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
+    "policy-compliance.html": f"{len(RULES)} Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
     "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
     "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
-    "articles/index.html": "Every article on the site, grouped by product format, each one built from a fact table in which every row links to the official product page it was read from.",
-    "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed, risk-assessed and waiting on a decision rather than already applied, each tied to the official rule that constrains it.",
+    "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
+    "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
-    "decisions.html": "The decision queue for this site: every open choice with its options, cost and reversibility, plus the record of decisions actually taken (currently none).",
+    "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
 }
 
 BODIES = {
@@ -1479,6 +1743,14 @@ def render(page: Page) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(page.title_tag or page.title)} | {esc(SITE_TITLE_SUFFIX)}</title>
 <meta name="description" content="{esc(page.description or SITE_DESCRIPTION)}">
+<meta property="og:title" content="{esc(page.title_tag or page.title)}">
+<meta property="og:description" content="{esc(page.description or SITE_DESCRIPTION)}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{esc(SITE_URL + page.path)}">
+<meta property="og:site_name" content="{esc(SITE_TITLE_SUFFIX)}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{esc(page.title_tag or page.title)}">
+<meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
@@ -1486,7 +1758,7 @@ def render(page: Page) -> str:
 <a class="skip" href="#main">Skip to content</a>
 <div class="layout">
 <aside class="sidebar">
-  <a class="brand" href="{esc(page.rel('index.html'))}">Affiliate research</a>
+  <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">air fryer buying guides</span></a>
   <nav aria-label="Main">{nav}</nav>
 </aside>
 <div class="content">
