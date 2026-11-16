@@ -999,7 +999,7 @@ each file so the provenance is not lost.
 
 **Checks run before pushing.** `python3 scripts/build_site.py` → `scripts/verify.py` (OK, 24 pages) → `qa/audit_site.py` (PASS, 0 warnings) → `python3 -m unittest discover -s tests` (83 OK) → `python3 -m engine.cli audit` (exit 0, 0/7 ready, which is the intended gate) → `python3 -m engine.cli build` + `tools/check_links.py` (0 broken links) → `git diff --check`.
 
-**PR and merge.** PR [#60](https://github.com/kanlerxz87-cyber/Zone4/pull/60) (`arena/c42349c3-zone4` → `main`): audit and verify (×2) passed. Merged at 2026-11-16T18:45:34Z as merge commit `915b078`. Pages status `built` for `915b078`. Board and log record: PR #61 (this file only).
+**PR and merge.** PR [#60](https://github.com/kanlerxz87-cyber/Zone4/pull/60) (`arena/c42349c3-zone4` → `main`): audit and verify (×2) passed. Merged at 2026-11-16T18:45:34Z as merge commit `915b078`. Pages status `built` for `915b078`. Board and log record: PR [#64](https://github.com/kanlerxz87-cyber/Zone4/pull/64) (`COORDINATION.md` and the method note in the verification record).
 
 **Files changed.** `data/verification-session-c42349c3.json` (new), `data/flags.json` (F-47, F-48 added; F-44 dated update; `_meta`), `data/content.json` (`rechecked_utc` → 2026-11-16), `README.md` and `EXECUTIVE_SUMMARY.md` (flag counts 46→48 and the 2026-11-16 re-check note), `docs/` (regenerated), `COORDINATION.md`.
 
