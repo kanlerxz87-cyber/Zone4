@@ -9,7 +9,9 @@
       "Any sentence, bullet or phrase copied from the Amazon listing - Participation Requirement 6(a) forbids altering Program Content, and this site does not republish it.",
       "Search-volume or trend figures - no official source publishes them, so the cells are blank and marked unverified.",
       "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
-    ]
+    ],
+    "updated_utc": "2026-11-16",
+    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail."
   },
   "articles": [
     {
@@ -40,9 +42,9 @@
           "source_url": "https://www.amazon.com/dp/B0CDY277D3"
         }
       ],
-      "title_tag": "Chefman 6 Quart Dual Basket Air Fryer Oven: Verified Two-Basket Specs",
-      "meta_description": "Two independent 3-quart baskets, a 200-450°F digital range and easy-view windows: the listed specifications of the Chefman 6 Quart Dual Basket Air Fryer Oven, each traced to its official source.",
-      "h1": "Chefman 6 Quart Dual Basket Air Fryer Oven: two baskets, every figure checked",
+      "title_tag": "Chefman 6-Quart Dual-Basket Air Fryer: Spec Check, Sizes and Sync Finish",
+      "meta_description": "Two independent 3-quart baskets, a 200-450\u00b0F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
+      "h1": "Two baskets, one finish line: the Chefman 6-quart dual-basket air fryer",
       "outline": [
         {
           "h2": "What the dual basket format changes",
@@ -278,7 +280,8 @@
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
         "The listing title appears only as a linked identifier, never as republished copy.",
         "Capacity is quoted with its unit exactly as the product details table shows it."
-      ]
+      ],
+      "nav_label": "6-quart dual basket"
     },
     {
       "id": "M-P2",
@@ -308,9 +311,9 @@
           "source_url": "https://www.amazon.com/dp/B09B7SB46R"
         }
       ],
-      "title_tag": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: Verified Listed Specs",
-      "meta_description": "French doors, a dual-speed fan and rotisserie, 24.6 liters listed: the Emeril Lagasse 26QT air fryer toaster oven's stated specifications, with its two function counts reported as written and every figure traced to its official source.",
-      "h1": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: the listed facts, both function counts included",
+      "title_tag": "Emeril Lagasse 26QT French-Door Air Fryer Toaster Oven: Spec Check and Fit",
+      "meta_description": "French doors, a dual-speed fan and rotisserie, 24.6 liters listed: what the 26QT Emeril Lagasse oven brings to a countertop, what it asks from your counter, and every figure traced to its source.",
+      "h1": "French doors and 24 functions: inside the Emeril Lagasse 26QT air fryer toaster oven",
       "outline": [
         {
           "h2": "Toaster oven or air fryer? What the format does",
@@ -500,7 +503,7 @@
           "value": "Store link: Visit the Emeril Store; Innovation IQ is the contributor to a customer-review video, not the product brand or byline.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Brand store link, customer-review video block, and Item details table on the Amazon product page",
-          "note": "The review block also carries “Earns Commissions”; it is not a product-brand designation."
+          "note": "The review block also carries \u201cEarns Commissions\u201d; it is not a product-brand designation."
         },
         {
           "id": "M-P2-F9",
@@ -562,7 +565,8 @@
         "P2 brand and manufacturer come from the explicit Item details fields; the separate creator/review block is not used as a product brand.",
         "Both the 24 and the 25 function counts are reported, with the discrepancy flagged.",
         "The listing title's second segment differed on a 2026-11-15 re-read; both reads are recorded verbatim in the repository (flag F-44). This article quotes the stored 2026-11-14 fields with their citations."
-      ]
+      ],
+      "nav_label": "26QT French door"
     },
     {
       "id": "M-P3",
@@ -592,9 +596,9 @@
           "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
         }
       ],
-      "title_tag": "Chefman 8 Quart 4-in-1 Air Fryer: Verified Single-Basket Specs",
-      "meta_description": "Four presets, a 200-400°F range and a dishwasher-safe basket for the 8-quart variant: the Chefman single-basket air fryer's listed specifications, each traced to its official source.",
-      "h1": "Chefman 8 Quart TurboFry 4-in-1 Air Fryer: one basket, every figure checked",
+      "title_tag": "Chefman 8-Quart TurboFry 4-in-1 Air Fryer: Spec Check and Size Fit",
+      "meta_description": "Four presets, a 200-400\u00b0F range and a 450\u00b0F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
+      "h1": "One big basket, 450 degrees: the Chefman 8-quart TurboFry 4-in-1",
       "outline": [
         {
           "h2": "Single basket and multi-function: what the format does",
@@ -815,7 +819,8 @@
         "Every capacity and dimension figure is stated for the 8 qt variant only, because the page also offers 6 and 9 qt sizes.",
         "The listing title appears only as a linked identifier.",
         "The also-viewed carousel's third position differed on a 2026-11-15 re-read (B09MR7QWKZ, a Gourmia 8 Qt model); the stored 2026-11-14 record is kept with its citation (flag F-29)."
-      ]
+      ],
+      "nav_label": "8-quart single basket"
     },
     {
       "id": "M-CMP",
@@ -845,9 +850,9 @@
           "source_url": "https://www.amazon.com/dp/B09B7SB46R"
         }
       ],
-      "title_tag": "Dual Basket vs Single Basket vs Toaster Oven Air Fryer: Verified Comparison",
-      "meta_description": "Three countertop air-fryer formats compared on listed capacity, footprint, material and features: units kept exactly as listed, blank cells explained, and every figure traced to its official source.",
-      "h1": "Dual basket, single basket or toaster oven: comparing three countertop air fryers",
+      "title_tag": "Dual-Basket vs Single-Basket vs Toaster-Oven Air Fryers: Compared",
+      "meta_description": "Three countertop air-fryer formats compared on listed capacity, footprint and features - units kept exactly as listed, blank cells explained, and every figure traced to its official source.",
+      "h1": "Dual basket, single basket or toaster oven: which air fryer fits your kitchen?",
       "outline": [
         {
           "h2": "The three formats in one table",
@@ -1021,7 +1026,8 @@
         "No price, star rating or review count appears anywhere in the comparison table.",
         "Capacity units are shown exactly as listed and are not converted.",
         "The comparison does not rank or endorse any of the products."
-      ]
+      ],
+      "nav_label": "Format comparison"
     },
     {
       "id": "M-BUY",
@@ -1051,9 +1057,9 @@
           "source_url": "https://www.amazon.com/dp/B09B7SB46R"
         }
       ],
-      "title_tag": "Air Fryer Buying Guide: Format First, Then the Numbers",
-      "meta_description": "A five-step decision guide to choosing between a dual-basket air fryer, a single-basket fryer and a French-door toaster oven, using only listed specifications that trace to their official sources.",
-      "h1": "Air fryer buying guide: start with the format, then the numbers",
+      "title_tag": "How to Choose an Air Fryer in 2026: the Format-First Method",
+      "meta_description": "A five-step decision guide to choosing between a dual-basket air fryer, a single-basket fryer and a French-door toaster oven - using only listed specifications that trace to their official sources.",
+      "h1": "How to choose an air fryer in 2026: the format-first method",
       "outline": [
         {
           "h2": "Step one: pick the format",
@@ -1237,7 +1243,7 @@
           "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse; product page links to the Emeril Store.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Item details table and brand store link on the Amazon product page",
-          "note": "Confirmed; F-05 resolved. “Innovation IQ” is a customer-review video contributor, not the product brand."
+          "note": "Confirmed; F-05 resolved. \u201cInnovation IQ\u201d is a customer-review video contributor, not the product brand."
         },
         {
           "id": "M-BUY-F7",
@@ -1257,8 +1263,497 @@
       "compliance_notes": [
         "No price, star rating or review count appears in the guide.",
         "Every step is tied to a verified field; no step depends on a withheld value.",
-        "Capacity units are kept as listed, and P2’s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
-      ]
+        "Capacity units are kept as listed, and P2\u2019s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
+      ],
+      "nav_label": "Buying guide"
+    },
+    {
+      "id": "M-G2",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "/air-fryer-sizes-explained-6qt-vs-8qt-vs-26qt/",
+      "target_keywords": [
+        {
+          "term": "what size air fryer do i need",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer sizes explained",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "6qt vs 8qt air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        }
+      ],
+      "title_tag": "Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT - What Fits Your Counter",
+      "meta_description": "Quarts, liters and counter depth: what the listed sizes of a 6-quart dual basket, an 8-quart single basket and a 26-quart French-door oven actually mean, with every figure linked to its source.",
+      "h1": "Air fryer sizes explained: 6QT vs 8QT vs 26QT - what actually fits your counter",
+      "outline": [
+        {
+          "h2": "Size is a counter question before it is a capacity question",
+          "purpose": "Open with the measurement that actually decides the purchase.",
+          "facts_used": [
+            "M-G2-F2",
+            "M-G2-F4",
+            "M-G2-F6"
+          ]
+        },
+        {
+          "h2": "Quarts and liters: the labels do not convert for you",
+          "purpose": "Show the mixed units honestly instead of converting them.",
+          "facts_used": [
+            "M-G2-F1",
+            "M-G2-F3",
+            "M-G2-F5",
+            "M-G2-F10"
+          ]
+        },
+        {
+          "h2": "The compact pair: what six to eight quarts covers",
+          "purpose": "Match the two smaller formats to everyday cooking.",
+          "facts_used": [
+            "M-G2-F1",
+            "M-G2-F7",
+            "M-G2-F5",
+            "M-G2-F9"
+          ]
+        },
+        {
+          "h2": "When the 26-quart oven earns its footprint",
+          "purpose": "Explain what the largest format gives and asks for.",
+          "facts_used": [
+            "M-G2-F3",
+            "M-G2-F4",
+            "M-G2-F8"
+          ]
+        },
+        {
+          "h2": "The counter-depth test, with the arithmetic",
+          "purpose": "Turn listed depths into a decision rule.",
+          "facts_used": [
+            "M-G2-F2",
+            "M-G2-F4",
+            "M-G2-F6"
+          ]
+        },
+        {
+          "h2": "A size checklist before you click",
+          "purpose": "Close with a screenshot-able checklist.",
+          "facts_used": [
+            "M-G2-F10",
+            "M-G2-F7",
+            "M-G2-F9",
+            "M-G2-F8"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G2-B1",
+          "h": "Size is a counter question before it is a capacity question",
+          "fact_ids": [
+            "M-G2-F2",
+            "M-G2-F4",
+            "M-G2-F6"
+          ],
+          "text": "The size argument in an air fryer listing usually happens in quarts. The size argument at home happens in inches. The three products in this research set list depths of 13.38, 16.9 and 12.75 inches respectively, and those three numbers decide where the machine can physically live - which is why this guide starts with a tape measure, not a capacity figure."
+        },
+        {
+          "id": "M-G2-B2",
+          "h": "Quarts and liters: the labels do not convert for you",
+          "fact_ids": [
+            "M-G2-F1",
+            "M-G2-F3",
+            "M-G2-F5",
+            "M-G2-F10"
+          ],
+          "text": "Here is a mess the listings themselves make: the dual-basket product's title says 6 Quart while its item details list 6 liters, the French-door oven lists 24.6 liters, and the single-basket fryer lists 8 quarts. This site reports each figure exactly as listed and does not convert between the units - so treat capacity as a rough ordering (the 24.6-liter oven is the big one), not as an arithmetic comparison."
+        },
+        {
+          "id": "M-G2-B3",
+          "h": "The compact pair: what six to eight quarts covers",
+          "fact_ids": [
+            "M-G2-F1",
+            "M-G2-F7",
+            "M-G2-F5",
+            "M-G2-F9"
+          ],
+          "text": "For one to three people, the choice is between the two smaller formats. The dual-basket unit splits its 6 quarts into two independent 3-quart baskets with a Sync Finish option named in the title - a main and a side aimed at the same finish line. The single-basket fryer spends its 8 quarts on one cavity with four presets and a dishwasher-safe basket. Editorial judgement, from those listed facts: cook two things at once often, take the dual basket; cook one thing big, take the single."
+        },
+        {
+          "id": "M-G2-B4",
+          "h": "When the 26-quart oven earns its footprint",
+          "fact_ids": [
+            "M-G2-F3",
+            "M-G2-F4",
+            "M-G2-F8"
+          ],
+          "text": "The French-door toaster oven lists 24.6 liters of interior and 24 one-touch presets in its title, with a dual-speed fan and rotisserie named among its features. It is the format that can replace a toaster and a countertop oven - and it asks for 16.9 inches of counter depth to do it. If your counter run is shallower than that, this class of oven is out before the cooking questions start."
+        },
+        {
+          "id": "M-G2-B5",
+          "h": "The counter-depth test, with the arithmetic",
+          "fact_ids": [
+            "M-G2-F2",
+            "M-G2-F4",
+            "M-G2-F6"
+          ],
+          "text": "Do this before anything else: measure the counter where the machine would sit, front to back. Under about 13 inches of depth, the single-basket unit (12.75 inches listed) is the only one of the three that fits as listed. Around 14 inches, the dual basket (13.38 inches listed) joins it. Past 17 inches, the French-door oven (16.9 inches listed) is finally in play. The room in front of the machine matters too - the listed figures count the unit, not the hands using it."
+        },
+        {
+          "id": "M-G2-B6",
+          "h": "A size checklist before you click",
+          "fact_ids": [
+            "M-G2-F10",
+            "M-G2-F7",
+            "M-G2-F9",
+            "M-G2-F8"
+          ],
+          "text": "So: measure the counter; decide whether two dishes finishing together is a weekly need (that is the dual basket's whole pitch); decide whether one big basket beats two small ones for how you cook (four presets versus two independent cavities); and read capacity in its own listed unit rather than converting. Every figure in this guide is a row in the fact table below, each linking to the listing it came from - and when you are ready, the listing itself is one click away."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G2-F1",
+          "field": "Dual-basket capacity as listed",
+          "value": "Title: 6 Quart combined (2 independent 3QT baskets); Item details capacity field: 6 liters",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing field read on the official product page",
+          "note": "Two different units appear on one page; both are reported as listed (F-10)."
+        },
+        {
+          "id": "M-G2-F2",
+          "field": "Dual-basket dimensions as listed",
+          "value": "13.38\"D x 11.81\"W x 10.63\"H",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F3",
+          "field": "French-door oven capacity as listed",
+          "value": "24.6 liters",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F4",
+          "field": "French-door oven dimensions as listed",
+          "value": "16.9\"D x 15.8\"W x 14.8\"H",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F5",
+          "field": "Single-basket capacity as listed",
+          "value": "8 quarts",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F6",
+          "field": "Single-basket dimensions as listed",
+          "value": "12.75\"D x 13.5\"W x 10\"H",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F7",
+          "field": "Dual-basket format and stated features",
+          "value": "Two independent 3-quart nonstick baskets; Sync Finish named in the title; easy-view windows; 200-450 degrees F digital range",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing field read on the official product page",
+          "note": "Facts only; listing prose is not reproduced."
+        },
+        {
+          "id": "M-G2-F8",
+          "field": "French-door oven format and stated features",
+          "value": "French-door air fryer toaster oven; 24 one-touch presets named in the current title segment (the 2026-11-14 title segment words the count differently; F-26); dual-speed fan and rotisserie named in the stored title segment",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing field read on the official product page",
+          "note": "The two function-count readings are both recorded rather than merged (F-26, F-44)."
+        },
+        {
+          "id": "M-G2-F9",
+          "field": "Single-basket format and stated features",
+          "value": "Single basket; 4 presets; touch control; 200-400 degrees F range; 450F Hi-Fry option named in the title; dishwasher-safe basket",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G2-F10",
+          "field": "Capacity units",
+          "value": "Capacities are listed in mixed units (quarts and liters) across the three products; this site reports them as listed and does not convert",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page",
+            "Listing field read on the official product page",
+            "Listing field read on the official product page"
+          ],
+          "note": "Derived convention of this site, stated so the reader can check it."
+        }
+      ],
+      "cta": {
+        "text": "Check the current listing and availability for the format that fit your counter",
+        "link_label": "Open the air fryer listings",
+        "link_url": "https://link.amazon/B04G1MEwY",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or popularity badge appears in this article.",
+        "Capacity figures are never converted between quarts and liters; each is reported in its own listed unit.",
+        "The counter-depth fit statements are arithmetic and judgement on listed dimensions, labelled as such, not listing claims.",
+        "No trend or popularity claim is made (decision D-19, 2026-11-16): the size framing is evergreen."
+      ],
+      "nav_label": "Sizes explained"
+    },
+    {
+      "id": "M-G3",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "/holiday-2026-air-fryer-gift-guide/",
+      "target_keywords": [
+        {
+          "term": "air fryer gift guide",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "holiday gift guide air fryer",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "which air fryer to gift",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "title_tag": "Holiday 2026 Air Fryer Gift Guide: Match the Format to the Counter",
+      "meta_description": "A gift guide built from listed specifications only: which air fryer format suits which cook, why it carries no prices, and the one measurement to take before you wrap the box.",
+      "h1": "Holiday 2026: gift an air fryer by the counter they actually have",
+      "outline": [
+        {
+          "h2": "Give the format, not just the box",
+          "purpose": "Frame gifting around how the person cooks.",
+          "facts_used": [
+            "M-G3-F1",
+            "M-G3-F3",
+            "M-G3-F5"
+          ]
+        },
+        {
+          "h2": "For the cook who runs two dishes at once",
+          "purpose": "Route to the dual-basket format.",
+          "facts_used": [
+            "M-G3-F1",
+            "M-G3-F2"
+          ]
+        },
+        {
+          "h2": "For the meal-prepper with a favorite basket",
+          "purpose": "Route to the single-basket format.",
+          "facts_used": [
+            "M-G3-F3",
+            "M-G3-F4"
+          ]
+        },
+        {
+          "h2": "For the household that hosts",
+          "purpose": "Route to the French-door oven format.",
+          "facts_used": [
+            "M-G3-F5",
+            "M-G3-F6"
+          ]
+        },
+        {
+          "h2": "Why this guide has no prices in it",
+          "purpose": "Turn the site's biggest constraint into honest gift advice.",
+          "facts_used": [
+            "M-G3-F7"
+          ]
+        },
+        {
+          "h2": "Before you wrap it: the one measurement",
+          "purpose": "Close with the counter-depth check.",
+          "facts_used": [
+            "M-G3-F2",
+            "M-G3-F4",
+            "M-G3-F6",
+            "M-G3-F8"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G3-B1",
+          "h": "Give the format, not just the box",
+          "fact_ids": [
+            "M-G3-F1",
+            "M-G3-F3",
+            "M-G3-F5"
+          ],
+          "text": "The easiest way to gift an air fryer badly is to buy the biggest box with the longest feature list. The easiest way to gift one well is to match the format to how the person actually cooks: two independent 3-quart baskets for the cook juggling a main and a side, one 8-quart basket for the cook who makes one thing properly, or a 24.6-liter French-door oven for the household that feeds a crowd. The three products in this guide are exactly those three shapes."
+        },
+        {
+          "id": "M-G3-B2",
+          "h": "For the cook who runs two dishes at once",
+          "fact_ids": [
+            "M-G3-F1",
+            "M-G3-F2"
+          ],
+          "text": "If their weeknight ritual is a protein plus a side, the dual-basket format is the gift that changes the ritual: two independent 3-quart baskets, a Sync Finish option named in the title, and easy-view windows so nobody opens the machine to peek. It lists 13.38 inches of counter depth - compact, but measure their counter anyway."
+        },
+        {
+          "id": "M-G3-B3",
+          "h": "For the meal-prepper with a favorite basket",
+          "fact_ids": [
+            "M-G3-F3",
+            "M-G3-F4"
+          ],
+          "text": "For the cook who makes one big thing - a whole batch of wings, a tray of vegetables - the single-basket 8-quart unit is the straightforward pick: four presets, a 200-400 degree range with a 450-degree Hi-Fry option named in the title, and a dishwasher-safe basket. It lists 12.75 inches of counter depth, the shallowest of the three."
+        },
+        {
+          "id": "M-G3-B4",
+          "h": "For the household that hosts",
+          "fact_ids": [
+            "M-G3-F5",
+            "M-G3-F6"
+          ],
+          "text": "The French-door toaster oven is the showpiece gift: 24.6 liters listed, 24 one-touch presets in its current title segment, French doors, and rotisserie among its named features. It is also the one that needs the most counter - 16.9 inches of listed depth. Gift it only to a kitchen you have seen."
+        },
+        {
+          "id": "M-G3-B5",
+          "h": "Why this guide has no prices in it",
+          "fact_ids": [
+            "M-G3-F7"
+          ],
+          "text": "Every other gift guide guesses at prices. This one does not: programme rules restrict published prices and star ratings to Amazon-served links or the approved APIs, so this site publishes neither and simply points you at the listing, where the live number is always the true one. For a gift buyer that is genuinely better advice - a copied price is stale the moment it is published."
+        },
+        {
+          "id": "M-G3-B6",
+          "h": "Before you wrap it: the one measurement",
+          "fact_ids": [
+            "M-G3-F2",
+            "M-G3-F4",
+            "M-G3-F6",
+            "M-G3-F8"
+          ],
+          "text": "Before the box goes under anything, get one measurement: the depth of the counter it will live on. The three listed depths are 12.75, 13.38 and 16.9 inches, and capacity labels across the three mix quarts and liters, so trust the tape measure over the unit on the box. Every figure here is a sourced row in the table below - the receipts come with the recommendation."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G3-F1",
+          "field": "Dual-basket format as listed",
+          "value": "Two independent 3-quart nonstick baskets (6 quarts combined); Sync Finish named in the title; easy-view windows",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F2",
+          "field": "Dual-basket dimensions as listed",
+          "value": "13.38\"D x 11.81\"W x 10.63\"H",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F3",
+          "field": "Single-basket format as listed",
+          "value": "8-quart single basket; 4 presets; 200-400 degrees F range with 450F Hi-Fry option named in the title; dishwasher-safe basket",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F4",
+          "field": "Single-basket dimensions as listed",
+          "value": "12.75\"D x 13.5\"W x 10\"H",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F5",
+          "field": "French-door oven format as listed",
+          "value": "24.6 liters interior; French doors; 24 one-touch presets in the current title segment (F-26 records the two readings); rotisserie named in the stored title segment",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F6",
+          "field": "French-door oven dimensions as listed",
+          "value": "16.9\"D x 15.8\"W x 14.8\"H",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "Listing field read on the official product page",
+          "note": ""
+        },
+        {
+          "id": "M-G3-F7",
+          "field": "Price and rating publication rule",
+          "value": "Participation Requirements restrict published prices, availability, star ratings and customer reviews to Amazon-served links or the Creators/PA APIs; this site publishes none of them",
+          "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "source_ref": "Associates Program Participation Requirements (2(b) and 6(t))",
+          "note": "The reason this gift guide carries no prices."
+        },
+        {
+          "id": "M-G3-F8",
+          "field": "Capacity units",
+          "value": "Capacity labels across the three products mix quarts and liters; this site reports each as listed and does not convert",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page",
+            "Listing field read on the official product page",
+            "Listing field read on the official product page"
+          ],
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "Check the current listing and availability before you wrap it",
+        "link_label": "Open the air fryer listings",
+        "link_url": "https://link.amazon/B00hJ57DV",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating or review count appears in this gift guide (F-02); the omission is explained in the copy and points the reader to the live listing.",
+        "The seasonal framing is calendar-based (the guide is dated 2026-11-16) and makes no trend or popularity claim (decision D-19).",
+        "Giftee profiles are editorial routing on listed specifications and dimensions, not hands-on claims: nobody on this project has used these appliances (decision D-06).",
+        "No capacity conversions are made between quarts and liters."
+      ],
+      "nav_label": "Holiday gift guide"
     }
   ],
   "seo_rules": [
@@ -1361,6 +1856,18 @@
       "detail": "Keep the published URL list so a later review can confirm each link carries the right tag and points at the right listing.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements 2(b) and 6(w)"
+    },
+    {
+      "step": "Trend and popularity claims",
+      "detail": "A popularity or 'trending' claim is allowed only as a dated snapshot of an official page (decision D-19, 2026-11-16); otherwise use evergreen or calendar-based framing. Never a bare superlative.",
+      "source_url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "source_ref": "Google Search Central: helpful, reliable, people-first content"
+    },
+    {
+      "step": "Paid search guardrail",
+      "detail": "Paid search will never be used (decision D-29, 2026-11-16); never bid on marketplace trademarks or their misspellings (Trademark Guidelines 1-3).",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "source_ref": "Associates Program Trademark Guidelines and Participation Requirements"
     }
   ]
 }

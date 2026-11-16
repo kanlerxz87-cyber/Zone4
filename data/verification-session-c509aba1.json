@@ -1,0 +1,171 @@
+{
+  "_meta": {
+    "session": "arena/c509aba1-zone4",
+    "read_date_utc": "2026-11-16",
+    "scope": "Independent line-by-line re-read of every reader-facing claim this session's overhaul touches: the three supplied short links (target form), the three product pages (title segments, breadcrumb), the public commission Table 1, the Operating Agreement header and Section 5 citation, the disclosure help page (exact required sentence), and FTC Disclosures 101 (placement rules). Cross-checked against arena/c42349c3-zone4's same-day record (data/verification-session-c42349c3.json).",
+    "method": "Page reads through the platform's page-fetch tool, one read per URL. No login, form, checkout or access control used or bypassed. Outbound curl to Amazon is blocked in this sandbox; every Amazon read is through the fetch tool. Amazon pages were read as a normal visitor sees them; prices and star ratings visible on the pages were deliberately NOT copied into the site (Participation Requirements 2(b) and 6(t)).",
+    "conventions": "match = the stored record agrees with the 2026-11-16 live read. drift = the live page differs from the stored snapshot; the stored snapshot keeps its own citation and the difference is flagged or already flagged. Every row names the official URL it was read from."
+  },
+  "rows": [
+    {
+      "row": "L1",
+      "field": "Supplied short link target",
+      "stored": "https://link.amazon/B04G1MEwY resolves to ASIN B0CDY277D3",
+      "live_read_2026_11_16": "Requested https://link.amazon/B04G1MEwY; the fetch landed on https://www.amazon.com/dp/B0CDY277D3 with title 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black'",
+      "result": "match",
+      "source_url": "https://link.amazon/B04G1MEwY"
+    },
+    {
+      "row": "L2",
+      "field": "Supplied short link target",
+      "stored": "https://link.amazon/B02NbDxp3 resolves to ASIN B09B7SB46R",
+      "live_read_2026_11_16": "Requested https://link.amazon/B02NbDxp3; the fetch landed on https://www.amazon.com/dp/B09B7SB46R with title 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'",
+      "result": "match",
+      "source_url": "https://link.amazon/B02NbDxp3"
+    },
+    {
+      "row": "L3",
+      "field": "Supplied short link target",
+      "stored": "https://link.amazon/B00hJ57DV resolves to ASIN B08DKYBTPH",
+      "live_read_2026_11_16": "Requested https://link.amazon/B00hJ57DV; the fetch landed on https://www.amazon.com/dp/B08DKYBTPH with title 'Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel'",
+      "result": "match",
+      "source_url": "https://link.amazon/B00hJ57DV"
+    },
+    {
+      "row": "P1-t",
+      "field": "P1 listing title",
+      "stored": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black (name_listing)",
+      "live_read_2026_11_16": "identical title string on https://www.amazon.com/dp/B0CDY277D3",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "row": "P1-b",
+      "field": "P1 breadcrumb",
+      "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "live_read_2026_11_16": "identical breadcrumb chain",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "row": "P1-c",
+      "field": "P1 also-viewed competitors",
+      "stored": "B0B7C327LK, B0BYKGN61Q, B0CNSB81V6 (2026-11-14 snapshot)",
+      "live_read_2026_11_16": "positions 1-3 showed B0B7C327LK, B0BYKGN61Q, B0CNSB81V6 - same set",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "row": "P2-t",
+      "field": "P2 listing title segments",
+      "stored": "Segment 1 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven' matches; segment 2 stored from 2026-11-14 reads '26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'",
+      "live_read_2026_11_16": "Segment 2 reads '| Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included' - the same variant the 2026-11-15 read recorded in F-44. The stored 2026-11-14 record is kept with its citation.",
+      "result": "drift (already flagged F-44; the newer variant persists on 2026-11-16)",
+      "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "row": "P2-b",
+      "field": "P2 breadcrumb",
+      "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "live_read_2026_11_16": "identical breadcrumb chain",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "row": "P2-c",
+      "field": "P2 also-viewed competitors",
+      "stored": "B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH (2026-11-14 snapshot)",
+      "live_read_2026_11_16": "positions 1-3 showed B0BZ52FLKC, B0FM5KF34G, B0D1BGLW25 - position 3 drifted (Midea Flexify 26.4 QT, also seen 2026-11-15/16 by other sessions)",
+      "result": "drift (already flagged F-29/F-44; dated re-observation appended to F-29)",
+      "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "row": "P3-t",
+      "field": "P3 listing title",
+      "stored": "Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel (name_listing)",
+      "live_read_2026_11_16": "identical title string on https://www.amazon.com/dp/B08DKYBTPH (the live page uses the registered TurboFry mark glyph in the title; recorded here as read)",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    {
+      "row": "P3-b",
+      "field": "P3 breadcrumb",
+      "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "live_read_2026_11_16": "identical breadcrumb chain",
+      "result": "match",
+      "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    {
+      "row": "P3-c",
+      "field": "P3 also-viewed competitors",
+      "stored": "B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99 (2026-11-14 snapshot)",
+      "live_read_2026_11_16": "positions 1-3 showed B0CNY1YVDD, B0D5FX6VRL, B09MR7QWKZ - position 3 drifted (Gourmia 8 Qt, also seen 2026-11-15/16 by other sessions)",
+      "result": "drift (already flagged F-29/F-44; dated re-observation appended to F-29)",
+      "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    {
+      "row": "C-1",
+      "field": "Commission Table 1 - Kitchen rate",
+      "stored": "4.50% ('Physical Books, Kitchen, Automotive' row)",
+      "live_read_2026_11_16": "Table 1 row 'Physical Books, Kitchen, Automotive | 4.50%' read on the public Standard Commission Income Statement page",
+      "result": "match",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+    },
+    {
+      "row": "C-2",
+      "field": "Commission Table 1 - Home rate",
+      "stored": "3.00% (row including Home)",
+      "live_read_2026_11_16": "Table 1 row 'Toys, Furniture, Home, Home Improvement, ... | 3.00%' confirmed",
+      "result": "match",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+    },
+    {
+      "row": "C-3",
+      "field": "Per-ASIN commission category",
+      "stored": "Blank - unverified (F-01)",
+      "live_read_2026_11_16": "The public table maps categories, not ASINs; nothing on the read pages assigns these ASINs to a commission category. Blanking remains correct.",
+      "result": "match (blank confirmed correct)",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ"
+    },
+    {
+      "row": "OA-1",
+      "field": "Operating Agreement currency",
+      "stored": "cited as the source of the required disclosure (Section 5) and of the no-representation rule (Section 4)",
+      "live_read_2026_11_16": "Agreement page header reads 'Updated: October 15, 2025'; sections 1-4 read as cited; Section 5 wording cross-checked by arena/c42349c3-zone4 the same day (data/verification-session-c42349c3.json)",
+      "result": "match",
+      "source_url": "https://affiliate-program.amazon.com/help/operating/agreement"
+    },
+    {
+      "row": "HELP-1",
+      "field": "Required disclosure sentence",
+      "stored": "'As an Amazon Associate I earn from qualifying purchases.' (site-wide, source S-HELP)",
+      "live_read_2026_11_16": "The disclosure help page states the Operating Agreement requires exactly this sentence on the site, and '(paid link)' as a clear link-level disclosure. Both are used on this site.",
+      "result": "match",
+      "source_url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE"
+    },
+    {
+      "row": "FTC-1",
+      "field": "FTC disclosure placement rule",
+      "stored": "disclosure at the top of every page and under every article headline (rules R-16 family, decision D-32)",
+      "live_read_2026_11_16": "Disclosures 101: 'Place it so it's hard to miss. The disclosure should be placed with the endorsement message itself. Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos...'. Top-of-page and under-headline placement matches the guidance.",
+      "result": "match",
+      "source_url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+    },
+    {
+      "row": "F-47",
+      "field": "Displayed vs target form of the supplied links",
+      "stored": "brief displays https://link.amazon.com/<code>; site publishes https://link.amazon/<code> (F-47, needs owner review)",
+      "live_read_2026_11_16": "This session resolved the target form of all three codes (rows L1-L3). The displayed link.amazon.com form was tested by arena/c42349c3-zone4 the same day and lands on Amazon's internal Midway sign-in page; this session did not re-test it. F-47 stays open for the owner.",
+      "result": "open (flagged F-47)",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json"
+    }
+  ],
+  "flags_written": [
+    "F-29 (dated re-observation appended)",
+    "F-46 (resolved by decision D-21)"
+  ],
+  "cross_checks": [
+    "data/verification-session-c42349c3.json (same-day independent session: short links both forms, product titles, OA Section 5, policies update date, FTC quotes)",
+    "data/reverification-2026-11-14.json and data/verification-session-f87cc71f.json (earlier independent passes)"
+  ]
+}
