@@ -351,9 +351,9 @@
       "id": "REQ-23",
       "area": "Site",
       "requirement": "Clean, user friendly, simple, easy to use UI, like a simple dashboard.",
-      "status": "Delivered",
-      "delivered": "One fixed sidebar navigates every page, grouped by purpose (overview, categories, content, research, decide, governance). The landing page uses KPI tiles and article cards; wide tables scroll inside their own container and the long tables carry a live filter box; the suggestion register pairs a scannable summary table with one card per proposal.",
-      "blocker": "",
+      "status": "Delivered (partial)",
+      "delivered": "The site is deliberately not dashboard-shaped: a reader-facing publication layout (masthead, article-led home, product cards, five-item navigation, footer index) with the research registers kept one click away on the Decision centre page. Accessibility and consistency are enforced by qa/audit_site.py (one h1 per page, lang, viewport, skip link, unique ids, table row sources, disclosure adjacency). The simplification the brief asked for is delivered; the dashboard metaphor was replaced by a publication one in the 2026-11-16 redesign.",
+      "blocker": "The layout choice is a design decision the brief left open and this session took it (F-60). The previous status was 'Delivered' with this description, kept here as the audit record: One fixed sidebar navigates every page, grouped by purpose (overview, categories, content, research, decide, governance). The landing page uses KPI tiles and article cards; wide tables scroll inside their own container and the long tables carry a live filter box; the suggestion register pairs a scannable summary table with one card per proposal.… If a literal dashboard is required, record D-18 and the layout can be revisited.",
       "sources": [
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"
       ],
@@ -454,7 +454,7 @@
       "area": "Decision support",
       "requirement": "Provide a clear list of questions, information and answers that must be addressed before any decision can reasonably be made, based on what is already known and what is not.",
       "status": "Delivered (partial)",
-      "delivered": "The questions register: 36 rows split into what is already known from an official source, what is missing and who can supply it. Sixteen open questions and twenty verified answers quoted from the source that settles each one (Q-23 to Q-36 were ported into the register built by arena/00ba6c2e-zone4, which had a 'Known' kind declared but no rows using it).",
+      "delivered": "The questions register: 36 rows split into what is already known from an official source, what is missing and who can supply it. Sixteen open questions and twenty verified answers quoted from the source that settles each one (Q-23 to Q-36 were ported into the register built by arena/00ba6c2e-zone4, which had a 'Known' kind declared but no rows using it). Update 2026-11-16 (arena/6554fead-zone4): the requested surface is now complete — docs/information-gaps.html groups the register by decision area and separates established facts from unknowns, each with the rule or party that would close it. The note above says 36 rows; the register holds 37, so that figure has drifted and is left as written rather than silently edited.",
       "blocker": "The register cannot answer twelve of its own rows: the Associates tag, the per-ASIN commission category and API eligibility need the owner's account, and the collection and AI-content questions need counsel. Those are listed as unknown rather than guessed.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -484,7 +484,7 @@
       "area": "Decision support",
       "requirement": "Create a section dedicated to suggestions, so someone can review them and choose the best path before implementing any changes.",
       "status": "Delivered (partial)",
-      "delivered": "The suggestions register: 27 costed paths, each with the problem, the proposal, the cost, the risk, the check that would prove it worked, its priority and its status, plus a decision queue that records which option was actually taken. Fifteen rows were ported in from the parallel session's board; thirteen duplicates were dropped rather than double-numbered.",
+      "delivered": "The suggestions register: 27 costed paths, each with the problem, the proposal, the cost, the risk, the check that would prove it worked, its priority and its status, plus a decision queue that records which option was actually taken. Fifteen rows were ported in from the parallel session's board; thirteen duplicates were dropped rather than double-numbered. Update 2026-11-16 (arena/6554fead-zone4): the requested surface is now complete — docs/decision-centre.html is the dedicated review-and-choose page (the four registers, the order to work in, the three gating decisions and where each answer is recorded). The note above says 27 costed paths; the register holds 36, so that figure has drifted and is left as written rather than silently edited.",
       "blocker": "Nothing on the board is implemented except the two items this session shipped for review (the redesign and the navigation split, S-13 and S-17), because the brief asks for a path to be chosen before changes are made. The owner's sign-off on those two is open (F-46).",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",

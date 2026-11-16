@@ -16,7 +16,8 @@
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
-    "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21)."
+    "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
+    "added_by_6554fead_2026_11_16": "S-32 to S-36 added by the 2026-11-16 editorial pass, one per decision D-35 to D-39. They cover the gaps this pass found while rebuilding the site: no author line, no format chooser, four unwritten question-led topics, no per-page freshness date, and one important check that currently lives only in a session log."
   },
   "suggestions": [
     {
@@ -790,6 +791,132 @@
         }
       ],
       "flags": []
+    },
+    {
+      "id": "S-32",
+      "priority": "P2 - Adds real value",
+      "title": "Publish a visible publication name and author line, or state plainly that there is no author",
+      "problem": "The site now has a reader-facing name (The Countertop Edit) but no author line and no about page. Google's helpful-content guidance asks who created the content and why, and calls out fabricated author biographies as a defect; the FTC guidance asks the same question from the other side. The site currently answers \"who\" only implicitly, in the footer.",
+      "proposal": "Either (a) add a one-paragraph about page that names the publisher, states that no hands-on testing is performed, and links the verification method — honest and quick; or (b) if a named human editor will review copy, add that person's name and role, only once they have agreed. Option (b) requires an answer to Q-05 before it can be built.",
+      "why": "Both reviewers and search engines treat an unattributed affiliate site as lower quality, and the honest version of an author line is one page of copy. It is also the single cheapest thing that makes the site read as edited rather than generated.",
+      "effort": "M — one page plus one footer line; option (b) also needs an editor to agree",
+      "risk": "Inventing an author, a credential or a biography would be a straightforward deception and is exactly what the cited Google guidance warns about. Option (a) carries no such risk.",
+      "check": "Rebuild, re-run verify.py and qa/audit_site.py; the about page must carry the disclosure and a source link for every claim it makes about the site's method. If option (b) is chosen, confirm the named editor in writing before publishing the name.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: who, how and why — and the caution against fabricated authorship"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101: honest, not misleading endorsement claims"
+        }
+      ],
+      "flags": [
+        "F-12"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-35"
+    },
+    {
+      "id": "S-33",
+      "priority": "P2 - Adds real value",
+      "title": "Add a one-screen 'which format is for me' chooser built only from cited fields",
+      "problem": "The three products answer different questions, and the site explains the difference in prose across five articles. A reader arriving from a search result about one format has to read a full article to learn whether the other two are even relevant.",
+      "proposal": "A single page with three questions (how many dishes at once, counter depth available, whether one appliance should replace several) that routes to a format page. Every branch is decided by a listed field: basket count, footprint depth, and the named function list. No price, no rating, no score.",
+      "why": "It is the highest-intent page an affiliate site can publish short of a price table, and it can be built entirely from facts this repository already holds, so it adds no verification burden.",
+      "effort": "M — one template, three branches, and a fact-table row for each field used",
+      "risk": "A chooser implies a recommendation. Every outcome has to be phrased as a fit statement, not a ranking, and must avoid implying testing that did not happen.",
+      "check": "Every branch's stated reason links to the fact row that drives it; verify.py must fail if a branch cites no fact. Manually walk all branches and confirm each ends on a format page, not a product pitch.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first, task-completing content"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements: original content relevant to the Special Link (2(b))"
+        }
+      ],
+      "flags": [
+        "F-02"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-36"
+    },
+    {
+      "id": "S-34",
+      "priority": "P2 - Adds real value",
+      "title": "Write the four remaining format-first articles the calendar already names",
+      "problem": "Five articles cover three products and three formats. The topic calendar recorded as S-13 proposes eight titles; four remain unwritten, and they are the ones that answer questions rather than review products (for example how to read a capacity claim, and what a preset count actually tells you).",
+      "proposal": "Write those four as question-led pieces, each built on fact rows that already exist plus, where needed, one new row read from the same official pages. No new claim without a row.",
+      "why": "Product reviews compete with every retailer page on the internet. Question-led pieces are where an unpriced, untested site can still win a search result honestly, because the answer is explanation rather than price.",
+      "effort": "L — four articles at roughly 900 words each, plus the fact rows they need",
+      "risk": "Volume without substance is the thin-affiliation pattern Google's spam policy names. Each piece must carry at least five cited facts and no restatement of another article.",
+      "check": "Each new article must pass the existing gates: a fact table with every row sourced, every row cited by a paragraph, unique title tag and meta description, and no price or rating.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google spam policies: thin affiliation and scaled content abuse"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, reliable, people-first content"
+        }
+      ],
+      "flags": [
+        "F-12"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-37"
+    },
+    {
+      "id": "S-35",
+      "priority": "P2 - Adds real value",
+      "title": "Give every product page a dated 'last checked' line that can be regenerated in one command",
+      "problem": "The site says product records were observed on one date, but a reader cannot tell which of the listed figures on a given page came from which read, and no command re-dates them. A site that promises verification has to make its freshness visible per page.",
+      "proposal": "Render the observed date from data on every product and article page, and add a single command (for example `python3 scripts/mark_checked.py <session-file>`) that updates the date only when a session file records a fresh read of that page.",
+      "why": "Freshness is the one trust signal an affiliate site can honestly manufacture, and the repository already stores the session records needed to drive it.",
+      "effort": "S — a data field, one template line, one small script",
+      "risk": "Re-dating without a real read would be a lie told by a script. The command must refuse to update a product whose session file does not list that page.",
+      "check": "Run the command with no new session file and confirm nothing changes; run it with a new session file and confirm only the named pages move. verify.py must fail if a page's date is later than its record.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: pages should accurately reflect their content and dates"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC guidance: claims must be truthful and not misleading"
+        }
+      ],
+      "flags": [
+        "F-59"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-38"
+    },
+    {
+      "id": "S-36",
+      "priority": "P3 - Housekeeping",
+      "title": "Move the per-paragraph number check out of session procedure and into the verifier",
+      "problem": "Flag F-56 records a check that compared every number in every article paragraph against the values of the rows that paragraph cites. It was run by hand this session. A check that lives in a session log is a check that stops happening.",
+      "proposal": "Add the comparison to scripts/verify.py: for each paragraph, every numeric token longer than one digit must appear in a cited fact value; the only exemptions are flag ids and the word 'Nine' spelled out.",
+      "why": "It is the only automated way this repository has to catch a paragraph asserting a figure it does not cite, which is the exact failure mode the brief is worried about.",
+      "effort": "S — roughly 15 lines in verify.py",
+      "risk": "A too-strict rule blocks legitimate prose that mentions a year or an article count. The exemption list must be explicit and reviewed.",
+      "check": "Deliberately introduce an uncited figure in a scratch copy and confirm verify.py fails; then remove it and confirm the build passes.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+          "ref": "The verifier that would carry the check"
+        }
+      ],
+      "flags": [
+        "F-56"
+      ],
+      "status": "Recommended, no decision needed",
+      "decision": "D-39"
     }
   ]
 }

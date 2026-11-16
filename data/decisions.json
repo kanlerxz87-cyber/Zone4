@@ -9,7 +9,8 @@
       "Recorded": "The owner has stated the decision and it is written in the log."
     },
     "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19.",
-    "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided."
+    "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided.",
+    "added_by_6554fead_2026_11_16": "D-35 to D-39 added with S-32 to S-36 on 2026-11-16. All remain open; none has been acted on."
   },
   "decisions": [
     {
@@ -1262,6 +1263,195 @@
         {
           "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
           "ref": "Conditions of Use, License and Access"
+        }
+      ]
+    },
+    {
+      "id": "D-35",
+      "question": "Should the site publish an about page with a visible publisher name and an honest no-testing statement?",
+      "linked_question": "Q-05",
+      "linked_suggestions": [
+        "S-32"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "About page, publisher statement, no named person",
+          "commits_to": "One page stating who publishes the site, that nothing is hands-on tested, and how verification works. No invented author.",
+          "effort": "S",
+          "reversible": "Yes"
+        },
+        {
+          "key": "B",
+          "label": "About page plus a named human editor",
+          "commits_to": "Adds a real name and role, which requires that person to agree in writing and to actually review copy before publication.",
+          "effort": "M",
+          "reversible": "Yes"
+        },
+        {
+          "key": "C",
+          "label": "Leave the footer statement as the only attribution",
+          "commits_to": "No change. The question of who wrote the site stays implicit.",
+          "effort": "None",
+          "reversible": "Yes"
+        }
+      ],
+      "recommendation": "Option A now, option B when a reviewer is actually committed. An about page that says 'no hands-on testing, here is the method' is more trustworthy than a fake biography and supportable today.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: who, how and why"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ]
+    },
+    {
+      "id": "D-36",
+      "question": "Should a format chooser be built, and should it ever say 'not for you'?",
+      "linked_question": "Q-16",
+      "linked_suggestions": [
+        "S-33"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Build it, and let it rule products out",
+          "commits_to": "A chooser that can end on 'none of these three fit', which is more useful to a reader and less useful to a conversion rate.",
+          "effort": "M",
+          "reversible": "Yes"
+        },
+        {
+          "key": "B",
+          "label": "Build it, but every branch ends on a product",
+          "commits_to": "A chooser shaped like a funnel. Honest only if every branch genuinely fits.",
+          "effort": "M",
+          "reversible": "Yes"
+        },
+        {
+          "key": "C",
+          "label": "Do not build it",
+          "commits_to": "Readers keep deciding from the articles.",
+          "effort": "None",
+          "reversible": "Yes"
+        }
+      ],
+      "recommendation": "Option A. A chooser that cannot say no is a sales funnel wearing a decision tool's clothes, and readers can tell.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first content"
+        }
+      ]
+    },
+    {
+      "id": "D-37",
+      "question": "Should the four remaining question-led articles be written now, and who reviews them?",
+      "linked_question": "Q-05",
+      "linked_suggestions": [
+        "S-34"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Write all four, owner reviews before publication",
+          "commits_to": "Four new pages and an editorial read of each before it goes live.",
+          "effort": "L",
+          "reversible": "Yes"
+        },
+        {
+          "key": "B",
+          "label": "Write one as a test",
+          "commits_to": "One article, measured before committing to the rest.",
+          "effort": "M",
+          "reversible": "Yes"
+        },
+        {
+          "key": "C",
+          "label": "Wait until the tag question is answered",
+          "commits_to": "No new content until the site can attribute a click, on the argument that content without attribution earns nothing.",
+          "effort": "None",
+          "reversible": "Yes"
+        }
+      ],
+      "recommendation": "Option B. One piece written and reviewed properly tells you more than four written at once, and it costs a quarter as much.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google spam policies: scaled content abuse"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful content"
+        }
+      ]
+    },
+    {
+      "id": "D-38",
+      "question": "Should each page show its own 'last checked' date, driven by the session records?",
+      "linked_question": "",
+      "linked_suggestions": [
+        "S-35"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, per page, regenerated only from a real read",
+          "commits_to": "A visible date per product and article page, and a command that refuses to update a page without a session record.",
+          "effort": "S",
+          "reversible": "Yes"
+        },
+        {
+          "key": "B",
+          "label": "Keep one site-wide date",
+          "commits_to": "The current footer line only.",
+          "effort": "None",
+          "reversible": "Yes"
+        }
+      ],
+      "recommendation": "Option A. It is the cheapest honest freshness signal available, and the repository already holds the records to drive it.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: snippets should reflect the page"
+        }
+      ]
+    },
+    {
+      "id": "D-39",
+      "question": "Should the per-paragraph number check become part of the build gate?",
+      "linked_question": "",
+      "linked_suggestions": [
+        "S-36"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Yes, add it to scripts/verify.py",
+          "commits_to": "Every paragraph's numbers must appear in a cited fact row, or the build fails.",
+          "effort": "S",
+          "reversible": "Yes"
+        },
+        {
+          "key": "B",
+          "label": "Leave it as a session procedure",
+          "commits_to": "The check happens when someone remembers to run it.",
+          "effort": "None",
+          "reversible": "Yes"
+        }
+      ],
+      "recommendation": "Option A. A rule that is not enforced by the build is a preference.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py",
+          "ref": "The build gate"
         }
       ]
     }

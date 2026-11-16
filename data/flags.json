@@ -46,7 +46,8 @@
       "F-38": "Dated update appended on 2026-11-16 (status unchanged).",
       "F-44": "Dated update appended on 2026-11-16: a third consecutive-day read agrees (status unchanged).",
       "F-48": "Resolved 2026-11-16 (arena/f9f20f21-zone4): direction confirmed against PR #28's merged diff; map rekeyed; engine reference corrected."
-    }
+    },
+    "added_by_6554fead_2026_11_16": "Six flags added by the 2026-11-16 editorial pass (session arena/6554fead-zone4): F-55 to F-60. They were first written as F-49 to F-54 and renumbered on integration, because main had by then taken F-47 to F-49 from the parallel re-verification sessions (PRs #60, #63, #66, #67). The register's _meta note about F-50 to F-54 being historical numbers refers to the older renumbering map below, not to these rows."
   },
   "flags": [
     {
@@ -645,6 +646,79 @@
       ],
       "status": "Needs review",
       "action": "If accessory counts are ever mentioned in site copy, quote neither number until Amazon's listing is internally consistent (or ask the seller). Meanwhile no site change is needed; nothing on this site states an accessory count."
+    },
+    {
+      "id": "F-55",
+      "severity": "Medium",
+      "title": "Article copy asserted what listing feature labels do, which the listing does not state",
+      "detail": "Three paragraphs in data/marketing.json explained the function of a named feature rather than reporting it. M-P1-B4 said the '+ 2Min Button' was 'for a quick burst of extra heat', that Automatic Shut-Off was 'for peace of mind', that Hi-Fry was 'for higher-heat crisping' and that Mute was 'for anyone who dislikes appliance beeps'. M-P1-B1 said the two dishes 'can be aimed to finish together'. P2's opening paragraph and the buying guide's footprint step made general claims about how a French door opens. The official pages name the labels; they do not define them, and this repository's rule is that nothing is inferred. All five passages were rewritten in the 2026-11-16 editorial pass to report the labels as labels and to send the reader to the seller or the tape measure for the meaning. No fact-table value changed, and no published figure was affected.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://www.amazon.com/dp/B09B7SB46R"
+      ],
+      "status": "Corrected 2026-11-16 (arena/6554fead-zone4); kept as the audit record",
+      "action": "None outstanding. If you want the feature explanations on the site, they need either a seller answer or a hands-on test, which is decision D-06 / question Q-06."
+    },
+    {
+      "id": "F-56",
+      "severity": "Low",
+      "title": "A paragraph cited a fact it never used, and one number had no cited row",
+      "detail": "M-P1-B4 listed M-P1-F4 (product dimensions) among its citations but stated no dimension. The comparison article's footprint paragraph quoted the P2 '24 versus 25' function-count discrepancy while citing only the three capacity/dimension facts, and its also-viewed paragraph said 'Nine distinct ASINs' while citing that same row only indirectly. A scripted check now compares every number longer than one digit in every paragraph against the values of the rows that paragraph cites. The unused citation was removed, and the comparison article gained its own fact row (M-CMP-F7) for the function-count discrepancy so the claim is cited where it is made. The check is recorded in COORDINATION.md for the next session to keep running.",
+      "sources": [
+        "https://www.amazon.com/dp/B09B7SB46R",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json"
+      ],
+      "status": "Corrected 2026-11-16 (arena/6554fead-zone4); kept as the audit record",
+      "action": "None outstanding. The check is a session procedure, not an automated gate: if it should run on every build it belongs in scripts/verify.py, which is a change worth recording as a suggestion."
+    },
+    {
+      "id": "F-57",
+      "severity": "Medium",
+      "title": "Every article repeated the site's pricing rule inside the body copy, which is what made the pages read as machine output",
+      "detail": "Four of the five articles closed with a paragraph restating that prices and ratings are withheld and why. The rule is real and must stay visible, but repeating it in the body of every article is what gave the published pages their compliance-report tone, and it pushed the reader's actual question (what does this cost, is it any good) to a sentence about policy. In the 2026-11-16 editorial pass the rule stays in three visible places on every page: the disclosure ribbon, the call-to-action sentence next to the link, and the fact table's blank price row. The body copy now closes on the product decision instead. No claim was added or removed.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/agreement",
+        "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+      ],
+      "status": "Corrected 2026-11-16 (arena/6554fead-zone4); kept as the audit record",
+      "action": "None outstanding. The disclosure itself was not moved, shortened or made less prominent on any page; qa/audit_site.py still fails the build if it is missing or separated from a shop link."
+    },
+    {
+      "id": "F-58",
+      "severity": "Low",
+      "title": "Two page descriptions stated fixed counts that had already drifted, and the site called itself a dashboard",
+      "detail": "PAGE_DESCRIPTIONS described requirements.html as 'All thirty items in the project brief' while the register held 35, and the site title suffix and landing title were 'Zone4 affiliate research' with a 'Dashboard' nav item, which describes the repository rather than the reader. Counts are now derived from the data (len(REQUIREMENTS), len(RULES), len(CONTENT['analysis'])), and the reader-facing name is 'The Countertop Edit' with a five-item navigation. The old label is kept in the page titles' suffix, so a reader who arrives from a search result still sees where they are.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/requirements.json",
+        "https://developers.google.com/search/docs/appearance/snippet"
+      ],
+      "status": "Corrected 2026-11-16 (arena/6554fead-zone4); kept as the audit record",
+      "action": "The brand name is a working title, not an approved one: naming and visual direction remain decision D-18 (suggestion S-15). Recording D-18 overwrites it."
+    },
+    {
+      "id": "F-59",
+      "severity": "High",
+      "title": "No live re-fetch of amazon.com, ftc.gov or developers.google.com was possible from this session's environment",
+      "detail": "The 2026-11-16 editorial session ran in an environment whose outbound network reaches only github.com, api.github.com, registry.npmjs.org and pypi.org. A request to https://www.amazon.com/dp/B0CDY277D3, https://affiliate-program.amazon.com/, https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers and https://kanlerxz87-cyber.github.io/Zone4/docs/index.html each failed at the socket (curl exit 35, no bytes received). Consequences, stated precisely: every product field on this site still rests on the 2026-11-14 reads recorded in data/products.json and the session records, not on a fresh 2026-11-16 read; the policy citations still rest on the 2026-11-15 re-reads; and the live site itself could not be fetched to confirm a deployment from this environment (the Pages API, which is reachable, is used instead). What was verified this session is everything that can be checked from the repository: that every published value matches its recorded source value, that every article paragraph cites only facts recorded for that article, that no number in any paragraph is absent from the rows it cites, that every table row links to an official host, that the disclosure and paid-link labels are present and adjacent, and that no price or star rating is published. The editorial copy written this session makes no product claim that is not traceable to an existing fact row.",
+      "sources": [
+        "https://www.amazon.com/dp/B0CDY277D3",
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+      ],
+      "status": "Needs review",
+      "action": "Run one verification session from an environment with general internet access and re-read the three product pages, the Operating Agreement and the Program Policies; record it as a dated session file and update data/products.json only where the fresh read differs. Until then treat every product field as a 2026-11-14 snapshot, which is what the site itself says in its footer."
+    },
+    {
+      "id": "F-60",
+      "severity": "Low",
+      "title": "REQ-23 (simple dashboard) was marked Delivered while the redesign had replaced the dashboard with a publication layout",
+      "detail": "The requirement register carried REQ-23 as 'Delivered' with a description of a fixed sidebar, KPI tiles and grouped navigation. The 2026-11-16 editorial pass removed the sidebar and the dashboard framing on the argument that a shopper should meet a publication, not a console, and replaced it with a masthead, a five-item navigation, a footer index and article-led pages. Leaving the old status in place would have described a page that no longer exists. REQ-23 is now 'Delivered (partial)', with the delivered column describing what is actually on the site and the blocker column stating that the layout choice is revisitable under decision D-18. No claim about the products changed.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/requirements.json",
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      ],
+      "status": "Corrected 2026-11-16 (arena/6554fead-zone4); kept as the audit record",
+      "action": "If a literal dashboard is a hard requirement, record D-18 and the layout can be revisited; the registers themselves are unchanged and remain reachable from the Decision centre."
     }
   ]
 }

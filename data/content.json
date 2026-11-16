@@ -260,5 +260,25 @@
     "source_ref": "IP License, Section 2(k)",
     "reason": "IP License Section 2(k) requires this text in plain view when Product Advertising Content consisting of text is displayed. This site displays Amazon listing titles, so the notice is shown as the conservative reading of the clause. Flag F-25."
   },
-  "rechecked_utc": "2026-11-16"
+  "rechecked_utc": "2026-11-16",
+  "editorial": {
+    "note": "Position statement added by the 2026-11-16 editorial pass (arena/6554fead-zone4). It states only editorial choices, and every factual claim in it is one already published with a source elsewhere in this repository.",
+    "promise": [
+      "Every number on this site was read from an official page and is linked to it in the same paragraph.",
+      "Where a listing contradicts itself, both readings are published. The site does not pick the tidier one.",
+      "Nothing is inferred: if the listing does not say what a feature does, neither does the review.",
+      "Prices, star ratings and review counts are not republished. They are visible on the listing, one click away.",
+      "Nobody here has cooked in these appliances, and no page claims otherwise.",
+      "Every gap, defect and unverified value is listed on the Flagged for Review page with its source."
+    ],
+    "counts": {
+      "products": 3,
+      "articles": 5,
+      "flags": 50,
+      "open_flags": 31,
+      "suggestions": 31,
+      "questions": 37,
+      "decisions": 34
+    }
+  }
 }
