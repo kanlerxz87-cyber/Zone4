@@ -1254,7 +1254,7 @@
      "reversible": "Yes."
     }
    ],
-   "recommendation": "A. The engine in this repository is deliberately built to refuse to publish rather than to scrape, and the 2026-11-15 attempt to re-read the specification tables was served an automated-traffic interstitial, which the site did not work around (F-45).",
+   "recommendation": "A. The engine in this repository is deliberately built to refuse to publish rather than to scrape, and the 2026-11-15 attempt to re-read the specification tables was served an automated-traffic interstitial, which the site did not work around (F-38).",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",

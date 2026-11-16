@@ -51,6 +51,17 @@ QUESTIONS = QUESTIONS_DOC["questions"]
 DECISIONS_DOC = load("decisions.json")
 DECISIONS = DECISIONS_DOC["decisions"]
 DECISION_LOG = DECISIONS_DOC["log"]
+# The design brief: three specified visual directions, the anti-"AI slop"
+# checklist, the organic-traffic topic programme and the headline options.
+# Like the other registers it is a proposal surface, and every row in it cites
+# the official source that constrains it.
+DESIGN_DOC = load("design.json")
+DIRECTIONS = DESIGN_DOC["directions"]
+ANTI_SLOP = DESIGN_DOC["anti_slop"]
+HEADLINE_OPTIONS = DESIGN_DOC["headline_options"]
+TOPICS = DESIGN_DOC["topics"]
+LAUNCH_PATH = DESIGN_DOC["launch_path"]
+PROMPT_SLOTS = DESIGN_DOC["prompt_slots"]
 OBSERVED = CONTENT["observed_date"]
 # The date the three supplied links and the cited official policy pages were last
 # re-read from their official sources. Kept separate from OBSERVED, which is the
@@ -72,6 +83,7 @@ NAV = [
     ("requirements.html", "Requirements", "Research"),
     ("suggestions.html", "Suggestions", "Decide"),
     ("questions.html", "Open questions", "Decide"),
+    ("design.html", "Design brief", "Decide"),
     ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
@@ -590,6 +602,8 @@ def decision_queue_section(current: Page) -> str:
         + href(current, "suggestions.html", f"{len(SUGGESTIONS)} costed suggestions")
         + " &nbsp; "
         + href(current, "questions.html", f"{len(QUESTIONS)} open questions")
+        + " &nbsp; "
+        + href(current, "design.html", "the design brief")
         + "</p></section>"
     )
 
@@ -1324,6 +1338,364 @@ def page_questions(current: Page) -> str:
     )
 
 
+def design_prompt_text() -> str:
+    """Assemble the paste-ready design prompt from the same data the page shows.
+
+    It is built from data/design.json rather than typed out here, so the
+    brief on the site, DESIGN_PROMPT.md in the repository root and the
+    register underneath them cannot drift apart. Slots stay bracketed until
+    the decision that fills them is recorded; the slot table below the prompt
+    names the decision for each one.
+    """
+    lines: list[str] = []
+    add = lines.append
+    add("Design a polished affiliate-marketing website for three countertop air fryers")
+    add("whose every published figure is checked against an official source.")
+    add("")
+    add("GOAL. A site that earns organic search traffic and converts informed readers")
+    add("through clearly disclosed affiliate links, and that reads like a human-edited")
+    add("kitchen-technology publication. It must not read like generated filler.")
+    add("")
+    add("BRAND & DIRECTION. Brand [BRAND]. Visual direction [DIRECTION].")
+    add("Editorial voice [VOICE]. Audience and market [AUDIENCE].")
+    add("")
+    add("DIRECTION OPTIONS (pick one; each is fully specified on the Design brief page):")
+    for d in DIRECTIONS:
+        add(f"  - {d['id']} {d['name']} ({d['decision_option']}): {d['one_line']}")
+        add(f"    Display type: {d['type']['display']}")
+        add(f"    Body type: {d['type']['body']}")
+        add(f"    Palette: " + ", ".join(
+            f"{k} {v}" for k, v in d["colour"].items() if k != "rule_text"))
+        add(f"    Hero: {d['hero_pattern']}")
+        add(f"    Disclosure: {d['disclosure_component']}")
+        if d["blocked_by"]:
+            add(f"    Constrained by flags: {', '.join(d['blocked_by'])}")
+    add("")
+    add("PRODUCTS. (1) A 6-quart dual-basket air fryer with two independent 3-quart")
+    add("baskets and a listed Sync Finish feature. (2) A 26QT French-door air fryer")
+    add("toaster oven whose listing states two different cooking-function counts.")
+    add("(3) An 8-quart single-basket air fryer with a 450F high-heat option, part of a")
+    add("6/8/9-quart variant family. Present them by format - dual-basket,")
+    add("single-basket, toaster-oven - because format is the reader's real decision.")
+    add("Every product fact must come from a cited listing field; never invent a")
+    add("specification, a price, a rating or a review count.")
+    add("")
+    add("REQUIRED PAGES. A marketing landing page with a story-led hero; one category")
+    add("page per format; a products-at-a-glance comparison table; five long-form")
+    add("articles (three reviews, one format comparison, one buying guide); a topics hub")
+    add("for the approved content calendar [TOPICS]; and a governance section")
+    add("(verification log, policy compliance, flagged for review, sources, suggestions,")
+    add("questions, decision log) designed with the same care as the marketing pages.")
+    add("")
+    add("HEADLINES. Use register [HEADLINES]. A headline names the reader's decision or a")
+    add("number the page can prove. Never let a headline describe the site's own checking")
+    add("process, and never repeat one construction across several articles - that is the")
+    add("single clearest signal that a page was generated rather than written.")
+    add("")
+    add("TRAFFIC PROGRAMME. SEO-first and people-first. Build the approved topic calendar")
+    add("[TOPICS] with question-shaped headlines and internal links from every topic to")
+    add("the format pages and the reviews. Trendy language is allowed only under the")
+    add("evidence rule [TREND_RULE], which requires a dated official snapshot behind every")
+    add("popularity claim; otherwise write timeless format advice. Target")
+    add("featured-snippet-shaped answers - size tables, checklists, glossaries - without")
+    add("writing for machines.")
+    add("")
+    add("ANTI-PATTERNS. Do not ship any of these; each is a documented defect on the")
+    add("current site:")
+    for a in ANTI_SLOP:
+        add(f"  - {a['id']}: {a['pattern']} -> {a['replacement']}")
+    add("")
+    add("COMPLIANCE HARD CONSTRAINTS (non-negotiable; they override any visual idea).")
+    add("  - The affiliate disclosure sentence appears clearly at the top of every page,")
+    add("    placed with the endorsement, never behind a click and never inside a group")
+    add("    of links or hashtags.")
+    add("  - Do not publish prices, star ratings or review counts unless the approved API")
+    add("    route is in place.")
+    add("  - Do not use marketplace trademarks in page titles, meta descriptions or")
+    add("    target keywords.")
+    add("  - Every table row that states a fact links to the official source it was read")
+    add("    from. Anything unverified is left blank and visibly flagged, never inferred.")
+    add("  - Make no hands-on performance claim without real testing, and claim no")
+    add("    experience with a product nobody here has used.")
+    add("  - No price tracking and no price alerts.")
+    add("  - No traffic, click, conversion or revenue figure may appear anywhere: no")
+    add("    official source supplies one for these products.")
+    add("")
+    add("DECISION WORKFLOW. Design the review workflow as a first-class part of the")
+    add("product: a suggestions register where every change is proposed, costed and")
+    add("risk-assessed, a questions register that separates what is known from what is")
+    add("missing, and a decision queue in dependency order that the owner works through")
+    add("before anything is implemented.")
+    add("")
+    add("OUTPUT. A complete design system (type scale, colour tokens, spacing, card and")
+    add("table components, disclosure component, decision-queue component), page")
+    add("templates for every required page, and two example article mockups built from")
+    add("real verified facts. State which compliance constraint shaped each design")
+    add("decision.")
+    return "\n".join(lines)
+
+
+def design_prompt_page_block(current: Page) -> str:
+    """The prompt, with a copy button, and the slots that still need filling."""
+    slot_source = "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/design.json"
+    slot_rows = [
+        [
+            f"<code>{esc(s['slot'])}</code>",
+            esc(s["filled_from"]),
+            esc(s["current"]),
+            ext(slot_source, "data/design.json, prompt_slots"),
+        ]
+        for s in PROMPT_SLOTS
+    ]
+    return (
+        '<section><h2>The paste-ready prompt</h2>'
+        '<p class="section-lead">Assembled from the tables above, so it cannot disagree with them. '
+        'Copy it, fill the bracketed slots from your recorded decisions, and hand it to a designer '
+        'or a design tool. The same text is written to <code>DESIGN_PROMPT.md</code> in the '
+        'repository root, so the document and this page are the same brief.</p>'
+        '<div class="promptblock">'
+        '<div class="promptbar"><button type="button" id="copy-prompt" class="copybtn">Copy prompt</button>'
+        '<span class="small muted" id="copy-status" role="status"></span></div>'
+        f'<pre id="design-prompt">{esc(design_prompt_text())}</pre>'
+        '</div>'
+        + table(["Slot", "Filled from", "Current value", "Where the slot lives"],
+                slot_rows, "prompt-slots")
+        + '<p class="wide-note">Every slot is a decision, not a fact. Until one is recorded the prompt '
+        'carries the bracket rather than a guess, because guessing at a brand name or a voice is '
+        'exactly the kind of inventory this site refuses to publish.</p></section>'
+    )
+
+
+def page_design(current: Page) -> str:
+    """The design brief: directions, anti-slop checklist, headlines, topics, prompt."""
+    dir_rows = []
+    for d in DIRECTIONS:
+        dir_rows.append([
+            f'<span id="{esc(d["id"])}"><strong>{esc(d["id"])}</strong></span>',
+            esc(d["name"]) + f'<div class="small muted">{esc(d["decision_option"])}</div>',
+            esc(d["one_line"]),
+            esc(d["best_for"]),
+            esc(d["effort"]),
+            pill("Blocked" if d["blocked_by"] else "Clear", "bad" if d["blocked_by"] else "ok")
+            + ("<br>" + " ".join(flag_chip(current, f) for f in d["blocked_by"]) if d["blocked_by"] else ""),
+            "<br>".join(ext(s["url"], s["ref"]) for s in d["constrained_by"]),
+        ])
+    dir_cards = []
+    for d in DIRECTIONS:
+        tokens = "".join(
+            f'<div class="opt"><div class="opt-key">{esc(k.replace("_", " "))}</div>'
+            f'<div class="opt-body">{esc(v)}</div></div>'
+            for k, v in d["type"].items()
+        )
+        swatches = "".join(
+            f'<span class="swatch" style="background:{esc(v)}" title="{esc(k)}"></span>'
+            for k, v in d["colour"].items() if k != "rule_text"
+        )
+        dir_cards.append(
+            f'<section class="decision" id="spec-{esc(d["id"])}">'
+            f'<div class="decision-head"><h2>{esc(d["id"])} &middot; {esc(d["name"])}</h2>'
+            f'{pill(d["decision_option"], "muted")}</div>'
+            f'<p class="section-lead">{esc(d["one_line"])}</p>'
+            f'<div class="swatches">{swatches}</div>'
+            f'<div class="optrow">{tokens}</div>'
+            f'<p class="small"><strong>Grid.</strong> {esc(d["grid"])}</p>'
+            f'<p class="small"><strong>Spacing.</strong> {esc(d["spacing"])}</p>'
+            f'<p class="small"><strong>Hero.</strong> {esc(d["hero_pattern"])}</p>'
+            f'<p class="small"><strong>Cards.</strong> {esc(d["card"])}</p>'
+            f'<p class="small"><strong>Tables.</strong> {esc(d["table"])}</p>'
+            f'<p class="small"><strong>Disclosure.</strong> {esc(d["disclosure_component"])}</p>'
+            f'<p class="small"><strong>Imagery.</strong> {esc(d["imagery"])}</p>'
+            f'<p class="rec"><strong>Risk.</strong> {esc(d["risk"])}</p>'
+            f'<p class="small muted">Constrained by: '
+            + " &middot; ".join(ext(s["url"], s["ref"]) for s in d["constrained_by"])
+            + "</p></section>"
+        )
+    slop_rows = []
+    for a in ANTI_SLOP:
+        slop_rows.append([
+            f'<span id="{esc(a["id"])}"><strong>{esc(a["id"])}</strong></span>',
+            esc(a["pattern"]),
+            esc(a["evidence"]),
+            esc(a["why_it_reads_machine_generated"]),
+            esc(a["replacement"]),
+            esc(a["check"]),
+            (" ".join(flag_chip(current, f) for f in a["flags"]) if a["flags"] else "")
+            + "<br>" + "<br>".join(ext(s["url"], s["ref"]) for s in a["sources"]),
+        ])
+    head_rows = []
+    for h in HEADLINE_OPTIONS:
+        head_rows.append([
+            f'<span id="{esc(h["id"])}"><strong>{esc(h["article"])}</strong></span>',
+            esc(h["current_h1"]),
+            esc(h["option_steady"]),
+            esc(h["option_punchy"]),
+            esc(h["note"]),
+            "<br>".join(ext(s["url"], s["ref"]) for s in h["sources"]),
+        ])
+    topic_rows = []
+    for t in TOPICS:
+        topic_rows.append([
+            f'<span id="{esc(t["id"])}"><strong>{esc(t["id"])}</strong></span>',
+            esc(t["wave"]),
+            esc(t["working_title"]),
+            esc(t["question_it_answers"]),
+            esc(t["intent"]),
+            esc(t["built_from"]),
+            esc(", ".join(t["fact_rows"])),
+            esc(t["links_to"][0]) + ("<br>" + "<br>".join(esc(x) for x in t["links_to"][1:])
+                                     if len(t["links_to"]) > 1 else ""),
+            esc(t["evidence_note"]),
+            esc(t["status"]),
+            "<br>".join(ext(s["url"], s["ref"]) for s in t["sources"]),
+        ])
+    decision_by_id = {d["id"]: d for d in DECISIONS}
+    path_rows = [
+        [
+            str(s["step"]),
+            f'<a class="flag-chip" href="{esc(current.rel("decisions.html"))}#{esc(s["decision"])}">'
+            f'{esc(s["decision"])}</a>',
+            esc(s["choice"]),
+            esc(s["what_it_unblocks"]),
+            esc(s["cost"]),
+            ext(decision_by_id[s["decision"]]["sources"][0]["url"],
+                decision_by_id[s["decision"]]["sources"][0]["ref"]),
+        ]
+        for s in LAUNCH_PATH
+    ]
+    return (
+        '<header class="hero"><h1>Design brief</h1>'
+        '<p class="lead">Three visual directions specified far enough to build, the ten writing '
+        'patterns that make this site read as machine output with a replacement for each, two '
+        'finished headline options for every published article, an eight-topic organic-traffic '
+        'programme, and the prompt that assembles all of it. Nothing on this page has been applied.</p>'
+        '<p class="muted small">'
+        f'{len(DIRECTIONS)} directions &middot; {len(ANTI_SLOP)} anti-patterns &middot; '
+        f'{len(HEADLINE_OPTIONS)} headline rewrites &middot; {len(TOPICS)} topics &middot; '
+        '0 traffic, revenue or search-volume figures published</p></header>'
+        '<section class="kpis kpis-stack">'
+        '<div class="kpi"><div class="kpi-value kpi-text">A proposal, not a changelog</div>'
+        '<div class="kpi-label">Each section is bound to a decision row. When that decision is '
+        'recorded, the change is made and the register is updated. Until then the site is '
+        'unchanged, and that is deliberate.</div></div>'
+        '<div class="kpi"><div class="kpi-value kpi-text">Two directions are free; one is narrowed</div>'
+        '<div class="kpi-label">The bold deal-finder look is only viable in an evidence-only form, '
+        'because the price, rating and price-tracking rules bar the tactics the look normally '
+        'depends on. The page says so rather than letting a designer discover it.</div></div>'
+        '<div class="kpi"><div class="kpi-value kpi-text">Every row constrained by an official source</div>'
+        '<div class="kpi-label">Google Search Central for the writing standards, the FTC for '
+        'disclosure placement, the Associates Operating Agreement and Program Policies for what '
+        'may be said. No third-party SEO or marketing blog is cited for any rule or figure.</div></div>'
+        '</section>'
+        '<section><h2>The shortest credible path</h2>'
+        '<p class="section-lead">The decision queue holds ' + str(len(DECISIONS)) + ' open choices. '
+        'These five are ordered by what each one unblocks, so answering them in this order avoids '
+        'doing the expensive one twice.</p>'
+        + table(["Step", "Decision", "What to choose", "What it unblocks", "Cost",
+                 "Source behind the step (official)"],
+                path_rows, "launch-path")
+        + '<p class="wide-note">A recommendation, not a rule. The full queue is on the '
+        + href(current, "decisions.html", "Decision log") + ' page.</p></section>'
+        '<section><h2>Three directions</h2>'
+        '<p class="section-lead">These are the executable detail for the three options already in '
+        'D-18. They add no options; they give each existing one the type stack, tokens and '
+        'component rules a designer needs. Full specifications follow the table.</p>'
+        + table(["ID", "Direction", "In one line", "Best for", "Effort", "Status",
+                 "Constrained by (official)"], dir_rows, "design-directions")
+        + "</section>"
+        + "".join(dir_cards)
+        + '<section><h2>What makes the current site read as machine output</h2>'
+        '<p class="section-lead">Read line by line on 2026-11-16. Each row names the pattern, the '
+        'evidence for it on this site, why it reads as generated, the replacement and the check '
+        'that proves the fix. None of the ten adds a claim, so none needs a new source.</p>'
+        + table(["ID", "Pattern", "Evidence on this site", "Why it reads as generated",
+                 "Replacement", "How to check the fix", "Flags and sources (official)"],
+                slop_rows, "anti-slop")
+        + '</section>'
+        '<section><h2>Headline options for the five published articles</h2>'
+        '<p class="section-lead">Three of the five current headlines describe the site\'s own '
+        'checking process rather than the reader\'s problem, and two of those differ only by the '
+        'words &ldquo;two baskets&rdquo; and &ldquo;one basket&rdquo; (F-49). Two finished '
+        'alternatives for each, so the choice is four fields per article and one rebuild.</p>'
+        + table(["Article", "Current H1", "Option A: steady", "Option B: punchy", "Note",
+                 "Sources (official)"], head_rows, "headline-options")
+        + '<p class="wide-note">The punchy options make a claim only where the page can prove it. Two of '
+        'them make a comparison claim, so they wait on D-12 letting the comparison page conclude.</p>'
+        '</section>'
+        '<section><h2>The organic-traffic topic programme</h2>'
+        '<p class="section-lead">Eight topics, each with the question it answers, the intent behind '
+        'it, the verified fact rows it is built from and the pages it must link to. No row carries a '
+        'search-volume, traffic or revenue estimate: no official source supplies one (F-15), and '
+        'the Operating Agreement makes no representation about the traffic any site can expect.</p>'
+        + table(["ID", "Wave", "Working title", "Question it answers", "Intent",
+                 "Built from", "Fact rows", "Links to", "Evidence note", "Status",
+                 "Sources (official)"], topic_rows, "topics")
+        + '<p class="wide-note">Google\'s helpful-content guidance lists &ldquo;writing about things '
+        'simply because they seem trending&rdquo; among the warning signs of search-engine-first '
+        'content, so every topic here is one a buyer of these three formats actually asks and is '
+        'answerable from a field already verified. That tension is recorded as F-47 and decided by '
+        'D-17 and D-19.</p></section>'
+        + design_prompt_page_block(current)
+        + '<p class="small muted">Related: '
+        + href(current, "suggestions.html", "Suggestions")
+        + ' for the costed backlog, '
+        + href(current, "questions.html", "Open questions")
+        + ' for what is still unknown, '
+        + href(current, "decisions.html", "Decision log")
+        + ' for the choices, and '
+        + href(current, "flagged.html", "Flagged for review")
+        + ' for the defects this page records.</p>'
+    )
+
+
+def decision_dependency_rows(current: Page) -> list[list[str]]:
+    """Order the decision queue by what each choice unblocks.
+
+    The dependency is derived, not authored: two decisions are linked when they
+    share a question in the register, so the order falls out of data that
+    already exists and cannot be forgotten in one place. Decisions attached to
+    a P1 suggestion sort first, then by how many other decisions they touch.
+    """
+    by_id = {d["id"]: d for d in DECISIONS}
+    p1_decisions = {s["decision"] for s in SUGGESTIONS if s["priority"].startswith("P1")}
+    question_to_decisions: dict[str, list[str]] = {}
+    for d in DECISIONS:
+        for qid in [x.strip() for x in (d.get("linked_question") or "").split(",") if x.strip()]:
+            question_to_decisions.setdefault(qid, []).append(d["id"])
+    touches: dict[str, set[str]] = {}
+    for d in DECISIONS:
+        related: set[str] = set()
+        for qid in [x.strip() for x in (d.get("linked_question") or "").split(",") if x.strip()]:
+            related.update(x for x in question_to_decisions.get(qid, []) if x != d["id"])
+        touches[d["id"]] = related
+    ordered = sorted(
+        DECISIONS,
+        key=lambda d: (
+            0 if d["id"] in p1_decisions else 1,
+            -len(touches[d["id"]]),
+            d["id"],
+        ),
+    )
+    rows = []
+    for n, d in enumerate(ordered, start=1):
+        related = sorted(touches[d["id"]])
+        rows.append([
+            str(n),
+            f'<a class="flag-chip" href="#{esc(d["id"])}">{esc(d["id"])}</a>',
+            esc(d["question"]),
+            " ".join(
+                f'<a class="flag-chip" href="#{esc(r)}">{esc(r)}</a>' for r in related
+            ) if related else '<span class="muted">Unblocks nothing else directly</span>',
+            " ".join(
+                f'<a class="flag-chip" href="{esc(current.rel("questions.html"))}#{esc(x.strip())}">'
+                f'{esc(x.strip())}</a>'
+                for x in (d.get("linked_question") or "").split(",") if x.strip()
+            ) or '<span class="muted">&mdash;</span>',
+            pill("P1 gate", "bad") if d["id"] in p1_decisions else pill("Open", "warn"),
+            ext(d["sources"][0]["url"], d["sources"][0]["ref"]),
+        ])
+    return rows
+
+
 def page_decisions(current: Page) -> str:
     open_items = [d for d in DECISIONS if d["status"].startswith("Open")]
     cards = [
@@ -1384,6 +1756,17 @@ def page_decisions(current: Page) -> str:
         f'<section class="kpis">{kpi_html}</section>'
         '<p class="small muted">Pick an option and the site owner records it in the log at the bottom of this page, with the date. '
         'The recommendation is an argument, not a decision, and it is labelled as one.</p>'
+        + '<section><h2>Suggested order, and the shortest credible path</h2>'
+        '<p class="section-lead">The queue below is ordered by what each choice unblocks, so working '
+        'top-down avoids doing the expensive step twice. The order is derived, not authored: two '
+        'decisions are linked when they share a question in the register, and a decision attached '
+        'to a P1 suggestion sorts first.</p>'
+        + table(["Order", "Decision", "Question", "Also unblocks", "Gated by", "Weight",
+                 "Primary source (official)"],
+                decision_dependency_rows(current), "decision-order")
+        + '<p class="wide-note">Five of these are enough to make the site launchable. The steps are set '
+        'out on the ' + href(current, "design.html", "Design brief")
+        + ' page. The full queue, in the order it was written, follows.</p></section>'
         + "".join(blocks)
         + '<section><h2>Recorded decisions</h2>'
         + table(["Date (UTC)", "Decision", "Choice", "Recorded by", "Evidence", "Where it is recorded"],
@@ -1416,7 +1799,8 @@ PAGE_DESCRIPTIONS = {
     "articles/index.html": "Every article on the site, grouped by product format, each one built from a fact table in which every row links to the official product page it was read from.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed, risk-assessed and waiting on a decision rather than already applied, each tied to the official rule that constrains it.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
-    "decisions.html": "The decision queue for this site: every open choice with its options, cost and reversibility, plus the record of decisions actually taken (currently none).",
+    "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output, two headline options per article, {len(TOPICS)} organic-traffic topics and a paste-ready prompt. Nothing here has been applied.",
+    "decisions.html": "The decision queue for this site: every open choice with its options, cost and reversibility, in the order each one unblocks the others, plus the record of decisions actually taken (currently none).",
 }
 
 BODIES = {
@@ -1434,6 +1818,7 @@ BODIES = {
     "policy-compliance.html": page_policy,
     "suggestions.html": page_suggestions,
     "questions.html": page_questions,
+    "design.html": page_design,
     "decisions.html": page_decisions,
     "analytics.html": page_analytics,
     "flagged.html": page_flagged,
@@ -1586,6 +1971,11 @@ def build() -> list[pathlib.Path]:
             html_text = html_text.replace(
                 "</body>",
                 f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
+            )
+        if page.path == "design.html":
+            html_text = html_text.replace(
+                "</body>",
+                f'<script src="{esc(page.rel("design.js"))}"></script>\n</body>',
             )
         out = OUT / page.path
         out.write_text(html_text, encoding="utf-8")

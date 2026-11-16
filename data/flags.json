@@ -37,7 +37,8 @@
    "F-48": "New. Escalated out of F-44: the P2 listing title has now been contradicted by two consecutive later dated reads, so which string the site publishes is an owner decision.",
    "appended": "F-44, F-29 and F-26 received dated update sentences from the 2026-11-16 read. No stored value was overwritten.",
    "F-49": "New. Headline template repetition across three of five articles and four of five title tags, found by line-by-line reading: the most visible cause of the 'reads like AI slop' complaint.",
-   "F-50": "New. ASIN and full category breadcrumb published as prose in the second paragraph of each product article, duplicating a sourced fact table on the same page."
+   "F-50": "New. ASIN and full category breadcrumb published as prose in the second paragraph of each product article, duplicating a sourced fact table on the same page.",
+   "F-51": "New. Ten stale flag and decision cross-references found by reading every F-## in data/*.json against the flag it pointed at; all ten corrected, record kept because the build cannot detect this class by itself."
   }
  },
  "flags": [
@@ -633,6 +634,18 @@
    ],
    "status": "Needs review",
    "action": "Approve the copy pass (D-36, checklist row AS-02). The ASIN and the category path move to the fact table and the evidence rail, where they are already sourced; no fact is removed from the site."
+  },
+  {
+   "id": "F-51",
+   "severity": "Medium",
+   "title": "Ten cross-references in the published records pointed at flag numbers that were renumbered when three sessions' registers merged",
+   "detail": "Reading every flag reference in data/*.json on 2026-11-16 found ten that pointed at a flag whose subject was not the one the sentence was about. They arise from the renumbering recorded in this file's _meta: three sessions numbered their findings independently on 2026-11-15, so today's F-39 is 'two product names in the repository' while three sentences about the P2 listing title still called it F-39 (now F-44), and today's F-40 is the duplicate-meta-description defect while one sentence about the unreadable specification tables called it F-40 (now F-38). The corrections made on 2026-11-16: data/content.json - three F-39 to F-44, one F-40 to F-38, two F-41 to F-46, and one stale decision reference, '(D-12)' for a re-verification cadence, changed to '(Q-11)' because D-12 is the voice decision and Q-11 is the re-verification-cadence question; data/decisions.json - one F-45 to F-38 for the automated-traffic interstitial; data/requirements.json - two F-41 to F-46 in REQ-32 and REQ-33. No published product value was affected - every one of these is a pointer - but a reviewer following one would have landed on the wrong finding, which on this site is the same class of defect as a wrong citation. scripts/verify.py already fails the build when a flag reference in the decision-support registers does not exist; it cannot tell whether an existing reference points at the right subject, which is why this is recorded rather than merely fixed.",
+   "sources": [
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/content.json"
+   ],
+   "status": "Corrected 2026-11-16 (arena/89900251-zone4); kept as the audit record",
+   "action": "None needed for the ten corrected references. The remaining exposure is that the build checks a reference exists, not that it is the right one; if the register grows again, consider a check that compares the sentence's subject with the flag's title."
   }
  ]
 }

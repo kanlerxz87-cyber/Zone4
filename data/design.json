@@ -8,7 +8,8 @@
   "evidence_rule": "No row in this file carries a search-volume, traffic, click, conversion or revenue figure. No official source reviewed supplies one for these products (F-15), and the Associates Operating Agreement Section 4 states that Amazon makes no representation about the traffic or commission income any site can expect. Where a topic is described as likely to attract readers, that is a stated judgement about the question the topic answers, not a measured forecast.",
   "trend_rule": "Google's helpful-content guidance lists 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' among the warning signs of search-engine-first content. A topic in this programme is therefore admissible only if it answers a question a buyer of these three formats actually asks and can be answered from fields this site has already verified. That constraint is recorded as flag F-47 and is decided by D-17 and D-19.",
   "how_to_use": "Read the directions, pick one (D-18 chooses the family, D-35 the specification to build from). Read the anti-slop checklist and approve the pass (D-36). Read the headline options and pick a register (D-37). Then paste the prompt at the bottom of the Design brief page, or take DESIGN_PROMPT.md from the repository root, to a designer or a design tool.",
-  "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs."
+  "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs.",
+  "launch_path_note": "The five steps are a recommendation, not a rule. They are ordered by what each one unblocks, not by how hard each is: four of the five are cheap, and the one expensive step (the copy pass) is placed third because doing it earlier means doing it twice."
  },
  "directions": [
   {
@@ -673,6 +674,43 @@
    "slot": "[AUDIENCE]",
    "filled_from": "Q-16 and Q-04",
    "current": "not yet chosen"
+  }
+ ],
+ "launch_path": [
+  {
+   "step": 1,
+   "decision": "D-01",
+   "choice": "Put an Associates tag on the three links, or relabel them as plain product links",
+   "what_it_unblocks": "Every revenue step. Until this is answered nothing the site earns can be attributed, and the disclosure sentence is only accurate if the links carry a tag.",
+   "cost": "About 15 minutes once account access exists"
+  },
+  {
+   "step": 2,
+   "decision": "D-03",
+   "choice": "Say who writes the site, and how the content is produced",
+   "what_it_unblocks": "D-12 (voice) and the anti-slop pass. A rewrite without an author and method line would have to be rewritten again when they arrive.",
+   "cost": "One page to write"
+  },
+  {
+   "step": 3,
+   "decision": "D-12",
+   "choice": "Let the copy take positions inside the fact rule",
+   "what_it_unblocks": "D-36 (the copy pass), D-37 (headlines) and the whole topic programme. Writing before this lands means writing twice.",
+   "cost": "A decision, then two days of writing"
+  },
+  {
+   "step": 4,
+   "decision": "D-36",
+   "choice": "Run the anti-slop pass, or at least the two defect fixes",
+   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change - and F-49 and F-50 are the two most visible defects on the site.",
+   "cost": "Two days, or half a day for the two defects alone"
+  },
+  {
+   "step": 5,
+   "decision": "D-35",
+   "choice": "Pick the design-system specification to build from",
+   "what_it_unblocks": "D-39 (the token layer) and the visual overhaul itself, plus the answer to the brief's 'polished marketing site' request.",
+   "cost": "An afternoon to choose; one to three days to build"
   }
  ]
 }
