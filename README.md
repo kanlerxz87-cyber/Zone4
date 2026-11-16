@@ -13,7 +13,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | Path | Purpose |
 |---|---|
 | `data/products.json` | Verified product records (ASIN, brand, manufacturer, model, category, specifications, competitor ASINs) |
-| `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
+| `data/marketing.json` | Marketing content kit: 3 product spec-check articles, 1 comparison page, 3 buying guides (format, sizes, seasonal), SEO rules, publishing checklist |
 | `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
 | `data/requirements.json` | The 35 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
@@ -36,9 +36,9 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
 | `data/suggestions.json` | The change backlog: 31 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
-| `data/questions.json` | 37 questions that must be answered before a change can be made: 14 already answered from an official source, 23 still open, each naming what is known, how the missing piece is discovered and who can answer it |
-| `data/decisions.json` | The decision queue (34 choices with options, cost and reversibility) and the log of decisions actually taken |
-| `docs/` | The published site (24 generated pages plus the stylesheet, app script and tracker script) |
+| `data/questions.json` | 37 questions that must be answered before a change can be made: 18 answered (14 from official sources, 4 closed by the 2026-11-16 decisions), 19 still open, each naming what is known, how the missing piece is discovered and who can answer it |
+| `data/decisions.json` | The decision queue (34 choices with options, cost and reversibility) and the log of decisions actually taken: 26 recorded on 2026-11-16 under the owner's written delegation, 8 still open |
+| `docs/` | The published site (26 generated pages plus the stylesheet, app script and tracker script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
@@ -49,23 +49,23 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 
 | Page | What it holds |
 |---|---|
-| `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the decision queue, the product table and key findings |
+| `index.html` | Landing page: marketing hero, trust strip, the three-question chooser, article cards, category tiles, the open-decisions queue, the product table and key findings |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
 | `requirements.html` | All 35 brief items: delivered, blocked or unverifiable, each with the official source |
-| `products.html` | All three products, one row each, every row linked to its source |
+| `products.html` | All three products, one row each, every row linked to its source, plus the derived counter-space analysis with its arithmetic shown |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
-| `marketing.html` | The same articles, comparison page and buying guide on one page, with a fact table per article |
-| `articles/index.html` | Articles hub: every article, grouped by the product format it covers |
+| `marketing.html` | All seven articles on one page, with a fact table per article |
+| `articles/index.html` | Articles hub: every article grouped by product format, plus the topic calendar of planned, question-shaped titles |
 | `articles/*.html` | One page per article, with its own title tag and meta description, the finished copy, its call to action and the fact table it was written from |
 | `automation.html` | Pipeline stages, tracking metrics, optimisation loop and the Agent Terms |
 | `analysis.html` | 18 findings with their basis, confidence and source links |
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `suggestions.html` | Suggestions: 31 changes worth making, costed and risk-assessed, in three priority bands, waiting on a decision rather than already applied |
-| `questions.html` | Open questions: 37 items, 14 of them already answered from an official source, the rest with what is known, what is missing and who can supply it |
-| `decisions.html` | Decision log: the 34 open choices with their options, plus the record of decisions taken |
-| `flagged.html` | Flagged for Review: 48 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
+| `suggestions.html` | Suggestions: 31 changes worth making, costed and risk-assessed, with the recommended path first, the review workflow, and a status chip per item (shipped 2026-11-16, staged, awaiting the owner, or refused by policy) |
+| `questions.html` | Open questions: 37 items, 18 answered (official sources or recorded decisions), the rest with what is known, what is missing, who can supply it, and a discovery plan |
+| `decisions.html` | Decision log: 26 decisions recorded on 2026-11-16 (each with its recorded choice), 8 open choices with their options, and the log of who recorded what and when |
+| `flagged.html` | Flagged for Review: 50 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
