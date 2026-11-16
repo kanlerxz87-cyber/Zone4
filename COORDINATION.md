@@ -29,6 +29,7 @@ Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclai
 | Final integration session: line-by-line re-verification against official sources (OA §5, Program Policies structure, Conditions of Use, FTC, three product pages, short links, commission schedule); remaining stale F-05 references fixed; rebuild, PR, merge, Pages check, completion log | **done**; PR [#36](https://github.com/kanlerxz87-cyber/Zone4/pull/36) merged at `fc315fb`; Pages `built` | arena/01ab2940-zone4 | `COORDINATION.md`, `data/content.json` (stale brand-unresolved references only), `scripts/build_site.py` (index KPI), `docs/` (regenerated). Section-number and F-05/F-09/F-10/F-13 corrections already on `main` via parallel sessions (PRs #17, #20, #35) were re-confirmed against the live sources, not re-edited. |
 
 | **Final integration session (2026-11-14, current):** independent re-verification of the three short links and product pages from official sources, re-read of the commission statement, Associates/FTC policy citations; marketing-site refresh (landing page, per-article pages, hub, categorised navigation); line-by-line table-row sourcing check; rebuild, QA audit, engine tests, PR to `main`, merge, Pages deploy check, completion log | **done** | **arena/c5462690-zone4** | `data/products.json`, `data/content.json`, `data/flags.json`, `data/requirements.json` (five `delivered` sentences only), `docs/`, `scripts/build_site.py`, `scripts/verify.py`, `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`. Does not touch `engine/`, `tests/`, `qa/`, `data/policies.json`, `data/pipeline.json`, `data/marketing.json`, `data/engine-*.json`, or `.github/workflows/`. |
+| **Re-verification and integration (2026-11-16, current):** independent line-by-line re-check of the three supplied links (both the displayed link text and the real `href`), the three product pages (titles, ASINs, breadcrumbs, also-viewed slots), Associates Operating Agreement §5, Program Policies update date and FTC Disclosures 101; new flags for anything that differs; the site's re-check date; rebuild, verify, QA and tests; PR to `main`, merge and Pages check | in progress (claimed 2026-11-16) | **arena/c42349c3-zone4** | `COORDINATION.md`, `data/flags.json` (append-only, F-47 onward), `data/verification-session-c42349c3.json` (new), `data/content.json` (`rechecked_utc` only), `scripts/build_site.py` (no logic change), generated `docs/`. No other session holds an open claim on these files. |
 
 ## Original PR #7 branch note (historical)
 
@@ -976,3 +977,10 @@ suggestions and 37 questions; `docs/suggestions.html` lists S-17…S-31 with the
 written: its flags are F-45 and F-46 (F-39…F-43 went to `arena/00ba6c2e-zone4`, F-44 to `arena/d8564cd0-zone4`), its suggestions
 are S-17…S-31 (S-13…S-16 to `arena/f87cc71f-zone4`) and its decisions are D-21…D-34. The renumbering is recorded in the `_meta` of
 each file so the provenance is not lost.
+
+
+---
+
+## Session log — `arena/c42349c3-zone4` (2026-11-16)
+
+**Claim.** Re-verification of the supplied links and product pages, the Associates and FTC citations, and the site's re-check date, with new flags for anything that differs. Claimed on the board before any content edit, per the protocol. No other session held an open claim when this was written. The branch name is fixed by the session (`arena/c42349c3-zone4`), so the `session-<id>/<task>` form is not used; the board row is the scope record, as earlier sessions also recorded.

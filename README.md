@@ -16,10 +16,11 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/requirements.json` | The 35 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 46 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 48 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-15 re-check date |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
+| `data/verification-session-c42349c3.json` | Re-check of 2026-11-16: the three supplied links (displayed text and target), the three product pages, the Operating Agreement §5 sentence, the Program Policies date and FTC Disclosures 101. Flags F-47 and F-48 and a dated update to F-44 record what differs |
 | `DESIGN_PROMPT.md` | Ready-to-paste redesign brief (suggestion S-14, decision D-20); fills its bracketed slots from the recorded picks |
 | `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `data/verification-session-d8564cd0.json` | 2026-11-15 verification pass by `arena/d8564cd0-zone4`: commission table re-read, P1/P2/P3 page reads, flag F-44 record |
@@ -60,7 +61,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `suggestions.html` | Suggestions: 31 changes worth making, costed and risk-assessed, in three priority bands, waiting on a decision rather than already applied |
 | `questions.html` | Open questions: 37 items, 14 of them already answered from an official source, the rest with what is known, what is missing and who can supply it |
 | `decisions.html` | Decision log: the 34 open choices with their options, plus the record of decisions taken |
-| `flagged.html` | Flagged for Review: 46 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
+| `flagged.html` | Flagged for Review: 48 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
