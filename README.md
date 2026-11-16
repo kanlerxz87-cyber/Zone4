@@ -2,6 +2,8 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
+Which generator produces the live pages: **only** `scripts/build_site.py` writes `docs/` (the published site). The engine under `engine/` renders its own separate preview into `build/site-preview/` and never writes `docs/`; see ENGINE.md, "Relationship to the published site". `tools/check_links.py` checks that engine preview and fails on a clean checkout until `python3 -m engine.cli build` has created it.
+
 **Live site (GitHub Pages):** https://kanlerxz87-cyber.github.io/Zone4/
 
 The repository's Pages source is `main` `/` (legacy build). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. Setting the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
@@ -16,9 +18,10 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/requirements.json` | The 35 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 48 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 50 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-16 re-check date |
 | `data/verification-session-4c552c78.json` | Same-day re-read (2026-11-16) of the three short links, their listing pages, Table 1, the Program Policies, the Operating Agreement and the Conditions of Use; flag F-49 record |
+| `data/verification-session-f9f20f21.json` | Re-check of 2026-11-16 (residual scope): all three product pages re-read for the Item details tables (not exposed that day; every exposed value corroborates the record), Table 1 re-read, F-48 resolved against PR #28's diff, flag F-50 found (P2 accessory-count inconsistency) |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
 | `data/verification-session-c42349c3.json` | Re-check of 2026-11-16: the three supplied links (displayed text and target), the three product pages, the Operating Agreement §5 sentence, the Program Policies date and FTC Disclosures 101. Flags F-47 and F-48 and a dated update to F-44 record what differs |

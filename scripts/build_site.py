@@ -1603,6 +1603,14 @@ def build() -> list[pathlib.Path]:
         + "</urlset>\n"
     )
     (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    # robots.txt: mechanical SEO hygiene that points crawlers at the sitemap this
+    # build just wrote (suggestion S-09 shipped the sitemap; the pointer costs
+    # nothing and decides nothing). Added by arena/f9f20f21-zone4 (2026-11-16).
+    (OUT / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n"
+        f"Sitemap: {SITE_URL}sitemap.xml\n",
+        encoding="utf-8",
+    )
     return written
 
 
