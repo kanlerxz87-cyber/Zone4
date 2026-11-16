@@ -11,7 +11,9 @@
     },
     "rule": "An Unknown is never closed by inference. It is closed by a named source, a named party's answer, or an explicit owner decision recorded in the Decision log.",
     "ported_00ba6c2e_2026_11_15": "Q-16 to Q-19 were ported from the parallel session's decision worksheet (arena/bb85f073-zone4, PR #50), which asked about the audience, privacy and consent, budget and time horizon, and trade-name clearance. Those four gaps were not in this register and are kept rather than dropped. Their seven-row worksheet itself was merged into decisions.json D-15/D-16 to avoid two conflicting D-01 numbering schemes.",
-    "ported_d2a62d6b_2026_11_15": "Q-20 to Q-22 are the open questions from the parallel session arena/d2a62d6b-zone4 that this register did not already hold (where product photography comes from, paid versus organic traffic, and whether an email list or an incentive may be tied to the links). Q-23 to Q-37 are that session's verified answers, quoted verbatim from the official source each row cites: the register declared a 'Known' kind but had no rows using it, so the answers were ported in rather than dropped."
+    "ported_d2a62d6b_2026_11_15": "Q-20 to Q-22 are the open questions from the parallel session arena/d2a62d6b-zone4 that this register did not already hold (where product photography comes from, paid versus organic traffic, and whether an email list or an incentive may be tied to the links). Q-23 to Q-37 are that session's verified answers, quoted verbatim from the official source each row cites: the register declared a 'Known' kind but had no rows using it, so the answers were ported in rather than dropped.",
+    "updated_utc": "2026-11-16",
+    "update_note": "Q-06, Q-12, Q-21 and Q-37 closed by the owner decisions recorded on 2026-11-16 (delegated). Q-36 re-verified on 2026-11-16. Everything else stands: the gaps that need an account holder, a seller, a lawyer or a budget stay open, and each row still says how the missing piece could be discovered."
   },
   "questions": [
     {
@@ -143,10 +145,10 @@
       "area": "Content",
       "question": "Will the site test any product, or position itself as a specification and decision tool only?",
       "why_it_matters": "It decides whether the site can use the language of review at all, and it is the difference between a page that adds value over the listing and one that restates it.",
-      "kind": "Owner decision",
-      "known": "No unit was tested. Every article is a restatement of fields read from the listing, which is why the copy hedges.",
-      "how_to_discover": "Not a discovery question. Testing requires buying or being loaned units; either route has a disclosure consequence.",
-      "answerable_by": "The site owner",
+      "kind": "Known",
+      "known": "Specification and decision tool: no product will be tested, and no hands-on or performance claim will be published (decision D-06 option B, recorded 2026-11-16 under the owner's delegation). If a unit is ever tested, the decision must be re-opened first.",
+      "how_to_discover": "Already answered by decision D-06 in the decision log (2026-11-16). Revisit only if that decision changes.",
+      "answerable_by": "Answered by the recorded decision (delegated owner decision, 2026-11-16)",
       "blocks": [
         "S-06",
         "S-07",
@@ -298,10 +300,10 @@
       "area": "Operations",
       "question": "Should the repository, the site and the code carry one product name?",
       "why_it_matters": "The published site is branded 'Zone4 affiliate research', while the click tracker and the engine's preview generator both use 'Northstar'. If the site is ever launched as a brand, the name has to be one name, and it must not contain an Amazon Mark.",
-      "kind": "Owner decision",
-      "known": "The inconsistency is real and is recorded in flag F-39. No Amazon Mark appears in any page title or keyword.",
-      "how_to_discover": "Not a discovery question. The owner picks one name; the rename is mechanical.",
-      "answerable_by": "The site owner",
+      "kind": "Known",
+      "known": "Yes - one name is adopted: the site brand is Zone4 (decision D-18, recorded 2026-11-16), product names stay as the official listing titles (D-10 option B), and the documentation is corrected to match (D-10).",
+      "how_to_discover": "Already answered by decision D-10, D-18 in the decision log (2026-11-16). Revisit only if that decision changes.",
+      "answerable_by": "Answered by the recorded decision (delegated owner decision, 2026-11-16)",
       "blocks": [
         "S-10"
       ],
@@ -507,10 +509,10 @@
       "area": "Money",
       "question": "Is the growth plan organic search only, or will you pay for traffic?",
       "why_it_matters": "A paid-search campaign that bids on an Amazon Mark disqualifies the very purchases it produces. This is not a question of taste; the official terms decide it.",
-      "kind": "Owner decision",
-      "known": "Participation Requirement 6(f): you may buy paid search advertisements, but not on keywords that are Proprietary Terms (Amazon Marks and variations or misspellings), and the resulting ad must send users to your site and not directly or indirectly to an Amazon site. The Commission Income Statement disqualifies purchases referred by a prohibited paid search placement, by a link displayed on a search engine, and by a redirecting link.",
-      "how_to_discover": "Decide the channel, then check each planned keyword against the non-exhaustive trademark list linked from the official policies page.",
-      "answerable_by": "The site owner",
+      "kind": "Known",
+      "known": "Organic search only. Paid search will never be used (decision D-29 option A, recorded 2026-11-16), and the publishing checklist records the guardrail against bidding on marketplace trademarks.",
+      "how_to_discover": "Already answered by decision D-29 in the decision log (2026-11-16). Revisit only if that decision changes.",
+      "answerable_by": "Answered by the recorded decision (delegated owner decision, 2026-11-16)",
       "blocks": [
         "S-26"
       ],
@@ -788,8 +790,8 @@
       "question": "Do the three supplied links still resolve to the three products on record?",
       "why_it_matters": "Already answered from an official source, so it is recorded here rather than re-derived at each review.",
       "kind": "Known",
-      "known": "Yes, re-resolved on 2026-11-15: B04G1MEwY resolves to ASIN B0CDY277D3, B02NbDxp3 to B09B7SB46R and B00hJ57DV to B08DKYBTPH. No tag parameter is visible in any resolved URL.",
-      "how_to_discover": "Already answered. Re-read the cited source at the next review to confirm the wording has not changed.",
+      "known": "Yes. Re-resolved on 2026-11-16 by arena/c509aba1-zone4 and on 2026-11-16 by arena/c42349c3-zone4: B04G1MEwY resolves to ASIN B0CDY277D3, B02NbDxp3 to B09B7SB46R and B00hJ57DV to B08DKYBTPH. No tag parameter is visible in any resolved URL (F-03). Note: the displayed form link.amazon.com/<code> in the brief is not the link target; the target form link.amazon/<code> is what resolves (F-47).",
+      "how_to_discover": "Already answered. Re-read the cited sources at the next review to confirm the links still resolve.",
       "answerable_by": "Already answered by the cited official source",
       "blocks": [],
       "sources": [
@@ -805,10 +807,10 @@
       "area": "Content",
       "question": "Is the editorial redesign shipped on 2026-11-15 the look the site should publish with?",
       "why_it_matters": "It was built on the owner's behalf by a session that also wrote the suggestion proposing it, so it needs a decision rather than being treated as settled.",
-      "kind": "Owner decision",
-      "known": "The redesign changes presentation only: no price, rating, review count or commission figure was added, every table row still carries its official source link, and the disclosure and paid-link labels are unchanged.",
-      "how_to_discover": "Read suggestions S-13 and S-17 and decision D-17, then accept, amend or revert.",
-      "answerable_by": "The site owner",
+      "kind": "Known",
+      "known": "Yes - the 2026-11-15 editorial redesign is kept and amended (decision D-21 option B, recorded 2026-11-16): warm editorial direction confirmed, with the 2026-11-16 marketing polish pass on top. Reverting remains a one-file change.",
+      "how_to_discover": "Already answered by decision D-21 in the decision log (2026-11-16). Revisit only if that decision changes.",
+      "answerable_by": "Answered by the recorded decision (delegated owner decision, 2026-11-16)",
       "blocks": [
         "S-17",
         "S-21"
