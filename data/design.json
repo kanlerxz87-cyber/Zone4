@@ -1,0 +1,678 @@
+{
+ "_meta": {
+  "description": "The design brief and organic-traffic programme for this site, written as proposals the owner chooses between rather than changes already made. Three costed visual directions with real design-system detail, an anti-slop checklist that names the patterns on the current site and their replacements, a topic programme with two headline options per topic, proposed headline rewrites for the five published articles, and the paste-ready prompt assembled from all of it. Every row cites the official source that constrains it.",
+  "created_utc": "2026-11-16",
+  "created_by": "arena/89900251-zone4",
+  "status": "Proposal. Nothing in this file has been applied to the published site. Each section is bound to a decision row in data/decisions.json; when that decision is recorded, the change is made and the row's status changes.",
+  "source_scope": "Only official sources are cited: the three Amazon product pages, the Associates Operating Agreement, the Associates Program Policies and its help topics, the FTC, and Google Search Central. No third-party SEO or marketing blog is cited for any figure or rule.",
+  "evidence_rule": "No row in this file carries a search-volume, traffic, click, conversion or revenue figure. No official source reviewed supplies one for these products (F-15), and the Associates Operating Agreement Section 4 states that Amazon makes no representation about the traffic or commission income any site can expect. Where a topic is described as likely to attract readers, that is a stated judgement about the question the topic answers, not a measured forecast.",
+  "trend_rule": "Google's helpful-content guidance lists 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' among the warning signs of search-engine-first content. A topic in this programme is therefore admissible only if it answers a question a buyer of these three formats actually asks and can be answered from fields this site has already verified. That constraint is recorded as flag F-47 and is decided by D-17 and D-19.",
+  "how_to_use": "Read the directions, pick one (D-18 chooses the family, D-35 the specification to build from). Read the anti-slop checklist and approve the pass (D-36). Read the headline options and pick a register (D-37). Then paste the prompt at the bottom of the Design brief page, or take DESIGN_PROMPT.md from the repository root, to a designer or a design tool.",
+  "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs."
+ },
+ "directions": [
+  {
+   "id": "DIR-A",
+   "decision_option": "D-18 option A",
+   "name": "Warm editorial",
+   "one_line": "A kitchen magazine that happens to show its sources.",
+   "best_for": "The brief's 'polished marketing affiliate website' read alone: it is the only direction that absorbs the disclosure, the blank cells and the source links without making them look like defects.",
+   "type": {
+    "display": "Fraunces (optical size 96, soft), fallback: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif",
+    "body": "Inter 17px / 1.65, fallback: system-ui, sans-serif",
+    "mono": "'IBM Plex Mono' 13px for ASINs, dimensions and every figure that came off a listing",
+    "scale": "12 / 14 / 17 / 21 / 27 / 34 / 46 / 60 px, 1.25 major-third-ish, body measure capped at 68ch"
+   },
+   "colour": {
+    "ink": "#241C17",
+    "paper": "#FBF7F1",
+    "terracotta": "#C4613C",
+    "sage": "#6F7F63",
+    "rule": "#E7DDD1",
+    "muted": "#6B6058",
+    "rule_text": "One accent (terracotta) per screen, used for links and one primary call to action. Sage marks 'verified' states only. No gradient, no shadow on cards."
+   },
+   "spacing": "4 / 8 / 16 / 24 / 40 / 64 / 96 px. Section rhythm 96px desktop, 56px mobile.",
+   "grid": "12 columns, 1120px max content, 24px gutter. Article column 720px with a 280px evidence rail that collapses below 900px.",
+   "hero_pattern": "Paper background, no photography tint. One-line promise (max 9 words), one-line method statement, two calls to action side by side, one product image right-aligned at 40% width. No badge strip, no counters.",
+   "card": "1px rule on top instead of a border box. Kicker (format name, small caps), headline (display, 27px), one-line standfirst, read time and sourced-fact count in mono. No shadow, no radius above 4px.",
+   "table": "No zebra. Header row small caps with a single 1px rule beneath. Numerals monospaced and right-aligned. Each row ends in a 'source' chip linking the official page the row was read from. First column sticky on mobile; blank cells render as a dashed em dash with the flag id beside it.",
+   "disclosure_component": "A one-line strip directly above the article headline, ink on paper, 15px, carrying the Operating Agreement sentence verbatim and a link to Section 5. On desktop it repeats as a 40px sticky sub-header once the article headline scrolls past. It is never placed inside a list of links or a group of hashtags.",
+   "imagery": "Real product photography only, supplied or licensed (S-18, D-22). No generated imagery, no stock illustration standing in for a product, no cropping or editing of any image carrying an Amazon Mark.",
+   "effort": "Two to three days: a new stylesheet layer plus the templates. Reversible.",
+   "risk": "Low. The largest risk is typographic: a display serif at small sizes loses the legibility the data tables depend on, so the tables keep the sans stack.",
+   "blocked_by": [],
+   "constrained_by": [
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: the disclosure must be placed with the endorsement and be hard to miss; not mixed into a group of links"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement Section 5: the sentence that must appear, clearly and prominently"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: page experience and clear sourcing as trust signals"
+    }
+   ]
+  },
+  {
+   "id": "DIR-B",
+   "decision_option": "D-18 option B",
+   "name": "Crisp data-journalism",
+   "one_line": "The receipts are the design.",
+   "best_for": "Cheapest credible polish: it keeps the dashboard bones the site already has and spends its effort on typography, density and the evidence rail rather than on new imagery.",
+   "type": {
+    "display": "Newsreader (optical size 48), fallback: 'Source Serif 4', Georgia, serif",
+    "body": "'IBM Plex Sans' 16px / 1.6, fallback: system-ui, sans-serif",
+    "mono": "'IBM Plex Mono' 13px, used for every value that came off a listing and for every ASIN",
+    "scale": "12 / 13 / 16 / 20 / 25 / 31 / 40 px, body measure capped at 72ch"
+   },
+   "colour": {
+    "ink": "#12161B",
+    "paper": "#FFFFFF",
+    "signal_blue": "#1B57C4",
+    "verified_green": "#17734B",
+    "rule": "#D8DEE5",
+    "muted": "#5A6572",
+    "rule_text": "Near-monochrome. Colour is reserved for state: blue for links, green for the verified chip. No decorative colour anywhere."
+   },
+   "spacing": "4 / 8 / 12 / 24 / 32 / 48 / 72 px. Section rhythm 72px desktop, 48px mobile.",
+   "grid": "12 columns, 1240px max content. Two-column articles with a sticky evidence rail that holds the fact table, the flag list and the source list.",
+   "hero_pattern": "No photograph. A headline, a one-line method statement ('Every figure on this page links to the page it was read from'), and a compact strip of three derived counts. The hero is the argument, not the mood.",
+   "card": "1px border, 8px radius, hover raises the border to 2px in signal blue. Mono metadata row at the bottom: read time, sourced-fact count, observation date.",
+   "table": "Dense: 14px, 32px row height, monospaced numerals, sticky header, row hover highlight. Per-row source chip sits in a dedicated final column header-labelled 'Read from'. Blank cells are explicit: an empty box with the flag id and a tooltip naming the official source that would fill it.",
+   "disclosure_component": "A full-width bar pinned above the masthead, ink on white, with a check glyph, the Operating Agreement sentence verbatim and the Section 5 link. It stays visible for the whole session, not just at the top of the page. Never collapsed behind a 'more' control.",
+   "imagery": "Optional. The direction works with no photography at all; if images are added, the same licensing rule as DIR-A applies.",
+   "effort": "One to two days: mostly typography, density and the evidence rail. Reversible.",
+   "risk": "Low. The risk is that 'crisp' drifts into 'clinical', which is the look the brief is complaining about; the fix is the display serif in headlines, which carries the warmth without any photography.",
+   "blocked_by": [],
+   "constrained_by": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement Section 5: the required sentence, clearly and prominently"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: disclosures are likely to be missed behind a click or at the end of a page"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/appearance/page-experience",
+     "ref": "Google: page experience, including density and legibility on small screens"
+    }
+   ]
+  },
+  {
+   "id": "DIR-C",
+   "decision_option": "D-18 option C",
+   "name": "Bold deal-finder, evidence-only",
+   "one_line": "Big verdicts, big badges, and nothing a price would normally carry.",
+   "best_for": "Only if the owner wants maximum commercial energy. It is included because D-18 already offers it and because the brief asks for a polished marketing site, but most of the playbook this look normally depends on is blocked.",
+   "type": {
+    "display": "Archivo Black for badges and verdict tiles; Archivo SemiBold for headlines, fallback: 'Helvetica Neue', Arial, sans-serif",
+    "body": "Inter 16px / 1.6, fallback: system-ui, sans-serif",
+    "mono": "'IBM Plex Mono' 13px for every figure that came off a listing",
+    "scale": "12 / 14 / 16 / 20 / 26 / 34 / 48 px, badge type tracked out at 0.04em and uppercased"
+   },
+   "colour": {
+    "ink": "#0B0B0B",
+    "paper": "#FFFFFF",
+    "accent_yellow": "#FFD166",
+    "verdict_green": "#0E7C4A",
+    "alert_red": "#C1121F",
+    "rule": "#E5E5E5",
+    "rule_text": "High contrast is the point: yellow on black for the primary call to action, green only for a verdict that a listed field supports, red only for a flag the reader must see."
+   },
+   "spacing": "4 / 8 / 16 / 24 / 32 / 48 / 80 px. Section rhythm 80px desktop, 48px mobile.",
+   "grid": "12 columns, 1200px max content. Card-first: the homepage is a grid of verdict tiles, not a list of articles.",
+   "hero_pattern": "Black field, yellow call to action, three 'best for' tiles immediately beneath, each with a one-line reason drawn from a listed field. The method statement sits below the tiles, not above them.",
+   "card": "Black-bordered 2px, 0 radius, hard offset shadow 4px. Verdict badge sits outside the card's top-left corner. Every badge must name the field that earns it.",
+   "table": "Compact comparison with a highlighted 'winner' column per row, where the winner is decided only by a listed field: largest listed capacity, shallowest listed depth, most listed presets. No row may be won on price, rating or popularity.",
+   "disclosure_component": "A full-width black bar with white type directly beneath the masthead and again immediately above every call-to-action cluster. It must be the loudest element on the page: 16px, weight 600, never smaller than the badge type beside it.",
+   "imagery": "Real product photography only. Generated imagery is especially damaging in this direction because the look promises first-hand familiarity.",
+   "effort": "Two to three days, plus the copy pass to write verdict reasons that a listed field actually supports. Reversible.",
+   "risk": "High. The visual language of this direction promises price, rating and scarcity. Prices and star ratings cannot be published while F-02 holds, price tracking and price alerts are barred by Participation Requirement 6(y) (F-22), and no popularity claim can be made without a dated official snapshot (F-15, D-19). The direction is only viable in the narrow 'evidence-only' form set out here, and even then it courts the gap between how it looks and what it is allowed to say.",
+   "blocked_by": [
+    "F-02",
+    "F-15",
+    "F-22"
+   ],
+   "constrained_by": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Participation Requirements 2(b) and 6(t): prices and ratings only through Amazon-served links or the approved API route; 6(y): no price tracking or price alerts"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement Section 5: the disclosure must remain clearly and prominently stated"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: you cannot talk about your experience with a product you have not tried"
+    }
+   ]
+  }
+ ],
+ "anti_slop": [
+  {
+   "id": "AS-01",
+   "pattern": "The headline advertises the site's process instead of the reader's payoff",
+   "evidence": "Three of the five published H1s end in a phrase about the site's own method: 'two baskets, every figure checked', 'the listed facts, both function counts included', 'one basket, every figure checked'. Four of the five title tags contain the word 'Verified'.",
+   "why_it_reads_machine_generated": "A human writer names what the reader gets. A template names what the page did. Repeating the same construction across three pieces is the clearest single tell on the site, and it is visible in the site's own data.",
+   "replacement": "Headline names the decision or the number; the method moves to a one-line 'how we checked' note under the byline and to the fact table, where it already is.",
+   "check": "No two published H1s share a construction; no title tag repeats a modifier that appears in three others.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Does the content provide substantial value when compared to other pages in search results?'"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+     "ref": "Google spam policies: keyword stuffing is repeating words or phrases so often that they read abnormally"
+    }
+   ],
+   "flags": [
+    "F-49"
+   ]
+  },
+  {
+   "id": "AS-02",
+   "pattern": "Reader-irrelevant apparatus in the opening paragraphs",
+   "evidence": "The second paragraph of each product article opens with the ASIN and the full five-level category breadcrumb in prose ('listed under ASIN B0CDY277D3 ... filed under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers'), duplicating a sourced fact table one section below.",
+   "why_it_reads_machine_generated": "It is the database row rendered as a sentence. No reader chooses an air fryer by ASIN, and the breadcrumb is five nouns deep. Putting it in prose is the single most machine-like habit on the site.",
+   "replacement": "Open on the reader's problem. Move the ASIN and the category path into the fact table and the evidence rail, where they are already sourced and where the reader who wants them looks.",
+   "check": "No published paragraph contains an ASIN; every ASIN on the site sits in a table cell or the evidence rail, beside its source link.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'After reading your content, will someone leave feeling they've learned enough about a topic to help achieve their goal?'"
+    }
+   ],
+   "flags": [
+    "F-50"
+   ]
+  },
+  {
+   "id": "AS-03",
+   "pattern": "Articles that describe writing the article",
+   "evidence": "The single-basket piece opens: 'Some listings need paragraphs of interpretation; this one mostly needs reading.' The sentence is about the writing, not the fryer.",
+   "why_it_reads_machine_generated": "Meta-commentary about the page's own composition is a filler move that costs the reader their first sentence, which is the most valuable one on the page.",
+   "replacement": "Open with a specific, checkable fact or a concrete kitchen situation. If the writing really is simple, show it by being simple.",
+   "check": "No paragraph refers to the process of writing, reading or checking the page.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Will someone reading your content leave feeling like they've had a satisfying experience?'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-04",
+   "pattern": "Hedging at the end of paragraphs",
+   "evidence": "Recorded in suggestion S-12: 'every paragraph ends with a hedging clause'. The pattern is visible throughout the five published pieces.",
+   "why_it_reads_machine_generated": "A hedge after every claim reads as a model protecting itself, not as a writer being careful. Careful writing hedges the one claim that needs hedging and states the rest.",
+   "replacement": "One honesty paragraph per article, in a fixed position, stating what could not be verified. Every other paragraph states its claim flatly and carries its source.",
+   "check": "A reviewer can point to the single paragraph in each article where the limits are stated; no other paragraph ends in a qualifier.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Is the content produced well, or does it appear sloppy or hastily produced?'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-05",
+   "pattern": "A comparison page that refuses to compare",
+   "evidence": "The comparison article states that no unit conversion is offered 'on purpose' and never ranks the three formats on any listed attribute. Recorded in S-12.",
+   "why_it_reads_machine_generated": "Refusing to conclude is not neutrality, it is an absence. A reader who has read three format descriptions still does not know which one to buy.",
+   "replacement": "Rank on attributes the listings actually state: largest listed capacity, shallowest listed counter depth, most listed presets, fewest baskets. Say which field decides each row and link it.",
+   "check": "The comparison page produces an explicit answer for at least one realistic reader profile, with the deciding field named and sourced.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+     "ref": "Google spam policies: thin affiliation, content that adds little or no value beyond restating the merchant's own material"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Are you mainly summarizing what others have to say without adding much value?'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-06",
+   "pattern": "No author, no method statement, no answer to 'who wrote this'",
+   "evidence": "No published page names a person, an organisation or a method. The site says what it verified but never who verified it.",
+   "why_it_reads_machine_generated": "Google's own guidance names this directly, and an anonymous page with perfect data reads colder than a signed page with imperfect data.",
+   "replacement": "A named editorial standard instead of a fake individual: one 'how this site checks a figure' page, linked from every article's byline line, plus a stated review date per article.",
+   "check": "Every article carries a byline line that links to the method page and states the observation date.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+     "ref": "Google: 'You should consider having accurate author bylines when readers would reasonably expect it, such as to any content where someone might think, \"Who wrote this?\"'"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Does the content present information in a way that makes you want to trust it, such as clear sourcing ... background about the author or the site that publishes it?'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-07",
+   "pattern": "No statement about how the content was produced",
+   "evidence": "The site is built with automated assistance and says so nowhere on its public pages; the fact is recorded only in the repository's own documentation.",
+   "why_it_reads_machine_generated": "It is an omission a reader would notice if they asked, and Google names it as the case where a disclosure is expected.",
+   "replacement": "One sentence on the method page: what is written by hand, what is generated and then checked, and what is never published without an official source.",
+   "check": "The method page states the production method in one sentence that a reader can find without opening the repository.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+     "ref": "Google: 'AI or automation disclosures are useful for content where someone might think \"How was this created?\". Consider adding these when it would be reasonably expected.'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-08",
+   "pattern": "Governance apparatus in the shop window",
+   "evidence": "The landing hero leads with the site's checking method rather than the reader's outcome, and the KPI strip foregrounds internal counts: '31 Flags awaiting your decision, of 46 recorded'.",
+   "why_it_reads_machine_generated": "It is the project's internal task board rendered as marketing. A visitor arriving from search did not come to read the site's backlog.",
+   "replacement": "Hero carries one promise and two calls to action. The decision queue, the flag counts and the verification log stay one click away and are labelled as governance, which is what they are.",
+   "check": "The first screen contains no count of internal records; every count on it describes the products or the articles.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Do you have an existing or intended audience for your business or site that would find the content useful if they came directly to you?'"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-09",
+   "pattern": "Prose that restates the table above it",
+   "evidence": "Several paragraphs in the five published pieces re-list specification values that the fact table on the same page already states in a sourced row.",
+   "why_it_reads_machine_generated": "Restatement is the failure mode of writing from structured data. The same sentences would be produced for any three products.",
+   "replacement": "The paragraph says what the numbers mean for a kitchen; the table says what the numbers are. If a paragraph has no fact id it is not allowed to state a fact, and if it only restates one it is deleted.",
+   "check": "Every surviving paragraph carries at least one fact id and adds something the table does not say.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Are you mainly summarizing what others have to say without adding much value?'"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+     "ref": "Google spam policies: thin affiliation"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "AS-10",
+   "pattern": "Uniform paragraph length and sentence rhythm across every piece",
+   "evidence": "Five articles of six to eight paragraphs each, all opening with a two-sentence hook and closing with a call to action, with no short paragraph anywhere in any of them.",
+   "why_it_reads_machine_generated": "Human edited prose varies: a one-sentence paragraph for emphasis, a long one for explanation. Perfectly even rhythm is a generation artefact.",
+   "replacement": "Vary deliberately during the rewrite: at least one paragraph of one sentence in every article, and at least one of eight sentences.",
+   "check": "Paragraph word counts within an article vary by a factor of at least three.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: 'Is the content produced well, or does it appear sloppy or hastily produced?'"
+    },
+    {
+     "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+     "ref": "Google: 'Using AI doesn't give content any special gains. It's just content.'"
+    }
+   ],
+   "flags": []
+  }
+ ],
+ "headline_options": [
+  {
+   "id": "H-M-P1",
+   "article": "M-P1",
+   "product": "P1",
+   "current_h1": "Chefman 6 Quart Dual Basket Air Fryer Oven: two baskets, every figure checked",
+   "option_steady": "The Chefman 6 Quart Dual Basket, in numbers you can check: two 3-quart baskets, one Sync Finish, and 13.4 inches of counter",
+   "option_punchy": "Two baskets, one dinner: what the Chefman 6 Quart Dual Basket actually gives up for Sync Finish",
+   "note": "Both options name a real listed figure or a real reader problem. Neither uses the word 'verified'. The steady option leads with the number; the punchy one leads with the weeknight that the product is for.",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "P1 product page: the two 3-quart baskets (fact M-P1-F2), the 13.38in depth (M-P1-F4) and the Sync Finish feature (M-P1-F7)"
+    }
+   ]
+  },
+  {
+   "id": "H-M-P2",
+   "article": "M-P2",
+   "product": "P2",
+   "current_h1": "Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: the listed facts, both function counts included",
+   "option_steady": "The Emeril Lagasse 26QT French Door oven: 24 presets on the title, 25 in the features, and 15.8 inches of counter",
+   "option_punchy": "This oven says 24 functions on the box and 25 inside it. Here is what it definitely does",
+   "note": "The discrepancy is the most interesting true thing on the page, and it is currently buried in a clause. Leading with it is honest, it is sourced (fact M-P2-F10 and flag F-26), and it is the kind of headline a real publication would write.",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B09B7SB46R",
+     "ref": "P2 product page: the two function counts (fact M-P2-F10) and the 15.8in width (M-P2-F4)"
+    }
+   ]
+  },
+  {
+   "id": "H-M-P3",
+   "article": "M-P3",
+   "product": "P3",
+   "current_h1": "Chefman 8 Quart TurboFry 4-in-1 Air Fryer: one basket, every figure checked",
+   "option_steady": "The Chefman 8 Quart TurboFry: four presets, a 200-400 degree range, and the shallowest depth of the three",
+   "option_punchy": "The smallest counter footprint here is also the biggest basket: the Chefman 8 Quart TurboFry, checked",
+   "note": "The punchy option makes a comparison claim, so it is only publishable if the comparison page states the same ranking with the deciding field named, which is AS-05's replacement rule. Until then only the steady option is safe.",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B08DKYBTPH",
+     "ref": "P3 product page: four presets and the temperature range (fact M-P3-F2), the 12.75in depth (M-P3-F3)"
+    }
+   ]
+  },
+  {
+   "id": "H-M-CMP",
+   "article": "M-CMP",
+   "product": "ALL",
+   "current_h1": "Dual basket, single basket or toaster oven: comparing three countertop air fryers",
+   "option_steady": "Dual basket, single basket or French door: which of these three formats fits your counter and your cooking",
+   "option_punchy": "One cooks two dishes, one disappears into a corner, one swallows a pizza. Three air-fryer formats, decided",
+   "note": "The punchy option states three differences drawn from listed capacity and listed footprint (facts M-CMP-F1 to M-CMP-F3). It is the strongest headline on the site if the comparison page is allowed to conclude, which is decision D-12.",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "P1 product page: the dual-basket capacity and footprint (fact M-CMP-F1)"
+    },
+    {
+     "url": "https://www.amazon.com/dp/B09B7SB46R",
+     "ref": "P2 product page: the French-door capacity and footprint (fact M-CMP-F3)"
+    }
+   ]
+  },
+  {
+   "id": "H-M-BUY",
+   "article": "M-BUY",
+   "product": "ALL",
+   "current_h1": "Air fryer buying guide: start with the format, then the numbers",
+   "option_steady": "How to choose an air fryer: start with the format, then check four numbers on the listing",
+   "option_punchy": "Buy an air fryer by format, not by quart: the four numbers that actually decide it",
+   "note": "Question-shaped and specific. 'Four numbers' is countable because the guide already has four: how many dishes cook at once, listed capacity in the unit the listing uses, listed counter depth, and the size-variant trap (fact M-BUY-F5).",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B08DKYBTPH",
+     "ref": "P3 product page: the 6, 8 and 9 quart size-variant family (fact M-BUY-F5)"
+    }
+   ]
+  }
+ ],
+ "topics": [
+  {
+   "id": "T-01",
+   "wave": "Wave 1 - foundational four",
+   "working_title": "Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT - What Actually Fits Your Counter",
+   "question_it_answers": "Which listed size is the one I have room for, and why do two listings state their capacity in different units?",
+   "intent": "Know, then choose",
+   "built_from": "The three listed capacity values in the units the listings use (6 liters, 8 quarts, 24.6 liters) and the three listed footprints (13.38, 12.75 and 16.9 inches deep).",
+   "fact_rows": [
+    "M-CMP-F1",
+    "M-CMP-F2",
+    "M-CMP-F3",
+    "M-BUY-F2",
+    "M-BUY-F3"
+   ],
+   "links_to": [
+    "All three category pages",
+    "The comparison",
+    "The buying guide"
+   ],
+   "evidence_note": "No unit conversion is published, because the listings state different units and no official source states which is intended (F-06). The article explains the mismatch rather than resolving it.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "P1 product page: 6 liters listed capacity and 13.38in depth"
+    },
+    {
+     "url": "https://www.amazon.com/dp/B08DKYBTPH",
+     "ref": "P3 product page: 8 quarts listed capacity and 12.75in depth"
+    }
+   ]
+  },
+  {
+   "id": "T-02",
+   "wave": "Wave 1 - foundational four",
+   "working_title": "Choosing an Air Fryer in 2026: The Format-First Method",
+   "question_it_answers": "How do I choose between a dual basket, a single basket and a French-door oven?",
+   "intent": "Choose",
+   "built_from": "The three format descriptions already verified, plus the counter-depth figures that decide between them in a real kitchen.",
+   "fact_rows": [
+    "M-BUY-F1",
+    "M-BUY-F3",
+    "M-CMP-F5"
+   ],
+   "links_to": [
+    "The buying guide",
+    "The comparison",
+    "All three product articles"
+   ],
+   "evidence_note": "This is the published buying guide rewritten rather than a new piece, so it inherits the guide's fact table.",
+   "status": "Proposed (rewrite of M-BUY)",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B09B7SB46R",
+     "ref": "P2 product page: the French-door format and its 16.9in depth"
+    }
+   ]
+  },
+  {
+   "id": "T-03",
+   "wave": "Wave 1 - foundational four",
+   "working_title": "Hi-Fry, Sync Finish, Shake Reminder: An Air Fryer Feature Glossary",
+   "question_it_answers": "What do these named features actually do, and which of the three products lists them?",
+   "intent": "Know",
+   "built_from": "The three special-feature rows exactly as listed, with no interpretation of what a feature achieves.",
+   "fact_rows": [
+    "M-P1-F7",
+    "M-P2-F7",
+    "M-P3-F7",
+    "M-P1-F8",
+    "M-P3-F2"
+   ],
+   "links_to": [
+    "All three product articles",
+    "The comparison"
+   ],
+   "evidence_note": "Feature names are quoted as the listings state them. No performance claim is attached to any feature, because none is verified (F-15) and the FTC bars describing experience with an untried product.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "P1 product page: the special-feature row listing Hi-Fry, Sync Finish and Dual Zone Features"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: content must not promise to answer a question that actually has no answer"
+    }
+   ]
+  },
+  {
+   "id": "T-04",
+   "wave": "Wave 1 - foundational four",
+   "working_title": "The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy",
+   "question_it_answers": "What should I check on a listing before I commit?",
+   "intent": "Do",
+   "built_from": "The field set this site reads on every product: capacity and its unit, footprint, material, presets, temperature range, special features and the size-variant family.",
+   "fact_rows": [
+    "M-BUY-F2",
+    "M-BUY-F3",
+    "M-BUY-F4",
+    "M-BUY-F5",
+    "M-P3-F8"
+   ],
+   "links_to": [
+    "The buying guide",
+    "All three product articles"
+   ],
+   "evidence_note": "The checklist is the site's own method turned into reader advice, which is the most defensible kind of original content available here.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B08DKYBTPH",
+     "ref": "P3 product page: the 6, 8 and 9 quart variant family that makes 'check the variant' a real step"
+    }
+   ]
+  },
+  {
+   "id": "T-05",
+   "wave": "Wave 2",
+   "working_title": "Two Baskets or One? The Sync-Finish Question, Answered With Specs",
+   "question_it_answers": "Is a second basket worth the counter space it costs?",
+   "intent": "Choose",
+   "built_from": "Two independent 3-quart baskets versus one 8-quart basket, and the two footprints, both as listed.",
+   "fact_rows": [
+    "M-P1-F2",
+    "M-P3-F2",
+    "M-P1-F4",
+    "M-P3-F3"
+   ],
+   "links_to": [
+    "Dual-basket category",
+    "Single-basket category",
+    "The comparison"
+   ],
+   "evidence_note": "The trade is stated in listed units only. No cooking-performance claim is made.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "P1 product page: two independent 3-quart baskets and the 13.38in depth"
+    }
+   ]
+  },
+  {
+   "id": "T-06",
+   "wave": "Wave 2",
+   "working_title": "French Door Air Fryer Ovens: Big Capacity, Bigger Footprint?",
+   "question_it_answers": "What does the largest listed capacity cost in counter depth?",
+   "intent": "Choose",
+   "built_from": "24.6 liters and 16.9 inches of depth against 8 quarts at 12.75 inches, both as listed.",
+   "fact_rows": [
+    "M-P2-F3",
+    "M-P2-F4",
+    "M-P3-F3",
+    "M-CMP-F3"
+   ],
+   "links_to": [
+    "Air-fry toaster ovens category",
+    "Single-basket category",
+    "The comparison"
+   ],
+   "evidence_note": "Capacity is published in the unit each listing states; depth is compared in one unit because all three listings state it in inches.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B09B7SB46R",
+     "ref": "P2 product page: 24.6 liters listed against a 16.9in depth"
+    }
+   ]
+  },
+  {
+   "id": "T-07",
+   "wave": "Wave 2",
+   "working_title": "Compact Countertop Cooking: The Small-Kitchen Air Fryer Format",
+   "question_it_answers": "Which of these three fits a small kitchen?",
+   "intent": "Choose",
+   "built_from": "The three listed depths, ordered, with the smallest footprint named explicitly.",
+   "fact_rows": [
+    "M-P3-F3",
+    "M-P1-F4",
+    "M-P2-F4",
+    "M-BUY-F3"
+   ],
+   "links_to": [
+    "Single-basket category",
+    "The buying guide",
+    "The comparison"
+   ],
+   "evidence_note": "This is the one comparison the verified field set supports outright, because all three listings state depth in the same unit.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B08DKYBTPH",
+     "ref": "P3 product page: 12.75in depth, the shallowest of the three as listed"
+    }
+   ]
+  },
+  {
+   "id": "T-08",
+   "wave": "Wave 2",
+   "working_title": "What '24 Cooking Functions' Really Means (and Why Titles Disagree)",
+   "question_it_answers": "Why does one listing state two different function counts, and what should I believe?",
+   "intent": "Know",
+   "built_from": "The P2 title's 24 against the feature section's 25, with the eleven named modes reproduced as listed.",
+   "fact_rows": [
+    "M-P2-F10",
+    "M-P2-F2"
+   ],
+   "links_to": [
+    "Air-fry toaster ovens category",
+    "The P2 product article"
+   ],
+   "evidence_note": "This is the strongest original piece available: it reports a discrepancy on a live official listing that no other site has reason to publish, and it can only be written because the site records what it could not resolve. F-26 stays open and is cited in the piece.",
+   "status": "Proposed",
+   "sources": [
+    {
+     "url": "https://www.amazon.com/dp/B09B7SB46R",
+     "ref": "P2 product page: the two function counts and the eleven named modes"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: original information, reporting, research or analysis"
+    }
+   ]
+  }
+ ],
+ "prompt_slots": [
+  {
+   "slot": "[DIRECTION]",
+   "filled_from": "D-18 (direction family) and D-35 (the specification to build from)",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[BRAND]",
+   "filled_from": "D-18 and Q-19 (trade-name clearance)",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[VOICE]",
+   "filled_from": "D-12 and the S-12 voice decision",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[TOPICS]",
+   "filled_from": "D-17 (which wave)",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[HEADLINES]",
+   "filled_from": "D-37 (steady or punchy register)",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[TREND_RULE]",
+   "filled_from": "D-19 (the evidence rule for popularity words)",
+   "current": "not yet chosen"
+  },
+  {
+   "slot": "[AUDIENCE]",
+   "filled_from": "Q-16 and Q-04",
+   "current": "not yet chosen"
+  }
+ ]
+}
