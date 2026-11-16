@@ -41,7 +41,7 @@
    "disclosure_component": "A one-line strip directly above the article headline, ink on paper, 15px, carrying the Operating Agreement sentence verbatim and a link to Section 5. On desktop it repeats as a 40px sticky sub-header once the article headline scrolls past. It is never placed inside a list of links or a group of hashtags.",
    "imagery": "Real product photography only, supplied or licensed (S-18, D-22). No generated imagery, no stock illustration standing in for a product, no cropping or editing of any image carrying an Amazon Mark.",
    "effort": "Two to three days: a new stylesheet layer plus the templates. Reversible.",
-   "risk": "Low. The largest risk is typographic: a display serif at small sizes loses the legibility the data tables depend on, so the tables keep the sans stack.",
+   "risk": "Low. The largest risk is typographic: a display serif at small sizes loses the legibility the data tables depend on, so the tables keep the sans stack. Note: the warm theme in the stylesheet shipped on 2026-11-15 is a light preview of this direction's palette, not the full specification; adopting DIR-A means finishing that job, not starting it.",
    "blocked_by": [],
    "constrained_by": [
     {
@@ -56,7 +56,8 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: page experience and clear sourcing as trust signals"
     }
-   ]
+   ],
+   "shipped_preview": true
   },
   {
    "id": "DIR-B",

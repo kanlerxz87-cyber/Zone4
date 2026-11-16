@@ -16,24 +16,25 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/requirements.json` | The 35 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
-| `data/flags.json` | 46 irregularities and unverified items (Flagged for Review) |
+| `data/flags.json` | 51 irregularities and unverified items (Flagged for Review) |
 | `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-15 re-check date |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
-| `DESIGN_PROMPT.md` | Ready-to-paste redesign brief (suggestion S-14, decision D-20); fills its bracketed slots from the recorded picks |
-| `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
+| `data/design.json` | The design brief: three visual directions specified to build from, ten anti-"AI slop" patterns with replacements, two headline options per published article, an eight-topic organic-traffic programme and the five-step shortest path |
+| `data/verification-session-89900251.json` | 2026-11-16 verification pass: three short links re-resolved, P1–P3 titles, breadcrumbs and also-viewed carousels re-read, and the Associates, FTC and Google guidance pages quoted verbatim |
 | `data/verification-session-d8564cd0.json` | 2026-11-15 verification pass by `arena/d8564cd0-zone4`: commission table re-read, P1/P2/P3 page reads, flag F-44 record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
+| `scripts/render_design_prompt.py` | Regenerates `DESIGN_PROMPT.md` from `data/design.json`, so the document and the Design brief page are the same brief |
 | `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
 | `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
-| `data/suggestions.json` | The change backlog: 31 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
-| `data/questions.json` | 37 questions that must be answered before a change can be made: 14 already answered from an official source, 23 still open, each naming what is known, how the missing piece is discovered and who can answer it |
-| `data/decisions.json` | The decision queue (34 choices with options, cost and reversibility) and the log of decisions actually taken |
-| `docs/` | The published site (24 generated pages plus the stylesheet, app script and tracker script) |
+| `data/suggestions.json` | The change backlog: 36 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
+| `data/questions.json` | 44 questions that must be answered before a change can be made: 18 already answered from an official source, 26 still open, each naming what is known, how the missing piece is discovered and who can answer it |
+| `data/decisions.json` | The decision queue (39 choices with options, cost and reversibility, also shown in dependency order) and the log of decisions actually taken |
+| `docs/` | The published site (25 generated pages plus the stylesheet, app script, tracker script and design-page copy script) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
@@ -57,16 +58,18 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `verification.html` | Field-by-field verification log for every product |
 | `policy-compliance.html` | 30 Amazon Associates and FTC rules, each with its official source section |
 | `analytics.html` | Clicks & conversions: a local-only first-party click log, with export and clear |
-| `suggestions.html` | Suggestions: 31 changes worth making, costed and risk-assessed, in three priority bands, waiting on a decision rather than already applied |
-| `questions.html` | Open questions: 37 items, 14 of them already answered from an official source, the rest with what is known, what is missing and who can supply it |
-| `decisions.html` | Decision log: the 34 open choices with their options, plus the record of decisions taken |
-| `flagged.html` | Flagged for Review: 46 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
+| `suggestions.html` | Suggestions: 36 changes worth making, costed and risk-assessed, in three priority bands, waiting on a decision rather than already applied |
+| `questions.html` | Open questions: 44 items, 18 of them already answered from an official source, the rest with what is known, what is missing and who can supply it |
+| `design.html` | Design brief: three specified visual directions with type stacks, colour tokens and component rules; ten anti-"AI slop" patterns with replacements; two headline options per article; eight organic-traffic topics; the five-step shortest credible path; and a paste-ready prompt. Nothing on it has been applied. |
+| `decisions.html` | Decision log: the 39 open choices with their options, in the order each unblocks the others, plus the record of decisions taken |
+| `flagged.html` | Flagged for Review: 51 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify
 
 ```bash
-python3 scripts/build_site.py     # regenerate docs/ from data/
+python3 scripts/build_site.py        # regenerate docs/ from data/
+python3 scripts/render_design_prompt.py   # regenerate DESIGN_PROMPT.md from data/design.json
 python3 scripts/verify.py         # data + page checks
 python3 qa/audit_site.py          # independent audit of the committed HTML
 
@@ -91,11 +94,14 @@ record that does not exist, if a recorded decision is missing from the log, if a
 - Attribution to the user's Associates ID is **unverified** (no tag in the resolved links).
 - Attributed click, order, revenue and trend metrics are **blank**. No Associates reporting, API key or account is connected, so nothing is simulated. The Analytics page records first-party clicks in the visitor's own browser and publishes no attributed figure.
 - Automated research at scale is **not built**. The Associates Program IP License, Section 4 (Agent Terms) governs any agent that touches Program Content.
+- No traffic, search-volume, click, conversion or revenue figure is published **anywhere**, including on the Design brief page. No official source supplies one for these products (F-15), the Operating Agreement Section 4 states that Amazon makes no representation about the traffic or commission income any site can expect, and Google lists trend-chasing as a warning sign of search-engine-first content. That tension is recorded as F-47 rather than resolved by a forecast.
 - Price tracking and price alerting are **not built**: Participation Requirement 6(y) prohibits them unless Amazon agrees otherwise.
 
-Start with `suggestions.html` on the live site for the costed backlog, `questions.html` for what must be answered before any of
-it can be built, `decisions.html` for the choice itself, `flagged.html` for the defects found, and `requirements.html` for the
-brief-by-brief delivery status.
+Start with `design.html` if you want the look-and-copy answers: it holds the three specified directions, the ten writing
+patterns that make the site read as machine output, two headline options per article and the shortest path through the 39 open
+decisions, all in one page. Then `suggestions.html` for the costed backlog, `questions.html` for what must be answered before
+any of it can be built, `decisions.html` for the choice itself, `flagged.html` for the defects found, and `requirements.html`
+for the brief-by-brief delivery status.
 
 Nothing in this repository acts on a suggestion by itself. Every change is proposed, costed and left in the queue until the owner
 records a decision. Two things were shipped before they were approved and are flagged accordingly (F-46): the editorial redesign
