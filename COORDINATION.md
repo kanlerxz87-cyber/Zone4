@@ -995,7 +995,7 @@ each file so the provenance is not lost.
 
 **Not re-read this session.** Commission Table 1, IP License §§2(k) and 4, Participation Requirements 2(b)/6(t)/6(y), Creators API docs and Conditions of Use. The record marks these as not re-read.
 
-**Method limit.** All Amazon reads went through the platform's page-fetch tool, one read per URL (the Operating Agreement chunks 0–1 and Program Policies chunk 0 for the policy pages). The tool does not send the identifying user agent that the engine uses. No login, form or access control was used, and no automated-traffic interstitial was met. Outbound `curl` to Amazon is blocked in this sandbox.
+**Method limit.** All Amazon reads went through the platform's page-fetch tool, one read per URL, apart from a small number of repeats (the `link.amazon/B04G1MEwY` href, and the live `flagged.html` after the deploy); the Operating Agreement chunks 0–1 and Program Policies chunk 0 were read for the policy pages. The tool does not send the identifying user agent that the engine uses. No login, form or access control was used, and no automated-traffic interstitial was met. Outbound `curl` to Amazon is blocked in this sandbox.
 
 **Checks run before pushing.** `python3 scripts/build_site.py` → `scripts/verify.py` (OK, 24 pages) → `qa/audit_site.py` (PASS, 0 warnings) → `python3 -m unittest discover -s tests` (83 OK) → `python3 -m engine.cli audit` (exit 0, 0/7 ready, which is the intended gate) → `python3 -m engine.cli build` + `tools/check_links.py` (0 broken links) → `git diff --check`.
 
