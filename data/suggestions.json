@@ -12,11 +12,18 @@
    "Awaiting decision": "Written and costed, waiting on a decision from the site owner in the Decision queue.",
    "Needs a decision first": "Cannot be implemented until an open question is answered or another decision is made.",
    "Blocked by policy": "Implementing it as usually described would breach a cited Amazon rule. The row records the rule and the narrower alternative.",
-   "Recommended, no decision needed": "A correction with one correct answer. Recorded so the change is visible, not because it needs a vote."
+   "Recommended, no decision needed": "A correction with one correct answer. Recorded so the change is visible, not because it needs a vote.",
+   "Implemented 2026-11-16": "Decision recorded 2026-11-16 and the change is live in this build.",
+   "Partly implemented 2026-11-16": "Decision recorded 2026-11-16; part of the change is live in this build, the rest is staged or needs an owner fact.",
+   "Confirmed by the 2026-11-16 decision": "A standing state or guardrail, confirmed by the recorded decision. Nothing new to build.",
+   "Decision recorded 2026-11-16 - work remains": "The direction is decided; implementation is deferred and the reason is in the decision log.",
+   "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes."
   },
   "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
   "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
   "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
+  "updated_utc": "2026-11-16",
+  "update_note": "Statuses updated after the 2026-11-16 delegated decision round: what shipped in this build, what is confirmed as standing policy, what was not adopted, and what still needs an owner fact (S-01, S-02, S-08, S-18). The register stays the place to review a change before it is made; nothing here was implemented before its decision was recorded.",
   "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items."
  },
  "suggestions": [
@@ -96,7 +103,7 @@
     "F-12",
     "F-38"
    ],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-03"
   },
   {
@@ -116,7 +123,7 @@
     }
    ],
    "flags": [],
-   "status": "Recommended, no decision needed",
+   "status": "Implemented 2026-11-16",
    "decision": "D-04"
   },
   {
@@ -144,7 +151,7 @@
     }
    ],
    "flags": [],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-05"
   },
   {
@@ -175,7 +182,7 @@
     "F-11",
     "F-31"
    ],
-   "status": "Awaiting decision",
+   "status": "Not adopted - see the recorded decision",
    "decision": "D-06"
   },
   {
@@ -202,7 +209,7 @@
     "F-06",
     "F-26"
    ],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-07"
   },
   {
@@ -257,7 +264,7 @@
     "F-19",
     "F-25"
    ],
-   "status": "Awaiting decision",
+   "status": "Partly implemented 2026-11-16",
    "decision": "D-09"
   },
   {
@@ -281,7 +288,7 @@
     }
    ],
    "flags": [],
-   "status": "Recommended, no decision needed",
+   "status": "Partly implemented 2026-11-16",
    "decision": "D-10"
   },
   {
@@ -304,7 +311,7 @@
     "F-29",
     "F-35"
    ],
-   "status": "Recommended, no decision needed",
+   "status": "Partly implemented 2026-11-16",
    "decision": "D-11"
   },
   {
@@ -331,7 +338,7 @@
     "F-12",
     "F-31"
    ],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-12"
   },
   {
@@ -357,7 +364,7 @@
    "flags": [
     "F-15"
    ],
-   "status": "Awaiting decision",
+   "status": "Partly implemented 2026-11-16",
    "decision": "D-17"
   },
   {
@@ -381,7 +388,7 @@
     }
    ],
    "flags": [],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-20"
   },
   {
@@ -407,7 +414,7 @@
    "flags": [
     "F-39"
    ],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-18"
   },
   {
@@ -433,7 +440,7 @@
    "flags": [
     "F-15"
    ],
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-19"
   },
   {
@@ -446,7 +453,7 @@
    "effort": "M",
    "risk": "Design judgement. No published fact changed. Risk: Low - presentation only; no published value changes.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Recommended, no decision needed",
+   "status": "Implemented 2026-11-16",
    "decision": "D-21",
    "sources": [
     {
@@ -496,7 +503,7 @@
    "effort": "M",
    "risk": "Product judgement, using only values already published from the official pages below. Risk: Low - it routes to records that already exist and cites them.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Needs a decision first",
+   "status": "Implemented 2026-11-16",
    "decision": "D-23",
    "sources": [
     {
@@ -520,7 +527,7 @@
    "effort": "M",
    "risk": "Design judgement, judged against the official page-experience guidance below. Risk: Low",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-24",
    "sources": [
     {
@@ -540,7 +547,7 @@
    "effort": "S",
    "risk": "Information-architecture judgement. Risk: Low - nothing is removed, only regrouped in the navigation.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Recommended, no decision needed",
+   "status": "Decision recorded 2026-11-16 - work remains",
    "decision": "D-21",
    "sources": [
     {
@@ -562,7 +569,7 @@
    "effort": "S",
    "risk": "Editorial judgement, justified by the official rules below that create the gaps. Risk: Low",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-25",
    "sources": [
     {
@@ -586,7 +593,7 @@
    "effort": "S",
    "risk": "Original analysis proposed by this session. The inputs are the published values below; the arithmetic would be shown in full. Risk: Low - derived from published values with the arithmetic shown, and labelled as derived.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-26",
    "sources": [
     {
@@ -618,7 +625,7 @@
    "effort": "S",
    "risk": "Technical judgement, bounded by the official rules below on how links may be presented. Risk: Low",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-27",
    "sources": [
     {
@@ -642,7 +649,7 @@
    "effort": "M",
    "risk": "Distribution judgement, bounded by the official statement below. Risk: Low. Note that the Operating Agreement makes no representation about the traffic any site can expect, so no outcome is promised.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Needs a decision first",
+   "status": "Partly implemented 2026-11-16",
    "decision": "D-28",
    "sources": [
     {
@@ -666,7 +673,7 @@
    "effort": "S",
    "risk": "Not a judgement: this is a direct consequence of the official rule quoted below. Risk: None if followed. Account-ending if ignored.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Needs a decision first",
+   "status": "Implemented 2026-11-16",
    "decision": "D-29",
    "sources": [
     {
@@ -710,7 +717,7 @@
    "effort": "S",
    "risk": "Not a judgement: the official rule below decides it. Risk: High if ignored.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Confirmed by the 2026-11-16 decision",
    "decision": "D-31",
    "sources": [
     {
@@ -730,7 +737,7 @@
    "effort": "S",
    "risk": "Design judgement, bounded by the official guidance below. Risk: Low",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Awaiting decision",
+   "status": "Implemented 2026-11-16",
    "decision": "D-32",
    "sources": [
     {
@@ -754,7 +761,7 @@
    "effort": "M",
    "risk": "Not a judgement: measurement has to be real before it can be optimised. The rule below is why no figure is published today. Risk: Low - the alternative is optimising against a number that does not exist.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Needs a decision first",
+   "status": "Confirmed by the 2026-11-16 decision",
    "decision": "D-33",
    "sources": [
     {
@@ -778,7 +785,7 @@
    "effort": "S",
    "risk": "Not a judgement: the official clauses below decide it. Risk: High if ignored; zero if followed.",
    "check": "Rebuild and re-run scripts/verify.py, qa/audit_site.py and the engine tests; no published value may change without an official source, and every table row must keep its official link.",
-   "status": "Needs a decision first",
+   "status": "Confirmed by the 2026-11-16 decision",
    "decision": "D-34",
    "sources": [
     {
@@ -825,11 +832,11 @@
   {
    "id": "S-33",
    "priority": "P1 - Decide first",
-   "title": "Run the anti-slop copy pass: ten named patterns, each with its replacement and its check",
-   "problem": "The brief's central complaint is that the site reads like machine output. Reading the five published pieces line by line on 2026-11-16 found why: three of five headlines describe the site's own checking process and two of those differ only by the words 'two baskets' and 'one basket' (F-52); the second paragraph of each product article prints the ASIN and a five-level category path as prose that the sourced fact table already carries (F-53); one article opens by talking about how easy it is to write; every article hedges; and the comparison page refuses to compare.",
+   "title": "Finish the anti-slop copy pass: the two patterns that survived the 2026-11-16 rewrite",
+   "problem": "The brief's central complaint was that the site read like machine output. Session arena/c509aba1-zone4's copy pass (recorded decisions D-12, D-17, D-18, D-20, D-21, D-25, D-27) fixed most of it: the headlines, the voice, the hedging, the refusal to compare and the rhythm. Two patterns survive, both narrow: the M-P3 opener that describes its own composition ('Some listings need paragraphs of interpretation; this one mostly needs reading'), and the ASIN plus five-level category path still printed as prose in the second paragraph of all three product articles (F-53).",
    "proposal": "Apply the ten-row checklist in data/design.json, each row naming the pattern, the evidence for it on this site, the replacement and the check that proves the fix. The guard stays mechanical: a paragraph that states a fact without a fact id fails the build, and a ranking claim must cite the field that decides it.",
    "why": "This is the difference between a site that is merely accurate and one a reader would finish. Google's guidance rewards substantial value compared with other pages and treats pure restatement as low value; the FTC text does not constrain any of the ten changes, because none of them adds a claim.",
-   "effort": "Two days for five pieces plus review, most of it writing. The two defect fixes alone (F-52, F-53) are half a day.",
+   "effort": "Half a day for both.",
    "risk": "Allowing the writer to conclude is what makes the fact rule slip. The guard has to stay in the build, not in the writer's judgement.",
    "check": "No two headlines share a construction; no paragraph contains an ASIN; every paragraph carries at least one fact id and adds something the table does not say; the comparison page produces an explicit answer for at least one realistic reader profile with the deciding field named and sourced; paragraph word counts within an article vary by a factor of at least three.",
    "sources": [
@@ -857,7 +864,7 @@
    "id": "S-34",
    "priority": "P2 - Adds real value",
    "title": "Ship the topic calendar and the headline rewrite together, with two ready-written options per article",
-   "problem": "The brief asks for catchy, trendy articles and topics that earn organic traffic. The register has eight working titles (S-13) but no intent, no internal-link plan and no source mapping, and the five published headlines are the single most visible reason the site reads as generated (F-52).",
+   "problem": "The brief asks for catchy, trendy articles and topics that earn organic traffic. The register has eight working titles (S-13) but no intent, no internal-link plan and no source mapping, and the five published headlines are the single most visible reason the site reads as generated (F-52). Note: D-17 was recorded on 2026-11-16 as option B (the full eight-topic calendar, published in waves), and two of those eight have shipped. The remaining six in this table are the calendar as adopted, not a proposal awaiting adoption.",
    "proposal": "Two tables in data/design.json, both ready to apply. The topic programme gives each of the eight titles the question it answers, the search intent, the verified fact rows it is built from, the pages it must link to and the evidence note that limits it. The headline table gives every published article two finished options - one steady, one punchy - so the choice is a four-field edit per article and one rebuild rather than a writing job.",
    "why": "Both deliverables answer the brief directly, and neither can be published as a forecast: no row carries a search-volume, traffic or revenue figure, because no official source supplies one (F-15) and the Operating Agreement makes no representation about traffic (F-51, Q-40).",
    "effort": "One article per working session for the topics; the headline set is four fields per article and one rebuild.",

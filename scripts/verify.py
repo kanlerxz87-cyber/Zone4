@@ -563,6 +563,23 @@ def check_required_pages() -> None:
             fail(f"docs/{rel} does not carry the article's own meta description")
         if f"<title>{html_escape(a['title_tag'])} |" not in raw:
             fail(f"docs/{rel} does not carry the article's own title tag")
+        # Standing internal-linking rule (decision D-27, recorded 2026-11-16):
+        # every article carries a 'Where next' block that reaches the comparison,
+        # the buying guide, the articles hub and the chooser. The check reads the
+        # block itself, not the site navigation, so it cannot pass by accident.
+        wm = re.search(r'<nav class="wherenext".*?</nav>', raw, re.S)
+        if not wm:
+            fail(f"docs/{rel}: no 'Where next' block (decision D-27)")
+        else:
+            block = wm.group(0)
+            targets = ["articles/index.html", "index.html#chooser"]
+            if a["id"] != "M-CMP":
+                targets.append("dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html")
+            if a["id"] != "M-BUY":
+                targets.append("air-fryer-buying-guide-2026.html")
+            for target in targets:
+                if target not in block:
+                    fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
 def check_root_entry() -> None:

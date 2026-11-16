@@ -11,6 +11,11 @@
         "date_utc": "2026-11-14",
         "session": "arena/46c18cd1-zone4",
         "result": "Independent wrap-up re-read. All three short links re-resolved (ASINs match; no tag= parameter — F-03 stands). Listing titles, P1/P3 brand bylines, P2 Item details Brand Name, category breadcrumbs and the complete product-detail tables were re-read on all three official product pages. All nine also-viewed entries reappeared in the stored order with their title prefixes. Commission Table 1 category bands were re-read: Kitchen 4.50% and Home 3.00%; these are category-level references only, and product-level rates remain blank because no official source maps the ASINs to a commission category (F-01; history F-36). Prices and star ratings appear on the live pages and remain withheld (F-02). Full log: data/verification-session-46c18cd1.json."
+      },
+      "same_day_4c552c78_2026_11_16": {
+        "date_utc": "2026-11-16",
+        "session": "arena/4c552c78-zone4",
+        "result": "Short links re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH; no tag= parameter in any resolved URL (F-03 stands). Listing titles: P1 and P3 match name_listing exactly. P2's first segment matches; its second segment is the 2026-11-15 string, not the stored one (F-44 open; stored value not changed). Also-viewed module: P1 unchanged; P2 slot 3 and P3 slot 3 changed relative to the stored snapshot (F-29 update; snapshot not overwritten). Default offers on P1 and P3 were used items sold by Amazon Resale (F-49). Full record: data/verification-session-4c552c78.json."
       }
     },
     "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50% and Home at 3.00%. These are category-level references only; the official sources reviewed do not map the supplied ASINs to a commission category. Product-level rate fields are intentionally null (F-01).",

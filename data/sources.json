@@ -63,7 +63,7 @@
       "publisher": "Amazon Associates Central",
       "accessible": true,
       "used_for": "Fixed commission rates by category, bounty events, fine-art cap, 0.00% exclusions",
-      "notes": "Read directly by the final integration session on 2026-11-14. Table 1 lists: Luxury Beauty / Luxury Stores Beauty / Amazon Explore 10.00%; Digital Music / Physical Music / Handmade / Digital Videos 5.00%; Physical Books / Kitchen / Automotive 4.50%; Fire Tablet, Kindle, Luxury Stores Fashion, Apparel, Fire TV, Echo, Ring, Watches, Jewelry, Luggage, Shoes, Handbags and Accessories 4.00%; Toys, Furniture, Home, Home Improvement, Lawn and Garden, Pets, Headphones, Beauty, Musical Instruments, Business and Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins 3.00%; PC and PC Components 2.50%; Televisions and Digital Video Games 2.00%; Amazon Fresh, Physical Video Games, Grocery, Health and Personal Care 1.00%; Gift Cards, Wireless Service Plans, Alcohol, Digital Kindle subscriptions, Vehicle Leasing and Sales, Pet Prescription Medications, Restaurant-prepared Food, Amazon Appstore, Prime Now and Amazon Pay Places 0.00%; Coach 0.00%; All Other Categories 4.00%. This is the official public table, which is why the rate is no longer blank. The commission category Amazon assigns to a specific ASIN is still not confirmable from outside Associates Central (F-01)."
+      "notes": "Read directly by the final integration session on 2026-11-14. Table 1 lists: Luxury Beauty / Luxury Stores Beauty / Amazon Explore 10.00%; Digital Music / Physical Music / Handmade / Digital Videos 5.00%; Physical Books / Kitchen / Automotive 4.50%; Fire Tablet, Kindle, Luxury Stores Fashion, Apparel, Fire TV, Echo, Ring, Watches, Jewelry, Luggage, Shoes, Handbags and Accessories 4.00%; Toys, Furniture, Home, Home Improvement, Lawn and Garden, Pets, Headphones, Beauty, Musical Instruments, Business and Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins 3.00%; PC and PC Components 2.50%; Televisions and Digital Video Games 2.00%; Amazon Fresh, Physical Video Games, Grocery, Health and Personal Care 1.00%; Gift Cards, Wireless Service Plans, Alcohol, Digital Kindle subscriptions, Vehicle Leasing and Sales, Pet Prescription Medications, Restaurant-prepared Food, Amazon Appstore, Prime Now and Amazon Pay Places 0.00%; Coach 0.00%; All Other Categories 4.00%. This is the official public table, which is why the rate is no longer blank. The commission category Amazon assigns to a specific ASIN is still not confirmable from outside Associates Central (F-01). Re-read 2026-11-16 (arena/4c552c78-zone4): Table 1 still lists 'Physical Books, Kitchen, Automotive' at 4.50% and 'Home' at 3.00%. Unchanged."
     },
     {
       "id": "S-COU",
@@ -72,7 +72,7 @@
       "publisher": "Amazon.com (official)",
       "accessible": true,
       "used_for": "'License and Access' section, read 2026-11-14: the licence excludes 'any collection and use of any product listings, descriptions, or prices' and 'any use of data mining, robots, or similar data gathering and extraction tools'; it also bars using AI-generated content from the Amazon Services to develop or improve large language or multimodal models or other machine learning technology.",
-      "notes": "Re-confirmed 2026-11-14 (final wrap-up, arena/46c18cd1-zone4): the cited nodeId=508088 URL redirects to nodeId=GLSBYFE9MGKKQXXM ('Conditions of Use', last updated August 14, 2026); the 'License and Access' clauses above were re-read verbatim on that target. Amazon's own docs pages still link the old URL. Citation update is a next-review action (F-30)."
+      "notes": "Re-confirmed 2026-11-14 (final wrap-up, arena/46c18cd1-zone4): the cited nodeId=508088 URL redirects to nodeId=GLSBYFE9MGKKQXXM ('Conditions of Use', last updated August 14, 2026); the 'License and Access' clauses above were re-read verbatim on that target. Amazon's own docs pages still link the old URL. Citation update is a next-review action (F-30). Re-read 2026-11-16 (arena/4c552c78-zone4): 'Last updated: August 14, 2026' (the cited nodeId=508088 redirects to nodeId=GLSBYFE9MGKKQXXM). Its 'License and Access' section was read again; it also bars 'meta tags or any other \"hidden text\" utilizing Amazon's name or trademarks' without written consent. A check of the built site on 2026-11-16 found no page title or meta description that uses the Amazon name."
     },
     {
       "id": "S-DEPLOY",
@@ -131,7 +131,8 @@
       "url": "https://link.amazon/B04G1MEwY",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B0CDY277D3 (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead)."
+      "used_for": "Resolved to ASIN B0CDY277D3. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B0CDY277D3 (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead).",
+      "notes": "Re-resolved 2026-11-16 (arena/4c552c78-zone4) to B0CDY277D3."
     },
     {
       "id": "S-L2",
@@ -139,7 +140,8 @@
       "url": "https://link.amazon/B02NbDxp3",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B09B7SB46R (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead)."
+      "used_for": "Resolved to ASIN B09B7SB46R. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B09B7SB46R (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead).",
+      "notes": "Re-resolved 2026-11-16 (arena/4c552c78-zone4) to B09B7SB46R."
     },
     {
       "id": "S-L3",
@@ -147,7 +149,8 @@
       "url": "https://link.amazon/B00hJ57DV",
       "publisher": "Amazon.com",
       "accessible": true,
-      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B08DKYBTPH (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead)."
+      "used_for": "Resolved to ASIN B08DKYBTPH. The resolved URL contains no Associates tag parameter. Resolution re-checked 2026-11-14 by arena/3036372b-zone4. Resolved to ASIN B08DKYBTPH (re-resolved 2026-11-14). The resolved URL contains no Associates tag parameter (lv, btn_type, btn_ref, channelId, plpRedirect and th appear instead).",
+      "notes": "Re-resolved 2026-11-16 (arena/4c552c78-zone4) to B08DKYBTPH."
     },
     {
       "id": "S-OA",
@@ -155,7 +158,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/agreement",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Section 1: Special Links must use the tagged link formats. Section 5: the required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.', plus the bar on misrepresenting or embellishing the relationship. Section 7: service offerings are provided 'AS IS'. Re-read in full 2026-11-14."
+      "used_for": "Section 1: Special Links must use the tagged link formats. Section 5: the required disclosure sentence 'As an Amazon Associate I earn from qualifying purchases.', plus the bar on misrepresenting or embellishing the relationship. Section 7: service offerings are provided 'AS IS'. Re-read in full 2026-11-14.",
+      "notes": "Re-read 2026-11-16 (arena/4c552c78-zone4): 'Updated: October 15, 2025'. Unchanged."
     },
     {
       "id": "S-P1",
@@ -200,7 +204,7 @@
       "publisher": "Amazon Associates Central",
       "accessible": true,
       "used_for": "Session and attribution windows (24 h, 89-day cart, 180-day ship) and the Participation Requirements prohibitions encoded as site gates",
-      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4; complements S-PP."
+      "notes": "Read 2026-11-14 by session arena/8592c4f6-zone4; complements S-PP. Re-read 2026-11-16 (arena/4c552c78-zone4): 'Updated: April 14, 2026'. Unchanged."
     },
     {
       "id": "S-PP",
@@ -208,7 +212,8 @@
       "url": "https://affiliate-program.amazon.com/help/operating/policies",
       "publisher": "Amazon Associates (official)",
       "accessible": true,
-      "used_for": "Commission Income Statement sections 1, 2(a) to 2(k), 3 and 4; Participation Requirements sections 1, 2(a), 2(b), 3(a) to 3(f), 4, 5, 6(a) to 6(z); Trademark Guidelines 1 to 8; Associates Program IP License sections 1, 2(a) to 2(k), 3 and 4 (Agent Terms); Products Statement 1 to 3; Influencer Program Policy; Creator Ads Boost. Every section cited on this site was re-read on 2026-11-14. Note for reviewers: the lettered Participation Requirements run 3(a) to 3(f) under 'Responsibility for Your Site' and 6(a) to 6(z) under 'Content on your Site', so the ratings rule is 6(t) and not 3(t). Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1–2 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)–(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)–(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z). IP License sections 2(k) (text disclaimer) and 4 (Agent Terms), re-read 2026-11-14 (F-23, F-24)."
+      "used_for": "Commission Income Statement sections 1, 2(a) to 2(k), 3 and 4; Participation Requirements sections 1, 2(a), 2(b), 3(a) to 3(f), 4, 5, 6(a) to 6(z); Trademark Guidelines 1 to 8; Associates Program IP License sections 1, 2(a) to 2(k), 3 and 4 (Agent Terms); Products Statement 1 to 3; Influencer Program Policy; Creator Ads Boost. Every section cited on this site was re-read on 2026-11-14. Note for reviewers: the lettered Participation Requirements run 3(a) to 3(f) under 'Responsibility for Your Site' and 6(a) to 6(z) under 'Content on your Site', so the ratings rule is 6(t) and not 3(t). Re-read 2026-11-14 (page updated April 14, 2026). Commission Income Statement sections 1–2 (Qualifying Purchases, Qualifying Revenue, disqualified purchases incl. 2(c) paid search and 2(d)–(e) search and redirecting links); Standard Commission Income is in the Appendix, which links to the schedule URL (see S-SCHED). Participation Requirements sections 1(g) (trademark in domain or tag), 2(b) (prices and availability; Associates ID as parameter), 5 (no machine-learning use without approval), 6(e)–(f) (Amazon keywords), 6(g) (incentives), 6(p) (links in customer content), 6(s) (artificial clicks), 6(t) (reviews and star ratings), 6(w) (link shortening), 6(y), 6(z). IP License sections 2(k) (text disclaimer) and 4 (Agent Terms), re-read 2026-11-14 (F-23, F-24).",
+      "notes": "Re-read 2026-11-16 (arena/4c552c78-zone4): the page header still reads 'Updated: April 14, 2026'. Unchanged."
     },
     {
       "id": "S-REPO",

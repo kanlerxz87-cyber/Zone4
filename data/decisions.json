@@ -3,13 +3,14 @@
   "description": "The queue a reviewer works through before anything in the Suggestion register is built, plus a log of decisions already taken. A decision is only recorded as taken when the owner states it; this file never assumes one. Each entry names the options, what each option commits the site to, and the cheapest reversible first step.",
   "created_utc": "2026-11-15",
   "created_by": "arena/00ba6c2e-zone4",
-  "how_to_use": "Read the question, pick an option, and record it in the log at the bottom with the date. Until then the site stays exactly as it is. Nothing in this repository acts on a suggestion automatically.",
+  "how_to_use": "Read the question, pick an option, and record it in the log at the bottom with the date. Until then the site stays exactly as it is. Nothing in this repository acts on a suggestion automatically. Decisions recorded on 2026-11-16 were made under the owner's written delegation for that session; they are reversible and each log entry names the delegation it rests on.",
   "statuses": {
    "Open - needs your answer": "Waiting on the owner. The site does nothing in the meantime.",
    "Recorded": "The owner has stated the decision and it is written in the log."
   },
   "ported_00ba6c2e_2026_11_15": "A parallel session (arena/bb85f073-zone4, PR #50) published a seven-row decision worksheet on its own suggestions.html with its own D-01..D-07 numbering, which collided with this register's D-01..D-07. Rather than drop either, its four items that were not already covered here (product confirmation, marketplace and tracking ID, authorised automation, measurement and privacy) are ported as D-13 to D-16 with their options and recommendations preserved verbatim in substance, and its other three items map onto existing rows: its D-04 pricing to D-02 and D-08, its D-05 economics to D-08 and D-09, and its D-06 editorial direction to D-03, D-06 and D-12. Its four unique open questions are ported as Q-16 to Q-19.",
   "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided.",
+  "delegation_2026_11_16": "The owner's session brief of 2026-11-16 states: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Under that delegation this session recorded the presentation, voice and policy decisions that needed no fact the owner alone has (D-03 to D-07, D-09 to D-12, D-17 to D-21, D-23 to D-34). Decisions that need an account, a budget, a seller or a lawyer (D-01, D-02, D-08, D-13, D-14, D-15, D-16, D-22) stay open: they cannot be answered from any official source this project can read.",
   "added_by_89900251_2026_11_16": "D-35 to D-39 are the design and traffic path. D-35 is the executable detail for the three options already in D-18, not a new set of options. D-36 and D-37 cover the copy and headline changes the F-52 and F-53 defects need. D-38 and D-39 are decision-process and build-order items."
  },
  "decisions": [
@@ -91,7 +92,7 @@
    "linked_suggestions": [
     "S-03"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -121,7 +122,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Who / How / Why, and the fabricated-authorship warning"
     }
-   ]
+   ],
+   "recorded_choice": "Option B, plus an honest production note: the site describes its writing and checking pipeline without naming a person (no named human reviewer exists yet - Q-05 stays open) and states plainly that the copy is AI-assisted and machine-checked against official sources, never hands-on tested.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-04",
@@ -130,7 +134,7 @@
    "linked_suggestions": [
     "S-04"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -160,7 +164,10 @@
      "url": "https://developers.google.com/search/docs/appearance/snippet",
      "ref": "Create unique descriptions for each page on your site"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: every page keeps its own title tag and meta description; the wording is reviewed in the 2026-11-16 polish pass. Already shipped and now confirmed as standing policy.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-05",
@@ -169,7 +176,7 @@
    "linked_suggestions": [
     "S-05"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -192,7 +199,10 @@
      "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
      "ref": "rel=\"sponsored\" for paid links"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: product links carry rel=\"sponsored\" alongside the visible disclosure and the '(paid link)' label.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-06",
@@ -202,7 +212,7 @@
     "S-06",
     "S-12"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -225,7 +235,10 @@
      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
      "ref": "Thin affiliation: original reviews and rigorous testing as added value"
     }
-   ]
+   ],
+   "recorded_choice": "Option B: the site is a specification and decision tool. No unit will be tested and no hands-on or performance claim is published (FTC endorsement guidance: no experience claims for products not tried).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-07",
@@ -234,7 +247,7 @@
    "linked_suggestions": [
     "S-07"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -257,7 +270,10 @@
      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
      "ref": "Scaled content abuse"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: question-led pages are published. This build ships 'Air fryer sizes explained' and the seasonal gift guide; the topic calendar lists the rest.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-08",
@@ -298,7 +314,7 @@
    "linked_suggestions": [
     "S-09"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -321,7 +337,10 @@
      "url": "https://developers.google.com/search/docs/appearance/page-experience",
      "ref": "Page experience and presentation"
     }
-   ]
+   ],
+   "recorded_choice": "Option A split: social/OG preview metadata is added in this build. Search Console property verification stays with the owner (it needs account access this session does not have).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-10",
@@ -330,7 +349,7 @@
    "linked_suggestions": [
     "S-10"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -353,7 +372,10 @@
      "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
      "ref": "The stale test-count line"
     }
-   ]
+   ],
+   "recorded_choice": "Option B: documentation errors are corrected continuously (this session updates README and the executive summary); product names stay as the listing titles. Site brand naming is settled under D-18.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-11",
@@ -362,7 +384,7 @@
    "linked_suggestions": [
     "S-11"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -385,7 +407,10 @@
      "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json",
      "ref": "The flag register this page renders"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the Flagged page groups open, corrected and resolved items, with an accurate KPI. Shipped earlier, confirmed as standing policy.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-12",
@@ -394,7 +419,7 @@
    "linked_suggestions": [
     "S-12"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -417,7 +442,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Originality and insight beyond the obvious"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the copy may conclude, rank within verified facts and address the reader directly, while every factual claim still resolves to a sourced fact row. The 2026-11-16 voice pass applies it.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-13",
@@ -585,7 +613,7 @@
    "linked_suggestions": [
     "S-13"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -619,7 +647,10 @@
      "url": "https://www.amazon.com/dp/B08DKYBTPH",
      "ref": "P3 product page: example of the verified rows the topics are built from"
     }
-   ]
+   ],
+   "recorded_choice": "Option B: the full calendar of eight topics is adopted, published in waves. This build ships the sizes piece and the seasonal gift guide; the articles hub lists the roadmap with the remaining six titles.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-18",
@@ -628,7 +659,7 @@
    "linked_suggestions": [
     "S-15"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -662,7 +693,10 @@
      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
      "ref": "FTC: disclosures must remain clear in any design"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: warm editorial direction (kitchen-magazine: serif display, warm palette, story-led hero). Brand name: keep 'Zone4' - it is the project's own established name and no new trade name is introduced while Q-19 (clearance) is open.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-19",
@@ -671,7 +705,7 @@
    "linked_suggestions": [
     "S-16"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -705,7 +739,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google Search Central: reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: a popularity or trend claim is allowed only as a dated snapshot of an official page; otherwise evergreen or calendar-based framing. Written into the publishing checklist.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-20",
@@ -714,7 +751,7 @@
    "linked_suggestions": [
     "S-14"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -744,7 +781,10 @@
      "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/DESIGN_PROMPT.md",
      "ref": "The prepared draft in this repository"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: DESIGN_PROMPT.md is adopted as the design brief with its bracketed slots filled from the picks recorded here (D-18 direction, S-12 voice, D-17 topics, D-19 trend rule).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-21",
@@ -754,7 +794,7 @@
     "S-17",
     "S-21"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -788,7 +828,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
      "ref": "Operating Agreement"
     }
-   ]
+   ],
+   "recorded_choice": "Option B (amend): the 2026-11-15 editorial redesign is kept and amended by the 2026-11-16 marketing polish pass (voice, chooser, topic calendar, spacing and typography). No published value changes. Resolves F-46.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-22",
@@ -840,7 +883,7 @@
    "linked_suggestions": [
     "S-19"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -874,7 +917,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: creating helpful, reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the three-question 'which one is for you' chooser is built from published listed values only, with the reasoning shown and sources linked.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-24",
@@ -883,7 +929,7 @@
    "linked_suggestions": [
     "S-20"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -906,7 +952,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: creating helpful, reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the mobile-first pass is done now in the site stylesheet (type scale, tap targets, responsive grids and tables).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-25",
@@ -915,7 +964,7 @@
    "linked_suggestions": [
     "S-22"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -949,7 +998,10 @@
      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
      "ref": "FTC Disclosures 101"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: every article carries a 'What we do not show' block above the fold - prices, ratings and per-ASIN commission, each naming the flag and the rule.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-26",
@@ -958,7 +1010,7 @@
    "linked_suggestions": [
     "S-23"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -985,7 +1037,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: creating helpful, reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the counter-space analysis (listed capacity per inch of listed counter depth) is published with the arithmetic shown and labelled as derived, not as a listing claim.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-27",
@@ -994,7 +1049,7 @@
    "linked_suggestions": [
     "S-24"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1028,7 +1083,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: creating helpful, reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the internal-linking rule is enforced as a build check - every article must carry a 'Where next' block linking its category, the comparison, the buying guide and the chooser.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-28",
@@ -1037,7 +1095,7 @@
    "linked_suggestions": [
     "S-25"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1064,7 +1122,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: creating helpful, reliable, people-first content"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the growth strategy is the verification angle - every number comes with its receipt - rather than publishing volume. The method is published on the verification page and the executive summary.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-29",
@@ -1073,7 +1134,7 @@
    "linked_suggestions": [
     "S-26"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1096,7 +1157,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
      "ref": "Program Policies"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: paid search will never be used. Guardrail recorded in the publishing checklist: never bid on marketplace trademarks or their misspellings.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-30",
@@ -1105,7 +1169,7 @@
    "linked_suggestions": [
     "S-27"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1128,7 +1192,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
      "ref": "Program Policies"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: confirmed policy - no deals, price-history or price-drop section will ever be built (Participation Requirements 6(y)).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-31",
@@ -1137,7 +1204,7 @@
    "linked_suggestions": [
     "S-28"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1160,7 +1227,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
      "ref": "Program Policies"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the site stays single-retailer for these products; the three supplied links are the only shop links.",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-32",
@@ -1169,7 +1239,7 @@
    "linked_suggestions": [
     "S-29"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1196,7 +1266,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
      "ref": "Operating Agreement"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the required disclosure sentence appears immediately under every article headline, in addition to the page-top disclosure and the link-adjacent '(paid link)' label (FTC: hard to miss).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-33",
@@ -1205,7 +1278,7 @@
    "linked_suggestions": [
     "S-30"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1228,7 +1301,10 @@
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
      "ref": "Program Policies"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the optimisation loop stays unwired until real reporting exists; the browser-local click log remains the only instrumentation (Q-14/Q-17 still open).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-34",
@@ -1237,7 +1313,7 @@
    "linked_suggestions": [
     "S-31"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1254,7 +1330,7 @@
      "reversible": "Yes."
     }
    ],
-   "recommendation": "A. The engine in this repository is deliberately built to refuse to publish rather than to scrape, and the 2026-11-15 attempt to re-read the specification tables was served an automated-traffic interstitial, which the site did not work around (F-38).",
+   "recommendation": "A. The engine in this repository is deliberately built to refuse to publish rather than to scrape, and the 2026-11-15 attempt to re-read the specification tables was served an automated-traffic interstitial, which the site did not work around (F-45).",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
@@ -1264,11 +1340,14 @@
      "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
      "ref": "Conditions of Use, License and Access"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: research stays manual; the automation engine remains offline until the Agent Terms are implemented and reviewed (Q-07 open).",
+   "recorded_date_utc": "2026-11-16",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
   {
    "id": "D-35",
-   "question": "Which design-system specification should the visual overhaul be built from?",
+   "question": "Should the design-system specification on the Design brief page be adopted for the next design pass?",
    "linked_question": "Q-41, Q-42",
    "linked_suggestions": [
     "S-32"
@@ -1302,9 +1381,16 @@
      "commits_to": "The anti-slop rewrite (D-36) lands first, so the redesign is judged on final copy rather than on copy that is about to change.",
      "effort": "None now; the redesign slips by one step.",
      "reversible": "Yes."
+    },
+    {
+     "key": "D",
+     "label": "Keep the specifications as reference only; no choice needed now",
+     "commits_to": "The three directions stay on the Design brief page as the reference for any future design pass. DIR-A's tokens describe the warm-editorial direction that D-18 recorded and that shipped.",
+     "effort": "None.",
+     "reversible": "Yes."
     }
    ],
-   "recommendation": "A or B. DIR-A is the most complete answer to the brief's 'polished marketing affiliate website'; DIR-B is the cheapest and needs no photography, which matters because none is licensed yet (Q-20, D-22). DIR-C is viable only in the narrow evidence-only form and carries the highest gap between how it looks and what it may say.",
+   "recommendation": "D, now that D-18 (warm editorial) was recorded and the overhaul shipped on 2026-11-16 by arena/c509aba1-zone4. The three specifications remain useful as the reference for any future pass, and DIR-A's tokens describe the direction that was actually built - but nothing needs choosing today.",
    "sources": [
     {
      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
@@ -1322,7 +1408,7 @@
   },
   {
    "id": "D-36",
-   "question": "Should the anti-slop copy pass be run, and under what guard?",
+   "question": "Should the remaining anti-slop copy pass be run, now that the headline and voice work has shipped?",
    "linked_question": "Q-05, Q-38",
    "linked_suggestions": [
     "S-33"
@@ -1351,7 +1437,7 @@
      "reversible": "n/a"
     }
    ],
-   "recommendation": "A. The guard is mechanical, not a matter of taste: a paragraph that states a fact without a fact id fails the build, so allowing judgement cannot quietly allow invention. B is the fallback if the two days are not available.",
+   "recommendation": "A. Most of this pass already landed: session arena/c509aba1-zone4's copy pass (recorded decisions D-12, D-17, D-18, D-20, D-21, D-25, D-27) fixed the hedging, the meta-commentary, the refusal to compare and the uniform rhythm. What is left is narrow: the M-P3 opener that describes its own composition (AS-03), and the ASIN-and-breadcrumb prose in all three product articles (AS-02, flag F-53). Both are half a day together.",
    "sources": [
     {
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
@@ -1369,7 +1455,7 @@
   },
   {
    "id": "D-37",
-   "question": "Which headline register should the published articles carry?",
+   "question": "Which headline register should the articles carry, now that every headline has been rewritten once?",
    "linked_question": "Q-43, Q-38",
    "linked_suggestions": [
     "S-34"
@@ -1398,7 +1484,7 @@
      "reversible": "Yes."
     }
    ],
-   "recommendation": "C. It is the only option where every headline is backed by something the page can prove, and it puts the strongest true story on the site - the listing that contradicts itself - where a reader will see it.",
+   "recommendation": "No change needed (option D). The published headlines already satisfy the rule the option sets were written to: each names a number or the reader's problem and none describes the site's process (F-52, corrected). The two option sets on the Design brief page remain as an available second register if the owner wants a different voice, not as a fix for a defect.",
    "sources": [
     {
      "url": "https://www.amazon.com/dp/B09B7SB46R",
@@ -1490,6 +1576,188 @@
    "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open.",
    "recorded_by": "arena/00ba6c2e-zone4",
    "evidence": "Not applicable: nothing has been decided."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-03",
+   "choice": "Option B, plus an honest production note: the site describes its writing and checking pipeline without naming a person (no named human reviewer exists yet - Q-05 stays open) and states plainly that the copy is AI-assisted and machine-checked against official sources, never hands-on tested.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-04",
+   "choice": "Option A: every page keeps its own title tag and meta description; the wording is reviewed in the 2026-11-16 polish pass. Already shipped and now confirmed as standing policy.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-05",
+   "choice": "Option A: product links carry rel=\"sponsored\" alongside the visible disclosure and the '(paid link)' label.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-06",
+   "choice": "Option B: the site is a specification and decision tool. No unit will be tested and no hands-on or performance claim is published (FTC endorsement guidance: no experience claims for products not tried).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-07",
+   "choice": "Option A: question-led pages are published. This build ships 'Air fryer sizes explained' and the seasonal gift guide; the topic calendar lists the rest.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-09",
+   "choice": "Option A split: social/OG preview metadata is added in this build. Search Console property verification stays with the owner (it needs account access this session does not have).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-10",
+   "choice": "Option B: documentation errors are corrected continuously (this session updates README and the executive summary); product names stay as the listing titles. Site brand naming is settled under D-18.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-11",
+   "choice": "Option A: the Flagged page groups open, corrected and resolved items, with an accurate KPI. Shipped earlier, confirmed as standing policy.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-12",
+   "choice": "Option A: the copy may conclude, rank within verified facts and address the reader directly, while every factual claim still resolves to a sourced fact row. The 2026-11-16 voice pass applies it.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-17",
+   "choice": "Option B: the full calendar of eight topics is adopted, published in waves. This build ships the sizes piece and the seasonal gift guide; the articles hub lists the roadmap with the remaining six titles.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-18",
+   "choice": "Option A: warm editorial direction (kitchen-magazine: serif display, warm palette, story-led hero). Brand name: keep 'Zone4' - it is the project's own established name and no new trade name is introduced while Q-19 (clearance) is open.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-19",
+   "choice": "Option A: a popularity or trend claim is allowed only as a dated snapshot of an official page; otherwise evergreen or calendar-based framing. Written into the publishing checklist.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-20",
+   "choice": "Option A: DESIGN_PROMPT.md is adopted as the design brief with its bracketed slots filled from the picks recorded here (D-18 direction, S-12 voice, D-17 topics, D-19 trend rule).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-21",
+   "choice": "Option B (amend): the 2026-11-15 editorial redesign is kept and amended by the 2026-11-16 marketing polish pass (voice, chooser, topic calendar, spacing and typography). No published value changes. Resolves F-46.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-23",
+   "choice": "Option A: the three-question 'which one is for you' chooser is built from published listed values only, with the reasoning shown and sources linked.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-24",
+   "choice": "Option A: the mobile-first pass is done now in the site stylesheet (type scale, tap targets, responsive grids and tables).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-25",
+   "choice": "Option A: every article carries a 'What we do not show' block above the fold - prices, ratings and per-ASIN commission, each naming the flag and the rule.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-26",
+   "choice": "Option A: the counter-space analysis (listed capacity per inch of listed counter depth) is published with the arithmetic shown and labelled as derived, not as a listing claim.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-27",
+   "choice": "Option A: the internal-linking rule is enforced as a build check - every article must carry a 'Where next' block linking its category, the comparison, the buying guide and the chooser.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-28",
+   "choice": "Option A: the growth strategy is the verification angle - every number comes with its receipt - rather than publishing volume. The method is published on the verification page and the executive summary.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-29",
+   "choice": "Option A: paid search will never be used. Guardrail recorded in the publishing checklist: never bid on marketplace trademarks or their misspellings.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-30",
+   "choice": "Option A: confirmed policy - no deals, price-history or price-drop section will ever be built (Participation Requirements 6(y)).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-31",
+   "choice": "Option A: the site stays single-retailer for these products; the three supplied links are the only shop links.",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-32",
+   "choice": "Option A: the required disclosure sentence appears immediately under every article headline, in addition to the page-top disclosure and the link-adjacent '(paid link)' label (FTC: hard to miss).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-33",
+   "choice": "Option A: the optimisation loop stays unwired until real reporting exists; the browser-local click log remains the only instrumentation (Q-14/Q-17 still open).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-16",
+   "decision": "D-34",
+   "choice": "Option A: research stays manual; the automation engine remains offline until the Agent Terms are implemented and reviewed (Q-07 open).",
+   "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
+   "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
   }
  ]
 }

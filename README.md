@@ -2,6 +2,8 @@
 
 A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
 
+Which generator produces the live pages: **only** `scripts/build_site.py` writes `docs/` (the published site). The engine under `engine/` renders its own separate preview into `build/site-preview/` and never writes `docs/`; see ENGINE.md, "Relationship to the published site". `tools/check_links.py` checks that engine preview and fails on a clean checkout until `python3 -m engine.cli build` has created it.
+
 **Live site (GitHub Pages):** https://kanlerxz87-cyber.github.io/Zone4/
 
 The repository's Pages source is `main` `/` (legacy build). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. Setting the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
@@ -11,7 +13,7 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | Path | Purpose |
 |---|---|
 | `data/products.json` | Verified product records (ASIN, brand, manufacturer, model, category, specifications, competitor ASINs) |
-| `data/marketing.json` | Marketing content kit: 3 product articles, 1 comparison page, 1 buying guide, SEO rules, publishing checklist |
+| `data/marketing.json` | Marketing content kit: 3 product spec-check articles, 1 comparison page, 3 buying guides (format, sizes, seasonal), SEO rules, publishing checklist |
 | `data/pipeline.json` | The automation pipeline, the click/conversion metrics and the Agent Terms |
 | `data/requirements.json` | The 35 requirements from the brief, one row each, with what is delivered, what blocks it and the official source |
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
@@ -22,6 +24,15 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
 | `data/design.json` | The design brief: three visual directions specified to build from, ten anti-"AI slop" patterns with replacements, two headline options per published article, an eight-topic organic-traffic programme and the five-step shortest path |
 | `data/verification-session-89900251.json` | 2026-11-16 verification pass: three short links re-resolved, P1–P3 titles, breadcrumbs and also-viewed carousels re-read, and the Associates, FTC and Google guidance pages quoted verbatim |
+| `data/flags.json` | 50 irregularities and unverified items (Flagged for Review) |
+| `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-16 re-check date |
+| `data/verification-session-4c552c78.json` | Same-day re-read (2026-11-16) of the three short links, their listing pages, Table 1, the Program Policies, the Operating Agreement and the Conditions of Use; flag F-49 record |
+| `data/verification-session-f9f20f21.json` | Re-check of 2026-11-16 (residual scope): all three product pages re-read for the Item details tables (not exposed that day; every exposed value corroborates the record), Table 1 re-read, F-48 resolved against PR #28's diff, flag F-50 found (P2 accessory-count inconsistency) |
+| `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
+| `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
+| `data/verification-session-c42349c3.json` | Re-check of 2026-11-16: the three supplied links (displayed text and target), the three product pages, the Operating Agreement §5 sentence, the Program Policies date and FTC Disclosures 101. Flags F-47 and F-48 and a dated update to F-44 record what differs |
+| `DESIGN_PROMPT.md` | Ready-to-paste redesign brief (suggestion S-14, decision D-20); fills its bracketed slots from the recorded picks |
+| `data/verification-session-ebf5c261.json` | Second independent verification session's field-by-field record |
 | `data/verification-session-d8564cd0.json` | 2026-11-15 verification pass by `arena/d8564cd0-zone4`: commission table re-read, P1/P2/P3 page reads, flag F-44 record |
 | `scripts/build_site.py` | Builds `docs/` from `data/` (standard library only) |
 | `scripts/verify.py` | Checks data and built pages; fails on any problem |
@@ -31,6 +42,10 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `tests/test_engine.py` | 83 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
+| `data/suggestions.json` | The change backlog: 31 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
+| `data/questions.json` | 37 questions that must be answered before a change can be made: 18 answered (14 from official sources, 4 closed by the 2026-11-16 decisions), 19 still open, each naming what is known, how the missing piece is discovered and who can answer it |
+| `data/decisions.json` | The decision queue (34 choices with options, cost and reversibility) and the log of decisions actually taken: 26 recorded on 2026-11-16 under the owner's written delegation, 8 still open |
+| `docs/` | The published site (26 generated pages plus the stylesheet, app script and tracker script) |
 | `data/suggestions.json` | The change backlog: 36 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
 | `data/questions.json` | 44 questions that must be answered before a change can be made: 18 already answered from an official source, 26 still open, each naming what is known, how the missing piece is discovered and who can answer it |
 | `data/decisions.json` | The decision queue (39 choices with options, cost and reversibility, also shown in dependency order) and the log of decisions actually taken |
@@ -45,13 +60,13 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 
 | Page | What it holds |
 |---|---|
-| `index.html` | Landing page: marketing hero, KPIs, trending-article cards, category tiles, the decision queue, the product table and key findings |
+| `index.html` | Landing page: marketing hero, trust strip, the three-question chooser, article cards, category tiles, the open-decisions queue, the product table and key findings |
 | `executive-summary.html` | Headline findings, decisions needed, and what is not built |
 | `requirements.html` | All 35 brief items: delivered, blocked or unverifiable, each with the official source |
-| `products.html` | All three products, one row each, every row linked to its source |
+| `products.html` | All three products, one row each, every row linked to its source, plus the derived counter-space analysis with its arithmetic shown |
 | `categories/*.html` | One page per product format: dual-basket, single-basket, air-fry toaster ovens |
-| `marketing.html` | The same articles, comparison page and buying guide on one page, with a fact table per article |
-| `articles/index.html` | Articles hub: every article, grouped by the product format it covers |
+| `marketing.html` | All seven articles on one page, with a fact table per article |
+| `articles/index.html` | Articles hub: every article grouped by product format, plus the topic calendar of planned, question-shaped titles |
 | `articles/*.html` | One page per article, with its own title tag and meta description, the finished copy, its call to action and the fact table it was written from |
 | `automation.html` | Pipeline stages, tracking metrics, optimisation loop and the Agent Terms |
 | `analysis.html` | 18 findings with their basis, confidence and source links |
@@ -63,6 +78,10 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `design.html` | Design brief: three specified visual directions with type stacks, colour tokens and component rules; ten anti-"AI slop" patterns with replacements; two headline options per article; eight organic-traffic topics; the five-step shortest credible path; and a paste-ready prompt. Nothing on it has been applied. |
 | `decisions.html` | Decision log: the 39 open choices with their options, in the order each unblocks the others, plus the record of decisions taken |
 | `flagged.html` | Flagged for Review: 51 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
+| `suggestions.html` | Suggestions: 31 changes worth making, costed and risk-assessed, with the recommended path first, the review workflow, and a status chip per item (shipped 2026-11-16, staged, awaiting the owner, or refused by policy) |
+| `questions.html` | Open questions: 37 items, 18 answered (official sources or recorded decisions), the rest with what is known, what is missing, who can supply it, and a discovery plan |
+| `decisions.html` | Decision log: 26 decisions recorded on 2026-11-16 (each with its recorded choice), 8 open choices with their options, and the log of who recorded what and when |
+| `flagged.html` | Flagged for Review: 50 irregularities and unverified items, grouped into those needing a decision, those corrected and those resolved |
 | `sources.html` | Every source, whether it was read, and what it was used for |
 
 ## Rebuild and verify

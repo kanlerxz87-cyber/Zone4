@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "session": "arena/c42349c3-zone4",
+    "read_date_utc": "2026-11-16",
+    "scope": "Independent re-read of the three supplied links (both the displayed link text and the real href), the three product pages (title, breadcrumb, also-viewed slots 1-3), the Associates Operating Agreement (Section 5 wording and update date), the Associates Program Policies update date, and FTC Disclosures 101 (publication date and quoted rules). Also the live Pages landing page.",
+    "method": "Page reads through the platform's page-fetch tool, one read per URL, apart from a small number of repeats (the link.amazon/B04G1MEwY href, and the live flagged.html after the deploy) (chunk 0, plus chunk 1 of the Operating Agreement). No login, form, checkout or access control was used or bypassed. The page-fetch tool does not set a custom identifying user agent, so these reads do not carry the 'Agent/zone4-research' identifier that the engine uses; This is recorded here as a method limit, not as a flag. Outbound curl to Amazon is blocked in this sandbox, so every Amazon read is through the fetch tool.",
+    "not_re_read_this_session": [
+      "Standard Commission Income Statement Table 1 (last re-read 2026-11-15 by arena/d2a62d6b-zone4 and 2026-11-14 by others)",
+      "IP License Section 2(k) and Section 4 (Agent Terms) text; quoted in the registers from earlier reads",
+      "Associates Program Participation Requirements 2(b), 6(t), 6(y) (last re-read 2026-11-15)",
+      "Creators API documentation, Conditions of Use, Google Search Central guidance"
+    ],
+    "result_summary": "All three href short links resolve to the ASINs in data/products.json. The displayed link text does not: each reached Amazon's internal Midway sign-in page (new flag F-47). Titles, breadcrumbs and P1 carousel match the stored record. P2 title second segment and P2/P3 carousel slot 3 still differ from the stored record, as already recorded in F-44; nothing new was found about them. Operating Agreement Section 5 wording, the Program Policies update date and the FTC publication date match what the site cites.",
+    "stored_record_changed": false
+  },
+  "rows": [
+    {
+      "id": "L1-href",
+      "item": "Supplied link 1, href target",
+      "url_read": "https://link.amazon/B04G1MEwY",
+      "observed": "Redirects to https://www.amazon.com/dp/B0CDY277D3?lv=shuf&btn_type=ss&gaOptInStatus=true&btn_ref=srctok-4f3c2fbac38e9131&channelId=704&plpRedirect=mhFallback. Title 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen'.",
+      "stored": "short_link https://link.amazon/B04G1MEwY -> ASIN B0CDY277D3",
+      "match": "yes (ASIN)",
+      "source_link": "https://link.amazon/B04G1MEwY"
+    },
+    {
+      "id": "L2-href",
+      "item": "Supplied link 2, href target",
+      "url_read": "https://link.amazon/B02NbDxp3",
+      "observed": "Redirects to https://www.amazon.com/dp/B09B7SB46R?...btn_ref=srctok-086276cd4cc4c6ae. Title 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen'.",
+      "stored": "short_link https://link.amazon/B02NbDxp3 -> ASIN B09B7SB46R",
+      "match": "yes (ASIN); title second segment differs from stored name_listing (see F-44)",
+      "source_link": "https://link.amazon/B02NbDxp3"
+    },
+    {
+      "id": "L3-href",
+      "item": "Supplied link 3, href target",
+      "url_read": "https://link.amazon/B00hJ57DV",
+      "observed": "Redirects to https://www.amazon.com/dp/B08DKYBTPH?...btn_ref=srctok-1bf93398af899cda. Title 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen'.",
+      "stored": "short_link https://link.amazon/B00hJ57DV -> ASIN B08DKYBTPH",
+      "match": "yes (ASIN)",
+      "source_link": "https://link.amazon/B00hJ57DV"
+    },
+    {
+      "id": "L1-display",
+      "item": "Supplied link 1, displayed link text",
+      "url_read": "https://link.amazon.com/B04G1MEwY",
+      "observed": "Returned 'Midway Authentication Portal' (Amazon internal corporate sign-in: 'Sign in', 'Amazon username', 'Sign in with temporary PIN'). Not a product page.",
+      "stored": "Displayed text in the brief: https://link.amazon.com/B04G1MEwY (the link target in the brief is https://link.amazon/B04G1MEwY)",
+      "match": "no; see flag F-47",
+      "source_link": "https://link.amazon.com/B04G1MEwY"
+    },
+    {
+      "id": "L2-display",
+      "item": "Supplied link 2, displayed link text",
+      "url_read": "https://link.amazon.com/B02NbDxp3",
+      "observed": "Same Midway sign-in page (title 'Midway Authentication Portal').",
+      "stored": "Displayed text in the brief: https://link.amazon.com/B02NbDxp3",
+      "match": "no; see flag F-47",
+      "source_link": "https://link.amazon.com/B02NbDxp3"
+    },
+    {
+      "id": "L3-display",
+      "item": "Supplied link 3, displayed link text",
+      "url_read": "https://link.amazon.com/B00hJ57DV",
+      "observed": "Same Midway sign-in page (title 'Midway Authentication Portal').",
+      "stored": "Displayed text in the brief: https://link.amazon.com/B00hJ57DV",
+      "match": "no; see flag F-47",
+      "source_link": "https://link.amazon.com/B00hJ57DV"
+    },
+    {
+      "id": "P1-page",
+      "item": "P1 product page",
+      "url_read": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed": "Title matches stored name_listing. Breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (node 17659096011). Also-viewed slots 1-3: B0B7C327LK, B0BYKGN61Q, B0CNSB81V6.",
+      "stored": "name_listing; category_path; competitors B0B7C327LK, B0BYKGN61Q, B0CNSB81V6",
+      "match": "yes (all three slots)",
+      "source_link": "https://www.amazon.com/dp/B0CDY277D3"
+    },
+    {
+      "id": "P2-page",
+      "item": "P2 product page",
+      "url_read": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed": "Title first segment matches stored name_listing; second segment reads 'Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included' (same as the 2026-11-15 read in F-44). Breadcrumb as above. Also-viewed slots 1-3: B0BZ52FLKC, B0FM5KF34G, B0D1BGLW25.",
+      "stored": "name_listing second segment '26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.'; competitors B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH",
+      "match": "slots 1-2 yes; slot 3 no (B0D1BGLW25 observed, B0F92GL7JH stored); title second segment no (see F-44)",
+      "source_link": "https://www.amazon.com/dp/B09B7SB46R"
+    },
+    {
+      "id": "P3-page",
+      "item": "P3 product page",
+      "url_read": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed": "Title matches stored name_listing. Breadcrumb as above. Also-viewed slots 1-3: B0CNY1YVDD, B0D5FX6VRL, B09MR7QWKZ.",
+      "stored": "name_listing; competitors B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99",
+      "match": "slots 1-2 yes; slot 3 no (B09MR7QWKZ observed, B0C33CHG99 stored); see F-44 and F-29",
+      "source_link": "https://www.amazon.com/dp/B08DKYBTPH"
+    },
+    {
+      "id": "OA-s5",
+      "item": "Associates Operating Agreement, Section 5 disclosure sentence and update date",
+      "url_read": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "observed": "'Updated: October 15, 2025'. Section 5: 'As an Amazon Associate I earn from qualifying purchases.'",
+      "stored": "Site disclosure line and source S-OA (updated October 15, 2025)",
+      "match": "yes",
+      "source_link": "https://affiliate-program.amazon.com/help/operating/agreement"
+    },
+    {
+      "id": "PP-date",
+      "item": "Associates Program Policies update date",
+      "url_read": "https://affiliate-program.amazon.com/help/operating/policies",
+      "observed": "'Updated: April 14, 2026.'",
+      "stored": "S-PP and S-POL: updated April 14, 2026",
+      "match": "yes",
+      "source_link": "https://affiliate-program.amazon.com/help/operating/policies"
+    },
+    {
+      "id": "FTC-101",
+      "item": "FTC Disclosures 101 for Social Media Influencers",
+      "url_read": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "observed": "Dated 'November 2019'. Quoted rules: 'Place it so it's hard to miss.'; 'You can't talk about your experience with a product you haven't tried.'",
+      "stored": "S-FTC: November 2019; site disclosure guidance",
+      "match": "yes",
+      "source_link": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers"
+    },
+    {
+      "id": "SITE-live",
+      "item": "Live GitHub Pages landing page",
+      "url_read": "https://kanlerxz87-cyber.github.io/Zone4/",
+      "observed": "Serves the disclosure, 'Verified 2026-11-14 · links re-checked 2026-11-15', 31 flags awaiting decision of 46 recorded, and the three product rows.",
+      "stored": "Built from data/ on main at bab8186",
+      "match": "yes; re-check date updated to 2026-11-16 in this session's rebuild",
+      "source_link": "https://kanlerxz87-cyber.github.io/Zone4/"
+    }
+  ],
+  "flags_written": {
+    "F-47": "Displayed link text differs from the href; the displayed host lands on Amazon's internal sign-in page",
+    "F-48": "Flag-number map in data/flags.json _meta runs the opposite way from the board log; F-50 to F-54 are not in the register",
+    "F-44": "Dated update appended (2026-11-16 read agrees with the 2026-11-15 read)"
+  }
+}
