@@ -1923,8 +1923,12 @@ def decision_dependency_rows(current: Page) -> list[list[str]]:
         for qid in [x.strip() for x in (d.get("linked_question") or "").split(",") if x.strip()]:
             related.update(x for x in question_to_decisions.get(qid, []) if x != d["id"])
         touches[d["id"]] = related
+    # Only the open ones belong in a queue: a recorded decision is not waiting
+    # on anything, and listing it would make the page's own KPI (13 waiting,
+    # 26 recorded) disagree with the table beneath it.
+    open_only = [d for d in DECISIONS if not d["status"].lower().startswith("recorded")]
     ordered = sorted(
-        DECISIONS,
+        open_only,
         key=lambda d: (
             0 if d["id"] in p1_decisions else 1,
             -len(touches[d["id"]]),
@@ -2018,10 +2022,11 @@ def page_decisions(current: Page) -> str:
         'under the owner&rsquo;s written delegation for this session ("no manual input... work on your own"); they are '
         'reversible, and each log entry says so.</p>'
         + '<section><h2>Suggested order, and the shortest credible path</h2>'
-        '<p class="section-lead">The queue below is ordered by what each choice unblocks, so working '
-        'top-down avoids doing the expensive step twice. The order is derived, not authored: two '
-        'decisions are linked when they share a question in the register, and a decision attached '
-        'to a P1 suggestion sorts first.</p>'
+        '<p class="section-lead">The ' + str(len([d for d in DECISIONS if not d["status"].lower().startswith("recorded")]))
+        + ' decisions still open, ordered by what each choice unblocks, so working top-down avoids doing the expensive '
+        'step twice. The order is derived, not authored: two decisions are linked when they share a question in the '
+        'register, and a decision attached to a P1 suggestion sorts first. The recorded ones are in the log below, '
+        'not in this queue.</p>'
         + table(["Order", "Decision", "Question", "Also unblocks", "Gated by", "Weight",
                  "Primary source (official)"],
                 decision_dependency_rows(current), "decision-order")
