@@ -9,7 +9,7 @@
   "trend_rule": "Google's helpful-content guidance lists 'Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?' among the warning signs of search-engine-first content. A topic in this programme is therefore admissible only if it answers a question a buyer of these three formats actually asks and can be answered from fields this site has already verified. That constraint is recorded as flag F-51 and is decided by D-17 and D-19.",
   "how_to_use": "Read the directions, pick one (D-18 chooses the family, D-35 the specification to build from). Read the anti-slop checklist and approve the pass (D-36). Read the headline options and pick a register (D-37). Then paste the prompt at the bottom of the Design brief page, or take DESIGN_PROMPT.md from the repository root, to a designer or a design tool.",
   "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs.",
-  "launch_path_note": "The five steps are a recommendation, not a rule. They are ordered by what each one unblocks, not by how hard each is: four of the five are cheap, and the one expensive step (the copy pass) is placed third because doing it earlier means doing it twice."
+  "launch_path_note": "The five steps are a recommendation, not a rule. They are ordered by what each one unblocks, not by how hard each is. Note that steps 2 and 3 were recorded on 2026-11-16 by session arena/c509aba1-zone4 under the owner's written delegation, and step 5's visual direction (D-18, warm editorial) was recorded and shipped in the same build. The path therefore now serves the next design pass rather than the current one, and it is kept because the dependency reasoning still holds for anyone picking the work up cold."
  },
  "directions": [
   {
@@ -688,14 +688,14 @@
   {
    "step": 2,
    "decision": "D-03",
-   "choice": "Say who writes the site, and how the content is produced",
+   "choice": "Say who writes the site, and how the content is produced (recorded 2026-11-16 as option B)",
    "what_it_unblocks": "D-12 (voice) and the anti-slop pass. A rewrite without an author and method line would have to be rewritten again when they arrive.",
    "cost": "One page to write"
   },
   {
    "step": 3,
    "decision": "D-12",
-   "choice": "Let the copy take positions inside the fact rule",
+   "choice": "Let the copy take positions inside the fact rule (recorded 2026-11-16 as option A)",
    "what_it_unblocks": "D-36 (the copy pass), D-37 (headlines) and the whole topic programme. Writing before this lands means writing twice.",
    "cost": "A decision, then two days of writing"
   },
@@ -703,14 +703,14 @@
    "step": 4,
    "decision": "D-36",
    "choice": "Run the anti-slop pass, or at least the two defect fixes",
-   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change - and F-52 and F-53 are the two most visible defects on the site.",
+   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change. Most of this pass already shipped on 2026-11-16; what is open is the M-P3 opener that describes its own composition and the ASIN-and-breadcrumb prose in the three product articles (F-53).",
    "cost": "Two days, or half a day for the two defects alone"
   },
   {
    "step": 5,
    "decision": "D-35",
    "choice": "Pick the design-system specification to build from",
-   "what_it_unblocks": "D-39 (the token layer) and the visual overhaul itself, plus the answer to the brief's 'polished marketing site' request.",
+   "what_it_unblocks": "D-39 (the token layer) and any further design pass. D-18 was recorded on 2026-11-16 as warm editorial and the overhaul has shipped, so this is now a reference choice rather than a build gate.",
    "cost": "An afternoon to choose; one to three days to build"
   }
  ]
