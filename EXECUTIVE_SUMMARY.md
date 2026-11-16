@@ -173,7 +173,7 @@ The brief asks for **suggestions that feed a prompt to design the site as a poli
 | Ten headline options | Two finished alternatives for each of the five published articles, so the choice is four fields per article and one rebuild. |
 | Eight topics | Each with the question it answers, the intent, the verified fact rows it is built from, the pages it must link to and the evidence note that limits it. |
 | Paste-ready prompt | Assembled from the same data, so the page, `DESIGN_PROMPT.md` and the register cannot disagree. Seven bracketed slots, each naming the decision that fills it. |
-| Shortest credible path | Five of the 39 open decisions, ordered by what each unblocks. |
+| Shortest credible path | Five of the 39 decisions, ordered by what each unblocks. Twenty-six were recorded on 2026-11-16 under the owner's delegation by `arena/c509aba1-zone4`, so the path now mostly serves the next design pass rather than this one. |
 
 **Re-verification, 2026-11-16.** All three supplied short links were re-resolved from their official pages:
 
@@ -200,7 +200,7 @@ Full row-by-row record: `data/verification-session-89900251.json`.
 | **F-51** | The brief asks for trendy topics and for traffic that converts. Google's guidance lists trend-chasing as a warning sign of search-engine-first content, and the Operating Agreement (§4) makes no representation about traffic or commission income. | Recorded as an open tension with the rule that resolves it. No traffic, revenue or search-volume figure is published anywhere on the site. Decided by D-17, D-19 and D-37. |
 | **F-44** | P2's published listing title is contradicted by four consecutive later official reads on 2026-11-15 and 2026-11-16. | Stored record left in place; the choice of which string to publish is now explicitly the owner's. |
 | **F-52** | Three of five headlines describe the site's own checking process; two differ only by "two baskets" / "one basket"; four of five title tags contain "Verified". | Two finished replacement options per article, waiting on D-37. |
-| **F-53** | The second paragraph of each product article prints the ASIN and a five-level category path as prose the sourced fact table already carries. | Replacement written (ASIN-02); waiting on D-36. |
+| **F-53** | The second paragraph of each product article prints the ASIN and a five-level category path as prose the sourced fact table already carries. | **Unchanged after the copy pass** — the pass rewrote headlines, openers, voice and structure but not these three paragraphs. Replacement written (checklist row AS-02); waiting on D-36. |
 | **F-54** | Ten cross-references pointed at flag numbers that were renumbered when three sessions' registers merged — three sentences about the P2 title cited F-39 where it is now F-44, one cited F-40 for the unreadable specification tables where it is F-38, and three cited F-41 for the redesign sign-off where it is F-46. | All ten corrected. The class of defect is recorded because `scripts/verify.py` checks that a reference **exists**, not that it points at the right finding. |
 
 **The honest tension in the brief.** "Catchy trendy articles" and "generate organic traffic so real people click and buy"
@@ -209,7 +209,7 @@ from the questions a buyer of these three formats actually asks and answered fro
 lead with a number or a tension the page can prove; and the one place the site really can out-rank a big review site —
 the listing that contradicts itself on its own page — is where the strongest headline points. That is recorded as F-51
 rather than hidden, because the alternative was to publish a forecast.
-## 5c. Same-day re-verification on 2026-11-16 by `arena/4c552c78-zone4`
+## 5e. Same-day re-verification on 2026-11-16 by `arena/4c552c78-zone4`
 
 Full record: `data/verification-session-4c552c78.json`. No stored ASIN, title, competitor label or specification was changed; the stored snapshots stay in place and the differences are recorded as dated notes.
 
