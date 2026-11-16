@@ -15,7 +15,7 @@
       "same_day_4c552c78_2026_11_16": {
         "date_utc": "2026-11-16",
         "session": "arena/4c552c78-zone4",
-        "result": "Short links re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH; no tag= parameter in any resolved URL (F-03 stands). Listing titles: P1 and P3 match name_listing exactly. P2's first segment matches; its second segment is the 2026-11-15 string, not the stored one (F-44 open; stored value not changed). Also-viewed module: P1 unchanged; P2 slot 3 and P3 slot 3 changed relative to the stored snapshot (F-29 update; snapshot not overwritten). Default offers on P1 and P3 were used items sold by Amazon Resale (F-47). Full record: data/verification-session-4c552c78.json."
+        "result": "Short links re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH; no tag= parameter in any resolved URL (F-03 stands). Listing titles: P1 and P3 match name_listing exactly. P2's first segment matches; its second segment is the 2026-11-15 string, not the stored one (F-44 open; stored value not changed). Also-viewed module: P1 unchanged; P2 slot 3 and P3 slot 3 changed relative to the stored snapshot (F-29 update; snapshot not overwritten). Default offers on P1 and P3 were used items sold by Amazon Resale (F-49). Full record: data/verification-session-4c552c78.json."
       }
     },
     "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50% and Home at 3.00%. These are category-level references only; the official sources reviewed do not map the supplied ASINs to a commission category. Product-level rate fields are intentionally null (F-01).",

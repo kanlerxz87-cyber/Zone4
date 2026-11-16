@@ -5,7 +5,7 @@
     "branched_from": "bab81866b5034a2d49300bb9d05ffc028a49d1d7",
     "purpose": "Same-day re-read of the three supplied short links and their listing pages, the Associates Table 1 commission band, the Program Policies, the Operating Agreement and the Amazon Conditions of Use, compared line by line with the stored records. Values were read on this date; nothing was copied from an earlier session without a fresh read.",
     "method": "fetch_page on the supplied short links (each resolved to its /dp/ page), on the public Associates Central pages and on the Conditions of Use page. Titles, ASINs, carousel ASINs and labels, offer condition and seller, and the stated 'Updated' or 'Last updated' dates were compared with data/products.json, data/flags.json and data/sources.json.",
-    "published_values": "No price, rating, review count or commission figure from the Amazon pages was copied into any published record (F-02). Offer condition and seller are recorded as an observation only (F-47)."
+    "published_values": "No price, rating, review count or commission figure from the Amazon pages was copied into any published record (F-02). Offer condition and seller are recorded as an observation only (F-49)."
   },
   "reads": [
     {
@@ -23,7 +23,7 @@
         "B0CNSB81V6"
       ],
       "also_viewed_vs_record": "same ASINs, same order",
-      "offer_observation": "Offer block led with 'Used - Very Good' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-47)."
+      "offer_observation": "Offer block led with 'Used - Very Good' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-49)."
     },
     {
       "id": "R-02",
@@ -56,7 +56,7 @@
         "B09MR7QWKZ"
       ],
       "also_viewed_vs_record": "slots 1-2 same; slot 3 differs (stored B0C33CHG99). B0C33CHG99 appears in a separate lower module on the same read (F-29)",
-      "offer_observation": "Offer block led with 'Used - Like New' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-47)."
+      "offer_observation": "Offer block led with 'Used - Like New' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-49)."
     },
     {
       "id": "R-04",
@@ -97,7 +97,7 @@
     "The FTC Disclosures 101 page and the Google Search Central pages (last read 2026-11-15 by arena/d2a62d6b-zone4; not re-read today)."
   ],
   "changes_made": [
-    "data/flags.json: dated update notes on F-03, F-29 and F-44; new flag F-47 (used default offer on P1 and P3); as_of_utc set to 2026-11-16.",
+    "data/flags.json: dated update notes on F-03, F-29 and F-44; new flag F-49 (used default offer on P1 and P3); dated note on F-03. F-29 and F-44 were re-read and match the notes already recorded by arena/c42349c3-zone4, so no duplicate note was added.",
     "data/products.json: _meta.reverification.same_day_4c552c78_2026_11_16 (summary only). No stored ASIN, title, label, competitor list or spec value was changed.",
     "data/content.json: rechecked_utc set to 2026-11-16; one executive-summary bullet added.",
     "data/sources.json: dated notes added to S-COMM, S-PP, S-POL, S-OA, S-COU, S-L1, S-L2, S-L3."
