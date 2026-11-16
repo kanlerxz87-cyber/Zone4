@@ -709,7 +709,7 @@
         "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088"
       ],
       "status": "Open design constraint",
-      "action": "When wiring live retrieval, set an identifying user agent and keep the F-50 sourcing decision open rather than scraping to fill blanks."
+      "action": "When wiring live retrieval, set an identifying user agent and keep the F-31 sourcing decision open (that register item was originally numbered F-50 by PR #28; see data/flags.json _meta) rather than scraping to fill blanks."
     }
   ]
 }
