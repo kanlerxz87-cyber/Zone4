@@ -954,7 +954,25 @@ this site exists to flag.
 
 - **Checks run before pushing.** `python3 scripts/build_site.py` (25 pages) → `python3 scripts/verify.py` PASS → `python3 qa/audit_site.py` PASS (25 pages, 0 warnings) → `python3 -m unittest discover -s tests` 83/83 → `python3 -m engine.cli build` + `python3 tools/check_links.py` PASS → `python3 -m engine.cli audit` 0/7 ready (the engine refusing to publish unverified fields is the designed behaviour) → `git diff --exit-code -- docs` clean after a rebuild, so the committed site is deterministic. Two new guards were added and negative-tested: `check_design()` rejects a topic that carries a traffic figure, an unknown fact row or an unknown launch-path decision, and the `DESIGN_PROMPT.md` guard was confirmed to fail when the file is truncated.
 
-- **Merge and deployment result.** PR [#60](https://github.com/kanlerxz87-cyber/Zone4/pull/60) (`arena/89900251-zone4` → `main`) passed all three PR gates and was merged; the GitHub Pages API reports status `built` for the merge commit. Live at https://kanlerxz87-cyber.github.io/Zone4/docs/design.html, alongside the existing `suggestions.html`, `questions.html`, `decisions.html` and `flagged.html`.
+- **Merge and deployment result.** Four PRs from this branch to `main`, all passing every gate and all merged, with Pages `built` confirmed for each merge commit:
+
+  | PR | What it carried | Merge commit | Pages |
+  |---|---|---|---|
+  | [#72](https://github.com/kanlerxz87-cyber/Zone4/pull/72) | The main deliverable: `data/design.json`, `docs/design.html` + `docs/design.js`, `scripts/render_design_prompt.py`, the decision dependency-order table, `check_design()`/`check_design_page()` in `scripts/verify.py`, the new register rows, the verification record and the stale-cross-reference corrections | `db1c651` | `built` 19:30Z |
+  | [#75](https://github.com/kanlerxz87-cyber/Zone4/pull/75) | Launch-path rows reworded to reflect the decisions recorded on `main` | `b08a545` | `built` 19:34Z |
+  | [#76](https://github.com/kanlerxz87-cyber/Zone4/pull/76) | Anti-slop evidence rows brought up to date against the copy pass | `1aac7dc` | `built` 19:39Z |
+  | [#77](https://github.com/kanlerxz87-cyber/Zone4/pull/77) | Dependency-order table restricted to the 13 open decisions | `e37b795` | `built` 19:44Z |
+
+  Live and confirmed by fetching the deployed pages: https://kanlerxz87-cyber.github.io/Zone4/docs/design.html (three directions with type
+  stacks and colour tokens, ten anti-patterns, ten headline options, eight topics, the launch path and the copyable prompt) and
+  https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html (the 13 open decisions in dependency order above the full queue and the
+  decision log).
+
+- **One process note for the next session.** Four sessions edited the same three register files on 2026-11-16 and this branch was the last
+  to arrive. Two things would have helped: (1) claim a **flag-number block** in `COORDINATION.md` alongside the file scope, because the
+  renumbering here (F-47…F-51 to F-51…F-54 across ten files) was avoidable churn; (2) when `main` has moved by more than a couple of
+  PRs, **merge rather than rebase** — a rebase would have meant five sequential conflict resolutions over the same register files, each
+  with a real chance of dropping another session's row.
 
 ---
 
