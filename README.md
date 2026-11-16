@@ -17,7 +17,8 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/sources.json` | Source registry (32 entries): each official source, and whether it was read |
 | `data/policies.json` | 30 Amazon Associates and FTC requirements, with status for this site |
 | `data/flags.json` | 46 irregularities and unverified items (Flagged for Review) |
-| `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-15 re-check date |
+| `data/content.json` | Executive summary, 18 analysis findings, category text, and the 2026-11-16 re-check date |
+| `data/verification-session-4c552c78.json` | Same-day re-read (2026-11-16) of the three short links, their listing pages, Table 1, the Program Policies, the Operating Agreement and the Conditions of Use; flag F-47 record |
 | `data/reverification-2026-11-14.json` | Independent re-verification record of the supplied links and citations |
 | `data/verification-session-f87cc71f.json` | Second independent re-verification (2026-11-15): short links, titles, carousels, Table 1, OA Section 5, FTC |
 | `DESIGN_PROMPT.md` | Ready-to-paste redesign brief (suggestion S-14, decision D-20); fills its bracketed slots from the recorded picks |

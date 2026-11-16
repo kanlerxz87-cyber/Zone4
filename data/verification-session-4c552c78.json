@@ -1,0 +1,105 @@
+{
+  "_meta": {
+    "session": "arena/4c552c78-zone4",
+    "date_utc": "2026-11-16",
+    "branched_from": "bab81866b5034a2d49300bb9d05ffc028a49d1d7",
+    "purpose": "Same-day re-read of the three supplied short links and their listing pages, the Associates Table 1 commission band, the Program Policies, the Operating Agreement and the Amazon Conditions of Use, compared line by line with the stored records. Values were read on this date; nothing was copied from an earlier session without a fresh read.",
+    "method": "fetch_page on the supplied short links (each resolved to its /dp/ page), on the public Associates Central pages and on the Conditions of Use page. Titles, ASINs, carousel ASINs and labels, offer condition and seller, and the stated 'Updated' or 'Last updated' dates were compared with data/products.json, data/flags.json and data/sources.json.",
+    "published_values": "No price, rating, review count or commission figure from the Amazon pages was copied into any published record (F-02). Offer condition and seller are recorded as an observation only (F-47)."
+  },
+  "reads": [
+    {
+      "id": "R-01",
+      "source": "https://link.amazon/B04G1MEwY",
+      "resolved_to": "https://www.amazon.com/dp/B0CDY277D3",
+      "page_title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+      "asin_matches_record": true,
+      "title_matches_record": "exact (name_listing)",
+      "tag_parameter_in_resolved_url": false,
+      "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_slots": [
+        "B0B7C327LK",
+        "B0BYKGN61Q",
+        "B0CNSB81V6"
+      ],
+      "also_viewed_vs_record": "same ASINs, same order",
+      "offer_observation": "Offer block led with 'Used - Very Good' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-47)."
+    },
+    {
+      "id": "R-02",
+      "source": "https://link.amazon/B02NbDxp3",
+      "resolved_to": "https://www.amazon.com/dp/B09B7SB46R",
+      "page_title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+      "asin_matches_record": true,
+      "title_matches_record": "first segment matches; second segment differs from the stored name_listing and matches the 2026-11-15 read (F-44 open)",
+      "tag_parameter_in_resolved_url": false,
+      "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_slots": [
+        "B0BZ52FLKC",
+        "B0FM5KF34G",
+        "B0D1BGLW25"
+      ],
+      "also_viewed_vs_record": "slots 1-2 same; slot 3 differs (stored B0F92GL7JH) (F-29)"
+    },
+    {
+      "id": "R-03",
+      "source": "https://link.amazon/B00hJ57DV",
+      "resolved_to": "https://www.amazon.com/dp/B08DKYBTPH",
+      "page_title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "asin_matches_record": true,
+      "title_matches_record": "exact (name_listing)",
+      "tag_parameter_in_resolved_url": false,
+      "breadcrumb": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "also_viewed_slots": [
+        "B0CNY1YVDD",
+        "B0D5FX6VRL",
+        "B09MR7QWKZ"
+      ],
+      "also_viewed_vs_record": "slots 1-2 same; slot 3 differs (stored B0C33CHG99). B0C33CHG99 appears in a separate lower module on the same read (F-29)",
+      "offer_observation": "Offer block led with 'Used - Like New' sold by Amazon Resale; buy box names Amazon Resale and Fulfilled by Amazon (F-47)."
+    },
+    {
+      "id": "R-04",
+      "source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "what": "Associates Program Standard Commission Income Statement, Table 1",
+      "result": "Kitchen: 4.50% (Physical Books, Kitchen, Automotive). Home: 3.00%. Matches record; category-level only (F-01)."
+    },
+    {
+      "id": "R-05",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "what": "Associates Program Policies",
+      "result": "'Updated: April 14, 2026'. Matches S-PP."
+    },
+    {
+      "id": "R-06",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "what": "Associates Program Operating Agreement",
+      "result": "'Updated: October 15, 2025'. Matches S-OA."
+    },
+    {
+      "id": "R-07",
+      "source": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "resolved_to": "nodeId=GLSBYFE9MGKKQXXM",
+      "what": "Amazon Conditions of Use",
+      "result": "'Last updated: August 14, 2026'. Matches S-COU. The 'License and Access' section again excludes data mining, robots and extraction tools, collection of product listings, descriptions or prices, and AI-generated content used to develop models. It also bars meta tags or hidden text that use Amazon's name without written consent."
+    }
+  ],
+  "site_checks": {
+    "meta_and_title_use_of_amazon_name": {
+      "pages_checked": 24,
+      "hits": 0,
+      "method": "Parsed every <meta name=description|keywords> and <title> in docs/**/*.html on 2026-11-16. Checked before the rebuild; re-checked after it (see the log)."
+    }
+  },
+  "not_read_on_this_date": [
+    "The full product-details tables on each product page (these sit many chunks down the page; the 2026-11-14 records were re-read by three earlier sessions and are not re-read here).",
+    "Prices, ratings and review counts (withheld from the site under F-02; not recorded here).",
+    "The FTC Disclosures 101 page and the Google Search Central pages (last read 2026-11-15 by arena/d2a62d6b-zone4; not re-read today)."
+  ],
+  "changes_made": [
+    "data/flags.json: dated update notes on F-03, F-29 and F-44; new flag F-47 (used default offer on P1 and P3); as_of_utc set to 2026-11-16.",
+    "data/products.json: _meta.reverification.same_day_4c552c78_2026_11_16 (summary only). No stored ASIN, title, label, competitor list or spec value was changed.",
+    "data/content.json: rechecked_utc set to 2026-11-16; one executive-summary bullet added.",
+    "data/sources.json: dated notes added to S-COMM, S-PP, S-POL, S-OA, S-COU, S-L1, S-L2, S-L3."
+  ]
+}
