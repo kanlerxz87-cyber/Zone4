@@ -160,7 +160,7 @@
   {
    "id": "AS-01",
    "pattern": "The headline advertises the site's process instead of the reader's payoff",
-   "evidence": "Three of the five published H1s end in a phrase about the site's own method: 'two baskets, every figure checked', 'the listed facts, both function counts included', 'one basket, every figure checked'. Four of the five title tags contain the word 'Verified'.",
+   "evidence": "Three of the five published H1s end in a phrase about the site's own method: 'two baskets, every figure checked', 'the listed facts, both function counts included', 'one basket, every figure checked'. Four of the five title tags contain the word 'Verified'. Update 2026-11-16 (post-merge): every article headline and title tag has since been rewritten on main by session arena/c509aba1-zone4 (decisions D-12, D-17, D-18, D-20, D-21, D-25, D-27 recorded under the owner's delegation). No published H1 now describes the site's checking process, no two share a construction, and no title tag contains the word 'Verified'. This row is corrected in the published copy; it is kept because the rule still governs the next rewrite.",
    "why_it_reads_machine_generated": "A human writer names what the reader gets. A template names what the page did. Repeating the same construction across three pieces is the clearest single tell on the site, and it is visible in the site's own data.",
    "replacement": "Headline names the decision or the number; the method moves to a one-line 'how we checked' note under the byline and to the fact table, where it already is.",
    "check": "No two published H1s share a construction; no title tag repeats a modifier that appears in three others.",
@@ -181,7 +181,7 @@
   {
    "id": "AS-02",
    "pattern": "Reader-irrelevant apparatus in the opening paragraphs",
-   "evidence": "The second paragraph of each product article opens with the ASIN and the full five-level category breadcrumb in prose ('listed under ASIN B0CDY277D3 ... filed under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers'), duplicating a sourced fact table one section below.",
+   "evidence": "The second paragraph of each product article opens with the ASIN and the full five-level category breadcrumb in prose ('listed under ASIN B0CDY277D3 ... filed under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers'), duplicating a sourced fact table one section below. Update 2026-11-16 (post-merge): re-checked against main after the copy pass. Unchanged - all three product articles still open their second paragraph this way. This is the one pattern on this list the pass did not touch.",
    "why_it_reads_machine_generated": "It is the database row rendered as a sentence. No reader chooses an air fryer by ASIN, and the breadcrumb is five nouns deep. Putting it in prose is the single most machine-like habit on the site.",
    "replacement": "Open on the reader's problem. Move the ASIN and the category path into the fact table and the evidence rail, where they are already sourced and where the reader who wants them looks.",
    "check": "No published paragraph contains an ASIN; every ASIN on the site sits in a table cell or the evidence rail, beside its source link.",
@@ -198,7 +198,7 @@
   {
    "id": "AS-03",
    "pattern": "Articles that describe writing the article",
-   "evidence": "The single-basket piece opens: 'Some listings need paragraphs of interpretation; this one mostly needs reading.' The sentence is about the writing, not the fryer.",
+   "evidence": "The single-basket piece opens: 'Some listings need paragraphs of interpretation; this one mostly needs reading.' The sentence is about the writing, not the fryer. Update 2026-11-16 (post-merge): re-checked against main after the copy pass. Unchanged - the M-P3 opener is still the sentence quoted here, although the rest of that article was rewritten around it.",
    "why_it_reads_machine_generated": "Meta-commentary about the page's own composition is a filler move that costs the reader their first sentence, which is the most valuable one on the page.",
    "replacement": "Open with a specific, checkable fact or a concrete kitchen situation. If the writing really is simple, show it by being simple.",
    "check": "No paragraph refers to the process of writing, reading or checking the page.",
@@ -213,7 +213,7 @@
   {
    "id": "AS-04",
    "pattern": "Hedging at the end of paragraphs",
-   "evidence": "Recorded in suggestion S-12: 'every paragraph ends with a hedging clause'. The pattern is visible throughout the five published pieces.",
+   "evidence": "Recorded in suggestion S-12: 'every paragraph ends with a hedging clause'. The pattern is visible throughout the five published pieces. Update 2026-11-16 (post-merge, arena/89900251-zone4): the copy pass shipped by arena/c509aba1-zone4 landed on main while this page was in flight and this pattern is no longer present in the published copy. The row is kept because the rule behind it still governs the next rewrite, and because the surviving symptoms are named below. A sample re-read after the pass shows the hedging clauses are gone from the rewritten pieces.",
    "why_it_reads_machine_generated": "A hedge after every claim reads as a model protecting itself, not as a writer being careful. Careful writing hedges the one claim that needs hedging and states the rest.",
    "replacement": "One honesty paragraph per article, in a fixed position, stating what could not be verified. Every other paragraph states its claim flatly and carries its source.",
    "check": "A reviewer can point to the single paragraph in each article where the limits are stated; no other paragraph ends in a qualifier.",
@@ -228,7 +228,7 @@
   {
    "id": "AS-05",
    "pattern": "A comparison page that refuses to compare",
-   "evidence": "The comparison article states that no unit conversion is offered 'on purpose' and never ranks the three formats on any listed attribute. Recorded in S-12.",
+   "evidence": "The comparison article states that no unit conversion is offered 'on purpose' and never ranks the three formats on any listed attribute. Recorded in S-12. Update 2026-11-16 (post-merge, arena/89900251-zone4): the copy pass shipped by arena/c509aba1-zone4 landed on main while this page was in flight and this pattern is no longer present in the published copy. The row is kept because the rule behind it still governs the next rewrite, and because the surviving symptoms are named below. The comparison now ranks the three formats on listed attributes and names the deciding field.",
    "why_it_reads_machine_generated": "Refusing to conclude is not neutrality, it is an absence. A reader who has read three format descriptions still does not know which one to buy.",
    "replacement": "Rank on attributes the listings actually state: largest listed capacity, shallowest listed counter depth, most listed presets, fewest baskets. Say which field decides each row and link it.",
    "check": "The comparison page produces an explicit answer for at least one realistic reader profile, with the deciding field named and sourced.",
@@ -247,7 +247,7 @@
   {
    "id": "AS-06",
    "pattern": "No author, no method statement, no answer to 'who wrote this'",
-   "evidence": "No published page names a person, an organisation or a method. The site says what it verified but never who verified it.",
+   "evidence": "No published page names a person, an organisation or a method. The site says what it verified but never who verified it. Update 2026-11-16 (post-merge): a byline line and a production note were added to the published articles by arena/c509aba1-zone4 under decision D-03. The row stands as the rule that page was written to; verify at the next review that the byline line links to a method page rather than only naming a process.",
    "why_it_reads_machine_generated": "Google's own guidance names this directly, and an anonymous page with perfect data reads colder than a signed page with imperfect data.",
    "replacement": "A named editorial standard instead of a fake individual: one 'how this site checks a figure' page, linked from every article's byline line, plus a stated review date per article.",
    "check": "Every article carries a byline line that links to the method page and states the observation date.",
@@ -266,7 +266,7 @@
   {
    "id": "AS-07",
    "pattern": "No statement about how the content was produced",
-   "evidence": "The site is built with automated assistance and says so nowhere on its public pages; the fact is recorded only in the repository's own documentation.",
+   "evidence": "The site is built with automated assistance and says so nowhere on its public pages; the fact is recorded only in the repository's own documentation. Update 2026-11-16 (post-merge): the production note required here was published under decision D-03 by arena/c509aba1-zone4. The row is kept so the sentence cannot be dropped in a future rewrite.",
    "why_it_reads_machine_generated": "It is an omission a reader would notice if they asked, and Google names it as the case where a disclosure is expected.",
    "replacement": "One sentence on the method page: what is written by hand, what is generated and then checked, and what is never published without an official source.",
    "check": "The method page states the production method in one sentence that a reader can find without opening the repository.",
