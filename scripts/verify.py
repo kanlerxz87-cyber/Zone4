@@ -283,6 +283,125 @@ def check_decision_support() -> None:
         fail(f"decision log and register disagree: recorded={sorted(recorded)} logged={sorted(logged)}")
 
 
+def check_design() -> None:
+    """The design brief must obey the same sourcing rules as every other page.
+
+    It is a proposal rather than verified product data, so the rule that
+    matters is different: every row must cite the official source that
+    constrains it, and it must not smuggle in a figure no official source
+    supports. No row in this file may carry a traffic, revenue, search-volume,
+    price, rating or review-count number.
+    """
+    design = load("design.json")
+    decisions = {d["id"]: d for d in load("decisions.json")["decisions"]}
+    flags = {f["id"] for f in load("flags.json")["flags"]}
+    suggestions = {s["id"] for s in load("suggestions.json")["suggestions"]}
+    articles = {a["id"] for a in load("marketing.json")["articles"]}
+    products = {p["id"] for p in load("products.json")["products"]}
+
+    # A bare number followed by a unit or a currency sign would be a figure the
+    # site has no official source for. The brief must stay qualitative.
+    figure_re = re.compile(r"(\$\s?\d|\b\d+(\.\d+)?\s*(%|percent|stars?|reviews?|visits?|clicks?|sessions?|impressions?)\b)", re.IGNORECASE)
+
+    def row_sources(where: str, row: dict) -> None:
+        sources = row.get("sources") or row.get("constrained_by")
+        if not sources:
+            fail(f"design {where}: no source cited")
+            return
+        for s in sources:
+            if not is_official(s["url"]):
+                fail(f"design {where}: non-official source {s['url']}")
+        if figure_re.search(json.dumps(row, ensure_ascii=False)):
+            fail(f"design {where}: carries a figure no official source supports")
+
+    seen: set[str] = set()
+    for group in ("directions", "anti_slop", "headline_options", "topics"):
+        for row in design.get(group, []):
+            rid = row["id"]
+            if rid in seen:
+                fail(f"design: duplicate id {rid}")
+            seen.add(rid)
+            row_sources(f"{group} {rid}", row)
+            for fid in row.get("flags") or row.get("blocked_by") or []:
+                if fid not in flags:
+                    fail(f"design {rid}: unknown flag {fid}")
+
+    # A direction must point at a real D-18 option, so the brief cannot invent
+    # a fourth look nobody has been asked to choose between.
+    d18 = decisions.get("D-18")
+    if d18:
+        keys = {o["key"] for o in d18["options"]}
+        for d in design["directions"]:
+            if not any(d["decision_option"].endswith(f"option {k}") for k in keys):
+                fail(f"design {d['id']}: decision_option does not match a D-18 option")
+
+    # Headline options must attach to articles that exist, and topics to facts
+    # and products that exist.
+    fact_ids = {f["id"] for a in load("marketing.json")["articles"] for f in a["facts"]}
+    for h in design["headline_options"]:
+        if h["article"] not in articles:
+            fail(f"design {h['id']}: unknown article {h['article']}")
+    for t in design["topics"]:
+        for fid in t["fact_rows"]:
+            if fid not in fact_ids:
+                fail(f"design {t['id']}: unknown fact row {fid}")
+        if t["wave"] not in {"Wave 1 - foundational four", "Wave 2"}:
+            fail(f"design {t['id']}: undeclared wave {t['wave']}")
+
+    # The launch path must be five real decisions in order, or the page's
+    # claim about a "shortest credible path" is not checkable.
+    path = design.get("launch_path", [])
+    if not path:
+        fail("design: launch_path is empty")
+    for n, step in enumerate(path, start=1):
+        if step["step"] != n:
+            fail(f"design launch_path: step {step['step']} is out of order")
+        if step["decision"] not in decisions:
+            fail(f"design launch_path: unknown decision {step['decision']}")
+
+    # Every slot in the prompt must name the decision or question that fills it.
+    for s in design.get("prompt_slots", []):
+        if s["current"] != "not yet chosen" and not re.search(r"\b[DSQ]-\d+", s["filled_from"]):
+            fail(f"design prompt slot {s['slot']}: filled_from names no decision or question")
+
+    if figure_re.search(json.dumps(design.get("launch_path", []), ensure_ascii=False)):
+        fail("design launch_path: carries a figure no official source supports")
+
+    # DESIGN_PROMPT.md is generated from this data by scripts/render_design_prompt.py.
+    # If someone edits the markdown by hand it stops being the same brief as the
+    # page, so the build refuses to ship the mismatch.
+    prompt_md = ROOT / "DESIGN_PROMPT.md"
+    if not prompt_md.exists():
+        fail("DESIGN_PROMPT.md is missing; run scripts/render_design_prompt.py")
+    else:
+        text = prompt_md.read_text(encoding="utf-8")
+        for d in design["directions"]:
+            if d["one_line"] not in text:
+                fail(f"DESIGN_PROMPT.md is out of date: missing direction {d['id']}")
+        for a in design["anti_slop"]:
+            if a["replacement"] not in text:
+                fail(f"DESIGN_PROMPT.md is out of date: missing anti-pattern {a['id']}")
+
+
+def check_design_page() -> None:
+    """The Design brief page must carry the prompt that the data assembles."""
+    page = DOCS / "design.html"
+    if not page.exists():
+        return
+    raw = page.read_text(encoding="utf-8")
+    design = load("design.json")
+    match = re.search(r'<pre id="design-prompt">(.*?)</pre>', raw, re.S)
+    if not match:
+        fail("docs/design.html: the paste-ready prompt block is missing")
+        return
+    prompt = html.unescape(match.group(1))
+    for d in design["directions"]:
+        if d["one_line"] not in prompt:
+            fail(f"docs/design.html: the prompt is missing direction {d['id']}")
+    if "[DIRECTION]" not in prompt or "[TOPICS]" not in prompt:
+        fail("docs/design.html: the prompt has lost its bracketed slots")
+
+
 class SiteParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
@@ -422,7 +541,7 @@ def check_required_pages() -> None:
         "index.html", "executive-summary.html", "products.html", "marketing.html",
         "automation.html", "analysis.html", "requirements.html", "suggestions.html", "verification.html",
         "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
-        "suggestions.html", "questions.html", "decisions.html",
+        "suggestions.html", "questions.html", "design.html", "decisions.html",
         "categories/dual-basket-air-fryers.html",
         "categories/single-basket-air-fryers.html",
         "categories/air-fryer-toaster-ovens.html",
@@ -482,7 +601,9 @@ def main() -> int:
     check_pipeline()
     check_requirements()
     check_decision_support()
+    check_design()
     check_site()
+    check_design_page()
     check_required_pages()
     check_root_entry()
     if failures:

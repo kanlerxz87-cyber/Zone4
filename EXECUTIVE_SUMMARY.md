@@ -1,6 +1,7 @@
 # Executive Summary — Zone4 Amazon Affiliate Research Site
 
 **Date:** 2026-11-16 (UTC) — delegated decision round recorded and implemented (section 2c); same-day re-verification (sections 5c/5d); decision-support layer added 2026-11-15; independent re-verification 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
+**Date:** 2026-11-16 (UTC) — design brief, traffic programme and decision-ordering added; links and cited official pages re-verified 2026-11-16; decision-support layer 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
 
 ---
 
@@ -13,6 +14,7 @@ Build an Amazon affiliate research and marketing platform that identifies produc
 ## 2. What the repository delivers
 
 1. **A live, evidence-first marketing site** on GitHub Pages — 26 generated pages: a marketing landing page with a three-question product chooser (`docs/index.html`), executive summary, **requirements**, product catalogue (with a derived counter-space analysis), three category subpages (dual-basket air fryers / single-basket air fryers / air-fry toaster ovens), **marketing content**, an **articles hub with the topic calendar**, **seven individual article pages**, **automation & tracking**, analysis & findings, **suggestions** (with a recommended-path band and review workflow), **open questions** (with a discovery plan), **decision log**, field-by-field **verification log**, **policy compliance**, **clicks & conversions** (Analytics), **Flagged for review**, and **sources**. Every table row carries a link to its official source; withheld values are labelled, never inferred.
+1. **A live, evidence-first research site** on GitHub Pages — 25 generated pages: a marketing landing page (`docs/index.html`), executive summary, **requirements**, product catalogue, three category subpages (dual-basket air fryers / single-basket air fryers / air-fry toaster ovens), **marketing content**, an **articles hub**, **five individual article pages**, **automation & tracking**, analysis & findings, **suggestions**, **open questions**, **design brief**, **decision log**, field-by-field **verification log**, **policy compliance**, **clicks & conversions** (Analytics), **Flagged for review**, and **sources**. Every table row carries a link to its official source; withheld values are labelled, never inferred.
 2. **Verified product identities** for all three submitted links (ASINs, listing titles, brands, manufacturers, model numbers, category paths, listed specifications, competitor ASINs) — `data/products.json`, `docs/verification.html`.
 3. **A marketing content kit, published as real pages** — three product spec-check articles, one comparison page and three buying guides (the format guide, a sizes-explained piece and a dated seasonal gift guide), each with a title tag, meta description, keyword targets, an outline, finished copy, a call to action and a fact table in which every row links to its official source (`data/marketing.json`). Each article is also published as its own page under `docs/articles/` with its own title tag and meta description, and is grouped by product format in the hub at `docs/articles/index.html`; `docs/marketing.html` carries the same seven pieces on one page.
 4. **An automation and tracking plan** — 13 pipeline stages, 10 tracking metrics (every value deliberately blank), five optimisation steps and seven Agent Terms requirements (`data/pipeline.json`, `docs/automation.html`).
@@ -33,6 +35,9 @@ them has been applied:
 | `docs/suggestions.html` | Every change worth making, with the problem, the proposal, the effort, the risk, the check that would prove it worked and the official rule that constrains it. A scannable summary table, a recommended-path band and one card per proposal. | 31 suggestions, in three priority bands; 16 shipped or staged on 2026-11-16 |
 | `docs/questions.html` | What must be answered before any of them can be acted on: what is already known from an official source, what is missing, how the missing piece is discovered and who can supply it, plus a discovery plan grouped by who can answer. | 37 questions: 18 already answered (14 from official sources, 4 closed by the 2026-11-16 decisions), 2 discoverable, 4 not discoverable from here, 13 owner decisions |
 | `docs/decisions.html` | The choice itself: every open decision with its options, what each option commits the site to, its cost and whether it is reversible, plus a recommendation labelled as an argument rather than a decision. A log records decisions actually taken. | 34 decisions: 26 recorded 2026-11-16 under the owner's delegation, 8 open |
+| `docs/suggestions.html` | Every change worth making, with the problem, the proposal, the effort, the risk, the check that would prove it worked and the official rule that constrains it. A scannable summary table plus one card per proposal. | 36 suggestions, in three priority bands |
+| `docs/questions.html` | What must be answered before any of them can be acted on: what is already known from an official source, what is missing, how the missing piece is discovered and who can supply it. | 44 questions: 18 already answered from an official source, 4 discoverable, 4 not discoverable from here, 18 owner decisions |
+| `docs/decisions.html` | The choice itself: every open decision with its options, what each option commits the site to, its cost and whether it is reversible, plus a recommendation labelled as an argument rather than a decision. A log records decisions actually taken. | 39 open decisions, 0 recorded, shown in dependency order |
 
 **The three that decide whether this project can earn at all**, in order of dependency:
 
@@ -155,7 +160,56 @@ Nothing is simulated in place of a blocked or unverified requirement.
 | Google: AI-generated content | Read in full; quoted verbatim into the questions register (Q-23…Q-37) | [Google Search Central](https://developers.google.com/search/blog/2023/02/google-search-and-ai-content) |
 | Google: creating helpful content | Read; the standard the editorial suggestions are judged against | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
 
-## 5c. Same-day re-verification on 2026-11-16 by `arena/4c552c78-zone4`
+## 5d. Design brief, traffic programme and 2026-11-16 re-verification (`arena/89900251-zone4`)
+
+The brief asks for **suggestions that feed a prompt to design the site as a polished marketing affiliate website**, for
+**catchy, trendy articles and topics that earn organic traffic**, and for the site to stop reading like machine output. A new
+`docs/design.html` page, generated from `data/design.json`, answers all three — and nothing on it has been applied.
+
+| What it holds | Detail |
+|---|---|
+| Three visual directions | The executable detail for the three options already in D-18: named display and body type stacks with fallbacks, five colour tokens with hex values, a spacing scale, a grid, and a rule for the hero, the cards, the tables, the disclosure component and the imagery. Two are free; the bold deal-finder look is narrowed to an evidence-only form because the price, rating and price-tracking rules (F-02, F-15, F-22) bar the tactics that look normally depends on. |
+| Ten anti-patterns | Each names a writing habit on the current site, the evidence for it, why it reads as generated, the replacement and the check that proves the fix. |
+| Ten headline options | Two finished alternatives for each of the five published articles, so the choice is four fields per article and one rebuild. |
+| Eight topics | Each with the question it answers, the intent, the verified fact rows it is built from, the pages it must link to and the evidence note that limits it. |
+| Paste-ready prompt | Assembled from the same data, so the page, `DESIGN_PROMPT.md` and the register cannot disagree. Seven bracketed slots, each naming the decision that fills it. |
+| Shortest credible path | Five of the 39 decisions, ordered by what each unblocks. Twenty-six were recorded on 2026-11-16 under the owner's delegation by `arena/c509aba1-zone4`, so the path now mostly serves the next design pass rather than this one. |
+
+**Re-verification, 2026-11-16.** All three supplied short links were re-resolved from their official pages:
+
+| Item checked | Result | Source |
+|---|---|---|
+| `B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV` | Still resolve to `B0CDY277D3`, `B09B7SB46R`, `B08DKYBTPH`. No `tag=` parameter in any resolved URL (F-03 stands) | [P1](https://www.amazon.com/dp/B0CDY277D3) · [P2](https://www.amazon.com/dp/B09B7SB46R) · [P3](https://www.amazon.com/dp/B08DKYBTPH) |
+| P1 title, breadcrumb, also-viewed | Matched the stored record on every field read; no change made | [P1 official page](https://www.amazon.com/dp/B0CDY277D3) |
+| P3 title, breadcrumb | Matched; the third also-viewed slot rotated to `B09MR7QWKZ` — the same substitution recorded on 2026-11-15 (F-29) | [P3 official page](https://www.amazon.com/dp/B08DKYBTPH) |
+| P2 title | The **fourth consecutive later read** returned the same alternative string. Four reads on 2026-11-15 and 2026-11-16 now agree with each other and differ from the stored 2026-11-14 record, so which string the site publishes is an owner decision rather than a note: **F-44**. Stored record not overwritten | [P2 official page](https://www.amazon.com/dp/B09B7SB46R) |
+| P2 function count | The live title again states 24, a third dated sighting of the "24" side of the discrepancy (F-26 stays open) | [P2 official page](https://www.amazon.com/dp/B09B7SB46R) |
+| Operating Agreement §1, §4, §5 | Re-read verbatim: tagged link formats; no representation about traffic or commission income; the required disclosure sentence | [Operating Agreement](https://affiliate-program.amazon.com/help/operating/agreement) |
+| Disclosure help topic | Re-read: a link-level disclosure must be clear and conspicuous and placed near the link | [Associates help](https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE) |
+| Commission Table 1 | Kitchen **4.50%** confirmed; still no ASIN-to-band mapping, so product cells stay blank (F-01) | [Table 1](https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ) |
+| FTC Disclosures 101 | Re-read: hard to miss, placed with the endorsement, not behind a click, not mixed with links; no claimed experience with an untried product | [FTC](https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers) |
+| Google AI-content guidance | Re-read; the byline and automation-disclosure sentences quoted verbatim into Q-39 | [Google Search Central](https://developers.google.com/search/blog/2023/02/google-search-and-ai-content) |
+| Google helpful-content guidance | Re-read; the "simply because they seem trending" warning sign is the constraint on the topic programme (F-51, Q-38) | [Google Search Central](https://developers.google.com/search/docs/fundamentals/creating-helpful-content) |
+
+Full row-by-row record: `data/verification-session-89900251.json`.
+
+**Irregularities found by reading the published records line by line, and what was done about them:**
+
+| Flag | What it is | Disposition |
+|---|---|---|
+| **F-51** | The brief asks for trendy topics and for traffic that converts. Google's guidance lists trend-chasing as a warning sign of search-engine-first content, and the Operating Agreement (§4) makes no representation about traffic or commission income. | Recorded as an open tension with the rule that resolves it. No traffic, revenue or search-volume figure is published anywhere on the site. D-19 and D-17 were recorded on 2026-11-16 under the owner's delegation, which settles the evidence rule; the no-forecast half stands. |
+| **F-44** | P2's published listing title is contradicted by four consecutive later official reads on 2026-11-15 and 2026-11-16. | Stored record left in place; the choice of which string to publish is now explicitly the owner's. |
+| **F-52** | Three of the five headlines described the site's own checking process, two of them differing only by "two baskets" / "one basket", and four of five title tags contained "Verified". | **Corrected on `main`** by the `arena/c509aba1-zone4` copy pass before this session merged: no published H1 now describes the site's process and no title tag contains the word. The two option sets on the Design brief page stand as an available second register, not as a fix. One symptom survives: the M-P3 opener still comments on its own composition (checklist row AS-03). |
+| **F-53** | The second paragraph of each product article prints the ASIN and a five-level category path as prose the sourced fact table already carries. | **Unchanged after the copy pass** — the pass rewrote headlines, openers, voice and structure but not these three paragraphs. Replacement written (checklist row AS-02); waiting on D-36. |
+| **F-54** | Ten cross-references pointed at flag numbers that were renumbered when three sessions' registers merged — three sentences about the P2 title cited F-39 where it is now F-44, one cited F-40 for the unreadable specification tables where it is F-38, and three cited F-41 for the redesign sign-off where it is F-46. | All ten corrected. The class of defect is recorded because `scripts/verify.py` checks that a reference **exists**, not that it points at the right finding. |
+
+**The honest tension in the brief.** "Catchy trendy articles" and "generate organic traffic so real people click and buy"
+are requests for outcomes, and no official source supports a number for either. The topic programme is therefore built
+from the questions a buyer of these three formats actually asks and answered from fields already verified; the headlines
+lead with a number or a tension the page can prove; and the one place the site really can out-rank a big review site —
+the listing that contradicts itself on its own page — is where the strongest headline points. That is recorded as F-51
+rather than hidden, because the alternative was to publish a forecast.
+## 5e. Same-day re-verification on 2026-11-16 by `arena/4c552c78-zone4`
 
 Full record: `data/verification-session-4c552c78.json`. No stored ASIN, title, competitor label or specification was changed; the stored snapshots stay in place and the differences are recorded as dated notes.
 
@@ -192,6 +246,14 @@ Steps 1–7 below are the same actions, restated as twelve numbered decisions wi
 10. Work the fifteen suggestions ported from `arena/d2a62d6b-zone4` (S-17…S-31, decisions D-21…D-34) in priority order: the
     "which one is for you" chooser, the mobile pass and the "what we could not verify" block change what a reader gets from the
     site; the paid-search, deals-section and single-retailer rows are guardrails that keep it inside the Programme Policies.
+11. Work the five-step shortest credible path on `docs/design.html`, in this order: **D-01** (tag the links — nothing can earn
+    until this is true), **D-03** (say who writes the site), **D-12** (let the copy take positions inside the fact rule), **D-36**
+    (run the anti-slop pass, or at least the F-52 and F-53 fixes), **D-35** (pick the visual direction). The order is by what each
+    step unblocks, so doing the expensive one third means doing it once.
+12. Choose the headline register (D-37) and the visual direction (D-35) from the ten and three finished options on the Design brief
+    page; both are four-field or one-file changes, not writing jobs. Decide the P2 title question (F-44) the same day.
+13. If the design tokens should be previewable before the overhaul, take D-39 first — it is half a day and turns a choice between
+    three descriptions into a choice between three things you can see.
 
 ## 7. Official sources used (fetched live 2026-11-14 unless noted)
 

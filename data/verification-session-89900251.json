@@ -1,0 +1,204 @@
+{
+  "_meta": {
+    "description": "Independent verification record for session arena/89900251-zone4 (2026-11-16, UTC). Every entry states the official source URL that was read in this session, what was read, and whether the stored record matched. Nothing in this file is inferred: a value is recorded as confirmed only where the page read in this session showed it.",
+    "session": "arena/89900251-zone4",
+    "date_utc": "2026-11-16",
+    "branch": "arena/89900251-zone4",
+    "base_commit": "bab81866b5034a2d49300bb9d05ffc028a49d1d7",
+    "method": "Each supplied short link was re-resolved with a plain fetch (no tag parameter was added, no interstitial was worked around, no retry was made after an automated-traffic notice). Each policy and guidance page was read in this session and the sentences quoted below were taken from the page as returned. Where a stored record differs from today's read, the difference is recorded and the stored record is left unchanged unless a decision has been recorded to change it.",
+    "rule_applied": "One later read does not by itself establish which string is canonical. Where a stored record was contradicted, the contradiction is recorded and flagged, and the stored record is left in place for the owner to decide (see F-44, F-29)."
+  },
+  "short_links": [
+    {
+      "supplied": "https://link.amazon/B04G1MEwY",
+      "resolved_to": "https://www.amazon.com/dp/B0CDY277D3",
+      "stored_asin": "B0CDY277D3",
+      "match": true,
+      "tag_parameter_seen": false,
+      "flags": ["F-03", "F-04"],
+      "note": "No tag= parameter appeared in the resolved URL. F-03 stands."
+    },
+    {
+      "supplied": "https://link.amazon/B02NbDxp3",
+      "resolved_to": "https://www.amazon.com/dp/B09B7SB46R",
+      "stored_asin": "B09B7SB46R",
+      "match": true,
+      "tag_parameter_seen": false,
+      "flags": ["F-03", "F-04"],
+      "note": "No tag= parameter appeared in the resolved URL. F-03 stands."
+    },
+    {
+      "supplied": "https://link.amazon/B00hJ57DV",
+      "resolved_to": "https://www.amazon.com/dp/B08DKYBTPH",
+      "stored_asin": "B08DKYBTPH",
+      "match": true,
+      "tag_parameter_seen": false,
+      "flags": ["F-03", "F-04"],
+      "note": "No tag= parameter appeared in the resolved URL. F-03 stands."
+    }
+  ],
+  "product_reads": [
+    {
+      "id": "P1",
+      "asin": "B0CDY277D3",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "read_via": "https://link.amazon/B04G1MEwY",
+      "listing_title_read": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "stored_listing_title": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+      "title_match": true,
+      "breadcrumb_read": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "breadcrumb_match": true,
+      "also_viewed_read": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+      "also_viewed_stored": ["B0B7C327LK", "B0BYKGN61Q", "B0CNSB81V6"],
+      "also_viewed_match": true,
+      "result": "Full match on every field read. No change made."
+    },
+    {
+      "id": "P2",
+      "asin": "B09B7SB46R",
+      "source": "https://www.amazon.com/dp/B09B7SB46R",
+      "read_via": "https://link.amazon/B02NbDxp3",
+      "listing_title_read": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included",
+      "stored_listing_title": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.",
+      "title_match": false,
+      "title_difference": "The first segment matches the stored record exactly. The second segment differs from the stored record. Today's second segment is character-for-character the same string that session arena/d8564cd0-zone4 recorded on 2026-11-15 (F-44), so this is now the second consecutive later read to show the same alternative text. The stored record was NOT overwritten: two later reads agreeing do not establish which rendering Amazon treats as canonical, and the stored record cites its own read date. Recorded as an escalation of F-44.",
+      "breadcrumb_read": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "breadcrumb_match": true,
+      "also_viewed_read": ["B0BZ52FLKC", "B0FM5KF34G", "B0D1BGLW25"],
+      "also_viewed_stored": ["B0BZ52FLKC", "B0FM5KF34G", "B0F92GL7JH"],
+      "also_viewed_match": false,
+      "also_viewed_difference": "Slot 3 showed B0D1BGLW25 (Midea Flexify Classic French Door Toaster Oven Air Fryer Combo, 26.4 QT) where the stored record has B0F92GL7JH. The same substitution was recorded on 2026-11-15 in F-44. This is the advertising module behaving as F-29 records; no ranking or share is derived from these lists, so no product value changes.",
+      "function_count_in_title": "24 One-Touch Preset Options",
+      "function_count_note": "The listing title read today again states 24, matching the '24 cooking functions' side of the F-26 discrepancy. The 'About this item' heading that says '25 COOKING PRE-SETS' was not re-read in this session because the advertising modules were returned in its place on this read, and it was not worked around. F-26 remains open; today's read adds one more dated sighting of 24 in the title.",
+      "result": "Title and carousel slot 3 differ from the stored record. Both differences are recorded, nothing was overwritten."
+    },
+    {
+      "id": "P3",
+      "asin": "B08DKYBTPH",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read_via": "https://link.amazon/B00hJ57DV",
+      "listing_title_read": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "stored_listing_title": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel",
+      "title_match": true,
+      "breadcrumb_read": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "breadcrumb_match": true,
+      "also_viewed_read": ["B0CNY1YVDD", "B0D5FX6VRL", "B09MR7QWKZ"],
+      "also_viewed_stored": ["B0CNY1YVDD", "B0D5FX6VRL", "B0C33CHG99"],
+      "also_viewed_match": false,
+      "also_viewed_difference": "Slot 3 showed B09MR7QWKZ (Gourmia Air Fryer - 8 Qt Basket Capacity) where the stored record has B0C33CHG99 (Cosori TurboBlaze). The same substitution was recorded on 2026-11-15 in F-44. As with P2, this is the advertising module rotating; no product value changes.",
+      "result": "Title and breadcrumb match. Carousel slot 3 differs; recorded under F-29."
+    }
+  ],
+  "official_sources_read": [
+    {
+      "id": "S-OA",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "read": true,
+      "page_state": "Updated: October 15, 2025",
+      "quotes": [
+        "Section 1: \"The links must properly use the special \\\"tagged\\\" link formats we provide and comply with this Agreement (\\\"Special Links\\\").\"",
+        "Section 4: \"We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.\"",
+        "Section 5: \"You must clearly and prominently state the following, or any substantially similar statement previously allowed under this Agreement, on your Site or any other location where Amazon may authorize your display or other use of Program Content: \\\"As an Amazon Associate I earn from qualifying purchases.\\\"\""
+      ],
+      "matches_stored_record": true,
+      "used_for": "The site's disclosure sentence (verbatim match); the rule that no traffic or earnings figure may be published as if supported; the tagged-link requirement behind F-03 and D-01."
+    },
+    {
+      "id": "S-HELP",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE",
+      "read": true,
+      "quotes": [
+        "\"To meet the Associate Program's requirements, you must (1) include a legally compliant disclosure with your links and (2) identify yourself on your Site as an Amazon Associate with the language required by the Operating Agreement.\"",
+        "\"1. Clear. A clear disclosure could be as simple as \\\"(paid link)\\\", \\\"#ad\\\", or \\\"#CommissionsEarned\\\". 2. Conspicuous. It should be placed near any affiliate link or product review in a location that customers will notice easily. They shouldn't have to hunt for it.\"",
+        "\"In addition, the Operating Agreement requires that the following statement clearly and conspicuously appears on your Site: \\\"As an Amazon Associate I earn from qualifying purchases.\\\"\""
+      ],
+      "matches_stored_record": true,
+      "used_for": "The design brief's disclosure component: hard to miss, placed with the endorsement, never mixed into a group of links."
+    },
+    {
+      "id": "S-COMM",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "read": true,
+      "quotes": [
+        "Table 1 row: \"Physical Books, Kitchen, Automotive | 4.50%\"",
+        "Table 1 row: \"Toys, Furniture, Home, Home Improvement, Lawn & Garden, Pets Products, Headphones, Beauty, Musical Instruments, Business & Industrial Supplies, Outdoors, Tools, Sports, Baby Products, Amazon Coins | 3.00%\""
+      ],
+      "matches_stored_record": true,
+      "still_no_asin_mapping": true,
+      "used_for": "F-01 stands: the table is a category-level reference and no official source reviewed maps these three ASINs to a commission category, so every product-level rate cell stays blank."
+    },
+    {
+      "id": "S-FTC",
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "read": true,
+      "page_state": "November 2019",
+      "quotes": [
+        "\"Place it so it's hard to miss. The disclosure should be placed with the endorsement message itself.\"",
+        "\"Disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, at the end of posts or videos, or anywhere that requires a person to click MORE.\"",
+        "\"Don't mix your disclosure into a group of hashtags or links.\"",
+        "\"You can't talk about your experience with a product you haven't tried.\"",
+        "\"Don't use vague or confusing terms like \\\"sp,\\\" \\\"spon,\\\" or \\\"collab,\\\" or stand-alone terms like \\\"thanks\\\" or \\\"ambassador,\\\" and stay away from other abbreviations and shorthand when possible.\""
+      ],
+      "matches_stored_record": true,
+      "used_for": "The disclosure component in the design brief; the rule that no article may imply hands-on use."
+    },
+    {
+      "id": "S-GSC-AI",
+      "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+      "read": true,
+      "quotes": [
+        "\"Google's ranking systems aim to reward original, high-quality content that demonstrates qualities of what we call E-E-A-T: expertise, experience, authoritativeness, and trustworthiness.\"",
+        "\"Using automation—including AI—to generate content with the primary purpose of manipulating ranking in search results is a violation of our spam policies.\"",
+        "\"Using AI doesn't give content any special gains. It's just content. If it is useful, helpful, original, and satisfies aspects of E-E-A-T, it might do well in Search.\"",
+        "\"You should consider having accurate author bylines when readers would reasonably expect it, such as to any content where someone might think, \\\"Who wrote this?\\\"\"",
+        "\"AI or automation disclosures are useful for content where someone might think \\\"How was this created?\\\". Consider adding these when it would be reasonably expected.\"",
+        "\"Giving AI an author byline is probably not the best way to follow our recommendation to make clear to readers...\""
+      ],
+      "used_for": "The anti-slop checklist rows on bylines, disclosure of method, and the originality rule; the design brief's editorial-voice constraint."
+    },
+    {
+      "id": "S-GOOGLE",
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "read": true,
+      "quotes": [
+        "\"Does your content clearly demonstrate first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service, or visiting a place)?\"",
+        "\"Are you writing about things simply because they seem trending and not because you'd write about them otherwise for your existing audience?\"",
+        "\"Are you mainly summarizing what others have to say without adding much value?\"",
+        "\"Is the content mass-produced by or outsourced to a large number of creators, or spread across a large network of sites, so that individual pages or sites don't get as much attention or care?\"",
+        "\"Does the content present information in a way that makes you want to trust it, such as clear sourcing, evidence of the expertise involved, background about the author or the site that publishes it, such as through links to an author page or a site's About page?\""
+      ],
+      "used_for": "The anti-slop checklist; the trend-topic warning that shapes the traffic programme (F-51); the sourcing and trust signals the design brief encodes."
+    },
+    {
+      "id": "S-SPAM",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "read": true,
+      "quotes": [
+        "The page lists the following as spam policies: \"Scaled content abuse\", \"Thin affiliation\", \"Keyword stuffing\", \"Scraping\", \"Machine-generated traffic\", \"Cloaking\", \"Sneaky redirects\", \"Link spam\", \"Doorway abuse\"."
+      ],
+      "used_for": "The anti-slop checklist rows on volume publishing, keyword stuffing and thin affiliate pages. The definition text for each policy heading was not quoted here because the page returns each section behind an on-page anchor; the headings were read and are listed as read."
+    }
+  ],
+  "not_read_this_session": [
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "reason": "Read in full and quoted verbatim by the 2026-11-15 sessions (records in data/verification-session-f87cc71f.json). Re-read in this session was not needed for any value this session publishes; no new claim in this session rests on it."
+    },
+    {
+      "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=508088",
+      "reason": "The Conditions of Use redirect and its wording were confirmed on 2026-11-14 (F-30). No value in this session depends on a fresh read."
+    }
+  ],
+  "result": {
+    "links_re_resolved": 3,
+    "links_matching_stored_asin": 3,
+    "titles_confirmed": 2,
+    "titles_differing": 1,
+    "breadcrumbs_confirmed": 3,
+    "also_viewed_slots_confirmed": 7,
+    "also_viewed_slots_differing": 2,
+    "values_changed_in_data": 0,
+    "new_facts_published": 0,
+    "summary": "All three supplied links still resolve to the ASINs on record and none carries a tag parameter. P1 matches on every field read. P3 matches on title and breadcrumb; its third also-viewed slot rotated. P2's listing title differs from the stored record for the second consecutive dated read, and its third also-viewed slot rotated the same way. No stored value was overwritten and no new fact was published: both differences are recorded and left for the owner (F-44, F-29)."
+  }
+}
