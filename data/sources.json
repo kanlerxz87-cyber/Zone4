@@ -283,7 +283,8 @@
       "publisher": "Google Search Central",
       "accessible": true,
       "used_for": "rel=\"sponsored\" for paid links, which is the basis of S-05 and D-05.",
-      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log)."
+      "notes": "Read 2026-11-15 by session arena/00ba6c2e-zone4 for the decision-support pages (suggestions, open questions, decision log).",
+      "note": "rel=\"sponsored\" for paid links, which is the basis of S-05 and D-05. The published guidance states that sponsored is the preferred value for advertisements and paid placements, that nofollow was previously recommended for these links and \"is still an acceptable way to flag them\", and that multiple rel values may be given as a space- or comma-separated list. Re-read the wording 2026-11-17 through a search result of the same page (direct fetch from this environment was unavailable); the sentence quoted here is unchanged from the 2026-11-16 reading. Consequence for the site: the shop links carry BOTH sponsored and nofollow plus noopener, so they are qualified whichever of the two an engine prefers. Note also that qualifying a link is a crawl hint, not a crawl block, and that it is not a substitute for the reader-facing disclosure - S-OA and S-FTC cover that separately."
     },
     {
       "id": "S-GSC-AI",

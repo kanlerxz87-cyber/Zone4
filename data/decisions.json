@@ -1735,6 +1735,107 @@
           "ref": "Google: people-first, reader-facing presentation"
         }
       ]
+    },
+    {
+      "id": "D-44",
+      "question": "Should the outbound product links carry the Associates tag, given that the site already claims it earns from them?",
+      "linked_question": "Q-01",
+      "linked_suggestions": [
+        "S-01",
+        "SG-27"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Replace the short links with tagged /dp/ Special Links",
+          "commits_to": "Every outbound product link points at the official /dp/ listing URL for the ASIN with ?tag=shopnow047c-20, carries rel=\"sponsored noopener nofollow\", and is labelled as a paid link. The link.amazon short links stay in data/product-intent.json as the submitted evidence, never as the outbound href.",
+          "effort": "One data change plus a rebuild.",
+          "reversible": "Yes - revert data/products.json and rebuild. Retained clicks already logged would remain logged."
+        },
+        {
+          "key": "B",
+          "label": "Keep the short links and withdraw the earning claim",
+          "commits_to": "No tag anywhere, and the disclosure sentence is removed from all 29 pages, which would remove the ability to publish affiliate links honestly at all.",
+          "effort": "Large, and it removes a requirement rather than meeting one.",
+          "reversible": "Yes, but re-adding a withdrawn disclosure later is a visible credibility loss."
+        },
+        {
+          "key": "C",
+          "label": "Tag the short links",
+          "commits_to": "Append the tag to a shortener URL. The shortener resolves to the ASIN, so the tag would have to survive the redirect. That behaviour is not documented anywhere this site may cite, so it cannot be relied on.",
+          "effort": "Minutes.",
+          "reversible": "Yes, but it produces links whose attribution cannot be checked."
+        }
+      ],
+      "recommendation": "A. It is the only option whose result can be checked from outside: a reader, or the owner, can see the tag in the address bar of the destination.",
+      "recorded_choice": "Option A, recorded 2026-11-17 and implemented the same day. All outbound product links are now https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 with rel=\"sponsored noopener nofollow\", and scripts/verify.py check_tracked_links fails the build if any class=\"shop\" link loses its tag or its sponsored relation. What this resolves: a click is now attributable in principle, because the tag travels with the URL. What it does NOT resolve, and must not be read into this record: whether shopnow047c-20 is an enrolled tag, whether Associates Central records the click, or whether the ASINs are commission-eligible. Those are account-side facts (F-55). The tag was format-checked only; syntax is not enrolment. The disclosure sentence is required either way and was not made conditional on this decision.",
+      "recorded_date_utc": "2026-11-17",
+      "recorded_by": "arena/59645da8-zone4 (delegated decision; owner supplied tracking ID shopnow047c-20)",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies / Participation Requirements (Special Links must carry the Associates tag)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement, Section 5 (required disclosure)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "Google: qualify paid outbound links with rel=\"sponsored\""
+        }
+      ]
+    },
+    {
+      "id": "D-45",
+      "question": "Should the site add first-hand measurements, given that it currently publishes only specification carry-over and says so?",
+      "linked_question": "Q-49",
+      "linked_suggestions": [
+        "SG-31"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Publish one measured test record",
+          "commits_to": "Buy or borrow one appliance without using the affiliate tag, keep a dated log of repeatable measurements (true counter depth, usable volume, measured temperature, noise, cleanup time), and publish it as a page that states the method and states that it is one unit.",
+          "effort": "High. One appliance at retail plus roughly a day of measurement and writing. The only item on the backlog with a cash cost.",
+          "reversible": "Yes in the sense that a page can be unpublished. Not reversible for the purchase."
+        },
+        {
+          "key": "B",
+          "label": "Stay specification-only and say so more prominently",
+          "commits_to": "No measurement ever. The site competes on traceability alone: every figure links to the official listing, and the disclosure that no unit was tested moves from the article footer to the top of every article.",
+          "effort": "One template change.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Solicit reader-reported experience",
+          "commits_to": "Ask readers what they observed. Cheaper than A, but creates a moderation duty, is unverifiable third-party content, and would need a policy for defamation and for manufactured reviews before it could ship.",
+          "effort": "Medium, and ongoing.",
+          "reversible": "No. Once reader reports are published, withdrawing them is a trust event."
+        }
+      ],
+      "recommendation": "A, with B as the interim. The site should say at the top of every article that no unit was tested until A exists, and A should be attempted for exactly one product rather than all three.",
+      "recorded_choice": "Option B for now, Option A as the recommended path. This session did NOT buy, test or measure any product, and no page claims otherwise. What was recorded instead: the gap between 'specification carry-over' and the first-hand experience that Google's people-first self-assessment asks about is now stated as SG-31 in the suggestions register, with its cost, risk and check written out for a reviewer to decide on. The narrow question this session could answer - should the site stop describing itself as specification-only - is answered no: the honest disclosure stays and is the reason the site can be trusted at all. The narrow question it could not answer - should the owner buy a unit - is left where it belongs.",
+      "recorded_date_utc": "2026-11-17",
+      "recorded_by": "arena/59645da8-zone4 (delegated decision; owner session brief 2026-11-17)",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search's guidance about AI-generated content (people-first self-assessment; Experience)"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101 (a test result cited on a monetised page)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement (a purchase through one's own link is not commission-eligible)"
+        }
+      ]
     }
   ],
   "log": [
@@ -1954,6 +2055,20 @@
       "choice": "Option A: the capture promise is published on the analytics page and in this register; no form ships until the service does (F-58).",
       "recorded_by": "arena/59645da8-zone4 (delegated decision; owner session brief 2026-11-17)",
       "evidence": "Nothing is collected, so nothing can be mis-collected; adding the form later is additive. Brief: 'no manual input... work on your own to finish all tasks in this session.'"
+    },
+    {
+      "date_utc": "2026-11-17",
+      "decision": "D-44",
+      "choice": "Option A: every outbound product link is the official /dp/ listing URL for the ASIN with ?tag=shopnow047c-20 and rel=\"sponsored noopener nofollow\"; the link.amazon short links remain in data/product-intent.json as submitted evidence, never as an href.",
+      "recorded_by": "arena/59645da8-zone4 (delegated decision; owner supplied tracking ID shopnow047c-20)",
+      "evidence": "scripts/verify.py check_tracked_links fails the build if any class=\"shop\" link loses its tag or its sponsored relation, so the decision is enforced rather than asserted. Enrolment, click recording and ASIN eligibility remain unverified and are recorded as F-55."
+    },
+    {
+      "date_utc": "2026-11-17",
+      "decision": "D-45",
+      "choice": "Option B now, Option A recommended. No product was bought, tested or measured in this session and no page claims otherwise; the first-hand-evidence gap is written out as SG-31 with its cost, risk and check so a reviewer can choose. The disclosure that no unit was tested stays, and stays prominent.",
+      "recorded_by": "arena/59645da8-zone4 (delegated decision; owner session brief 2026-11-17)",
+      "evidence": "The decision register is a record of what was and was not done, which is the whole point of D-45's choice B. Recording 'we did not test anything' as a decision is only meaningful if the suggestion that would change it carries a real price tag, which SG-31 does."
     }
   ]
 }

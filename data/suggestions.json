@@ -1044,6 +1044,45 @@
       ],
       "status": "Not built - needs a service decision",
       "decision": "D-43"
+    },
+    {
+      "id": "SG-31",
+      "priority": "P1 - Decide first",
+      "title": "Publish one first-hand test record, and say plainly what it is not",
+      "problem": "Every figure on this site is a specification copied from an official listing. That is accurate, and it is also the ceiling on what the site can be. Google's people-first self-assessment asks directly whether content 'clearly demonstrates first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service)'. This site currently answers that question with a disclosure that says no unit was tested. Honest, but it means the writing cannot distinguish itself from any other page that repeats the same bullets. The Experience component of E-E-A-T is the one thing a competitor cannot copy from the listing, and it is the thing this site does not have.",
+      "proposal": "Buy or borrow ONE of the three appliances and keep a dated test log. Not a video, not a score out of ten: measurements a reader can repeat. Examples that cost nothing but time: exterior dimensions and weight on a kitchen scale; the counter depth actually consumed with the door open and with the basket out (the number that decides whether it fits); usable basket volume measured with rice or water against the stated capacity; preheat time to 400F with a thermocouple; the difference between the set temperature and the measured temperature at the basket centre over 10 minutes; noise at arm's length in dB; time to clean two baskets versus one after a chicken-wing cook with a stated quantity. Publish the raw log as a table with the instrument and the date for each row, and mark the page as a first-hand test with the method stated.",
+      "why": "It is the only change on this list that adds a fact nobody else has. It also unlocks the comparison the site cannot currently make: the listing states 6 quarts, the test says how much of that a reader can use. The existing rule structure already supports it - the fact table, the source-per-row gate and the flag register were built for exactly this kind of evidence, and a measured row cites a test-log entry instead of a listing. It is also the honest answer to the brief's 'should not read like AI slop': slop is text that could have been written without the product, and a measured number could not have been.",
+      "effort": "High, and it is the only suggestion here with a cash cost. One appliance at the listed price; roughly a day of measurement, photography and writing; a thermocouple and a kitchen scale if not already owned. Repeatable per product, but the first one is the expensive one.",
+      "risk": "Three real ones. (1) Amazon's Operating Agreement and the IP License govern what may be done with Program Content, and they do not restrict what an Associate may write about a product it owns - but the reviewer should confirm that reading rather than take it from this register (the relevant text is cited as S-OA and S-IPL). (2) A purchase made through one's own affiliate link is not commission-eligible under the Operating Agreement; buy it without the tag, or the 'test' contaminates the account. (3) A single unit is a sample of one: the page must say so, and must not generalise a defect it observes to the model. A negative test result is still publishable - the format stays the same, only the conclusion changes - but it must be published, not quietly dropped, or the site becomes the thing it criticises.",
+      "check": "The test page carries, per row, the value, the instrument, the date and the person who took the reading; the method section states temperature, quantity cooked and ambient conditions; the page says in the first hundred words that it is one unit and how it was obtained; and the fact table cites the log rather than the listing for every measured row. A second person repeating one measurement and landing within a stated tolerance is the strongest check available and should be attempted for at least the dimensions.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search's guidance about AI-generated content (people-first self-assessment, Experience)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement (disclosure, own-purchase rule, Program Content)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program IP License (Program Content)"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101 (a test result cited on a monetised page)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "Google Search Central: qualify outbound links"
+        }
+      ],
+      "flags": [
+        "F-01",
+        "F-55"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-45"
     }
   ]
 }

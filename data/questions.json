@@ -1106,6 +1106,29 @@
       "flags": [
         "F-58"
       ]
+    },
+    {
+      "id": "Q-49",
+      "area": "Editorial",
+      "question": "Is anyone going to use one of these appliances, and can the measurements be published?",
+      "why_it_matters": "Every figure on this site is a specification carried over from an official listing, and the articles say so. That is accurate and it is also a ceiling. Google's people-first self-assessment asks whether content 'clearly demonstrates first-hand expertise and a depth of knowledge (for example, expertise that comes from having actually used a product or service)'. Specification carry-over cannot demonstrate that, however carefully it is sourced. Until someone uses one, every article on this site is competing on the same facts as every other page that quotes the same listing.",
+      "kind": "Owner decision",
+      "known": "What the site can publish if it gets one unit is written out in SG-31: true counter depth with the door open and the basket out, usable basket volume measured against the stated capacity, measured temperature at the basket centre over ten minutes, noise in dB, and cleanup time after a stated cook. Each of those is repeatable by a reader, which is what makes it evidence rather than opinion. No unit has been bought, borrowed or tested in this session and no page claims one was.",
+      "how_to_discover": "The question is really three: (1) does the owner want to spend roughly one appliance's price plus a day on this? (2) is there already an owner of one of these appliances who could take the readings, which would make the cost near zero? (3) for a purchase, the Operating Agreement forbids commission on a purchase made through one's own link, so the unit has to be bought without the tag - a step that is easy to get wrong and corrupts the account if it is. Ask (2) first; it is the cheapest path and it is the one most likely to already exist.",
+      "answerable_by": "The site owner, and anyone in the owner's household who already owns one of the three appliances.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search's guidance about AI-generated content (people-first self-assessment; Experience)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement (a purchase through one's own link is not commission-eligible)"
+        }
+      ],
+      "flags": [
+        "F-01"
+      ]
     }
   ]
 }

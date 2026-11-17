@@ -1114,6 +1114,15 @@ def page_article(current: Page, a: dict) -> str:
         + cta_html
         + not_verified_block(current)
         + where_next_block(current, a)
+        # The evidence panel. These five blocks are what make every sentence
+        # above checkable, and they are also the least reader-facing part of the
+        # page. From 2026-11-17 they sit inside one <details> block, closed by
+        # default, with a summary that says exactly what is inside. Nothing was
+        # removed: the tables are in the HTML for a search engine, a screen
+        # reader that chooses to expand, and anyone who wants to check a claim.
+        + '<details class="evidence" id="evidence"><summary><strong>Evidence for every claim on this page</strong> '
+          f'\u2014 {len(a["facts"])} sourced facts, the keyword targets, the search metadata and the '
+          'compliance notes. Open to check anything above.</summary>'
         + "<h2>Fact basis (every row links to its official source)</h2>"
         + marketing_fact_table(a)
         + "<h2>Keyword targets</h2>"
@@ -1122,7 +1131,7 @@ def page_article(current: Page, a: dict) -> str:
         + seo_html
         + "<h2>Outline</h2><ul class=\"outline\">" + outline_html + "</ul>"
         + "<h2>Compliance notes</h2><ul>" + notes_html + "</ul>"
-        + "</article>"
+        + "</details></article>"
         + '<section><h2>Related reading</h2><div class="agrid">' + related_html + "</div></section>"
     )
 

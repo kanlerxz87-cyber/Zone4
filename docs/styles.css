@@ -827,3 +827,27 @@ details.unverified[open] summary { margin-bottom: 4px; border-bottom: 1px dashed
   display: block; width: 100%; height: auto; margin: 0 0 14px;
   border-radius: 10px; border: 1px solid var(--line); background: var(--panel-soft);
 }
+
+/* --- Article evidence panel ------------------------------------------------
+   The fact table, keyword targets, SEO metadata, outline and compliance notes
+   are the proof behind the piece, not the piece. One closed <details> keeps
+   them in the document (checkable, crawlable) without ending every article
+   with five tables. */
+details.evidence {
+  margin: 30px 0 0; padding: 14px 20px 18px; background: var(--panel-soft);
+  border: 1px solid var(--line); border-radius: 12px;
+}
+details.evidence > summary {
+  cursor: pointer; font-size: 14px; line-height: 1.5; color: var(--ink);
+  list-style: none; padding-right: 8px;
+}
+details.evidence > summary::-webkit-details-marker { display: none; }
+details.evidence > summary::before {
+  content: "+"; display: inline-grid; place-items: center; width: 20px; height: 20px;
+  margin-right: 9px; border-radius: 50%; background: var(--accent-soft);
+  color: var(--accent-strong); font-weight: 800; font-size: 14px; vertical-align: 1px;
+}
+details.evidence[open] > summary::before { content: "\2212"; }
+details.evidence[open] > summary { border-bottom: 1px dashed var(--line); padding-bottom: 12px; margin-bottom: 6px; }
+details.evidence h2 { font-size: 16px; margin: 22px 0 8px; }
+details.evidence .table-wrap { box-shadow: none; }
