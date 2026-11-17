@@ -23,7 +23,7 @@
    "question": "Does an Amazon Associates account exist for this site, and what is its Partner Tag?",
    "why_it_matters": "Without an account there is no tag, and without a tag no click can be attributed. Every revenue figure the brief asks for is downstream of this single fact.",
    "kind": "Unknown - not discoverable from here",
-   "known": "No tag parameter appears in any of the three resolved links. The short links themselves are genuine link.amazon links and do resolve to the correct product pages.",
+   "known": "No tag parameter appears in any of the three resolved links. The short links themselves are genuine link.amazon links and do resolve to the correct product pages. Update 2026-11-17: the owner supplied the tracking ID shopnow047c-20 (session brief), and the site now publishes tagged Special Links carrying it. What is still only visible inside Associates Central is whether that tag is registered, active and assigned to this account (Q-45, F-55).",
    "how_to_discover": "Sign in to Associates Central. The Partner Tag is shown in the account settings and in every link the account generates.",
    "answerable_by": "The site owner",
    "blocks": [
@@ -1017,6 +1017,89 @@
     }
    ],
    "flags": []
+  },
+  {
+   "id": "Q-45",
+   "area": "Money",
+   "question": "Is the owner-selected tracking ID shopnow047c-20 registered, active and assigned to this site's Associates account - and for which marketplace?",
+   "why_it_matters": "Every downstream revenue number depends on it. A tagged link whose tag is not registered produces clicks that earn nothing and reports that reconcile nothing; the format check alone (2(b), XXXXX-##) is necessary but not sufficient. The owner's brief selected the ID but no public official source can confirm the registration.",
+   "kind": "Unknown - not discoverable from here",
+   "known": "The ID matches the official format: Participation Requirements 2(b) requires the Associates ID or 'tag' 'appearing as XXXXX-##' as a parameter in the URL of each link (re-read verbatim 2026-11-17). The tagged Special Links are published. Nothing official states that the ID is registered or active.",
+   "how_to_discover": "Associates Central only (sign-in): 1) Account Settings - confirm the ID is listed and active and note its marketplace; 2) generate one tagged link per product and compare with the three URLs in data/associates.json; 3) click each published Special Link once; 4) after 24-48 hours, confirm the clicks appear in the Associates report; 5) record the result in data/associates.json (registered_and_active) with the date.",
+   "answerable_by": "The site owner (Associates Central sign-in required)",
+   "blocks": [
+    "S-41",
+    "Attribution-ready links",
+    "REQ-15 completion"
+   ],
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/",
+     "ref": "Associates Central (account settings and reports; sign-in required)"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Associates Program Policies, Participation Requirements 2(b) (tag format)"
+    }
+   ],
+   "flags": [
+    "F-55",
+    "F-03"
+   ]
+  },
+  {
+   "id": "Q-46",
+   "area": "Measurement",
+   "question": "Where should the self-hosted analytics endpoint run, and under what privacy and consent basis?",
+   "why_it_matters": "The owner's brief asks for 'a privacy-preserving outbound-click counter and a self-hosted analytics endpoint'. GitHub Pages serves static files only, so an endpoint needs hosting the owner controls, and any move beyond the browser-local ledger changes what data leaves the visitor's browser - which is exactly what Q-17/D-16 gate. Choosing by default would guess at a privacy basis.",
+   "kind": "Owner decision",
+   "known": "The local layer is shipped and defined: docs/tracker.js records clicks in the visitor's browser only, and data/campaign-ledger.json defines the six rollup columns, the five event types and the authorized-sources rule with zero rows. No endpoint exists and none is required for the site to run.",
+   "how_to_discover": "Not a discovery question - a choice. D-40 lists the three options (stay local-only, self-host on owner infrastructure, use a managed privacy-first service) with what each commits the site to; D-16 must be answered first whenever anything beyond local storage is involved.",
+   "answerable_by": "The site owner",
+   "blocks": [
+    "S-40",
+    "D-40"
+   ],
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Associates Program Policies, Participation Requirements 6(s) (no artificial or incentivised clicks - measurement stays passive)"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC Disclosures 101 (transparency with readers)"
+    }
+   ],
+   "flags": [
+    "F-19"
+   ]
+  },
+  {
+   "id": "Q-47",
+   "area": "Traffic",
+   "question": "Who verifies the site in Google Search Console, and when are the generated sitemap and the RSS feed submitted?",
+   "why_it_matters": "The brief's measurement directive ('so the next topic is chosen from measured queries instead of instinct') needs the site's own impressions and queries, which only Search Console supplies - and S-09's unshipped half is exactly this. The sitemap and feed are already generated; the property is the missing half, and verifying it needs an owner account.",
+   "kind": "Owner decision",
+   "known": "docs/sitemap.xml is generated by the builder from the same page list the site renders, robots.txt points at it, and docs/feed.xml (2026-11-17) carries every article. No Search Console property is connected, so nothing about indexing, impressions or queries is claimed anywhere.",
+   "how_to_discover": "Owner steps: verify the kanlerxz87-cyber.github.io/Zone4 property in Google Search Console, submit https://kanlerxz87-cyber.github.io/Zone4/docs/sitemap.xml, and let the feed register in feed readers via its head link. First measured query data then fills the topic-choice loop (Q-40).",
+   "answerable_by": "The site owner (Search Console account required)",
+   "blocks": [
+    "S-09 completion",
+    "Q-40"
+   ],
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+     "ref": "Google Search Central, building and submitting a sitemap"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google Search Central, creating helpful content (topics from real demand, not instinct)"
+    }
+   ],
+   "flags": [
+    "F-15"
+   ]
   }
  ]
 }

@@ -1,0 +1,155 @@
+{
+ "_meta": {
+  "session": "arena/1f4a7a22-zone4",
+  "read_date_utc": "2026-11-17",
+  "scope": "Re-verification reads this session ran before publishing anything: the three supplied short links (resolution target, listing title, breadcrumb, also-viewed set, tag= parameter presence), the Associates Program Policies (update date, Commission Income Statement Section 1 attribution windows, Section 6 reporting sentence, Participation Requirements 2(b) tag-format sentence), and the Associates Program Operating Agreement (Section 4 no-representation sentence, Section 5 disclosure sentence). These reads back the tracking-ID integration, the product-intent confirmation record and the campaign-ledger attribution windows published in this session's build.",
+  "method": "Page reads through the platform's page-fetch tool, one read per URL. No login, form, checkout or access control used or bypassed. Prices and star ratings visible on the live pages were deliberately NOT copied into the site (Participation Requirements 2(b) and 6(t)); they appear only inside page-source URLs fetched during the reads and are not recorded here as data values.",
+  "conventions": "match = the stored record agrees with the 2026-11-17 live read. drift = the live page differs from the stored snapshot; the stored snapshot keeps its own citation and the difference is flagged or already flagged. Every row names the official URL it was read from."
+ },
+ "rows": [
+  {
+   "row": "L1",
+   "field": "Supplied short link target (P1)",
+   "stored": "https://link.amazon/B04G1MEwY resolves to ASIN B0CDY277D3",
+   "live_read_2026_11_17": "Requested https://link.amazon/B04G1MEwY; the fetch landed on https://www.amazon.com/dp/B0CDY277D3 with parameters lv=shuf, btn_type=ss, gaOptInStatus=true, btn_ref=srctok-... (source token), channelId=704, plpRedirect=mhFallback. No 'tag=' parameter in the resolved URL (F-03 stands).",
+   "result": "match",
+   "source_url": "https://link.amazon/B04G1MEwY"
+  },
+  {
+   "row": "L2",
+   "field": "Supplied short link target (P2)",
+   "stored": "https://link.amazon/B02NbDxp3 resolves to ASIN B09B7SB46R",
+   "live_read_2026_11_17": "Requested https://link.amazon/B02NbDxp3; the fetch landed on https://www.amazon.com/dp/B09B7SB46R with parameters lv=shuf, btn_type=ss, gaOptInStatus=true, btn_ref=srctok-... (source token), channelId=704, plpRedirect=mhFallback. No 'tag=' parameter in the resolved URL (F-03 stands).",
+   "result": "match",
+   "source_url": "https://link.amazon/B02NbDxp3"
+  },
+  {
+   "row": "L3",
+   "field": "Supplied short link target (P3)",
+   "stored": "https://link.amazon/B00hJ57DV resolves to ASIN B08DKYBTPH (recorded with the th=1 variant parameter)",
+   "live_read_2026_11_17": "Requested https://link.amazon/B00hJ57DV; the fetch landed on https://www.amazon.com/dp/B08DKYBTPH with parameters lv=shuf, btn_type=ss, gaOptInStatus=true, btn_ref=srctok-... (source token), channelId=704, plpRedirect=mhFallback, th=1. No 'tag=' parameter in the resolved URL (F-03 stands).",
+   "result": "match",
+   "source_url": "https://link.amazon/B00hJ57DV"
+  },
+  {
+   "row": "P1-t",
+   "field": "P1 listing title",
+   "stored": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black (name_listing)",
+   "live_read_2026_11_17": "identical title string in the page title on https://www.amazon.com/dp/B0CDY277D3",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+  },
+  {
+   "row": "P1-b",
+   "field": "P1 breadcrumb",
+   "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+   "live_read_2026_11_17": "identical breadcrumb chain (node 17659096011 for Air Fryers)",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+  },
+  {
+   "row": "P1-c",
+   "field": "P1 also-viewed carousel",
+   "stored": "B0B7C327LK, B0BYKGN61Q, B0CNSB81V6 (2026-11-14 snapshot)",
+   "live_read_2026_11_17": "positions 1-3 showed B0B7C327LK, B0BYKGN61Q, B0CNSB81V6 in the stored order",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+  },
+  {
+   "row": "P2-t",
+   "field": "P2 listing title segments",
+   "stored": "First segment 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven' stored verbatim; the stored second segment ('26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.') is the 2026-11-14 snapshot (F-44 keeps the drift question open)",
+   "live_read_2026_11_17": "Page title read 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included' - the same alternative second segment recorded on 2026-11-15, 2026-11-16 (twice) and now a fifth dated sighting. Stored record kept unchanged; no official source states which rendering is canonical (F-44). The title again carries 'Six Cooking Accessories Included' against the description's '7 premium accessories' (F-50).",
+   "result": "drift (already flagged: F-44, F-50)",
+   "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+  },
+  {
+   "row": "P2-b",
+   "field": "P2 breadcrumb",
+   "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+   "live_read_2026_11_17": "identical breadcrumb chain",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+  },
+  {
+   "row": "P2-c",
+   "field": "P2 also-viewed carousel",
+   "stored": "B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH (2026-11-14 snapshot)",
+   "live_read_2026_11_17": "positions 1-3 showed B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH in the stored order - the 2026-11-15/16 rotation to B0D1BGLW25 in slot 3 did not recur on this read",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+  },
+  {
+   "row": "P3-t",
+   "field": "P3 listing title",
+   "stored": "Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel (name_listing)",
+   "live_read_2026_11_17": "identical title string in the page title on https://www.amazon.com/dp/B08DKYBTPH (th=1 variant)",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+  },
+  {
+   "row": "P3-b",
+   "field": "P3 breadcrumb",
+   "stored": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+   "live_read_2026_11_17": "identical breadcrumb chain",
+   "result": "match",
+   "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+  },
+  {
+   "row": "P3-c",
+   "field": "P3 also-viewed carousel",
+   "stored": "B0CNY1YVDD, B0D5FX6VRL, B0C33CHG99 (2026-11-14 snapshot)",
+   "live_read_2026_11_17": "slot 1 B0CNY1YVDD and slot 3 B0C33CHG99 matched the stored snapshot; slot 2 showed B09MR7QWKZ (Gourmia 8 Qt) where the snapshot stores B0D5FX6VRL. F-29 dated update appended; snapshot not overwritten.",
+   "result": "drift (already flagged: F-29)",
+   "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+  },
+  {
+   "row": "POL-1",
+   "field": "Associates Program Policies update date",
+   "stored": "Updated April 14, 2026",
+   "live_read_2026_11_17": "page states 'Updated: April 14, 2026'",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+  },
+  {
+   "row": "POL-2",
+   "field": "Participation Requirements 2(b) tag-format sentence (basis for the tagged Special Links this session publishes)",
+   "stored": "Participation Requirements 2(b): the Associates ID or 'tag' appearing as XXXXX-## must be included as a parameter in the URL of each link placed on the Site to an Amazon Site",
+   "live_read_2026_11_17": "verbatim: \"For example, you must include your Associates ID or \\\"tag\\\" (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.\" The owner-selected tracking ID shopnow047c-20 matches the XXXXX-## shape (alphanumeric identifier plus hyphen and two digits); whether it is registered and assigned to this site is confirmable only inside Associates Central (F-55).",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+  },
+  {
+   "row": "POL-3",
+   "field": "Commission Income Statement Section 1 attribution windows (basis for the campaign ledger's event definitions)",
+   "stored": "Session ends 24 hours after the Special-Link click (or on order or on clicking another publisher's link); cart orders may complete up to 89 days after the click; the product must be shipped and paid for within 180 days of purchase",
+   "live_read_2026_11_17": "verbatim 1(a)-(b): the Session is 'measured as beginning when a customer clicks through that Special Link and ending upon the first to occur of the following: (x) 24 hours elapse from that click, (y) the customer places an order for a Product, other than a digital product ... or (z) the customer clicks through a Special Link to an Amazon Site that is not your Special Link'; 1(b)(i): cart order completed 'no later than 89 days after their initial click-through of the Special Link'; 1(b)(iii): 'within 180 days of the purchase, the Product is shipped to, streamed or downloaded by, and paid for by the customer'.",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+  },
+  {
+   "row": "POL-4",
+   "field": "Commission Income Statement Section 6 reporting sentence (basis for REQ-15 / the ledger's authorized-source rule)",
+   "stored": "Amazon will use commercially reasonable efforts to accurately and comprehensively track Qualifying Purchases ... creating and distributing to you our reports",
+   "live_read_2026_11_17": "verbatim in Section 6 'Commission Income Reporting and Payment'. Click, order and commission reporting is produced by Amazon; this site's ledger therefore accepts rows only from authorized first-party reports.",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
+  },
+  {
+   "row": "OA-1",
+   "field": "Operating Agreement Section 4 (no-representation sentence, constrains the site's refusal to forecast traffic or revenue)",
+   "stored": "Amazon makes no representation, warranty or covenant regarding the amount of traffic or commission income an Associate can expect at any time",
+   "live_read_2026_11_17": "verbatim: \"We do not make any representation, warranty, or covenant regarding the amount of traffic or commission income you can expect at any time in connection with the Associates Program, and we will not be liable for any actions you undertake based on your expectations.\"",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/agreement"
+  },
+  {
+   "row": "OA-2",
+   "field": "Operating Agreement Section 5 (the disclosure sentence every page carries)",
+   "stored": "As an Amazon Associate I earn from qualifying purchases.",
+   "live_read_2026_11_17": "verbatim: \"You must clearly and prominently state the following ... \\u201cAs an Amazon Associate I earn from qualifying purchases.\\u201d\" - identical to the sentence published on every page of this site.",
+   "result": "match",
+   "source_url": "https://affiliate-program.amazon.com/help/operating/agreement"
+  }
+ ]
+}

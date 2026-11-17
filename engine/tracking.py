@@ -45,6 +45,9 @@ class Event:
     other_tag: str | None = None   # set when another publisher's link was clicked
     order_status: str | None = None
     source: str = "manual"     # where the event came from (associates-report, analytics-export…)
+    channel: str | None = None  # how the traffic reached the site (organic-search, rss-reader, direct…);
+                                # filled only from a first-party analytics export, never inferred
+                                # (campaign-ledger column, defined 2026-11-17)
 
     def __post_init__(self) -> None:
         if self.type not in EVENT_TYPES:

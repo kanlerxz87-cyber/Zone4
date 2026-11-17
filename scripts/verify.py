@@ -5,11 +5,16 @@ Checks:
   1. data/*.json: ASIN format; canonical URL matches ASIN; short links on link.amazon;
      every flag reference exists; every source URL is on an official host; every fact,
      keyword, stage, metric and rule in the marketing and pipeline files is sourced;
-     every marketing article has a fact table, a disclosure and a compliant CTA.
+     every marketing article has a fact table, a disclosure and a compliant CTA;
+     the Associates record (tag shape, null registration), the link-intent record
+     (separate redirect-observation field) and the campaign ledger (six columns, five
+     events, zero rows, provenance trail).
   2. docs/*.html: every internal link and #anchor resolves; the Associates disclosure
      sentence appears on every page; every table body row contains a link to an
      official host; no Amazon price or star rating is published; no Amazon Mark is
-     used as a page title, meta description or target keyword.
+     used as a page title, meta description or target keyword; every sponsored link
+     is the final tagged Amazon destination; docs/feed.xml parses and carries exactly
+     the article register.
 Standard library only. No network access is needed.
 """
 from __future__ import annotations
@@ -37,6 +42,7 @@ OFFICIAL_HOSTS = {
     "github.io", "oauth-redirect.googleusercontent.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+SITE_URL_CANONICAL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
 RATING_RE = re.compile(r"\b\d\.\d\s*(out of 5|stars?)\b", re.IGNORECASE)
@@ -281,6 +287,84 @@ def check_decision_support() -> None:
     logged = {entry["decision"] for entry in decisions_doc["log"] if entry["decision"] != "\u2014"}
     if recorded != logged:
         fail(f"decision log and register disagree: recorded={sorted(recorded)} logged={sorted(logged)}")
+
+
+def check_measurement() -> None:
+    """The Associates, link-intent and campaign-ledger records (added 2026-11-17).
+
+    The tracking ID is owner-supplied, so what can be checked mechanically is
+    its shape against the official rule and its consistency with the product
+    records - never its registration, which stays null until an Associates
+    Central read records it (flag F-55).
+    """
+    associates = load("associates.json")
+    tag = associates["tracking_id"]["value"]
+    if not re.match(r"^[a-z0-9][a-z0-9-]*-\d{2}$", tag):
+        fail(f"tracking ID {tag!r} does not match the official XXXXX-## shape (Participation Requirements 2(b))")
+    if associates["tracking_id"].get("registered_and_active") is not None:
+        fail("associates.json registered_and_active must stay null until an Associates Central read records it (F-55)")
+    if not associates["tracking_id"].get("source_url") or not is_official(associates["tracking_id"]["source_url"]):
+        fail("associates.json tracking_id must cite the official format rule")
+    products = {p["id"]: p for p in load("products.json")["products"]}
+    for sl in associates["special_links"]:
+        p = products.get(sl["product_id"])
+        if not p or sl["asin"] != p["asin"]:
+            fail(f"special link {sl['product_id']}: ASIN does not match the product record")
+        expected = f"https://www.amazon.com/dp/{p['asin']}?tag={tag}"
+        if sl["special_link_url"] != expected:
+            fail(f"special link {sl['product_id']}: expected {expected}, found {sl['special_link_url']}")
+    intents = load("link-intent.json")["intents"]
+    products_by_asin = {p["asin"]: p for p in products.values()}
+    for it in intents:
+        if not ASIN_RE.match(it["intended_asin"]):
+            fail(f"link intent {it['link']}: intended ASIN malformed: {it['intended_asin']}")
+        if it["intended_asin"] not in products_by_asin:
+            fail(f"link intent {it['link']}: intended ASIN matches no product record")
+        if it["official_listing_url"] != f"https://www.amazon.com/dp/{it['intended_asin']}":
+            fail(f"link intent {it['link']}: official listing URL does not match the intended ASIN")
+        if not it.get("confirmation_date_utc") or not is_official(it["confirmation_source_url"]):
+            fail(f"link intent {it['link']}: confirmation date or source missing/ unofficial")
+        reds = it.get("observed_redirect_targets")
+        # The owner directive: observed redirect targets live in their own field
+        # and are never merged into the intended values.
+        if not isinstance(reds, list) or not reds:
+            fail(f"link intent {it['link']}: observed_redirect_targets must be a separate, populated list")
+        for obs in reds or []:
+            if urlparse(obs["target_url"]).hostname not in OFFICIAL_HOSTS:
+                fail(f"link intent {it['link']}: redirect observation target is not an official host: {obs['target_url']}")
+            if it["intended_asin"] not in obs["target_url"]:
+                fail(f"link intent {it['link']}: a redirect observation must carry the intended ASIN it resolved to")
+    ledger = load("campaign-ledger.json")
+    if ledger["rows"]:
+        fail("campaign-ledger.json carries rows; no authorized report is connected, so any row would be synthetic (F-19)")
+    for ev in ledger["five_events"]:
+        if not ev.get("window"):
+            fail(f"campaign ledger event {ev['event']}: attribution window missing")
+    if not ledger.get("provenance"):
+        fail("campaign ledger: the dated provenance trail is missing")
+    if not isinstance(ledger.get("columns"), list) or len(ledger["columns"]) != 6:
+        fail("campaign ledger: the six defined columns (timestamp, source, channel, eligible sessions, clicks, reported orders) must be listed")
+
+
+def check_feed() -> None:
+    """docs/feed.xml must exist, parse, and carry exactly the article register."""
+    import xml.etree.ElementTree as ET
+    feed = DOCS / "feed.xml"
+    if not feed.exists():
+        fail("docs/feed.xml is missing (decision D-41 shipped it on 2026-11-17)")
+        return
+    try:
+        root = ET.parse(feed).getroot()
+    except Exception as exc:  # noqa: BLE001 - any parse failure is a failure
+        fail(f"docs/feed.xml does not parse: {exc}")
+        return
+    articles = load("marketing.json")["articles"]
+    expected = {SITE_URL_CANONICAL + "articles/" + a["slug"].strip("/") + ".html" for a in articles}
+    links = {it.findtext("link") for it in root.iter("item")}
+    if links != expected:
+        missing = sorted(expected - links)
+        extra = sorted(links - expected)
+        fail(f"docs/feed.xml item links do not match the article register (missing={missing}, extra={extra})")
 
 
 def check_design() -> None:
@@ -535,6 +619,25 @@ def check_site() -> None:
                 if target is None or parsed_url.fragment not in target.ids:
                     fail(f"{rel}: anchor not found: {url}")
 
+    # Every sponsored (paid) link must be the final tagged destination:
+    # Participation Requirements 2(b) requires the tag as a URL parameter, and
+    # 6(v)-(w) bar shorteners and cloaking, so no buy href may revert to the
+    # short-link host or lose its tag (decisions D-01/D-14, recorded 2026-11-17).
+    tag_value = load("associates.json")["tracking_id"]["value"]
+    for page in pages:
+        rel = page.relative_to(ROOT)
+        raw = page.read_text(encoding="utf-8")
+        for m in re.finditer(r'<a href="([^"]+)" rel="sponsored', raw):
+            url = html.unescape(m.group(1))
+            if urlparse(url).hostname != "www.amazon.com":
+                fail(f"{rel}: sponsored link does not point at www.amazon.com: {url}")
+            if f"tag={tag_value}" not in url:
+                fail(f"{rel}: sponsored link is missing the tracking tag: {url}")
+        for m in re.finditer(r'data-track-target="([^"]+)"', raw):
+            url = html.unescape(m.group(1))
+            if urlparse(url).hostname != "www.amazon.com":
+                fail(f"{rel}: tracked click target is not the final Amazon destination: {url}")
+
 
 def check_required_pages() -> None:
     required = [
@@ -601,8 +704,10 @@ def main() -> int:
     check_pipeline()
     check_requirements()
     check_decision_support()
+    check_measurement()
     check_design()
     check_site()
+    check_feed()
     check_design_page()
     check_required_pages()
     check_root_entry()

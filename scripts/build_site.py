@@ -62,6 +62,18 @@ HEADLINE_OPTIONS = DESIGN_DOC["headline_options"]
 TOPICS = DESIGN_DOC["topics"]
 LAUNCH_PATH = DESIGN_DOC["launch_path"]
 PROMPT_SLOTS = DESIGN_DOC["prompt_slots"]
+# Owner-supplied Associates data (2026-11-17): the tracking ID the owner
+# selected, the tagged Special Links built from it, and the product-intent
+# confirmation record. The ID is owner input, not an official-page value: its
+# registration is pending the one-link-per-product Associates Central test
+# (flag F-55), and the test protocol ships on the products page. The campaign
+# ledger defines the measurement schema with zero rows (no authorized report
+# is connected, F-19).
+ASSOCIATES_DOC = load("associates.json")
+TRACKING_ID = ASSOCIATES_DOC["tracking_id"]["value"]
+SPECIAL_LINKS = {s["product_id"]: s["special_link_url"] for s in ASSOCIATES_DOC["special_links"]}
+LINK_INTENT = load("link-intent.json")
+CAMPAIGN_LEDGER = load("campaign-ledger.json")
 OBSERVED = CONTENT["observed_date"]
 # The date the three supplied links and the cited official policy pages were last
 # re-read from their official sources. Kept separate from OBSERVED, which is the
@@ -249,11 +261,29 @@ def competitor_links(p: dict) -> str:
     )
 
 
+def tagged_url(url: str) -> str:
+    """Append the owner-selected tracking ID to an official product URL.
+
+    Participation Requirements 2(b) requires the Associates ID or "tag"
+    (appearing as XXXXX-##) as a parameter in the URL of each link placed on
+    the Site to an Amazon Site. The ID is owner-supplied and its registration
+    is pending confirmation in Associates Central (flag F-55).
+    """
+    if "tag=" in url:
+        return url
+    sep = "&" if "?" in url else "?"
+    return f"{url}{sep}tag={TRACKING_ID}"
+
+
 def shop_link(p: dict) -> str:
-    # rel="sponsored" marks the affiliate link for search engines (decision D-05,
-    # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
-    return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
+    # The published href is the final destination URL with the owner-selected
+    # tag (decision D-01/D-14, recorded 2026-11-17): no shortener and nothing
+    # that obscures the Amazon destination (Participation Requirements
+    # 6(v)-(w)). rel="sponsored" marks the affiliate link for search engines
+    # (decision D-05); the visible disclosure and "(paid link)" label stay.
+    url = SPECIAL_LINKS[p["id"]]
+    return ext(url, "Open Amazon link (paid link)",
+               f' class="shop" data-track="click" data-track-target="{esc(url)}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
 
 
@@ -560,7 +590,7 @@ def marketing_article(current: Page, article: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in article["compliance_notes"])
     cta = article["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
+    cta_button = ext(tagged_url(cta["link_url"]), cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure sits in the same paragraph as the affiliate link, so it is
     # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
@@ -902,7 +932,7 @@ def page_article(current: Page, a: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in a["compliance_notes"])
     cta = a["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
+    cta_button = ext(tagged_url(cta["link_url"]), cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure and a plain-language paid-link label sit in the same
     # paragraph as the affiliate link, not below it, so both are adjacent to the
     # link they qualify. qa/audit_site.py fails the build if either is missing.
@@ -1061,6 +1091,67 @@ def page_products(current: Page) -> str:
         'in liters, the other two in quarts, so read the ratio within each row rather than ranking the rows against each '
         'other. Depth is the first dimension as listed; the unit&rsquo;s own footprint also includes its width and height '
         'on the rows above.</p></section>'
+        + intent_confirmation_section(current)
+    )
+
+
+def intent_confirmation_section(current: Page) -> str:
+    """Outbound links and the product-intent confirmation record (2026-11-17).
+
+    The buy links published on this site are tagged Special Links built from
+    the owner-selected tracking ID; the submitted short links stay recorded
+    with their intended ASINs and their observed redirect targets kept in a
+    separate field, per the owner's directive that the two are never merged.
+    """
+    intent_rows = []
+    for it in LINK_INTENT["intents"]:
+        reds = "<br>".join(
+            f'<span class="small">{esc(obs["observed_utc"])}:</span> '
+            f'{ext(obs["target_url"], obs["target_url"].split("?")[0])}'
+            f'<br><span class="small muted">{esc(obs["parameters_note"])} ({esc(obs["record"])})</span>'
+            for obs in it["observed_redirect_targets"]
+        )
+        intent_rows.append([
+            ext(it["link"], it["link"].replace("https://", "")),
+            ext(it["official_listing_url"], it["intended_asin"]),
+            esc(it["confirmation_date_utc"]) + f' <span class="small muted">({esc(it["confirmation_evidence"].split("(")[0].strip()[:90])}...)</span>',
+            esc(it["intent_status"].split(";")[0]),
+            reds,
+        ])
+    special_rows = []
+    for sl in ASSOCIATES_DOC["special_links"]:
+        special_rows.append([
+            esc(sl["product_id"]),
+            ext(sl["special_link_url"], sl["special_link_url"].replace("https://www.amazon.com", "")),
+            ext(sl["submitted_link"], sl["submitted_link"].replace("https://", "")),
+            esc(sl["test_status"]),
+        ])
+    return (
+        '<section id="special-links"><h2>Outbound links: tagged Special Links and the one-link-per-product test</h2>'
+        '<p class="section-lead">The owner selected tracking ID <strong>' + esc(TRACKING_ID) + '</strong> (brief, 2026-11-17). Every outbound '
+        'product link on this site now points at the final destination URL with that tag as its parameter &mdash; the format Participation '
+        'Requirements 2(b) requires &mdash; with no shortener in the published href (6(v)&ndash;(w)). What is still only confirmable inside '
+        'Associates Central is whether the ID is registered and active, so the flag is open and the test below gates the '
+        '&ldquo;attribution-ready&rdquo; claim, not publishing (F-55). The supplied short links are not judged valid or invalid here; their '
+        'compliance status is unresolved in the parallel Zone3 register (FLG-003).</p>'
+        + table(["Product", "Published Special Link (destination)", "Submitted link (recorded)", "Test status"],
+                special_rows, "special-links")
+        + '<div><h3>Test protocol &mdash; one link per product, inside Associates Central (sign-in required)</h3>'
+        '<ol>'
+        + "".join(f"<li>{esc(step)}</li>" for step in ASSOCIATES_DOC["test_protocol"]["steps"])
+        + '</ol>'
+        f'<p class="note">Source of the format rule: {ext(ASSOCIATES_DOC["tracking_id"]["source_url"], ASSOCIATES_DOC["tracking_id"]["source_ref"])}. '
+        f'The account surfaces: {ext(ASSOCIATES_DOC["test_protocol"]["source_url"], "Associates Central")}. Until the report confirms the clicks, no '
+        f'attributed click, order or revenue figure is claimed anywhere on this site (F-19).</p></div></section>'
+        + '<section id="link-intent"><h2>Product-intent confirmation record</h2>'
+        '<p class="section-lead">Per submitted link: the intended ASIN, the official listing URL, the confirmation date and its source &mdash; '
+        'and, kept strictly separate so the two are never merged, the redirect targets the short link actually served on each dated read, with '
+        'whatever parameters it carried. The intended ASIN is validated against Amazon&rsquo;s official ASIN definition; whether these are the '
+        'products the owner intends to promote remains decision D-13.</p>'
+        + table(["Submitted link", "Intended ASIN (official listing)", "Confirmed", "Intent status",
+                 "Observed redirect targets (separate field, dated per read)"], intent_rows, "link-intent")
+        + '<p class="note">Each redirect observation cites the session record that performed the read. The 2026-11-17 confirmations are in '
+        'data/verification-session-1f4a7a22.json; the intended-ASIN field changes only through an owner decision.</p></section>'
     )
 
 
@@ -1249,23 +1340,78 @@ def page_analytics(current: Page) -> str:
         '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
         'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
         'product links on this site do.</p>'
-        '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
-        'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
+        '<p class="note">Since 2026-11-17 the tracked links are tagged Special Links: the final destination URL with the owner-selected tracking ID '
+        '(' + esc(TRACKING_ID) + ') as its parameter. A click recorded here can therefore be reconciled against Associates reporting once the '
+        'account connection exists and the tag&rsquo;s registration is confirmed by the one-link-per-product test ('
+        + href(current, "products.html#special-links", "test protocol") + '; ' + flag_chip(current, "F-55") + ').</p>'
         '</section>'
-        '<section>'
+        + campaign_ledger_section(current)
+        + '<section>'
         '<h2>Connecting real measurement</h2>'
         '<ul class="bullets">'
-        f'<li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see {href(current, "policy-compliance.html", "Policy compliance")}).</li>'
-        f'<li>Confirm the tag on the supplied short links before relying on any earnings (see {href(current, "flagged.html", "F-03")}).</li>'
-        f'<li>Authoritative click, order and commission figures come from the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}.</li>'
+        f'<li>The owner-selected tracking ID ({esc(TRACKING_ID)}) is already on every outbound product link; confirm its registration in Associates Central with the {href(current, "products.html#special-links", "one-link-per-product test")} before relying on any earnings (see {href(current, "flagged.html", "F-55")}).</li>'
+        f'<li>Authoritative click, order and commission figures come from the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}; a rollup row is entered only from such a report, with its source and date (see {href(current, "flagged.html", "F-19")}).</li>'
         f'<li>Product data served from Amazon must come through the Creators API, and reusing or fine-tuning on API content needs express prior written approval (see {href(current, "flagged.html", "F-24")}).</li>'
         f'<li>Price tracking and price alerting are prohibited unless Amazon agrees otherwise, so no price history is collected here (see {href(current, "flagged.html", "F-22")}).</li>'
-        '<li>Add a cookie or consent notice appropriate to your audience before enabling measurement on real traffic, consistent with the disclosure '
-        'expectations in the official Program Policies and applicable law.</li>'
+        '<li>Add a cookie or consent notice appropriate to your audience before enabling measurement beyond the browser-local ledger (decision '
+        'D-40 lists the endpoint options; D-16/Q-17 hold the privacy basis), consistent with the disclosure expectations in the official Program '
+        'Policies and applicable law.</li>'
         '</ul>'
         '</section>'
         f'<p class="muted small">This page displays no prices, ratings or review counts (withheld under {href(current, "flagged.html", "F-02")}). '
         f'Verified product facts live in the {href(current, "verification.html", "verification log")}.</p>'
+    )
+
+
+def campaign_ledger_section(current: Page) -> str:
+    """The empty but well-defined campaign ledger, rendered as an empty state.
+
+    Every column and event definition cites the official rule that defines it;
+    the rows list is empty by design because no authorized first-party report
+    is connected (F-19), and engine.tracking refuses synthetic events.
+    """
+    col_rows = []
+    for col in CAMPAIGN_LEDGER["columns"]:
+        source = (
+            ext("https://affiliate-program.amazon.com/help/operating/policies", "Commission Income Statement")
+            if col["column"] in ("eligible_sessions", "clicks", "reported_orders")
+            else ext("https://affiliate-program.amazon.com/help/operating/policies", "Program Policies")
+        )
+        col_rows.append([esc(col["column"]), esc(col["definition"]), esc(col["filled_from"]), source])
+    event_rows = []
+    for ev in CAMPAIGN_LEDGER["five_events"]:
+        event_rows.append([
+            esc(ev["event"]),
+            esc(ev["definition"]),
+            esc(ev["window"]),
+            ext("https://affiliate-program.amazon.com/help/operating/policies",
+                "Commission Income Statement" if ev["event"] in ("click", "session", "order") else "Program Policies"),
+        ])
+    prov_rows = []
+    for prov in CAMPAIGN_LEDGER["provenance"]:
+        prov_rows.append([
+            esc(prov["date_utc"]),
+            esc(prov["entry"]),
+            ext("https://github.com/kanlerxz87-cyber/Zone4/blob/main/" + prov["record"], prov["record"]),
+        ])
+    return (
+        '<section id="campaign-ledger"><h2>The campaign ledger (empty by design)</h2>'
+        '<p class="section-lead">The rollup schema the first authorized report is typed into: six columns, the five defined event types, and a '
+        'dated provenance trail. Rows are added only when their numbers exist in an authorized first-party report &mdash; an Associates Central '
+        'export or this site&rsquo;s own analytics export &mdash; and each row records the report it came from. No conversion score and no revenue '
+        'forecast is published anywhere: Operating Agreement Section 4 states Amazon makes no representation about the traffic or commission '
+        'income an Associate can expect (re-read verbatim 2026-11-17). The raw event ledger underneath is data/tracking.jsonl, and '
+        'engine.tracking refuses synthetic events by design.</p>'
+        + table(["Column", "Definition", "Filled from", "Source (official)"], col_rows, "ledger")
+        + '<h3>The five defined events</h3>'
+        + table(["Event", "Definition", "Attribution window (official)", "Source (official)"], event_rows, "ledger")
+        + '<p class="note">The windows are the official Commission Income Statement Section 1 text, re-read 2026-11-17: a Session ends at the first '
+        'of 24 hours, an order, or a click through another publisher&rsquo;s Special Link; cart orders may complete up to 89 days after the click; '
+        'the product must ship and be paid for within 180 days of purchase.</p>'
+        + '<h3>Provenance trail</h3>'
+        + table(["Date (UTC)", "Entry", "Record"], prov_rows, "ledger")
+        + f'<p class="note">The ledger currently holds zero rows. Nothing observed anywhere except an authorized report is eligible, so every '
+        f'performance rollup on this page renders as null until a report is connected ({flag_chip(current, "F-19")}).</p></section>'
     )
 
 
@@ -2142,6 +2288,7 @@ def render(page: Page) -> str:
 <meta name="twitter:title" content="{esc(page.title_tag or page.title)}">
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 {page.head_extra}
+<link rel="alternate" type="application/rss+xml" title="{esc(SITE_TITLE_SUFFIX)} - RSS" href="{esc(page.rel('feed.xml'))}">
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
 <body>
@@ -2157,7 +2304,7 @@ def render(page: Page) -> str:
 {page.body}
 </main>
 <footer>
-  <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
+  <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py. Subscribe: <a href="{esc(page.rel('feed.xml'))}">RSS feed</a>.</p>
 </footer>
 </div>
 </div>
@@ -2237,6 +2384,55 @@ def collect_pages() -> list[Page]:
     return pages
 
 
+def _rfc822(date_str: str) -> str:
+    """RFC-822 date (RSS requires it) from one of the data files' UTC dates.
+
+    Deliberately derived from published dates, never from the clock, so the
+    build stays deterministic and CI can compare committed docs/ against a
+    fresh build.
+    """
+    from datetime import datetime, timezone
+    from email.utils import format_datetime
+    dt = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    return format_datetime(dt)
+
+
+def feed_xml() -> str:
+    """RSS 2.0 feed of the published articles (decision D-41, shipped 2026-11-17).
+
+    Generated from the same article register the pages render, so a guide in
+    the data is automatically in the sitemap, on the hub and in the feed.
+    Item dates reuse the observed date already published in each article's
+    structured data; nothing is asserted here that the articles do not
+    already say.
+    """
+    items = []
+    for a in MARKETING["articles"]:
+        url = SITE_URL + "articles/" + a["slug"].strip("/") + ".html"
+        items.append(
+            "    <item>\n"
+            f"      <title>{esc(a['h1'])}</title>\n"
+            f"      <link>{esc(url)}</link>\n"
+            f"      <guid isPermaLink=\"true\">{esc(url)}</guid>\n"
+            f"      <description>{esc(a['meta_description'])}</description>\n"
+            f"      <pubDate>{_rfc822(OBSERVED)}</pubDate>\n"
+            "    </item>\n"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0">\n'
+        "  <channel>\n"
+        f"    <title>{esc(SITE_TITLE_SUFFIX)}</title>\n"
+        f"    <link>{esc(SITE_URL)}</link>\n"
+        f"    <description>{esc(SITE_DESCRIPTION)}</description>\n"
+        "    <language>en</language>\n"
+        f"    <lastBuildDate>{_rfc822(RECHECKED)}</lastBuildDate>\n"
+        + "".join(items)
+        + "  </channel>\n"
+        "</rss>\n"
+    )
+
+
 def build() -> list[pathlib.Path]:
     OUT.mkdir(exist_ok=True)
     (OUT / "categories").mkdir(exist_ok=True)
@@ -2278,6 +2474,12 @@ def build() -> list[pathlib.Path]:
         f"Sitemap: {SITE_URL}sitemap.xml\n",
         encoding="utf-8",
     )
+    # RSS 2.0 feed of the published articles (decision D-41, shipped
+    # 2026-11-17): generated from the article register like everything else,
+    # so a guide in the data reaches the sitemap, the hub and the feed in one
+    # build. Every page head carries <link rel="alternate"> and the footer
+    # links the file.
+    (OUT / "feed.xml").write_text(feed_xml(), encoding="utf-8")
     return written
 
 

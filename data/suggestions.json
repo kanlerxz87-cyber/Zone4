@@ -17,14 +17,17 @@
    "Partly implemented 2026-11-16": "Decision recorded 2026-11-16; part of the change is live in this build, the rest is staged or needs an owner fact.",
    "Confirmed by the 2026-11-16 decision": "A standing state or guardrail, confirmed by the recorded decision. Nothing new to build.",
    "Decision recorded 2026-11-16 - work remains": "The direction is decided; implementation is deferred and the reason is in the decision log.",
-   "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes."
+   "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes.",
+   "Implemented 2026-11-17": "Decision recorded and the change is live in this build (2026-11-17 pass).",
+   "Owner action required": "Built and published up to the point where only a sign-in-only surface (Associates Central, Search Console, hosting) can take the next step; the exact steps are written down in the row."
   },
   "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
   "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
   "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
   "updated_utc": "2026-11-16",
   "update_note": "Statuses updated after the 2026-11-16 delegated decision round: what shipped in this build, what is confirmed as standing policy, what was not adopted, and what still needs an owner fact (S-01, S-02, S-08, S-18). The register stays the place to review a change before it is made; nothing here was implemented before its decision was recorded.",
-  "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items."
+  "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items.",
+  "added_by_1f4a7a22_2026_11_17": "Rows S-37..S-44 and the two new statuses were added by session arena/1f4a7a22-zone4 (2026-11-17), working from the owner's brief that selected tracking ID shopnow047c-20 and asked for the measurement machinery, the product-intent record and the anti-slop finish."
  },
  "suggestions": [
   {
@@ -51,8 +54,9 @@
     "F-03",
     "F-04"
    ],
-   "status": "Awaiting decision",
-   "decision": "D-01"
+   "status": "Implemented 2026-11-17",
+   "decision": "D-01",
+   "status_note_2026_11_17": "The owner selected tracking ID shopnow047c-20; every outbound product link now carries it as a tagged Special Link (S-37). The end-to-end attribution test inside Associates Central remains outstanding (S-41, F-55), which is why the row is implemented rather than closed."
   },
   {
    "id": "S-02",
@@ -661,7 +665,8 @@
      "ref": "Google: original information, reporting, research or analysis"
     }
    ],
-   "flags": []
+   "flags": [],
+   "status_note_2026_11_17": "Unchanged in scope by the 2026-11-17 pass; what moved is the machinery it waits on: the tagged links, the defined ledger and the feed now exist, and the traffic question (Q-47) is stated. Growth on the verification angle still starts after Search Console supplies real queries."
   },
   {
    "id": "S-26",
@@ -857,8 +862,9 @@
     "F-52",
     "F-53"
    ],
-   "status": "Awaiting decision",
-   "decision": "D-36"
+   "status": "Implemented 2026-11-17",
+   "decision": "D-36",
+   "status_note_2026_11_17": "D-36 recorded 2026-11-17 under the owner's repeated anti-slop instruction: the M-P3 opener no longer describes its own composition, and the ASIN-and-category-path prose (F-53) is rewritten out of the three product articles. Facts and fact_ids unchanged; F-52's dated update records the fix."
   },
   {
    "id": "S-34",
@@ -939,6 +945,212 @@
    "flags": [],
    "status": "Awaiting decision",
    "decision": "D-39"
+  },
+  {
+   "id": "S-37",
+   "priority": "P1 - Decide first",
+   "title": "Publish tagged Special Links using the owner-selected tracking ID",
+   "problem": "Until 2026-11-17 the site's buy links used the supplied link.amazon short links as hrefs, whose resolved URLs carry no Associates tag (F-03), and whose compliance status is unresolved in Zone3's FLG-003 - which this row does not judge either way. Participation Requirements 2(b) requires the tag as a parameter in the URL of each link placed on the site.",
+   "proposal": "Use the owner-selected tracking ID (shopnow047c-20, brief 2026-11-17) and publish the final destination URLs - https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 - as the outbound product links on every surface (product tables, category tiles, article CTAs). No shortener, no cloaking (6(v)-(w)); rel=\"sponsored\", the '(paid link)' label and the disclosure all stay.",
+   "why": "It makes the earning claim structurally true instead of aspirational: the disclosure sentence, the '(paid link)' marker and the tag now all describe the same link. It also ends the site's dependence on a redirector it cannot audit.",
+   "effort": "Done (2026-11-17): one tagging point in the builder, seven CTA data values, one rebuild.",
+   "risk": "If the tag turns out to be unregistered, clicks still reach the right products but earn nothing - which is why the test protocol (S-41) gates 'attribution-ready', not publishing. The short links stay recorded in the intent record either way.",
+   "check": "Every buy href matches https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20; verify.py fails the build if a shop link stops carrying the tag or reverts to a shortener host.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Participation Requirements 2(b) (tag format), 6(v)-(w) (no cloaking/shorteners)"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement, Section 5 (disclosure)"
+    }
+   ],
+   "flags": [
+    "F-03",
+    "F-55"
+   ],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-01"
+  },
+  {
+   "id": "S-38",
+   "priority": "P2 - Adds real value",
+   "title": "Build the product-intent confirmation record, with redirect observations kept in a separate field",
+   "problem": "The brief asked for a record that stores, per submitted link, the intended ASIN, the official listing URL, the confirmation date and the source - and keeps observed redirect targets in a separate field that is never merged with the intended values. Until 2026-11-17 that intent lived implicitly across products.json and the verification session records.",
+   "proposal": "data/link-intent.json: one row per submitted link with the intended ASIN (validated against Amazon's official ASIN definition), the official listing URL, the confirmation date and evidence, plus an append-only observed_redirect_targets log that dates each read, names the target actually served and whether a tag parameter was visible.",
+   "why": "It separates what the owner intends from what a redirector happens to serve on a given day, so a future reader can audit both without conflating them - the same discipline the site applies to snapshots versus stable facts.",
+   "effort": "Done (2026-11-17): three rows, nine dated redirect observations, rendered on the products page.",
+   "risk": "None. The record adds no claim; whether the three products are the intended ones stays with decision D-13.",
+   "check": "verify.py validates the record: every row carries an official listing URL and confirmation source, the redirect field is a separate list, and the intended ASIN matches the product record.",
+   "sources": [
+    {
+     "url": "https://sell.amazon.com/blog/what-is-an-asin",
+     "ref": "Amazon's official ASIN definition (the checkable identifier)"
+    },
+    {
+     "url": "https://www.amazon.com/dp/B0CDY277D3",
+     "ref": "Official listing for P1 (the confirmation source, as for P2 and P3)"
+    }
+   ],
+   "flags": [
+    "F-04"
+   ],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-13"
+  },
+  {
+   "id": "S-39",
+   "priority": "P2 - Adds real value",
+   "title": "Define the empty campaign ledger: six columns, five events, dated provenance",
+   "problem": "The brief asks to 'start with an empty but well-defined campaign ledger' - timestamp, source, channel, eligible sessions, clicks and reported orders, added only from authorized first-party reports, with a dated provenance trail, and no conversion score or revenue forecast. The raw event ledger (data/tracking.jsonl, engine/tracking.py) existed; the rollup layer did not.",
+   "proposal": "data/campaign-ledger.json defines the six columns, names the five defined events (impression, click, session, order, refund) with their official attribution windows (24-hour session, 89-day cart, 180-day ship - Commission Income Statement Section 1), carries zero rows, and keeps a dated provenance trail. The Analytics page renders it as an empty state.",
+   "why": "An empty ledger with defined columns is the difference between 'we will measure later' and a schema the first real report can be typed into correctly. The no-forecast rule is Operating Agreement Section 4's own language.",
+   "effort": "Done (2026-11-17): schema, five event definitions, provenance trail, rendered empty state.",
+   "risk": "The main risk is forgetting why it is empty. The Analytics page and the provenance trail both state it: no authorized report is connected, and engine.tracking refuses synthetic events.",
+   "check": "verify.py fails the build if the ledger carries a row (no authorized report exists) or if any event definition loses its official source.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Commission Income Statement Sections 1 and 6 (attribution windows; Amazon produces the reports)"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement, Section 4 (no representation about traffic or commission income - the no-forecast rule)"
+    }
+   ],
+   "flags": [
+    "F-19"
+   ],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-33"
+  },
+  {
+   "id": "S-40",
+   "priority": "P2 - Adds real value",
+   "title": "Stage the self-hosted analytics endpoint decision",
+   "problem": "The brief asks for 'a privacy-preserving outbound-click counter and a self-hosted analytics endpoint'. The counter is shipped and privacy-preserving (browser-local, sends nothing). The endpoint cannot exist on GitHub Pages, which serves static files only - so the hosting choice is genuinely the owner's, and the privacy basis (Q-17/D-16) gates any version of it.",
+   "proposal": "Record the choice as decision D-40 with three options: stay local-only (the ledger stays defined and empty), self-host a small collector on infrastructure the owner controls, or adopt a managed privacy-first service. Nothing is deployed until both the hosting choice and the consent basis exist.",
+   "why": "Staging the decision keeps the brief's automation goal visible without guessing at a privacy basis or spinning up infrastructure nobody asked for yet.",
+   "effort": "Decision only; the client-side send target is one constant whenever the answer arrives.",
+   "risk": "Low. The risk of acting early (measuring beyond local storage before the consent review) is exactly what the gate prevents.",
+   "check": "If D-40 lands on self-hosting, the endpoint accepts only the five event types and the campaign ledger's provenance trail records the deployment date and source.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Participation Requirements 6(s)"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC Disclosures 101"
+    }
+   ],
+   "flags": [
+    "F-19"
+   ],
+   "status": "Needs a decision first",
+   "decision": "D-40"
+  },
+  {
+   "id": "S-41",
+   "priority": "P1 - Decide first",
+   "title": "Run the one-link-per-product Associates Central test before scaling",
+   "problem": "The brief: 'Test one link per product in the enrolled Associates workflow and confirm destination and tracking report before scaling.' The tagged Special Links are published, but their tag's registration, activity and report attribution are confirmable only inside Associates Central (F-55) - and the owner's brief separately instructs that the supplied short links are not to be judged invalid or valid (Zone3 FLG-003, unresolved).",
+   "proposal": "The five-step protocol published in data/associates.json and on the products page: confirm the tag in Account Settings; generate one tagged link per product and compare with the published URLs; click each published Special Link once; confirm the clicks appear in the Associates report after 24-48 hours; record the result with the date. Only then scale beyond three.",
+   "why": "It is the cheapest possible way to convert the owner's selected ID from an input into a verified fact, and it produces the evidence the ledger's first real row will need.",
+   "effort": "About 15 minutes inside Associates Central, plus 24-48 hours of report wait.",
+   "risk": "None to the site: publishing is not gated on it, only the 'attribution-ready' claim is. If the report shows no attribution, stop and re-check the tag.",
+   "check": "data/associates.json registered_and_active moves from null to a dated value, and the campaign ledger's provenance trail gains the confirmation entry.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/",
+     "ref": "Associates Central (account settings, link builder, reports)"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Participation Requirements 2(b)"
+    }
+   ],
+   "flags": [
+    "F-55",
+    "F-03"
+   ],
+   "status": "Owner action required",
+   "decision": "D-14"
+  },
+  {
+   "id": "S-42",
+   "priority": "P2 - Adds real value",
+   "title": "Ship the RSS feed and its subscribe affordances",
+   "problem": "The brief's publishing directive ('add each new guide to the existing sitemap and feed') presumes a feed; none existed, so each new guide could reach sitemap consumers but not feed readers. The sitemap has existed since 2026-11-15.",
+   "proposal": "Generate docs/feed.xml (RSS 2.0) in the builder from the article register: absolute links to the published article pages, item dates equal to the observed date already published in each article's structured data, channel metadata only. Add <link rel=alternate> to every page head and an RSS link in the footer. Every future article appears in the feed automatically because the feed reads the same data the pages render from.",
+   "why": "Feed readers are the privacy-safe subscription channel (no email list, no consent surface - D-16 stays closed), and the head link is what lets them discover it. It also gives the publishing cadence a mechanical outlet: publish into the register, and the sitemap, the feed and the hub all update together.",
+   "effort": "Done (2026-11-17): generator, head link, footer link.",
+   "risk": "Minimal. The feed publishes only what the site already publishes, with no new claims - it reuses the register's own titles, links and dates.",
+   "check": "verify.py validates that feed.xml exists, parses as XML, and that every item link matches a published article page.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google Search Central, creating helpful content (a feed is distribution of the same people-first pages, not new claims)"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+     "ref": "The generated feed in this repository (docs/feed.xml) - the format follows RSS 2.0, and the file is the published artifact itself"
+    }
+   ],
+   "flags": [],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-41"
+  },
+  {
+   "id": "S-43",
+   "priority": "P2 - Adds real value",
+   "title": "Reader capture: an email follow option, only after the privacy basis exists",
+   "problem": "The brief's parallel passes name 'reader capture' as a polish row. An email list is the strongest capture channel, but it is exactly what Q-22 and D-16 gate: collecting addresses creates a consent basis, a privacy notice and a retention question that no one has answered. Shipping it by default would guess at all three.",
+   "proposal": "Keep the shipped RSS feed as the capture channel for now (subscribe affordances live since 2026-11-17). If an email list is wanted, answer D-16 first (consent basis, retention, notice), then add a single opt-in form whose copy states the basis, and keep Program Content out of it (Participation Requirements Section 4 bars offline/email use of Program Content).",
+   "why": "Capture that respects the open privacy decision is also better marketing: an empty RSS subscriber is a smaller loss than a mis-collected email list.",
+   "effort": "RSS: done. Email: a form plus the notice, after D-16.",
+   "risk": "The Amazon rule is specific: Program Content must not appear in email. Any newsletter design must keep product data and Special Links out of it until the policy row is re-read and the design reviewed.",
+   "check": "No email form ships while D-16 is open; when it ships, its copy names the consent basis and the page carries the standard disclosure.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Section 4 (offline/email use of Program Content restricted)"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC Disclosures 101 (disclosures must be clear and conspicuous wherever the endorsement appears)"
+    }
+   ],
+   "flags": [
+    "F-26"
+   ],
+   "status": "Needs a decision first",
+   "decision": "D-16"
+  },
+  {
+   "id": "S-44",
+   "priority": "P3 - Housekeeping",
+   "title": "Fold the measurement surfaces into the design brief as named components",
+   "problem": "The 2026-11-17 pass added three surfaces the design brief does not yet name: the campaign-ledger empty-state table on the Analytics page, the tagged buy button (tag + '(paid link)' label + disclosure in one component), and the feed subscribe affordance in the head and footer. A future design pass that does not know they are compliance-fixed components will restyle around them.",
+   "proposal": "Decision D-42 option A: add the three components to data/design.json and DESIGN_PROMPT.md, each with its non-negotiable parts (the '(paid link)' label, the disclosure adjacency, the uncloaked destination) stated in the row so no restyle can drop them.",
+   "why": "The brief exists precisely so a redesign cannot drift from the components that carry compliance; the buy button is now the most important such component on the site.",
+   "effort": "One data-file addition and a regeneration, after D-42 is answered.",
+   "risk": "None while open; the row only stages the addition.",
+   "check": "If adopted, check_design() treats the new rows like every other brief row: sourced, qualitative, no figures.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google Search Central, creating helpful content"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Program Policies, Participation Requirements 6(v)-(w)"
+    }
+   ],
+   "flags": [],
+   "status": "Awaiting decision",
+   "decision": "D-42"
   }
  ]
 }

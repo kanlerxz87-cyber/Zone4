@@ -230,12 +230,24 @@ def load_short_links() -> set[str]:
     return {p["short_link"] for p in products}
 
 
+def load_special_links() -> set[str]:
+    """The tagged Special Links published as outbound product hrefs (2026-11-17).
+
+    Since decisions D-01/D-14 were recorded, the shop hrefs are the final
+    destination URLs with the owner-selected tracking ID, not the short links;
+    the short links remain recorded data (products-coverage check below) but
+    are no longer valid shop destinations.
+    """
+    associates = json.loads((DATA / "associates.json").read_text(encoding="utf-8"))
+    return {s["special_link_url"] for s in associates["special_links"]}
+
+
 def load_asins() -> set[str]:
     products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
     return {p["asin"] for p in products}
 
 
-def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> None:
+def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> None:
     rel = path.relative_to(ROOT)
     text = visible_text(sp)
 
@@ -304,7 +316,10 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
 
     # -- nav consistency (warnings; new pages may be added by other sessions)
     nav_paths: set[str] = set()   # site-root-relative paths (relative to docs/)
-    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*.html")}
+    # Every file the build can produce is a valid nav/inline target, not only
+    # HTML: the RSS feed (docs/feed.xml, decision D-41) is linked from every
+    # page head and the footer.
+    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*") if p.is_file()}
     for href_url, _ in sp.external_anchors:
         parsed = urlparse(href_url)
         if parsed.scheme or href_url.startswith("#"):
@@ -331,8 +346,11 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
     # link, and the link carries a plain-language paid-link label.
     for href, row_no, paragraph in sp.shop_links:
-        if href not in short_links:
-            fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
+        # Since decisions D-01/D-14 (recorded 2026-11-17) a shop href must be
+        # the final tagged Special Link (Participation Requirements 2(b)); the
+        # supplied short links remain recorded data but are not valid hrefs.
+        if href not in special_links:
+            fail(f"{rel}: shop link is not one of the published tagged Special Links: {href}")
         if row_no == 0:
             context = " ".join(paragraph or [])
         elif 1 <= row_no <= len(sp.row_texts):
@@ -389,6 +407,7 @@ def main() -> int:
 
     check_root_entry()
     short_links = load_short_links()
+    special_links = load_special_links()
     asins = load_asins()
 
     pages = sorted(DOCS.rglob("*.html"))
@@ -397,7 +416,7 @@ def main() -> int:
     for page in pages:
         sp = PageParser()
         sp.feed(page.read_text(encoding="utf-8"))
-        check_page(page, sp, short_links)
+        check_page(page, sp, special_links)
     check_products_coverage(asins, short_links)
 
     if args.live:

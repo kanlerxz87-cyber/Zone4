@@ -21,7 +21,7 @@
    "linked_suggestions": [
     "S-01"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -51,7 +51,9 @@
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
      "ref": "Operating Agreement, Section 5"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "Option A, with the verification gate kept. The owner selected tracking ID shopnow047c-20 (brief, 2026-11-17), so the site's outbound product links are published as tagged Special Links - https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 - in place of the short-link hrefs, and the disclosure sentence and '(paid link)' labels stay. The tag's registration and activity are confirmable only inside Associates Central (one-link-per-product test, F-55), so attribution stays 'pending confirmation'. The supplied short links are not judged valid or invalid; their compliance status is unresolved in Zone3's FLG-003."
   },
   {
    "id": "D-02",
@@ -494,7 +496,7 @@
    "linked_suggestions": [
     "S-01"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -521,7 +523,9 @@
      "url": "https://affiliate-program.amazon.com/",
      "ref": "Associates Central"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "The owner selected tracking ID shopnow047c-20 (brief, 2026-11-17). Marketplace: the US storefront the links themselves point at (all three canonical listing URLs resolve on www.amazon.com; the ID ends in -20). Registration, report attribution and the marketplace listing are confirmed only inside Associates Central (Q-45); until then the site publishes the links but claims no attributed click or order."
   },
   {
    "id": "D-15",
@@ -1352,7 +1356,7 @@
    "linked_suggestions": [
     "S-32"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1404,7 +1408,9 @@
      "url": "https://developers.google.com/search/docs/appearance/page-experience",
      "ref": "Google: page experience"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "The design-system specification on the Design brief page is adopted as the working spec for future visual passes. Changing the shipped look beyond the spec stays gated on owner review, and on D-39's token layer making a direction switch a one-file change."
   },
   {
    "id": "D-36",
@@ -1413,7 +1419,7 @@
    "linked_suggestions": [
     "S-33"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1451,7 +1457,9 @@
      "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
      "ref": "Google: AI content gets no special gains; it is judged as content"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "Run the remaining anti-slop copy pass now. The owner's 2026-11-17 brief repeats the instruction verbatim ('It should not read like some AI slop website like it looks like now'), which is the delegation this entry rests on. The M-P3 opener that described its own composition is rewritten, and the ASIN-and-category-path prose (F-53) is rewritten out of the three product articles; every fact and fact_id is unchanged."
   },
   {
    "id": "D-37",
@@ -1460,7 +1468,7 @@
    "linked_suggestions": [
     "S-34"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1494,7 +1502,9 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: does the content provide substantial value compared with other pages in search results?"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "Keep the current headline register (rewritten once on 2026-11-16). The alternative registers remain published on the Design brief page as available options; switching is one field per article and is worth doing only when an owner preference exists, not by default."
   },
   {
    "id": "D-38",
@@ -1503,7 +1513,7 @@
    "linked_suggestions": [
     "S-35"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1530,7 +1540,9 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: does the site have a primary purpose or focus?"
     }
-   ]
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "Adopted as shipped on review: the dependency-ordered decision queue and the shortest credible launch path have been live on the Decision log page since 2026-11-16 (session arena/89900251-zone4 built them). Recorded so the queue's open row stops implying the page does not exist."
   },
   {
    "id": "D-39",
@@ -1567,12 +1579,129 @@
      "ref": "The stylesheet the token layer would be added to"
     }
    ]
+  },
+  {
+   "id": "D-40",
+   "question": "Where should the self-hosted analytics endpoint run, if anywhere? (GitHub Pages serves static files only.)",
+   "linked_question": "Q-46, Q-17",
+   "linked_suggestions": [
+    "S-40"
+   ],
+   "status": "Open - needs your answer",
+   "options": [
+    {
+     "key": "A",
+     "label": "Local-only for now (status quo, now well-defined)",
+     "commits_to": "The browser-local tracker and the append-only ledger stay the measurement layer; the campaign ledger keeps its defined columns and stays empty until an authorized report exists. No server, no consent surface beyond the local-storage note.",
+     "effort": "None beyond what is shipped.",
+     "reversible": "n/a"
+    },
+    {
+     "key": "B",
+     "label": "Self-hosted endpoint on infrastructure the owner controls",
+     "commits_to": "A small collector (POST endpoint writing the same five event types) is deployed on hosting the owner pays for and the site's tracker is pointed at it. Requires the privacy/consent review of D-16/Q-17 first, and a hosting account.",
+     "effort": "A weekend: deploy, point the tracker's send target at it, wire the export.",
+     "reversible": "Yes - the client falls back to local-only."
+    },
+    {
+     "key": "C",
+     "label": "Managed privacy-first analytics service",
+     "commits_to": "A third-party script is embedded. Fastest, but it is no longer self-hosted, adds a data processor, and the privacy review (D-16) must cover it before any tag ships.",
+     "effort": "An hour plus the review.",
+     "reversible": "Yes."
+    }
+   ],
+   "recommendation": "A until D-16 is answered; then B if the owner wants site-wide funnel numbers without a third party. C is the pragmatic fallback if no infrastructure will be run. Nothing here changes product data or claims.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Associates Program Policies, Participation Requirements 6(s) (artificial clicks - any measurement stays passive first-party)"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC Disclosures 101 (transparency expectations around tracking-adjacent copy)"
+    }
+   ]
+  },
+  {
+   "id": "D-41",
+   "question": "Ship an RSS feed and its subscribe affordances?",
+   "linked_question": "Q-47",
+   "linked_suggestions": [
+    "S-42"
+   ],
+   "status": "Recorded",
+   "options": [
+    {
+     "key": "A",
+     "label": "Yes - generate the feed from the article register",
+     "commits_to": "docs/feed.xml (RSS 2.0) is generated by the builder from the same article data the pages render, every head carries <link rel=alternate>, and the footer links the feed. Every future guide appears automatically.",
+     "effort": "One builder addition, shipped 2026-11-17 under the recording below.",
+     "reversible": "Yes - one generator block."
+    },
+    {
+     "key": "B",
+     "label": "No feed",
+     "commits_to": "Sitemap-only distribution; the publishing cadence reaches search engines but not feed readers.",
+     "effort": "None.",
+     "reversible": "Yes."
+    }
+   ],
+   "recommendation": "A - the feed reuses data the site already publishes, needs no consent surface, and completes the brief's 'sitemap and feed' pair.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google Search Central, creating helpful content"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+     "ref": "The generated feed in this repository (docs/feed.xml, RSS 2.0)"
+    }
+   ],
+   "recorded_date_utc": "2026-11-17",
+   "recorded_choice": "Option A - shipped 2026-11-17. docs/feed.xml is generated by the builder from the article register (RSS 2.0, absolute links, item dates = the observed date already published in each article's structured data; the build stays deterministic), every page head carries <link rel=alternate>, and the footer links the feed. The feed is the privacy-safe reader-capture channel while D-16 keeps an email list gated."
+  },
+  {
+   "id": "D-42",
+   "question": "Should the measurement surfaces added on 2026-11-17 (campaign-ledger empty state, tagged-CTA component, feed subscribe affordance) be folded into the design brief as named components?",
+   "linked_question": "Q-46",
+   "linked_suggestions": [
+    "S-44"
+   ],
+   "status": "Open - needs your answer",
+   "options": [
+    {
+     "key": "A",
+     "label": "Yes - add them to the brief",
+     "commits_to": "The Design brief page and DESIGN_PROMPT.md gain three component rows (ledger empty-state table, tagged buy button with '(paid link)' label, subscribe/follow block) so the next design pass styles them instead of inventing around them.",
+     "effort": "One data file + regeneration.",
+     "reversible": "Yes."
+    },
+    {
+     "key": "B",
+     "label": "Leave the brief as shipped",
+     "commits_to": "The components stay styled by the current stylesheet only; the brief keeps covering the five shipped surfaces.",
+     "effort": "None.",
+     "reversible": "Yes."
+    }
+   ],
+   "recommendation": "A - the brief exists so a design pass cannot drift from the compliance-fixed components; the ledger's empty state in particular should be styled once, deliberately.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google Search Central, creating helpful content (people-first presentation)"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Associates Program Policies, Participation Requirements 6(v)-(w) (the link stays clear and uncloaked in any styling)"
+    }
+   ]
   }
  ],
  "log": [
   {
    "date_utc": "2026-11-15",
-   "decision": "—",
+   "decision": "\u2014",
    "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open.",
    "recorded_by": "arena/00ba6c2e-zone4",
    "evidence": "Not applicable: nothing has been decided."
@@ -1758,6 +1887,55 @@
    "choice": "Option A: research stays manual; the automation engine remains offline until the Agent Terms are implemented and reviewed (Q-07 open).",
    "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
    "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-01",
+   "choice": "Option A, with the verification gate kept. The owner selected tracking ID shopnow047c-20 (brief, 2026-11-17), so the site's outbound product links are published as tagged Special Links - https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 - in place of the short-link hrefs, and the disclosure sentence and '(paid link)' labels stay. The tag's registration and activity are confirmable only inside Associates Central (one-link-per-product test, F-55), so attribution stays 'pending confirmation'. The supplied short links are not judged valid or invalid; their compliance status is unresolved in Zone3's FLG-003.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-14",
+   "choice": "The owner selected tracking ID shopnow047c-20 (brief, 2026-11-17). Marketplace: the US storefront the links themselves point at (all three canonical listing URLs resolve on www.amazon.com; the ID ends in -20). Registration, report attribution and the marketplace listing are confirmed only inside Associates Central (Q-45); until then the site publishes the links but claims no attributed click or order.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-35",
+   "choice": "The design-system specification on the Design brief page is adopted as the working spec for future visual passes. Changing the shipped look beyond the spec stays gated on owner review, and on D-39's token layer making a direction switch a one-file change.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-36",
+   "choice": "Run the remaining anti-slop copy pass now. The owner's 2026-11-17 brief repeats the instruction verbatim ('It should not read like some AI slop website like it looks like now'), which is the delegation this entry rests on. The M-P3 opener that described its own composition is rewritten, and the ASIN-and-category-path prose (F-53) is rewritten out of the three product articles; every fact and fact_id is unchanged.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-37",
+   "choice": "Keep the current headline register (rewritten once on 2026-11-16). The alternative registers remain published on the Design brief page as available options; switching is one field per article and is worth doing only when an owner preference exists, not by default.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-38",
+   "choice": "Adopted as shipped on review: the dependency-ordered decision queue and the shortest credible launch path have been live on the Decision log page since 2026-11-16 (session arena/89900251-zone4 built them). Recorded so the queue's open row stops implying the page does not exist.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-41",
+   "choice": "Option A - shipped 2026-11-17. docs/feed.xml is generated by the builder from the article register (RSS 2.0, absolute links, item dates = the observed date already published in each article's structured data; the build stays deterministic), every page head carries <link rel=alternate>, and the footer links the feed. The feed is the privacy-safe reader-capture channel while D-16 keeps an email list gated.",
+   "recorded_by": "arena/1f4a7a22-zone4 (delegated decision; owner session brief 2026-11-17)",
+   "evidence": "Owner brief 2026-11-17: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.', plus the directive-specific quotes named in the choice. Register recommendation and linked official sources followed."
   }
  ]
 }

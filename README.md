@@ -45,11 +45,19 @@ The repository's Pages source is `main` `/` (legacy build). The root `index.html
 | `data/suggestions.json` | The change backlog: 31 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
 | `data/questions.json` | 37 questions that must be answered before a change can be made: 18 answered (14 from official sources, 4 closed by the 2026-11-16 decisions), 19 still open, each naming what is known, how the missing piece is discovered and who can answer it |
 | `data/decisions.json` | The decision queue (34 choices with options, cost and reversibility) and the log of decisions actually taken: 26 recorded on 2026-11-16 under the owner's written delegation, 8 still open |
-| `docs/` | The published site (26 generated pages plus the stylesheet, app script and tracker script) |
+| `docs/` | The published site (26 generated pages plus the stylesheet, app script and tracker script; 27 pages after the 2026-11-17 rebuild, plus the generated sitemap, robots.txt and RSS feed) |
 | `data/suggestions.json` | The change backlog: 36 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |
 | `data/questions.json` | 44 questions that must be answered before a change can be made: 18 already answered from an official source, 26 still open, each naming what is known, how the missing piece is discovered and who can answer it |
 | `data/decisions.json` | The decision queue (39 choices with options, cost and reversibility, also shown in dependency order) and the log of decisions actually taken |
 | `docs/` | The published site (25 generated pages plus the stylesheet, app script, tracker script and design-page copy script) |
+| `data/associates.json` | The owner-selected tracking ID (shopnow047c-20, brief 2026-11-17), the three tagged Special Links built from it, and the one-link-per-product Associates Central test protocol (2026-11-17 pass) |
+| `data/link-intent.json` | Product-intent confirmation record: per submitted link, the intended ASIN, official listing URL, confirmation date and source, with observed redirect targets kept in a separate dated field that is never merged (2026-11-17 pass) |
+| `data/campaign-ledger.json` | The empty but well-defined campaign ledger: six columns (timestamp, source, channel, eligible sessions, clicks, reported orders), the five defined event types with their official attribution windows, zero rows and a dated provenance trail (2026-11-17 pass) |
+| `data/verification-session-1f4a7a22.json` | Re-check of 2026-11-17: the three supplied links re-resolved (no tag= in any resolved URL, F-03 stands), the Program Policies 2(b) tag-format sentence and Commission Income Statement windows re-read verbatim, Operating Agreement §4/§5 re-read |
+| `docs/feed.xml` | Generated RSS 2.0 feed of the published articles (decision D-41, shipped 2026-11-17): built from the same register the pages render, with `<link rel=alternate>` in every head and a footer link |
+| `data/flags.json` | 55 irregularities and unverified items (Flagged for Review); F-55 (owner-selected tracking ID unverified) added 2026-11-17 |
+| `data/suggestions.json` | 44 costed suggestions after the 2026-11-17 pass (S-37…S-44: tagged Special Links shipped, intent record shipped, campaign ledger shipped, endpoint decision staged, Associates test protocol, RSS feed shipped, reader capture gated on D-16, measurement surfaces staged for the design brief) |
+| `data/questions.json` | 47 questions after the 2026-11-17 pass (Q-45 tag registration, Q-46 endpoint hosting, Q-47 Search Console ownership) |
 | `docs/analytics.html` + `docs/tracker.js` | First-party clicks & conversions tracker (local-only, starts at zero, no fabricated data) |
 | `EXECUTIVE_SUMMARY.md` | Repository-level executive summary with the full source list |
 | `.github/workflows/site-checks.yml` | CI: rebuilds, verifies, and confirms `docs/` is up to date |
