@@ -225,14 +225,20 @@ def check_root_entry() -> None:
         fail("docs/.nojekyll missing")
 
 
-def load_short_links() -> set[str]:
+def _all_products() -> list[dict]:
+    # P1-P3 (products.json) and P4-P5 (products-extra.json, added 2026-11-17 from the
+    # two new submitted links). Both sets are supplied links and are audited alike.
     products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
-    return {p["short_link"] for p in products}
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    return products + extra
+
+
+def load_short_links() -> set[str]:
+    return {p["short_link"] for p in _all_products()}
 
 
 def load_asins() -> set[str]:
-    products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
-    return {p["asin"] for p in products}
+    return {p["asin"] for p in _all_products()}
 
 
 def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> None:
@@ -304,7 +310,7 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
 
     # -- nav consistency (warnings; new pages may be added by other sessions)
     nav_paths: set[str] = set()   # site-root-relative paths (relative to docs/)
-    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*.html")}
+    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*") if p.is_file()}  # feed.xml and sitemap.xml are targets too
     for href_url, _ in sp.external_anchors:
         parsed = urlparse(href_url)
         if parsed.scheme or href_url.startswith("#"):
