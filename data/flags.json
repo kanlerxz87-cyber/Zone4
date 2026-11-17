@@ -849,6 +849,20 @@
       ],
       "status": "Needs review (record update pending a reviewer)",
       "action": "A reviewer confirms the current title on the listing and updates P2 name_listing in data/products.json with the date and source, and checks any guide or article quoting the old segment (data/guides.json, docs/articles). Note: historical verification records (data/verification-session-*.json) keep the old wording as recorded; they are not edited."
+    },
+    {
+      "id": "F-67",
+      "severity": "High",
+      "title": "Links 4 and 5 resolve to meat thermometers, not air fryers; P4/P5 recorded separately and flagged for the owner's scope decision",
+      "detail": "Added 2026-11-17 by arena/0bdd37f3-zone4. The two newly supplied short links were independently opened and resolved: link.amazon/B0c8moW59 -> ASIN B0DHZTCNR5 (ThermoMaven 1 Sec Professional Digital Meat Thermometer) and link.amazon/B0f3GKalj -> ASIN B0DZFD6R9Z (CHEF iQ Sense Smart Wireless Meat Thermometer). Both sit under Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat, a different Amazon category from the air-fryer site. The identities and destinations are verified from the official listings. P4 and P5 are recorded as their own products in their own meat-thermometers category and are NOT merged into the air-fryer records. Whether to keep, replace or withdraw them remains an owner scope decision; this flag records the category discrepancy, not a finding that the links are invalid. Intended ASIN and observed redirect target are stored as separate fields in the product-intent record and are not merged.",
+      "sources": [
+        "https://link.amazon/B0c8moW59",
+        "https://link.amazon/B0f3GKalj",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ],
+      "status": "Needs review (owner scope decision; identities verified)",
+      "action": "Owner to decide the scope: (a) keep P4/P5 as a separate meat-thermometers category as recorded, (b) replace the two links with air-fryer Special Links, or (c) withdraw them. Identities and destinations are verified; only the scope and the Associates Special Link validation (F-58) remain open."
     }
   ]
 }
