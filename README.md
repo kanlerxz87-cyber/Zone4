@@ -9,24 +9,24 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 
 - The currently verified product register contains **three** earlier supplied products: ASINs `B0CDY277D3`, `B09B7SB46R`, and `B08DKYBTPH`. Their link and listing checks are recorded in the dated verification data; the latest prior re-check is 2026-11-16.
 - The latest brief repeats the three earlier URLs and adds two new candidates: [`B0c8moW59`](https://link.amazon/B0c8moW59) and [`B0f3GKalj`](https://link.amazon/B0f3GKalj). The first three destinations have historical dated verification records; the two new destinations were **not independently resolved in this session**, are not treated as ASINs, and are excluded from product pages under **F-55**. This is not a claim that either new link is invalid. Product-intent confirmation records are still needed for all five distinct links.
-- The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`) gates attribution claims and scaling, not publication. See **Q-01 / Q-47 / F-03** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
+- The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication. See **Q-01 / Q-50 / F-03 / F-58** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
 - The site includes a three-question product chooser, format categories, seven question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **43 suggestions**, **48 questions**, **43 decisions** (32 recorded, 11 open), and **66 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The suggestion and decision pages are the review gate: **46 suggestions**, **50 questions**, **45 decisions** (33 recorded, 12 open), and **67 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
 | Topic | Current state | What would establish it |
 |---|---|---|
-| Product intent / two new links | `data/intent-links.json` (rendered at docs/links.html) records, per submitted link, the intended ASIN, official listing URL, confirmation date and source, with the observed redirect target in a separate field that is never merged; the three P1–P3 ASINs were re-confirmed 2026-11-17. The two new candidate destinations remain unmatched and unverified (F-55/F-56), and their products are held, not published. | Confirm intended ASIN and official listing URL for the two remaining candidates in the enrolled Associates workflow; record intent, date and source separately from the observed redirect. |
-| Tracking ID / Special Links | `shopnow047c-20` applied: the published outbound links are the tagged Special Links, each destination-verified (data/intent-links.json); the tag's registration is unconfirmed (F-57) and the Associates Central one-link-per-product test has not run (F-58). | Confirm account enrollment and Partner Tag in Associates Central with the five-step protocol in `data/associates.json`; validate one destination and reporting event per product before scaling. |
+| Product intent / two new links | `data/intent-links.json` records the product-intent confirmation (intended ASIN and official listing URL vs. observed redirect targets, kept separate) for the three published links; the two new candidate links are unmatched and held (F-55). The link path codes are not ASINs (F-67, checked against Amazon's published ASIN guide). | Confirm intended ASIN and official listing URL for each of the five distinct candidates in the enrolled Associates workflow; record intent, date and source separately from the observed redirect. |
+| Tracking ID / Special Links | `shopnow047c-20` applied: the published outbound links are the tagged Special Links, each destination-verified (data/intent-links.json); the tag's registration is unconfirmed (F-57) and the Associates Central one-link-per-product test has not run (F-58). | Confirm account enrollment and Partner Tag in Associates Central with the five-step protocol in `data/associates.json` (S-45); validate one destination and reporting event per product before scaling. |
 | Product prices, ratings, reviews | Withheld | Confirm applicable Creators API access and permitted use under the current program terms; do not publish scraped or guessed values. |
-| Click and conversion measurement | The browser-only click logger stores in local storage; the self-hosted endpoint is built but not hosted (F-59). The campaign ledger `data/ledger.json` defines the brief's five event types (impression, click, session, order, refund) with their official attribution windows, six-plus rollup columns including `channel` (also an optional `engine.tracking` field), zero rows and a dated provenance trail. Hosting is staged as decisions D-41/D-43 with the privacy gate (D-16/Q-17). | Choose compliant hosting, retention, consent and privacy terms, then connect authorized reports. The defined events are not running instrumentation; the local logger is not an endpoint and does not prove purchases. |
+| Click and conversion measurement | Existing browser-only click logger stores in local storage; no server endpoint, shared analytics, or Amazon conversion feed is connected. S-38 proposes five event names for review. | Choose compliant hosting, retention, consent and privacy terms, then connect authorized reports. The proposed events are not running instrumentation; the local logger is not an endpoint and does not prove purchases. |
 | Search Console | No property verification or query data is recorded here | Verify the property with Google Search Console and report only its dated first-party observations. |
 | Reader capture | No email/signup collection is deployed | Choose a lawful provider, purpose, retention and consent flow before collecting personal data. |
 | Publishing cadence | Question-led topic calendar exists; no dated cadence is evidenced | Set an editorial frequency and review it against Search Console queries after data is available. |
 | RSS | Static feed generated from the published article records | Article dates are omitted because the source records do not contain verified publication dates. |
-| Campaign ledger | `data/tracking.jsonl` (raw events) and `data/ledger.json` (rollup schema) are intentionally empty of figures | Append only timestamped, authorized reports with provenance; never estimate orders or revenue. |
+| Campaign ledger | `data/ledger.json` is intentionally empty | Append only timestamped, authorized reports with provenance; never estimate orders or revenue. |
 
 The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md). For owners reviewing next steps, begin with the [Suggestions](https://kanlerxz87-cyber.github.io/Zone4/docs/suggestions.html), [Open questions](https://kanlerxz87-cyber.github.io/Zone4/docs/questions.html), [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html), and [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone4/docs/flagged.html) pages.
 
@@ -34,7 +34,7 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 
 | Page | Purpose |
 |---|---|
-| `docs/index.html` | Publication front page: chooser, featured guides, categories and comparison. |
+| `docs/index.html` | Shop-front publication front page: hero, lead guide, article shelf, category tiles, chooser, buyer comparison and a question-shaped content roadmap. |
 | `docs/articles/index.html` | Article hub and the question-led topic calendar. |
 | `docs/articles/*.html` | Seven individual buyer guides and product-format articles. |
 | `docs/categories/*.html` | Dual-basket, single-basket and air-fry toaster-oven category pages. |
@@ -43,13 +43,11 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
 | `docs/decisions.html` | Options and recorded decisions; open decisions remain visible. |
-| `docs/design.html` and `DESIGN_PROMPT.md` | Three design directions, anti-filler guidance, topic ideas and a prompt assembled from the design data. Open slots are deliberate where a decision remains open. |
+| `docs/design.html` and `DESIGN_PROMPT.md` | Three design directions, anti-filler guidance, topic ideas and a prompt assembled from the design data. Slots are filled from the recorded decisions (D-12/17/18/19/35/37); only the audience slot stays open. |
 | `docs/analytics.html` | Local-only click log; no network endpoint or conversion attribution. |
 | `docs/verification.html`, `docs/sources.html`, `docs/policy-compliance.html` | Field-level verification, sources, and policy checklist. |
-| `docs/links.html`, `docs/measurement.html`, `docs/guides/` | Product-intent confirmation record, measurement and campaign ledger, and the published question-led guides. |
 | `docs/flagged.html` | Unverified facts, unresolved link identities and review items. |
 | `docs/feed.xml`, `docs/sitemap.xml`, `docs/robots.txt` | RSS 2.0 article feed, sitemap, and crawler guidance. |
-
 The disclosure appears beneath the masthead and again in every page footer. All site pages are reachable from one flat navigation group and the footer directory. Product purchase links are marked `rel="sponsored"`; this attribute does not replace the visible disclosure or prove that a link is an Amazon Special Link.
 
 ## Data and code map
@@ -59,10 +57,8 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `data/products.json` | Current product records (three) and cited listing fields. |
 | `data/marketing.json` | Seven articles, their fact rows and editorial metadata. |
 | `data/sources.json` | Official-source registry. |
-| `data/flags.json` | 66 flags; F-55/F-56 record the two new unverified link destinations, F-57 the unverified tracking ID, F-58 the pending Special Link validation. |
+| `data/flags.json` | 67 flags; F-55/F-56 record the two new unverified link destinations, F-57 the unverified tracking ID, F-58 the pending Special Link validation. |
 | `data/associates.json` | The owner-selected tracking ID, the three tagged Special Links and the five-step one-link-per-product Associates Central test protocol (2026-11-17). |
-| `data/intent-links.json`, `data/ledger.json` | Product-intent confirmation record (intended ASIN, official listing, confirmation, separate redirect field) and the empty-until-authorised campaign ledger with the five defined events. |
-| `data/guides.json`, `data/publishing.json`, `data/products-extra.json` | Question-led guides, the publishing cadence, and the two held candidate products (not published as links). |
 | `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers. |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
@@ -72,7 +68,6 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `qa/audit_site.py` | Independent audit of committed HTML. |
 | `engine/`, `tests/`, `ENGINE.md` | Separate research-engine prototype, its tests and its operational limits. |
 | `COORDINATION.md` | Shared task board and verification/merge history. |
-
 ## Build and checks
 
 Run from a clean checkout with Python 3:
