@@ -738,6 +738,75 @@ def check_tracked_links() -> None:
                 fail(f"{page.relative_to(ROOT)}: shop link without rel=sponsored (D-05)")
 
 
+def check_readme_counts() -> None:
+    """The README's current-state table must agree with the registers.
+
+    F-42 and its siblings were raised because a count written into prose drifted
+    from the register it described. scripts/counts.py is now the only place a
+    published count comes from; this check compares the table against it.
+    """
+    readme = ROOT / "README.md"
+    if not readme.exists():
+        return
+    text = readme.read_text(encoding="utf-8")
+    if "## Current state" not in text:
+        return
+    section = text.split("## Current state", 1)[1].split("\n## ", 1)[0]
+
+    import subprocess
+    proc = subprocess.run([sys.executable, str(ROOT / "scripts" / "counts.py"), "--json"],
+                          capture_output=True, text=True, cwd=str(ROOT))
+    if proc.returncode != 0:
+        fail(f"scripts/counts.py failed: {proc.stderr.strip()[:200]}")
+        return
+    stats = json.loads(proc.stdout)
+
+    # Each row states one number and (sometimes) one parenthetical sub-count.
+    # (row label, register total, sub-count or None, regex capturing sub-count
+    #  then total in that order). Each regex is anchored on a phrase that appears
+    #  only in that row, so a reworded row fails loudly rather than silently
+    #  matching the wrong number.
+    expectations = [
+        ("Products", stats["products"], None,
+         r"field by field from its listing \| (\d+) \|"),
+        ("Published pieces", stats["articles"], None,
+         r"5 buying guides \| (\d+) \|"),
+        ("Pages", stats["pages"], None,
+         r"Pages in the published site \| (\d+) \|"),
+        ("Requirements", stats["requirements"], None,
+         r"one row each \| (\d+) \|"),
+        ("Flags", stats["flags"], stats["flags_open"],
+         r"recorded \((\d+) still open\) \| (\d+) \|"),
+        ("Suggestions", stats["suggestions"], None,
+         r"Costed suggestions \| (\d+) \|"),
+        ("Questions", stats["questions"], stats["questions_known"],
+         r"\((\d+) already answered from a source\) \| (\d+) \|"),
+        ("Decisions", stats["decisions"], stats["decisions_recorded"],
+         r"Decisions \((\d+) recorded, [^)]*\) \| (\d+) \|"),
+        ("Sources", stats["sources"], None,
+         r"marked read or not read \| (\d+) \|"),
+        ("Policies", stats["policies"], None,
+         r"checked against the site \| (\d+) \|"),
+        ("Findings", stats["findings"], None,
+         r"basis and confidence \| (\d+) \|"),
+        ("Events", stats["events"], None,
+         r"Measurement events defined \| (\d+) \|"),
+    ]
+    for label, total, sub, pattern in expectations:
+        m = re.search(pattern, section)
+        if not m:
+            fail(f"README current-state row missing or reworded: {label} (/{pattern}/)")
+            continue
+        nums = [int(g) for g in m.groups() if g is not None]
+        if sub is not None:
+            if nums[0] != sub:
+                fail(f"README {label} row says {nums[0]} as the sub-count; the registers give {sub}")
+            if nums[-1] != total:
+                fail(f"README {label} row says {nums[-1]} as the total; the registers give {total}")
+        elif nums[-1] != total:
+            fail(f"README {label} row says {nums[-1]}; the registers give {total}")
+
+
 def check_documented_test_count() -> None:
     """ENGINE.md states a test count; the suite must actually run that many.
 
@@ -787,6 +856,7 @@ def main() -> int:
     check_feed()
     check_tracked_links()
     check_documented_test_count()
+    check_readme_counts()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")

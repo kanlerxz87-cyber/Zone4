@@ -18,20 +18,28 @@ Central facts and are recorded as unverified (F-03, F-55). No earnings figure or
 
 ## Current state (2026-11-17)
 
+Every number below is produced by `python3 scripts/counts.py`, which reads the data files. Nothing in
+this table is typed by hand, and `scripts/verify.py` fails the build if the table and the registers diverge.
+
 | | Count | Where it lives |
 |---|---|---|
 | Products, each read field by field from its listing | 3 | `data/products.json` |
-| Published pieces: 3 reviews, 1 comparison, 5 guides | 9 | `data/marketing.json` |
+| Published pieces: 3 product reviews, 1 comparison, 5 buying guides | 9 | `data/marketing.json` |
 | Pages in the published site | 29 | `docs/` (generated) |
 | Requirements from the brief, one row each | 40 | `data/requirements.json` |
-| Irregularities and unverified items recorded (41 still open) | 58 | `data/flags.json` |
-| Costed suggestions | 40 | `data/suggestions.json` |
-| Questions that gate a decision (24 already answered from a source) | 48 | `data/questions.json` |
-| Decisions (30 recorded, the rest open) | 43 | `data/decisions.json` |
+| Irregularities and unverified items recorded (39 still open) | 58 | `data/flags.json` |
+| Costed suggestions | 41 | `data/suggestions.json` |
+| Questions that gate a decision (24 already answered from a source) | 49 | `data/questions.json` |
+| Decisions (32 recorded, the rest open) | 45 | `data/decisions.json` |
 | Official sources, each marked read or not read | 32 | `data/sources.json` |
 | Associate/FTC rules checked against the site | 30 | `data/policies.json` |
 | Findings with their basis and confidence | 18 | `data/content.json` |
 | Measurement events defined | 5 | `data/tracking-events.json` |
+
+A flag is counted as **open** unless its status begins with `Resolved`, `Corrected` or `Informational`.
+The status field is free text on purpose — a flag records what actually happened, including which session
+fixed it — so the rule that turns it into a number is stated once, in `scripts/counts.py`, rather than
+re-guessed in prose. Partly-built items count as open: the site still does not do the thing.
 
 ## How the site is built
 
