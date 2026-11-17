@@ -31,12 +31,12 @@
    "id": "S-01",
    "priority": "P1 - Decide first",
    "title": "Put an Associates tag on every outbound product link, or stop calling them affiliate links",
-   "problem": "The three supplied link.amazon short links resolve to the correct product pages, but the resolved URLs carry no tag= parameter, so a click cannot be credited to an Associates account. Flags F-03 and F-04 record this. The site currently calls these links 'paid links' next to a disclosure that says the site earns from qualifying purchases.",
-   "proposal": "Sign in to Associates Central, generate a Special Link for each of the three ASINs under the account's own Partner Tag, and replace the three short links site-wide with the tagged links. If no Associates account exists yet, relabel the calls to action as plain product links and withdraw the earning claim until one does.",
+   "problem": "The three previously reviewed link.amazon short links had no visible `tag=` parameter in their 2026-11-16 re-check (F-03). The user has now supplied `shopnow047c-20` as the selected tracking ID, but neither its account association nor any generated Special Link has been verified. Five additional product-link candidates are also unresolved (F-55).",
+   "proposal": "In Associates Central, confirm that shopnow047c-20 is the active account Partner Tag. Generate or validate one Special Link per intended product, confirm the destination and tracking report, then replace only the links that pass. Keep the existing disclosure and sponsored rel attribute. If account enrollment or link validation cannot be confirmed, do not claim attribution.",
    "why": "Every other revenue step depends on this one. Untagged links produce clicks the programme cannot attribute, so the site cannot earn regardless of how good the content is. The disclosure sentence is also only accurate when the links actually carry the tag.",
    "effort": "About 15 minutes once account access exists: three links to build, one data field per product to update, one rebuild.",
    "risk": "Wrong or duplicate tags split attribution. Amazon requires the tag on the link, and the Associates Operating Agreement Section 5 disclosure must stay on the site either way.",
-   "check": "Re-resolve each published link and confirm a tag= parameter matching the account's Partner Tag appears, then confirm one test click appears in Associates Central reporting.",
+   "check": "Associates Central confirms the account Partner Tag; each published Special Link's `tag=` value matches it; destination is the intended listing; one test click appears in the authorized report. Preserve the intended-ASIN and observed-redirect fields separately for each product.",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -243,12 +243,12 @@
    "id": "S-09",
    "priority": "P2 - Adds real value",
    "title": "Ship a social preview image and structured data, then measure whether search traffic arrives",
-   "problem": "The site has no Open Graph or Twitter card metadata and no per-page preview image, so a shared link renders as bare text. It also has no verification of whether any search engine has indexed it, because no Search Console property is connected.",
-   "proposal": "Add a per-page Open Graph title, description and one image, then verify the property in Google Search Console and record impressions and clicks as measured data, not estimates. The image must be generated from the site's own layout, not a photograph of a product the site has not licensed.",
+   "problem": "Page-level Open Graph/Twitter descriptions, Article/WebSite structured data, sitemap and robots.txt exist. An RSS 2.0 feed has now been generated from the seven published article records, but it has no verified publication dates. No social-preview image or Search Console property verification is recorded, so organic search outcomes remain unmeasured.",
+   "proposal": "Keep the generated sitemap and RSS feed current from the article register; add an original non-product social-preview image only after the design and rights path is chosen; verify the site in Google Search Console and use dated first-party query/impression data to refine future topics.",
    "why": "Without measurement the whole 'organic traffic' goal stays an assertion. Search Console is the only official source for the site's own impressions and queries, and it costs nothing.",
    "effort": "Two to three hours plus the wait for verification.",
    "risk": "A product photograph used in a preview card raises the Program Content question in flag F-25 and the IP License; a self-made layout image avoids it. Search Console data must not be presented as Amazon conversion data.",
-   "check": "A shared link renders with an image and the intended description; Search Console shows the property verified and the site's own impressions appear as measured figures with their date.",
+   "check": "The RSS parses as RSS 2.0 and contains exactly the published articles; Google Search Console property is verified by the owner; any search impressions/queries are dated exports from that property; no market-volume or conversion inference is made.",
    "sources": [
     {
      "url": "https://developers.google.com/search/docs/appearance/page-experience",
@@ -939,6 +939,70 @@
    "flags": [],
    "status": "Awaiting decision",
    "decision": "D-39"
+  },
+  {
+   "id": "S-37",
+   "priority": "P1 - Decide first",
+   "title": "Confirm product intent for all five links and validate the two new candidates",
+   "problem": "The latest request repeats three links already present in the product register and adds two new candidate URLs. The existing three have historical destination checks but no separate intended-product confirmation record; the two new destinations are not verified (F-55).",
+   "proposal": "Keep the current three product records unchanged until the account holder confirms intent and the Associates workflow validates the links. Create one product-intent confirmation record per intended product: ASIN, official listing URL, confirmation date and source. Record observed redirect target separately. Validate the two new candidates before adding any product pages.",
+   "why": "A short-link code alone does not establish the intended product, a valid Special Link or a tracking association. Keeping intent and observation separate makes mistakes reviewable rather than silently treating a redirect as authorization.",
+   "effort": "One confirmation record per intended product; do not publish a candidate that cannot be confirmed.",
+   "risk": "Requires an authorized Associates account and access to its reporting workflow. The five links are not described as invalid; their status is unresolved.",
+   "check": "Each included product has a dated confirmation record with intended ASIN, official listing URL and source, plus a separate observed-redirect field; destination and tracking report have been checked. Unconfirmed candidates remain excluded and flagged.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Amazon Associates Program Policies: Special Link requirements"
+    },
+    {
+     "url": "https://link.amazon/B0c8moW59",
+     "ref": "New user-submitted candidate link; destination not verified."
+    },
+    {
+     "url": "https://link.amazon/B0f3GKalj",
+     "ref": "New user-submitted candidate link; destination not verified."
+    }
+   ],
+   "flags": [
+    "F-55"
+   ],
+   "status": "Awaiting decision",
+   "decision": "D-40"
+  },
+  {
+   "id": "S-38",
+   "priority": "P1 - Decide first",
+   "title": "Approve a privacy boundary, hosting choice and five-event measurement contract before adding a server endpoint",
+   "problem": "The current tracker stores events only in each visitor’s browser. The static GitHub Pages site has no self-hosted collection endpoint, no five-event taxonomy and no reader-capture form. A server endpoint or signup form would change what data is collected and where it is stored.",
+   "proposal": "Keep the current local-only logger until the owner chooses hosting, retention and consent rules. As a draft taxonomy for review, define article_view (page identifier only), chooser_complete (chosen format), outbound_product_click (product/link identifier), reader_capture_opt_in (only after explicit consent; keep the email address out of analytics events), and reported_order (aggregate import from an authorized Associates report, never a browser pixel). Build an endpoint only after the questions register is answered.",
+   "why": "A count can be useful without cross-site identifiers, but collection location, personal information, retention and the source of a conversion event must be clear before collection starts. Client-side clicks cannot establish an Amazon order.",
+   "effort": "Owner selects an infrastructure and privacy approach; engineering work follows. Reader capture should be a separate opt-in, not bundled with anonymous measurement.",
+   "risk": "A third-party or misconfigured endpoint could expose visitor data or imply conversion data that was never reported. No email, user-level profile, or estimated purchase should enter the analytics stream.",
+   "check": "The endpoint is first-party and documented; each event has a narrow payload and provenance; consent and deletion behavior are tested; only authorized aggregate reports create reported_order events; QA confirms no request is sent before the chosen consent state.",
+   "sources": [
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js",
+     "ref": "Current localStorage-only tracker; no network endpoint"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+     "ref": "Current static GitHub Pages site generator"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC guidance cited for clear disclosures; not a substitute for privacy/legal review"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Associates policies and authorized reporting context"
+    }
+   ],
+   "flags": [
+    "F-19"
+   ],
+   "status": "Awaiting decision",
+   "decision": "D-41"
   }
  ]
 }

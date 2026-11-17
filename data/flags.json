@@ -85,14 +85,14 @@
    "id": "F-03",
    "severity": "High",
    "title": "Associates tag not visible in the resolved links",
-   "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref, gaOptInStatus) but no 'tag=' parameter. Two of them carry a btn_ref value of the form srtok-..., which is an Amazon source token rather than a visible Associate ID. Commission attribution to a specific Associates ID therefore cannot be confirmed from the page, and Participation Requirement 2(b) requires the tag to be present in the URL of each link placed on the site. Re-checked 2026-11-14 and unchanged. Update 2026-11-15 (arena/f87cc71f-zone4): all three short links re-resolved; still no tag= parameter in any resolved URL. Unchanged. Update 2026-11-16 (arena/4c552c78-zone4): all three short links re-resolved on the same day to the stored ASINs (B0CDY277D3, B09B7SB46R, B08DKYBTPH); no tag= parameter in any resolved URL. Unchanged. Update 2026-11-16 (arena/a8e8b898-zone4): all three short links re-resolved to the same ASINs (B0CDY277D3, B09B7SB46R, B08DKYBTPH); still no 'tag=' parameter in any resolved URL. Unchanged.",
+   "detail": "All three short links resolve to Amazon product URLs with tracking parameters (lv, channelId, plpRedirect, btn_ref, gaOptInStatus) but no 'tag=' parameter. Two of them carry a btn_ref value of the form srtok-..., which is an Amazon source token rather than a visible Associate ID. Commission attribution to a specific Associates ID therefore cannot be confirmed from the page, and Participation Requirement 2(b) requires the tag to be present in the URL of each link placed on the site. Re-checked 2026-11-14 and unchanged. Update 2026-11-15 (arena/f87cc71f-zone4): all three short links re-resolved; still no tag= parameter in any resolved URL. Unchanged. Update 2026-11-16 (arena/4c552c78-zone4): all three short links re-resolved on the same day to the stored ASINs (B0CDY277D3, B09B7SB46R, B08DKYBTPH); no tag= parameter in any resolved URL. Unchanged. Update 2026-11-16 (arena/a8e8b898-zone4): all three short links re-resolved to the same ASINs (B0CDY277D3, B09B7SB46R, B08DKYBTPH); still no 'tag=' parameter in any resolved URL. Unchanged. Update 2026-11-17: the user supplied `shopnow047c-20` as the selected tracking ID. It has not been confirmed as an active Partner Tag or applied to links in this session; the two new candidate URLs are separately unverified under F-55; the three repeated links have historical destination checks. No claim is made that any submitted short link is invalid.",
    "sources": [
     "https://link.amazon/B04G1MEwY",
     "https://link.amazon/B02NbDxp3",
     "https://link.amazon/B00hJ57DV"
    ],
    "status": "Needs review",
-   "action": "Open each link in Associates Central and confirm it was generated under your Associate ID. If the tag is missing, request the tagged canonical URL and replace the short link before publishing anything that earns commission."
+   "action": "Confirm in Associates Central that shopnow047c-20 is the enrolled account Partner Tag, generate or validate Special Links for intended products, and confirm destination plus tracking report before replacing the published links."
   },
   {
    "id": "F-04",
@@ -703,6 +703,19 @@
    ],
    "status": "Corrected 2026-11-16 (arena/89900251-zone4); kept as the audit record",
    "action": "None needed for the ten corrected references. The remaining exposure is that the build checks a reference exists, not that it is the right one; if the register grows again, consider a check that compares the sentence's subject with the flag's title."
+  },
+  {
+   "id": "F-55",
+   "severity": "High",
+   "title": "Two additional supplied links have not been matched to product-intent records",
+   "detail": "The latest request repeats the three short URLs already represented by the existing product records (B04G1MEwY, B02NbDxp3 and B00hJ57DV) and adds two new candidates: https://link.amazon/B0c8moW59, https://link.amazon/B0f3GKalj. The two new URLs were not independently opened or resolved in this session. No destination, product name, intended ASIN, canonical listing URL, Associates tag, price, review data or product specification is confirmed for them. They are not added to product cards or affiliate calls to action. This is not a finding that the links are invalid. The existing three destinations have historical dated verification records, but no explicit product-intent confirmation record has yet been added. Before publishing any changed or new link, verify it in the enrolled Associates workflow and store the intended ASIN, official listing URL, confirmation date and source separately from any observed redirect target.",
+   "sources": [
+    "https://link.amazon/B0c8moW59",
+    "https://link.amazon/B0f3GKalj",
+    "https://affiliate-program.amazon.com/help/operating/policies"
+   ],
+   "status": "Needs review",
+   "action": "Confirm the intended product and account-generated Special Link for each of the five distinct candidates. For every product, store intended ASIN, official listing URL, confirmation date and source; keep observed redirect target separate. Do not add either new candidate until identity and destination are confirmed."
   }
  ]
 }
