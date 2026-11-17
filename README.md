@@ -12,7 +12,7 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 - The user supplied `shopnow047c-20` as the selected tracking ID. Its association with an enrolled Associates account, its application to valid Special Links, and a tracking-report test remain unconfirmed. Do not infer compliance by appending the ID to the current short links; see **Q-01 / D-01 / F-03** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
 - The site includes a three-question product chooser, format categories, seven question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **40 suggestions**, **49 questions**, **42 decisions** (30 recorded, 12 open), and **67 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The suggestion and decision pages are the review gate: **44 suggestions**, **49 questions**, **42 decisions** (30 recorded, 12 open), and **67 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
@@ -34,7 +34,7 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 
 | Page | Purpose |
 |---|---|
-| `docs/index.html` | Publication front page: chooser, featured guides, categories and comparison. |
+| `docs/index.html` | Shop-front publication front page: hero, lead guide, article shelf, category tiles, chooser, buyer comparison and a question-shaped content roadmap. |
 | `docs/articles/index.html` | Article hub and the question-led topic calendar. |
 | `docs/articles/*.html` | Seven individual buyer guides and product-format articles. |
 | `docs/categories/*.html` | Dual-basket, single-basket and air-fry toaster-oven category pages. |
@@ -43,12 +43,11 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
 | `docs/decisions.html` | Options and recorded decisions; open decisions remain visible. |
-| `docs/design.html` and `DESIGN_PROMPT.md` | Three design directions, anti-filler guidance, topic ideas and a prompt assembled from the design data. Open slots are deliberate where a decision remains open. |
+| `docs/design.html` and `DESIGN_PROMPT.md` | Three design directions, anti-filler guidance, topic ideas and a prompt assembled from the design data. Slots are filled from the recorded decisions (D-12/17/18/19/35/37); only the audience slot stays open. |
 | `docs/analytics.html` | Local-only click log; no network endpoint or conversion attribution. |
 | `docs/verification.html`, `docs/sources.html`, `docs/policy-compliance.html` | Field-level verification, sources, and policy checklist. |
 | `docs/flagged.html` | Unverified facts, unresolved link identities and review items. |
 | `docs/feed.xml`, `docs/sitemap.xml`, `docs/robots.txt` | RSS 2.0 article feed, sitemap, and crawler guidance. |
-
 The disclosure appears beneath the masthead and again in every page footer. All site pages are reachable from one flat navigation group and the footer directory. Product purchase links are marked `rel="sponsored"`; this attribute does not replace the visible disclosure or prove that a link is an Amazon Special Link.
 
 ## Data and code map
@@ -58,7 +57,7 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `data/products.json` | Current product records (three) and cited listing fields. |
 | `data/marketing.json` | Seven articles, their fact rows and editorial metadata. |
 | `data/sources.json` | Official-source registry. |
-| `data/flags.json` | 55 flags; F-55 records the two new unverified link destinations and the missing product-intent confirmation. |
+| `data/flags.json` | 67 flags; F-55 records the two new unverified link destinations and the missing product-intent confirmation. |
 | `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers. |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
@@ -68,7 +67,6 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `qa/audit_site.py` | Independent audit of committed HTML. |
 | `engine/`, `tests/`, `ENGINE.md` | Separate research-engine prototype, its tests and its operational limits. |
 | `COORDINATION.md` | Shared task board and verification/merge history. |
-
 ## Build and checks
 
 Run from a clean checkout with Python 3:

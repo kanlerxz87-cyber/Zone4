@@ -10,7 +10,7 @@
 - The latest request repeats the three previously checked URLs and adds two candidates: `https://link.amazon/B0c8moW59` and `https://link.amazon/B0f3GKalj`. The first three destinations have historical dated verification records; the two new destinations were not independently verified in this session and are excluded from product pages under **F-55**. This does not mean either is invalid. Separate product-intent confirmation records are still needed for all five distinct links.
 - The user supplied **`shopnow047c-20`** as the selected tracking ID. Its status as an active Associates Partner Tag and its use in tagged Special Links are not confirmed. It has not been appended to the supplied URLs by guesswork. Confirm it in Associates Central, validate each intended destination and test a reporting event before scaling (**Q-01, D-01, F-03**).
 - The site is an editorial affiliate publication: one flat navigation group, product chooser, format category pages, comparison, seven question-led articles, source-linked fact tables, and a site directory in every footer. The affiliate disclosure appears below the masthead and again in every footer; product links use `rel="sponsored"`.
-- The decision-support system contains **38 suggestions**, **46 questions**, and **41 decisions** (26 recorded; 15 open). **F-55** makes the two new unverified destinations visible on the Flagged for Review page.
+- The decision-support system contains **44 suggestions**, **49 questions**, and **42 decisions** (30 recorded; 12 open). **F-55** makes the two new unverified destinations visible on the Flagged for Review page.
 - The static site includes `docs/feed.xml`, `docs/sitemap.xml`, and `docs/robots.txt`. RSS items are generated from article records; publication dates are omitted because none are supplied in the source data.
 
 ## Product and content status
@@ -90,3 +90,30 @@ Open after this session: 12 decisions (D-01, D-02, D-08, D-13, D-14, D-15, D-16,
 The named blocker is unchanged: an Associates account and the tracking ID first, because nothing can earn until
 the links carry a tag.
 
+## Full source list
+
+1. Associates Program Operating Agreement (updated 2025-10-15) — https://affiliate-program.amazon.com/help/operating/agreement
+2. Associates Program Policies (updated 2026-04-14; Commission Income Statement, Participation Requirements, IP License, Trademark Guidelines) — https://affiliate-program.amazon.com/help/operating/policies
+3. Public Associates Standard Commission Income Statement (Table 1, category rates) — https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ
+4. Historic Appendix schedule link (redirects to sign-in; superseded for category rates) — https://affiliate-program.amazon.com/help/operating/schedule
+5. Amazon Associates disclosure help page — https://affiliate-program.amazon.com/help/node/topic/GPXFHVYZMTGPUMPE
+6. Amazon ASIN guide (10-character standard) — https://sell.amazon.com/blog/what-is-an-asin
+7. PA-API 5 deprecation / Creators API notice — https://affiliate-program.amazon.com/creatorsapi/docs/en-us/paapiv5-deprecation
+8. Amazon Conditions of Use (updated 2026-08-14) — https://www.amazon.com/gp/help/customer/display.html?nodeId=508088
+9. Amazon product pages — https://www.amazon.com/dp/B0CDY277D3 · https://www.amazon.com/dp/B09B7SB46R · https://www.amazon.com/dp/B08DKYBTPH (plus the three submitted `link.amazon` URLs)
+10. Amazon 404 evidence for slug-as-ASIN lookups — https://www.amazon.com/dp/B04G1MEwY (and the other two slugs)
+11. FTC Disclosures 101 for Social Media Influencers — https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers
+12. Third-party, non-official corroboration of the `link.amazon` domain — https://linktw.in/link-amazon-vs-linktwin (flagged as non-official)
+13. Google Search Central — Creating helpful, reliable, people-first content (who/how/why, effort, originality, the caution against fabricated authorship) — https://developers.google.com/search/docs/fundamentals/creating-helpful-content *(read 2026-11-15)*
+14. Google Search Central — Spam policies for Google web search (thin affiliation, scaled content abuse, paid-link qualification) — https://developers.google.com/search/docs/essentials/spam-policies *(read 2026-11-15)*
+15. Google Search Central — Control your snippets in search results (unique meta description per page) — https://developers.google.com/search/docs/appearance/snippet *(read 2026-11-15)*
+16. Google Search Central — Qualify outbound links (`rel="sponsored"` for paid links) — https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links *(read 2026-11-15)*
+17. Google Search Central — Understanding page experience in Google Search results — https://developers.google.com/search/docs/appearance/page-experience *(read 2026-11-15)*
+18. Google Search Central — Google Search and AI-generated content: automation used to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains, and bylines and automation disclosures are worth considering — https://developers.google.com/search/blog/2023/02/google-search-and-ai-content *(read in full 2026-11-15; quoted verbatim in the questions register as Q-23…Q-37 — `S-GSC-AI` in `data/sources.json`)*
+
+**A note on why Google's documentation is cited here.** Amazon's rules govern whether this site may publish a fact. Google's
+documentation governs whether the page can be found and whether it is the kind of page a search engine wants to rank. The two are
+different questions and both matter to the brief, which asks for organic traffic. Only Google's own documentation is used for the
+second, and no ranking, traffic or growth figure is published anywhere on the site.
+
+*Every table row above carries its source; values that could not be confirmed from an official source are blank, withheld, or flagged — never inferred.*
