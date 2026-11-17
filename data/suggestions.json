@@ -19,7 +19,7 @@
    "Decision recorded 2026-11-16 - work remains": "The direction is decided; implementation is deferred and the reason is in the decision log.",
    "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes.",
    "Implemented 2026-11-17": "Decision recorded 2026-11-17 and the change is live in this build.",
-   "Partly implemented 2026-11-17": "Decision recorded 2026-11-17; part of the change is live in this build, the rest is staged or needs an owner fact."
+   "Awaiting decision 2026-11-17": "Written and costed 2026-11-17; waiting on a decision from the site owner."
   },
   "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
   "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
@@ -33,12 +33,12 @@
    "id": "S-01",
    "priority": "P1 - Decide first",
    "title": "Put an Associates tag on every outbound product link, or stop calling them affiliate links",
-   "problem": "The three supplied link.amazon short links resolve to the correct product pages, but the resolved URLs carry no tag= parameter, so a click cannot be credited to an Associates account. Flags F-03 and F-04 record this. The site currently calls these links 'paid links' next to a disclosure that says the site earns from qualifying purchases.",
-   "proposal": "Sign in to Associates Central, generate a Special Link for each of the three ASINs under the account's own Partner Tag, and replace the three short links site-wide with the tagged links. If no Associates account exists yet, relabel the calls to action as plain product links and withdraw the earning claim until one does.",
+   "problem": "The three previously reviewed link.amazon short links had no visible `tag=` parameter in their 2026-11-16 re-check (F-03). The user has now supplied `shopnow047c-20` as the selected tracking ID, but neither its account association nor any generated Special Link has been verified. Five additional product-link candidates are also unresolved (F-55).",
+   "proposal": "In Associates Central, confirm that shopnow047c-20 is the active account Partner Tag. Generate or validate one Special Link per intended product, confirm the destination and tracking report, then replace only the links that pass. Keep the existing disclosure and sponsored rel attribute. If account enrollment or link validation cannot be confirmed, do not claim attribution.",
    "why": "Every other revenue step depends on this one. Untagged links produce clicks the programme cannot attribute, so the site cannot earn regardless of how good the content is. The disclosure sentence is also only accurate when the links actually carry the tag.",
    "effort": "About 15 minutes once account access exists: three links to build, one data field per product to update, one rebuild.",
    "risk": "Wrong or duplicate tags split attribution. Amazon requires the tag on the link, and the Associates Operating Agreement Section 5 disclosure must stay on the site either way.",
-   "check": "Re-resolve each published link and confirm a tag= parameter matching the account's Partner Tag appears, then confirm one test click appears in Associates Central reporting.",
+   "check": "Associates Central confirms the account Partner Tag; each published Special Link's `tag=` value matches it; destination is the intended listing; one test click appears in the authorized report. Preserve the intended-ASIN and observed-redirect fields separately for each product.",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -245,12 +245,12 @@
    "id": "S-09",
    "priority": "P2 - Adds real value",
    "title": "Ship a social preview image and structured data, then measure whether search traffic arrives",
-   "problem": "The site has no Open Graph or Twitter card metadata and no per-page preview image, so a shared link renders as bare text. It also has no verification of whether any search engine has indexed it, because no Search Console property is connected.",
-   "proposal": "Add a per-page Open Graph title, description and one image, then verify the property in Google Search Console and record impressions and clicks as measured data, not estimates. The image must be generated from the site's own layout, not a photograph of a product the site has not licensed.",
+   "problem": "Page-level Open Graph/Twitter descriptions, Article/WebSite structured data, sitemap and robots.txt exist. An RSS 2.0 feed has now been generated from the seven published article records, but it has no verified publication dates. No social-preview image or Search Console property verification is recorded, so organic search outcomes remain unmeasured.",
+   "proposal": "Keep the generated sitemap and RSS feed current from the article register; add an original non-product social-preview image only after the design and rights path is chosen; verify the site in Google Search Console and use dated first-party query/impression data to refine future topics.",
    "why": "Without measurement the whole 'organic traffic' goal stays an assertion. Search Console is the only official source for the site's own impressions and queries, and it costs nothing.",
    "effort": "Two to three hours plus the wait for verification.",
    "risk": "A product photograph used in a preview card raises the Program Content question in flag F-25 and the IP License; a self-made layout image avoids it. Search Console data must not be presented as Amazon conversion data.",
-   "check": "A shared link renders with an image and the intended description; Search Console shows the property verified and the site's own impressions appear as measured figures with their date.",
+   "check": "The RSS parses as RSS 2.0 and contains exactly the published articles; Google Search Console property is verified by the owner; any search impressions/queries are dated exports from that property; no market-volume or conversion inference is made.",
    "sources": [
     {
      "url": "https://developers.google.com/search/docs/appearance/page-experience",
@@ -828,7 +828,7 @@
    "flags": [
     "F-51"
    ],
-   "status": "Implemented 2026-11-16",
+   "status": "Awaiting decision",
    "decision": "D-35"
   },
   {
@@ -859,7 +859,7 @@
     "F-52",
     "F-53"
    ],
-   "status": "Implemented 2026-11-17",
+   "status": "Awaiting decision",
    "decision": "D-36"
   },
   {
@@ -891,7 +891,7 @@
     "F-51",
     "F-52"
    ],
-   "status": "Implemented 2026-11-17",
+   "status": "Awaiting decision",
    "decision": "D-37"
   },
   {
@@ -915,7 +915,7 @@
     }
    ],
    "flags": [],
-   "status": "Implemented 2026-11-16",
+   "status": "Awaiting decision",
    "decision": "D-38"
   },
   {
@@ -944,108 +944,163 @@
   },
   {
    "id": "S-37",
-   "priority": "P2 - Adds real value",
-   "title": "Stand up the self-hosted analytics endpoint the counter is already wired to",
-   "problem": "The five defined events are recorded only in the visitor's own browser. GitHub Pages is a static host and cannot run a POST endpoint, so no aggregate measurement can exist as the site stands (F-56).",
-   "proposal": "Deploy the endpoint contract published in data/pipeline.json as a small function on the owner's own domain, publish a consent notice and privacy notice first, then fill in the tracker's meta tag. The browser-local log stays as the fallback.",
-   "why": "It is the difference between a counter and measurement: without an endpoint there is no way to know which guide earns its keep.",
-   "effort": "A few hours of hosting setup plus the privacy notices.",
-   "risk": "Low technically; the privacy risk is the point of the D-16 review.",
-   "check": "A test event appears in the endpoint's store, and the local export and the endpoint row agree; no visitor identifier appears in either.",
-   "decision": "D-40",
-   "flags": [
-    "F-56"
-   ],
+   "priority": "P1 - Decide first",
+   "title": "Confirm product intent for all five links and validate the two new candidates",
+   "problem": "The latest request repeats three links already present in the product register and adds two new candidate URLs. The existing three have historical destination checks but no separate intended-product confirmation record; the two new destinations are not verified (F-55).",
+   "proposal": "Keep the current three product records unchanged until the account holder confirms intent and the Associates workflow validates the links. Create one product-intent confirmation record per intended product: ASIN, official listing URL, confirmation date and source. Record observed redirect target separately. Validate the two new candidates before adding any product pages.",
+   "why": "A short-link code alone does not establish the intended product, a valid Special Link or a tracking association. Keeping intent and observation separate makes mistakes reviewable rather than silently treating a redirect as authorization.",
+   "effort": "One confirmation record per intended product; do not publish a candidate that cannot be confirmed.",
+   "risk": "Requires an authorized Associates account and access to its reporting workflow. The five links are not described as invalid; their status is unresolved.",
+   "check": "Each included product has a dated confirmation record with intended ASIN, official listing URL and source, plus a separate observed-redirect field; destination and tracking report have been checked. Unconfirmed candidates remain excluded and flagged.",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Participation Requirement 6(s)"
+     "ref": "Amazon Associates Program Policies: Special Link requirements"
+    },
+    {
+     "url": "https://link.amazon/B0c8moW59",
+     "ref": "New user-submitted candidate link; destination not verified."
+    },
+    {
+     "url": "https://link.amazon/B0f3GKalj",
+     "ref": "New user-submitted candidate link; destination not verified."
     }
    ],
-   "status": "Needs a decision first"
+   "flags": [
+    "F-55"
+   ],
+   "status": "Awaiting decision",
+   "decision": "D-40"
   },
   {
    "id": "S-38",
    "priority": "P1 - Decide first",
-   "title": "Replace the untagged outbound links with validated Special Links - one tested link per product first",
-   "problem": "The published product links are the supplied short links. They resolve correctly, but they carry no visible Associates tag (F-03), and their exact compliance status is unresolved (FLG-003 in the prior repository's flag register).",
-   "proposal": "In the enrolled Associates workflow, generate one tagged Special Link per product from SiteStripe or the official link builder, follow each one in a logged-out browser to confirm it lands on the intended ASIN with the tag present, and confirm the click appears in Associates reporting before any link is replaced at scale. The product-intent record in data/products.json is the checklist: intended ASIN, listing URL, confirmation date, observed target.",
-   "why": "No link can earn commission without the tag, and an unvalidated replacement is how a site ends up linking the wrong product.",
-   "effort": "One test session once the account exists.",
-   "risk": "Low if one link is validated before scaling, as the brief requires.",
-   "check": "Each test link resolves to the intended ASIN with tag= visible, and the click appears in the Associates click report within the reporting window.",
-   "decision": "D-01",
-   "flags": [
-    "F-03",
-    "F-55"
-   ],
+   "title": "Approve a privacy boundary, hosting choice and five-event measurement contract before adding a server endpoint",
+   "problem": "The current tracker stores events only in each visitor’s browser. The static GitHub Pages site has no self-hosted collection endpoint, no five-event taxonomy and no reader-capture form. A server endpoint or signup form would change what data is collected and where it is stored.",
+   "proposal": "Keep the current local-only logger until the owner chooses hosting, retention and consent rules. As a draft taxonomy for review, define article_view (page identifier only), chooser_complete (chosen format), outbound_product_click (product/link identifier), reader_capture_opt_in (only after explicit consent; keep the email address out of analytics events), and reported_order (aggregate import from an authorized Associates report, never a browser pixel). Build an endpoint only after the questions register is answered.",
+   "why": "A count can be useful without cross-site identifiers, but collection location, personal information, retention and the source of a conversion event must be clear before collection starts. Client-side clicks cannot establish an Amazon order.",
+   "effort": "Owner selects an infrastructure and privacy approach; engineering work follows. Reader capture should be a separate opt-in, not bundled with anonymous measurement.",
+   "risk": "A third-party or misconfigured endpoint could expose visitor data or imply conversion data that was never reported. No email, user-level profile, or estimated purchase should enter the analytics stream.",
+   "check": "The endpoint is first-party and documented; each event has a narrow payload and provenance; consent and deletion behavior are tested; only authorized aggregate reports create reported_order events; QA confirms no request is sent before the chosen consent state.",
    "sources": [
     {
-     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
-     "ref": "Operating Agreement Section 1: the links must properly use the tagged Special Link formats"
-    }
-   ],
-   "status": "Needs a decision first"
-  },
-  {
-   "id": "S-39",
-   "priority": "P2 - Adds real value",
-   "title": "Reader capture: follow-by-RSS ships now; an email list waits on the privacy review",
-   "problem": "The brief asks for reader capture. A static site cannot store emails safely on its own, and incentives tied to clicks are prohibited (Participation Requirement 6(g)).",
-   "proposal": "The RSS feed (shipped 2026-11-17) is the reader-capture channel: every page advertises it in its head up. If the owner wants an email list, it arrives with a consent notice, a privacy notice and no link to the affiliate programme.",
-   "why": "Capture without consent is a liability; the feed captures readers with no data collected at all.",
-   "effort": "None now; days plus review for the email option.",
-   "risk": "The email option's risk is privacy, not technical.",
-   "check": "The feed validates and appears in feed readers; if the email option is taken, the consent flow exists before the first signup.",
-   "decision": "D-41",
-   "flags": [],
-   "sources": [
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js",
+     "ref": "Current localStorage-only tracker; no network endpoint"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+     "ref": "Current static GitHub Pages site generator"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC guidance cited for clear disclosures; not a substitute for privacy/legal review"
+    },
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Participation Requirement 6(g): no rewards for clicking"
+     "ref": "Associates policies and authorized reporting context"
     }
    ],
-   "status": "Partly implemented 2026-11-17"
+   "flags": [
+    "F-19"
+   ],
+   "status": "Awaiting decision",
+   "decision": "D-41"
   },
   {
-   "id": "S-40",
+   "id": "SG-27",
    "priority": "P2 - Adds real value",
-   "title": "Verify the site in Google Search Console and submit the sitemap and feed",
-   "problem": "The sitemap, robots.txt and RSS feed are published, but no search-performance data exists, so the next topic is chosen from buyer questions rather than from measured queries (S-25, Q-40).",
-   "proposal": "The owner verifies site ownership with their Google account (meta tag or DNS), then submits docs/sitemap.xml once. After that, the cadence rule picks the next guide from measured queries in the Search Console performance report.",
-   "why": "It turns the traffic plan from instinct into evidence without publishing a single forecast (D-19).",
-   "effort": "Minutes of owner time.",
-   "risk": "None; the site publishes nothing Search Console would contradict.",
-   "check": "Search Console shows the property as verified and lists the sitemap as read.",
-   "decision": "D-42",
-   "flags": [],
+   "title": "Give the navigation labels a publication pass so the site reads like a magazine, not a dashboard",
+   "problem": "The sidebar navigation works, but its group and page labels are dashboard vocabulary. A buyer arriving from search should see the same language a buying-advice publication uses, so the nav itself reinforces the shop-like reading experience rather than the audit process behind it.",
+   "proposal": "Review every navigation group title and page label for publication tone, keep the single navigation group the brief requires, and ensure the RSS feed link is reachable from the nav and footer. Labels stay accurate to the page they point at; nothing is renamed into a claim.",
+   "why": "Navigation is the first thing a reader scans. Publication-grade labels lower the perceived machine-generated feel and make the site feel curated, which is the whole point of the polish pass.",
+   "effort": "Under an hour.",
+   "risk": "Presentation only. Labels must still match the page they link to, so each rename is checked against the page title.",
+   "check": "Every nav label is unique and describes the destination; the feed link appears in nav and footer; the build and verifier stay green.",
    "sources": [
     {
-     "url": "https://developers.google.com/search/docs/appearance/page-experience",
-     "ref": "Google Search Central: site presentation and measurement"
-    }
-   ],
-   "status": "Needs a decision first"
-  },
-  {
-   "id": "S-41",
-   "priority": "P2 - Adds real value",
-   "title": "Set the publishing cadence and ship every new guide to the sitemap and the RSS feed in the same build",
-   "problem": "Guides published without a cadence and without feed/sitemap updates are invisible to readers who follow and to crawlers who index.",
-   "proposal": "One question-shaped guide per week from the topic calendar, each a real page with its own title tag and meta description, each landing in docs/sitemap.xml and docs/feed.xml in the build that publishes it. The first weekly guide (topic T-04) ships with this change.",
-   "why": "A cadence makes the site a publication rather than a dump, and the feed gives search engines and readers one index surface (the brief's 'make it findable').",
-   "effort": "One build change plus the weekly writing.",
-   "risk": "None: the fact rule governs every guide as before.",
-   "check": "docs/feed.xml contains one item per published guide and validates; sitemap.xml lists every page the build wrote.",
-   "decision": "D-17",
-   "flags": [],
-   "sources": [
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+     "ref": "The navigation this would relabel (scripts/build_site.py)"
+    },
     {
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
-     "ref": "Google: helpful, people-first content, published consistently"
+     "ref": "Google: helpful, people-first content - presentation guidance"
     }
    ],
-   "status": "Implemented 2026-11-17"
+   "flags": [],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-21"
+  },
+  {
+   "id": "SG-28",
+   "priority": "P2 - Adds real value",
+   "title": "Ship the RSS feed so every new guide is discoverable the moment it is published",
+   "problem": "The site has a sitemap and structured data, but no feed. A publication that publishes on a cadence should give readers and aggregators a machine-readable list of new articles, and the brief names the shipped RSS feed as part of the publication polish.",
+   "proposal": "Generate an RSS 2.0 feed (docs/feed.xml) from the article data at build time, link it from every page head with a <link rel=\"alternate\" type=\"application/rss+xml\">, add it to the sitemap and robots, and add a footer link. Each item carries the article title, link, description and publication date, sourced from the article's own data.",
+   "why": "A feed is the standard discovery channel for a publishing cadence. It costs nothing, needs no account, and makes the 'publish a guide, then measure arrival' loop possible for feed readers as well as search.",
+   "effort": "Under an hour.",
+   "risk": "Low. The feed is generated from the same article data the pages use, so it cannot drift from the published articles. No external host is added.",
+   "check": "docs/feed.xml exists, is well-formed XML, lists every published article URL, and the verifier confirms the feed is wired into the sitemap, robots and page heads.",
+   "sources": [
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+     "ref": "The shipped RSS feed this suggestion adds"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/appearance/snippet",
+     "ref": "Google Search Central: making content discoverable"
+    }
+   ],
+   "flags": [],
+   "status": "Implemented 2026-11-17",
+   "decision": "D-09"
+  },
+  {
+   "id": "SG-29",
+   "priority": "P2 - Adds real value",
+   "title": "Connect Google Search Console so the next topic is chosen from measured queries, not instinct",
+   "problem": "The brief asks to measure whether anyone arrives and to choose the next topic from measured queries. Without Search Console connected, the site can publish guides and a feed but cannot see which queries actually bring readers, so topic selection stays instinct-led.",
+   "proposal": "Once the owner confirms a Google account, add the GitHub Pages property to Search Console, verify ownership, and read the queries, impressions and clicks report. Feed those measured queries back into the topic calendar. The site itself needs no code change; the verification is an owner action.",
+   "why": "This is the measurement step the brief names explicitly. It turns the publishing cadence from a guess into a measured loop, and it is the only way to know which of the question-shaped guides actually arrive.",
+   "effort": "Owner action, roughly an hour with the account.",
+   "risk": "None to the site. Search Console is read-only for the site; it changes no published content and no disclosure.",
+   "check": "Search Console reports impressions and clicks for the site's URLs, and the topic calendar records which queries drove the next guide.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/appearance/snippet",
+     "ref": "Google Search Central: measure performance in Search Console"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/pipeline.json",
+     "ref": "The measurement pipeline this feeds (data/pipeline.json)"
+    }
+   ],
+   "flags": [],
+   "status": "Awaiting decision 2026-11-17",
+   "decision": "D-30"
+  },
+  {
+   "id": "SG-30",
+   "priority": "P2 - Adds real value",
+   "title": "Add a reader-capture surface so returning readers can follow the publishing cadence",
+   "problem": "A publication that publishes on a cadence needs a way for a reader who found one guide to come back for the next. There is no capture surface today, so each guide starts from a cold visitor again.",
+   "proposal": "Add a minimal, privacy-preserving reader-capture section (an email signup that posts to a self-hosted endpoint or a provider the owner chooses) with a clear consent notice and a link to the privacy policy. Do not build it until the provider, consent basis and retention are decided, because capture without a lawful basis is the one part of this that cannot be automated safely.",
+   "why": "Returning readers are the difference between a one-off click and a publication with an audience. But the consent and retention decisions are owner-only, so this is staged rather than built.",
+   "effort": "Half a day once the provider and consent basis are chosen.",
+   "risk": "Privacy. Capture without a documented consent basis and retention policy would breach the disclosure expectations in the Program Policies and applicable law, so it is gated on the privacy decision.",
+   "check": "A capture surface exists with a consent notice and privacy link, the endpoint is self-hosted or owner-chosen, and the disclosure and privacy review pass.",
+   "sources": [
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: Disclosures 101 - placement and clarity"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Associates Operating Agreement - disclosure and content rules"
+    }
+   ],
+   "flags": [],
+   "status": "Awaiting decision 2026-11-17",
+   "decision": "D-16"
   }
  ]
 }

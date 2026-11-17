@@ -318,7 +318,7 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
         except ValueError:
             warn(f"{rel}: link escapes docs/: {href_url}")
     for np_ in sorted(nav_paths):
-        if np_ not in on_disk:
+        if not (DOCS / np_).exists():
             fail(f"{rel}: nav/inline link target missing on disk: {np_}")
     if len(sp.aria_current) > 1:
         warn(f"{rel}: more than one aria-current=\"page\"")

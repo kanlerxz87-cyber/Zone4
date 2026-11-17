@@ -20,11 +20,11 @@
   {
    "id": "Q-01",
    "area": "Money",
-   "question": "Does an Amazon Associates account exist for this site, and what is its Partner Tag?",
+   "question": "Is the Associates account enrolled under the supplied Partner Tag, and have the published links been generated and validated in that account?",
    "why_it_matters": "Without an account there is no tag, and without a tag no click can be attributed. Every revenue figure the brief asks for is downstream of this single fact.",
    "kind": "Unknown - not discoverable from here",
-   "known": "No tag parameter appears in any of the three resolved links. The short links themselves are genuine link.amazon links and do resolve to the correct product pages.",
-   "how_to_discover": "Sign in to Associates Central. The Partner Tag is shown in the account settings and in every link the account generates.",
+   "known": "The user supplied `shopnow047c-20` as the selected tracking ID. This session cannot confirm that it is active, belongs to an enrolled Associates account, or has been applied to any Special Link. The three previously reviewed destinations had no visible `tag=` parameter in their 2026-11-16 re-check. Five additional URLs are separately unverified (F-55).",
+   "how_to_discover": "In Associates Central, confirm account enrollment and that shopnow047c-20 is the account Partner Tag. Generate or validate one Special Link per intended product; re-resolve each destination and confirm a test click in the authorized reporting workflow before scaling.",
    "answerable_by": "The site owner",
    "blocks": [
     "S-01",
@@ -1020,74 +1020,64 @@
   },
   {
    "id": "Q-45",
-   "area": "Analytics",
-   "question": "Where will the self-hosted analytics endpoint be hosted, and under what privacy notice?",
-   "why_it_matters": "The five defined events are recorded only in the visitor's browser until an endpoint exists (F-56); the choice of host decides whose privacy terms apply.",
-   "kind": "Owner decision",
-   "known": "The tracker is wired to an endpoint contract (data/pipeline.json) and sends nothing while the meta tag is empty. GitHub Pages cannot host a POST endpoint.",
-   "how_to_discover": "Choose a host - a small serverless function on the owner's own domain is enough - deploy the contract, publish the privacy notice, then fill in the meta tag.",
-   "answerable_by": "Owner (hosting account and privacy wording); a privacy reviewer for the notice (D-16).",
-   "blocks": "S-37, D-40, aggregate measurement of the five defined events",
+   "area": "Product identity and links",
+   "question": "Are the two newly added short links intended to represent additional products, and can the intended product be confirmed for each of the five distinct candidate links?",
+   "why_it_matters": "The three existing links have historical destination verification but lack a separate product-intent confirmation record. Two additional links appear in the latest request and have not been resolved. Publishing without confirming intended products risks sending readers to the wrong listing.",
+   "kind": "Unknown - discoverable",
+   "known": "The brief repeats the three link.amazon URLs already in the product register and adds https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj. The first three have historical destination verification records. The two additional destinations are unverified in this session. The user also supplied shopnow047c-20, whose account association and use in Special Links are unconfirmed.",
+   "how_to_discover": "In Associates Central, validate one Special Link per intended product and confirm its destination and tracking report. For each of the five distinct products, store intended ASIN, official listing URL, confirmation date and source; keep the observed redirect target in a separate field. Do not use a short-link token itself as an ASIN.",
+   "answerable_by": "The account holder or an authorized Associates user; the public listing pages can then be checked against the intended product.",
+   "blocks": [
+    "S-37",
+    "D-40"
+   ],
    "sources": [
     {
+     "url": "https://link.amazon/B0c8moW59",
+     "ref": "New user-submitted link; destination not independently verified in this pass."
+    },
+    {
+     "url": "https://link.amazon/B0f3GKalj",
+     "ref": "New user-submitted link; destination not independently verified in this pass."
+    },
+    {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Participation Requirement 6(s)"
+     "ref": "Amazon Associates Program Policies: Special Link requirements"
     }
    ],
    "flags": [
-    "F-56"
+    "F-55"
    ]
   },
   {
    "id": "Q-46",
-   "area": "Content",
-   "question": "May the site ask readers for an email address, and what consent text would that need?",
-   "why_it_matters": "Reader capture is on the brief; collecting addresses without a consent flow and privacy notice would trade a growth idea for a liability.",
+   "area": "Measurement and privacy",
+   "question": "Where may a first-party analytics endpoint run, what are the five event definitions, and what privacy/consent rules govern any reader signup?",
+   "why_it_matters": "The current localStorage tracker is not shared analytics and cannot report purchases. A server endpoint and reader-capture form would introduce storage and potentially personal data; the site must choose a lawful purpose, consent flow, retention period and deletion path before collection.",
    "kind": "Owner decision",
-   "known": "The RSS feed captures readers with no personal data collected. Participation Requirement 6(g) bars rewarding clicks, so any list must stay clear of the affiliate links.",
-   "how_to_discover": "Decide whether a list is wanted at all (D-41); if yes, have the consent and privacy text reviewed (D-16) before the first signup form is published.",
-   "answerable_by": "Owner, with a privacy reviewer for the text.",
-   "blocks": "S-39, D-41",
+   "known": "The public site is generated as static pages. docs/tracker.js makes no network request and stores events only in the visitor browser. There is no reader signup form or Search Console property verification recorded. Associates orders must come from authorized reporting, not inferred from outbound clicks.",
+   "how_to_discover": "Choose among remaining browser-local-only measurement, a first-party self-hosted endpoint, or an approved managed provider after reviewing hosting, retention, consent, data-subject requests and security. Approve a five-event taxonomy and inspect every payload before enabling collection. Keep reader email separate from analytics; import purchase outcomes only from authorized reports.",
+   "answerable_by": "The site owner for the purpose, provider, budget and consent choice; an authorized Associates user for order-report access; a privacy professional for applicable legal review.",
+   "blocks": [
+    "S-38",
+    "D-41"
+   ],
    "sources": [
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js",
+     "ref": "Current local-only tracker behavior"
+    },
+    {
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+     "ref": "Current static-site build path"
+    },
     {
      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-     "ref": "FTC Disclosures 101: disclosure obligations travel with the channel"
-    }
-   ],
-   "flags": []
-  },
-  {
-   "id": "Q-47",
-   "area": "Operations",
-   "question": "Which Google account verifies this site in Search Console, and who submits the sitemap and feed?",
-   "why_it_matters": "Without a verified owner account there is no search-performance data, so topics stay question-led instead of query-led (S-25, Q-40).",
-   "kind": "Owner decision",
-   "known": "sitemap.xml, robots.txt and feed.xml are already generated and published with every build.",
-   "how_to_discover": "The owner verifies the property (meta tag or DNS record) and submits docs/sitemap.xml once (D-42).",
-   "answerable_by": "Owner (the Google account holder).",
-   "blocks": "S-40, D-42, measured topic selection",
-   "sources": [
-    {
-     "url": "https://developers.google.com/search/docs/appearance/page-experience",
-     "ref": "Google Search Central: site presentation and measurement"
-    }
-   ],
-   "flags": []
-  },
-  {
-   "id": "Q-48",
-   "area": "Measurement",
-   "question": "Which authorized first-party report will supply the campaign ledger's rows, and on what schedule?",
-   "why_it_matters": "The ledger is defined and empty (data/campaign-ledger.json); rows may only come from authorized reports, so the report source decides when the ledger can start.",
-   "kind": "Unknown - not discoverable from here",
-   "known": "The Commission Income Statement states that Amazon creates and distributes the click and order reports. No Associates account or reporting feed is connected (Q-01, F-19).",
-   "how_to_discover": "Once the account exists (Q-01), read the Associates Central reports named in the Commission Income Statement and copy the figures with the retrieval date into data/campaign-ledger.json.",
-   "answerable_by": "The Associates Central reporting (after enrolment) and the owner's reporting schedule.",
-   "blocks": "Campaign ledger population; evidence-based iteration (Priority 4)",
-   "sources": [
+     "ref": "FTC disclosure placement guidance, not a complete privacy rule"
+    },
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Commission Income Statement, Sections 1 to 3"
+     "ref": "Associates reporting and Program Policies"
     }
    ],
    "flags": [

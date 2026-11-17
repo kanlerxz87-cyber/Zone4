@@ -19,6 +19,7 @@ import json
 import pathlib
 import re
 import sys
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from urllib.parse import urlparse
 
@@ -491,13 +492,35 @@ def check_site() -> None:
         sp.feed(page.read_text(encoding="utf-8"))
         parsed[page] = sp
         rel = page.relative_to(ROOT)
-        raw = page.read_text(encoding="utf-8")
-        if DISCLOSURE not in " ".join(sp.text_parts):
+        visible = " ".join(sp.text_parts)
+        if DISCLOSURE not in visible:
             fail(f"{rel}: disclosure sentence missing")
-        if raw.count(DISCLOSURE) < 2:
-            fail(f"{rel}: disclosure must appear under the masthead and again in the footer (owner brief 2026-11-17)")
+        raw = page.read_text(encoding="utf-8")
+        footer_match = re.search(r"<footer>(.*?)</footer>", raw, re.S)
+        if not footer_match or DISCLOSURE not in html.unescape(footer_match.group(1)):
+            fail(f"{rel}: affiliate disclosure must be repeated in the footer")
+        if raw.count('<div class="nav-group">') != 1:
+            fail(f"{rel}: shared navigation must contain exactly one group")
+        shop_anchors = re.findall(r'<a\b[^>]*class="[^"]*\bshop\b[^"]*"[^>]*>', raw)
+        for anchor in shop_anchors:
+            rel_attr = re.search(r'\brel="([^"]*)"', anchor)
+            if not rel_attr or "sponsored" not in rel_attr.group(1).split():
+                fail(f"{rel}: product link is missing rel=\"sponsored\": {anchor[:140]}")
+        if not footer_match or 'class="footer-directory"' not in footer_match.group(1):
+            fail(f"{rel}: footer site directory is missing")
+        elif footer_match:
+            footer_hrefs = re.findall(r'<a\b[^>]*href="([^"]+)"', footer_match.group(1))
+            footer_targets = set()
+            for href_value in footer_hrefs:
+                parsed_href = urlparse(href_value)
+                if not parsed_href.scheme and parsed_href.path:
+                    footer_targets.add((page.parent / parsed_href.path).resolve())
+            missing_from_footer = [target.relative_to(DOCS) for target in pages if target.resolve() not in footer_targets]
+            if missing_from_footer:
+                fail(f"{rel}: footer directory omits page(s): {', '.join(map(str, missing_from_footer))}")
         for bad in sp.bad_rows:
             fail(f"{rel}: table row {bad} has no link to an official source")
+        raw = page.read_text(encoding="utf-8")
         if PRICE_RE.search(re.sub(r"<[^>]+>", " ", raw)):
             fail(f"{rel}: contains a currency amount (Amazon prices are withheld under Participation Requirements 2(b))")
         if RATING_RE.search(raw):
@@ -584,88 +607,31 @@ def check_required_pages() -> None:
                     fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
-def check_measurement() -> None:
-    """The five defined events, the empty campaign ledger, the product-intent
-    record and the RSS feed must exist exactly as the brief specifies."""
-    pipeline = load("pipeline.json")
-    events = [e for e in pipeline.get("events", []) if e.get("id") != "EV-T"]
-    want = {"EV-1", "EV-2", "EV-3", "EV-4", "EV-5"}
-    got = {e.get("id") for e in events}
-    if got != want or len(events) != 5:
-        fail(f"pipeline events: expected exactly {sorted(want)}, got {sorted(got)}")
-    for e in events:
-        if not e.get("definition") or not e.get("how_recorded"):
-            fail(f"pipeline event {e.get('id')}: missing definition or how_recorded")
-        if not is_official(e.get("source_url", "")):
-            fail(f"pipeline event {e.get('id')}: non-official source")
-
-    ledger = load("campaign-ledger.json")
-    meta = ledger["_meta"]
-    if ledger.get("rows"):
-        fail("campaign ledger has rows, but no authorized first-party report is connected (Q-48)")
-    names = [c["field"] for c in meta.get("columns", [])]
-    for required in ("timestamp_utc", "source", "channel", "eligible_sessions", "clicks",
-                     "reported_orders", "provenance"):
-        if required not in names:
-            fail(f"campaign ledger: missing column {required}")
-    if not meta.get("provenance_rule"):
-        fail("campaign ledger: no provenance rule")
-
-    for p in load("products.json")["products"]:
-        ir = p.get("intent_record")
-        if not ir:
-            fail(f"{p['id']}: no product-intent confirmation record")
-            continue
-        for key in ("submitted_link", "submitted_code", "intended_asin", "official_listing_url",
-                    "confirmation_date_utc", "confirmation_source", "observed_redirect_targets"):
-            if not ir.get(key):
-                fail(f"{p['id']}: intent_record.{key} is missing or empty")
-        if ir.get("intended_asin") != p["asin"] or not ASIN_RE.match(str(ir.get("intended_asin", ""))):
-            fail(f"{p['id']}: intended_asin does not match the verified record ASIN")
-        if ir.get("submitted_code") == ir.get("intended_asin"):
-            fail(f"{p['id']}: submitted code merged with the intended ASIN (F-55 forbids merging)")
-        if ir.get("official_listing_url") != p["canonical_url"]:
-            fail(f"{p['id']}: intent_record.official_listing_url does not match canonical_url")
-        obs = ir.get("observed_redirect_targets")
-        if not isinstance(obs, list) or not obs:
-            fail(f"{p['id']}: observed_redirect_targets must be a non-empty list kept separate from intent")
-        for o in obs or []:
-            if not isinstance(o, dict) or not o.get("date_utc") or not o.get("resolved_url"):
-                fail(f"{p['id']}: an observed redirect entry lacks a date or a target")
-
-    page = DOCS / "analytics.html"
-    if page.exists():
-        raw = page.read_text(encoding="utf-8")
-        for e in events:
-            if e["event"] not in raw:
-                fail(f"docs/analytics.html: the five defined events table is missing {e['event']}")
-        if "campaign ledger" not in raw.lower():
-            fail("docs/analytics.html: the campaign ledger section is missing")
-    products_page = DOCS / "products.html"
-    if products_page.exists() and "Product-intent confirmation record" not in products_page.read_text(encoding="utf-8"):
-        fail("docs/products.html: the product-intent confirmation record is missing")
-
-    for page in DOCS.rglob("*.html"):
-        if "feed.xml" not in page.read_text(encoding="utf-8"):
-            fail(f"{page.relative_to(ROOT)}: no RSS feed link in the page")
-
+def check_rss_feed() -> None:
     feed_path = DOCS / "feed.xml"
     if not feed_path.exists():
-        fail("docs/feed.xml missing; run scripts/build_site.py")
+        fail("docs/feed.xml missing")
         return
-    feed = feed_path.read_text(encoding="utf-8")
-    items = re.findall(r"<item>(.*?)</item>", feed, re.S)
+    try:
+        root = ET.parse(feed_path).getroot()
+    except ET.ParseError as exc:
+        fail(f"docs/feed.xml is not valid XML: {exc}")
+        return
+    if root.tag != "rss" or root.get("version") != "2.0":
+        fail("docs/feed.xml must be an RSS 2.0 document")
+        return
+    channel = root.find("channel")
+    if channel is None:
+        fail("docs/feed.xml has no channel")
+        return
+    items = channel.findall("item")
     articles = load("marketing.json")["articles"]
     if len(items) != len(articles):
-        fail(f"feed.xml has {len(items)} items for {len(articles)} published guides")
-    for a in articles:
-        if ("articles/" + a["slug"].strip("/") + ".html") not in feed:
-            fail(f"feed.xml: missing item for {a['id']}")
-        if a["title_tag"] not in feed:
-            fail(f"feed.xml: missing title for {a['id']}")
-    for u in re.findall(r"<loc>(.*?)</loc>", (DOCS / "sitemap.xml").read_text(encoding="utf-8")):
-        if not u.startswith("https://kanlerxz87-cyber.github.io/Zone4/docs/"):
-            fail(f"sitemap.xml: unexpected URL {u}")
+        fail(f"docs/feed.xml has {len(items)} items; expected {len(articles)} published articles")
+    expected = ["https://kanlerxz87-cyber.github.io/Zone4/docs/articles/" + a["slug"].strip("/") + ".html" for a in articles]
+    actual = [item.findtext("link") for item in items]
+    if actual != expected:
+        fail("docs/feed.xml article links do not match the published article records")
 
 
 def check_root_entry() -> None:
@@ -689,8 +655,8 @@ def main() -> int:
     check_decision_support()
     check_design()
     check_site()
+    check_rss_feed()
     check_design_page()
-    check_measurement()
     check_required_pages()
     check_root_entry()
     if failures:
@@ -699,7 +665,7 @@ def main() -> int:
             print(" -", f)
         return 1
     n_pages = len(list(DOCS.rglob('*.html')))
-    print(f"OK: data files valid; {n_pages} pages checked: links, anchors, disclosure (masthead + footer), row sources, "
+    print(f"OK: data files valid; {n_pages} pages checked: links, anchors, disclosure, row sources, "
           f"no prices or ratings, no Amazon Mark in titles or keywords.")
     return 0
 

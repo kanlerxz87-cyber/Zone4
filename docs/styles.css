@@ -72,16 +72,13 @@ a:hover { color: var(--accent-strong); }
 }
 .disclosure a { color: #5c4700; font-weight: 600; }
 main { padding: 12px 30px 34px; max-width: 1400px; }
-footer { padding: 16px 30px; color: var(--muted); border-top: 1px solid var(--line); background: var(--panel-soft); }
-/* Footer directory (arena/cc32105d-zone4): one grouped list of every page. */
-.foot-nav { display: flex; flex-wrap: wrap; gap: 26px; margin: 12px 0 10px; }
-.foot-col { min-width: 170px; }
-.foot-title { display: block; font-weight: 700; color: var(--ink); margin-bottom: 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
-.foot-col ul { list-style: none; margin: 0; padding: 0; }
-.foot-col li { margin: 3px 0; font-size: 13px; }
-.foot-col a { color: var(--muted); text-decoration: none; }
-.foot-col a:hover, .foot-col a:focus { color: var(--accent-strong); text-decoration: underline; }
-footer .disclosure { margin-bottom: 8px; }
+footer { padding: 20px 30px; color: var(--muted); border-top: 1px solid var(--line); background: var(--panel-soft); }
+.footer-disclosure { margin: 0 0 14px; color: var(--ink); }
+.footer-directory { border-top: 1px solid var(--line); padding-top: 12px; }
+.footer-directory > strong { display: block; margin-bottom: 8px; color: var(--ink); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.footer-links a { font-size: 13px; }
+footer > p:last-child { margin: 14px 0 0; }
 
 /* --- Headings ------------------------------------------------------------- */
 h1, h2, h3, .mhero h1, .acard-title, .tile-title, .scard h3, .dcard-q, .kpi-text {
