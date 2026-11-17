@@ -1404,7 +1404,10 @@
      "url": "https://developers.google.com/search/docs/appearance/page-experience",
      "ref": "Google: page experience"
     }
-   ]
+   ],
+   "recorded_choice": "Option A: the DIR-A warm-editorial specification in data/design.json is adopted as the build direction for the shop-front pass (2026-11-17). D-18 had already chosen the warm-editorial family; this records the full specification as the one the pass builds from.",
+   "recorded_date_utc": "2026-11-17",
+   "recorded_by": "arena/dd63a369-zone4 (delegated decision; owner session brief: no manual input)"
   },
   {
    "id": "D-36",
@@ -1484,6 +1487,13 @@
      "commits_to": "Punchy for the P2 function-count piece and the comparison; steady for the three product articles. Matches the evidence each piece actually has.",
      "effort": "Same as A.",
      "reversible": "Yes."
+    },
+    {
+     "key": "D",
+     "label": "No change needed - the published headlines already satisfy the steady rule",
+     "commits_to": "The headlines stay as published: each already names a listed figure or the reader decision, so none is rewritten again.",
+     "effort": "None.",
+     "reversible": "n/a"
     }
    ],
    "recommendation": "No change needed (option D). The published headlines already satisfy the rule the option sets were written to: each names a number or the reader's problem and none describes the site's process (F-52, corrected). The two option sets on the Design brief page remain as an available second register if the owner wants a different voice, not as a fix for a defect.",
@@ -1496,7 +1506,10 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: does the content provide substantial value compared with other pages in search results?"
     }
-   ]
+   ],
+   "recorded_choice": "Option D (no change): the published headlines already satisfy the steady rule - each names a listed figure or the reader decision - so no headline is rewritten again.",
+   "recorded_date_utc": "2026-11-17",
+   "recorded_by": "arena/dd63a369-zone4 (delegated decision; owner session brief: no manual input)"
   },
   {
    "id": "D-38",
@@ -1700,7 +1713,7 @@
  "log": [
   {
    "date_utc": "2026-11-15",
-   "decision": "—",
+   "decision": "\u2014",
    "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open.",
    "recorded_by": "arena/00ba6c2e-zone4",
    "evidence": "Not applicable: nothing has been decided."

@@ -445,7 +445,8 @@
      "url": "https://www.amazon.com/dp/B08DKYBTPH",
      "ref": "P3 product page: 8 quarts listed capacity and 12.75in depth"
     }
-   ]
+   ],
+   "published_article": "M-G2"
   },
   {
    "id": "T-02",
@@ -471,7 +472,8 @@
      "url": "https://www.amazon.com/dp/B09B7SB46R",
      "ref": "P2 product page: the French-door format and its 16.9in depth"
     }
-   ]
+   ],
+   "published_article": "M-BUY"
   },
   {
    "id": "T-03",
@@ -675,7 +677,7 @@
   {
    "slot": "[AUDIENCE]",
    "filled_from": "Q-16 and Q-04",
-   "current": "not yet chosen"
+   "current": "still open (Q-16 and Q-04)"
   }
  ],
  "launch_path": [

@@ -26,6 +26,14 @@ SITE_DESCRIPTION = (
     "Spec-checked buying guides for three countertop air fryers: product records, sourced articles, "
     "and a receipt behind every number. What we cannot verify is flagged, not hidden."
 )
+# The front page leads with the shop, not the audit: its own marketing title and
+# meta description, distinct from the dashboard label used in the navigation.
+# No Amazon Mark appears in either (Participation Requirement 6(e)).
+INDEX_TITLE_TAG = "Find the air fryer that fits your kitchen"
+INDEX_DESCRIPTION = (
+    "Compare three countertop air fryers on the numbers their listings actually state. A three-question "
+    "chooser, seven sourced buying guides and a receipt behind every figure - no prices, ratings or guesses."
+)
 
 
 def load(name: str):
@@ -635,45 +643,6 @@ def article_card(current: Page, a: dict, show_category: bool = True) -> str:
     )
 
 
-def decision_queue_section(current: Page) -> str:
-    """The decisions that gate the rest, as cards rather than another table.
-
-    The site is a proposal, not a finished product: much of what the brief asks
-    for cannot be built without an answer only the owner can give. Saying so on
-    the landing page is more useful to a reader than another product card, and a
-    card reads better here than a four-column table of prose.
-    """
-    open_decisions = [d for d in DECISIONS if d["status"].startswith("Open")]
-    top = open_decisions[:3]
-    if not top:
-        return ""
-    cards = "".join(
-        f'<a class="dcard" href="{esc(current.rel("decisions.html"))}#{esc(d["id"])}">'
-        f'<div class="dcard-top"><span class="dcard-id">{esc(d["id"])}</span>'
-        f'<span class="chip chip-quiet">Gate</span></div>'
-        f'<div class="dcard-q">{esc(d["question"])}</div>'
-        f'<div class="dcard-rec"><strong>Recommended.</strong> {esc(d["recommendation"])}</div>'
-        f'<div class="dcard-go">Open the options &rarr;</div></a>'
-        for d in top
-    )
-    return (
-        f'<section><h2>Still yours to decide: {len(open_decisions)} questions</h2>'
-        '<p class="section-lead">The design and voice decisions have been recorded and shipped. These are what remains - '
-        'each one needs a fact only you have (an Associates account, a budget, a seller or a lawyer), so no source this '
-        'project can read will ever answer them. The three that gate the rest are below.</p>'
-        f'<div class="agrid">{cards}</div>'
-        + '<p>'
-        + href(current, "decisions.html", "Work through all " + str(len(open_decisions)) + " open decisions →")
-        + " &nbsp; "
-        + href(current, "suggestions.html", f"{len(SUGGESTIONS)} costed suggestions")
-        + " &nbsp; "
-        + href(current, "questions.html", f"{len(QUESTIONS)} open questions")
-        + " &nbsp; "
-        + href(current, "design.html", "the design brief")
-        + "</p></section>"
-    )
-
-
 def chooser_section(current: Page) -> str:
     """The three-question 'which one is for you' chooser (suggestion S-19,
     decision D-23 recorded 2026-11-16).
@@ -727,37 +696,170 @@ def shop_section_hook(current: Page) -> str:
     return build_extras.shop_section(sys.modules[__name__], current)
 
 
-def page_index(current: Page) -> str:
-    open_flags = [f for f in FLAGS if flag_group(f["status"]) == "Needs your decision"]
-    # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
-    assigned = sum(
-        1 for p in PRODUCTS
-        if p.get("commission_rate_pct") is not None and p.get("commission_category_official")
+def featured_section(current: Page) -> str:
+    """The shop window: one lead guide, then the rest of the shelf.
+
+    Leads with the reader's decision, not the site's checking process (anti-slop
+    patterns AS-01, AS-02 and AS-08). The buying guide is the natural entry
+    point; the format comparison and the three product articles follow.
+    """
+    buy = next((a for a in ARTICLES if a["id"] == "M-BUY"), ARTICLES[0])
+    rest = [a for a in ARTICLES if a["id"] != buy["id"]]
+    rest.sort(key=lambda a: {"Comparison": 0, "Product article": 1}.get(a["page_type"], 2))
+    feature = (
+        f'<a class="feature" href="{esc(current.rel(article_path(buy)))}">'
+        f'<div class="feature-top"><span class="chip">Buying guide</span>'
+        f'<span class="chip chip-quiet">Start here</span></div>'
+        f'<div class="feature-title">{esc(buy["h1"])}</div>'
+        f'<div class="feature-dek">{esc(buy["meta_description"])}</div>'
+        f'<div class="feature-meta">{article_read_minutes(buy)} min read \u00b7 '
+        f'{len(buy["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+        f'<div class="feature-go">Read the guide \u2192</div></a>'
     )
+    grid = "".join(article_card(current, a) for a in rest)
+    return (
+        '<section id="articles"><h2>Start here, then read deeper</h2>'
+        '<p class="section-lead">Begin with the format-first buying guide, then compare the three formats or read the '
+        'review for the one that fits your kitchen. Every figure in every guide is a row in a table that links back to '
+        'the listing it was read from.</p>'
+        f'<div class="feature-wrap">{feature}</div>'
+        f'<div class="agrid">{grid}</div></section>'
+    )
+
+
+def product_comparison_table(current: Page) -> str:
+    """A buyer-facing comparison on the fields a shopper actually decides on.
+
+    Each row links the product to its official listing and carries the rel="sponsored"
+    shop link. Prices, ratings and per-product commission stay off this table by rule
+    (F-02, F-01); the full verified record lives on products.html. This is the shop
+    window, not the audit.
+    """
+    best_for = {
+        "P1": "Two dishes finishing at the same time",
+        "P3": "One big dish, shallowest counter footprint",
+        "P2": "Feeding a crowd on a deep counter",
+    }
+    rows = []
+    for p in PRODUCTS:
+        depth = esc(str(p["dimensions"]).split(" x ")[0])
+        rows.append([
+            ext(p["canonical_url"], p["name_short"]),
+            esc(CATEGORY_TITLE.get("categories/" + CATEGORY_BY_PRODUCT[p["id"]] + ".html", p["subcategory"])),
+            esc(p["capacity"]),
+            depth,
+            esc(best_for[p["id"]]),
+            shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>',
+        ])
+    return table(
+        ["Product (source link)", "Format", "Listed capacity", "Listed depth", "Best for", "Shop"],
+        rows, "comparison",
+    )
+
+
+def content_roadmap_section(current: Page) -> str:
+    """The content roadmap: catchy, question-shaped titles the site is writing next.
+
+    Built from data/design.json topics (decision D-17). A topic is marked Written
+    when a published article carries it; otherwise it is Planned. Every row links
+    the official listing the topic draws on, so a planned title is a promise backed
+    by verified figures rather than filler (D-19: no trend claim without a dated
+    official snapshot).
+    """
+    rows = []
+    for t in TOPICS:
+        pub = t.get("published_article")
+        article = next((a for a in ARTICLES if a["id"] == pub), None) if pub else None
+        if article:
+            link = href(current, article_path(article), "Read it")
+            status = '<span class="pill pill-ok">Written</span>'
+        else:
+            link = '<span class="muted">On the calendar</span>'
+            wave = re.search(r"Wave (\d)", t.get("wave", ""))
+            status = '<span class="pill pill-muted">Planned \u00b7 wave ' + (wave.group(1) if wave else "2") + "</span>"
+        src = t["sources"][0]
+        rows.append([
+            esc(t.get("working_title", "")),
+            esc(t.get("question_it_answers", "")),
+            status,
+            link,
+            ext(src["url"], src.get("ref", "official listing")),
+        ])
+    return (
+        '<section id="roadmap"><h2>What we are writing next</h2>'
+        '<p class="section-lead">A content roadmap of question-shaped guides (decision D-17). Each title is a question a '
+        'buyer actually types, and each is answerable from figures already verified against official listings - so a '
+        'planned title is a promise, not filler. No popularity or trend claim is made (D-19); every row links the '
+        'listing it draws on.</p>'
+        + table(["Working title", "The reader's question", "Status", "Link", "The official facts it draws on"],
+                rows, "roadmap")
+        + "</section>"
+    )
+
+
+def transparency_band(current: Page) -> str:
+    """The dashboard surfaces, kept reachable but out of the shop window.
+
+    Every governance page is one click from here and from the footer, in a single
+    group (the brief's "single navigation group"). The counts are derived from the
+    data so they cannot drift from the registers they summarise.
+    """
     recorded = sum(1 for d in DECISIONS if d["status"] == "Recorded")
-    kpis = [
-        (f"{len(PRODUCTS)} products", "Each one checked against its live listing: identity, category, brand and specifications"),
-        (f"{len(ARTICLES)} guides",
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Product article')} spec checks, "
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Comparison')} comparison and "
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guides - every figure sourced"),
-        ("0 prices, 0 star ratings", "Withheld on purpose (F-02): the programme keeps them off sites like this one"),
-        (f"{recorded} decisions recorded",
-         f"{len(DECISIONS) - recorded} still open - each one needs a fact only the owner has"),
-        (str(len(open_flags)),
-         f"Flags still open, of {len(FLAGS)} recorded (the rest are corrected or resolved and kept as "
-         "the audit record on the Flagged for review page)"),
-    ]
-    kpi_html = "".join(
-        f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
-        for v, l in kpis
+    counts = (
+        f'<div class="tcount"><span class="tcount-n">{len(PRODUCTS)}</span> verified products</div>'
+        f'<div class="tcount"><span class="tcount-n">{len(ARTICLES)}</span> sourced guides</div>'
+        f'<div class="tcount"><span class="tcount-n">0</span> prices or ratings published</div>'
+        f'<div class="tcount"><span class="tcount-n">{recorded}</span> decisions recorded</div>'
     )
-    # Articles presented in decision order (buying guide, then comparison, then
-    # the product reviews), per suggestion S-02/S-03 of session arena/d8564cd0-zone4.
-    trending = "".join(article_card(current, a) for a in sorted(
-        ARTICLES,
-        key=lambda a: {"Buying guide": 0, "Comparison": 1}.get(a["page_type"], 2),
-    ))
+    links = [
+        ("Verification log", "Every published value and the listing it was read from.", "verification.html"),
+        ("Policy compliance", "The programme and FTC rules this site is checked against.", "policy-compliance.html"),
+        ("Flagged for review", "Every irregularity and unverified item, with its source.", "flagged.html"),
+        ("Sources", "Every source used, and whether it was actually read.", "sources.html"),
+        ("Suggestions", "The costed change backlog, to choose from before anything ships.", "suggestions.html"),
+        ("Open questions", "What must be answered before a change can be made.", "questions.html"),
+        ("Decision log", "The choices recorded and the ones still open.", "decisions.html"),
+        ("Analytics", "A local-only click log that starts at zero.", "analytics.html"),
+    ]
+    cards = "".join(
+        f'<a class="tcard" href="{esc(current.rel(target))}"><div class="tcard-t">{esc(label)}</div>'
+        f'<div class="tcard-s">{esc(blurb)}</div></a>'
+        for label, blurb, target in links
+    )
+    withheld = (
+        '<ul class="bullets">'
+        '<li><strong>Prices and star ratings</strong> \u2014 withheld until an approved API supplies them '
+        f'{flag_chip(current, "F-02")}</li>'
+        '<li><strong>Per-product commission rate</strong> \u2014 blank: no official source maps these ASINs to a '
+        f'commission category {flag_chip(current, "F-01")}</li>'
+        '<li><strong>Hands-on testing</strong> \u2014 none claimed; nobody here has cooked in these appliances.</li>'
+        '<li><strong>Traffic or earnings forecasts</strong> \u2014 none published; the programme makes no representation '
+        'about either.</li>'
+        "</ul>"
+    )
+    return (
+        '<section id="transparency"><h2>The data behind the shop</h2>'
+        '<p class="section-lead">This site publishes only what an official listing or policy page states. Everything below '
+        'is the receipt: the verification log, the policy checks, the open flags and the decision surface. It is one click '
+        'away and never in the way of the buying decision.</p>'
+        f'<div class="tcounts">{counts}</div>'
+        f'<div class="transgrid">{cards}</div>'
+        '<h3>What this site deliberately does not publish</h3>'
+        '<p class="section-lead">Stated here rather than buried, each naming the rule or flag behind it.</p>'
+        + withheld
+        + '</section>'
+    )
+
+
+def page_index(current: Page) -> str:
+    """The front page as a shop, not an audit: hero, the shelf, categories, the
+    chooser, a buyer comparison, the content roadmap, then the receipts.
+
+    Governance apparatus (KPI counters, the decision queue, the full verified
+    table) is moved out of the shop window into the transparency band and the
+    footer, where it is still one click away. Implements suggestion S-21 (public
+    magazine / research appendix split) and completes D-21's "amend" decision.
+    """
     cat_tiles = "".join(
         f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
         f'<div class="tile-sub">{esc(next(p["name_short"] for p in PRODUCTS if CATEGORY_BY_PRODUCT.get(p["id"]) == key))}</div>'
@@ -765,66 +867,37 @@ def page_index(current: Page) -> str:
         for target, label, key in
         ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
     )
-    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:4])
-    # The gaps are stated on the front page rather than only on the review page: a
-    # reader deserves to know what this site refuses to publish before they trust
-    # what it does publish, and no competitor states theirs at all.
-    withheld = "".join(
-        f"<li><strong>{esc(k)}</strong> \u2014 {esc(v)}</li>"
-        for k, v in (
-            ("Prices", "withheld until an approved Amazon API supplies them. The listings show them; this site does not (F-02)"),
-            ("Star ratings and review counts", "withheld for the same reason (F-02)"),
-            ("Per-product commission rate",
-             "blank: no official source states which commission category these ASINs sit in (F-01)"),
-            ("Hands-on testing",
-             "none claimed. Nobody on this project has cooked in these appliances, and the site says so"),
-            ("Traffic or earnings forecasts",
-             "none published. The Operating Agreement states Amazon makes no representation about either"),
-        )
-    )
     buying_guide_path = next(
         (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
     )
     return (
         shop_section_hook(current)
         + '<div class="mhero">'
-        '<span class="badge">A practical guide to three very different countertop formats</span>'
+        '<span class="badge">A practical guide to three very different countertop formats \u00b7 every figure links to the listing it was read from</span>'
         "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
         '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
-        'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
-        'verify is flagged rather than hidden, and no price or star rating is published because the programme rules keep '
-        'them off sites like this. Start with the chooser and find your format in under a minute.</p>'
+        'compared on the numbers their makers actually list. Start with the chooser to find your format in under a '
+        'minute, then read the guide that answers the question you arrived with.</p>'
         '<div class="mhero-actions">'
         '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
         f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
         f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the formats</a>'
-        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what we flag</a>'
         '</div>'
         '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
-        '<span>Written by people-shaped sentences, checked line by line</span></div>'
+        '<span>Written in plain sentences, checked line by line</span></div>'
         '</div>'
-        + f'<section class="kpis">{kpi_html}</section>'
-        + chooser_section(current)
-        + '<section><h2>Start here, then go deeper</h2>'
-        '<p class="section-lead">Start with the buying guide, compare the three formats, then read the review for the '
-        "product that fits your kitchen. Each article is built only from figures read off the official product page, and "
-        "every fact it states is a row in a table that links back to that page.</p>"
-        f'<div class="agrid">{trending}</div></section>'
+        + featured_section(current)
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
-        + decision_queue_section(current)
-        + '<section><h2>Products at a glance</h2>'
-        + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C\u2026, Flag F-02)" aria-label="Filter table"></p>'
-        + product_table(current, PRODUCTS)
-        + commission_category_note()
-        + '<p class="small muted">Every row links to its official product page as the source. Short links are the links you '
-        "supplied. Competitor ASINs come from the also-viewed carousel and change between page loads (F-29).</p></section>"
-        + '<section><h2>What this site deliberately does not publish</h2>'
-        '<p class="section-lead">These gaps are the point. They are stated here rather than buried, and each one names the '
-        'official rule or the flag that explains it.</p>'
-        '<ul class="bullets">' + withheld + "</ul>"
-        + f'<p class="small muted">Full list: {href(current, "flagged.html", "Flagged for Review")}.</p></section>'
-        + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
-        + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
+        + chooser_section(current)
+        + '<section><h2>The three, side by side</h2>'
+        '<p class="section-lead">The decision fields a shopper actually compares, taken straight from the listings. '
+        'Prices, ratings and per-product commission stay off this table by rule \u2014 see the full verified record for '
+        'what is withheld and why.</p>'
+        + product_comparison_table(current)
+        + f'<p class="small muted">Full verified record, with every withheld cell and its flag: '
+        f'{href(current, "products.html", "All products")}.</p></section>'
+        + content_roadmap_section(current)
+        + transparency_band(current)
         + '<p class="muted small">'
         + "Product records observed " + esc(OBSERVED) + " (UTC); supplied links and cited policy pages re-read "
         + esc(RECHECKED) + " (UTC). Verification scope and method: "
@@ -2071,7 +2144,7 @@ def page_decisions(current: Page) -> str:
 # carried their own, and these cover the rest. The build fails if two pages
 # share one (see scripts/verify.py), so this cannot silently regress.
 PAGE_DESCRIPTIONS = {
-    "index.html": "Spec-checked air fryer buying guides: a three-question chooser, seven sourced articles, three verified product records, and a receipt behind every number.",
+    "index.html": INDEX_DESCRIPTION,
     "executive-summary.html": f"What the verification found, the {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} decisions that still need the owner and the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} recorded on 2026-11-16, and what is deliberately not built. Each statement links to the official source behind it.",
     "products.html": "Three air-fryer product records side by side: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
     "categories/dual-basket-air-fryers.html": "The dual-basket air-fryer category: the Chefman 6 quart record, its listed specifications, the competing ASINs shown beside it on the listing, and the article written from those facts.",
@@ -2187,6 +2260,29 @@ def render(page: Page) -> str:
 <footer>
   <p class="footer-disclosure"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} <span class="small">(Source: {ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) This site is not endorsed by or affiliated with Amazon.</span></p>
   <nav class="footer-directory" aria-label="Site directory"><strong>Explore the site</strong><div class="footer-links">{footer_links}<a href="{esc(page.rel('feed.xml'))}">RSS feed</a></div></nav>
+  <nav aria-label="Footer" class="footer-nav">
+    <div class="footer-col">
+      <div class="footer-t">Transparency</div>
+      <a href="{esc(page.rel('verification.html'))}">Verification log</a>
+      <a href="{esc(page.rel('policy-compliance.html'))}">Policy compliance</a>
+      <a href="{esc(page.rel('flagged.html'))}">Flagged for review</a>
+      <a href="{esc(page.rel('sources.html'))}">Sources</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-t">Decide</div>
+      <a href="{esc(page.rel('suggestions.html'))}">Suggestions</a>
+      <a href="{esc(page.rel('questions.html'))}">Open questions</a>
+      <a href="{esc(page.rel('decisions.html'))}">Decision log</a>
+      <a href="{esc(page.rel('design.html'))}">Design brief</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-t">Research</div>
+      <a href="{esc(page.rel('analytics.html'))}">Analytics</a>
+      <a href="{esc(page.rel('automation.html'))}">Automation &amp; tracking</a>
+      <a href="{esc(page.rel('executive-summary.html'))}">Executive summary</a>
+      <a href="{esc(page.rel('requirements.html'))}">Requirements</a>
+    </div>
+  </nav>
   <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>
@@ -2255,6 +2351,7 @@ def collect_pages() -> list[Page]:
         page.body = body_fn(page)
         if path == "index.html":
             page.head_extra = website_jsonld()
+            page.title_tag = INDEX_TITLE_TAG
         pages.append(page)
     hub = Page(ARTICLES_HUB, NAV_LABEL[ARTICLES_HUB], ARTICLES_HUB, "")
     hub.body = page_articles_index(hub)

@@ -133,7 +133,7 @@ decision.
 | `[TOPICS]` | D-17 (which wave) | The eight-topic question calendar (D-17) on the Articles hub, one guide per week to sitemap and feed (cadence set 2026-11-17). |
 | `[HEADLINES]` | D-37 (steady or punchy register) | Steady register as published (D-37 recorded 2026-11-17); punchy variants on the Design brief page stay parked behind D-12. |
 | `[TREND_RULE]` | D-19 (the evidence rule for popularity words) | Popularity claims only as dated snapshots of an official page (D-19); no traffic, revenue or search-volume figure anywhere (F-15, F-51). |
-| `[AUDIENCE]` | Q-16 and Q-04 | not yet chosen |
+| `[AUDIENCE]` | Q-16 and Q-04 | still open (Q-16 and Q-04) |
 
 Nothing in this prompt is applied to the site. Each slot is a decision recorded on the
 [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html) page; until one is
