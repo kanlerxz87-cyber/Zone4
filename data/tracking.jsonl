@@ -3,4 +3,10 @@
 # This file is intentionally empty of events: no Amazon account or analytics source is
 # connected to this workspace, so every performance rollup renders as null (flag F-010).
 # Do NOT add invented events: engine.tracking refuses source="synthetic-example".
-# Schema: {"ts","type","ref","href","amount","currency","other_tag","order_status","source"}
+# Schema: {"ts","type","ref","href","amount","currency","other_tag","order_status","source","channel"}
+# The five defined event types (engine.tracking EVENT_TYPES): impression, click,
+# session, order, refund. Their official attribution windows (24-hour session,
+# 89-day cart, 180-day ship) are quoted from Commission Income Statement Section 1
+# and rendered with the rollup schema (timestamp, source, channel, eligible sessions,
+# clicks, reported orders) on the Analytics page and in data/ledger.json,
+# which also carries the dated provenance trail for every row entered from a report.

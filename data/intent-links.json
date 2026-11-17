@@ -5,6 +5,7 @@
     "tracking_id_source": "Supplied by the site owner on 2026-11-17 in the brief. Format check: Amazon's help page at https://www.amazon.com/b?ie=UTF8&node=51812349011 (read 2026-11-17) states that Amazon's software adds '-20' to Store IDs and that a US Store ID ends in -20. The ID has not been verified as active in Associates Central.",
     "checked_utc": "2026-11-17",
     "method": "fetch of each short link (follow redirects) and of each official listing page; ASIN read from the final URL path; title and category breadcrumb read from the page. Not verified: any Associates reporting, any commission category (F-01).",
+    "reconciliation_2026_11_17": "Merge reconciliation (arena/1f4a7a22-zone4): decisions D-01/D-14 (recorded 2026-11-17 under the owner's brief) publish the tagged Special Links as the outbound product hrefs, so published_outbound_url now equals tracking_id_candidate_url for P1-P3. The parallel data/link-intent.json was withdrawn as a duplicate of this record; its append-only redirect-history observations (2026-11-14, 2026-11-16 and 2026-11-17 reads, each citing its session record) are preserved in observed_redirect_history. The short links remain recorded verbatim and are not judged valid or invalid (Zone3 FLG-003 unresolved). Attribution is unverified until the Associates Central one-link-per-product test passes (F-57, F-58).",
     "asin_format_source": "Amazon's published ASIN guide: https://sell.amazon.com/blog/what-is-an-asin (read 2026-11-17, arena/cc32105d-zone4): an ASIN is a unique 10-character alphanumeric code that appears after /dp/ in the product URL and typically starts 'B0'. The submitted link path codes are nine characters and appear in the short-link path, so they are not ASINs (flag F-67)."
   },
   "links": [
@@ -32,16 +33,46 @@
         "note": "Read by fetch on 2026-11-17. The same short link was read on 2026-11-16 (data/verification-session-4c552c78.json) with the same ASIN."
       },
       "tracking_id_candidate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
-      "published_outbound_url": "https://link.amazon/B04G1MEwY",
-      "special_link_status": "Not validated. The short link stays as the published link. The tag-bearing candidate (engine_candidate_url) passed a destination check only; attribution is unverified until the owner's Associates Central test (F-58).",
+      "published_outbound_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "special_link_status": "Published 2026-11-17 as the site's outbound product link per decisions D-01/D-14 (recorded under the owner's brief: replace ambiguous outbound links with validated Special Links; test one link per product before scaling). The URL is the final destination with the tag as its parameter (Participation Requirements 2(b)), no shortener (6(v)-(w)). The destination was verified by the candidate's destination check (engine_candidate_url.destination_test, 2026-11-17). Attribution remains unverified until the Associates Central one-link-per-product test passes (F-57, F-58); the supplied short link stays recorded, unjudged (FLG-003 unresolved).",
       "intent_match": true,
       "engine_candidate_url": {
         "url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
         "built_by": "engine/links.py build_link(asin='B0CDY277D3', host='www.amazon.com', tag='shopnow047c-20'), run 2026-11-17",
         "destination_test": "fetch_page on this URL, 2026-11-17: resolved to https://www.amazon.com/dp/B0CDY277D3 (listing title matched).",
         "attribution_test": "NOT RUN. Not possible from this sandbox: the tag is credited only through Associates Central after enrollment is confirmed (F-57), and the Associates-generated Special Link test is F-58.",
-        "status": "Unverified candidate. Not published. This is a tag-bearing product URL built by the engine, not a Special Link generated in Associates Central."
-      }
+        "status": "Published as the site's outbound product link (decisions D-01/D-14, recorded 2026-11-17). Destination check passed 2026-11-17; attribution unverified (F-57); the Associates Central test is pending (F-58)."
+      },
+      "observed_redirect_history": [
+        {
+          "date_utc": "2026-11-14",
+          "final_url_without_query": "https://www.amazon.com/dp/B0CDY277D3",
+          "observed_query_parameters": [],
+          "note": "Amazon source-token parameters (btn_ref) observed; no 'tag=' parameter",
+          "record": "data/verification-session-46c18cd1.json"
+        },
+        {
+          "date_utc": "2026-11-16",
+          "final_url_without_query": "https://www.amazon.com/dp/B0CDY277D3",
+          "observed_query_parameters": [],
+          "note": "Amazon source-token parameters observed; no 'tag=' parameter",
+          "record": "data/verification-session-4c552c78.json"
+        },
+        {
+          "date_utc": "2026-11-17",
+          "final_url_without_query": "https://www.amazon.com/dp/B0CDY277D3",
+          "observed_query_parameters": [
+            "lv=shuf",
+            "btn_type=ss",
+            "gaOptInStatus=true",
+            "btn_ref=srctok-5dda90f185bda415",
+            "channelId=704",
+            "plpRedirect=mhFallback"
+          ],
+          "note": "lv, btn_type, gaOptInStatus, btn_ref (source token), channelId, plpRedirect; no 'tag=' parameter (F-03 stands)",
+          "record": "data/verification-session-1f4a7a22.json"
+        }
+      ]
     },
     {
       "product_id": "P2",
@@ -60,9 +91,39 @@
         "note": "Recorded 2026-11-16 by session arena/4c552c78-zone4. Not re-read on 2026-11-17."
       },
       "tracking_id_candidate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
-      "published_outbound_url": "https://link.amazon/B02NbDxp3",
-      "special_link_status": "Not validated. Publish the short link as supplied. Do not publish the candidate tagged URL until the owner's one-link test in Associates Central confirms the destination and the tracking report (F-58).",
-      "intent_match": true
+      "published_outbound_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "special_link_status": "Published 2026-11-17 as the site's outbound product link per decisions D-01/D-14 (recorded under the owner's brief: replace ambiguous outbound links with validated Special Links; test one link per product before scaling). The URL is the final destination with the tag as its parameter (Participation Requirements 2(b)), no shortener (6(v)-(w)). The destination was verified by the dated reads of the same listing (observed_redirect and observed_redirect_history; the official listing URL was re-read 2026-11-17 per confirmation_source). Attribution remains unverified until the Associates Central one-link-per-product test passes (F-57, F-58); the supplied short link stays recorded, unjudged (FLG-003 unresolved).",
+      "intent_match": true,
+      "observed_redirect_history": [
+        {
+          "date_utc": "2026-11-14",
+          "final_url_without_query": "https://www.amazon.com/dp/B09B7SB46R",
+          "observed_query_parameters": [],
+          "note": "Amazon source-token parameters (btn_ref) observed; no 'tag=' parameter",
+          "record": "data/verification-session-46c18cd1.json"
+        },
+        {
+          "date_utc": "2026-11-16",
+          "final_url_without_query": "https://www.amazon.com/dp/B09B7SB46R",
+          "observed_query_parameters": [],
+          "note": "Amazon source-token parameters observed; no 'tag=' parameter",
+          "record": "data/verification-session-4c552c78.json"
+        },
+        {
+          "date_utc": "2026-11-17",
+          "final_url_without_query": "https://www.amazon.com/dp/B09B7SB46R",
+          "observed_query_parameters": [
+            "lv=shuf",
+            "btn_type=ss",
+            "gaOptInStatus=true",
+            "btn_ref=srctok-6165b35b3f1fa317",
+            "channelId=704",
+            "plpRedirect=mhFallback"
+          ],
+          "note": "lv, btn_type, gaOptInStatus, btn_ref (source token), channelId, plpRedirect; no 'tag=' parameter (F-03 stands)",
+          "record": "data/verification-session-1f4a7a22.json"
+        }
+      ]
     },
     {
       "product_id": "P3",
@@ -81,9 +142,40 @@
         "note": "Recorded 2026-11-16 by session arena/4c552c78-zone4. Not re-read on 2026-11-17."
       },
       "tracking_id_candidate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
-      "published_outbound_url": "https://link.amazon/B00hJ57DV",
-      "special_link_status": "Not validated. Publish the short link as supplied. Do not publish the candidate tagged URL until the owner's one-link test in Associates Central confirms the destination and the tracking report (F-58).",
-      "intent_match": true
+      "published_outbound_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "special_link_status": "Published 2026-11-17 as the site's outbound product link per decisions D-01/D-14 (recorded under the owner's brief: replace ambiguous outbound links with validated Special Links; test one link per product before scaling). The URL is the final destination with the tag as its parameter (Participation Requirements 2(b)), no shortener (6(v)-(w)). The destination was verified by the dated reads of the same listing (observed_redirect and observed_redirect_history; the official listing URL was re-read 2026-11-17 per confirmation_source). Attribution remains unverified until the Associates Central one-link-per-product test passes (F-57, F-58); the supplied short link stays recorded, unjudged (FLG-003 unresolved).",
+      "intent_match": true,
+      "observed_redirect_history": [
+        {
+          "date_utc": "2026-11-14",
+          "final_url_without_query": "https://www.amazon.com/dp/B08DKYBTPH",
+          "observed_query_parameters": [],
+          "note": "th=1 variant parameter and Amazon source-token parameters observed; no 'tag=' parameter",
+          "record": "data/verification-session-46c18cd1.json"
+        },
+        {
+          "date_utc": "2026-11-16",
+          "final_url_without_query": "https://www.amazon.com/dp/B08DKYBTPH",
+          "observed_query_parameters": [],
+          "note": "Amazon source-token parameters observed; no 'tag=' parameter",
+          "record": "data/verification-session-4c552c78.json"
+        },
+        {
+          "date_utc": "2026-11-17",
+          "final_url_without_query": "https://www.amazon.com/dp/B08DKYBTPH",
+          "observed_query_parameters": [
+            "lv=shuf",
+            "btn_type=ss",
+            "gaOptInStatus=true",
+            "btn_ref=srctok-006f209c8d78d619",
+            "channelId=704",
+            "plpRedirect=mhFallback",
+            "th=1"
+          ],
+          "note": "lv, btn_type, gaOptInStatus, btn_ref (source token), channelId, plpRedirect, th=1; no 'tag=' parameter (F-03 stands)",
+          "record": "data/verification-session-1f4a7a22.json"
+        }
+      ]
     },
     {
       "product_id": "P4",

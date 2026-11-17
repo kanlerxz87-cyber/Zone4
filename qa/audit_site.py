@@ -16,9 +16,10 @@ Hard failures (exit 1):
   5.  Per page: every table body row contains at least one official-host link.
   6.  Per page: no currency amount in visible text; no star-rating pattern;
       no location-claim residue (Bucharest/Romania) from flag F-09.
-  7.  Affiliate hygiene: every shop link points at one of the three supplied
-      link.amazon short links AND its table row repeats the disclosure sentence
-      (Operating Agreement Section 5; Associates help GPXFHVYZMTGPUMPE).
+  7.  Affiliate hygiene: every shop link points at one of the published tagged
+      Special Links (final destination URL with the owner-selected tracking ID,
+      decisions D-01/D-14 recorded 2026-11-17) AND its table row repeats the
+      disclosure sentence (Operating Agreement Section 5).
   8.  products.html lists all three ASINs and all three short links.
 
 Warnings (reported, exit 0 unless --strict-warnings):
@@ -237,11 +238,23 @@ def load_short_links() -> set[str]:
     return {p["short_link"] for p in _all_products()}
 
 
+def load_special_links() -> set[str]:
+    """The tagged Special Links published as outbound product hrefs (2026-11-17).
+
+    Since decisions D-01/D-14 were recorded, a shop href is the final destination
+    URL with the owner-selected tracking ID (data/intent-links.json candidate
+    URLs); the supplied short links remain recorded data but are not valid hrefs.
+    """
+    intent = json.loads((DATA / "intent-links.json").read_text(encoding="utf-8"))
+    return {l["tracking_id_candidate_url"] for l in intent["links"]
+            if l["product_id"] not in ("P4", "P5")}
+
+
 def load_asins() -> set[str]:
     return {p["asin"] for p in _all_products()}
 
 
-def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> None:
+def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> None:
     rel = path.relative_to(ROOT)
     text = visible_text(sp)
 
@@ -337,8 +350,8 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
     # link, and the link carries a plain-language paid-link label.
     for href, row_no, paragraph in sp.shop_links:
-        if href not in short_links:
-            fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
+        if href not in special_links:
+            fail(f"{rel}: shop link is not one of the published tagged Special Links: {href}")
         if row_no == 0:
             context = " ".join(paragraph or [])
         elif 1 <= row_no <= len(sp.row_texts):
@@ -395,6 +408,7 @@ def main() -> int:
 
     check_root_entry()
     short_links = load_short_links()
+    special_links = load_special_links()
     asins = load_asins()
 
     pages = sorted(DOCS.rglob("*.html"))
@@ -403,7 +417,7 @@ def main() -> int:
     for page in pages:
         sp = PageParser()
         sp.feed(page.read_text(encoding="utf-8"))
-        check_page(page, sp, short_links)
+        check_page(page, sp, special_links)
     check_products_coverage(asins, short_links)
 
     if args.live:

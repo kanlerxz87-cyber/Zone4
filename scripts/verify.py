@@ -2,7 +2,8 @@
 """Verify the data and the built site. Exits non-zero on any failure.
 
 Checks:
-  1. data/*.json: ASIN format; canonical URL matches ASIN; short links on link.amazon;
+  1. data/*.json (including the Associates record, the product-intent record and the empty-until-authorised
+     campaign ledger, and the requirement that every published product link is the final tagged destination): ASIN format; canonical URL matches ASIN; short links on link.amazon;
      every flag reference exists; every source URL is on an official host; every fact,
      keyword, stage, metric and rule in the marketing and pipeline files is sourced;
      every marketing article has a fact table, a disclosure and a compliant CTA.
@@ -38,6 +39,7 @@ OFFICIAL_HOSTS = {
     "github.io", "oauth-redirect.googleusercontent.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+SITE_URL_CANONICAL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
@@ -507,6 +509,17 @@ def check_site() -> None:
             rel_attr = re.search(r'\brel="([^"]*)"', anchor)
             if not rel_attr or "sponsored" not in rel_attr.group(1).split():
                 fail(f"{rel}: product link is missing rel=\"sponsored\": {anchor[:140]}")
+            href_attr = re.search(r'\bhref="([^"]*)"', anchor)
+            if href_attr:
+                url = html.unescape(href_attr.group(1))
+                if urlparse(url).hostname != "www.amazon.com":
+                    fail(f"{rel}: product link is not the final Amazon destination: {url}")
+                if f"tag={load('associates.json')['tracking_id']['value']}" not in url:
+                    fail(f"{rel}: product link is missing the tracking tag (2(b)): {url}")
+        for m in re.finditer(r'data-track-target="([^"]+)"', raw):
+            url = html.unescape(m.group(1))
+            if url.startswith("http") and urlparse(url).hostname != "www.amazon.com":
+                fail(f"{rel}: tracked click target is not the final Amazon destination: {url}")
         if not footer_match or 'class="footer-directory"' not in footer_match.group(1):
             fail(f"{rel}: footer site directory is missing")
         elif footer_match:
@@ -608,6 +621,74 @@ def check_required_pages() -> None:
                     fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
+
+def check_measurement() -> None:
+    """The Associates, product-intent and campaign-ledger records (added 2026-11-17).
+
+    The tracking ID is owner-supplied, so what can be checked mechanically is its
+    shape against the official rule and its consistency with the product records -
+    never its registration, which stays null until an Associates Central read
+    records it (F-57). Intent and ledger records are data/intent-links.json and
+    data/ledger.json (defined by arena/3d2ad125-zone4); the Associates record and
+    the five-step test protocol are data/associates.json (arena/1f4a7a22-zone4).
+    """
+    associates = load("associates.json")
+    tag = associates["tracking_id"]["value"]
+    if not re.match(r"^[a-z0-9][a-z0-9-]*-\d{2}$", tag):
+        fail(f"associates.json: tracking ID {tag!r} does not match the official XXXXX-## shape (Participation Requirements 2(b))")
+    if associates["tracking_id"].get("registered_and_active") is not None:
+        fail("associates.json: registered_and_active must stay null until an Associates Central read records it (F-57)")
+    if not associates["tracking_id"].get("source_url") or not is_official(associates["tracking_id"]["source_url"]):
+        fail("associates.json: tracking_id must cite the official format rule")
+    if not associates.get("test_protocol", {}).get("steps"):
+        fail("associates.json: the one-link-per-product test protocol is missing")
+
+    intent = load("intent-links.json")
+    if intent["_meta"]["tracking_id"] != tag:
+        fail("intent-links.json and associates.json disagree about the tracking ID")
+    products = load("products.json")["products"]
+    asins = {p["asin"] for p in products} | {p["asin"] for p in load("products-extra.json")["products"]}
+    published = {p["id"]: p["short_link"] for p in products}
+    for l in intent["links"]:
+        pid = l["product_id"]
+        red = l.get("observed_redirect") or {}
+        if "observed_asin" not in red:
+            fail(f"intent-links {pid}: observed redirect target field missing")
+        if red.get("observed_asin") != l["intended_asin"]:
+            fail(f"intent-links {pid}: observed redirect ASIN does not match the intended ASIN")
+        hist = l.get("observed_redirect_history") or []
+        for obs in hist:
+            host = urlparse(obs.get("final_url_without_query", obs.get("target_url", ""))).hostname or ""
+            if host not in OFFICIAL_HOSTS:
+                fail(f"intent-links {pid}: redirect-history observation is not on an official host")
+            if l["intended_asin"] not in (obs.get("final_url_without_query", obs.get("target_url", ""))):
+                fail(f"intent-links {pid}: a redirect-history observation must carry the intended ASIN it resolved to")
+        # Held products (P4/P5) publish nothing; P1-P3 publish the tagged Special Link.
+        if pid in published:
+            expected = l["tracking_id_candidate_url"]
+            if l["published_outbound_url"] != expected:
+                fail(f"intent-links {pid}: published outbound URL is not the tagged Special Link (D-01/D-14)")
+            if published[pid] == l["published_outbound_url"]:
+                fail(f"intent-links {pid}: the published href is still the supplied short link")
+        for sl in associates["special_links"]:
+            if sl["product_id"] == pid and sl["special_link_url"] != l["tracking_id_candidate_url"]:
+                fail(f"associates.json and intent-links.json disagree about {pid}'s Special Link")
+
+    ledger = load("ledger.json")
+    if ledger.get("rows"):
+        fail("ledger.json carries rows; no authorised report is connected, so any row would be synthetic (F-19)")
+    events = ledger.get("five_events") or []
+    if [e.get("event") for e in events] != ["impression", "click", "session", "order", "refund"]:
+        fail("ledger.json: the five defined events (impression, click, session, order, refund) must be listed in order")
+    for ev in events:
+        if not ev.get("window"):
+            fail(f"ledger.json event {ev.get('event')}: attribution window missing")
+    if not ledger.get("provenance"):
+        fail("ledger.json: the dated provenance trail is missing")
+    for col in ("timestamp_utc", "source", "channel", "eligible_sessions", "clicks", "reported_orders"):
+        if col not in ledger.get("columns", []):
+            fail(f"ledger.json: the defined columns must include {col}")
+
 def check_rss_feed() -> None:
     feed_path = DOCS / "feed.xml"
     if not feed_path.exists():
@@ -688,8 +769,15 @@ def check_publication() -> None:
         if pid in HELD_PRODUCT_IDS:
             if l["published_outbound_url"] is not None:
                 fail(f"intent-links {pid}: held candidate is published as a link (F-55 on main)")
-        elif l["published_outbound_url"] != l["submitted_url"]:
-            fail(f"intent-links {pid}: a link other than the supplied short link is published before the Special Link test")
+        elif l["published_outbound_url"] != l["tracking_id_candidate_url"]:
+            # Updated 2026-11-17 (arena/1f4a7a22-zone4, merge reconciliation): decisions
+            # D-01/D-14 were recorded under the owner's brief ("replace ambiguous outbound
+            # links with validated Special Links; test one link per product before scaling"),
+            # and each tagged candidate had passed a destination check, so the published
+            # outbound link is the tagged Special Link. The Associates Central test gates
+            # attribution and scaling, not publication (F-57, F-58); the supplied short
+            # links stay recorded and unjudged (FLG-003 unresolved).
+            fail(f"intent-links {pid}: published outbound URL is not the tagged Special Link (D-01/D-14)")
         if l["intended_asin"] not in known_asins:
             fail(f"intent-links {pid}: intended ASIN is not in products.json or products-extra.json")
         if not l["tracking_id_candidate_url"].endswith("?tag=" + tag):
@@ -817,6 +905,7 @@ def main() -> int:
     check_design_page()
     check_required_pages()
     check_root_entry()
+    check_measurement()
     check_publication()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")

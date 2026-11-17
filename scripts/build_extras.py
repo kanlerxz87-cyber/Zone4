@@ -74,6 +74,18 @@ def _e(value) -> str:
     return _html.escape("" if value is None else str(value), quote=True)
 
 
+def _tagged_for(pid: str, asin: str) -> str:
+    """The published outbound href: the tagged Special Link (decisions D-01/D-14, 2026-11-17).
+
+    Sourced from the product-intent record's candidate URL so the record and the
+    rendered href cannot drift; falls back to building the URL from the ASIN.
+    """
+    for l in _load("intent-links.json")["links"]:
+        if l["product_id"] == pid:
+            return l["tracking_id_candidate_url"]
+    return f"https://www.amazon.com/dp/{asin}?tag=" + _load("intent-links.json")["_meta"]["tracking_id"]
+
+
 def all_products(bs) -> list[dict]:
     """P1-P3 from data/products.json (via build_site) plus P4-P5 from data/products-extra.json."""
     extra = _load("products-extra.json")["products"]
@@ -119,7 +131,7 @@ def extra_products_section(bs, current) -> str:
             f'<tr><td class="mono">{_e(p["id"])}</td>'
             f'<td><a href="{_e(p["canonical_url"])}" rel="sponsored noopener noreferrer">{_e(p["name_short"])}</a></td>'
             f'<td class="mono">{_e(p["asin"])}</td><td>{_e(p["category_path"])}</td>'
-            f'<td>{_shop_link(p["short_link"], "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td></tr>'
+            f'<td>{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td></tr>'
         )
     if not rows:
         return ""
@@ -153,7 +165,7 @@ def shop_section(bs, current) -> str:
             f'<h3>{_e(p["name_short"])}</h3>'
             f'<p class="small mono">ASIN {_e(p["asin"])} · {_e(p["id"])}</p>'
             f'<ul class="small">{facts_html}</ul>'
-            f'<p class="shop-actions">{_shop_link(p["short_link"], "View on Amazon", p["asin"])} ' + PAID_NOTE +
+            f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])} ' + PAID_NOTE +
             f'<a href="{_e(current.rel("products.html"))}">Source record</a> {guide_html}</p></article>'
         )
     return (
@@ -179,7 +191,7 @@ def _guide_body(bs, page, g: dict) -> str:
     prod_links = []
     for pid in g["product_ids"]:
         p = next(x for x in all_products(bs) if x["id"] == pid)
-        prod_links.append(f'<li><p>{_shop_link(p["short_link"], "View " + p["name_short"] + " on Amazon", p["asin"])}'
+        prod_links.append(f'<li><p>{_shop_link(_tagged_for(p["id"], p["asin"]), "View " + p["name_short"] + " on Amazon", p["asin"])}'
                           f' <span class="small mono">ASIN {_e(p["asin"])}</span> ' + PAID_NOTE + '</p></li>')
     rows = []
     for f in g["facts"]:
@@ -296,12 +308,47 @@ def _links_body(bs, page) -> str:
         f'<section><h2>Records</h2>{table}</section>'
         f'<section><h2>Tracking ID</h2><p>Tracking ID supplied by the owner: <code>{_e(rec["_meta"]["tracking_id"])}</code>. '
         f'{_e(rec["_meta"]["tracking_id_source"])}</p>'
-        '<p>No link on this site is replaced by a tagged link yet. The candidate tagged URLs are stored in '
-        '<code>data/intent-links.json</code> for the owner\'s one-link test (F-58). Until that test passes, every '
-        'outbound link is the short link as supplied, marked as sponsored, and every row is labelled as not validated.</p>'
+        '<p>Since 2026-11-17 the published outbound product links are the tagged Special Links '
+        '<code>https://www.amazon.com/dp/&lt;ASIN&gt;?tag=shopnow047c-20</code> - the final destination URL with the '
+        'owner-selected tracking ID as its parameter (decisions D-01/D-14, recorded under the owner\'s brief, which '
+        'directs: replace ambiguous outbound links with validated Special Links; test one link per product before '
+        'scaling). Each tagged URL had already passed a destination check (engine_candidate_url.destination_test). '
+        'What the one-link-per-product Associates Central test (data/associates.json) still gates is attribution and '
+        'scaling beyond these three links - not publication (F-57, F-58). The supplied short links stay recorded '
+        'verbatim and unjudged (Zone3 FLG-003 unresolved).</p>'
         f'<p>Background: <a href="{_e(page.rel("flagged.html"))}">F-03</a> (no Associates tag in the resolved links), '
         f'<a href="{_e(page.rel("flagged.html"))}">F-47</a> (the displayed link form).</p></section>'
     )
+
+
+def five_events_table(ledger: dict) -> str:
+    """The brief's five defined events with their official windows (data/ledger.json)."""
+    rows = "".join(
+        f'<tr><td class="mono">{_e(ev["event"])}</td><td>{_e(ev["definition"])}</td>'
+        f'<td>{_e(ev["window"])}</td>'
+        f'<td><a href="{POLICY_URL}" rel="noopener noreferrer">{_e(ev.get("source_ref", "Program Policies"))}</a></td></tr>'
+        for ev in ledger.get("five_events", [])
+    )
+    if not rows:
+        return '<p class="small muted">Event definitions pending.</p>'
+    return ('<div class="tablewrap"><table class="data"><thead><tr><th scope="col">Event</th>'
+            '<th scope="col">Definition</th><th scope="col">Attribution window (official)</th>'
+            '<th scope="col">Source (official)</th></tr></thead><tbody>' + rows + '</tbody></table></div>')
+
+
+def provenance_html(ledger: dict) -> str:
+    """Dated provenance trail: who defined the ledger and when (data/ledger.json)."""
+    prov = ledger.get("provenance") or []
+    if not prov:
+        return ""
+    rows = "".join(
+        f'<tr><td class="small">{_e(p_["date_utc"])}</td><td>{_e(p_["entry"])}</td>'
+        f'<td class="small mono"><a href="https://github.com/kanlerxz87-cyber/Zone4/blob/main/{_e(p_.get("record", ""))}" rel="noopener noreferrer">{_e(p_.get("record", ""))}</a></td></tr>'
+        for p_ in prov
+    )
+    return ('<h3>Provenance trail</h3><div class="tablewrap"><table class="data"><thead><tr>'
+            '<th scope="col">Date (UTC)</th><th scope="col">Entry</th><th scope="col">Record</th></tr></thead>'
+            '<tbody>' + rows + '</tbody></table></div>')
 
 
 def _measurement_body(bs, page) -> str:
@@ -327,10 +374,14 @@ def _measurement_body(bs, page) -> str:
         '<th scope="col">What is stored</th><th scope="col">Aggregated as</th><th scope="col">Source</th></tr></thead><tbody>' + ev_rows + '</tbody></table></div>'
         f'<p><strong>Endpoint status:</strong> {endpoint} The server is in <code>analytics-endpoint/</code>; '
         'it runs anywhere that accepts a Python process, not on GitHub Pages, which only serves static files.</p></section>'
+        '<section><h2>The five defined events (campaign ledger)</h2><p class="section-lead">The brief\'s five event types '
+        'with the official attribution windows each figure must satisfy before it can enter a ledger row. These are '
+        'the Associates measurement events - a different vocabulary from the local counter\'s event names above.</p>'
+        + five_events_table(ledger) + '</section>'
         '<section><h2>Campaign ledger</h2><p class="section-lead">Rows are added only from authorised first-party '
         'reports. This ledger has no rows: no report has been imported, so no clicks, eligible sessions or orders '
         'are shown anywhere. The site\'s own click counter is a different measurement and is never an order.</p>'
-        + ledger_table + f'<p class="small muted">{_e(ledger["status"])}</p></section>'
+        + ledger_table + provenance_html(ledger) + f'<p class="small muted">{_e(ledger["status"])}</p></section>'
         '<section><h2>Not connected</h2><ul class="bullets">'
         '<li>Search Console: needs the owner to verify the property. Nothing has been submitted.</li>'
         '<li>Reader capture (email): needs an owner-chosen provider and consent text. Not built.</li>'

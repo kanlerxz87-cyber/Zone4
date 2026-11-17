@@ -22,6 +22,24 @@ OUT = ROOT / "docs"
 DISCLOSURE_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
 DISCLOSURE_SOURCE = "https://affiliate-program.amazon.com/help/operating/agreement"
 SITE_TITLE_SUFFIX = "Zone4 - air fryer buying guides"
+
+# ---------------------------------------------------------------- associates
+# The owner-selected tracking ID (2026-11-17 brief) and the tagged Special Links
+# published as outbound product hrefs (decisions D-01/D-14, recorded 2026-11-17).
+# The ID's registration is confirmable only inside Associates Central (F-57);
+# the destination of each Special Link was verified on 2026-11-17 (data/intent-links.json).
+ASSOCIATES_DOC = json.loads((DATA / "associates.json").read_text(encoding="utf-8"))
+TRACKING_ID = ASSOCIATES_DOC["tracking_id"]["value"]
+SPECIAL_LINKS = {s["product_id"]: s["special_link_url"] for s in ASSOCIATES_DOC["special_links"]}
+
+
+def tagged_url(url: str) -> str:
+    """Append the tracking tag as a URL parameter unless the URL already carries it."""
+    if f"tag={TRACKING_ID}" in url:
+        return url
+    return url + ("&" if "?" in url else "?") + f"tag={TRACKING_ID}"
+
+
 SITE_DESCRIPTION = (
     "Spec-checked buying guides for three countertop air fryers: product records, sourced articles, "
     "and a receipt behind every number. What we cannot verify is flagged, not hidden."
@@ -272,10 +290,17 @@ def competitor_links(p: dict) -> str:
 
 
 def shop_link(p: dict) -> str:
-    # rel="sponsored" marks the affiliate link for search engines (decision D-05,
-    # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
-    return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
+    # The published outbound product link is the tagged Special Link
+    # https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 (decisions D-01/D-14,
+    # recorded 2026-11-17 under the owner's brief): the final destination URL
+    # with the tag as its parameter (Participation Requirements 2(b)), no
+    # shortener (6(v)-(w)). rel="sponsored" marks the affiliate link for search
+    # engines (decision D-05, recorded 2026-11-16); the visible disclosure and
+    # "(paid link)" label stay. The supplied short link stays recorded data in
+    # data/intent-links.json; it is not judged valid or invalid (FLG-003 unresolved).
+    url = SPECIAL_LINKS.get(p["id"], tagged_url(f"https://www.amazon.com/dp/{p['asin']}"))
+    return ext(url, "Open Amazon link (paid link)",
+               f' class="shop" data-track="click" data-track-target="{esc(url)}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
 
 
@@ -321,7 +346,7 @@ def product_table(current: Page, products: list[dict]) -> str:
         "ID", "Product (source link)", "ASIN", "Brand (as shown)", "Subcategory", "Category (Amazon path)",
         "Capacity (as listed)", "Dimensions (as listed)", "Colour / material / special features (as listed)",
         "Price", "Star rating", "Commission rate", "Trend / conversion",
-        "Competition: also-viewed ASINs", "Affiliate link", "Flags",
+        "Competition: also-viewed ASINs", "Affiliate link (published Special Link; supplied short link, recorded)", "Flags",
     ]
     rows = []
     for p in products:
@@ -340,7 +365,8 @@ def product_table(current: Page, products: list[dict]) -> str:
             commission_cell(p),
             pill("Unverified (F-15)", "warn"),
             competitor_links(p),
-            shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>',
+            shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>'
+            + f'<div class="note mono">Supplied short link, recorded: {esc(p["short_link"])}</div>',
             " ".join(flag_chip(current, f) for f in p["flags"]),
         ])
     return table(headers, rows, "products")
@@ -358,12 +384,11 @@ def verification_rows(current: Page) -> list[list[str]]:
     rows = []
     for p in PRODUCTS:
         src = ext(p["canonical_url"], "Amazon page")
-        short = ext(p["short_link"], "Short link")
         sched = ext(SOURCES["S-SCHED"]["url"], "Commission schedule (sign-in)")
         fl = PRODUCT_FLAGS[p["id"]]
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
-            ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
+            ("ASIN", p["asin"], "Verified (from resolved URL)", src, "F-04"),
             ("Brand", p["brand"], "Verified", src, ""),
             ("Manufacturer", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-28"),
             ("Model number", p.get("model_number") or "Blank", "Verified (Item details)" if p.get("model_number") else "Unverified (blank)", src, "" if p.get("model_number") else "F-28"),
@@ -380,7 +405,7 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             commission_verification_item(p, sched),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
-            ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
+            ("Associates tag in link", "Tagged Special Link published (shopnow047c-20)", "Published; registration unverified", src, "F-57"),
         ]
         if fl["variant"]:
             items.append(("Cooking function count", "Two counts stated on the page", "Unresolved", src, fl["variant"]))
@@ -582,7 +607,7 @@ def marketing_article(current: Page, article: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in article["compliance_notes"])
     cta = article["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
+    cta_button = ext(tagged_url(cta["link_url"]), cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure sits in the same paragraph as the affiliate link, so it is
     # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
@@ -995,7 +1020,7 @@ def page_article(current: Page, a: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in a["compliance_notes"])
     cta = a["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
+    cta_button = ext(tagged_url(cta["link_url"]), cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure and a plain-language paid-link label sit in the same
     # paragraph as the affiliate link, not below it, so both are adjacent to the
     # link they qualify. qa/audit_site.py fails the build if either is missing.
@@ -1163,14 +1188,15 @@ def page_category(current: Page, key: str) -> str:
     prods = [p for p in PRODUCTS if p["id"] in cat["product_ids"]]
     headers = ["ID", "Product (source link)", "ASIN", "Brand (as shown)", "Capacity (as listed)",
                "Dimensions (as listed)", "Special features (as listed)",
-               "Competition: also-viewed ASINs", "Affiliate link", "Flags"]
+               "Competition: also-viewed ASINs", "Affiliate link (published Special Link; supplied short link, recorded)", "Flags"]
     rows = []
     for p in prods:
         rows.append([
             esc(p["id"]), ext(p["canonical_url"], p["name_listing"]), esc(p["asin"]), esc(p["brand"]),
             esc(p["capacity"]), esc(p["dimensions"]), esc(p.get("special_feature", "")),
             competitor_links(p),
-            shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>',
+            shop_link(p) + f'<div class="note">{esc(DISCLOSURE_SENTENCE)}</div>'
+            + f'<div class="note mono">Supplied short link, recorded: {esc(p["short_link"])}</div>',
             " ".join(flag_chip(current, f) for f in p["flags"]),
         ])
     return (
@@ -1195,7 +1221,7 @@ def page_marketing(current: Page) -> str:
         + '<section><h2>The pages</h2>' + articles + "</section>"
         + '<section><h2>Publishing checklist</h2>' + marketing_checklist_table() + "</section>"
         + '<p class="small muted">These pages are drafts for the publisher. They are not published to a public storefront, and no affiliate link is live '
-        'until the Associate tag is confirmed (F-03).</p>'
+        'and the outbound links carry the owner-selected tracking ID; what stays unverified is the tag\'s registration in Associates Central (F-57).</p>'
     )
 
 
@@ -1343,14 +1369,16 @@ def page_analytics(current: Page) -> str:
         '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
         'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
         'product links on this site do.</p>'
-        '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
-        'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
+        '<p class="note">Since 2026-11-17 the tracked links are tagged Special Links: the final destination URL with the owner-selected tracking ID '
+        '(' + esc(TRACKING_ID) + ') as its parameter. A click recorded here can therefore be reconciled against Associates reporting once the '
+        'account connection exists; whether the tag is registered and active is confirmed only by the one-link-per-product test in Associates '
+        'Central (' + href(current, "links.html", "product-intent record") + '; ' + flag_chip(current, "F-57") + ', ' + flag_chip(current, "F-58") + ').</p>'
         '</section>'
         '<section>'
         '<h2>Connecting real measurement</h2>'
         '<ul class="bullets">'
-        f'<li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see {href(current, "policy-compliance.html", "Policy compliance")}).</li>'
-        f'<li>Confirm the tag on the supplied short links before relying on any earnings (see {href(current, "flagged.html", "F-03")}).</li>'
+        f'<li>The owner-selected tracking ID ({esc(TRACKING_ID)}) is already on every outbound product link; confirm its registration in Associates Central with the {href(current, "links.html", "one-link-per-product test protocol")} before relying on any earnings (see {href(current, "flagged.html", "F-57")}).</li>'
+        f'<li>The rollup ledger that turns local clicks into reported figures stays empty until an authorised first-party report exists (see {href(current, "measurement.html", "Measurement & ledger")}).</li>'
         f'<li>Authoritative click, order and commission figures come from the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}.</li>'
         f'<li>Product data served from Amazon must come through the Creators API, and reusing or fine-tuning on API content needs express prior written approval (see {href(current, "flagged.html", "F-24")}).</li>'
         f'<li>Price tracking and price alerting are prohibited unless Amazon agrees otherwise, so no price history is collected here (see {href(current, "flagged.html", "F-22")}).</li>'

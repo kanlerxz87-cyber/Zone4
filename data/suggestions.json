@@ -19,14 +19,16 @@
       "Decision recorded 2026-11-16 - work remains": "The direction is decided; implementation is deferred and the reason is in the decision log.",
       "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes.",
       "Implemented 2026-11-17": "Decision recorded 2026-11-17 and the change is live in this build.",
-      "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build."
+      "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build.",
+      "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
     "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
     "updated_utc": "2026-11-16",
     "update_note": "Statuses updated after the 2026-11-16 delegated decision round: what shipped in this build, what is confirmed as standing policy, what was not adopted, and what still needs an owner fact (S-01, S-02, S-08, S-18). The register stays the place to review a change before it is made; nothing here was implemented before its decision was recorded.",
-    "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items."
+    "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items.",
+    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's S-39 (validated Special Links with the one-link test) and S-40 (Search Console) already covered this session's tagged-links and Search Console proposals, and S-41-S-44 cover the front-page and module surfaces. This session's rows were withdrawn where covered; S-45 (the five-step Associates Central test protocol, owner action) and S-46 (the shipped RSS feed) were appended; S-01/S-33 were flipped to Implemented 2026-11-17 (D-01/D-14 recorded; D-36 recorded)."
   },
   "suggestions": [
     {
@@ -53,8 +55,9 @@
         "F-03",
         "F-04"
       ],
-      "status": "Awaiting decision",
-      "decision": "D-01"
+      "status": "Implemented 2026-11-17",
+      "decision": "D-01",
+      "status_note_2026_11_17": "The owner selected tracking ID shopnow047c-20; every outbound product link now carries it as a tagged Special Link (S-37). The end-to-end attribution test inside Associates Central remains outstanding (S-38, F-57), which is why the row is implemented rather than closed."
     },
     {
       "id": "S-02",
@@ -859,8 +862,9 @@
         "F-52",
         "F-53"
       ],
-      "status": "Awaiting decision",
-      "decision": "D-36"
+      "status": "Implemented 2026-11-17",
+      "decision": "D-36",
+      "status_note_2026_11_17": "D-36 recorded 2026-11-17 under the owner's repeated anti-slop instruction: the M-P3 opener no longer describes its own composition, and the ASIN-and-category-path prose (F-53) is rewritten out of the three product articles. Facts and fact_ids unchanged; F-52's dated update records the fix."
     },
     {
       "id": "S-34",
@@ -1150,6 +1154,57 @@
         "F-15",
         "F-19"
       ]
+    },
+    {
+      "id": "S-45",
+      "priority": "P2 - Adds real value",
+      "title": "Ship the RSS feed and its subscribe affordances",
+      "problem": "The brief's publishing directive ('add each new guide to the existing sitemap and feed') presumes a feed; none existed, so each new guide could reach sitemap consumers but not feed readers. The sitemap has existed since 2026-11-15.",
+      "proposal": "Generate docs/feed.xml (RSS 2.0) in the builder from the article register: absolute links to the published article pages, item dates equal to the observed date already published in each article's structured data, channel metadata only. Add <link rel=alternate> to every page head and an RSS link in the footer. Every future article appears in the feed automatically because the feed reads the same data the pages render from.",
+      "why": "Feed readers are the privacy-safe subscription channel (no email list, no consent surface - D-16 stays closed), and the head link is what lets them discover it. It also gives the publishing cadence a mechanical outlet: publish into the register, and the sitemap, the feed and the hub all update together.",
+      "effort": "Done (2026-11-17): generator, head link, footer link.",
+      "risk": "Minimal. The feed publishes only what the site already publishes, with no new claims - it reuses the register's own titles, links and dates.",
+      "check": "verify.py validates that feed.xml exists, parses as XML, and that every item link matches a published article page.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central, creating helpful content (a feed is distribution of the same people-first pages, not new claims)"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+          "ref": "The generated feed in this repository (docs/feed.xml) - the format follows RSS 2.0, and the file is the published artifact itself"
+        }
+      ],
+      "flags": [],
+      "status": "Implemented 2026-11-17",
+      "decision": "D-44",
+      "status_note_2026_11_17": "Shipped 2026-11-17 by arena/68d67712-zone4 (docs/feed.xml) and arena/3d2ad125-zone4 (guide entries in the same feed); verified by scripts/verify.py's feed checks."
+    },
+    {
+      "id": "S-46",
+      "priority": "P2 - Adds real value",
+      "title": "Reader capture: an email follow option, only after the privacy basis exists",
+      "problem": "The brief's parallel passes name 'reader capture' as a polish row. An email list is the strongest capture channel, but it is exactly what Q-22 and D-16 gate: collecting addresses creates a consent basis, a privacy notice and a retention question that no one has answered. Shipping it by default would guess at all three.",
+      "proposal": "Keep the shipped RSS feed as the capture channel for now (subscribe affordances live since 2026-11-17). If an email list is wanted, answer D-16 first (consent basis, retention, notice), then add a single opt-in form whose copy states the basis, and keep Program Content out of it (Participation Requirements Section 4 bars offline/email use of Program Content).",
+      "why": "Capture that respects the open privacy decision is also better marketing: an empty RSS subscriber is a smaller loss than a mis-collected email list.",
+      "effort": "RSS: done. Email: a form plus the notice, after D-16.",
+      "risk": "The Amazon rule is specific: Program Content must not appear in email. Any newsletter design must keep product data and Special Links out of it until the policy row is re-read and the design reviewed.",
+      "check": "No email form ships while D-16 is open; when it ships, its copy names the consent basis and the page carries the standard disclosure.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies, Section 4 (offline/email use of Program Content restricted)"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101 (disclosures must be clear and conspicuous wherever the endorsement appears)"
+        }
+      ],
+      "flags": [
+        "F-26"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-45"
     }
   ]
 }
