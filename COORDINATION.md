@@ -1276,3 +1276,44 @@ Pages on merge commit: built — GitHub Pages API reports status `built`, source
 - **Result:** the publication build is live with: products-first front page; navigation group; disclosure under the masthead and in the footer on every page; `rel="sponsored"` on every product link; per-page titles and meta; sitemap and RSS; guides hub and four published guides (one held); product-intent record page; measurement ledger (empty); and the self-hosted click endpoint (not hosted; F-59).
 - **Not done here (owner or external):** Special Link validation for the short links (F-58, one-link test not run); thermometer candidates P4/P5 held (F-55 on main; F-56 scope decision); tracking-ID confirmation in the Associates account (F-57); Search Console, Associates reporting and reader capture (F-61); endpoint hosting (F-59).
 
+## Session log — `arena/cc32105d-zone4` (2026-11-17)
+
+**Claim (pushed as `805216c`):** reader-measurement and product-intent pass per the owner's 2026-11-17 brief;
+flag block reserved F-55..F-60 at claim time.
+
+**Overlap and reconciliation (nothing discarded silently):** while this branch was in flight, `arena/68d67712-zone4`
+(PRs #79/#81: navigation/footer, RSS, exec cleanup, link-intent triage — flags F-55..F-59, Q-45/Q-46, S-37/S-38,
+D-40/D-41) and `arena/3d2ad125-zone4` (PRs #80/#83: the full publication build — `data/intent-links.json`,
+`data/products-extra.json`, `data/ledger.json`, `data/publishing.json`, `data/guides.json`, `analytics-endpoint/`,
+`scripts/build_extras.py`, `tests/test_analytics_endpoint.py`, `docs/guides/`, `docs/links.html`,
+`docs/measurement.html`, `docs/measure.js`, flags F-55..F-66) merged to `main`. The merge into this branch
+(`git merge origin/main`) took their scripts, docs and publication records as canonical and re-applied only this
+session's unique delta (see the board row above). Superseded local work remains in this branch's history: the
+session's draft five-event contract in `data/pipeline.json` (their `docs/measure.js` defines the five live events
+page_view / outbound_click / guide_read_75 / category_click / feed_click), the draft `data/campaign-ledger.json`
+(their `data/ledger.json` is the ledger), the draft product-intent blocks in `data/products.json` (their
+`data/intent-links.json` is the record), the draft tracker.js rework (their `docs/measure.js` + rebranded
+`docs/tracker.js` are canonical, F-64), and the draft guide article M-G4 (their `data/guides.json` programme and
+`data/publishing.json` cadence own the guides). **Numbering:** the reserved F-55..F-60 block had been taken on
+main; this session's surviving flag was renumbered **F-67** and every reference rewritten; its planned F-56
+(endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59.
+
+**Sources and verification (2026-11-17):** `link.amazon/B04G1MEwY|B02NbDxp3|B00hJ57DV` re-resolved to
+`/dp/B0CDY277D3|B09B7SB46R|B08DKYBTPH` with no `tag=` (F-03 stands); listing titles/breadcrumbs/carousels re-read
+(dated drift in F-29/F-44/F-50 confirmed; Item details tables again not exposed, F-38); Commission Table 1
+(Kitchen 4.50%) re-read; Operating Agreement (updated 2025-10-15; §5 disclosure verbatim) and Program Policies
+(updated 2026-04-14) re-read; Amazon's published ASIN guide (`sell.amazon.com/blog/what-is-an-asin`, read live)
+cited for the 10-character ASIN format behind F-67. Full record: `data/verification-session-cc32105d.json` (15 rows).
+Amazon's general ASIN help page (nodeId=G201963240) returned 404 and is not relied on.
+
+**Irregularities:** the numbering collision above (resolved, not hidden); two further sessions hold open PRs on the
+same brief at wrap-up time — PR #82 (`arena/1f4a7a22-zone4`) and PR #69 (`arena/6554fead-zone4`, overlapping per
+`arena/3d2ad125-zone4`'s log) — neither is merged or closed by this session; their reviewers should read this
+reconciliation first.
+
+**PR record:** PR [#85](https://github.com/kanlerxz87-cyber/Zone4/pull/85) (`arena/cc32105d-zone4` → `main`)
+merged 2026-11-17 with `gh pr merge --merge`; PR checks (audit, verify ×2) green; Pages `built` for `5535e536`,
+HTTPS enforced, live at https://kanlerxz87-cyber.github.io/Zone4/ (confirmed via the GitHub Pages API). The merge
+commit on main is `5535e536`. Follow-up PRs #82 (`arena/1f4a7a22-zone4`) and #69 (`arena/6554fead-zone4`) were open
+at wrap-up and are left to their owners, with this reconciliation noted above.
+
