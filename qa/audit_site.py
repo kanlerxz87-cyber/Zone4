@@ -16,9 +16,10 @@ Hard failures (exit 1):
   5.  Per page: every table body row contains at least one official-host link.
   6.  Per page: no currency amount in visible text; no star-rating pattern;
       no location-claim residue (Bucharest/Romania) from flag F-09.
-  7.  Affiliate hygiene: every shop link points at one of the three supplied
-      link.amazon short links AND its table row repeats the disclosure sentence
-      (Operating Agreement Section 5; Associates help GPXFHVYZMTGPUMPE).
+  7.  Affiliate hygiene: every shop link points at one of the published tagged
+      Special Links (final destination URL with the owner-selected tracking ID,
+      decisions D-01/D-14 recorded 2026-11-17) AND its table row repeats the
+      disclosure sentence (Operating Agreement Section 5).
   8.  products.html lists all three ASINs and all three short links.
 
 Warnings (reported, exit 0 unless --strict-warnings):
@@ -225,26 +226,32 @@ def check_root_entry() -> None:
         fail("docs/.nojekyll missing")
 
 
-def load_short_links() -> set[str]:
+def _all_products() -> list[dict]:
+    # P1-P3 (products.json) and P4-P5 (products-extra.json, added 2026-11-17 from the
+    # two new submitted links). Both sets are supplied links and are audited alike.
     products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
-    return {p["short_link"] for p in products}
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    return products + extra
+
+
+def load_short_links() -> set[str]:
+    return {p["short_link"] for p in _all_products()}
 
 
 def load_special_links() -> set[str]:
     """The tagged Special Links published as outbound product hrefs (2026-11-17).
 
-    Since decisions D-01/D-14 were recorded, the shop hrefs are the final
-    destination URLs with the owner-selected tracking ID, not the short links;
-    the short links remain recorded data (products-coverage check below) but
-    are no longer valid shop destinations.
+    Since decisions D-01/D-14 were recorded, a shop href is the final destination
+    URL with the owner-selected tracking ID (data/intent-links.json candidate
+    URLs); the supplied short links remain recorded data but are not valid hrefs.
     """
-    associates = json.loads((DATA / "associates.json").read_text(encoding="utf-8"))
-    return {s["special_link_url"] for s in associates["special_links"]}
+    intent = json.loads((DATA / "intent-links.json").read_text(encoding="utf-8"))
+    return {l["tracking_id_candidate_url"] for l in intent["links"]
+            if l["product_id"] not in ("P4", "P5")}
 
 
 def load_asins() -> set[str]:
-    products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
-    return {p["asin"] for p in products}
+    return {p["asin"] for p in _all_products()}
 
 
 def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> None:
@@ -316,10 +323,7 @@ def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> N
 
     # -- nav consistency (warnings; new pages may be added by other sessions)
     nav_paths: set[str] = set()   # site-root-relative paths (relative to docs/)
-    # Every file the build can produce is a valid nav/inline target, not only
-    # HTML: the RSS feed (docs/feed.xml, decision D-41) is linked from every
-    # page head and the footer.
-    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*") if p.is_file()}
+    on_disk = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*") if p.is_file()}  # feed.xml and sitemap.xml are targets too
     for href_url, _ in sp.external_anchors:
         parsed = urlparse(href_url)
         if parsed.scheme or href_url.startswith("#"):
@@ -333,7 +337,7 @@ def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> N
         except ValueError:
             warn(f"{rel}: link escapes docs/: {href_url}")
     for np_ in sorted(nav_paths):
-        if np_ not in on_disk:
+        if not (DOCS / np_).exists():
             fail(f"{rel}: nav/inline link target missing on disk: {np_}")
     if len(sp.aria_current) > 1:
         warn(f"{rel}: more than one aria-current=\"page\"")
@@ -346,9 +350,6 @@ def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> N
     # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
     # link, and the link carries a plain-language paid-link label.
     for href, row_no, paragraph in sp.shop_links:
-        # Since decisions D-01/D-14 (recorded 2026-11-17) a shop href must be
-        # the final tagged Special Link (Participation Requirements 2(b)); the
-        # supplied short links remain recorded data but are not valid hrefs.
         if href not in special_links:
             fail(f"{rel}: shop link is not one of the published tagged Special Links: {href}")
         if row_no == 0:

@@ -222,8 +222,8 @@
    "area": "Link management",
    "requirement": "Publish and manage affiliate links.",
    "status": "Delivered (partial)",
-   "delivered": "All three products' outbound links are published as tagged Special Links (https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20) on the dashboard, the all-products table, the category pages and every article call to action, each with the Associates disclosure directly beside it, the '(paid link)' marker and rel=\"sponsored\". The submitted short links stay recorded in the product-intent confirmation record (data/link-intent.json) with their observed redirect targets kept in a separate field.",
-   "blocker": "Attribution is unverified end to end. The tracking ID is owner-supplied (brief, 2026-11-17) and matches the official XXXXX-## format of Participation Requirements 2(b), but no public official source can confirm it is registered and active (F-55); the published one-link-per-product test inside Associates Central must pass before the links are treated as attribution-ready. The supplied short links' compliance status is unresolved (Zone3 FLG-003) and is not judged here.",
+   "delivered": "All three products' outbound links are published as tagged Special Links (https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20) on the dashboard, the all-products table, the category pages and every article call to action, each with the Associates disclosure directly beside it, the '(paid link)' marker and rel=\"sponsored\". The submitted short links stay recorded in the product-intent confirmation record (data/intent-links.json) with their observed redirect targets kept in a separate field.",
+   "blocker": "Attribution is unverified end to end. The tracking ID is owner-supplied (brief, 2026-11-17) and matches the official XXXXX-## format of Participation Requirements 2(b), but no public official source can confirm it is registered and active (F-57); the published one-link-per-product test inside Associates Central must pass before the links are treated as attribution-ready. The supplied short links' compliance status is unresolved (Zone3 FLG-003) and is not judged here.",
    "sources": [
     "https://link.amazon/B04G1MEwY",
     "https://link.amazon/B02NbDxp3",
@@ -233,7 +233,7 @@
    "flags": [
     "F-03",
     "F-04",
-    "F-55"
+    "F-57"
    ]
   },
   {
@@ -241,15 +241,15 @@
    "area": "Tracking",
    "requirement": "Track clicks and conversions.",
    "status": "Delivered (partial)",
-   "delivered": "A first-party click tracker is published on the Analytics page. It records real clicks on the site's tracked links in the visitor's own browser, plus one event explicitly labelled as a test, and exports the log as JSON or CSV. It starts at zero, sends nothing to any server and never estimates a figure, so it does not conflict with Section 6(s) on artificial clicks. The five defined event types (impression, click, session, order, refund) and the campaign-ledger rollup schema (timestamp, source, channel, eligible sessions, clicks, reported orders, with a dated provenance trail) are defined in data/campaign-ledger.json with zero rows.",
-   "blocker": "Conversion and revenue attribution is not built and no click, conversion or revenue figure is published. Click and conversion reporting is produced by Amazon, not by this site: Commission Income Statement Section 6 states that Amazon will use commercially reasonable efforts to track Qualifying Purchases and to create and distribute the reports. No Associates account or reporting feed is connected, and the selected tag's registration is pending the one-link-per-product Associates Central test (F-55), so a locally recorded click cannot yet be reconciled against Amazon reporting (F-19).",
+   "delivered": "A first-party click tracker is published on the Analytics page. It records real clicks on the site's tracked links in the visitor's own browser, plus one event explicitly labelled as a test, and exports the log as JSON or CSV. It starts at zero, sends nothing to any server and never estimates a figure, so it does not conflict with Section 6(s) on artificial clicks. The five defined event types (impression, click, session, order, refund) and the campaign-ledger rollup schema (timestamp, source, channel, eligible sessions, clicks, reported orders, with a dated provenance trail) are defined in data/ledger.json with zero rows.",
+   "blocker": "Conversion and revenue attribution is not built and no click, conversion or revenue figure is published. Click and conversion reporting is produced by Amazon, not by this site: Commission Income Statement Section 6 states that Amazon will use commercially reasonable efforts to track Qualifying Purchases and to create and distribute the reports. No Associates account or reporting feed is connected, and the selected tag's registration is pending the one-link-per-product Associates Central test (F-57), so a locally recorded click cannot yet be reconciled against Amazon reporting (F-19).",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies"
    ],
    "flags": [
     "F-03",
     "F-19",
-    "F-55"
+    "F-57"
    ]
   },
   {

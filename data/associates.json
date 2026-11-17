@@ -17,7 +17,7 @@
   "marketplace": "US storefront inferred from the links themselves: all three canonical listing URLs resolve on www.amazon.com and the ID ends in -20, the shape the engine's locale table assigns to the US store. Program enrollment for that marketplace is confirmed only inside Associates Central.",
   "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
   "source_ref": "Associates Program Policies, Participation Requirements 2(b) (format rule, read 2026-11-17)",
-  "flag": "F-55"
+  "flag": "F-57"
  },
  "special_links": [
   {

@@ -115,7 +115,7 @@
    "row": "POL-2",
    "field": "Participation Requirements 2(b) tag-format sentence (basis for the tagged Special Links this session publishes)",
    "stored": "Participation Requirements 2(b): the Associates ID or 'tag' appearing as XXXXX-## must be included as a parameter in the URL of each link placed on the Site to an Amazon Site",
-   "live_read_2026_11_17": "verbatim: \"For example, you must include your Associates ID or \\\"tag\\\" (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.\" The owner-selected tracking ID shopnow047c-20 matches the XXXXX-## shape (alphanumeric identifier plus hyphen and two digits); whether it is registered and assigned to this site is confirmable only inside Associates Central (F-55).",
+   "live_read_2026_11_17": "verbatim: \"For example, you must include your Associates ID or \\\"tag\\\" (appearing as XXXXX-##, or such other format as we may designate) as a parameter in the URL of each link you place on your Site to an Amazon Site.\" The owner-selected tracking ID shopnow047c-20 matches the XXXXX-## shape (alphanumeric identifier plus hyphen and two digits); whether it is registered and assigned to this site is confirmable only inside Associates Central (F-57).",
    "result": "match",
    "source_url": "https://affiliate-program.amazon.com/help/operating/policies"
   },
