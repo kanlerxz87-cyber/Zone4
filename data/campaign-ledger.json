@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "description": "The campaign ledger. It starts empty and well-defined: a row is added only when the figures are obtained from an authorized first-party report. No conversion score and no revenue forecast is presented here or anywhere on this site.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/cc32105d-zone4",
+    "columns": [
+      {
+        "field": "timestamp_utc",
+        "meaning": "When the row was recorded (UTC)."
+      },
+      {
+        "field": "source",
+        "meaning": "The authorized first-party report the figures were read from, named and linked."
+      },
+      {
+        "field": "channel",
+        "meaning": "Where the report says the traffic came from (organic search, direct, feed, and so on). Never inferred."
+      },
+      {
+        "field": "eligible_sessions",
+        "meaning": "Sessions the report attributes to this site's Special Links."
+      },
+      {
+        "field": "clicks",
+        "meaning": "Clicks the report attributes to this site's links."
+      },
+      {
+        "field": "reported_orders",
+        "meaning": "Orders the report attributes to this site's links."
+      },
+      {
+        "field": "provenance",
+        "meaning": "Dated provenance trail: report name, report period, retrieval session, and the commit the row landed in."
+      }
+    ],
+    "provenance_rule": "A row without a named first-party report, a report period and a retrieval date is invalid. Figures are copied exactly as the report states them; nothing is estimated, interpolated, modelled or forecast. A later report that revises an earlier figure is added as a new row with its own provenance, never by editing the old row.",
+    "why_empty": "No Associates account or reporting feed is connected (Q-01, Q-48, F-19), so no authorized figure exists to put in a row. The ledger is defined now so that measurement, when it arrives, lands in one agreed shape.",
+    "sources": [
+      {
+        "url": "https://affiliate-program.amazon.com/help/operating/policies",
+        "ref": "Commission Income Statement, Sections 1 to 3: Amazon creates and distributes the click and order reports"
+      },
+      {
+        "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+        "ref": "Operating Agreement Section 4: no representation about the traffic or commission income a site can expect"
+      }
+    ]
+  },
+  "rows": []
+}

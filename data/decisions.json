@@ -1352,7 +1352,7 @@
    "linked_suggestions": [
     "S-32"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1413,7 +1413,7 @@
    "linked_suggestions": [
     "S-33"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1460,7 +1460,7 @@
    "linked_suggestions": [
     "S-34"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1503,7 +1503,7 @@
    "linked_suggestions": [
     "S-35"
    ],
-   "status": "Open - needs your answer",
+   "status": "Recorded",
    "options": [
     {
      "key": "A",
@@ -1565,6 +1565,117 @@
     {
      "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css",
      "ref": "The stylesheet the token layer would be added to"
+    }
+   ]
+  },
+  {
+   "id": "D-40",
+   "question": "Where should the self-hosted analytics endpoint live, if the five defined events are ever to leave the visitor's browser?",
+   "linked_question": "Q-14, Q-17, Q-45",
+   "linked_suggestions": [
+    "S-37"
+   ],
+   "status": "Open - needs your answer",
+   "options": [
+    {
+     "key": "A",
+     "label": "A small endpoint on the owner's own domain (a serverless function is enough)",
+     "commits_to": "The endpoint contract in data/pipeline.json is deployed on the owner's domain, the tracker's meta tag is filled in, and a consent notice is published first. The browser-local log stays available as the fallback.",
+     "effort": "A few hours of hosting setup plus the privacy notice.",
+     "reversible": "Yes - empty the meta tag and the tracker is local-only again."
+    },
+    {
+     "key": "B",
+     "label": "Stay browser-local only",
+     "commits_to": "Nothing ever leaves the visitor's browser. Measurement stays per-visitor and export-only, and no aggregate figure is ever published. This is the state of the site today.",
+     "effort": "None.",
+     "reversible": "n/a"
+    },
+    {
+     "key": "C",
+     "label": "A privacy-friendly hosted analytics product",
+     "commits_to": "A third party processes the events; its privacy terms become part of the site's privacy notice. Not recommended without the D-16 privacy review.",
+     "effort": "Account and billing.",
+     "reversible": "Yes, but data leaves the site."
+    }
+   ],
+   "recommendation": "B until D-16 and Q-17 answer the privacy questions; then A. The counter is deliberately built so that no configuration change is needed to keep it local-only.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Participation Requirement 6(s): no artificial or fraudulent activity"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: disclosures travel with the claim in any medium"
+    }
+   ]
+  },
+  {
+   "id": "D-41",
+   "question": "Should the site capture readers beyond follow-by-RSS - for example an email list?",
+   "linked_question": "Q-22, Q-46",
+   "linked_suggestions": [
+    "S-39"
+   ],
+   "status": "Open - needs your answer",
+   "options": [
+    {
+     "key": "A",
+     "label": "RSS and browser bookmarks only (the state today)",
+     "commits_to": "No personal data is collected at all. The RSS feed ships now and reader capture is the feed.",
+     "effort": "None - already shipped.",
+     "reversible": "n/a"
+    },
+    {
+     "key": "B",
+     "label": "Add an email list with a consent notice and a privacy review first",
+     "commits_to": "A signup form, a privacy notice, a consent flow and a mailing schedule; none of it tied to the affiliate links (Participation Requirement 6(g) bars rewards for clicking).",
+     "effort": "Days, plus the privacy review (D-16).",
+     "reversible": "Yes, at the cost of reader trust if handled badly."
+    }
+   ],
+   "recommendation": "A for now. The feed answers the same need with no data collected; B needs the privacy answers first.",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Participation Requirement 6(g): no incentives tied to clicking Special Links"
+    },
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC: any channel carrying a recommendation carries the disclosure"
+    }
+   ]
+  },
+  {
+   "id": "D-42",
+   "question": "Who verifies this site in Google Search Console, and who submits the sitemap and feed there?",
+   "linked_question": "Q-47",
+   "linked_suggestions": [
+    "S-40"
+   ],
+   "status": "Open - needs your answer",
+   "options": [
+    {
+     "key": "A",
+     "label": "The owner verifies with their Google account",
+     "commits_to": "One owner-side verification (a meta tag or DNS record) and a one-time sitemap submission; search performance data then exists and the next topic can be chosen from measured queries (S-25).",
+     "effort": "Minutes of owner time.",
+     "reversible": "Yes."
+    },
+    {
+     "key": "B",
+     "label": "Not now",
+     "commits_to": "The sitemap and feed stay published for crawlers to find on their own; no search-performance data exists and topic choices stay question-led rather than query-led.",
+     "effort": "None.",
+     "reversible": "Yes."
+    }
+   ],
+   "recommendation": "A. The build already ships sitemap.xml, robots.txt and feed.xml; what is missing is the verified owner account that makes the measurement readable.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/appearance/page-experience",
+     "ref": "Google Search Central: page experience and site presentation"
     }
    ]
   }
@@ -1758,6 +1869,34 @@
    "choice": "Option A: research stays manual; the automation engine remains offline until the Agent Terms are implemented and reviewed (Q-07 open).",
    "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)",
    "evidence": "Owner brief 2026-11-16: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Register recommendation and linked official sources followed."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-35",
+   "choice": "Option A: the warm-editorial design-system specification on the Design brief page (DIR-A) is adopted as the specification for the design work. The stylesheet already shipped in this direction on 2026-11-16 (D-18); the full token and component list on the Design brief page is the spec the next pass builds to. The decision log records the choice rather than re-describing it.",
+   "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
+   "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-36",
+   "choice": "Option A: the ten-row anti-slop pass runs, guarded by the fact rule. Most of it had already landed on 2026-11-16 (D-12, D-17, D-18, D-20, D-21, D-25, D-27); the remaining defect is F-53 - the ASIN and category path printed as prose in the three product openers - and those three paragraphs were rewritten in this build with fact rows, fact_ids and citations unchanged. F-52 was already corrected. Every factual claim still resolves to a sourced fact row and the build still fails without one.",
+   "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
+   "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-37",
+   "choice": "No change to the published headlines: the steady register shipped on 2026-11-16 already satisfies the rule the option sets were written to (each headline names a number or the reader's problem; none describes the site's process). The punchy variants stay on the Design brief page because two of them make comparison claims that wait on D-12's conclusion.",
+   "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
+   "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
+  },
+  {
+   "date_utc": "2026-11-17",
+   "decision": "D-38",
+   "choice": "Option A: the decision queue is published in dependency order with the five-step shortest credible launch path. The page shipped 2026-11-16 (arena/89900251-zone4, PRs #72-#77); this entry records the decision so the register agrees with the published page.",
+   "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
+   "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
   }
  ]
 }

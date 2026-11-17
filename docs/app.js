@@ -39,6 +39,7 @@
   };
 
   go.addEventListener('click', function () {
+    if (window.nsTrack) window.nsTrack('chooser_start', 'three-question chooser submitted');
     var pick = function (n) {
       var el = document.querySelector('input[name="' + n + '"]:checked');
       return el ? el.value : null;
@@ -68,6 +69,7 @@
     }).join('') + '</ul>';
     html += '<p class="small"><strong>Why, from your answers:</strong> ' + why.join('; ') + '.</p>';
     html += '<p class="small muted">Skeptical? The table below shows the same routing with the listed figures beside it.</p>';
+    if (window.nsTrack) window.nsTrack('chooser_route', winners.join(' + '));
     out.innerHTML = html;
     out.hidden = false;
   });
