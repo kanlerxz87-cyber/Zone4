@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "session": "arena/59645da8-zone4",
+    "date_utc": "2026-11-17",
+    "scope": "Reader-facing publication pass: tagged Special Links, product-intent record, five-event counter, campaign ledger, feed, navigation split, two new guides.",
+    "network_access": "NONE. This environment has outbound access to github.com, api.github.com, codeload.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org only. amazon.com, link.amazon, affiliate-program.amazon.com and developers.google.com all failed to connect (OpenSSL SSL_ERROR_SYSCALL / no route). Every product or policy assertion made on 2026-11-17 is therefore a CARRIED-FORWARD record of a read performed on 2026-11-14 or 2026-11-16, not a fresh read.",
+    "consequence": "No page on the site claims a 2026-11-17 re-read of a product page, the commission table, the Operating Agreement or the Program Policies. The site's 're-checked' date stays at 2026-11-16 (data/content.json rechecked_utc) because that is the last date an official page was actually read. This is the whole point of the record: a date the session did not verify must not be published as if it had.",
+    "what_was_verified_on_2026_11_17": [
+      "Repository state: every count published in the README, the executive summary and the front page was re-derived from the data files in this session (see counts below), not typed.",
+      "Build integrity: scripts/build_site.py, scripts/verify.py, qa/audit_site.py --strict-warnings, the 83 engine tests, engine.cli audit and tools/check_links.py all run green on the committed tree.",
+      "Tracker behaviour: tools/node/tracker-smoke.mjs executes the real docs/tracker.js and asserts the viewport events fire, the click event carries its ASIN and host, NO network call is attempted while the endpoint is null, and no field outside the whitelist enters the local record.",
+      "Feed: docs/feed.xml parses as RSS 2.0, carries 9 items for 9 published articles, and every item link resolves to a built page (checked by check_feed in scripts/verify.py).",
+      "Tagged links: every a.shop href in every built page carries ?tag=shopnow047c-20 and rel=sponsored (checked by check_tracked_links).",
+      "Tag syntax only: shopnow047c-20 matches the published US Store ID shape (lowercase name, hyphen, two-digit suffix). Syntax is not enrolment.",
+      "Disclosure placement: the sentence sits above <main> and in the footer on all 29 pages, and directly under the headline on all 9 article pages.",
+      "Internal links: every href and #anchor resolves; no <img src> is broken; every page is listed in the generated footer index."
+    ],
+    "what_was_NOT_verified_on_2026_11_17": [
+      "That link.amazon/B04G1MEwY, /B02NbDxp3 and /B00hJ57DV still resolve to B0CDY277D3, B09B7SB46R and B08DKYBTPH. No outbound access. The product-intent record says so in confirmation_kind.",
+      "That shopnow047c-20 is an enrolled Associates tag, that a click through it is recorded, or that these three ASINs are commission-eligible. Only Associates Central can answer; F-55.",
+      "That amazon.com, affiliate-program.amazon.com or any cited policy page is reachable or unchanged today.",
+      "Whether any search engine has indexed the site, and whether any reader has arrived. Search Console is not connected (F-57)."
+    ]
+  },
+  "counts_rederived": {
+    "note": "Each number below was produced by counting the data files in this session, not copied from a previous document.",
+    "products": 3,
+    "articles": 9,
+    "product_articles": 3,
+    "comparison": 1,
+    "buying_guides": 5,
+    "pages": 29,
+    "flags": 58,
+    "flags_open": 41,
+    "suggestions": 40,
+    "questions": 48,
+    "questions_answered_from_a_source": 24,
+    "decisions": 43,
+    "decisions_recorded": 30,
+    "requirements": 40,
+    "sources": 32,
+    "policies": 30,
+    "analysis_findings": 18,
+    "events": 5
+  },
+  "source_checks": [
+    {
+      "claim": "The Associates tag pattern is a lowercase name, a hyphen and a two-digit suffix.",
+      "status": "Carried forward, not re-read today",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "last_read": "2026-11-16 by arena/4c552c78-zone4 (data/verification-session-4c552c78.json)"
+    },
+    {
+      "claim": "Every Special Link must carry the Associates tag as a URL parameter.",
+      "status": "Carried forward, not re-read today",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "last_read": "2026-11-16"
+    },
+    {
+      "claim": "Prices and availability may appear only where Amazon serves the link or an approved API supplies them (Participation Requirement 2(b)).",
+      "status": "Carried forward, not re-read today",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "last_read": "2026-11-16"
+    },
+    {
+      "claim": "The required disclosure sentence is exactly 'As an Amazon Associate I earn from qualifying purchases.'",
+      "status": "Carried forward; the sentence on the site is unchanged from the version last confirmed 2026-11-16",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "last_read": "2026-11-16"
+    },
+    {
+      "claim": "A disclosure must be hard to miss and placed near the claim it qualifies.",
+      "status": "Carried forward, not re-read today",
+      "source": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "last_read": "2026-11-16"
+    },
+    {
+      "claim": "RSS 2.0 requires an rss element with a channel, and channel-level title, link and description.",
+      "status": "Applied from the published specification; not re-fetched today",
+      "source": "https://www.rssboard.org/rss-specification",
+      "last_read": "Not fetched in this session (no outbound access to rssboard.org). The elements emitted are the ones the specification defines; the feed is parsed and validated structurally by scripts/verify.py."
+    },
+    {
+      "claim": "Sitemaps are submitted to a search console and the property must be verified by the owner.",
+      "status": "Carried forward; the owner step is recorded as F-57",
+      "source": "https://developers.google.com/search/docs/monitor-debug/search-console-start",
+      "last_read": "Not fetched in this session (no outbound access to developers.google.com)."
+    }
+  ],
+  "irregularities_found_and_how_they_were_handled": [
+    {
+      "what": "The site's outbound links were untagged link.amazon shorteners while the page carried an earning disclosure.",
+      "handling": "Replaced with tagged /dp/ Special Links on 2026-11-17 (D-44). F-03 updated: what that fixes and what it leaves open are both stated. F-55 added for the unverified enrolment."
+    },
+    {
+      "what": "A product-card CTA read 'Check price on Amazon', promising a price that Participation Requirement 2(b) does not allow this site to show.",
+      "handling": "Relabelled 'View the official listing (paid link)'. Article CTA text that promised 'availability' was rewritten the same day. Recorded in data/marketing.json _meta.cta_wording_note_2026_11_17."
+    },
+    {
+      "what": "The executive summary and README stated counts that no longer matched the data (7 articles, 36 suggestions, 44 questions, 51 flags).",
+      "handling": "Every count re-derived in this session and replaced. README's historical sections are explicitly marked as historical rather than silently edited."
+    },
+    {
+      "what": "The product cards' 'observed 2026-11-14' would have read as a fresh observation beside a 2026-11-17 change strip.",
+      "handling": "The front page's change strip is dated 2026-11-17 and says what changed in the code and data; no product value is presented as re-read today. The product-intent record's confirmation_kind field says 'carried forward', in those words."
+    },
+    {
+      "what": "qa/audit_site.py required every shop link to be one of the link.amazon short links, which would have blocked the only change that makes a click attributable.",
+      "handling": "The rule was restated (Amazon host, tag required) with the reason in the code. It is a rule change, so it is recorded here rather than made silently."
+    }
+  ],
+  "unverified_items_published_on_the_flagged_page": [
+    "F-03 (updated)",
+    "F-55",
+    "F-56",
+    "F-57",
+    "F-58"
+  ]
+}

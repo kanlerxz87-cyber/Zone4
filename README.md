@@ -118,7 +118,7 @@ and are superseded by the table above.
 | `qa/audit_site.py` | Independent QA audit of the committed HTML, run separately from the builder |
 | `scripts/render_design_prompt.py` | Regenerates `DESIGN_PROMPT.md` from `data/design.json`, so the document and the Design brief page are the same brief |
 | `engine/` | The automation engine: research intake, claim checking, scoring, economics, links, tracking, policy gates, content and site generation |
-| `tests/test_engine.py` | 83 unit tests for the engine |
+| `tests/test_engine.py` | 86 unit tests for the engine |
 | `tools/check_links.py` | Link, per-row sourcing, CSS and disclosure check for the engine's preview build |
 | `ENGINE.md` | How the engine works, what it refuses to do, and its publish gate |
 | `data/suggestions.json` | The change backlog: 31 costed suggestions, each with the problem, proposal, effort, risk, the check that would prove it worked and the official rule that constrains it |

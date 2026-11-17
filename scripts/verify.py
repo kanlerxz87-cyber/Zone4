@@ -585,6 +585,34 @@ def check_required_pages() -> None:
                     fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
+def check_disclosure_placement() -> None:
+    """The disclosure must be above the fold on every page, and repeated below.
+
+    Brief requirement (2026-11-17): "Keep the disclosure above the fold on every
+    page, including this one." Three placements are checked, because each does a
+    different job:
+      1. a strip between the masthead and <main> - seen before any content;
+      2. the same sentence in the footer - seen after the content;
+      3. on an article, a line directly under the headline (D-32) - seen at the
+         point a reader decides whether to keep reading.
+    The exact sentence is required by the Operating Agreement, Section 5; the
+    FTC's Disclosures 101 is why placement matters at all.
+    """
+    for page in sorted(DOCS.rglob("*.html")):
+        rel = page.relative_to(ROOT)
+        raw = page.read_text(encoding="utf-8")
+        first = raw.find('class="disclosure"')
+        main_at = raw.find('<main id="main"')
+        if first == -1 or main_at == -1 or first > main_at:
+            fail(f"{rel}: no disclosure strip above <main>")
+        head, sep, tail = raw.partition("<footer>")
+        if not sep or DISCLOSURE not in tail:
+            fail(f"{rel}: disclosure sentence missing from the footer")
+        if "/articles/" in str(rel) and not rel.name == "index.html":
+            if 'class="disclosure-inline"' not in raw:
+                fail(f"{rel}: article has no inline disclosure under the headline (D-32)")
+
+
 def check_navigation() -> None:
     """D-40: one primary nav group, and every built page in the footer index.
 
@@ -710,6 +738,27 @@ def check_tracked_links() -> None:
                 fail(f"{page.relative_to(ROOT)}: shop link without rel=sponsored (D-05)")
 
 
+def check_documented_test_count() -> None:
+    """ENGINE.md states a test count; the suite must actually run that many.
+
+    F-42 was raised because the documentation said 81 while the suite ran 83.
+    An assertion nobody checks drifts, so the number is compared here.
+    """
+    import unittest
+    engine_md = (ROOT / "ENGINE.md")
+    if not engine_md.exists():
+        return
+    m = re.search(r"#\s*(\d+)\s+tests", engine_md.read_text(encoding="utf-8"))
+    if not m:
+        fail("ENGINE.md no longer states a test count in the '# N tests' form")
+        return
+    documented = int(m.group(1))
+    suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
+    actual = suite.countTestCases()
+    if documented != actual:
+        fail(f"ENGINE.md says {documented} tests; the suite has {actual}")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -733,9 +782,11 @@ def main() -> int:
     check_site()
     check_design_page()
     check_required_pages()
+    check_disclosure_placement()
     check_navigation()
     check_feed()
     check_tracked_links()
+    check_documented_test_count()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")

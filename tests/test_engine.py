@@ -345,6 +345,39 @@ class TestEconomics(unittest.TestCase):
         self.assertTrue(store().source_url("S1").startswith("https://affiliate-program.amazon.com/"))
 
 
+class TestPublishedTag(unittest.TestCase):
+    """The tag on the published site and the engine's must be the same one.
+
+    Added 2026-11-17 with decision D-44. Two code paths build an Amazon link -
+    scripts/build_site.py for the pages and engine/links.py for the pipeline -
+    and a tag that differs between them would attribute half the clicks to an
+    account nobody is looking at. This test reads the published value rather
+    than a copy of it.
+    """
+
+    def setUp(self):
+        from engine.config import Config
+        self.cfg = Config.load()
+
+    def test_published_tag_is_the_configured_tag(self):
+        import json
+        from pathlib import Path
+        products = json.loads((Path(__file__).resolve().parent.parent / "data" / "products.json").read_text())
+        published = products["products"][0]["associates_tag"]
+        self.assertEqual(self.cfg.marketplace.partner_tag, published)
+
+    def test_tag_passes_the_link_builder(self):
+        from engine.config import Config
+        from engine.links import build_link
+        link = build_link("B0CDY277D3", host="www.amazon.com",
+                          tag=self.cfg.marketplace.partner_tag)
+        self.assertIn(f"tag={self.cfg.marketplace.partner_tag}", link.url)
+        self.assertEqual(link.url, "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20")
+
+    def test_tag_is_masked_in_reports(self):
+        self.assertEqual(self.cfg.redacted()["marketplace"]["partner_tag"], "***")
+
+
 class TestLinks(unittest.TestCase):
     def test_refuses_short_identifier(self):
         with self.assertRaises(LinkError):

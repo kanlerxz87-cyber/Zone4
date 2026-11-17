@@ -112,9 +112,24 @@ class Config:
             for k, v in mp.items():
                 if hasattr(cfg.marketplace, k):
                     setattr(cfg.marketplace, k, v)
+        # Tag resolution order, most explicit first:
+        #   1. ZONE4_PARTNER_TAG in the environment (never committed);
+        #   2. config.json (gitignored);
+        #   3. the tag published on the site, data/products.json -> associates_tag.
+        # Step 3 exists so the engine and the published pages cannot disagree
+        # about which tag is in use. It is a published identifier, not a secret:
+        # it appears in every outbound link on the site by design.
         tag = os.environ.get("ZONE4_PARTNER_TAG")
         if tag:
             cfg.marketplace.partner_tag = tag
+        elif not cfg.marketplace.partner_tag:
+            try:
+                products = json.loads((cfg.data_dir / "products.json").read_text(encoding="utf-8"))
+                published = (products.get("products") or [{}])[0].get("associates_tag")
+            except (OSError, ValueError, KeyError):
+                published = None
+            if published:
+                cfg.marketplace.partner_tag = published
         host = os.environ.get("ZONE4_AMAZON_HOST")
         if host:
             cfg.marketplace.host = host
