@@ -1223,6 +1223,8 @@ Pages on merge commit: built — GitHub Pages API reports status `built`, source
 - **Pages:** the Pages API reports the latest build **`built`** for `8c189a2` (created 2026-11-16T19:19:47Z, updated 19:20:09Z), source `main /` (legacy root redirect to `/docs`), HTTPS enforced. Live checks passed after the build: `docs/articles/air-fryer-sizes-explained-6qt-vs-8qt-vs-26qt.html` serves the new question-led guide with the under-headline disclosure, the "What this article does not show" block and the sourced fact table; `docs/decisions.html` shows the new KPIs (8 waiting / 26 recorded) and the recorded-choice lines on the decision cards. Live site: https://kanlerxz87-cyber.github.io/Zone4/
 - **Session complete.** The 8 open decisions (D-01, D-02, D-08, D-13, D-14, D-15, D-16, D-22) and the flagged items above await the owner on the published pages with source links; they do not block the site, per the standing instruction.
 
+### Session arena/68d67712-zone4 — completion (2026-11-17, UTC)
+
 ### Session arena/0bdd37f3-zone4 — claim (2026-11-17, UTC)
 
 - Claimed the 2026-11-17 publication-polish + product-intent + supply-completeness pass recorded in the board row above. Scope is exactly the files listed in that row; no other session holds a claim on them.
@@ -1317,3 +1319,10 @@ HTTPS enforced, live at https://kanlerxz87-cyber.github.io/Zone4/ (confirmed via
 commit on main is `5535e536`. Follow-up PRs #82 (`arena/1f4a7a22-zone4`) and #69 (`arena/6554fead-zone4`) were open
 at wrap-up and are left to their owners, with this reconciliation noted above.
 
+
+### Session arena/0bdd37f3-zone4 — claim (2026-11-17, UTC)
+
+- Claimed the 2026-11-17 publication-polish + product-intent + supply-completeness pass recorded in the board row above. Scope is exactly the files listed in that row; no other session holds a claim on them.
+- Branch: this session works on its assigned branch `arena/0bdd37f3-zone4` (branched from `b5d22b0`, the tip of `main`). The repository branch constraints of this environment require all work to stay on that assigned branch, so it plays the role of the `session-<id>/<task>` branch the brief describes; no other branch or worktree is created.
+- Owner brief for this session: "There should be no manual input on my part. Work on your own to finish all tasks in this session." Anything that needs a fact only the owner has (Associates account, tag verification, Google Search Console, an email-capture provider, legal review) stays open and is named in the completion log.
+- First action under the claim: resolve and verify the two supplied links not yet recorded, then build the product-intent confirmation record and ship the RSS feed before touching the generator.
