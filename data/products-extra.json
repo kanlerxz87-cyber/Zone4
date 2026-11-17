@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "description": "Two product records added on 2026-11-17 from the two new submitted links. Only what the official listing page showed in its title and category breadcrumb is recorded. Brand, model, dimensions, capacity and rating are NOT recorded: the Item details table was not reached in the reads on 2026-11-17, so the values stay blank and flagged (F-60). Prices and star ratings are withheld (F-02).",
+    "read_utc": "2026-11-17",
+    "read_by": "arena/3d2ad125-zone4"
+  },
+  "products": [
+    {
+      "id": "P4",
+      "asin": "B0DHZTCNR5",
+      "short_link": "https://link.amazon/B0c8moW59",
+      "canonical_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "name_short": "ThermoMaven 1 Sec Professional Digital Meat Thermometer",
+      "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "listing_claims_in_title": [
+        "±0.5℉ accuracy",
+        "NIST&NSF Certified",
+        "Highly waterproof",
+        "Auto-rotate bright LED screen",
+        "Black colour (as titled)"
+      ],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "subcategory": "Meat thermometers",
+      "brand": null,
+      "brand_status": "Blank: not read from Item details (F-60)",
+      "model_number": null,
+      "capacity": null,
+      "dimensions": null,
+      "special_feature": null,
+      "flags": [
+        "F-56",
+        "F-60"
+      ],
+      "publication_status": "Held (F-55 on main): record kept; not shown as a product card, link or category."
+    },
+    {
+      "id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "short_link": "https://link.amazon/B0f3GKalj",
+      "canonical_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "name_short": "CHEF iQ Sense Smart Wireless Meat Thermometer",
+      "name_listing": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "listing_claims_in_title": [
+        "3 ultra-thin probes",
+        "WiFi unlimited range",
+        "1000°F heat safe",
+        "5 sensors",
+        "Gen3 (as titled)"
+      ],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "subcategory": "Meat thermometers",
+      "brand": null,
+      "brand_status": "Blank: not read from Item details (F-60)",
+      "model_number": null,
+      "capacity": null,
+      "dimensions": null,
+      "special_feature": null,
+      "flags": [
+        "F-56",
+        "F-60"
+      ],
+      "publication_status": "Held (F-55 on main): record kept; not shown as a product card, link or category."
+    }
+  ]
+}

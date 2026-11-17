@@ -38,6 +38,7 @@ OFFICIAL_HOSTS = {
     "github.io", "oauth-redirect.googleusercontent.com",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
+SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
 RATING_RE = re.compile(r"\b\d\.\d\s*(out of 5|stars?)\b", re.IGNORECASE)
@@ -626,12 +627,16 @@ def check_rss_feed() -> None:
         return
     items = channel.findall("item")
     articles = load("marketing.json")["articles"]
-    if len(items) != len(articles):
-        fail(f"docs/feed.xml has {len(items)} items; expected {len(articles)} published articles")
-    expected = ["https://kanlerxz87-cyber.github.io/Zone4/docs/articles/" + a["slug"].strip("/") + ".html" for a in articles]
+    # Articles first, then the published guides (scripts/build_extras.py); held guides are not listed.
+    held = {"P4", "P5"}
+    guides_pub = [g for g in load("guides.json")["guides"] if not any(pid in held for pid in g["product_ids"])]
+    expected = (["https://kanlerxz87-cyber.github.io/Zone4/docs/articles/" + a["slug"].strip("/") + ".html" for a in articles]
+                + ["https://kanlerxz87-cyber.github.io/Zone4/docs/guides/" + g["slug"] + ".html" for g in guides_pub])
+    if len(items) != len(expected):
+        fail(f"docs/feed.xml has {len(items)} items; expected {len(expected)} ({len(articles)} articles, {len(guides_pub)} published guides)")
     actual = [item.findtext("link") for item in items]
     if actual != expected:
-        fail("docs/feed.xml article links do not match the published article records")
+        fail("docs/feed.xml article and guide links do not match the published records")
 
 
 def check_root_entry() -> None:
@@ -647,6 +652,159 @@ def check_root_entry() -> None:
         fail("root .nojekyll missing")
 
 
+def check_publication() -> None:
+    """Checks added 2026-11-17 by arena/3d2ad125-zone4 for the publication build:
+    the product-intent record, the guides, the links' rel attribute, the disclosure
+    above and below each page, one sidebar group with every surface in the footer,
+    the feed, the sitemap, the measurement script and the empty-until-authorised ledger."""
+    import json as _json
+    import xml.etree.ElementTree as ET
+    intent = load("intent-links.json")
+    extra = load("products-extra.json")["products"]
+    HELD_PRODUCT_IDS = {"P4", "P5"}  # held until F-55 on main is resolved (see scripts/build_extras.py)
+    base_products = load("products.json")["products"]
+    known_asins = {p["asin"] for p in base_products + extra}
+    tag = intent["_meta"]["tracking_id"]
+    if not re.match(r"^[a-z0-9][a-z0-9-]*-20$", tag):
+        fail(f"intent-links: tracking ID {tag!r} does not match the US Store ID pattern (-20)")
+    seen_codes = set()
+    for l in intent["links"]:
+        pid = l["product_id"]
+        code = l["link_path_code"]
+        if l["submitted_url"] != f"https://link.amazon/{code}":
+            fail(f"intent-links {pid}: submitted URL is not the link.amazon form")
+        if code in seen_codes:
+            fail(f"intent-links {pid}: duplicate link code {code}")
+        seen_codes.add(code)
+        if l["official_listing_url"] != f"https://www.amazon.com/dp/{l['intended_asin']}":
+            fail(f"intent-links {pid}: official listing URL does not match the intended ASIN")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", l["confirmation_date_utc"]):
+            fail(f"intent-links {pid}: confirmation date not dated")
+        for k in ("intended_asin", "observed_redirect", "official_listing_url", "confirmation_source"):
+            if k not in l:
+                fail(f"intent-links {pid}: field {k} missing")
+        if "observed_asin" not in l["observed_redirect"]:
+            fail(f"intent-links {pid}: observed redirect target field missing")
+        if pid in HELD_PRODUCT_IDS:
+            if l["published_outbound_url"] is not None:
+                fail(f"intent-links {pid}: held candidate is published as a link (F-55 on main)")
+        elif l["published_outbound_url"] != l["submitted_url"]:
+            fail(f"intent-links {pid}: a link other than the supplied short link is published before the Special Link test")
+        if l["intended_asin"] not in known_asins:
+            fail(f"intent-links {pid}: intended ASIN is not in products.json or products-extra.json")
+        if not l["tracking_id_candidate_url"].endswith("?tag=" + tag):
+            fail(f"intent-links {pid}: candidate tagged URL uses a different tag")
+    for p in extra:
+        if p["canonical_url"] != f"https://www.amazon.com/dp/{p['asin']}":
+            fail(f"products-extra {p['id']}: canonical URL does not match its ASIN")
+        if not p["category_url"].startswith("https://www.amazon.com/"):
+            fail(f"products-extra {p['id']}: category URL is not an official Amazon page")
+        for k in ("brand", "capacity", "dimensions"):
+            if p.get(k) not in (None, ""):
+                fail(f"products-extra {p['id']}: {k} is set but its Item details were not read; keep it blank")
+    guides = load("guides.json")["guides"]
+    slugs, metas = set(), set()
+    for g in guides:
+        if g["slug"] in slugs or not g["meta_description"] or g["meta_description"] in metas:
+            fail(f"guide {g.get('slug')}: slug or meta description is missing or duplicated")
+        slugs.add(g["slug"]); metas.add(g["meta_description"])
+        if len(g["meta_description"]) > 200:
+            fail(f"guide {g['slug']}: meta description longer than 200 characters")
+        if not g["facts"]:
+            fail(f"guide {g['slug']}: no fact rows, so no figure can be checked")
+        for f in g["facts"]:
+            if not f.get("source", "").startswith("https://www.amazon.com/dp/"):
+                fail(f"guide {g['slug']} fact {f.get('id')}: source is not an official listing page")
+            asin = f["source"].rsplit("/", 1)[-1]
+            if asin not in known_asins:
+                fail(f"guide {g['slug']} fact {f.get('id')}: source ASIN {asin} is not a known product")
+        for pid in g["product_ids"]:
+            if pid not in {p["id"] for p in base_products + extra}:
+                fail(f"guide {g['slug']}: unknown product {pid}")
+    ledger = load("ledger.json")
+    for row in ledger.get("rows", []):
+        for k in ("timestamp_utc", "source", "report_reference", "obtained_by"):
+            if not row.get(k):
+                fail(f"ledger row lacks {k}: rows need an authorised first-party report reference")
+    pub = load("publishing.json")
+    if not isinstance(pub["cadence"]["interval_days"], int) or pub["cadence"]["interval_days"] < 1:
+        fail("publishing cadence interval is not a positive whole number of days")
+    measure = (DOCS / "measure.js").read_text(encoding="utf-8")
+    for bad in ("document.cookie", "localStorage", "sessionStorage", "navigator.userAgent", "referrer"):
+        if bad in measure:
+            fail(f"measure.js uses {bad}: the measurement must not store or read identifiers")
+    events = set(re.findall(r"(\w+): 1", measure.split("var EVENTS", 1)[1].split("}", 1)[0])) if "var EVENTS" in measure else set()
+    if events != {"page_view", "outbound_click", "guide_read_75", "category_click", "feed_click"}:
+        fail(f"measure.js events are {sorted(events)}, not the five defined events")
+    surfaces = ["index.html", "executive-summary.html", "products.html", "guides/index.html", "marketing.html",
+                "automation.html", "analysis.html", "requirements.html", "suggestions.html", "questions.html",
+                "design.html", "decisions.html", "verification.html", "policy-compliance.html", "links.html",
+                "measurement.html", "analytics.html", "flagged.html", "sources.html"]
+    for path in DOCS.rglob("*.html"):
+        rel = str(path.relative_to(DOCS))
+        text = path.read_text(encoding="utf-8")
+        if DISCLOSURE not in text:
+            fail(f"{rel}: disclosure sentence missing")
+        m = re.search(r'<p class="footer-disclosure"[^>]*>(.*?)</p>', text, re.S)
+        if not m or DISCLOSURE not in m.group(1):
+            fail(f"{rel}: disclosure is not repeated in the footer")
+        head_end = text.find('<main id="main">')
+        if head_end == -1 or text.find(DISCLOSURE) > head_end:
+            fail(f"{rel}: disclosure is not above the main content (above the fold)")
+        if text.count('<div class="nav-group">') != 1:
+            fail(f"{rel}: the sidebar must hold exactly one navigation group")
+        footer = text[text.find('<footer>'):] if '<footer>' in text else ""
+        if not footer:
+            fail(f"{rel}: footer missing")
+        for target in surfaces:
+            if rel == target:
+                continue
+            prefix = ("../" * rel.count("/")) + target
+            if f'href="{prefix}"' not in footer and f'href="{prefix}#' not in footer:
+                fail(f"{rel}: footer does not link to {target}")
+        for a in re.finditer(r"<a ([^>]*)>", text):
+            attrs = a.group(1)
+            href = re.search(r'href="([^"]*)"', attrs)
+            if not href:
+                continue
+            h = href.group(1)
+            if "amazon.com/dp/" in h or h.startswith("https://link.amazon/"):
+                rel_attr = re.search(r'rel="([^"]*)"', attrs)
+                if not rel_attr or "sponsored" not in rel_attr.group(1).split():
+                    fail(f"{rel}: product link without rel=\"sponsored\": {h[:80]}")
+    feed = DOCS / "feed.xml"
+    try:
+        items = ET.parse(feed).getroot().findall("./channel/item")
+    except ET.ParseError as e:
+        fail(f"feed.xml does not parse: {e}")
+        items = []
+    feed_links = {i.findtext("link") for i in items}
+    for g in guides:
+        if any(pid in {"P4", "P5"} for pid in g["product_ids"]):
+            continue  # held (F-55 on main): not listed in the feed
+        if SITE_URL + "guides/" + g["slug"] + ".html" not in feed_links:
+            fail(f"feed.xml lacks guide {g['slug']}")
+    sitemap = (DOCS / "sitemap.xml").read_text(encoding="utf-8")
+    for path in DOCS.rglob("*.html"):
+        rel = str(path.relative_to(DOCS))
+        if (SITE_URL + rel) not in sitemap:
+            fail(f"sitemap.xml lacks {rel}")
+    products_html = (DOCS / "products.html").read_text(encoding="utf-8")
+    for p in extra:
+        if p["id"] in HELD_PRODUCT_IDS:
+            # Held: listed as text only. The short link must not be a link (F-55 on main).
+            if f'href="{p["short_link"]}"' in products_html:
+                fail(f"products.html links the held short link of {p['id']} (F-55 on main)")
+            if p["asin"] not in products_html or p["short_link"] not in products_html:
+                fail(f"products.html does not list held record {p['id']} ({p['asin']})")
+            continue
+        if p["asin"] not in products_html or p["short_link"] not in products_html:
+            fail(f"products.html does not list {p['id']} ({p['asin']})")
+    index = (DOCS / "index.html").read_text(encoding="utf-8")
+    if index.find('id="shop"') == -1 or index.find('id="shop"') > index.find('class="mhero"'):
+        fail("index.html: the product section must come before the hero (products first)")
+
+
 def main() -> int:
     check_data()
     check_marketing()
@@ -659,6 +817,7 @@ def main() -> int:
     check_design_page()
     check_required_pages()
     check_root_entry()
+    check_publication()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")
         for f in failures:
