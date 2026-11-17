@@ -16,7 +16,7 @@
  "decisions": [
   {
    "id": "D-01",
-   "question": "Do the three product links carry an Associates tag, or should the site stop describing them as earning links?",
+   "question": "Should the three existing product links be regenerated under the supplied tracking ID, shopnow047c-20, after confirming it is the enrolled account Partner Tag, or should the site stop describing them as earning links?",
    "linked_question": "Q-01",
    "linked_suggestions": [
     "S-01"
@@ -25,14 +25,14 @@
    "options": [
     {
      "key": "A",
-     "label": "Tag the links and keep the earning claim",
-     "commits_to": "Requires an Associates account. The three short links get replaced with tagged Special Links, the site keeps its disclosure sentence, and clicks become attributable.",
+     "label": "Validate shopnow047c-20 in Associates Central, then generate and test tagged Special Links",
+     "commits_to": "Requires an enrolled Associates account and confirmation that shopnow047c-20 is its Partner Tag. Each product link is generated or validated through the authorized workflow, its destination is checked, and a test click is confirmed in reporting before scaling.",
      "effort": "Minutes, once account access exists.",
      "reversible": "Yes. Reverting to untagged links is a data change and a rebuild."
     },
     {
      "key": "B",
-     "label": "Keep the links untagged and relabel the calls to action",
+     "label": "Keep the links as plain product links until a Partner Tag and Special Links are confirmed",
      "commits_to": "The site keeps sending readers to the products but stops claiming it earns from them, because it cannot. The disclosure sentence would have to be withdrawn, which in turn affects every page.",
      "effort": "One template change plus a policy-page rewrite.",
      "reversible": "Yes, but withdrawing and re-adding the disclosure across 21 pages is the largest single visible change the site could make."
@@ -40,12 +40,12 @@
     {
      "key": "C",
      "label": "Do nothing yet",
-     "commits_to": "The current inconsistency stays live: the site says it earns from qualifying purchases while carrying no tag.",
+     "commits_to": "No tracking is claimed until account membership and the supplied tracking ID have been confirmed and the links are validated.",
      "effort": "None.",
      "reversible": "n/a"
     }
    ],
-   "recommendation": "A, if an Associates account exists or can be opened. Failing that, B is the only internally consistent option; C is the one that looks worst to a careful reader.",
+   "recommendation": "A, only after the account confirms shopnow047c-20 as its Partner Tag and the destination plus tracking report are checked. Do not append a tag to the supplied short URLs by guesswork.",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -338,7 +338,7 @@
      "ref": "Page experience and presentation"
     }
    ],
-   "recorded_choice": "Option A split: social/OG preview metadata is added in this build. Search Console property verification stays with the owner (it needs account access this session does not have).",
+   "recorded_choice": "Option A split: social/OG preview metadata is added in this build. Search Console property verification stays with the owner (it needs account access this session does not have). A static RSS 2.0 feed from the published article records was added 2026-11-17; its item dates are omitted because the source data has no verified per-article publication dates. Search Console verification and a social-preview image remain uncompleted.",
    "recorded_date_utc": "2026-11-16",
    "recorded_by": "arena/c509aba1-zone4 (delegated decision; owner session brief 2026-11-16)"
   },
@@ -1451,7 +1451,9 @@
      "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
      "ref": "Google: AI content gets no special gains; it is judged as content"
     }
-   ]
+   ],
+   "decision": "F-53 is corrected (arena/cc32105d-zone4): the identifiers move to the records that already carry them; the prose in all eight openers is rewritten to flow from the hook sentence. Renaming fields is cosmetic, so no rename. D-35's headline register is kept.",
+   "reason": "A reader-facing opener repeating a code in prose is the audit voice the redesign removed. The re-read on 2026-11-17 (data/verification-session-cc32105d.json) confirmed the corrected openers carry no figure that needs a citation. F-53 is now Corrected 2026-11-17."
   },
   {
    "id": "D-37",
@@ -1530,7 +1532,9 @@
      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
      "ref": "Google: does the site have a primary purpose or focus?"
     }
-   ]
+   ],
+   "decision": "Shop and guides lead the page, the chooser and the editorial programme second; the decision queue and every dashboard surface sit in one sidebar group and in the footer directory, so the front page reads as a storefront.",
+   "reason": "The reading order the brief asks for. Implemented on main by arena/3d2ad125-zone4's products-first shop section and footer directory; recorded here so the register matches the built page."
   },
   {
    "id": "D-39",
@@ -1570,8 +1574,8 @@
   },
   {
    "id": "D-40",
-   "question": "Where should the self-hosted analytics endpoint live, if the five defined events are ever to leave the visitor's browser?",
-   "linked_question": "Q-14, Q-17, Q-45",
+   "question": "How should the two newly added short links be handled, and how will intended products be confirmed for all five distinct links?",
+   "linked_question": "Q-45",
    "linked_suggestions": [
     "S-37"
    ],
@@ -1579,71 +1583,84 @@
    "options": [
     {
      "key": "A",
-     "label": "A small endpoint on the owner's own domain (a serverless function is enough)",
-     "commits_to": "The endpoint contract in data/pipeline.json is deployed on the owner's domain, the tracker's meta tag is filled in, and a consent notice is published first. The browser-local log stays available as the fallback.",
-     "effort": "A few hours of hosting setup plus the privacy notice.",
-     "reversible": "Yes - empty the meta tag and the tracker is local-only again."
+     "label": "Keep them out of the shop until individually confirmed",
+     "commits_to": "The three existing verified product records remain unchanged. Add a new record only after the intended product, official listing URL, Associates destination and tracking report are confirmed and documented.",
+     "effort": "Requires an authorized Associates user for each candidate.",
+     "reversible": "Yes; confirmed records can be added later."
     },
     {
      "key": "B",
-     "label": "Stay browser-local only",
-     "commits_to": "Nothing ever leaves the visitor's browser. Measurement stays per-visitor and export-only, and no aggregate figure is ever published. This is the state of the site today.",
-     "effort": "None.",
-     "reversible": "n/a"
-    },
-    {
-     "key": "C",
-     "label": "A privacy-friendly hosted analytics product",
-     "commits_to": "A third party processes the events; its privacy terms become part of the site's privacy notice. Not recommended without the D-16 privacy review.",
-     "effort": "Account and billing.",
-     "reversible": "Yes, but data leaves the site."
+     "label": "Publish the five URLs as product links without confirmation",
+     "commits_to": "The site would expose destinations and product identity that have not been verified in this pass.",
+     "effort": "Low initially, but requires correction if any destination differs from intent.",
+     "reversible": "Technically yes, but creates avoidable reader and compliance risk."
     }
    ],
-   "recommendation": "B until D-16 and Q-17 answer the privacy questions; then A. The counter is deliberately built so that no configuration change is needed to keep it local-only.",
+   "recommendation": "A. No new link is treated as invalid, but none is added to the shop until intended identity and destination are confirmed.",
    "sources": [
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Participation Requirement 6(s): no artificial or fraudulent activity"
+     "ref": "Amazon Associates Program Policies: Special Links"
     },
     {
-     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-     "ref": "FTC: disclosures travel with the claim in any medium"
+     "url": "https://link.amazon/B04G1MEwY",
+     "ref": "User-supplied URL; not independently verified in this pass."
+    },
+    {
+     "url": "https://link.amazon/B02NbDxp3",
+     "ref": "User-supplied URL; not independently verified in this pass."
+    },
+    {
+     "url": "https://link.amazon/B00hJ57DV",
+     "ref": "User-supplied URL; not independently verified in this pass."
+    },
+    {
+     "url": "https://link.amazon/B0c8moW59",
+     "ref": "User-supplied URL; not independently verified in this pass."
+    },
+    {
+     "url": "https://link.amazon/B0f3GKalj",
+     "ref": "User-supplied URL; not independently verified in this pass."
     }
    ]
   },
   {
    "id": "D-41",
-   "question": "Should the site capture readers beyond follow-by-RSS - for example an email list?",
-   "linked_question": "Q-22, Q-46",
+   "question": "Should the site remain browser-local only, or implement a first-party endpoint and reader-capture flow after a privacy and consent decision?",
+   "linked_question": "Q-46",
    "linked_suggestions": [
-    "S-39"
+    "S-38"
    ],
    "status": "Open - needs your answer",
    "options": [
     {
      "key": "A",
-     "label": "RSS and browser bookmarks only (the state today)",
-     "commits_to": "No personal data is collected at all. The RSS feed ships now and reader capture is the feed.",
-     "effort": "None - already shipped.",
-     "reversible": "n/a"
+     "label": "Keep local-only analytics and do not collect reader contact details",
+     "commits_to": "The browser-only click log remains, no server-side event history or email list is created, and conversion information comes only from authorized aggregate Associates reports if connected.",
+     "effort": "None beyond maintaining the present tracker.",
+     "reversible": "Yes; a server can be added later after review."
     },
     {
      "key": "B",
-     "label": "Add an email list with a consent notice and a privacy review first",
-     "commits_to": "A signup form, a privacy notice, a consent flow and a mailing schedule; none of it tied to the affiliate links (Participation Requirement 6(g) bars rewards for clicking).",
-     "effort": "Days, plus the privacy review (D-16).",
-     "reversible": "Yes, at the cost of reader trust if handled badly."
+     "label": "Approve a first-party endpoint and a separate explicit reader opt-in",
+     "commits_to": "Choose a host, event retention and deletion policy, consent experience and reviewed event payloads before implementation. A reported order is imported only from authorized reporting; it is not inferred from clicks.",
+     "effort": "Hosting and privacy decisions plus implementation and security review.",
+     "reversible": "Collection can be stopped; retained data still requires a deletion plan."
     }
    ],
-   "recommendation": "A for now. The feed answers the same need with no data collected; B needs the privacy answers first.",
+   "recommendation": "A until the host, data handling, consent and event payload are reviewed. If B is later chosen, keep reader capture separate from anonymous analytics and do not collect or retain unnecessary identifiers.",
    "sources": [
     {
-     "url": "https://affiliate-program.amazon.com/help/operating/policies",
-     "ref": "Participation Requirement 6(g): no incentives tied to clicking Special Links"
+     "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js",
+     "ref": "Current tracker is local-only"
     },
     {
      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
-     "ref": "FTC: any channel carrying a recommendation carries the disclosure"
+     "ref": "FTC disclosure guidance; privacy-specific legal review remains open"
+    },
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Amazon Associates reporting policies"
     }
    ]
   },
@@ -1880,7 +1897,7 @@
   {
    "date_utc": "2026-11-17",
    "decision": "D-36",
-   "choice": "Option A: the ten-row anti-slop pass runs, guarded by the fact rule. Most of it had already landed on 2026-11-16 (D-12, D-17, D-18, D-20, D-21, D-25, D-27); the remaining defect is F-53 - the ASIN and category path printed as prose in the three product openers - and those three paragraphs were rewritten in this build with fact rows, fact_ids and citations unchanged. F-52 was already corrected. Every factual claim still resolves to a sourced fact row and the build still fails without one.",
+   "choice": "F-53 is corrected: the identifiers move to the records that already carry them; the prose in all eight openers is rewritten to flow from the hook sentence. Renaming fields is cosmetic, so no rename. D-35's headline register is kept.",
    "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
    "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
   },
@@ -1894,7 +1911,7 @@
   {
    "date_utc": "2026-11-17",
    "decision": "D-38",
-   "choice": "Option A: the decision queue is published in dependency order with the five-step shortest credible launch path. The page shipped 2026-11-16 (arena/89900251-zone4, PRs #72-#77); this entry records the decision so the register agrees with the published page.",
+   "choice": "Shop and guides first, chooser and editorial second, dashboards in one sidebar group and the footer directory.",
    "recorded_by": "arena/cc32105d-zone4 under the owner's written delegation in the session brief: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' The same brief states the site 'should not read like some AI slop website like it looks like now'.",
    "evidence": "Owner's session brief of 2026-11-17 (the not-slop and finish-all-tasks instructions), the options and recommendation already on the decision card, and the recorded work of sessions arena/c509aba1-zone4 and arena/89900251-zone4 in COORDINATION.md."
   }

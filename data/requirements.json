@@ -240,8 +240,8 @@
    "area": "Tracking",
    "requirement": "Track clicks and conversions.",
    "status": "Delivered (partial)",
-   "delivered": "A first-party click counter is published on the Analytics page and loads on every page. It records the five defined events (product-link click, chooser run, chooser route, guide view, in-page call to action) plus one event explicitly labelled as a test, and exports the log as JSON or CSV. It starts at zero, sends nothing to any server while the endpoint meta tag is empty (F-56), and never estimates a figure, so it does not conflict with Section 6(s) on artificial clicks. The campaign ledger is defined and empty (data/campaign-ledger.json).",
-   "blocker": "Conversion and revenue attribution is not built and no click, conversion or revenue figure is published. Click and conversion reporting is produced by Amazon, not by this site: Commission Income Statement Section 6 states that Amazon will use commercially reasonable efforts to track Qualifying Purchases and to create and distribute the reports. No Associates account or reporting feed is connected, and the supplied links carry no 'tag=' parameter, so a locally recorded click cannot yet be reconciled against Amazon reporting (F-03, F-19). The self-hosted endpoint cannot run on GitHub Pages and waits on the hosting decision (F-56, D-40, Q-45).",
+   "delivered": "A first-party click counter is published on the Analytics page and loads on every page (docs/tracker.js). The measurement layer (docs/measure.js) records five defined events - page view, outbound click, guide read to 75%, category click and feed click - and sends them to a self-hosted endpoint only once one is configured (docs/measurement.html documents the contract; analytics-endpoint/ holds the reference server). While no endpoint is configured the script is inert and sends nothing (F-59). The campaign ledger is defined and empty (data/ledger.json).",
+   "blocker": "Conversion and revenue attribution is not built and no click, conversion or revenue figure is published. The endpoint is built but not hosted (F-59); hosting, retention and consent are owner decisions (D-41). Amazon reporting is not connected and the supplied links carry no 'tag=' parameter, so a locally recorded click cannot yet be reconciled against Amazon reporting (F-03, F-19).",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies"
    ],
@@ -256,7 +256,7 @@
    "requirement": "Continuously optimize campaigns to maximize affiliate revenue.",
    "status": "Not built - needs access",
    "delivered": "",
-   "blocker": "Optimisation needs measured data first: no Associates reporting is connected and the campaign ledger is deliberately empty (Q-48). The evidence-based iteration rule (Priority 4) forbids a conversion score or revenue forecast, and none is published.",
+   "blocker": "Optimisation needs measured data first: no Associates reporting is connected, the endpoint is not hosted (F-59) and the campaign ledger is deliberately empty (data/ledger.json; Q-49). The evidence-based iteration rule (Priority 4) forbids a conversion score or revenue forecast, and none is published.",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies"
    ],
@@ -341,7 +341,7 @@
    "area": "Site",
    "requirement": "Live site with a clean landing page and subpages organized by category.",
    "status": "Delivered",
-   "delivered": "Twenty-eight generated pages: the publication front page, executive summary, requirements, all-products catalogue (with the product-intent confirmation record), three category pages, combined marketing page, articles hub, eight individual article pages, automation/tracking, analysis, suggestions, open questions, decision log, verification, policy compliance, analytics (five defined events, campaign ledger, endpoint contract), Flagged for Review and sources. GitHub Pages serves the site from main, with a generated sitemap, robots.txt and RSS feed.",
+   "delivered": "Thirty-four generated pages: the publication front page (shop and guides first), executive summary, requirements, all-products catalogue (with the product-intent confirmation record), three category pages, combined marketing page, articles hub, seven article pages, the guides hub and four published question-shaped guides, product-intent record page, measurement and ledger page, automation/tracking, analysis, suggestions, open questions, decision log, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site, with a generated sitemap, robots.txt and RSS feed.",
    "blocker": "",
    "sources": [
     "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"
@@ -455,7 +455,7 @@
    "area": "Decision support",
    "requirement": "Provide a clear list of questions, information and answers that must be addressed before any decision can reasonably be made, based on what is already known and what is not.",
    "status": "Delivered (partial)",
-   "delivered": "The questions register: 48 rows split into what is already known from an official source or a recorded decision, what is missing and who can supply it. The 2026-11-17 pass added the measurement and privacy gaps the analytics work uncovered (Q-45 to Q-48).",
+   "delivered": "The questions register: 49 rows split into what is already known from an official source or a recorded decision, what is missing and who can supply it. The 2026-11-17 passes added the measurement, privacy and reader-capture gaps (Q-45 to Q-49).",
    "blocker": "The register cannot answer twelve of its own rows: the Associates tag, the per-ASIN commission category and API eligibility need the owner's account, and the collection and AI-content questions need counsel. Those are listed as unknown rather than guessed.",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/agreement",
@@ -485,7 +485,7 @@
    "area": "Decision support",
    "requirement": "Create a section dedicated to suggestions, so someone can review them and choose the best path before implementing any changes.",
    "status": "Delivered (partial)",
-   "delivered": "The suggestions register: 41 costed paths, each with the problem, the proposal, the cost, the risk, the check that would prove it worked, its priority, the decision it sits behind and its status (shipped, staged, awaiting the owner, or refused by policy), plus a decision queue that records which option was actually taken.",
+   "delivered": "The suggestions register: 40 costed paths, each with the problem, the proposal, the cost, the risk, the check that would prove it worked, its priority, the decision it sits behind and its status (shipped, staged, awaiting the owner, or refused by policy), plus a decision queue that records which option was actually taken.",
    "blocker": "Nothing on the board is implemented except the two items this session shipped for review (the redesign and the navigation split, S-13 and S-17), because the brief asks for a path to be chosen before changes are made. The owner's sign-off on those two is open (F-46).",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies",

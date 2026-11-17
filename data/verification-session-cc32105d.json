@@ -127,7 +127,7 @@
    "observed": "Read live: an ASIN is 'a unique 10-character alphanumeric code assigned to every product listed in the Amazon store', typically starting 'B0', and 'the ASIN appears after /dp/' in the product-detail URL. The three submitted link codes (9 characters each) therefore are not ASINs; the observed identifiers (10 characters, after /dp/) are.",
    "result": "match (identifier rule for F-55)",
    "flags": [
-    "F-55"
+    "F-67"
    ]
   },
   {
@@ -137,7 +137,7 @@
    "observed": "Returned Amazon's 'We can't find the page' response on 2026-11-17. Not relied on; the published ASIN guide (R-13) is the cited source instead.",
    "result": "unreadable (method note)",
    "flags": [
-    "F-55"
+    "F-67"
    ]
   },
   {

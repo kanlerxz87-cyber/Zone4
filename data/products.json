@@ -79,52 +79,7 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
-      "intent_record": {
-        "submitted_link": "https://link.amazon/B04G1MEwY",
-        "submitted_code": "B04G1MEwY",
-        "intended_asin": "B0CDY277D3",
-        "intended_asin_status": "Provisional. It matches the listing the submitted link resolved to on every dated read from 2026-11-14 through 2026-11-17. The owner's confirmation that these are the intended products is still open (D-13, Q-09); the confirmation is a fact only the owner has.",
-        "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
-        "confirmation_date_utc": "2026-11-17",
-        "confirmation_source": "Repeated dated resolution of the submitted link, recorded in the verification-session records named under observed_redirect_targets. No field of this record is merged with those observations.",
-        "observed_redirect_targets": [
-          {
-            "date_utc": "2026-11-14",
-            "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
-            "tag_parameter_observed": false,
-            "source": "data/reverification-2026-11-14.json and data/verification-session-1eb689b8.json (first resolution of the supplied links)"
-          },
-          {
-            "date_utc": "2026-11-15",
-            "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-d8564cd0.json and data/verification-session-f87cc71f.json"
-          },
-          {
-            "date_utc": "2026-11-16",
-            "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-4c552c78.json, data/verification-session-c42349c3.json, data/verification-session-c509aba1.json, data/verification-session-89900251.json"
-          },
-          {
-            "date_utc": "2026-11-17",
-            "resolved_url": "https://www.amazon.com/dp/B0CDY277D3",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-cc32105d.json"
-          }
-        ],
-        "identifier_check": {
-          "submitted_code": "B04G1MEwY",
-          "submitted_code_length": 9,
-          "observed_asin": "B0CDY277D3",
-          "observed_asin_length": 10,
-          "match": false,
-          "note": "The submitted code is not the ASIN of the listing it resolves to: the code is 9 characters while the listing's ASIN is 10. Amazon's published ASIN guide (sell.amazon.com, read 2026-11-17) defines an ASIN as a unique 10-character alphanumeric code that appears after /dp/ in a product-detail URL - which is exactly where the observed identifiers were found. The submitted codes therefore cannot be ASINs: they are link codes. Intent and observation are kept in separate fields (F-55).",
-          "format_source": "https://sell.amazon.com/blog/what-is-an-asin",
-          "format_source_ref": "Amazon's published ASIN guide: 'a unique 10-character alphanumeric code'; 'the ASIN appears after /dp/'. Read 2026-11-17."
-        }
-      }
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
     },
     {
       "id": "P2",
@@ -182,52 +137,7 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
-      "intent_record": {
-        "submitted_link": "https://link.amazon/B02NbDxp3",
-        "submitted_code": "B02NbDxp3",
-        "intended_asin": "B09B7SB46R",
-        "intended_asin_status": "Provisional. It matches the listing the submitted link resolved to on every dated read from 2026-11-14 through 2026-11-17. The owner's confirmation that these are the intended products is still open (D-13, Q-09); the confirmation is a fact only the owner has.",
-        "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
-        "confirmation_date_utc": "2026-11-17",
-        "confirmation_source": "Repeated dated resolution of the submitted link, recorded in the verification-session records named under observed_redirect_targets. No field of this record is merged with those observations.",
-        "observed_redirect_targets": [
-          {
-            "date_utc": "2026-11-14",
-            "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
-            "tag_parameter_observed": false,
-            "source": "data/reverification-2026-11-14.json and data/verification-session-1eb689b8.json (first resolution of the supplied links)"
-          },
-          {
-            "date_utc": "2026-11-15",
-            "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-d8564cd0.json and data/verification-session-f87cc71f.json"
-          },
-          {
-            "date_utc": "2026-11-16",
-            "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-4c552c78.json, data/verification-session-c42349c3.json, data/verification-session-c509aba1.json, data/verification-session-89900251.json"
-          },
-          {
-            "date_utc": "2026-11-17",
-            "resolved_url": "https://www.amazon.com/dp/B09B7SB46R",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-cc32105d.json"
-          }
-        ],
-        "identifier_check": {
-          "submitted_code": "B02NbDxp3",
-          "submitted_code_length": 9,
-          "observed_asin": "B09B7SB46R",
-          "observed_asin_length": 10,
-          "match": false,
-          "note": "The submitted code is not the ASIN of the listing it resolves to: the code is 9 characters while the listing's ASIN is 10. Amazon's published ASIN guide (sell.amazon.com, read 2026-11-17) defines an ASIN as a unique 10-character alphanumeric code that appears after /dp/ in a product-detail URL - which is exactly where the observed identifiers were found. The submitted codes therefore cannot be ASINs: they are link codes. Intent and observation are kept in separate fields (F-55).",
-          "format_source": "https://sell.amazon.com/blog/what-is-an-asin",
-          "format_source_ref": "Amazon's published ASIN guide: 'a unique 10-character alphanumeric code'; 'the ASIN appears after /dp/'. Read 2026-11-17."
-        }
-      }
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
     },
     {
       "id": "P3",
@@ -283,52 +193,7 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
-      "intent_record": {
-        "submitted_link": "https://link.amazon/B00hJ57DV",
-        "submitted_code": "B00hJ57DV",
-        "intended_asin": "B08DKYBTPH",
-        "intended_asin_status": "Provisional. It matches the listing the submitted link resolved to on every dated read from 2026-11-14 through 2026-11-17. The owner's confirmation that these are the intended products is still open (D-13, Q-09); the confirmation is a fact only the owner has.",
-        "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
-        "confirmation_date_utc": "2026-11-17",
-        "confirmation_source": "Repeated dated resolution of the submitted link, recorded in the verification-session records named under observed_redirect_targets. No field of this record is merged with those observations.",
-        "observed_redirect_targets": [
-          {
-            "date_utc": "2026-11-14",
-            "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?th=1&psc=1",
-            "tag_parameter_observed": false,
-            "source": "data/reverification-2026-11-14.json and data/verification-session-1eb689b8.json (first resolution of the supplied links)"
-          },
-          {
-            "date_utc": "2026-11-15",
-            "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?th=1&psc=1",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-d8564cd0.json and data/verification-session-f87cc71f.json"
-          },
-          {
-            "date_utc": "2026-11-16",
-            "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?th=1&psc=1",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-4c552c78.json, data/verification-session-c42349c3.json, data/verification-session-c509aba1.json, data/verification-session-89900251.json"
-          },
-          {
-            "date_utc": "2026-11-17",
-            "resolved_url": "https://www.amazon.com/dp/B08DKYBTPH?th=1&psc=1",
-            "tag_parameter_observed": false,
-            "source": "data/verification-session-cc32105d.json"
-          }
-        ],
-        "identifier_check": {
-          "submitted_code": "B00hJ57DV",
-          "submitted_code_length": 9,
-          "observed_asin": "B08DKYBTPH",
-          "observed_asin_length": 10,
-          "match": false,
-          "note": "The submitted code is not the ASIN of the listing it resolves to: the code is 9 characters while the listing's ASIN is 10. Amazon's published ASIN guide (sell.amazon.com, read 2026-11-17) defines an ASIN as a unique 10-character alphanumeric code that appears after /dp/ in a product-detail URL - which is exactly where the observed identifiers were found. The submitted codes therefore cannot be ASINs: they are link codes. Intent and observation are kept in separate fields (F-55).",
-          "format_source": "https://sell.amazon.com/blog/what-is-an-asin",
-          "format_source_ref": "Amazon's published ASIN guide: 'a unique 10-character alphanumeric code'; 'the ASIN appears after /dp/'. Read 2026-11-17."
-        }
-      }
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
     }
   ]
 }

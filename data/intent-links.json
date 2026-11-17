@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "description": "Product-intent confirmation record. For each submitted link: the intended ASIN and the official listing URL that the site publishes, the date and source of that confirmation, and the observed redirect target recorded separately. The two fields are never merged. Amazon defines the ASIN as the checkable product identifier; the short-link path code is not an ASIN.",
+    "tracking_id": "shopnow047c-20",
+    "tracking_id_source": "Supplied by the site owner on 2026-11-17 in the brief. Format check: Amazon's help page at https://www.amazon.com/b?ie=UTF8&node=51812349011 (read 2026-11-17) states that Amazon's software adds '-20' to Store IDs and that a US Store ID ends in -20. The ID has not been verified as active in Associates Central.",
+    "checked_utc": "2026-11-17",
+    "method": "fetch of each short link (follow redirects) and of each official listing page; ASIN read from the final URL path; title and category breadcrumb read from the page. Not verified: any Associates reporting, any commission category (F-01).",
+    "asin_format_source": "Amazon's published ASIN guide: https://sell.amazon.com/blog/what-is-an-asin (read 2026-11-17, arena/cc32105d-zone4): an ASIN is a unique 10-character alphanumeric code that appears after /dp/ in the product URL and typically starts 'B0'. The submitted link path codes are nine characters and appear in the short-link path, so they are not ASINs (flag F-67)."
+  },
+  "links": [
+    {
+      "product_id": "P1",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "link_path_code": "B04G1MEwY",
+      "intended_asin": "B0CDY277D3",
+      "intent_basis": "ASIN stored in data/products.json (P1), read from the official listing page on 2026-11-14 and re-read 2026-11-16.",
+      "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "confirmation_date_utc": "2026-11-17",
+      "confirmation_source": "https://www.amazon.com/dp/B0CDY277D3 (page title re-read 2026-11-17; matches data/products.json name_listing)",
+      "observed_redirect": {
+        "date_utc": "2026-11-17",
+        "final_url_without_query": "https://www.amazon.com/dp/B0CDY277D3",
+        "observed_asin": "B0CDY277D3",
+        "observed_query_parameters": [
+          "lv",
+          "btn_type",
+          "gaOptInStatus",
+          "btn_ref",
+          "channelId",
+          "plpRedirect"
+        ],
+        "note": "Read by fetch on 2026-11-17. The same short link was read on 2026-11-16 (data/verification-session-4c552c78.json) with the same ASIN."
+      },
+      "tracking_id_candidate_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "published_outbound_url": "https://link.amazon/B04G1MEwY",
+      "special_link_status": "Not validated. The short link stays as the published link. The tag-bearing candidate (engine_candidate_url) passed a destination check only; attribution is unverified until the owner's Associates Central test (F-58).",
+      "intent_match": true,
+      "engine_candidate_url": {
+        "url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "built_by": "engine/links.py build_link(asin='B0CDY277D3', host='www.amazon.com', tag='shopnow047c-20'), run 2026-11-17",
+        "destination_test": "fetch_page on this URL, 2026-11-17: resolved to https://www.amazon.com/dp/B0CDY277D3 (listing title matched).",
+        "attribution_test": "NOT RUN. Not possible from this sandbox: the tag is credited only through Associates Central after enrollment is confirmed (F-57), and the Associates-generated Special Link test is F-58.",
+        "status": "Unverified candidate. Not published. This is a tag-bearing product URL built by the engine, not a Special Link generated in Associates Central."
+      }
+    },
+    {
+      "product_id": "P2",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "link_path_code": "B02NbDxp3",
+      "intended_asin": "B09B7SB46R",
+      "intent_basis": "ASIN stored in data/products.json (P2), read from the official listing page on 2026-11-14.",
+      "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "confirmation_date_utc": "2026-11-17",
+      "confirmation_source": "https://www.amazon.com/dp/B09B7SB46R (page title re-read 2026-11-17; the second title segment differs from data/products.json name_listing, see F-66; earlier 2026-11-16 read per data/verification-session-4c552c78.json, not re-read in this session beyond the title)",
+      "observed_redirect": {
+        "date_utc": "2026-11-16",
+        "final_url_without_query": "https://www.amazon.com/dp/B09B7SB46R",
+        "observed_asin": "B09B7SB46R",
+        "observed_query_parameters": [],
+        "note": "Recorded 2026-11-16 by session arena/4c552c78-zone4. Not re-read on 2026-11-17."
+      },
+      "tracking_id_candidate_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "published_outbound_url": "https://link.amazon/B02NbDxp3",
+      "special_link_status": "Not validated. Publish the short link as supplied. Do not publish the candidate tagged URL until the owner's one-link test in Associates Central confirms the destination and the tracking report (F-58).",
+      "intent_match": true
+    },
+    {
+      "product_id": "P3",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "link_path_code": "B00hJ57DV",
+      "intended_asin": "B08DKYBTPH",
+      "intent_basis": "ASIN stored in data/products.json (P3), read from the official listing page on 2026-11-14.",
+      "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "confirmation_date_utc": "2026-11-17",
+      "confirmation_source": "https://www.amazon.com/dp/B08DKYBTPH (page title re-read 2026-11-17; matches data/products.json name_listing)",
+      "observed_redirect": {
+        "date_utc": "2026-11-16",
+        "final_url_without_query": "https://www.amazon.com/dp/B08DKYBTPH",
+        "observed_asin": "B08DKYBTPH",
+        "observed_query_parameters": [],
+        "note": "Recorded 2026-11-16 by session arena/4c552c78-zone4. Not re-read on 2026-11-17."
+      },
+      "tracking_id_candidate_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "published_outbound_url": "https://link.amazon/B00hJ57DV",
+      "special_link_status": "Not validated. Publish the short link as supplied. Do not publish the candidate tagged URL until the owner's one-link test in Associates Central confirms the destination and the tracking report (F-58).",
+      "intent_match": true
+    },
+    {
+      "product_id": "P4",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "link_path_code": "B0c8moW59",
+      "intended_asin": "B0DHZTCNR5",
+      "intent_basis": "No ASIN was supplied with this link. The intended ASIN is provisionally the listing the short link opens to, recorded as provisional until the owner confirms it. Decision D-13 covers only the three original links, so this is tracked under F-56.",
+      "official_listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "confirmation_date_utc": "2026-11-17",
+      "confirmation_source": "https://www.amazon.com/dp/B0DHZTCNR5 (title and category breadcrumb read 2026-11-17)",
+      "observed_redirect": {
+        "date_utc": "2026-11-17",
+        "final_url_without_query": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "observed_asin": "B0DHZTCNR5",
+        "observed_query_parameters": [
+          "lv",
+          "btn_type",
+          "gaOptInStatus",
+          "_encoding",
+          "sp_csd",
+          "btn_ref",
+          "channelId",
+          "plpRedirect"
+        ],
+        "note": "Read on 2026-11-17 and again on the same day with the same ASIN. Listing is a meat thermometer, outside the air fryer scope of the original brief (F-56)."
+      },
+      "tracking_id_candidate_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20",
+      "published_outbound_url": null,
+      "special_link_status": "Not validated and held. Do not publish the short link or the candidate tagged URL until F-55 is resolved and the owner's one-link test (F-58) passes.",
+      "intent_match": true,
+      "publication_status": "Held (F-55 on main): not published as a link or product card until identity is confirmed in the enrolled Associates workflow."
+    },
+    {
+      "product_id": "P5",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "link_path_code": "B0f3GKalj",
+      "intended_asin": "B0DZFD6R9Z",
+      "intent_basis": "No ASIN was supplied with this link. The intended ASIN is provisionally the listing the short link opens to, recorded as provisional until the owner confirms it. Decision D-13 covers only the three original links, so this is tracked under F-56.",
+      "official_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "confirmation_date_utc": "2026-11-17",
+      "confirmation_source": "https://www.amazon.com/dp/B0DZFD6R9Z (title and category breadcrumb read 2026-11-17)",
+      "observed_redirect": {
+        "date_utc": "2026-11-17",
+        "final_url_without_query": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "observed_asin": "B0DZFD6R9Z",
+        "observed_query_parameters": [
+          "lv",
+          "sbo",
+          "btn_type",
+          "gaOptInStatus",
+          "language",
+          "btn_ref",
+          "channelId",
+          "plpRedirect",
+          "th"
+        ],
+        "note": "Read on 2026-11-17. Listing is a meat thermometer, outside the air fryer scope of the original brief (F-56)."
+      },
+      "tracking_id_candidate_url": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20",
+      "published_outbound_url": null,
+      "special_link_status": "Not validated and held. Do not publish the short link or the candidate tagged URL until F-55 is resolved and the owner's one-link test (F-58) passes.",
+      "intent_match": true,
+      "publication_status": "Held (F-55 on main): not published as a link or product card until identity is confirmed in the enrolled Associates workflow."
+    }
+  ]
+}

@@ -10,6 +10,10 @@ import html
 import json
 import pathlib
 import re
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import build_extras  # noqa: E402  (publication extras; same pipeline writes docs/)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -40,8 +44,6 @@ FLAG_BY_ID = {f["id"]: f for f in FLAGS}
 CONTENT = load("content.json")
 MARKETING = load("marketing.json")
 PIPELINE = load("pipeline.json")
-# The campaign ledger: empty by design, defined so measured rows land in one shape.
-LEDGER_DOC = load("campaign-ledger.json")
 REQUIREMENTS_DOC = load("requirements.json")
 REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
 # Decision-support layer: the backlog a reviewer chooses from, the questions that
@@ -73,9 +75,10 @@ RECHECKED = CONTENT.get("rechecked_utc", OBSERVED)
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 
 NAV = [
-    ("index.html", "Dashboard", "Overview"),
+    ("index.html", "Home", "Overview"),
     ("executive-summary.html", "Executive summary", "Overview"),
     ("products.html", "All products", "Overview"),
+    ("guides/index.html", "Guides", "Overview"),
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
@@ -88,20 +91,17 @@ NAV = [
     ("design.html", "Design brief", "Decide"),
     ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
+    ("links.html", "Product-intent record", "Governance"),
+    ("measurement.html", "Measurement & ledger", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
     ("analytics.html", "Analytics", "Governance"),
     ("flagged.html", "Flagged for review", "Governance"),
     ("sources.html", "Sources", "Governance"),
 ]
 NAV_LABEL = {target: label for target, label, _group in NAV}
-NAV_ORDER = [
-    ("Overview", [t for t, _l, g in NAV if g == "Overview"]),
-    ("Categories", [t for t, _l, g in NAV if g == "Categories"]),
-    ("Content", [t for t, _l, g in NAV if g == "Content"]),
-    ("Research", [t for t, _l, g in NAV if g == "Research"]),
-    ("Decide", [t for t, _l, g in NAV if g == "Decide"]),
-    ("Governance", [t for t, _l, g in NAV if g == "Governance"]),
-]
+# One flat navigation group keeps the storefront easy to scan. The same page
+# directory is repeated in the footer for readers who reach the end of an article.
+NAV_ORDER = [("Explore", [t for t, _label, _group in NAV])]
 
 # --- Article pages -------------------------------------------------------
 # Each marketing article in data/marketing.json is published as its own page,
@@ -161,7 +161,11 @@ ARTICLE_BY_PATH = {path: a for a, path in ARTICLE_PATHS}
 for _a, _path in ARTICLE_PATHS:
     NAV_LABEL[_path] = article_label(_a)
 NAV_LABEL[ARTICLES_HUB] = "Articles hub"
-NAV_ORDER.insert(3, ("Articles", [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS]))
+GUIDE_PATHS = []
+for _g in build_extras.published_guides():  # held guides are not listed (see scripts/build_extras.py)
+    GUIDE_PATHS.append("guides/" + _g["slug"] + ".html")
+    NAV_LABEL["guides/" + _g["slug"] + ".html"] = _g["h1"]
+NAV_ORDER[0] = ("Explore", NAV_ORDER[0][1] + GUIDE_PATHS + [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS])
 
 
 def esc(value) -> str:
@@ -218,7 +222,15 @@ def href(current: Page, target: str, text: str | None = None, extra: str = "") -
     return f'<a href="{esc(current.rel(target))}"{extra}>{label}</a>'
 
 
+def link_rel(url: str, rel: str = "noopener noreferrer") -> str:
+    """rel for an outbound link: Amazon product pages are always sponsored (2026-11-17)."""
+    if ("amazon.com/dp/" in url or url.startswith("https://link.amazon/")) and "sponsored" not in rel.split():
+        return "sponsored " + rel
+    return rel
+
+
 def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
+    rel = link_rel(url, rel)
     label = esc(text if text is not None else url)
     return f'<a href="{esc(url)}" rel="{esc(rel)}"{extra}>{label}</a>'
 
@@ -255,7 +267,7 @@ def shop_link(p: dict) -> str:
     # rel="sponsored" marks the affiliate link for search engines (decision D-05,
     # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
     return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="shop_click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
+               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
 
 
@@ -541,7 +553,7 @@ def marketing_article(current: Page, article: dict) -> str:
                 continue
             sources = fact.get("source_urls") or [fact["source_url"]]
             citations.extend(
-                f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
+                f'<a class="cite" href="{esc(url)}" rel="{esc(link_rel(url))}">{esc(fid)}</a>'
                 for url in sources
             )
         cites = "".join(citations)
@@ -562,7 +574,7 @@ def marketing_article(current: Page, article: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in article["compliance_notes"])
     cta = article["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop" data-track="cta_click" data-track-target="' + esc(cta["link_url"]) + '"', rel="sponsored noopener noreferrer")
+    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure sits in the same paragraph as the affiliate link, so it is
     # unmistakable and adjacent rather than separated by a line break.
     cta_html = (
@@ -710,6 +722,11 @@ def chooser_section(current: Page) -> str:
     )
 
 
+def shop_section_hook(current: Page) -> str:
+    """Products first on the landing page (see scripts/build_extras.py)."""
+    return build_extras.shop_section(sys.modules[__name__], current)
+
+
 def page_index(current: Page) -> str:
     open_flags = [f for f in FLAGS if flag_group(f["status"]) == "Needs your decision"]
     # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
@@ -769,8 +786,9 @@ def page_index(current: Page) -> str:
         (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
     )
     return (
-        '<div class="mhero">'
-        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 re-checked {esc(RECHECKED)} \u00b7 every table row links to its source</span>'
+        shop_section_hook(current)
+        + '<div class="mhero">'
+        '<span class="badge">A practical guide to three very different countertop formats</span>'
         "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
         '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
         'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
@@ -793,19 +811,20 @@ def page_index(current: Page) -> str:
         "every fact it states is a row in a table that links back to that page.</p>"
         f'<div class="agrid">{trending}</div></section>'
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
+        + decision_queue_section(current)
         + '<section><h2>Products at a glance</h2>'
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C\u2026, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + commission_category_note()
         + '<p class="small muted">Every row links to its official product page as the source. Short links are the links you '
         "supplied. Competitor ASINs come from the also-viewed carousel and change between page loads (F-29).</p></section>"
-        + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
-        + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
         + '<section><h2>What this site deliberately does not publish</h2>'
         '<p class="section-lead">These gaps are the point. They are stated here rather than buried, and each one names the '
         'official rule or the flag that explains it.</p>'
         '<ul class="bullets">' + withheld + "</ul>"
         + f'<p class="small muted">Full list: {href(current, "flagged.html", "Flagged for Review")}.</p></section>'
+        + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
+        + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
         + '<p class="muted small">'
         + "Product records observed " + esc(OBSERVED) + " (UTC); supplied links and cited policy pages re-read "
         + esc(RECHECKED) + " (UTC). Verification scope and method: "
@@ -847,8 +866,7 @@ def page_articles_index(current: Page) -> str:
          ext(P2_URL, "Format and footprint figures; price rule from the Programme Policies")],
         ["Hi-Fry, Sync Finish, Shake Reminder: An Air Fryer Feature Glossary", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
          ext(P3_URL, "Named features across the three listings")],
-        ["The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy", "Written 2026-11-17",
-         href(current, "articles/first-air-fryer-checklist-seven-numbers.html", "Open the guide"),
+        ["The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
          ext(P1_URL, "The verified field set: capacity, dimensions, range, presets")],
         ["Two Baskets or One? The Sync-Finish Question, Answered With Specs", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
          ext(P1_URL, "Dual-basket format fields (Sync Finish, 2 x 3QT)")],
@@ -895,7 +913,7 @@ def page_article(current: Page, a: dict) -> str:
                 continue
             for url in (fact.get("source_urls") or [fact.get("source_url")]):
                 if url:
-                    cites += f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
+                    cites += f'<a class="cite" href="{esc(url)}" rel="{esc(link_rel(url))}">{esc(fid)}</a>'
         body_html.append(f'{sub}<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
@@ -904,7 +922,7 @@ def page_article(current: Page, a: dict) -> str:
     )
     notes_html = "".join(f"<li>{esc(n)}</li>" for n in a["compliance_notes"])
     cta = a["cta"]
-    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop" data-track="cta_click" data-track-target="' + esc(cta["link_url"]) + '"', rel="sponsored noopener noreferrer")
+    cta_button = ext(cta["link_url"], cta["link_label"], ' class="shop"', rel="sponsored noopener noreferrer")
     # The disclosure and a plain-language paid-link label sit in the same
     # paragraph as the affiliate link, not below it, so both are adjacent to the
     # link they qualify. qa/audit_site.py fails the build if either is missing.
@@ -1040,51 +1058,6 @@ def counter_space_rows() -> list[list[str]]:
     return rows
 
 
-def product_intent_section(current: Page) -> str:
-    """The product-intent confirmation record (owner brief, 2026-11-17).
-
-    For each submitted link: the intended ASIN, the official listing URL, the
-    confirmation date and the source are one block; the observed redirect
-    targets are dated observations in a separate block. The two are never
-    merged (F-55).
-    """
-    rows = []
-    obs_rows = []
-    for p in PRODUCTS:
-        ir = p["intent_record"]
-        rows.append([
-            esc(p["id"]),
-            ext(ir["submitted_link"], ir["submitted_link"]),
-            f'<code>{esc(ir["submitted_code"])}</code>',
-            ext(ir["official_listing_url"], ir["intended_asin"]) + ' <span class="small muted">(provisional)</span>',
-            ext(ir["official_listing_url"], ir["official_listing_url"]),
-            esc(ir["confirmation_date_utc"]),
-            esc(ir["confirmation_source"]),
-        ])
-        for o in ir["observed_redirect_targets"]:
-            obs_rows.append([
-                esc(p["id"]),
-                esc(o["date_utc"]),
-                ext(o["resolved_url"], o["resolved_url"]),
-                esc("No" if not o["tag_parameter_observed"] else "Yes"),
-                esc(o["source"]),
-            ])
-    note = PRODUCTS[0]["intent_record"]["identifier_check"]["note"]
-    return (
-        '<section><h2>Product-intent confirmation record</h2>'
-        '<p class="section-lead">What each submitted link is meant to promote, kept strictly apart from where the link '
-        'was seen to go. The intended ASIN is provisional until the owner confirms the products '
-        + href(current, "decisions.html", "(decision D-13)") + '; the observed targets are dated readings, not '
-        'intent.</p>'
-        + table(["Product", "Submitted link (as supplied)", "Submitted code", "Intended ASIN", "Official listing URL",
-                 "Confirmation date (UTC)", "Confirmation source"], rows, "intent")
-        + '<h3>Observed redirect targets (separate field, never merged with intent)</h3>'
-        + table(["Product", "Date (UTC)", "Observed redirect target", "tag= parameter seen?", "Record"],
-                obs_rows, "intent")
-        + f'<p class="note">{esc(note)} ' + flag_chip(current, "F-55") + '</p></section>'
-    )
-
-
 def page_products(current: Page) -> str:
     return (
         hero("All products",
@@ -1094,6 +1067,7 @@ def page_products(current: Page) -> str:
          "quoted, with its source; all trend data remains unverified and blank.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
+        + build_extras.extra_products_section(sys.modules[__name__], current)
         + commission_category_note()
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
@@ -1108,7 +1082,6 @@ def page_products(current: Page) -> str:
         'in liters, the other two in quarts, so read the ratio within each row rather than ranking the rows against each '
         'other. Depth is the first dimension as listed; the unit&rsquo;s own footprint also includes its width and height '
         'on the rows above.</p></section>'
-        + product_intent_section(current)
     )
 
 
@@ -1257,51 +1230,11 @@ def page_sources(current: Page) -> str:
     )
 
 
-def measurement_sections(current: Page) -> str:
-    """The five defined events, the empty campaign ledger and the endpoint contract."""
-    ev_rows = []
-    for ev in PIPELINE["events"]:
-        if ev["id"] == "EV-T":
-            continue
-        ev_rows.append([
-            esc(ev["id"]), f'<code>{esc(ev["event"])}</code>', esc(ev["definition"]),
-            esc(ev["how_recorded"]), esc(ev["why_it_matters"]),
-            ext(ev["source_url"], ev["source_ref"]),
-        ])
-    ledger_meta = LEDGER_DOC["_meta"]
-    col_rows = [[esc(c["field"]), esc(c["meaning"]),
-                 ext("https://affiliate-program.amazon.com/help/operating/policies",
-                     "Commission Income Statement, Sections 1 to 3")]
-                for c in ledger_meta["columns"]]
-    ep = PIPELINE["analytics_endpoint"]
-    ep_items = "".join(f"<li>{esc(x)}</li>" for x in ep["privacy_rules"])
-    return (
-        '<section><h2>The five defined events</h2>'
-        '<p class="section-lead">Measurement is defined before it is collected. These five events are all the tracker '
-        'records; anything else is out of scope by definition. One labelled test event exists for the mechanism check '
-        'and is never counted as a product click.</p>'
-        + table(["ID", "Event", "What counts", "How it is recorded", "Why it is measured",
-                 "The rule it sits under (official)"], ev_rows, "events")
-        + "</section>"
-        '<section><h2>The campaign ledger (empty by design)</h2>'
-        '<p class="section-lead">' + esc(ledger_meta["description"]) + "</p>"
-        + table(["Column", "What it holds", "Source of the figures (official)"], col_rows, "ledger")
-        + f'<p class="note"><strong>Rows in the ledger:</strong> {len(LEDGER_DOC["rows"])} &mdash; '
-        + esc(ledger_meta["why_empty"]) + " " + esc(ledger_meta["provenance_rule"]) + "</p></section>"
-        '<section><h2>The self-hosted analytics endpoint</h2>'
-        f'<p>{esc(ep["status"])}</p>'
-        f'<p>{esc(ep["how_it_will_work"])}</p>'
-        f'<p class="small"><strong>{esc(ep["method"])}</strong> &mdash; fields: {esc(", ".join(ep["fields"]))}</p>'
-        '<ul class="bullets">' + ep_items + "</ul>"
-        + f'<p class="small">{ext(ep["source_url"], ep["source_ref"])}</p></section>'
-    )
-
-
 def page_analytics(current: Page) -> str:
     """Local-only first-party click log. Records real clicks in the visitor's own browser."""
     rows = [
-        ("Product-link clicks (EV-1)", "0", "Real product-link clicks recorded in this browser"),
-        ("All local events", "0", "The five defined events plus explicitly labelled test events"),
+        ("Clicks on tracked links", "0", "Real user clicks recorded in this browser"),
+        ("All local events", "0", "Clicks plus explicitly labelled test events"),
         ("Conversions / orders", "\u2014", "Requires Associates reporting (not connected). See " + "F-19"),
         ("Commission earned", "\u2014", "Requires Associates reporting (not connected). See F-01"),
         ("Last event (UTC)", "\u2014", "Timestamp of the most recent local event"),
@@ -1318,11 +1251,9 @@ def page_analytics(current: Page) -> str:
     )
     return (
         '<header class="hero"><h1>Clicks &amp; conversions</h1>'
-        '<p class="lead">A first-party click counter for the five defined events - product clicks, chooser runs, chooser routes, '
-        'guide views and in-page calls to action. It starts at zero, records only real visitor actions plus one clearly labelled '
-        'test event, and never invents a figure. Everything stays in this browser until an endpoint is configured (F-56). '
-        'Authoritative click, order and commission numbers come from the official Associates reporting and are not connected '
-        'here.</p></header>'
+        '<p class="lead">A first-party, local-only click tracker. It starts at zero, records only real clicks on tracked links plus one clearly '
+        'labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official Associates '
+        'reporting and are not connected here.</p></header>'
         f'<section class="kpis">{kpis}</section>'
         '<section>'
         '<h2>Click event log</h2>'
@@ -1337,13 +1268,12 @@ def page_analytics(current: Page) -> str:
         '<button class="btn" id="btn-export-csv" type="button">Export CSV</button>'
         '<button class="btn danger" id="btn-clear" type="button">Clear log</button></div>'
         '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
-        'as a product click. The five defined events are recorded automatically on every page: product-link clicks and in-page calls to action from '
-        'the tracked buttons, chooser runs and routes from the chooser itself, and guide views (page path only) as a guide loads.</p>'
+        'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
+        'product links on this site do.</p>'
         '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
         'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
         '</section>'
-        + measurement_sections(current)
-        + '<section>'
+        '<section>'
         '<h2>Connecting real measurement</h2>'
         '<ul class="bullets">'
         f'<li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see {href(current, "policy-compliance.html", "Policy compliance")}).</li>'
@@ -2153,7 +2083,7 @@ PAGE_DESCRIPTIONS = {
     "requirements.html": f"All {len(REQUIREMENTS)} items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
     "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
     "policy-compliance.html": f"{len(RULES)} Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
-    "analytics.html": "The five defined events, the empty campaign ledger and the endpoint contract: a first-party click counter that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
+    "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
     "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
@@ -2186,38 +2116,6 @@ BODIES = {
 }
 
 
-# Footer directory: every page on the site is reachable from here, grouped the
-# way a reader thinks about it. The disclosure strip repeats in the footer by
-# the owner's brief (2026-11-17): above the fold under the masthead on every
-# page, and again here. Added by arena/cc32105d-zone4.
-FOOTER_GROUPS = [
-    ("Shop and guides", ["index.html", "products.html",
-                         "categories/dual-basket-air-fryers.html",
-                         "categories/single-basket-air-fryers.html",
-                         "categories/air-fryer-toaster-ovens.html", ARTICLES_HUB]),
-    ("Research dashboards", ["executive-summary.html", "analysis.html", "verification.html",
-                             "requirements.html", "automation.html", "analytics.html"]),
-    ("Review before changes", ["suggestions.html", "questions.html", "decisions.html",
-                               "design.html", "flagged.html", "policy-compliance.html",
-                               "sources.html"]),
-]
-
-
-def footer_html(page: Page) -> str:
-    cols = []
-    for title, targets in FOOTER_GROUPS:
-        items = "".join(
-            f'<li><a href="{esc(page.rel(t))}">{esc(NAV_LABEL.get(t, t))}</a></li>' for t in targets
-        )
-        cols.append(f'<div class="foot-col"><span class="foot-title">{esc(title)}</span><ul>{items}</ul></div>')
-    foot_disclosure = (
-        f'<div class="disclosure" role="note"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
-        f'<span class="small">(Source: {ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) '
-        "This site is not endorsed by or affiliated with Amazon.</span></div>"
-    )
-    return foot_disclosure + '<div class="foot-nav">' + "".join(cols) + "</div>"
-
-
 def render(page: Page) -> str:
     nav_groups = []
     for group, targets in NAV_ORDER:
@@ -2232,6 +2130,11 @@ def render(page: Page) -> str:
             + "</div>"
         )
     nav = "".join(nav_groups)
+    directory_targets = list(dict.fromkeys(target for _group, targets in NAV_ORDER for target in targets))
+    footer_links = "".join(
+        f'<a href="{esc(page.rel(target))}">{esc(NAV_LABEL.get(target, target))}</a>'
+        for target in directory_targets
+    )
     disclosure = (
         f'<div class="disclosure" role="note"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
         f'<span class="small">(Source: '
@@ -2256,8 +2159,6 @@ def render(page: Page) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(page.title_tag or page.title)} | {esc(SITE_TITLE_SUFFIX)}</title>
 <meta name="description" content="{esc(page.description or SITE_DESCRIPTION)}">
-<meta name="analytics-endpoint" content="">
-<link rel="alternate" type="application/rss+xml" title="Zone4 - air fryer buying guides (RSS)" href="{esc(page.rel('feed.xml'))}">
 <meta property="og:title" content="{esc(page.title_tag or page.title)}">
 <meta property="og:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 <meta property="og:type" content="website">
@@ -2268,6 +2169,8 @@ def render(page: Page) -> str:
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
+<meta name="zone4-measure-endpoint" content="{esc(build_extras.MEASURE_ENDPOINT)}">
+<link rel="alternate" type="application/rss+xml" title="Zone4 articles" href="{esc(page.rel('feed.xml'))}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -2282,12 +2185,14 @@ def render(page: Page) -> str:
 {page.body}
 </main>
 <footer>
-{footer_html(page)}
+  <p class="footer-disclosure"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} <span class="small">(Source: {ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) This site is not endorsed by or affiliated with Amazon.</span></p>
+  <nav class="footer-directory" aria-label="Site directory"><strong>Explore the site</strong><div class="footer-links">{footer_links}<a href="{esc(page.rel('feed.xml'))}">RSS feed</a></div></nav>
   <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>
 </div>
 <script src="{esc(page.rel('app.js'))}"></script>
+<script src="{esc(page.rel('measure.js'))}" defer></script>
 </body>
 </html>
 """
@@ -2306,7 +2211,7 @@ def article_jsonld(a: dict) -> str:
         "@type": "Article",
         "headline": a["h1"],
         "description": a["meta_description"],
-        "datePublished": a.get("published_utc", OBSERVED),
+        "datePublished": OBSERVED,
         "dateModified": OBSERVED,
         "inLanguage": "en",
         "author": {"@type": "Organization", "name": SITE_TITLE_SUFFIX},
@@ -2370,12 +2275,11 @@ def build() -> list[pathlib.Path]:
     written = []
     for page in collect_pages():
         html_text = render(page)
-        # The first-party tracker loads on every page: an outbound-click counter
-        # that only exists on one page cannot count the site's product links.
-        html_text = html_text.replace(
-            "</body>",
-            f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
-        )
+        if page.path == "analytics.html":
+            html_text = html_text.replace(
+                "</body>",
+                f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
+            )
         if page.path == "design.html":
             html_text = html_text.replace(
                 "</body>",
@@ -2385,11 +2289,14 @@ def build() -> list[pathlib.Path]:
         out.write_text(html_text, encoding="utf-8")
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    extra_written = build_extras.write_all(sys.modules[__name__])
+    written += [OUT / p for p in extra_written]
     # A generated sitemap of the site's own pages: every URL in it is one this
     # build produced, on the Pages host for this repository. Nothing here is a
     # claim about products; submission to a search console is a user decision
     # (suggestion S-06 / open questions register). Added by arena/d8564cd0-zone4.
     site_urls = [SITE_URL + p.path for p in collect_pages()]
+    site_urls += [SITE_URL + p for p in extra_written if p.endswith(".html")]
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -2397,6 +2304,32 @@ def build() -> list[pathlib.Path]:
         + "</urlset>\n"
     )
     (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    # RSS is generated from the same article records as the site. Publication dates
+    # are deliberately omitted because the source data has no verified per-article
+    # dates; subscribers still get canonical links and the editorial descriptions.
+    feed_items = []
+    for article, article_url in ARTICLE_PATHS:
+        item_url = SITE_URL + article_url.lstrip("/")
+        feed_items.append(
+            "  <item>\n"
+            f"    <title>{html.escape(article['h1'])}</title>\n"
+            f"    <link>{html.escape(item_url)}</link>\n"
+            f"    <guid isPermaLink=\"true\">{html.escape(item_url)}</guid>\n"
+            f"    <description>{html.escape(article['meta_description'])}</description>\n"
+            "  </item>\n"
+        )
+    feed_items += build_extras.feed_items(sys.modules[__name__])
+    feed = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0"><channel>\n'
+        f"  <title>{html.escape(SITE_TITLE_SUFFIX)} articles</title>\n"
+        f"  <link>{html.escape(SITE_URL)}</link>\n"
+        "  <description>Question-led air-fryer guides built from sourced product facts.</description>\n"
+        "  <language>en-us</language>\n"
+        + "".join(feed_items)
+        + "</channel></rss>\n"
+    )
+    (OUT / "feed.xml").write_text(feed, encoding="utf-8")
     # robots.txt: mechanical SEO hygiene that points crawlers at the sitemap this
     # build just wrote (suggestion S-09 shipped the sitemap; the pointer costs
     # nothing and decides nothing). Added by arena/f9f20f21-zone4 (2026-11-16).
@@ -2405,46 +2338,6 @@ def build() -> list[pathlib.Path]:
         f"Sitemap: {SITE_URL}sitemap.xml\n",
         encoding="utf-8",
     )
-    # The RSS feed: one item per published guide, added to in the same build that
-    # publishes the guide (the cadence rule in data/marketing.json). Deterministic:
-    # the channel's build date is the newest guide's publication date, not the
-    # wall clock, so rebuilding twice writes identical bytes.
-    import email.utils
-    import datetime
-    items = sorted(ARTICLES, key=lambda a: a.get("published_utc", OBSERVED), reverse=True)
-    newest = max(a.get("published_utc", OBSERVED) for a in ARTICLES)
-
-    def rfc2822(day: str) -> str:
-        dt = datetime.datetime.fromisoformat(day).replace(tzinfo=datetime.timezone.utc)
-        return email.utils.format_datetime(dt)
-
-    feed_items = []
-    for a in items:
-        link = SITE_URL + "articles/" + a["slug"].strip("/") + ".html"
-        feed_items.append(
-            "    <item>\n"
-            f"      <title>{html.escape(a['title_tag'])}</title>\n"
-            f"      <link>{link}</link>\n"
-            f'      <guid isPermaLink="true">{link}</guid>\n'
-            f"      <description>{html.escape(a['meta_description'])}</description>\n"
-            f"      <pubDate>{rfc2822(a.get('published_utc', OBSERVED))}</pubDate>\n"
-            "    </item>\n"
-        )
-    feed = (
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
-        "  <channel>\n"
-        "    <title>Zone4 - air fryer buying guides</title>\n"
-        f"    <link>{SITE_URL}</link>\n"
-        "    <description>Question-shaped air fryer buying guides built only from figures read off official "
-        "product pages. Every number carries its source; no price or star rating is published.</description>\n"
-        "    <language>en</language>\n"
-        f"    <lastBuildDate>{rfc2822(newest)}</lastBuildDate>\n"
-        f'    <atom:link href="{SITE_URL}feed.xml" rel="self" type="application/rss+xml"/>\n'
-        + "".join(feed_items)
-        + "  </channel>\n</rss>\n"
-    )
-    (OUT / "feed.xml").write_text(feed, encoding="utf-8")
     return written
 
 
