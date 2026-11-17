@@ -11,7 +11,8 @@
       "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
     ],
     "updated_utc": "2026-11-16",
-    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail."
+    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail.",
+    "updated_2026_11_17": "arena/cc32105d-zone4: product-intent note - the three product openers (M-P1-B2, M-P2-B2, M-P3-B2) were rewritten so the ASIN and category path stay in the fact tables rather than in prose (F-53 corrected under decision D-36); fact rows, fact_ids and citations are unchanged."
   },
   "articles": [
     {
@@ -108,13 +109,13 @@
         },
         {
           "id": "M-P1-B2",
-          "text": "The product is the Chefman 6 Quart Dual Basket Air Fryer Oven, listed under ASIN B0CDY277D3, with Chefman shown as the brand byline and filed under Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers. It is the dual-basket member of the three-product set researched on this site, which makes it the natural comparison point for the single-basket and French-door formats covered in the other articles.",
+          "text": "This is the dual-basket member of the set: two independent 3-quart baskets that can aim to finish together, with Chefman as the brand byline on the listing. Its filing details - the ASIN and the full category breadcrumb - live in the fact table below rather than in this paragraph: nobody picks an air fryer by its filing code, but the identifiers stay checkable for anyone who wants them.",
           "fact_ids": [
             "M-P1-F1",
             "M-P1-F9",
             "M-P1-F10"
           ],
-          "h": "The product, as the listing files it"
+          "h": "Where it fits in the three-product set"
         },
         {
           "id": "M-P1-B3",
@@ -375,7 +376,7 @@
         },
         {
           "id": "M-P2-B2",
-          "text": "The listing is filed under ASIN B09B7SB46R, and it contains a discrepancy worth knowing before you buy: the title says 24 cooking functions, while the feature section says 25 cooking pre-sets, naming Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm among them. Both counts are reported here exactly as written, because a buyer deserves to know the listing has not fully reconciled its own arithmetic.",
+          "text": "Before the numbers, one thing worth knowing: this listing disagrees with itself. Its title says 24 cooking functions; its feature section says 25 cooking pre-sets. Both counts are reported here exactly as written, because a buyer deserves to know the listing has not reconciled its own arithmetic - the named presets and the identifiers this record files the product under are in the fact table below.",
           "fact_ids": [
             "M-P2-F9",
             "M-P2-F10"
@@ -653,7 +654,7 @@
         },
         {
           "id": "M-P3-B2",
-          "text": "This is the quiet detail that trips up variant pages. The product page offers 6, 8 and 9 quart sizes in one family, and the supplied link resolves to the 8-quart variant (ASIN B08DKYBTPH, variation parameter th=1), with Chefman as the brand byline, filed in the same Air Fryers category as the other two products here. Every figure in this article is stated for the 8-quart variant only; land on the 6- or 9-quart page and the numbers will differ.",
+          "text": "This is the quiet detail that trips up variant pages: the product page offers 6, 8 and 9 quart sizes in one family, and the supplied link resolves to the 8-quart variant, with Chefman as the brand byline, filed in the same Air Fryers category as the other two products here. Every figure in this article is stated for the 8-quart variant only; land on the 6- or 9-quart page and the numbers will differ. The exact identifiers - ASIN and variation parameter - sit in the fact table below, as rows.",
           "fact_ids": [
             "M-P3-F8",
             "M-P3-F9",

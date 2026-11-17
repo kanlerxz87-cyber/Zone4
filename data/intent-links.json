@@ -4,7 +4,8 @@
     "tracking_id": "shopnow047c-20",
     "tracking_id_source": "Supplied by the site owner on 2026-11-17 in the brief. Format check: Amazon's help page at https://www.amazon.com/b?ie=UTF8&node=51812349011 (read 2026-11-17) states that Amazon's software adds '-20' to Store IDs and that a US Store ID ends in -20. The ID has not been verified as active in Associates Central.",
     "checked_utc": "2026-11-17",
-    "method": "fetch of each short link (follow redirects) and of each official listing page; ASIN read from the final URL path; title and category breadcrumb read from the page. Not verified: any Associates reporting, any commission category (F-01)."
+    "method": "fetch of each short link (follow redirects) and of each official listing page; ASIN read from the final URL path; title and category breadcrumb read from the page. Not verified: any Associates reporting, any commission category (F-01).",
+    "asin_format_source": "Amazon's published ASIN guide: https://sell.amazon.com/blog/what-is-an-asin (read 2026-11-17, arena/cc32105d-zone4): an ASIN is a unique 10-character alphanumeric code that appears after /dp/ in the product URL and typically starts 'B0'. The submitted link path codes are nine characters and appear in the short-link path, so they are not ASINs (flag F-67)."
   },
   "links": [
     {

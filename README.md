@@ -12,13 +12,13 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 - The user supplied `shopnow047c-20` as the selected tracking ID. Its association with an enrolled Associates account, its application to valid Special Links, and a tracking-report test remain unconfirmed. Do not infer compliance by appending the ID to the current short links; see **Q-01 / D-01 / F-03** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
 - The site includes a three-question product chooser, format categories, seven question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **38 suggestions**, **46 questions**, **41 decisions** (26 recorded, 15 open), and **55 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The suggestion and decision pages are the review gate: **40 suggestions**, **49 questions**, **42 decisions** (30 recorded, 12 open), and **67 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
 | Topic | Current state | What would establish it |
 |---|---|---|
-| Product intent / two new links | Three links have historical destination checks but no separate product-intent record; two new candidate destinations are unverified (F-55). | Confirm intended ASIN and official listing URL for each of the five distinct candidates in the enrolled Associates workflow; record intent, date and source separately from the observed redirect. |
+| Product intent / two new links | `data/intent-links.json` records the product-intent confirmation (intended ASIN and official listing URL vs. observed redirect targets, kept separate) for the three published links; the two new candidate links are unmatched and held (F-55). The link path codes are not ASINs (F-67, checked against Amazon's published ASIN guide). | Confirm intended ASIN and official listing URL for each of the five distinct candidates in the enrolled Associates workflow; record intent, date and source separately from the observed redirect. |
 | Tracking ID / Special Links | `shopnow047c-20` supplied, not independently confirmed or applied | Confirm account enrollment and Partner Tag in Associates Central; validate one destination and reporting event per product before scaling. |
 | Product prices, ratings, reviews | Withheld | Confirm applicable Creators API access and permitted use under the current program terms; do not publish scraped or guessed values. |
 | Click and conversion measurement | Existing browser-only click logger stores in local storage; no server endpoint, shared analytics, or Amazon conversion feed is connected. S-38 proposes five event names for review. | Choose compliant hosting, retention, consent and privacy terms, then connect authorized reports. The proposed events are not running instrumentation; the local logger is not an endpoint and does not prove purchases. |
@@ -26,7 +26,7 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 | Reader capture | No email/signup collection is deployed | Choose a lawful provider, purpose, retention and consent flow before collecting personal data. |
 | Publishing cadence | Question-led topic calendar exists; no dated cadence is evidenced | Set an editorial frequency and review it against Search Console queries after data is available. |
 | RSS | Static feed generated from the published article records | Article dates are omitted because the source records do not contain verified publication dates. |
-| Campaign ledger | `data/tracking.jsonl` is intentionally empty | Append only timestamped, authorized reports with provenance; never estimate orders or revenue. |
+| Campaign ledger | `data/ledger.json` is intentionally empty | Append only timestamped, authorized reports with provenance; never estimate orders or revenue. |
 
 The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md). For owners reviewing next steps, begin with the [Suggestions](https://kanlerxz87-cyber.github.io/Zone4/docs/suggestions.html), [Open questions](https://kanlerxz87-cyber.github.io/Zone4/docs/questions.html), [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html), and [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone4/docs/flagged.html) pages.
 

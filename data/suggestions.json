@@ -974,7 +974,7 @@
    "id": "S-38",
    "priority": "P1 - Decide first",
    "title": "Approve a privacy boundary, hosting choice and five-event measurement contract before adding a server endpoint",
-   "problem": "The current tracker stores events only in each visitor’s browser. The static GitHub Pages site has no self-hosted collection endpoint, no five-event taxonomy and no reader-capture form. A server endpoint or signup form would change what data is collected and where it is stored.",
+   "problem": "The current tracker stores events only in each visitor\u2019s browser. The static GitHub Pages site has no self-hosted collection endpoint, no five-event taxonomy and no reader-capture form. A server endpoint or signup form would change what data is collected and where it is stored.",
    "proposal": "Keep the current local-only logger until the owner chooses hosting, retention and consent rules. As a draft taxonomy for review, define article_view (page identifier only), chooser_complete (chosen format), outbound_product_click (product/link identifier), reader_capture_opt_in (only after explicit consent; keep the email address out of analytics events), and reported_order (aggregate import from an authorized Associates report, never a browser pixel). Build an endpoint only after the questions register is answered.",
    "why": "A count can be useful without cross-site identifiers, but collection location, personal information, retention and the source of a conversion event must be clear before collection starts. Client-side clicks cannot establish an Amazon order.",
    "effort": "Owner selects an infrastructure and privacy approach; engineering work follows. Reader capture should be a separate opt-in, not bundled with anonymous measurement.",
@@ -1003,6 +1003,50 @@
    ],
    "status": "Awaiting decision",
    "decision": "D-41"
+  },
+  {
+   "id": "S-39",
+   "priority": "P1 - Decide first",
+   "title": "Replace the untagged outbound links with validated Special Links - one tested link per product first",
+   "problem": "The published product links are the supplied short links. They resolve correctly, but they carry no visible Associates tag (F-03), and their exact compliance status is unresolved (FLG-003 in the prior repository's flag register).",
+   "proposal": "In the enrolled Associates workflow, generate one tagged Special Link per product from SiteStripe or the official link builder, follow each one in a logged-out browser to confirm it lands on the intended ASIN with the tag present, and confirm the click appears in Associates reporting before any link is replaced at scale. The product-intent record in data/products.json is the checklist: intended ASIN, listing URL, confirmation date, observed target.",
+   "why": "No link can earn commission without the tag, and an unvalidated replacement is how a site ends up linking the wrong product.",
+   "effort": "One test session once the account exists.",
+   "risk": "Low if one link is validated before scaling, as the brief requires.",
+   "check": "Each test link resolves to the intended ASIN with tag= visible, and the click appears in the Associates click report within the reporting window.",
+   "decision": "D-01",
+   "flags": [
+    "F-03",
+    "F-58",
+    "F-67"
+   ],
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement Section 1: the links must properly use the tagged Special Link formats"
+    }
+   ],
+   "status": "Needs a decision first"
+  },
+  {
+   "id": "S-40",
+   "priority": "P2 - Adds real value",
+   "title": "Verify the site in Google Search Console and submit the sitemap and feed",
+   "problem": "The sitemap, robots.txt and RSS feed are published, but no search-performance data exists, so the next topic is chosen from buyer questions rather than from measured queries (S-25, Q-40).",
+   "proposal": "The owner verifies site ownership with their Google account (meta tag or DNS), then submits docs/sitemap.xml once. After that, the cadence rule picks the next guide from measured queries in the Search Console performance report.",
+   "why": "It turns the traffic plan from instinct into evidence without publishing a single forecast (D-19).",
+   "effort": "Minutes of owner time.",
+   "risk": "None; the site publishes nothing Search Console would contradict.",
+   "check": "Search Console shows the property as verified and lists the sitemap as read.",
+   "decision": "D-42",
+   "flags": [],
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/appearance/page-experience",
+     "ref": "Google Search Central: site presentation and measurement"
+    }
+   ],
+   "status": "Needs a decision first"
   }
  ]
 }

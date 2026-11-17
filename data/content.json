@@ -11,8 +11,10 @@
    "Measurement: the Analytics page stores outbound-click events in each visitor browser only. There is no server endpoint or connected Associates conversion report. S-38 proposes five events for review; the event taxonomy is not implemented. The campaign ledger remains empty until authorized first-party reports are available.",
    "Search groundwork: unique page metadata, Open Graph fields, structured data, sitemap, robots.txt and a generated RSS feed are present. Search Console is not verified and no search queries or impressions are recorded. RSS item publication dates are omitted because no verified per-article dates exist.",
    "Policy boundaries: prices, ratings, review counts and per-product commission assignments remain withheld or blank. No trend, conversion or revenue estimate is published. Automated product research is gated on account/API access and terms review.",
-   "Decision support: 38 costed suggestions, 46 questions and 41 decisions (26 recorded; 15 open) are published alongside the 55-item Flagged for Review register. The queue identifies the facts and access that block each next step.",
-   "Disclosure and navigation: the Associates disclosure appears below the masthead and repeats in every footer. Product purchase links use rel=\"sponsored\"; verification checks that attribute, disclosure placement, footer coverage, all site-directory links and the single navigation group."
+   "Decision support: 40 costed suggestions, 49 questions and 42 decisions (30 recorded; 12 open) are published alongside the site, each question naming the flag, suggestion and decision it sits behind.",
+   "Disclosure and navigation: the Associates disclosure appears below the masthead and repeats in every footer. Product purchase links use rel=\"sponsored\"; verification checks that attribute, disclosure placement, footer coverage, all site-directory links and the single navigation group.",
+   "Anti-slop fix and delegated decision round (2026-11-17): the last machine-output defect (F-53, identifiers printed as prose in the product openers) is corrected under recorded decision D-36; D-35 (warm-editorial specification adopted), D-37 (steady headline register kept) and D-38 (storefront reading order) were recorded to reconcile the register with the published site. The identifier-format check behind the product-intent record is recorded as F-67: the link path codes are not ASINs, verified against Amazon's published ASIN guide.",
+   "Re-verified 2026-11-17 (arena/cc32105d-zone4, 15-row record in data/verification-session-cc32105d.json): the three supplied links re-resolve to the recorded ASINs with no tag parameter (F-03 stands); P2's second title segment again reads the later variant (F-44, fifth agreeing read; F-26 and F-50 stand); the carousel slots that had rotated away each showed the originally stored ASIN again (F-29). Commission Table 1 and the Operating Agreement (2025-10-15) and Program Policies (2026-04-14) dates re-read unchanged."
   ],
   "decisions_needed": [
    "D-01: confirm that shopnow047c-20 is the active Partner Tag for an enrolled Associates account; generate or validate each Special Link and confirm its destination plus a reporting event.",
@@ -22,7 +24,8 @@
    "D-15 and D-16: define authorized research automation and measurement/privacy boundaries before any data collection or scaling.",
    "D-22: choose a lawful source for real product photography; no product photography is currently published.",
    "D-35, D-36 and D-37: review the proposed design specification, remaining copy pass and headline alternatives before further editorial changes.",
-   "D-38 and D-39: decide whether to add dependency-order and design-token work; these remain proposals, not prerequisites for reading the current site."
+   "D-39: decide whether to move the design tokens into a switchable layer before further design work; a proposal, not a prerequisite for reading the current site.",
+   "D-42: decide whether to verify the site in a search console (owner account required; Q-48, S-40)."
   ]
  },
  "analysis": [
@@ -252,7 +255,8 @@
   "source_ref": "IP License, Section 2(k)",
   "reason": "IP License Section 2(k) requires this text in plain view when Product Advertising Content consisting of text is displayed. This site displays Amazon listing titles, so the notice is shown as the conservative reading of the clause. Flag F-25."
  },
- "rechecked_utc": "2026-11-16",
+ "rechecked_utc": "2026-11-17",
  "recheck_note_2026_11_16": "arena/c509aba1-zone4 independently re-read the three supplied short links (all resolve to the recorded ASINs), the three product pages (titles and breadcrumbs match the stored records; P2's second title segment matches the 2026-11-15 variant reading recorded in F-44), the public commission table (Kitchen 4.50%, Home 3.00% in Table 1), the Operating Agreement (updated 2025-10-15), the disclosure help page (exact sentence confirmed) and FTC Disclosures 101. Record: data/verification-session-c509aba1.json.",
- "_meta_note_89900251_2026_11_16": "rechecked_utc advanced from 2026-11-15 to 2026-11-16 by arena/89900251-zone4 after this session re-resolved all three supplied short links and re-read the cited official pages. Four executive-summary bullets and two decisions_needed entries were appended for the design brief, the two presentation defects, the re-verification and the stale cross-reference corrections."
+ "_meta_note_89900251_2026_11_16": "rechecked_utc advanced from 2026-11-15 to 2026-11-16 by arena/89900251-zone4 after this session re-resolved all three supplied short links and re-read the cited official pages. Four executive-summary bullets and two decisions_needed entries were appended for the design brief, the two presentation defects, the re-verification and the stale cross-reference corrections.",
+ "recheck_note_2026_11_17": "arena/cc32105d-zone4 re-read the three short links, the three listing pages, the Standard Commission Income Statement Table 1, the Operating Agreement and the Program Policies on 2026-11-17; the record is data/verification-session-cc32105d.json (15 rows). Nothing diverged from the stored values beyond the dated drift already flagged (F-29, F-44, F-50); Item details tables were again not exposed (F-38)."
 }

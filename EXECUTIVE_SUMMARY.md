@@ -58,3 +58,35 @@ Product-specific findings link to the official listing URLs in the verification 
 - [Google Search Central: qualifying outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links)
 
 Start with [Suggestions](https://kanlerxz87-cyber.github.io/Zone4/docs/suggestions.html), [Open questions](https://kanlerxz87-cyber.github.io/Zone4/docs/questions.html), [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html), and [Flagged for Review](https://kanlerxz87-cyber.github.io/Zone4/docs/flagged.html). `COORDINATION.md` records task scopes, checks and integration history.
+
+
+---
+
+## Session notes — 2026-11-17 (arena/cc32105d-zone4): integration and anti-slop finish
+
+This session's brief overlapped two parallel sessions that landed first on `main` (`arena/68d67712-zone4`, PRs
+#79/#81; `arena/3d2ad125-zone4`, PRs #80/#83). Their publication build — `data/intent-links.json`, `data/ledger.json`,
+`data/publishing.json`, `data/guides.json`, `analytics-endpoint/`, `docs/measure.js`, `docs/links.html`,
+`docs/measurement.html`, the footer directory and the RSS feed — is kept as canonical. This session merged their work
+and re-applied only its unique delta:
+
+- **F-53 corrected** (the last machine-output defect: identifiers printed as prose in the three product openers):
+  the openers are rewritten across all eight articles under recorded decision **D-36**. D-35 (warm-editorial
+  specification), D-37 (steady headline register) and D-38 (storefront reading order) were recorded the same day.
+- **F-67 added**: the identifier-format check behind the product-intent record. Amazon's published ASIN guide
+  (read live 2026-11-17) defines an ASIN as a 10-character code appearing after `/dp/`; the three published link
+  path codes are nine characters and appear in the short-link path, so they are not ASINs. The check is cited in
+  `data/intent-links.json` and in the flag.
+- **2026-11-17 re-verification** (15-row record: `data/verification-session-cc32105d.json`): the three links
+  re-resolve to the recorded ASINs with no tag (F-03 stands); P2's second title segment again reads the later
+  variant (F-44, fifth agreeing read; F-26, F-50 stand); the rotated carousel slots each showed the originally
+  stored ASIN again (F-29); Table 1 and the OA (2025-10-15) / Policies (2026-04-14) dates re-read unchanged.
+- **New register rows**: Q-47 (reader email consent), Q-48 (Search Console verification), Q-49 (first-party
+  reports for the ledger); S-39 (validated Special Links replacement workflow), S-40 (Search Console property);
+  D-42 (Search Console verification, open). This session's duplicate rows and flags were dropped in favour of the
+  merged register (its session-local F-55 was renumbered to F-67; its planned F-56 duplicates F-59 on main).
+
+Open after this session: 12 decisions (D-01, D-02, D-08, D-13, D-14, D-15, D-16, D-22, D-39, D-40, D-41, D-42).
+The named blocker is unchanged: an Associates account and the tracking ID first, because nothing can earn until
+the links carry a tag.
+

@@ -1083,6 +1083,62 @@
    "flags": [
     "F-19"
    ]
+  },
+  {
+   "id": "Q-47",
+   "area": "Content",
+   "question": "May the site ask readers for an email address, and what consent text would that need?",
+   "why_it_matters": "Reader capture is on the brief; collecting addresses without a consent flow and privacy notice would trade a growth idea for a liability.",
+   "kind": "Owner decision",
+   "known": "The RSS feed captures readers with no personal data collected. Participation Requirement 6(g) bars rewarding clicks, so any list must stay clear of the affiliate links.",
+   "how_to_discover": "Decide whether a list is wanted at all (D-41); if yes, have the consent and privacy text reviewed (D-16) before the first signup form is published.",
+   "answerable_by": "Owner, with a privacy reviewer for the text.",
+   "blocks": "S-39, D-41",
+   "sources": [
+    {
+     "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+     "ref": "FTC Disclosures 101: disclosure obligations travel with the channel"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "Q-48",
+   "area": "Operations",
+   "question": "Which Google account verifies this site in Search Console, and who submits the sitemap and feed?",
+   "why_it_matters": "Without a verified owner account there is no search-performance data, so topics stay question-led instead of query-led (S-25, Q-40).",
+   "kind": "Owner decision",
+   "known": "sitemap.xml, robots.txt and feed.xml are already generated and published with every build.",
+   "how_to_discover": "The owner verifies the property (meta tag or DNS record) and submits docs/sitemap.xml once (D-42).",
+   "answerable_by": "Owner (the Google account holder).",
+   "blocks": "S-40, D-42, measured topic selection",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/appearance/page-experience",
+     "ref": "Google Search Central: site presentation and measurement"
+    }
+   ],
+   "flags": []
+  },
+  {
+   "id": "Q-49",
+   "area": "Measurement",
+   "question": "Which authorized first-party report will supply the campaign ledger's rows, and on what schedule?",
+   "why_it_matters": "The ledger is defined and empty (data/ledger.json); rows may only come from authorized reports, so the report source decides when the ledger can start.",
+   "kind": "Unknown - not discoverable from here",
+   "known": "The Commission Income Statement states that Amazon creates and distributes the click and order reports. No Associates account or reporting feed is connected (Q-01, F-19).",
+   "how_to_discover": "Once the account exists (Q-01), read the Associates Central reports named in the Commission Income Statement and copy the figures with the retrieval date into data/ledger.json.",
+   "answerable_by": "The Associates Central reporting (after enrolment) and the owner's reporting schedule.",
+   "blocks": "Campaign ledger population; evidence-based iteration (Priority 4)",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/policies",
+     "ref": "Commission Income Statement, Sections 1 to 3"
+    }
+   ],
+   "flags": [
+    "F-19"
+   ]
   }
  ]
 }
