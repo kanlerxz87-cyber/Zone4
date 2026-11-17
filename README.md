@@ -42,7 +42,9 @@ sitemap, the feed and the robots file. Run it, then check it:
 python3 scripts/build_site.py      # writes docs/ (29 pages + feed.xml + sitemap.xml + robots.txt)
 python3 scripts/verify.py          # data, links, anchors, disclosure, per-row sources, feed, tagged links
 python3 qa/audit_site.py --strict-warnings
-python3 scripts/make_og_image.py   # regenerates docs/og.png; needs Pillow (build-time only)
+python3 scripts/make_og_image.py   # docs/og.png (social card)
+python3 scripts/make_format_art.py # docs/img/*.png (format line art)
+                                   # both need Pillow; build-time only, not a site dependency
 python3 -m unittest discover -s tests
 node tools/node/tracker-smoke.mjs  # the five-event counter: no network call, no personal fields
 ```

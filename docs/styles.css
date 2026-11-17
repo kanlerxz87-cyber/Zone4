@@ -820,3 +820,10 @@ details.unverified summary::marker { color: var(--accent); }
 details.unverified ul { margin: 10px 0 2px; padding-left: 20px; }
 details.unverified li { margin-bottom: 6px; }
 details.unverified[open] summary { margin-bottom: 4px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; }
+
+/* Format line art on the product cards. Illustrations, never photographs:
+   see the comment on PRODUCT_ART in scripts/build_site.py. */
+.pcard-art {
+  display: block; width: 100%; height: auto; margin: 0 0 14px;
+  border-radius: 10px; border: 1px solid var(--line); background: var(--panel-soft);
+}

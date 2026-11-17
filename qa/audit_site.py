@@ -346,8 +346,16 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     # Non-HTML companions the build writes next to the pages: a link to one of
     # these is a real, shipped file, not a missing page (added 2026-11-17 with
     # the feed and the social card).
-    companions = {"feed.xml", "sitemap.xml", "robots.txt", "og.png", "styles.css",
-                  "app.js", "tracker.js", "design.js"}
+    companions = set()
+    for extra in ("feed.xml", "sitemap.xml", "robots.txt", "og.png", "styles.css",
+                  "app.js", "tracker.js", "design.js"):
+        companions.add(extra)
+    # Generated illustrations (scripts/make_format_art.py) are real files too.
+    for png in (DOCS / "img").glob("*.png"):
+        companions.add(str(png.relative_to(DOCS)))
+    missing_assets = [c for c in companions if not (DOCS / c).exists()]
+    for m in missing_assets:
+        fail(f"referenced asset does not exist: docs/{m}")
     for np_ in sorted(nav_paths):
         if np_ in companions:
             continue

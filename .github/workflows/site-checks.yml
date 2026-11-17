@@ -50,7 +50,9 @@ jobs:
           python-version: "3.11"
       - name: Install Pillow (build-time only)
         run: pip install --disable-pip-version-check "pillow==13.0.0"
-      - name: Regenerate the social card
-        run: python3 scripts/make_og_image.py
-      - name: Committed card matches the generator
-        run: git diff --exit-code -- docs/og.png
+      - name: Regenerate the social card and the format illustrations
+        run: |
+          python3 scripts/make_og_image.py
+          python3 scripts/make_format_art.py
+      - name: Committed images match their generators
+        run: git diff --exit-code -- docs/og.png docs/img/
