@@ -11,7 +11,9 @@
       "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
     ],
     "updated_utc": "2026-11-16",
-    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail."
+    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail.",
+    "publishing_cadence": "At least one question-shaped guide per month (D-43, recorded 2026-11-17). Every guide joins docs/sitemap.xml and docs/feed.xml at build time, carries its own title tag, meta description, disclosure and fact table, and passes scripts/verify.py before it ships. Topic choice follows measured queries once first-party measurement reports are connected (S-25, S-30): no topic is chosen from guessed popularity.",
+    "added_by_ef52e758_2026_11_17": "arena/ef52e758-zone4 (2026-11-17): M-G4 added - the first question-shaped guide for the meat-thermometer family (P4/P5, F-56), written to the same fact-table standard as the air-fryer articles. All seven earlier articles' calls to action now use the constructed Special Link form with tag=shopnow047c-20 (D-41); labels unchanged."
   },
   "articles": [
     {
@@ -43,7 +45,7 @@
         }
       ],
       "title_tag": "Chefman 6-Quart Dual-Basket Air Fryer: Spec Check, Sizes and Sync Finish",
-      "meta_description": "Two independent 3-quart baskets, a 200-450\u00b0F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
+      "meta_description": "Two independent 3-quart baskets, a 200-450°F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
       "h1": "Two baskets, one finish line: the Chefman 6-quart dual-basket air fryer",
       "outline": [
         {
@@ -273,8 +275,9 @@
       "cta": {
         "text": "Check the current listing and availability",
         "link_label": "Open the Chefman 6 quart dual basket listing",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -503,7 +506,7 @@
           "value": "Store link: Visit the Emeril Store; Innovation IQ is the contributor to a customer-review video, not the product brand or byline.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Brand store link, customer-review video block, and Item details table on the Amazon product page",
-          "note": "The review block also carries \u201cEarns Commissions\u201d; it is not a product-brand designation."
+          "note": "The review block also carries “Earns Commissions”; it is not a product-brand designation."
         },
         {
           "id": "M-P2-F9",
@@ -557,8 +560,9 @@
       "cta": {
         "text": "Check the current listing and availability",
         "link_label": "Open the 26QT French door air fryer toaster oven listing",
-        "link_url": "https://link.amazon/B02NbDxp3",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -597,7 +601,7 @@
         }
       ],
       "title_tag": "Chefman 8-Quart TurboFry 4-in-1 Air Fryer: Spec Check and Size Fit",
-      "meta_description": "Four presets, a 200-400\u00b0F range and a 450\u00b0F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
+      "meta_description": "Four presets, a 200-400°F range and a 450°F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
       "h1": "One big basket, 450 degrees: the Chefman 8-quart TurboFry 4-in-1",
       "outline": [
         {
@@ -811,8 +815,9 @@
       "cta": {
         "text": "Check the current listing and availability",
         "link_label": "Open the Chefman 8 quart air fryer listing",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -1019,8 +1024,9 @@
       "cta": {
         "text": "Open the listing for the format you are considering",
         "link_label": "Dual basket listing",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating or review count appears anywhere in the comparison table.",
@@ -1243,7 +1249,7 @@
           "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse; product page links to the Emeril Store.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Item details table and brand store link on the Amazon product page",
-          "note": "Confirmed; F-05 resolved. \u201cInnovation IQ\u201d is a customer-review video contributor, not the product brand."
+          "note": "Confirmed; F-05 resolved. “Innovation IQ” is a customer-review video contributor, not the product brand."
         },
         {
           "id": "M-BUY-F7",
@@ -1257,13 +1263,14 @@
       "cta": {
         "text": "Open the listing for the format that fits your kitchen",
         "link_label": "Single basket fryer listing",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating or review count appears in the guide.",
         "Every step is tied to a verified field; no step depends on a withheld value.",
-        "Capacity units are kept as listed, and P2\u2019s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
+        "Capacity units are kept as listed, and P2’s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
       ],
       "nav_label": "Buying guide"
     },
@@ -1515,8 +1522,9 @@
       "cta": {
         "text": "Check the current listing and availability for the format that fit your counter",
         "link_label": "Open the air fryer listings",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating, review count or popularity badge appears in this article.",
@@ -1744,8 +1752,9 @@
       "cta": {
         "text": "Check the current listing and availability before you wrap it",
         "link_label": "Open the air fryer listings",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The supplied short link is kept in data/product-intent.json as the submitted form."
       },
       "compliance_notes": [
         "No price, star rating or review count appears in this gift guide (F-02); the omission is explained in the copy and points the reader to the live listing.",
@@ -1754,6 +1763,245 @@
         "No capacity conversions are made between quarts and liters."
       ],
       "nav_label": "Holiday gift guide"
+    },
+    {
+      "id": "M-G4",
+      "product_id": "ALL",
+      "category_ids": [
+        "meat-thermometers"
+      ],
+      "page_type": "Buying guide",
+      "nav_label": "Meat thermometer buying guide",
+      "slug": "/instant-read-vs-wireless-meat-thermometer/",
+      "target_keywords": [
+        {
+          "term": "instant read vs wireless meat thermometer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810"
+        },
+        {
+          "term": "what to compare in a meat thermometer",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0DHZTCNR5"
+        },
+        {
+          "term": "meat thermometer buying guide",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z"
+        }
+      ],
+      "title_tag": "Instant-Read or Wireless Meat Thermometer: What to Compare First",
+      "meta_description": "Response time, probes, temperature range and cleanup: the listed differences between an instant-read thermometer and a wireless multi-probe system, with every figure linked to the listing it came from.",
+      "h1": "Instant-read or wireless: what should you compare in a meat thermometer?",
+      "outline": [
+        {
+          "h2": "Two shapes of answer to one kitchen question",
+          "purpose": "Name the fork before the spec rows.",
+          "facts_used": [
+            "M-G4-F1",
+            "M-G4-F3"
+          ]
+        },
+        {
+          "h2": "Speed versus range: the trade the two formats make",
+          "purpose": "Compare response time and wireless reach as listed.",
+          "facts_used": [
+            "M-G4-F1",
+            "M-G4-F3",
+            "M-G4-F7"
+          ]
+        },
+        {
+          "h2": "Heat, reach and cleaning: the numbers to check",
+          "purpose": "Line up the listed extremes side by side.",
+          "facts_used": [
+            "M-G4-F2",
+            "M-G4-F4",
+            "M-G4-F5"
+          ]
+        },
+        {
+          "h2": "What the listings do not settle",
+          "purpose": "Show the warranty discrepancy and the variant families rather than smoothing them over.",
+          "facts_used": [
+            "M-G4-F6",
+            "M-G4-F8",
+            "M-G4-F9"
+          ]
+        },
+        {
+          "h2": "A checklist before you click",
+          "purpose": "Close with questions, not a verdict.",
+          "facts_used": [
+            "M-G4-F10"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G4-B1",
+          "h": "Two shapes of answer to one kitchen question",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F3"
+          ],
+          "text": "A meat thermometer question usually hides a second question: do you want to know one temperature right now, or watch several temperatures without standing at the grill? The two products in this research set answer those two different questions. One is an instant-read pen with a one-second response time and a digital display; the other is a wireless multi-probe system with three probes, a charging hub and an app. Reading the spec rows before the feature list is what separates the two."
+        },
+        {
+          "id": "M-G4-B2",
+          "h": "Speed versus range: the trade the two formats make",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F3",
+            "M-G4-F7"
+          ],
+          "text": "The instant-read listing claims a one-second response time and a probe that reads at 0.1-degree resolution, with NIST and NSF named in its specification rows - the on-demand check you use with the oven door open. The wireless listing trades that immediacy for reach: Bluetooth and WiFi connectivity, an app as the display, and a 1000-degree-Fahrenheit heat rating so the probes can stay in the food while it cooks. Both sit in the same listed category, Meat Thermometers and Timers, so the split is by how you cook, not by where Amazon shelves them."
+        },
+        {
+          "id": "M-G4-B3",
+          "h": "Heat, reach and cleaning: the numbers to check",
+          "fact_ids": [
+            "M-G4-F2",
+            "M-G4-F4",
+            "M-G4-F5"
+          ],
+          "text": "Three listed extremes are worth lining up. Upper temperature: 572 degrees for the instant-read against 1000 degrees for the wireless probes. Probe reach into the food: a listed immersion depth of 6.5 inches against 4.75 inches. Cleaning: the instant-read is wipe-clean plastic rated fully waterproof by its seller, while the wireless probes are stainless steel and listed as dishwasher safe. None of these is better in the abstract; each matches a different kitchen habit."
+        },
+        {
+          "id": "M-G4-B4",
+          "h": "What the listings do not settle",
+          "fact_ids": [
+            "M-G4-F6",
+            "M-G4-F8",
+            "M-G4-F9"
+          ],
+          "text": "This site reports disagreements on a listing instead of picking a side. The wireless thermometer's own page states two different warranty periods - a three-year warranty description in its item details and a two-year assurance in its marketing copy - so no warranty figure is quoted here. Its page is also a probe-count family: one, two, three and four-probe variants, with the supplied link serving the three-probe variant. And the instant-read's page shows a newer colour variant as a newer model of the same thermometer. Each of these is a question to settle on the listing before ordering, not a fact this site can settle for you."
+        },
+        {
+          "id": "M-G4-B5",
+          "h": "A checklist before you click",
+          "fact_ids": [
+            "M-G4-F10",
+            "M-G4-F1",
+            "M-G4-F3"
+          ],
+          "text": "Ask four questions in this order. First, how fast do I need the reading - seconds at the pan, or continuous on a screen across the garden? Second, how many things cook at once? Third, who cleans the probe, and is the dishwasher involved? Fourth, which variant and which model year is actually in the link I am about to click? The two listings answer those questions with rows you can check; prices and ratings are deliberately left to the listings themselves, because programme rules keep them off sites like this one."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G4-F1",
+          "field": "Instant-read format as listed",
+          "value": "P4 (ThermoMaven HT07): Response Time 1 seconds; Resolution 0.1 degrees; Display Type Digital; Immersion Depth 6.5 inches; Specification Met NIST, NSF",
+          "source_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "source_ref": "Product information tables (Features & Specs, User guide) read verbatim 2026-11-17",
+          "note": "As listed; not paraphrased."
+        },
+        {
+          "id": "M-G4-F2",
+          "field": "Instant-read temperature and power as listed",
+          "value": "P4: Upper Temperature Range 572 degrees Fahrenheit; Power Source Battery Powered (1 AAA battery, included); Product Care Instructions Wipe Clean",
+          "source_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "source_ref": "Product information tables read verbatim 2026-11-17",
+          "note": "The listing's title additionally claims the unit is highly waterproof; that is seller copy, recorded but not restated as this site's finding."
+        },
+        {
+          "id": "M-G4-F3",
+          "field": "Wireless multi-probe format as listed",
+          "value": "P5 (CHEF iQ Sense, 3 Probes variant): Included Components 3 Probes, Hub; Connectivity Technology Bluetooth, Wi Fi; Display Type App; Reusability Rechargeable",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "source_ref": "Product information tables (Features & Specs, Item details) read verbatim 2026-11-17",
+          "note": "As listed; not paraphrased."
+        },
+        {
+          "id": "M-G4-F4",
+          "field": "Wireless temperature and probe as listed",
+          "value": "P5: Upper Temperature Range 1000 degrees Fahrenheit; Immersion Depth 4.75 inches; Outer Material Stainless Steel; Product Care Instructions Dishwasher Safe",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "source_ref": "Product information tables read verbatim 2026-11-17",
+          "note": "As listed."
+        },
+        {
+          "id": "M-G4-F5",
+          "field": "Shared category path",
+          "value": "Both listings sit under Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0DHZTCNR5",
+            "https://www.amazon.com/dp/B0DZFD6R9Z"
+          ],
+          "source_refs": [
+            "Category breadcrumb read 2026-11-17",
+            "Category breadcrumb read 2026-11-17"
+          ],
+          "note": "Breadcrumbs as shown on each official page."
+        },
+        {
+          "id": "M-G4-F6",
+          "field": "Warranty discrepancy on P5's own page",
+          "value": "Item details: Warranty Description '3 Year'; About this item copy: 'a two-year assurance provided by CHEF iQ'",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "source_ref": "Item details table and About this item copy, both read verbatim 2026-11-17",
+          "note": "Two different periods on one listing (F-55); this site quotes neither as the warranty."
+        },
+        {
+          "id": "M-G4-F7",
+          "field": "Wireless claim recorded as listed",
+          "value": "P5's About this item copy states up to 50 hours on a full charge and real-time updates including flip reminders and rest timers",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "source_ref": "About this item copy read verbatim 2026-11-17",
+          "note": "Seller claims recorded as listed; this site has not tested them (D-06)."
+        },
+        {
+          "id": "M-G4-F8",
+          "field": "Probe-count variant family",
+          "value": "P5's listing offers 1, 2, 3 and 4 Probe size options; the supplied link resolves to the 3 Probes variant (ASIN B0DZFD6R9Z, th=1)",
+          "source_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "source_ref": "Size selector read verbatim 2026-11-17",
+          "note": "Specifications on this site describe the 3-probe variant only (F-59)."
+        },
+        {
+          "id": "M-G4-F9",
+          "field": "Newer model shown on P4's listing",
+          "value": "P4's page shows 'There is a newer model of this item' pointing at ASIN B0GL7Z4KP4 (Orange)",
+          "source_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "source_ref": "Newer-model block read verbatim 2026-11-17",
+          "note": "The supplied link serves the Black HT07, which is what this site records (F-57)."
+        },
+        {
+          "id": "M-G4-F10",
+          "field": "Included components as listed",
+          "value": "P4: 1*Meat Thermometer, 1*AAA Battery, 1*User Manual, 1*Calibration Certificate. P5: 3 Probes, Hub",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0DHZTCNR5",
+            "https://www.amazon.com/dp/B0DZFD6R9Z"
+          ],
+          "source_refs": [
+            "Item details read verbatim 2026-11-17",
+            "Item details read verbatim 2026-11-17"
+          ],
+          "note": "As listed."
+        }
+      ],
+      "cta": {
+        "text": "Compare both listings side by side: the instant-read and the wireless system answer different kitchen questions, and each listing shows its own variants and availability.",
+        "link_label": "Open the instant-read listing (ThermoMaven HT07)",
+        "link_url": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "link_form_note": "Constructed Special Link carrying tag=shopnow047c-20 (D-41, 2026-11-17); destination tested. The wireless system's listing is one category click away (Where next), and both shop links sit on the meat-thermometers category page.",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating or review count appears in this article (Participation Requirements 2(b) and 6(t); F-02).",
+        "Warranty length is deliberately not stated: the listing gives two different periods and this site quotes neither (F-55).",
+        "No hands-on testing is claimed; nobody on this project has used these thermometers (D-06).",
+        "Seller claims from the About this item copy are recorded as listed and attributed to the listing, not adopted as findings (D-19).",
+        "The call to action carries rel=sponsored, a plain-language paid-link label and the required disclosure sentence (D-05, D-32)."
+      ]
     }
   ],
   "seo_rules": [

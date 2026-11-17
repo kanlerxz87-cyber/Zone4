@@ -7,15 +7,16 @@
       "Partly implemented": "Some of the stage runs here; the rest needs a source or access that is not connected.",
       "Not built": "Deliberately not built. The reason and the official source are in the same row."
     },
-    "note": "Updated 2026-11-14 by session arena/3036372b-zone4: the Analytics page adds a local-only first-party click log. It records real clicks in the visitor's own browser and generates no click of its own, so it does not conflict with Participation Requirement 6(s). Every attributed metric stays blank because attribution needs Associates reporting and a tagged link."
+    "note": "Updated 2026-11-14 by session arena/3036372b-zone4: the Analytics page adds a local-only first-party click log. It records real clicks in the visitor's own browser and generates no click of its own, so it does not conflict with Participation Requirement 6(s). Every attributed metric stays blank because attribution needs Associates reporting and a tagged link.",
+    "added_by_ef52e758_2026_11_17": "arena/ef52e758-zone4: PL-1 widened to five supplied links with the intent record; PL-9 implemented with the tagged Special Link form; PL-10 partly implemented with the local counter, the five-event schema and the empty campaign ledger."
   },
   "stages": [
     {
       "id": "PL-1",
       "stage": "Link intake and resolution",
-      "what_it_does": "Takes the three supplied short links, resolves each to its Amazon product page and records the ASIN from the resolved URL.",
+      "what_it_does": "Takes the five supplied short links, resolves each to its Amazon product page and records the ASIN from the resolved URL, keeping observed redirect targets in a separate field from the intended ASIN (data/product-intent.json).",
       "status": "Implemented",
-      "output": "ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH recorded in data/products.json, each with the short link that produced it.",
+      "output": "ASINs B0CDY277D3, B09B7SB46R, B08DKYBTPH, B0DHZTCNR5, B0DZFD6R9Z recorded in data/products.json, each with the short link that produced it. P4/P5 were first resolved 2026-11-17 (F-56).",
       "requirement": "Special Links must resolve to a product page and must carry the Associate ID as a URL parameter.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements 2(b)"
@@ -94,8 +95,8 @@
       "id": "PL-9",
       "stage": "Publishing and link management",
       "what_it_does": "Publishes the pages and manages which affiliate link sits next to which claim.",
-      "status": "Partly implemented",
-      "output": "The research site publishes to GitHub Pages from main. A monetised publication channel and a link registry are not set up.",
+      "status": "Implemented",
+      "output": "Reader-facing product links are constructed Special Links carrying tag=shopnow047c-20 in the canonical /dp/ form (D-41), each destination-tested 2026-11-17; rel=sponsored and the disclosure stay beside every link. The supplied short links are kept as the submitted form in data/product-intent.json. Associates-report validation of one test click and order per link gates scaling (F-03).",
       "requirement": "Every Special Link must carry the Associate ID. The supplied links resolve without a visible tag, so the tagged URLs must be confirmed before publication.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Participation Requirements 2(b) and 6(w)"
@@ -104,8 +105,8 @@
       "id": "PL-10",
       "stage": "Click and conversion tracking",
       "what_it_does": "Would record link clicks, sessions, orders and revenue per link, campaign and sub-tag.",
-      "status": "Not built",
-      "output": "Empty. The tracking table on the Automation page lists every metric with its official source and a blank value.",
+      "status": "Partly implemented",
+      "output": "A privacy-preserving local outbound-click counter runs on every page (docs/tracker.js, localStorage, no network). The five-event schema and the empty campaign ledger are defined in data/campaign-ledger.json (D-42); rows arrive only from authorized first-party reports. Attributed figures stay blank until an Associates account or endpoint is connected (F-19).",
       "requirement": "Click and order data come from Associates reporting, which needs the Associate ID and the tag on each link. Neither is available here.",
       "source_url": "https://affiliate-program.amazon.com/help/operating/policies",
       "source_ref": "Commission Income Statement, Section 1; Participation Requirements 2(b)"

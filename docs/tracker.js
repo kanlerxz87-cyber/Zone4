@@ -1,5 +1,10 @@
-// Northstar first-party click tracker — local-only, starts at zero.
+// Northstar first-party event tracker — local-only, starts at zero.
 // Records events in localStorage; no network calls; no fabricated data.
+// Event schema (five measured events, decision D-42, 2026-11-17):
+//   page_view, outbound_click, chooser_answer  -> recorded here (site-side)
+//   reported_click, reported_order             -> Associates reports only; never generated here
+// The 'test' type is the explicitly labelled mechanism self-check and is not one of the five.
+// Optional endpoint hook (D-44): leave ENDPOINT empty. Nothing is sent anywhere while it is empty.
 (function () {
   'use strict';
   var KEY = 'ns_tracker_events_v1';
@@ -26,7 +31,9 @@
   }
   function render() {
     var events = load();
-    var clicks = events.filter(function (e) { return e.type === 'click'; }).length;
+    var clicks = events.filter(function (e) {
+      return e.type === 'outbound_click' || e.type === 'click'; // 'click' is the legacy label
+    }).length;
     if (mClicks) mClicks.textContent = String(clicks);
     if (mEvents) mEvents.textContent = String(events.length);
     if (mLast) mLast.textContent = events.length ? events[events.length - 1].ts.replace('T', ' ').replace('Z', '') : '—';
@@ -41,7 +48,10 @@
     }
     rows.innerHTML = html;
   }
+  // The three site-side event names of the five-event schema (D-42).
+  var SITE_EVENTS = ['page_view', 'outbound_click', 'chooser_answer'];
   function addEvent(type, target, asin) {
+    if (SITE_EVENTS.indexOf(type) === -1 && type !== 'test' && type !== 'click') return; // 'click' is the legacy label
     var events = load();
     events.push({
       ts: new Date().toISOString(),
@@ -49,6 +59,7 @@
       target: target || '',
       asin: asin || ''
     });
+    if (events.length > 500) { events = events.slice(events.length - 500); }
     save(events);
     render();
   }
@@ -95,6 +106,10 @@
       render();
     }
   });
+
+  // One site-side page_view per page load (event schema, D-42). Path only —
+  // no referrer, no identifiers, nothing that leaves this browser.
+  addEvent('page_view', location.pathname, '');
 
   render();
 })();

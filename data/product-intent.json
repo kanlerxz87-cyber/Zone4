@@ -1,0 +1,147 @@
+{
+  "_meta": {
+    "description": "Product-intent confirmation record (owner brief requirement, 2026-11-17). For each submitted link it stores the intended ASIN, the official listing URL, the confirmation date and the source (the 'intent' block). Observed redirect targets are stored in the separate 'observed_redirect' block and are never merged into the intent fields.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/ef52e758-zone4",
+    "rule": "Do not merge the two fields. The intent is what the owner wants to promote: a stable identifier confirmed against the official listing page. The observed redirect is a dated observation of what a fetch saw; observations drift between reads (F-29, F-44) and are never copied into the intent block. Rationale: Amazon's ASIN definition provides a checkable identifier (data/sources.json S-ASIN).",
+    "tracking_id": {
+      "value": "shopnow047c-20",
+      "source": "Owner brief, 2026-11-17 ('Selected Tracking ID:shopnow047c-20')",
+      "recorded_as": "The Associate ID (tag) carried by every constructed Special Link on this site. Enrollment of this tag in the amazon.com Associates programme cannot be verified from this workspace and is confirmed only by the account holder (Q-46, F-03)."
+    },
+    "special_link_form": "https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1 - the canonical product-URL form with the tag= parameter required of Special Links (Program Policies, Participation Requirements 2(b); data/sources.json S-POL). Destination tested per link on 2026-11-17; attribution confirmation in Associates Central reports is the owner's gate before scaling.",
+    "flagged": ["F-03", "F-04", "F-47", "F-56"]
+  },
+  "links": [
+    {
+      "id": "L1",
+      "product_id": "P1",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "submitted_form_note": "Supplied in the owner brief as https://link.amazon/B04G1MEwY. The brief also shows a link.amazon.com/... display form; that form is not the link target (F-47).",
+      "intent": {
+        "intended_asin": "B0CDY277D3",
+        "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+        "confirmation_date_utc": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0CDY277D3",
+        "source_note": "Listing identity re-confirmed 2026-11-17 by arena/ef52e758-zone4 via the Special Link destination test (title and breadcrumb match the stored record). Earlier confirmations 2026-11-14 and 2026-11-16 are recorded in data/verification-session-*.json and data/reverification-2026-11-14.json."
+      },
+      "observed_redirect": {
+        "observed_date_utc": "2026-11-16",
+        "final_url_observed": "https://www.amazon.com/dp/B0CDY277D3",
+        "resolved_asin_observed": "B0CDY277D3",
+        "method": "Short link resolved through the platform page-fetch tool; full record in data/verification-session-c509aba1.json and data/verification-session-a8e8b898.json.",
+        "note": "No tag= parameter appears in the resolved URL (F-03). Observed values are dated observations only and can drift."
+      },
+      "special_link": {
+        "href": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "constructed_utc": "2026-11-17",
+        "destination_test": "Pass - fetched 2026-11-17; the URL serves the P1 listing (title match, data/verification-session-ef52e758.json).",
+        "attribution_test": "Not done - click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03)."
+      }
+    },
+    {
+      "id": "L2",
+      "product_id": "P2",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "submitted_form_note": "Supplied in the owner brief as https://link.amazon/B02NbDxp3.",
+      "intent": {
+        "intended_asin": "B09B7SB46R",
+        "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+        "confirmation_date_utc": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B09B7SB46R",
+        "source_note": "Listing identity re-confirmed 2026-11-17 by arena/ef52e758-zone4 via the Special Link destination test (title and breadcrumb match the stored record). The listing title's second segment has drifted between reads (F-44); the stored record keeps its cited reading."
+      },
+      "observed_redirect": {
+        "observed_date_utc": "2026-11-16",
+        "final_url_observed": "https://www.amazon.com/dp/B09B7SB46R",
+        "resolved_asin_observed": "B09B7SB46R",
+        "method": "Short link resolved through the platform page-fetch tool; full record in data/verification-session-c509aba1.json and data/verification-session-a8e8b898.json.",
+        "note": "No tag= parameter appears in the resolved URL (F-03). Observed values are dated observations only and can drift."
+      },
+      "special_link": {
+        "href": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "constructed_utc": "2026-11-17",
+        "destination_test": "Pass - fetched 2026-11-17; the URL serves the P2 listing (title match, data/verification-session-ef52e758.json).",
+        "attribution_test": "Not done - click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03)."
+      }
+    },
+    {
+      "id": "L3",
+      "product_id": "P3",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "submitted_form_note": "Supplied in the owner brief as https://link.amazon/B00hJ57DV.",
+      "intent": {
+        "intended_asin": "B08DKYBTPH",
+        "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+        "confirmation_date_utc": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B08DKYBTPH",
+        "source_note": "Listing identity re-confirmed 2026-11-17 by arena/ef52e758-zone4 via the Special Link destination test (title and breadcrumb match the stored record; the supplied link resolves to the 8-quart variant, F-08)."
+      },
+      "observed_redirect": {
+        "observed_date_utc": "2026-11-16",
+        "final_url_observed": "https://www.amazon.com/dp/B08DKYBTPH",
+        "resolved_asin_observed": "B08DKYBTPH",
+        "method": "Short link resolved through the platform page-fetch tool; full record in data/verification-session-c509aba1.json and data/verification-session-a8e8b898.json.",
+        "note": "No tag= parameter appears in the resolved URL (F-03). Observed values are dated observations only and can drift."
+      },
+      "special_link": {
+        "href": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "constructed_utc": "2026-11-17",
+        "destination_test": "Pass - fetched 2026-11-17; the URL serves the P3 listing (title match, data/verification-session-ef52e758.json).",
+        "attribution_test": "Not done - click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03)."
+      }
+    },
+    {
+      "id": "L4",
+      "product_id": "P4",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "submitted_form_note": "Supplied in the owner brief alongside the other product links. Not processed by any session before 2026-11-17 (F-56).",
+      "intent": {
+        "intended_asin": "B0DHZTCNR5",
+        "official_listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "confirmation_date_utc": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "source_note": "First confirmed 2026-11-17 by arena/ef52e758-zone4: the supplied link resolved to the ThermoMaven HT07 listing and the same page was re-served by the constructed Special Link. The link resolves to a meat thermometer, not an air fryer (F-56). Owner asked to re-confirm intent (Q-45)."
+      },
+      "observed_redirect": {
+        "observed_date_utc": "2026-11-17",
+        "final_url_observed": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "resolved_asin_observed": "B0DHZTCNR5",
+        "method": "Short link resolved through the platform page-fetch tool; row-by-row record in data/verification-session-ef52e758.json.",
+        "note": "No tag= parameter appears in the resolved URL (F-03). The listing shows a newer model (B0GL7Z4KP4, F-57); the observed target is the model the link actually serves."
+      },
+      "special_link": {
+        "href": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "constructed_utc": "2026-11-17",
+        "destination_test": "Pass - fetched 2026-11-17; the URL serves the P4 listing (title match, data/verification-session-ef52e758.json).",
+        "attribution_test": "Not done - click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03)."
+      }
+    },
+    {
+      "id": "L5",
+      "product_id": "P5",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "submitted_form_note": "Supplied in the owner brief alongside the other product links. Not processed by any session before 2026-11-17 (F-56).",
+      "intent": {
+        "intended_asin": "B0DZFD6R9Z",
+        "official_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "confirmation_date_utc": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "source_note": "First confirmed 2026-11-17 by arena/ef52e758-zone4: the supplied link resolved to the CHEF iQ Sense listing (3 Probes variant) and the same page was re-served by the constructed Special Link. The link resolves to a meat thermometer, not an air fryer (F-56). Owner asked to re-confirm intent (Q-45)."
+      },
+      "observed_redirect": {
+        "observed_date_utc": "2026-11-17",
+        "final_url_observed": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "resolved_asin_observed": "B0DZFD6R9Z",
+        "method": "Short link resolved through the platform page-fetch tool; row-by-row record in data/verification-session-ef52e758.json.",
+        "note": "No tag= parameter appears in the resolved URL (F-03). The listing is a probe-count variant family (1/2/3/4 probes, F-59); the observed target is the 3-probe variant page with the th=1 variation parameter."
+      },
+      "special_link": {
+        "href": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+        "constructed_utc": "2026-11-17",
+        "destination_test": "Pass - fetched 2026-11-17; the URL serves the P5 listing (title match, data/verification-session-ef52e758.json).",
+        "attribution_test": "Not done - click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03)."
+      }
+    }
+  ]
+}

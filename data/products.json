@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Verified product records for the three user-supplied Amazon links. Values are only what was observed on the cited official Amazon product page. Blank or withheld fields are listed in flags.json.",
+    "description": "Verified product records for the five user-supplied Amazon links (P1-P3 registered 2026-11-14; P4-P5 registered 2026-11-17 when the two remaining supplied links were resolved for the first time). Values are only what was observed on the cited official Amazon product page. Blank or withheld fields are listed in flags.json.",
     "observed_utc": "2026-11-14",
     "method": "Each user link was resolved to its Amazon product page, then the listing title, explicit brand/manufacturer fields (Item details where available; byline where recorded), category breadcrumb, specification table and 'Customers who viewed this item also viewed' list were read. P2's store link and creator/review block are recorded separately from the product brand. Prices and star ratings were read but are NOT published (F-02).",
     "reverification": {
@@ -19,7 +19,8 @@
       }
     },
     "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50% and Home at 3.00%. These are category-level references only; the official sources reviewed do not map the supplied ASINs to a commission category. Product-level rate fields are intentionally null (F-01).",
-    "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands)."
+    "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands).",
+    "added_by_ef52e758_2026_11_17": "arena/ef52e758-zone4: registered P4 (B0DHZTCNR5, ThermoMaven HT07 instant-read meat thermometer) and P5 (B0DZFD6R9Z, CHEF iQ Sense Gen3 wireless meat thermometer, 3-probe variant) from same-day reads of the official listing pages reached via the previously unprocessed supplied links https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj. Both links resolve to meat thermometers, not air fryers (F-56). Added special_link (constructed Special Link carrying the owner-supplied tracking ID shopnow047c-20) to all five products. New flags F-55 to F-59. No price, star rating or review count is stored or published (F-02)."
   },
   "products": [
     {
@@ -78,7 +79,9 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "special_link": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "special_link_note": "Constructed 2026-11-17 in the canonical product-URL form with the tag= parameter carrying the owner-supplied tracking ID shopnow047c-20 (owner brief 2026-11-17). Destination tested 2026-11-17: the URL serves this product's listing. Click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03). The supplied short link is kept in short_link as the submitted form (F-04)."
     },
     {
       "id": "P2",
@@ -136,7 +139,9 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "special_link": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "special_link_note": "Constructed 2026-11-17 in the canonical product-URL form with the tag= parameter carrying the owner-supplied tracking ID shopnow047c-20 (owner brief 2026-11-17). Destination tested 2026-11-17: the URL serves this product's listing. Click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03). The supplied short link is kept in short_link as the submitted form (F-04)."
     },
     {
       "id": "P3",
@@ -192,7 +197,174 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "special_link": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "special_link_note": "Constructed 2026-11-17 in the canonical product-URL form with the tag= parameter carrying the owner-supplied tracking ID shopnow047c-20 (owner brief 2026-11-17). Destination tested 2026-11-17: the URL serves this product's listing. Click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03). The supplied short link is kept in short_link as the submitted form (F-04)."
+    },
+    {
+      "id": "P4",
+      "asin": "B0DHZTCNR5",
+      "name_short": "ThermoMaven HT07 instant-read meat thermometer",
+      "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "subcategory": "Instant-read meat thermometers",
+      "brand": "ThermoMaven",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "capacity": "Not listed (meat thermometer; the listing has no capacity row)",
+      "dimensions": "Item Length 6.5 inches (as listed; no full width x depth x height is listed)",
+      "color": "Black",
+      "material": "Plastic (outer and inner, as listed)",
+      "short_link": "https://link.amazon/B0c8moW59",
+      "canonical_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "special_link": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "competitors": [
+        {
+          "asin": "B0GL7Z4KP4",
+          "label": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Br",
+          "url": "https://www.amazon.com/dp/B0GL7Z4KP4"
+        },
+        {
+          "asin": "B0DNMTK56N",
+          "label": "ThermoMaven 0.5 Sec Professional Meat Thermometer Digital, ±0.5°F Accuracy | NIST&NSF Certified, IP67 Waterproof, Auto-Rotati",
+          "url": "https://www.amazon.com/dp/B0DNMTK56N"
+        },
+        {
+          "asin": "B0F5X4FM3Q",
+          "label": "0.5 Sec Instant Read Meat Thermometer Digital for Cooking, Red | NIST ±0.5℉ Precision Food Thermometer, Kitchen Gadgets for O",
+          "url": "https://www.amazon.com/dp/B0F5X4FM3Q"
+        }
+      ],
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items on the 2026-11-17 read. Labels are the first part of each listing title as shown, not paraphrases. Carousel membership changes between page loads (F-29).",
+      "competitor_label_note": "Labels read verbatim on 2026-11-17 by session arena/ef52e758-zone4 from the P4 listing page; truncated at the point the page truncated them. The ASIN is the authoritative identifier (RV-I1 applied).",
+      "competitor_carousel_label": "A separate 'Similar brands on Amazon' module on the same page was labelled 'Sponsored' on the 2026-11-17 read; F-10.",
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-09",
+        "F-10",
+        "F-15",
+        "F-29",
+        "F-56",
+        "F-57"
+      ],
+      "special_feature": "Auto Off, Fast Reading System, High Accuracy, Ultra Clear Screen, Waterproof",
+      "manufacturer": "ThermoMaven",
+      "model_number": "HT07",
+      "model_name": "HT07",
+      "brand_note": "Verified 2026-11-17 from the official Item details table: Brand Name 'ThermoMaven', Manufacturer 'ThermoMaven', Model Name 'HT07', Model 'HT07', Part Number 'HT07', UPC 850057819342, ASIN B0DHZTCNR5. The 'ThermoMaven-US' byline near the video module is a creator/influencer byline, not the product brand (RV-I1 applied, as for P2/F-05).",
+      "listed_specs_2026_11_17": {
+        "source_note": "Product information (Features & Specs, Materials & Care, Item details) tables read verbatim 2026-11-17 from the official listing; values are as listed, not paraphrased.",
+        "upper_temperature_range": "572 °F",
+        "response_time": "1 seconds",
+        "resolution": "0.1°",
+        "immersion_depth": "6.5 inches",
+        "power_source": "Battery Powered (1 AAA battery, included)",
+        "display_type": "Digital",
+        "specification_met": "NIST, NSF",
+        "included_components": "1*Meat Thermometer, 1*AAA Battery, 1*User Manual, 1*Calibration Certificate",
+        "product_care_instructions": "Wipe Clean",
+        "unit_count": "1 Count",
+        "style_name": "Contemporary",
+        "age_range_description": "Adult",
+        "indoor_outdoor_usage": "Indoor, Outdoor",
+        "reusability": "Reusable"
+      },
+      "variant_observation": {
+        "field": "Newer model shown on the listing",
+        "value": "\"There is a newer model of this item\" points at ASIN B0GL7Z4KP4 (same product, Orange)",
+        "status": "Verified as listed",
+        "flag": "F-57"
+      },
+      "commission_rate_pct": null,
+      "commission_category_official": null,
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "special_link_note": "Constructed 2026-11-17 in the canonical product-URL form with the tag= parameter carrying the owner-supplied tracking ID shopnow047c-20 (owner brief 2026-11-17). Destination tested 2026-11-17: the URL serves this product's listing. Click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03). The supplied short link is kept in short_link as the submitted form (F-04)."
+    },
+    {
+      "id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "name_short": "CHEF iQ Sense Gen3 wireless meat thermometer (3 probes)",
+      "name_listing": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "subcategory": "Wireless multi-probe meat thermometers",
+      "brand": "CHEF iQ",
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "capacity": "Not listed (meat thermometer; the listing has no capacity row)",
+      "dimensions": "Item Length 4.75 inches (as listed; no full width x depth x height is listed)",
+      "color": "Black",
+      "material": "Stainless Steel (outer, as listed)",
+      "short_link": "https://link.amazon/B0f3GKalj",
+      "canonical_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "special_link": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "competitors": [
+        {
+          "asin": "B0D1TMFTPN",
+          "label": "ThermoMaven WiFi Wireless Meat Thermometer, 2 Probes, Smart Base, 6 Sensors | Unlimted Monitor Range via APP, Commercial-Grad",
+          "url": "https://www.amazon.com/dp/B0D1TMFTPN"
+        },
+        {
+          "asin": "B0H2JP9YDM",
+          "label": "CHEF iQ Sense | USA 250 Limited Edition | Blue Red White Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimit",
+          "url": "https://www.amazon.com/dp/B0H2JP9YDM"
+        },
+        {
+          "asin": "B0H2YYVGTM",
+          "label": "ThermoMaven Smart WiFi Wireless Meat Thermometer for Grilling with 2 Probes | Standalone Base, 6 Sensors, NIST Certified Accu",
+          "url": "https://www.amazon.com/dp/B0H2YYVGTM"
+        }
+      ],
+      "competitor_source_note": "'Customers who viewed this item also viewed' carousel, first three stored items on the 2026-11-17 read. Labels are the first part of each listing title as shown, not paraphrases. Carousel membership changes between page loads (F-29).",
+      "competitor_label_note": "Labels read verbatim on 2026-11-17 by session arena/ef52e758-zone4 from the P5 listing page; truncated at the point the page truncated them. The ASIN is the authoritative identifier (RV-I1 applied).",
+      "competitor_carousel_label": "A 'Similar brands on Amazon' module on the same page was labelled 'Sponsored' on the 2026-11-17 read; F-10.",
+      "flags": [
+        "F-01",
+        "F-02",
+        "F-03",
+        "F-04",
+        "F-09",
+        "F-10",
+        "F-15",
+        "F-29",
+        "F-55",
+        "F-56",
+        "F-59"
+      ],
+      "special_feature": "5 Sensors, Unlimited Range",
+      "manufacturer": "CHEF iQ",
+      "model_number": "CQ60-3C-Z1-E",
+      "model_name": "iQ Sense",
+      "brand_note": "Verified 2026-11-17 from the official Item details table: Brand Name 'CHEF iQ', Manufacturer 'CHEF iQ', Model Name 'iQ Sense', Model 'CQ60-3C-Z1-E', Part Number 'CQ60-3C-Z1-E', UPC 810170921148, ASIN B0DZFD6R9Z. The Item details Warranty Description row reads '3 Year' while the About this item copy says 'a two-year assurance provided by CHEF iQ' (F-55).",
+      "listed_specs_2026_11_17": {
+        "source_note": "Product information (Features & Specs, Materials & Care, Item details) tables read verbatim 2026-11-17 from the official listing; values are as listed, not paraphrased.",
+        "upper_temperature_range": "1000 °F",
+        "immersion_depth": "4.75 inches",
+        "connectivity_technology": "Bluetooth, Wi Fi",
+        "display_type": "App",
+        "reusability": "Rechargeable",
+        "included_components": "3 Probes, Hub",
+        "product_care_instructions": "Dishwasher Safe",
+        "specification_met": "ANSI, ASME, ASTM, CCC, CE, CSA, EMC, ETL, FCC, FDA, FE, HACCP, ISO 13485, ISO 9000, ISO 9001, NIST, NSF, RoHS, UL, WEEE",
+        "warranty_description_item_details": "3 Year",
+        "style_name": "Contemporary",
+        "age_range_description": "Adult",
+        "unit_count": "3 Count",
+        "indoor_outdoor_usage": "Indoor, Outdoor",
+        "about_this_item_claim": "Up to 50 hours on a full charge (as stated in the listing's About this item copy; a seller claim, recorded as listed)"
+      },
+      "variant_observation": {
+        "field": "Probe-count variant family",
+        "value": "Size options 1 Probe, 2 Probes, 3 Probes and 4 Probes are shown on the listing; the supplied link resolves to the 3 Probes variant (ASIN B0DZFD6R9Z)",
+        "status": "Verified as listed",
+        "flag": "F-59"
+      },
+      "commission_rate_pct": null,
+      "commission_category_official": null,
+      "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "special_link_note": "Constructed 2026-11-17 in the canonical product-URL form with the tag= parameter carrying the owner-supplied tracking ID shopnow047c-20 (owner brief 2026-11-17). Destination tested 2026-11-17: the URL serves this product's listing. Click and order attribution can only be confirmed in Associates Central reports by the account holder (owner gate; F-03). The supplied short link is kept in short_link as the submitted form (F-04)."
     }
   ]
 }

@@ -25,6 +25,7 @@ from urllib.parse import urlparse
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 DOCS = ROOT / "docs"
+SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 
 OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
@@ -595,6 +596,110 @@ def check_root_entry() -> None:
         fail("root .nojekyll missing")
 
 
+def check_measurement() -> None:
+    """Owner brief 2026-11-17: product-intent record, five measured events,
+    campaign ledger, and the feed/tracker that carry them. All checks here are
+    additive contracts over data/product-intent.json, data/campaign-ledger.json,
+    docs/feed.xml and docs/tracker.js."""
+    products = {p["id"]: p for p in load("products.json")["products"]}
+
+    # -- product-intent.json: intent and observed redirect stay separate fields.
+    intent_doc = load("product-intent.json")
+    links = intent_doc.get("links", [])
+    if len(links) != len(products):
+        fail(f"product-intent: {len(links)} records for {len(products)} products")
+    seen_products = set()
+    for rec in links:
+        pid = rec.get("product_id")
+        if pid not in products:
+            fail(f"product-intent {rec.get('id')}: product_id {pid} not in products.json")
+            continue
+        p = products[pid]
+        seen_products.add(pid)
+        intent = rec.get("intent", {})
+        obs = rec.get("observed_redirect", {})
+        if set(intent) & set(obs):
+            fail(f"product-intent {rec['id']}: intent and observed_redirect share field names")
+        if intent.get("intended_asin") != p["asin"]:
+            fail(f"product-intent {rec['id']}: intended_asin does not match products.json asin")
+        if not intent.get("confirmation_date_utc") or not intent.get("source"):
+            fail(f"product-intent {rec['id']}: missing confirmation date or source")
+        if intent.get("official_listing_url") != f"https://www.amazon.com/dp/{p['asin']}":
+            fail(f"product-intent {rec['id']}: official_listing_url is not the canonical /dp/ URL")
+        if not obs.get("resolved_asin_observed") or not obs.get("observed_date_utc"):
+            fail(f"product-intent {rec['id']}: observed redirect block incomplete")
+        if rec.get("special_link") != p.get("special_link"):
+            # the intent record stores the constructed link as an object with href + test evidence
+            sl = rec.get("special_link")
+            if not (isinstance(sl, dict) and sl.get("href") == p.get("special_link")):
+                fail(f"product-intent {rec['id']}: special_link differs from products.json")
+        if rec.get("submitted_url") != p.get("short_link"):
+            fail(f"product-intent {rec['id']}: submitted_url differs from products.json short_link")
+    for pid in products:
+        if pid not in seen_products:
+            fail(f"product-intent: no record for {pid}")
+
+    # -- campaign-ledger.json: the six defined columns, the five defined events,
+    # no endpoint, and rows only from named first-party reports.
+    ledger = load("campaign-ledger.json")
+    cols = [c.get("name") for c in ledger.get("_meta", {}).get("columns", [])]
+    if cols != ["timestamp_utc", "source", "channel", "eligible_sessions", "clicks", "reported_orders"]:
+        fail(f"campaign-ledger: columns drift: {cols}")
+    events = [e.get("name") for e in ledger.get("_meta", {}).get("events", {}).get("list", [])]
+    if events != ["page_view", "outbound_click", "chooser_answer", "reported_click", "reported_order"]:
+        fail(f"campaign-ledger: five-event schema drift: {events}")
+    endpoint = ledger.get("_meta", {}).get("endpoint", {})
+    if endpoint.get("url") and not endpoint.get("events_posted"):
+        fail("campaign-ledger: endpoint configured but no events_posted list")
+    for row in ledger.get("rows", []):
+        for c in cols:
+            if c not in row:
+                fail(f"campaign-ledger row missing column {c}")
+        src = str(row.get("source", ""))
+        if not src or "report" not in src.lower():
+            fail(f"campaign-ledger row without a named first-party report source: {src!r}")
+
+    # -- docs/feed.xml: regenerated at build; covers exactly the article pages.
+    feed_path = DOCS / "feed.xml"
+    if not feed_path.exists():
+        fail("docs/feed.xml missing (build_site.build must write it)")
+    else:
+        feed = feed_path.read_text(encoding="utf-8")
+        if "<rss" not in feed or "</rss>" not in feed:
+            fail("docs/feed.xml: not an RSS document")
+        item_links = re.findall(r"<item>.*?<link>(.*?)</link>", feed, re.S)
+        article_pages = sorted(
+            str(p.relative_to(DOCS)).replace("\\", "/")
+            for p in (DOCS / "articles").glob("*.html")
+            if p.name != "index.html"  # the hub page is not an article item
+        )
+        feed_targets = sorted(u.removeprefix(SITE_URL) for u in item_links)
+        if feed_targets != article_pages:
+            fail(f"feed.xml items and article pages drift: feed={len(feed_targets)} pages={len(article_pages)}")
+        for u in item_links:
+            if not u.startswith(SITE_URL) or not (DOCS / u.removeprefix(SITE_URL)).exists():
+                fail(f"feed.xml link does not resolve to a built page: {u}")
+
+    # -- docs/tracker.js: local-only recording of the three site-side events.
+    tracker = DOCS / "tracker.js"
+    if not tracker.exists():
+        fail("docs/tracker.js missing")
+    else:
+        js = tracker.read_text(encoding="utf-8")
+        for name in ("page_view", "outbound_click", "chooser_answer"):
+            if f"'{name}'" not in js and f'"{name}"' not in js:
+                fail(f"docs/tracker.js: site-side event {name} not implemented")
+        for bad in ("fetch(", "XMLHttpRequest", "sendBeacon"):
+            if bad in js:
+                fail(f"docs/tracker.js: {bad} found - the counter must stay local-only")
+    analytics = DOCS / "analytics.html"
+    if analytics.exists():
+        text = analytics.read_text(encoding="utf-8")
+        for name in ("page_view", "outbound_click", "chooser_answer", "reported_click", "reported_order"):
+            if name not in text:
+                fail(f"analytics.html: five-event schema is missing {name}")
+
+
 def main() -> int:
     check_data()
     check_marketing()
@@ -605,6 +710,7 @@ def main() -> int:
     check_site()
     check_design_page()
     check_required_pages()
+    check_measurement()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")

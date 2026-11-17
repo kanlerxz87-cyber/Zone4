@@ -230,12 +230,24 @@ def load_short_links() -> set[str]:
     return {p["short_link"] for p in products}
 
 
+def load_special_links() -> set[str]:
+    """The validated, tag-carrying Associates links (decision D-41, 2026-11-17).
+
+    Every reader-facing product CTA must be either a supplied short link or the
+    product's own validated special link -- never an arbitrary URL. The supplied
+    short links keep their register spot (FLG-003 is unresolved and they are not
+    called invalid); the special links are the constructed link_form_contract
+    URLs, destination-tested 2026-11-17."""
+    products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
+    return {p["special_link"] for p in products}
+
+
 def load_asins() -> set[str]:
     products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
     return {p["asin"] for p in products}
 
 
-def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> None:
+def check_page(path: pathlib.Path, sp: PageParser, shop_links: set[str]) -> None:
     rel = path.relative_to(ROOT)
     text = visible_text(sp)
 
@@ -331,8 +343,8 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
     # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
     # link, and the link carries a plain-language paid-link label.
     for href, row_no, paragraph in sp.shop_links:
-        if href not in short_links:
-            fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
+        if href not in shop_links:
+            fail(f"{rel}: shop link is neither a supplied short link nor the product's validated special link: {href}")
         if row_no == 0:
             context = " ".join(paragraph or [])
         elif 1 <= row_no <= len(sp.row_texts):
@@ -389,6 +401,7 @@ def main() -> int:
 
     check_root_entry()
     short_links = load_short_links()
+    shop_links = short_links | load_special_links()
     asins = load_asins()
 
     pages = sorted(DOCS.rglob("*.html"))
@@ -397,7 +410,7 @@ def main() -> int:
     for page in pages:
         sp = PageParser()
         sp.feed(page.read_text(encoding="utf-8"))
-        check_page(page, sp, short_links)
+        check_page(page, sp, shop_links)
     check_products_coverage(asins, short_links)
 
     if args.live:

@@ -1,0 +1,82 @@
+{
+  "_meta": {
+    "session": "arena/ef52e758-zone4",
+    "date_utc": "2026-11-17",
+    "branched_from": "b5d22b038394ad783c365539a79e40be6cc7ee11",
+    "purpose": "First processing of the two previously unregistered supplied links (B0c8moW59, B0f3GKalj) as P4/P5, same-day reads of their official listing pages, and destination tests of the five constructed Special Links carrying the owner-supplied tracking ID shopnow047c-20 before scaling them across the site (one tested link per product).",
+    "method": "fetch_page on the supplied short links (each resolved to its www.amazon.com /dp/ page), full reads of the two listing pages (chunked), and fetch_page on each of the five tagged Special Links. Titles and ASINs were compared with data/products.json; listed specifications were transcribed without unit conversion and with prices, ratings, review counts and badge copy withheld (F-02).",
+    "published_values": "No price, rating, review count or deal badge from the Amazon pages was copied into any published record (F-02). The owner brief's tracking ID is published as the owner-supplied fact it is (D-01); attribution is not claimed (F-03).",
+    "owner_brief_utc": "2026-11-17: tracking ID 'shopnow047c-20'; the five links 'Build marketing for the following products'; local-only measurement accepted; measurement scope widened to five defined events and a campaign ledger."
+  },
+  "reads": [
+    {
+      "id": "R-01",
+      "source": "https://link.amazon/B0c8moW59",
+      "resolved_to": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "asin": "B0DHZTCNR5",
+      "asin_matches_record": true,
+      "title_matches_record": "exact (name_listing: ThermoMaven 836 HT07)",
+      "tag_parameter_in_resolved_url": false,
+      "observation": "The submitted link resolves to a MEAT THERMOMETER, not an air fryer (flag F-56). Listing shows a variant family (size/color sub-listings; F-57). A manual PDF is linked from the listing (https://m.media-amazon.com/images/I/A16TN80IJUL.pdf). Prices, star rating, review count and badge copy visible on the page were withheld (F-02)."
+    },
+    {
+      "id": "R-02",
+      "source": "https://link.amazon/B0f3GKalj",
+      "resolved_to": "https://www.amazon.com/dp/B0DZFD6R9Z?th=1",
+      "asin": "B0DZFD6R9Z",
+      "asin_matches_record": true,
+      "title_matches_record": "exact (name_listing: CHEF iQ Sense Gen3, 3 Probes)",
+      "tag_parameter_in_resolved_url": false,
+      "observation": "The submitted link resolves to a MEAT THERMOMETER, not an air fryer (flag F-56), and carries th=1 (a variant-family parameter; F-59). User Guide PDF linked from the listing (https://m.media-amazon.com/images/I/81hiQf0-p-L.pdf). Prices, deal badges, star rating and review count visible on the page were withheld (F-02)."
+    },
+    {
+      "id": "R-03",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "purpose": "Full listing read for the P4 record (product details, product details table, what-is-in-the-box copy).",
+      "captured_to": "data/products.json P4 listed_specs_2026_11_17; data/sources.json S-P4",
+      "observation": "Units transcribed exactly as listed (inches, degrees Fahrenheit) and never converted (F-10). No Item details specification table was exposed in the fetched copy; two features appear only in marketing copy (F-57 notes)."
+    },
+    {
+      "id": "R-04",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z?th=1",
+      "purpose": "Full listing read for the P5 record (product details, product details table, what-is-in-the-box copy).",
+      "captured_to": "data/products.json P5 listed_specs_2026_11_17; data/sources.json S-P5",
+      "observation": "Units transcribed exactly as listed and never converted (F-10). The listing references a newer generation model, B0GL7Z4KP4 (flag F-53); the supplied model is published as supplied."
+    },
+    {
+      "id": "R-05",
+      "source": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "test": "Special Link destination test (P1) before scaling (decision D-41)",
+      "result": "Pass - serves the P1 listing (title matches the stored record).",
+      "note": "Fetched pages render with tag= canonicalized away; the tag is transmitted on click. Attribution can only be confirmed in Associates reports (owner gate, F-03)."
+    },
+    {
+      "id": "R-06",
+      "source": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "test": "Special Link destination test (P2) before scaling (decision D-41)",
+      "result": "Pass - serves the P2 listing (title matches the stored record).",
+      "note": "Same tag-canonicalization note as R-05."
+    },
+    {
+      "id": "R-07",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "test": "Special Link destination test (P3) before scaling (decision D-41)",
+      "result": "Pass - serves the P3 listing (title matches the stored record).",
+      "note": "Same tag-canonicalization note as R-05."
+    },
+    {
+      "id": "R-08",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "test": "Special Link destination test (P4) before scaling (decision D-41)",
+      "result": "Pass - serves the P4 listing (title matches the stored record).",
+      "note": "Same tag-canonicalization note as R-05."
+    },
+    {
+      "id": "R-09",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z?tag=shopnow047c-20&linkCode=ogi&th=1&psc=1",
+      "test": "Special Link destination test (P5) before scaling (decision D-41)",
+      "result": "Pass - serves the P5 listing (title matches the stored record).",
+      "note": "Same tag-canonicalization note as R-05."
+    }
+  ]
+}

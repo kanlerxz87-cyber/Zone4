@@ -561,6 +561,7 @@ table.flags td:nth-child(3) { min-width: 220px; }
 /* Calendar and derived tables */
 .calendar td:nth-child(2) { white-space: nowrap; }
 .derived td:nth-child(4) { white-space: nowrap; }
+.events td:nth-child(1) { white-space: nowrap; }
 
 /* Focus and selection affordances */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }

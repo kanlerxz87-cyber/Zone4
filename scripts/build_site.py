@@ -17,10 +17,11 @@ OUT = ROOT / "docs"
 
 DISCLOSURE_SENTENCE = "As an Amazon Associate I earn from qualifying purchases."
 DISCLOSURE_SOURCE = "https://affiliate-program.amazon.com/help/operating/agreement"
-SITE_TITLE_SUFFIX = "Zone4 - air fryer buying guides"
+SITE_TITLE_SUFFIX = "Zone4 - air fryer and meat thermometer guides"
 SITE_DESCRIPTION = (
-    "Spec-checked buying guides for three countertop air fryers: product records, sourced articles, "
-    "and a receipt behind every number. What we cannot verify is flagged, not hidden."
+    "Spec-checked buying guides for five kitchen products - three countertop air fryers and two meat "
+    "thermometers: product records, sourced articles, and a receipt behind every number. What we cannot "
+    "verify is flagged, not hidden."
 )
 
 
@@ -77,6 +78,7 @@ NAV = [
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
+    ("categories/meat-thermometers.html", "Meat thermometers", "Categories"),
     ("marketing.html", "Marketing content", "Content"),
     ("automation.html", "Automation & tracking", "Research"),
     ("analysis.html", "Analysis & findings", "Research"),
@@ -111,6 +113,8 @@ CATEGORY_BY_PRODUCT = {
     "P1": "dual-basket-air-fryers",
     "P2": "air-fryer-toaster-ovens",
     "P3": "single-basket-air-fryers",
+    "P4": "meat-thermometers",
+    "P5": "meat-thermometers",
 }
 CATEGORY_TITLE = {t: l for t, l, _g in NAV if t.startswith("categories/")}
 PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS}
@@ -252,9 +256,52 @@ def competitor_links(p: dict) -> str:
 def shop_link(p: dict) -> str:
     # rel="sponsored" marks the affiliate link for search engines (decision D-05,
     # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
-    return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
+    # The href is the constructed Special Link carrying the owner-supplied tracking
+    # ID (decision D-41, 2026-11-17): the canonical product URL with the tag=
+    # parameter, which is transparent about where it goes (Participation
+    # Requirements 2(b)). The supplied short link stays in the register as the
+    # submitted form (data/product-intent.json); attribution is confirmed in
+    # Associates reports by the owner before scaling (F-03).
+    href_target = p.get("special_link") or p["short_link"]
+    return ext(href_target, "Open Amazon link (paid link)",
+               f' class="shop" data-track="outbound_click" data-track-target="{esc(href_target)}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
+
+
+def product_intent_table(current: Page) -> str:
+    """The product-intent confirmation record, published (owner brief, 2026-11-17).
+
+    For each submitted link: the intended ASIN, the official listing URL, the
+    confirmation date and the source - and, in its own never-merged column, the
+    observed redirect target. data/product-intent.json is the source of truth.
+    """
+    doc = load("product-intent.json")
+    rows = []
+    for e in doc["links"]:
+        intent = e["intent"]
+        obs = e["observed_redirect"]
+        rows.append([
+            esc(e["submitted_url"]),
+            esc(intent["intended_asin"]),
+            ext(intent["official_listing_url"], "Official listing"),
+            esc(intent["confirmation_date_utc"]),
+            ext(intent["source"], "Listing read"),
+            (esc(obs["observed_date_utc"]) + "<br>" + ext(obs["final_url_observed"].split(" ")[0], "Observed target")
+             + f'<div class="note">{esc(obs["note"])}</div>'),
+            ext(e["special_link"]["href"], "Special Link (tagged)", rel="sponsored noopener noreferrer"),
+        ])
+    return (
+        '<section><h2>Product-intent confirmation record</h2>'
+        '<p class="section-lead">What each supplied link is meant to sell, confirmed against the official listing - and, in '
+        'its own column, what a fetch actually observed on the date shown. The two are never merged: the intent is the '
+        'stable identifier you are buying for, the observation is a dated snapshot that can drift (F-29, F-44). '
+        'Decision D-41; source of truth: data/product-intent.json.</p>'
+        + table(["Submitted link", "Intended ASIN", "Official listing URL", "Confirmed", "Confirmation source",
+                 "Observed redirect (separate field)", "Constructed Special Link"], rows, "products")
+        + '<p class="small muted">The Special Links carry tracking ID shopnow047c-20 (owner-supplied, 2026-11-17) and each '
+        'one was destination-tested that day. Confirming that clicks and orders land in Associates reporting is the owner\'s '
+        'gate before scaling (F-03). The supplied short links\' exact compliance status is unchanged and unresolved (F-47).</p></section>'
+    )
 
 
 # ---------------------------------------------------------------- tables
@@ -329,6 +376,8 @@ PRODUCT_FLAGS = {
     "P1": {"capacity": "F-06", "colour": "F-07", "competitors": "F-10", "variant": ""},
     "P2": {"capacity": "F-06", "colour": "", "competitors": "F-10", "variant": "F-26"},
     "P3": {"capacity": "F-08", "colour": "", "competitors": "F-10", "variant": ""},
+    "P4": {"capacity": "", "colour": "", "competitors": "F-10", "variant": "F-57"},
+    "P5": {"capacity": "", "colour": "", "competitors": "F-10", "variant": "F-59"},
 }
 
 
@@ -339,6 +388,8 @@ def verification_rows(current: Page) -> list[list[str]]:
         short = ext(p["short_link"], "Short link")
         sched = ext(SOURCES["S-SCHED"]["url"], "Commission schedule (sign-in)")
         fl = PRODUCT_FLAGS[p["id"]]
+        cap_status = ("Verified as listed" if not p["capacity"].startswith("Not listed")
+                      else "Verified (no capacity row on the listing)")
         items = [
             ("Listing title", p["name_listing"], "Verified", src, ""),
             ("ASIN", p["asin"], "Verified (from resolved URL)", short, "F-04"),
@@ -346,7 +397,7 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Manufacturer", p.get("manufacturer") or "Blank", "Verified (Item details)" if p.get("manufacturer") else "Unverified (blank)", src, "" if p.get("manufacturer") else "F-28"),
             ("Model number", p.get("model_number") or "Blank", "Verified (Item details)" if p.get("model_number") else "Unverified (blank)", src, "" if p.get("model_number") else "F-28"),
             ("Category path", p["category_path"], "Verified", src, ""),
-            ("Capacity (as listed)", p["capacity"], "Verified as listed", src, fl["capacity"]),
+            ("Capacity (as listed)", p["capacity"], cap_status, src, fl["capacity"]),
             ("Dimensions (as listed)", p["dimensions"], "Verified as listed", src, ""),
             ("Colour (as listed)", p["color"], "Verified as listed", src, fl["colour"]),
             ("Material (as listed)", p["material"], "Verified as listed", src, ""),
@@ -358,9 +409,15 @@ def verification_rows(current: Page) -> list[list[str]]:
             ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
             commission_verification_item(p, sched),
             ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
-            ("Associates tag in link", "Not visible in resolved URL", "Unverified", short, "F-03"),
+            ("Associates tag in link",
+             "Supplied short link: no tag in the resolved URL. Constructed Special Link: carries tag=shopnow047c-20 "
+             "(destination tested 2026-11-17; Associates-report validation pending)",
+             "Unverified (attribution)", short, "F-03"),
         ]
-        if fl["variant"]:
+        if p.get("variant_observation"):
+            vo = p["variant_observation"]
+            items.append((vo["field"], vo["value"], vo["status"], src, vo["flag"]))
+        elif fl["variant"]:
             items.append(("Cooking function count", "Two counts stated on the page", "Unresolved", src, fl["variant"]))
         if p.get("brand_note"):
             items.append(("Brand / manufacturer note", p["brand_note"], "Verified note", src, ""))
@@ -482,9 +539,13 @@ def where_next_block(current: Page, a: dict) -> str:
     """Standing internal-navigation block on every article (suggestion S-24,
     decision D-27). scripts/verify.py fails the build if an article omits it.
     """
-    key = article_category(a)
+    keys = [k for k in [article_category(a), *a.get("category_ids", [])] if k]
+    seen = set()
     items = []
-    if key:
+    for key in keys:
+        if key in seen:
+            continue
+        seen.add(key)
         items.append(href(current, "categories/" + key + ".html",
                           CATEGORY_TITLE.get("categories/" + key + ".html", "The category record")))
     if a["id"] != "M-CMP":
@@ -698,7 +759,7 @@ def chooser_section(current: Page) -> str:
         '<fieldset><legend>3. Do you want two different foods finishing at the same time?</legend>'
         '<label><input type="radio" name="sync" value="yes" checked> Yes, often</label>'
         '<label><input type="radio" name="sync" value="no"> No, one dish at a time is fine</label></fieldset>'
-        '<button class="btn btn-primary" type="button" id="chooser-go">Show my match</button>'
+        '<button class="btn btn-primary" type="button" id="chooser-go" data-track="chooser_answer" data-track-target="chooser-submit">Show my match</button>'
         '</div>'
         '<div class="chooser-result" id="chooser-result" role="status" aria-live="polite"></div>'
         '<h3>The routing, in plain text</h3>'
@@ -769,15 +830,17 @@ def page_index(current: Page) -> str:
     return (
         '<div class="mhero">'
         f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 re-checked {esc(RECHECKED)} \u00b7 every table row links to its source</span>'
-        "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
-        '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
+        "<h1>Find the kitchen gear that fits your counter \u2014 with every number fact-checked.</h1>"
+        '<p class="lead">Five kitchen products \u2014 three countertop air fryers (a dual-basket, a single-basket and a '
+        'French-door toaster oven) and two meat thermometers (an instant-read pen and a wireless multi-probe system) \u2014 '
         'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
         'verify is flagged rather than hidden, and no price or star rating is published because the programme rules keep '
-        'them off sites like this. Start with the chooser and find your format in under a minute.</p>'
+        'them off sites like this. Start with the air-fryer chooser, or jump straight to the thermometer guide.</p>'
         '<div class="mhero-actions">'
-        '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
+        '<a class="btn btn-primary" href="#chooser">Which air fryer is for me?</a>'
         f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
         f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the formats</a>'
+        f'<a class="btn" href="{esc(current.rel("articles/instant-read-vs-wireless-meat-thermometer.html"))}">Compare the meat thermometers</a>'
         f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what we flag</a>'
         '</div>'
         '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
@@ -837,7 +900,7 @@ def page_articles_index(current: Page) -> str:
     cal_rows = [
         ["Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT", "Written",
          href(current, "articles/air-fryer-sizes-explained-6qt-vs-8qt-vs-26qt.html", "Open the guide"),
-         ext(P1_URL, "Listed capacities and dimensions of all three products")],
+         ext(P1_URL, "Listed capacities and dimensions of the three air-fryer products")],
         ["Choosing an Air Fryer in 2026: The Format-First Method", "Written",
          href(current, "articles/air-fryer-buying-guide-2026.html", "Open the guide"),
          ext(CATEGORY_PATH_URL, "The shared category path and the three format records")],
@@ -1050,7 +1113,10 @@ def page_products(current: Page) -> str:
         + commission_category_note()
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
-        'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
+        'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page. '
+        'The shop button opens the constructed Special Link carrying tracking ID shopnow047c-20 (D-41); the supplied short '
+        'links and the confirmation record are in the table below.</p>'
+        + product_intent_table(current)
         + '<section><h2>Counter space per inch of depth (derived)</h2>'
         '<p class="section-lead">A question no listing answers: how much cooking capacity does each unit give back for the '
         'counter depth it takes? The arithmetic is shown in full, the inputs are the listed values above, and the result is '
@@ -1058,9 +1124,10 @@ def page_products(current: Page) -> str:
         + table(["Product", "Capacity as listed", "Counter depth as listed", "Capacity per inch of depth",
                  "The arithmetic", "Source of the inputs (official)"], counter_space_rows(), "derived")
         + '<p class="note">Units are kept exactly as listed and never converted (F-10): the French-door oven&rsquo;s row is '
-        'in liters, the other two in quarts, so read the ratio within each row rather than ranking the rows against each '
-        'other. Depth is the first dimension as listed; the unit&rsquo;s own footprint also includes its width and height '
-        'on the rows above.</p></section>'
+        'in liters, the other air-fryer rows in quarts, so read the ratio within each row rather than ranking the rows against '
+        'each other. The two meat-thermometer rows are excluded: a thermometer lists no cavity capacity to divide (its listed '
+        'measurements - probe length and temperature range - are on its category page). Depth is the first dimension as '
+        'listed; the unit&rsquo;s own footprint also includes its width and height on the rows above.</p></section>'
     )
 
 
@@ -1230,9 +1297,9 @@ def page_analytics(current: Page) -> str:
     )
     return (
         '<header class="hero"><h1>Clicks &amp; conversions</h1>'
-        '<p class="lead">A first-party, local-only click tracker. It starts at zero, records only real clicks on tracked links plus one clearly '
-        'labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official Associates '
-        'reporting and are not connected here.</p></header>'
+        '<p class="lead">A first-party, local-only event tracker. It starts at zero, records the three site-side events of the five-event schema '
+        'plus one clearly labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official '
+        'Associates reporting and are not connected here.</p></header>'
         f'<section class="kpis">{kpis}</section>'
         '<section>'
         '<h2>Click event log</h2>'
@@ -1249,8 +1316,41 @@ def page_analytics(current: Page) -> str:
         '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
         'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
         'product links on this site do.</p>'
-        '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
-        'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
+        '<p class="note">The tracked product links are the constructed Special Links carrying tracking ID shopnow047c-20 (decision D-41); each one '
+        'was destination-tested on 2026-11-17. A click recorded here is still a local record only - reconciling it against Associates reporting is '
+        'the owner\'s check before scaling (see ' + flag_chip(current, "F-03") + '). The supplied short links carry no tag in their resolved URLs.</p>'
+        '</section>'
+        '<section>'
+        '<h2>The five measured events</h2>'
+        '<p class="section-lead">The brief asks the site to record five defined events. No earlier document in this repository defined which five '
+        '(F-58), so the schema is defined here (decision D-42) and split between what this site measures itself and what only an authorized '
+        'first-party report can supply. Source of truth: <code>data/campaign-ledger.json</code>.</p>'
+        + table(["Event", "Where it happens", "Who records it", "Source of truth (official)"],
+                [
+                    ["page_view", "site-side (this browser)", "Local counter: <code>docs/tracker.js</code>, localStorage only, no network call",
+                     ext("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC: be transparent about measurement")],
+                    ["outbound_click", "site-side (this browser)", "Local counter: fires on every product link click",
+                     ext("https://www.amazon.com/dp/B0CDY277D3", "The listing a click serves")],
+                    ["chooser_answer", "site-side (this browser)", "Local counter: fires on the three-question chooser",
+                     ext("https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/tracker.js", "The counter implementation (this repository)")],
+                    ["reported_click", "report-side", "Associates Central reports export only; this site never generates it",
+                     ext("https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "Commission Income Statement: attribution windows")],
+                    ["reported_order", "report-side", "Associates Central reports export only; this site never generates it",
+                     ext("https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "Commission Income Statement: attribution windows")],
+                ], "events")
+        + '</section>'
+        '<section>'
+        '<h2>Campaign ledger (empty by design)</h2>'
+        '<p class="section-lead">The ledger starts empty and stays empty until rows are obtained from authorized first-party reports. Each row must '
+        'name the report it came from and the date it was read. No conversion score and no revenue forecast is presented anywhere in this project '
+        '(decision D-43; the provenance rule is in <code>data/campaign-ledger.json</code>).</p>'
+        + table(["Timestamp (UTC)", "Source (first-party report)", "Channel", "Eligible sessions", "Clicks", "Reported orders"],
+                [["<em>No rows yet</em> &mdash; waiting on authorized first-party reports",
+                  ext("https://affiliate-program.amazon.com/", "Associates Central reports (owner export)"),
+                  "&mdash;", "&mdash;", "&mdash;", "&mdash;"]], "events")
+        + '<p class="small muted">A self-hosted analytics endpoint is deliberately not configured: GitHub Pages serves static files only, and any '
+        'server-side collection needs the owner\'s endpoint and privacy basis first (decision D-44, Q-49). Until then no event leaves the '
+        'visitor\'s browser.</p>'
         '</section>'
         '<section>'
         '<h2>Connecting real measurement</h2>'
@@ -2050,19 +2150,20 @@ def page_decisions(current: Page) -> str:
 # carried their own, and these cover the rest. The build fails if two pages
 # share one (see scripts/verify.py), so this cannot silently regress.
 PAGE_DESCRIPTIONS = {
-    "index.html": "Spec-checked air fryer buying guides: a three-question chooser, seven sourced articles, three verified product records, and a receipt behind every number.",
+    "index.html": "Spec-checked buying guides for five kitchen products: an air-fryer chooser, sourced articles, five verified product records, and a receipt behind every number.",
     "executive-summary.html": f"What the verification found, the {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} decisions that still need the owner and the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} recorded on 2026-11-16, and what is deliberately not built. Each statement links to the official source behind it.",
-    "products.html": "Three air-fryer product records side by side: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
+    "products.html": "Five product records side by side - three air fryers and two meat thermometers: brand, category path, listed specifications and also-viewed competitors, with prices, ratings and commission cells deliberately blank, plus the product-intent confirmation record.",
     "categories/dual-basket-air-fryers.html": "The dual-basket air-fryer category: the Chefman 6 quart record, its listed specifications, the competing ASINs shown beside it on the listing, and the article written from those facts.",
     "categories/single-basket-air-fryers.html": "The single-basket air-fryer category: the Chefman 8 quart record, its listed presets and footprint, the size variants on the same page, and the article written from those facts.",
     "categories/air-fryer-toaster-ovens.html": "The air-fry toaster oven category: the Emeril Lagasse 26 quart record, its listed functions and footprint, and the two specification inconsistencies disclosed rather than resolved.",
+    "categories/meat-thermometers.html": "The meat thermometer category: an instant-read pen and a wireless multi-probe system side by side, their listed response times, temperature ranges and cleanup specs, and the variant families flagged rather than smoothed over.",
     "marketing.html": f"The full marketing content kit on one page: {len(ARTICLES)} articles - product spec checks, a format comparison and buying guides - each with the fact table it was written from and a disclosure-carrying call to action.",
     "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
-    "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
+    "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the five products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
     "requirements.html": f"All {len(REQUIREMENTS)} items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
-    "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
+    "verification.html": "A field-by-field verification log for all five products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
     "policy-compliance.html": f"{len(RULES)} Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
-    "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
+    "analytics.html": "A first-party click log that lives only in your browser and starts at zero, the five-event measurement schema, and the empty campaign ledger: no network call, no estimate, and no attributed figure until Associates reporting is connected.",
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
     "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
@@ -2079,6 +2180,7 @@ BODIES = {
     "categories/dual-basket-air-fryers.html": lambda c: page_category(c, "dual-basket-air-fryers"),
     "categories/single-basket-air-fryers.html": lambda c: page_category(c, "single-basket-air-fryers"),
     "categories/air-fryer-toaster-ovens.html": lambda c: page_category(c, "air-fryer-toaster-ovens"),
+    "categories/meat-thermometers.html": lambda c: page_category(c, "meat-thermometers"),
     "marketing.html": page_marketing,
     "automation.html": page_automation,
     "analysis.html": page_analysis,
@@ -2141,6 +2243,7 @@ def render(page: Page) -> str:
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{esc(page.title_tag or page.title)}">
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
+<link rel="alternate" type="application/rss+xml" title="{esc(SITE_TITLE_SUFFIX)} - guides feed" href="{esc(page.rel('feed.xml'))}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
@@ -2162,6 +2265,7 @@ def render(page: Page) -> str:
 </div>
 </div>
 <script src="{esc(page.rel('app.js'))}"></script>
+<script src="{esc(page.rel('tracker.js'))}"></script>
 </body>
 </html>
 """
@@ -2244,11 +2348,6 @@ def build() -> list[pathlib.Path]:
     written = []
     for page in collect_pages():
         html_text = render(page)
-        if page.path == "analytics.html":
-            html_text = html_text.replace(
-                "</body>",
-                f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
-            )
         if page.path == "design.html":
             html_text = html_text.replace(
                 "</body>",
@@ -2278,6 +2377,37 @@ def build() -> list[pathlib.Path]:
         f"Sitemap: {SITE_URL}sitemap.xml\n",
         encoding="utf-8",
     )
+    # RSS feed of the guide pages (decision D-43, 2026-11-17): derived from the
+    # same article register as the sitemap, so a guide cannot ship unindexed or
+    # unannounced. Every item links the page this build just wrote.
+    import email.utils
+    import datetime as _dt
+    feed_date = email.utils.format_datetime(
+        _dt.datetime.fromisoformat(RECHECKED).replace(tzinfo=_dt.timezone.utc)
+    )
+    items = []
+    for a, path in ARTICLE_PATHS:
+        items.append(
+            "    <item>\n"
+            f"      <title>{html.escape(a['title_tag'])}</title>\n"
+            f"      <link>{SITE_URL + path}</link>\n"
+            f"      <guid isPermaLink=\"true\">{SITE_URL + path}</guid>\n"
+            f"      <description>{html.escape(a['meta_description'])}</description>\n"
+            f"      <pubDate>{feed_date}</pubDate>\n"
+            "    </item>\n"
+        )
+    feed = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0">\n'
+        "  <channel>\n"
+        f"    <title>{html.escape(SITE_TITLE_SUFFIX)}</title>\n"
+        f"    <link>{SITE_URL}</link>\n"
+        f"    <description>{html.escape(SITE_DESCRIPTION)}</description>\n"
+        f"    <lastBuildDate>{feed_date}</lastBuildDate>\n"
+        + "".join(items)
+        + "  </channel>\n</rss>\n"
+    )
+    (OUT / "feed.xml").write_text(feed, encoding="utf-8")
     return written
 
 

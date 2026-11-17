@@ -10,7 +10,8 @@
       "api.github.com",
       "github.com"
     ],
-    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43)."
+    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43).",
+    "added_by_ef52e758_2026_11_17": "arena/ef52e758-zone4: S-P4 and S-P5 added for the two supplied links (B0c8moW59, B0f3GKalj) that no earlier session processed; both were resolved and read on 2026-11-17. The five constructed Special Links carrying tracking ID shopnow047c-20 were destination-tested against S-P1 to S-P5 the same day."
   },
   "sources": [
     {
@@ -293,6 +294,24 @@
       "accessible": true,
       "used_for": "The standard the editorial suggestions are judged against: automation used primarily to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains in search, and bylines and automation disclosures are worth considering.",
       "notes": "Read in full on 2026-11-15 by session arena/d2a62d6b-zone4 and quoted verbatim in the questions register (Q-23 to Q-37). Google's own wording is repeated rather than paraphrased wherever it is relied on."
+    },
+    {
+      "id": "S-P4",
+      "title": "Amazon product page, ASIN B0DHZTCNR5 (ThermoMaven HT07 instant-read meat thermometer)",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "publisher": "Amazon.com (retailer, official product page)",
+      "accessible": true,
+      "used_for": "Listing title, brand/manufacturer and model from Item details, category breadcrumb, Product information tables (Features & Specs, Materials & Care, Measurements), About this item copy, also-viewed ASINs; prices, star ratings and review counts read but withheld from the site (F-02).",
+      "notes": "Redirect target of https://link.amazon/B0c8moW59, first resolved 2026-11-17 (arena/ef52e758-zone4). Full row-by-row record in data/verification-session-ef52e758.json. The listing shows 'There is a newer model of this item' pointing at B0GL7Z4KP4 (F-57). The snapshot shows a US delivery location, which does not establish the user's location (F-09)."
+    },
+    {
+      "id": "S-P5",
+      "title": "Amazon product page, ASIN B0DZFD6R9Z (CHEF iQ Sense Gen3 wireless meat thermometer, 3 probes)",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "publisher": "Amazon.com (retailer, official product page)",
+      "accessible": true,
+      "used_for": "Listing title, brand/manufacturer and model from Item details, category breadcrumb, Product information tables (Features & Specs, Materials & Care, Measurements), About this item copy, also-viewed ASINs; prices, star ratings and review counts read but withheld from the site (F-02).",
+      "notes": "Redirect target of https://link.amazon/B0f3GKalj, first resolved 2026-11-17 (arena/ef52e758-zone4). Full row-by-row record in data/verification-session-ef52e758.json. The listing is a probe-count variant family (1/2/3/4 probes; the link serves the 3-probe variant, F-59). Item details state a '3 Year' warranty while the About this item copy says 'a two-year assurance' (F-55). The snapshot shows a US delivery location, which does not establish the user's location (F-09)."
     }
   ],
   "non_official_reference_only": [
