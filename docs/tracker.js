@@ -1,4 +1,4 @@
-// Northstar first-party click tracker — local-only, starts at zero.
+// Zone4 first-party click tracker — local-only, starts at zero.
 // Records events in localStorage; no network calls; no fabricated data.
 (function () {
   'use strict';
@@ -78,7 +78,7 @@
   });
   var b2 = document.getElementById('btn-export-json');
   if (b2) b2.addEventListener('click', function () {
-    download('northstar-tracker-events.json', JSON.stringify(load(), null, 2), 'application/json');
+    download('zone4-tracker-events.json', JSON.stringify(load(), null, 2), 'application/json');
   });
   var b3 = document.getElementById('btn-export-csv');
   if (b3) b3.addEventListener('click', function () {
@@ -86,7 +86,7 @@
     var csv = 'timestamp_utc,type,target,asin\n' + events.map(function (e) {
       return [e.ts, e.type, '"' + String(e.target || '').replace(/"/g, '""') + '"', e.asin || ''].join(',');
     }).join('\n');
-    download('northstar-tracker-events.csv', csv, 'text/csv');
+    download('zone4-tracker-events.csv', csv, 'text/csv');
   });
   var b4 = document.getElementById('btn-clear');
   if (b4) b4.addEventListener('click', function () {

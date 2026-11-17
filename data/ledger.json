@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "description": "Campaign ledger. Starts empty on purpose. A row is added only from an authorised first-party report (for example an Associates Central report that the owner exports). No row is estimated, copied from a third party or created from the site's own click counter. The site's click counter is a separate measurement and is never a reported order.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/3d2ad125-zone4"
+  },
+  "columns": [
+    "timestamp_utc",
+    "source",
+    "channel",
+    "eligible_sessions",
+    "clicks",
+    "reported_orders",
+    "report_reference",
+    "obtained_by"
+  ],
+  "rows": [],
+  "status": "Empty. No authorised report has been imported."
+}

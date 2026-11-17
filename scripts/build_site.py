@@ -10,6 +10,10 @@ import html
 import json
 import pathlib
 import re
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import build_extras  # noqa: E402  (publication extras; same pipeline writes docs/)
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -74,6 +78,7 @@ NAV = [
     ("index.html", "Home", "Overview"),
     ("executive-summary.html", "Executive summary", "Overview"),
     ("products.html", "All products", "Overview"),
+    ("guides/index.html", "Guides", "Overview"),
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
@@ -86,6 +91,8 @@ NAV = [
     ("design.html", "Design brief", "Decide"),
     ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
+    ("links.html", "Product-intent record", "Governance"),
+    ("measurement.html", "Measurement & ledger", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
     ("analytics.html", "Analytics", "Governance"),
     ("flagged.html", "Flagged for review", "Governance"),
@@ -154,7 +161,11 @@ ARTICLE_BY_PATH = {path: a for a, path in ARTICLE_PATHS}
 for _a, _path in ARTICLE_PATHS:
     NAV_LABEL[_path] = article_label(_a)
 NAV_LABEL[ARTICLES_HUB] = "Articles hub"
-NAV_ORDER[0] = ("Explore", NAV_ORDER[0][1] + [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS])
+GUIDE_PATHS = []
+for _g in build_extras.published_guides():  # held guides are not listed (see scripts/build_extras.py)
+    GUIDE_PATHS.append("guides/" + _g["slug"] + ".html")
+    NAV_LABEL["guides/" + _g["slug"] + ".html"] = _g["h1"]
+NAV_ORDER[0] = ("Explore", NAV_ORDER[0][1] + GUIDE_PATHS + [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS])
 
 
 def esc(value) -> str:
@@ -211,7 +222,15 @@ def href(current: Page, target: str, text: str | None = None, extra: str = "") -
     return f'<a href="{esc(current.rel(target))}"{extra}>{label}</a>'
 
 
+def link_rel(url: str, rel: str = "noopener noreferrer") -> str:
+    """rel for an outbound link: Amazon product pages are always sponsored (2026-11-17)."""
+    if ("amazon.com/dp/" in url or url.startswith("https://link.amazon/")) and "sponsored" not in rel.split():
+        return "sponsored " + rel
+    return rel
+
+
 def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
+    rel = link_rel(url, rel)
     label = esc(text if text is not None else url)
     return f'<a href="{esc(url)}" rel="{esc(rel)}"{extra}>{label}</a>'
 
@@ -534,7 +553,7 @@ def marketing_article(current: Page, article: dict) -> str:
                 continue
             sources = fact.get("source_urls") or [fact["source_url"]]
             citations.extend(
-                f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
+                f'<a class="cite" href="{esc(url)}" rel="{esc(link_rel(url))}">{esc(fid)}</a>'
                 for url in sources
             )
         cites = "".join(citations)
@@ -703,6 +722,11 @@ def chooser_section(current: Page) -> str:
     )
 
 
+def shop_section_hook(current: Page) -> str:
+    """Products first on the landing page (see scripts/build_extras.py)."""
+    return build_extras.shop_section(sys.modules[__name__], current)
+
+
 def page_index(current: Page) -> str:
     open_flags = [f for f in FLAGS if flag_group(f["status"]) == "Needs your decision"]
     # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
@@ -762,7 +786,8 @@ def page_index(current: Page) -> str:
         (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
     )
     return (
-        '<div class="mhero">'
+        shop_section_hook(current)
+        + '<div class="mhero">'
         '<span class="badge">A practical guide to three very different countertop formats</span>'
         "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
         '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
@@ -888,7 +913,7 @@ def page_article(current: Page, a: dict) -> str:
                 continue
             for url in (fact.get("source_urls") or [fact.get("source_url")]):
                 if url:
-                    cites += f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
+                    cites += f'<a class="cite" href="{esc(url)}" rel="{esc(link_rel(url))}">{esc(fid)}</a>'
         body_html.append(f'{sub}<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
@@ -1042,6 +1067,7 @@ def page_products(current: Page) -> str:
          "quoted, with its source; all trend data remains unverified and blank.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
+        + build_extras.extra_products_section(sys.modules[__name__], current)
         + commission_category_note()
         + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
@@ -2143,6 +2169,7 @@ def render(page: Page) -> str:
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
+<meta name="zone4-measure-endpoint" content="{esc(build_extras.MEASURE_ENDPOINT)}">
 <link rel="alternate" type="application/rss+xml" title="Zone4 articles" href="{esc(page.rel('feed.xml'))}">
 </head>
 <body>
@@ -2165,6 +2192,7 @@ def render(page: Page) -> str:
 </div>
 </div>
 <script src="{esc(page.rel('app.js'))}"></script>
+<script src="{esc(page.rel('measure.js'))}" defer></script>
 </body>
 </html>
 """
@@ -2261,11 +2289,14 @@ def build() -> list[pathlib.Path]:
         out.write_text(html_text, encoding="utf-8")
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    extra_written = build_extras.write_all(sys.modules[__name__])
+    written += [OUT / p for p in extra_written]
     # A generated sitemap of the site's own pages: every URL in it is one this
     # build produced, on the Pages host for this repository. Nothing here is a
     # claim about products; submission to a search console is a user decision
     # (suggestion S-06 / open questions register). Added by arena/d8564cd0-zone4.
     site_urls = [SITE_URL + p.path for p in collect_pages()]
+    site_urls += [SITE_URL + p for p in extra_written if p.endswith(".html")]
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -2287,6 +2318,7 @@ def build() -> list[pathlib.Path]:
             f"    <description>{html.escape(article['meta_description'])}</description>\n"
             "  </item>\n"
         )
+    feed_items += build_extras.feed_items(sys.modules[__name__])
     feed = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0"><channel>\n'

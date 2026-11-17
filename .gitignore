@@ -5,3 +5,5 @@ config.json
 data/tracking.local.jsonl
 data/report.json
 build/
+analytics-endpoint/counts.json
+analytics-endpoint/.counts-*
