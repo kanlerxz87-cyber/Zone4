@@ -1,0 +1,175 @@
+{
+  "_meta": {
+    "description": "Product-intent confirmation record for every link the owner submitted, with the candidate Special Link for each. Intended ASIN, official listing URL, confirmation date and source are one group of fields; observed redirect targets are a separate group. The two are never merged: an observed target is evidence about where a link goes, not a statement of what the owner intends.",
+    "tracking_id": "shopnow047c-20",
+    "tracking_id_source": "Supplied by the site owner in the 2026-11-17 brief as the 'Selected Tracking ID'. Not checked against Associates Central (no account access from this workspace; F-57).",
+    "tag_format_source": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+    "tag_format_note": "Official Associates help gives the direct product link as http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID; the candidate uses that format with https and the supplied tracking ID.",
+    "asin_definition_source": "https://sell.amazon.com/blog/what-is-an-asin",
+    "asin_definition_note": "Amazon's seller blog: an ASIN is a unique 10-character alphanumeric code. The submitted short codes are 9 characters, so they cannot be read as ASINs.",
+    "observed_utc": "2026-11-17",
+    "method": "Each submitted link was opened with the page-fetch tool and the final URL and listing title recorded. Each candidate Special Link was opened the same way. The tool drops query strings from the URL it reports, so the tag itself cannot be seen in the result and tag attribution is recorded as unchecked.",
+    "validation_rule": "Per Associates' one-link test (D-42): one candidate per product must be confirmed in the enrolled Associates workflow (destination and tracking report) before any live button changes. No live button has been changed.",
+    "status_legend": {
+      "candidate": "Built from the official format; not yet validated in Associates Central.",
+      "validated": "Destination and tracking report both confirmed in Associates Central by the owner (no row is validated yet)."
+    }
+  },
+  "links": [
+    {
+      "id": "L-01",
+      "submitted_url": "https://link.amazon/B04G1MEwY",
+      "product_id": "P1",
+      "in_scope": "Air-fryer guide",
+      "short_code": "B04G1MEwY",
+      "short_code_length": 9,
+      "short_code_is_asin": false,
+      "product_intent": {
+        "intended_asin": "",
+        "intended_asin_status": "Blank: no intended ASIN was supplied with the link and the 9-character short code is not an ASIN. The owner confirms the intended ASIN (Q-47); until then it stays blank.",
+        "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+        "confirmation_date": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0CDY277D3 (observed 2026-11-17; title: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black (stored name_listing, data/products.json))"
+      },
+      "observed_redirect": {
+        "observed_target_asin": "B0CDY277D3",
+        "observed_target_url": "https://www.amazon.com/dp/B0CDY277D3",
+        "observed_utc": "2026-11-17",
+        "source": "Redirect followed from https://link.amazon/B04G1MEwY on 2026-11-17; the final URL carried the ASIN after /dp/"
+      },
+      "candidate_special_link": "https://www.amazon.com/dp/B0CDY277D3/ref=nosim?tag=shopnow047c-20",
+      "candidate_status": "Destination checked on 2026-11-17 (the candidate resolves to the same ASIN). Tag attribution and the tracking report are NOT checked: they need the owner's Associates Central test (F-57).",
+      "live_outbound_link": "https://link.amazon/B04G1MEwY",
+      "live_outbound_note": "The supplied short link stays live until the one-link test passes for this product (D-42). The short link carries no visible Associates tag (F-03).",
+      "flags": [
+        "F-03",
+        "F-55",
+        "F-57"
+      ]
+    },
+    {
+      "id": "L-02",
+      "submitted_url": "https://link.amazon/B02NbDxp3",
+      "product_id": "P2",
+      "in_scope": "Air-fryer guide",
+      "short_code": "B02NbDxp3",
+      "short_code_length": 9,
+      "short_code_is_asin": false,
+      "product_intent": {
+        "intended_asin": "",
+        "intended_asin_status": "Blank: no intended ASIN was supplied with the link and the 9-character short code is not an ASIN. The owner confirms the intended ASIN (Q-47); until then it stays blank.",
+        "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+        "confirmation_date": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B09B7SB46R (observed 2026-11-17; title: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | 26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals. (stored name_listing; the second segment changed on a 2026-11-15 read, F-44))"
+      },
+      "observed_redirect": {
+        "observed_target_asin": "B09B7SB46R",
+        "observed_target_url": "https://www.amazon.com/dp/B09B7SB46R",
+        "observed_utc": "2026-11-17",
+        "source": "Redirect followed from https://link.amazon/B02NbDxp3 on 2026-11-17; the final URL carried the ASIN after /dp/"
+      },
+      "candidate_special_link": "https://www.amazon.com/dp/B09B7SB46R/ref=nosim?tag=shopnow047c-20",
+      "candidate_status": "Destination checked on 2026-11-17 (the candidate resolves to the same ASIN). Tag attribution and the tracking report are NOT checked: they need the owner's Associates Central test (F-57).",
+      "live_outbound_link": "https://link.amazon/B02NbDxp3",
+      "live_outbound_note": "The supplied short link stays live until the one-link test passes for this product (D-42). The short link carries no visible Associates tag (F-03).",
+      "flags": [
+        "F-03",
+        "F-55",
+        "F-57"
+      ]
+    },
+    {
+      "id": "L-03",
+      "submitted_url": "https://link.amazon/B00hJ57DV",
+      "product_id": "P3",
+      "in_scope": "Air-fryer guide",
+      "short_code": "B00hJ57DV",
+      "short_code_length": 9,
+      "short_code_is_asin": false,
+      "product_intent": {
+        "intended_asin": "",
+        "intended_asin_status": "Blank: no intended ASIN was supplied with the link and the 9-character short code is not an ASIN. The owner confirms the intended ASIN (Q-47); until then it stays blank.",
+        "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+        "confirmation_date": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B08DKYBTPH (observed 2026-11-17; title: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel (stored name_listing, data/products.json))"
+      },
+      "observed_redirect": {
+        "observed_target_asin": "B08DKYBTPH",
+        "observed_target_url": "https://www.amazon.com/dp/B08DKYBTPH",
+        "observed_utc": "2026-11-17",
+        "source": "Redirect followed from https://link.amazon/B00hJ57DV on 2026-11-17; the final URL carried the ASIN after /dp/"
+      },
+      "candidate_special_link": "https://www.amazon.com/dp/B08DKYBTPH/ref=nosim?tag=shopnow047c-20",
+      "candidate_status": "Destination checked on 2026-11-17 (the candidate resolves to the same ASIN). Tag attribution and the tracking report are NOT checked: they need the owner's Associates Central test (F-57).",
+      "live_outbound_link": "https://link.amazon/B00hJ57DV",
+      "live_outbound_note": "The supplied short link stays live until the one-link test passes for this product (D-42). The short link carries no visible Associates tag (F-03).",
+      "flags": [
+        "F-03",
+        "F-55",
+        "F-57"
+      ]
+    },
+    {
+      "id": "L-04",
+      "submitted_url": "https://link.amazon/B0c8moW59",
+      "product_id": "",
+      "in_scope": "Outside the air-fryer guides (see F-56)",
+      "short_code": "B0c8moW59",
+      "short_code_length": 9,
+      "short_code_is_asin": false,
+      "product_intent": {
+        "intended_asin": "",
+        "intended_asin_status": "Blank: no intended ASIN was supplied with the link and the 9-character short code is not an ASIN. The owner confirms the intended ASIN (Q-47); until then it stays blank.",
+        "official_listing_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "confirmation_date": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0DHZTCNR5 (observed 2026-11-17; title: ThermoMaven 1 Sec Professional Digital Meat Thermometer (listing title as read 2026-11-17; no stored product record))"
+      },
+      "observed_redirect": {
+        "observed_target_asin": "B0DHZTCNR5",
+        "observed_target_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+        "observed_utc": "2026-11-17",
+        "source": "Redirect followed from https://link.amazon/B0c8moW59 on 2026-11-17; the final URL carried the ASIN after /dp/"
+      },
+      "candidate_special_link": "https://www.amazon.com/dp/B0DHZTCNR5/ref=nosim?tag=shopnow047c-20",
+      "candidate_status": "Destination checked on 2026-11-17 (the candidate resolves to the same ASIN). Tag attribution and the tracking report are NOT checked: they need the owner's Associates Central test (F-57).",
+      "live_outbound_link": "https://link.amazon/B0c8moW59",
+      "live_outbound_note": "The supplied short link stays live until the one-link test passes for this product (D-42). The short link carries no visible Associates tag (F-03).",
+      "flags": [
+        "F-55",
+        "F-56",
+        "F-57"
+      ]
+    },
+    {
+      "id": "L-05",
+      "submitted_url": "https://link.amazon/B0f3GKalj",
+      "product_id": "",
+      "in_scope": "Outside the air-fryer guides (see F-56)",
+      "short_code": "B0f3GKalj",
+      "short_code_length": 9,
+      "short_code_is_asin": false,
+      "product_intent": {
+        "intended_asin": "",
+        "intended_asin_status": "Blank: no intended ASIN was supplied with the link and the 9-character short code is not an ASIN. The owner confirms the intended ASIN (Q-47); until then it stays blank.",
+        "official_listing_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "confirmation_date": "2026-11-17",
+        "source": "https://www.amazon.com/dp/B0DZFD6R9Z (observed 2026-11-17; title: CHEF iQ Sense Smart Wireless Meat Thermometer (listing title as read 2026-11-17; no stored product record))"
+      },
+      "observed_redirect": {
+        "observed_target_asin": "B0DZFD6R9Z",
+        "observed_target_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+        "observed_utc": "2026-11-17",
+        "source": "Redirect followed from https://link.amazon/B0f3GKalj on 2026-11-17; the final URL carried the ASIN after /dp/"
+      },
+      "candidate_special_link": "https://www.amazon.com/dp/B0DZFD6R9Z/ref=nosim?tag=shopnow047c-20",
+      "candidate_status": "Destination checked on 2026-11-17 (the candidate resolves to the same ASIN). Tag attribution and the tracking report are NOT checked: they need the owner's Associates Central test (F-57).",
+      "live_outbound_link": "https://link.amazon/B0f3GKalj",
+      "live_outbound_note": "The supplied short link stays live until the one-link test passes for this product (D-42). The short link carries no visible Associates tag (F-03).",
+      "flags": [
+        "F-55",
+        "F-56",
+        "F-57"
+      ]
+    }
+  ]
+}

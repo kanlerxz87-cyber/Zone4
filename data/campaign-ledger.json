@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "description": "Campaign ledger. It starts empty on purpose: a row is added only from an authorised first-party report, never from an estimate, a forecast or a figure taken from a third party.",
+    "created_utc": "2026-11-17",
+    "status": "Empty. No authorised first-party report has been obtained (no Associates Central export, no endpoint counts).",
+    "row_rule": "Add a row only when the figures come from a report the owner is authorised to read. Record the report name, its official source URL and the date it was obtained. Do not back-fill, round or estimate.",
+    "no_forecast_rule": "No conversion score, revenue forecast or commission estimate is stored here (Operating Agreement Section 4: Amazon makes no representation about the income a site will earn)."
+  },
+  "schema": {
+    "timestamp_utc": "When the figures were obtained, ISO 8601 (for example 2026-12-01T09:00:00Z).",
+    "source": "Name of the report or counter the figures came from.",
+    "source_url": "Official page that defines the report (Associates Central help or the owner's own endpoint documentation).",
+    "channel": "Traffic channel as the report defines it (for example organic search, direct, social).",
+    "eligible_sessions": "Integer, as stated in the report.",
+    "clicks": "Integer, as stated in the report.",
+    "reported_orders": "Integer, as stated in the report. Blank when the report does not state it.",
+    "provenance_note": "Who obtained the report, and anything the report excludes or qualifies."
+  },
+  "entries": []
+}

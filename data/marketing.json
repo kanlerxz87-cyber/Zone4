@@ -43,7 +43,7 @@
         }
       ],
       "title_tag": "Chefman 6-Quart Dual-Basket Air Fryer: Spec Check, Sizes and Sync Finish",
-      "meta_description": "Two independent 3-quart baskets, a 200-450\u00b0F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
+      "meta_description": "Two independent 3-quart baskets, a 200-450°F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
       "h1": "Two baskets, one finish line: the Chefman 6-quart dual-basket air fryer",
       "outline": [
         {
@@ -503,7 +503,7 @@
           "value": "Store link: Visit the Emeril Store; Innovation IQ is the contributor to a customer-review video, not the product brand or byline.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Brand store link, customer-review video block, and Item details table on the Amazon product page",
-          "note": "The review block also carries \u201cEarns Commissions\u201d; it is not a product-brand designation."
+          "note": "The review block also carries “Earns Commissions”; it is not a product-brand designation."
         },
         {
           "id": "M-P2-F9",
@@ -597,7 +597,7 @@
         }
       ],
       "title_tag": "Chefman 8-Quart TurboFry 4-in-1 Air Fryer: Spec Check and Size Fit",
-      "meta_description": "Four presets, a 200-400\u00b0F range and a 450\u00b0F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
+      "meta_description": "Four presets, a 200-400°F range and a 450°F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
       "h1": "One big basket, 450 degrees: the Chefman 8-quart TurboFry 4-in-1",
       "outline": [
         {
@@ -1243,7 +1243,7 @@
           "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse; product page links to the Emeril Store.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Item details table and brand store link on the Amazon product page",
-          "note": "Confirmed; F-05 resolved. \u201cInnovation IQ\u201d is a customer-review video contributor, not the product brand."
+          "note": "Confirmed; F-05 resolved. “Innovation IQ” is a customer-review video contributor, not the product brand."
         },
         {
           "id": "M-BUY-F7",
@@ -1263,7 +1263,7 @@
       "compliance_notes": [
         "No price, star rating or review count appears in the guide.",
         "Every step is tied to a verified field; no step depends on a withheld value.",
-        "Capacity units are kept as listed, and P2\u2019s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
+        "Capacity units are kept as listed, and P2’s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
       ],
       "nav_label": "Buying guide"
     },
@@ -1754,6 +1754,809 @@
         "No capacity conversions are made between quarts and liters."
       ],
       "nav_label": "Holiday gift guide"
+    },
+    {
+      "id": "M-G4",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "basket-or-oven-style-air-fryer-what-to-compare",
+      "target_keywords": [
+        {
+          "term": "basket or oven air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer oven or basket",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "title_tag": "Basket or Oven-Style Air Fryer: What to Compare (working title)",
+      "meta_description": "Compare basket count, capacity unit, footprint and the listed function counts for three records, with each figure traced to its listing.",
+      "h1": "Basket or oven-style air fryer: what should you compare?",
+      "outline": [
+        {
+          "h2": "Basket count and format",
+          "purpose": "Separate the two-basket, single-basket and oven-style formats.",
+          "facts_used": [
+            "M-G4-F1",
+            "M-G4-F2",
+            "M-G4-F3"
+          ]
+        },
+        {
+          "h2": "Capacity in one unit",
+          "purpose": "Show the unit difference and the conversion.",
+          "facts_used": [
+            "M-G4-F4",
+            "M-G4-F5",
+            "M-G4-F9"
+          ]
+        },
+        {
+          "h2": "Footprint as listed",
+          "purpose": "Give the listed dimensions in one order.",
+          "facts_used": [
+            "M-G4-F6",
+            "M-G4-F7",
+            "M-G4-F8"
+          ]
+        },
+        {
+          "h2": "Function counts on the page",
+          "purpose": "Show the two counts for the oven-style record.",
+          "facts_used": [
+            "M-G4-F10",
+            "M-G4-F11"
+          ]
+        },
+        {
+          "h2": "Check the offer you are buying",
+          "purpose": "Say what the default offer was on the read date.",
+          "facts_used": [
+            "M-G4-F12"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G4-B1",
+          "text": "The dual-basket record's title lists two independent 3-quart nonstick baskets. The single-basket record lists one 8-quart basket. The oven-style record is a French-door multi-function air fryer toaster oven, a different kind of appliance from either basket. Two dishes at once points to the dual basket; one large dish points to the single basket.",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F2",
+            "M-G4-F3"
+          ],
+          "h": "Basket count and format"
+        },
+        {
+          "id": "M-G4-B2",
+          "text": "Capacity is where one record disagrees with itself. The dual-basket title says 6 Quart and its capacity field says 6 liters. Those are not the same size: 6 liters is about 6.34 U.S. liquid quarts, using the NIST factor of 1 U.S. liquid quart = 0.9463529 liter. The site shows both figures and does not choose one.",
+          "fact_ids": [
+            "M-G4-F4",
+            "M-G4-F5",
+            "M-G4-F9"
+          ],
+          "h": "Capacity in one unit"
+        },
+        {
+          "id": "M-G4-B3",
+          "text": "The listed dimensions, depth by width by height, are 13.38 by 11.81 by 10.63 inches for the dual basket, 12.75 by 13.5 by 10 inches for the single basket, and 16.9 by 15.8 by 14.8 inches for the oven-style record. The oven-style record is the largest of the three on every dimension.",
+          "fact_ids": [
+            "M-G4-F6",
+            "M-G4-F7",
+            "M-G4-F8"
+          ],
+          "h": "Footprint as listed"
+        },
+        {
+          "id": "M-G4-B4",
+          "text": "The oven-style record's title says 24 cooking functions. Its About this item section says 25 cooking pre-sets, and lists eleven modes including Bake, Toast, Pizza, Pastry, Slow Cook and Roast. A 2026-11-15 read of the same page showed the title as '24 One-Touch Preset Options'. The page does not explain the difference, so the site reports both and does not pick one.",
+          "fact_ids": [
+            "M-G4-F10",
+            "M-G4-F11"
+          ],
+          "h": "Function counts on the page"
+        },
+        {
+          "id": "M-G4-B5",
+          "text": "On the 2026-11-16 read, the default offer on the dual-basket and single-basket pages was a used item sold by Amazon Resale and fulfilled by Amazon. A used item may not match the condition you expect. Check the condition shown on the listing before you buy.",
+          "fact_ids": [
+            "M-G4-F12"
+          ],
+          "h": "Check the offer you are buying"
+        },
+        {
+          "id": "M-G4-B6",
+          "text": "Our reading, based only on the figures above: decide the basket count first, then put capacity in one unit, then measure your counter. This is an opinion about the listed facts. No appliance was tested.",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F2",
+            "M-G4-F3"
+          ],
+          "h": "This site's reading"
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G4-F1",
+          "field": "Dual-basket format",
+          "value": "Dual basket: 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets (listing title)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F2",
+          "field": "Single-basket format",
+          "value": "Single basket: 8 Qt, XL Nonstick Dishwasher-Safe Basket (listing title)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F3",
+          "field": "Oven-style format",
+          "value": "French Door Multi-Function Air Fryer Toaster Oven (listing title)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F4",
+          "field": "Dual-basket capacity, title",
+          "value": "6 Quart (listing title)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F5",
+          "field": "Dual-basket capacity, specification",
+          "value": "6 liters (capacity field). Unit conflict: F-06",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), capacity",
+          "note": "Flag F-06"
+        },
+        {
+          "id": "M-G4-F6",
+          "field": "Dual-basket dimensions (D x W x H)",
+          "value": "13.38 x 11.81 x 10.63 inches",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F7",
+          "field": "Single-basket dimensions (D x W x H)",
+          "value": "12.75 x 13.5 x 10 inches",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F8",
+          "field": "Oven-style dimensions (D x W x H)",
+          "value": "16.9 x 15.8 x 14.8 inches",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F9",
+          "field": "Quart to liter factor",
+          "value": "1 U.S. liquid quart = 9.463 529 x 10^-1 liter (exact, NIST)",
+          "source_url": "https://www.nist.gov/physical-measurement-laboratory/nist-guide-si-appendix-b8",
+          "source_ref": "NIST SP 811 Appendix B.8, quart (U.S. liquid) row (read 2026-11-17)",
+          "note": ""
+        },
+        {
+          "id": "M-G4-F10",
+          "field": "Oven-style function count, title",
+          "value": "24 cooking functions (listing title); 24 One-Touch Preset Options on the 2026-11-15 read",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), name_listing; F-44 read 2026-11-15",
+          "note": "Flag F-26, F-44"
+        },
+        {
+          "id": "M-G4-F11",
+          "field": "Oven-style function count, About this item",
+          "value": "25 COOKING PRE-SETS, eleven modes listed (read 2026-11-14)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "F-26 (read 2026-11-14): About this item section",
+          "note": "Flag F-26"
+        },
+        {
+          "id": "M-G4-F12",
+          "field": "Default offer on the 2026-11-16 read",
+          "value": "Used item, sold by Amazon Resale and fulfilled by Amazon (P1: Very Good; P3: Like New)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "F-49 (read 2026-11-16); P3 offer on the same date",
+          "note": "Flag F-49"
+        }
+      ],
+      "cta": {
+        "text": "If the dual basket fits how you cook, check the current listing and its offer condition.",
+        "link_label": "Open the Chefman 6 quart dual basket listing",
+        "link_url": "https://link.amazon/B04G1MEwY",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "Listed specifications only; no appliance was tested.",
+        "No price, availability or rating is stated (F-02).",
+        "Capacity units are shown as listed; the conversion uses NIST SP 811 Appendix B.8 (F-06).",
+        "Working title; no popularity or superiority claim."
+      ],
+      "nav_label": "Basket or oven: what to compare"
+    },
+    {
+      "id": "M-G5",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "a-no-hype-checklist-for-comparing-air-fryer-capacity",
+      "target_keywords": [
+        {
+          "term": "air fryer capacity",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer quart vs liter",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "title_tag": "Checklist for Comparing Air Fryer Capacity (working title)",
+      "meta_description": "Four checks before you compare capacity figures: the unit, the basket count, the oven-style figure, and capacity against footprint, with the arithmetic shown.",
+      "h1": "A no-hype checklist for comparing air fryer capacity",
+      "outline": [
+        {
+          "h2": "Check the unit before the number",
+          "purpose": "Show the 6 Quart and 6 liter conflict and its conversion.",
+          "facts_used": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ]
+        },
+        {
+          "h2": "Count the baskets",
+          "purpose": "Explain why a combined figure is not one basket's room.",
+          "facts_used": [
+            "M-G5-F4",
+            "M-G5-F5"
+          ]
+        },
+        {
+          "h2": "Check the oven-style figure",
+          "purpose": "Show that 26QT and 24.6 liters agree numerically.",
+          "facts_used": [
+            "M-G5-F6",
+            "M-G5-F7"
+          ]
+        },
+        {
+          "h2": "Read capacity next to footprint",
+          "purpose": "Show the derived ratio and what it leaves out.",
+          "facts_used": [
+            "M-G5-F8",
+            "M-G5-F9",
+            "M-G5-F10"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G5-B1",
+          "text": "Start with the unit. The dual-basket title says 6 Quart and its capacity field says 6 liters. Six liters is about 6.34 U.S. liquid quarts, using the NIST factor 1 U.S. liquid quart = 0.9463529 liter. Write every figure in one unit before you compare two machines.",
+          "fact_ids": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ],
+          "h": "Check the unit before the number"
+        },
+        {
+          "id": "M-G5-B2",
+          "text": "The dual-basket title lists two independent 3-quart baskets, which add up to the 6-quart figure in the same title. Each basket is smaller than the combined total. A single-basket record listed at 8 quarts gives one space of that size.",
+          "fact_ids": [
+            "M-G5-F4",
+            "M-G5-F5"
+          ],
+          "h": "Count the baskets"
+        },
+        {
+          "id": "M-G5-B3",
+          "text": "The oven-style title says 26QT and its capacity field says 24.6 liters. These agree: 26 U.S. liquid quarts is about 24.6 liters on the NIST factor. So the two figures describe the same capacity in different units.",
+          "fact_ids": [
+            "M-G5-F6",
+            "M-G5-F7"
+          ],
+          "h": "Check the oven-style figure"
+        },
+        {
+          "id": "M-G5-B4",
+          "text": "Divide each capacity by the listed footprint (depth times width) to compare the room each record gives per square inch of counter. Dual basket: 6 quarts over 158.0 square inches is about 0.038 quarts per square inch. Single basket: 8 quarts over 172.1 square inches is about 0.046. Oven-style: 26 quarts over 267.0 square inches is about 0.097. This is arithmetic on listed figures. It does not measure how well any of them cooks.",
+          "fact_ids": [
+            "M-G5-F8",
+            "M-G5-F9",
+            "M-G5-F10"
+          ],
+          "h": "Read capacity next to footprint"
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G5-F1",
+          "field": "Dual-basket capacity, title",
+          "value": "6 Quart (listing title)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F2",
+          "field": "Dual-basket capacity, specification",
+          "value": "6 liters (capacity field)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), capacity",
+          "note": "Flag F-06"
+        },
+        {
+          "id": "M-G5-F3",
+          "field": "Quart to liter factor",
+          "value": "1 U.S. liquid quart = 9.463 529 x 10^-1 liter (exact, NIST)",
+          "source_url": "https://www.nist.gov/physical-measurement-laboratory/nist-guide-si-appendix-b8",
+          "source_ref": "NIST SP 811 Appendix B.8, quart (U.S. liquid) row (read 2026-11-17)",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F4",
+          "field": "Dual-basket baskets",
+          "value": "2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets (listing title)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F5",
+          "field": "Single-basket capacity",
+          "value": "8 quarts (capacity field)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), capacity",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F6",
+          "field": "Oven-style capacity, title",
+          "value": "26QT (listing title)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F7",
+          "field": "Oven-style capacity, specification",
+          "value": "24.6 liters (capacity field)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), capacity",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F8",
+          "field": "Dual-basket footprint (D x W)",
+          "value": "13.38 x 11.81 inches",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F9",
+          "field": "Single-basket footprint (D x W)",
+          "value": "12.75 x 13.5 inches",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G5-F10",
+          "field": "Oven-style footprint (D x W)",
+          "value": "16.9 x 15.8 inches",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "Before you compare capacities, check the current listing for the record you are considering.",
+        "link_label": "Open the Chefman 8 quart single basket listing",
+        "link_url": "https://link.amazon/B00hJ57DV",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "Arithmetic on listed figures only; ratios are not performance measures.",
+        "Unit conversion uses NIST SP 811 Appendix B.8.",
+        "No price, availability or rating is stated (F-02).",
+        "Working title; no popularity or superiority claim."
+      ],
+      "nav_label": "Capacity checklist"
+    },
+    {
+      "id": "M-G6",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "cleanup-and-counter-space-trade-offs-air-fryer",
+      "target_keywords": [
+        {
+          "term": "air fryer counter space",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer dishwasher safe basket",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "title_tag": "Cleanup vs Counter Space for Air Fryers (working title)",
+      "meta_description": "Weigh dishwasher-safe baskets against the listed footprint and height, using only the stated dimensions and care text.",
+      "h1": "How to weigh cleanup against counter space",
+      "outline": [
+        {
+          "h2": "What the listings say about cleaning",
+          "purpose": "Give the dishwasher statements that appear, and say where none appears.",
+          "facts_used": [
+            "M-G6-F1",
+            "M-G6-F2",
+            "M-G6-F3"
+          ]
+        },
+        {
+          "h2": "Footprint and height as listed",
+          "purpose": "Give the three dimension sets.",
+          "facts_used": [
+            "M-G6-F4",
+            "M-G6-F5",
+            "M-G6-F6"
+          ]
+        },
+        {
+          "h2": "The footprint trade-off",
+          "purpose": "Show the floor-area arithmetic.",
+          "facts_used": [
+            "M-G6-F4",
+            "M-G6-F6"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G6-B1",
+          "text": "The dual-basket title says its baskets are nonstick and dishwasher safe. The single-basket title says its basket is XL, nonstick and dishwasher-safe. The stored record for the oven-style model does not contain a dishwasher statement, so that cell is left blank rather than inferred. Read the care section on the listing before you assume the whole appliance is dishwasher safe.",
+          "fact_ids": [
+            "M-G6-F1",
+            "M-G6-F2",
+            "M-G6-F3"
+          ],
+          "h": "What the listings say about cleaning"
+        },
+        {
+          "id": "M-G6-B2",
+          "text": "The listed dimensions, depth by width by height, are 13.38 by 11.81 by 10.63 inches for the dual basket, 12.75 by 13.5 by 10 inches for the single basket, and 16.9 by 15.8 by 14.8 inches for the oven-style record. The single basket is the lowest of the three, which matters if the space sits under upper cabinets.",
+          "fact_ids": [
+            "M-G6-F4",
+            "M-G6-F5",
+            "M-G6-F6"
+          ],
+          "h": "Footprint and height as listed"
+        },
+        {
+          "id": "M-G6-B3",
+          "text": "Multiply depth by width to get the floor area each unit takes: about 158.0 square inches for the dual basket, 172.1 for the single basket, and 267.0 for the oven-style record. The oven-style record takes about 1.55 times the single basket's floor area on these figures. Whether that space is worth it depends on what you cook, which the listings cannot tell you.",
+          "fact_ids": [
+            "M-G6-F4",
+            "M-G6-F6"
+          ],
+          "h": "The footprint trade-off"
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G6-F1",
+          "field": "Dual-basket cleaning statement",
+          "value": "2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets (listing title)",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G6-F2",
+          "field": "Single-basket cleaning statement",
+          "value": "XL Nonstick Dishwasher-Safe Basket (listing title)",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G6-F3",
+          "field": "Oven-style cleaning statement",
+          "value": "No dishwasher statement in the stored record; cell left blank",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record)",
+          "note": "Blank by design"
+        },
+        {
+          "id": "M-G6-F4",
+          "field": "Dual-basket dimensions (D x W x H)",
+          "value": "13.38 x 11.81 x 10.63 inches",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G6-F5",
+          "field": "Single-basket dimensions (D x W x H)",
+          "value": "12.75 x 13.5 x 10 inches",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        },
+        {
+          "id": "M-G6-F6",
+          "field": "Oven-style dimensions (D x W x H)",
+          "value": "16.9 x 15.8 x 14.8 inches",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "Measure your counter first, then check the current listing for the record that fits.",
+        "link_label": "Open the Chefman 6 quart dual basket listing",
+        "link_url": "https://link.amazon/B04G1MEwY",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "Dimensions and care text as listed; nothing was tested.",
+        "Floor-area figures are arithmetic on listed dimensions, shown with the working.",
+        "Working title; no popularity or superiority claim."
+      ],
+      "nav_label": "Cleanup and counter space"
+    },
+    {
+      "id": "M-G7",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "questions-to-ask-before-buying-a-multi-function-kitchen-appliance",
+      "target_keywords": [
+        {
+          "term": "multi function kitchen appliance",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer toaster oven questions",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "title_tag": "Questions Before Buying a Multi-Function Appliance (working title)",
+      "meta_description": "Six questions for a multi-function kitchen appliance, illustrated with one listing that gives two function counts and two accessory counts.",
+      "h1": "Questions to ask before buying a multi-function kitchen appliance",
+      "outline": [
+        {
+          "h2": "Which functions will you use?",
+          "purpose": "Start with use, not the count.",
+          "facts_used": [
+            "M-G7-F1"
+          ]
+        },
+        {
+          "h2": "Does the count match the page?",
+          "purpose": "Show the function-count conflict.",
+          "facts_used": [
+            "M-G7-F2",
+            "M-G7-F3"
+          ]
+        },
+        {
+          "h2": "What is included?",
+          "purpose": "Show the accessory-count conflict.",
+          "facts_used": [
+            "M-G7-F4",
+            "M-G7-F5"
+          ]
+        },
+        {
+          "h2": "Brand, store and reviewer",
+          "purpose": "Separate the brand from the store and the review creator.",
+          "facts_used": [
+            "M-G7-F6",
+            "M-G7-F7",
+            "M-G7-F8"
+          ]
+        },
+        {
+          "h2": "Check the offer",
+          "purpose": "Check the offer condition before you buy.",
+          "facts_used": [
+            "M-G7-F9"
+          ]
+        },
+        {
+          "h2": "How big is it?",
+          "purpose": "Measure the spot before you choose.",
+          "facts_used": [
+            "M-G7-F10"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G7-B1",
+          "text": "Start with use, not the number. The oven-style record's About this item section lists eleven modes, including Bake, Toast, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. Pick three you would use each week, then check they are on the list.",
+          "fact_ids": [
+            "M-G7-F1"
+          ],
+          "h": "Which functions will you use?"
+        },
+        {
+          "id": "M-G7-B2",
+          "text": "The same oven-style page gives 24 cooking functions in its title and 25 cooking pre-sets in its About this item section. The site does not choose between them. Ask the seller, or read the product page on the day you buy.",
+          "fact_ids": [
+            "M-G7-F2",
+            "M-G7-F3"
+          ],
+          "h": "Does the count match the page?"
+        },
+        {
+          "id": "M-G7-B3",
+          "text": "The oven-style title says six cooking accessories are included. Its product description says 7 premium accessories, including an air fry basket, a rotisserie spit and a bake pan. Check the box contents against the listing you bought from.",
+          "fact_ids": [
+            "M-G7-F4",
+            "M-G7-F5"
+          ],
+          "h": "What is included?"
+        },
+        {
+          "id": "M-G7-B4",
+          "text": "The oven-style record lists its brand as Emeril. The product page links to the Emeril Store. A separate customer-review creator block names Innovation IQ. Brand, store and reviewer are different things, so read each one separately.",
+          "fact_ids": [
+            "M-G7-F6",
+            "M-G7-F7",
+            "M-G7-F8"
+          ],
+          "h": "Brand, store and reviewer"
+        },
+        {
+          "id": "M-G7-B5",
+          "text": "On the 2026-11-16 read, the default offer on the dual-basket and single-basket pages was a used item sold by Amazon Resale. Check the condition on the listing before you buy.",
+          "fact_ids": [
+            "M-G7-F9"
+          ],
+          "h": "Check the offer"
+        },
+        {
+          "id": "M-G7-B6",
+          "text": "The oven-style record's listed dimensions are 16.9 by 15.8 by 14.8 inches, the largest of the three records this site reads. Measure the spot first, then use the cleanup and counter-space guide to weigh the trade-off.",
+          "fact_ids": [
+            "M-G7-F10"
+          ],
+          "h": "How big is it?"
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G7-F1",
+          "field": "Oven-style modes",
+          "value": "Eleven modes listed in About this item: Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat, Keep Warm (read 2026-11-14)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "F-26 (read 2026-11-14)",
+          "note": "Flag F-26"
+        },
+        {
+          "id": "M-G7-F2",
+          "field": "Oven-style function count, title",
+          "value": "24 cooking functions (listing title)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), name_listing",
+          "note": ""
+        },
+        {
+          "id": "M-G7-F3",
+          "field": "Oven-style pre-set count, About this item",
+          "value": "25 COOKING PRE-SETS (read 2026-11-14)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "F-26 (read 2026-11-14)",
+          "note": "Flag F-26"
+        },
+        {
+          "id": "M-G7-F4",
+          "field": "Oven-style accessory count, title",
+          "value": "Six Cooking Accessories Included (2026-11-15 read)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "F-44 (read 2026-11-15): title segment",
+          "note": "Flag F-44"
+        },
+        {
+          "id": "M-G7-F5",
+          "field": "Oven-style accessory count, description",
+          "value": "Included are 7 premium accessories (2026-11-16 read)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "F-50 (read 2026-11-16): Product Description",
+          "note": "Flag F-50"
+        },
+        {
+          "id": "M-G7-F6",
+          "field": "Oven-style brand",
+          "value": "Emeril (brand field)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), brand",
+          "note": ""
+        },
+        {
+          "id": "M-G7-F7",
+          "field": "Oven-style store link",
+          "value": "Product page links to the Emeril Store",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), note on the product page",
+          "note": ""
+        },
+        {
+          "id": "M-G7-F8",
+          "field": "Oven-style review creator",
+          "value": "Customer-review creator block shows Innovation IQ (not the product brand)",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), note on the product page",
+          "note": ""
+        },
+        {
+          "id": "M-G7-F9",
+          "field": "Default offer on the 2026-11-16 read",
+          "value": "Used item, sold by Amazon Resale and fulfilled by Amazon",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3",
+          "source_ref": "F-49 (read 2026-11-16)",
+          "note": "Flag F-49"
+        },
+        {
+          "id": "M-G7-F10",
+          "field": "Oven-style dimensions (D x W x H)",
+          "value": "16.9 x 15.8 x 14.8 inches",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R",
+          "source_ref": "data/products.json (stored record), dimensions",
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "If a multi-function oven fits your counter and your menu, check the current listing before you decide.",
+        "link_label": "Open the Emeril Lagasse 26 quart listing",
+        "link_url": "https://link.amazon/B02NbDxp3",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "Listed specifications and stated functions only; nothing was tested.",
+        "Each conflict on the page is shown, not resolved (F-26, F-44, F-50).",
+        "No price, availability or rating is stated (F-02).",
+        "Working title; no popularity or superiority claim."
+      ],
+      "nav_label": "Questions before you buy"
     }
   ],
   "seo_rules": [

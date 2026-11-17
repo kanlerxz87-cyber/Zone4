@@ -2157,6 +2157,7 @@ def render(page: Page) -> str:
 {page.body}
 </main>
 <footer>
+  <p class="small"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} (Source: {ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) This site is not endorsed by or affiliated with Amazon.</p>
   <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>

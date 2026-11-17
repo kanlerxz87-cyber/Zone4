@@ -35,6 +35,9 @@ OFFICIAL_HOSTS = {
     # FTC consumer guidance, Amazon Actions status pages).
     "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
     "github.io", "oauth-redirect.googleusercontent.com",
+    # Added 2026-11-17 by session arena/391fd8db-zone4: NIST (SI conversion factors) and
+    # the W3C (Global Privacy Control specification, hosted on w3c.github.io).
+    "www.nist.gov", "w3c.github.io",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")

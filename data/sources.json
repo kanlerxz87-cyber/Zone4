@@ -8,9 +8,12 @@
       "affiliate-program.amazon.com",
       "www.ftc.gov",
       "api.github.com",
-      "github.com"
+      "github.com",
+      "www.nist.gov",
+      "w3c.github.io"
     ],
-    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43)."
+    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43).",
+    "added_by_391fd8db_2026_11_17": "Added 2026-11-17 by session arena/391fd8db-zone4: the NIST publisher of the SI guide (nist.gov, used for the unit-conversion factor) and the W3C publisher of the Global Privacy Control specification (w3c.github.io). Both are the authoritative owners of the fact cited."
   },
   "sources": [
     {
@@ -293,6 +296,60 @@
       "accessible": true,
       "used_for": "The standard the editorial suggestions are judged against: automation used primarily to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains in search, and bylines and automation disclosures are worth considering.",
       "notes": "Read in full on 2026-11-15 by session arena/d2a62d6b-zone4 and quoted verbatim in the questions register (Q-23 to Q-37). Google's own wording is repeated rather than paraphrased wherever it is relied on."
+    },
+    {
+      "id": "S-ASIN-DEF",
+      "title": "Amazon Selling Partner blog: Understanding ASIN numbers (what an ASIN is)",
+      "url": "https://sell.amazon.com/blog/what-is-an-asin",
+      "publisher": "Amazon Selling Partner blog (Amazon)",
+      "accessible": true,
+      "used_for": "The ASIN definition: a unique 10-character alphanumeric code. Used to show that the submitted 9-character short codes cannot be read as ASINs (F-55).",
+      "notes": "Read 2026-11-17 by session arena/391fd8db-zone4. Page dated Jun 4, 2025."
+    },
+    {
+      "id": "S-DIRECT-LINK",
+      "title": "Amazon Associates Central help: how do I build a simple text link to a specific item on Amazon.com?",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GP38PJ6EUR6PFBEC",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "The official direct product link format http://www.amazon.com/dp/ASIN/ref=nosim?tag=YOURASSOCIATEID, used to build the candidate Special Links in data/links.json.",
+      "notes": "Read 2026-11-17 by session arena/391fd8db-zone4. The page states the format and that it qualifies for the direct link bonus. Attribution is not confirmed (F-57)."
+    },
+    {
+      "id": "S-NIST-B8",
+      "title": "NIST Guide to the SI, Appendix B.8: factors for units listed alphabetically",
+      "url": "https://www.nist.gov/physical-measurement-laboratory/nist-guide-si-appendix-b8",
+      "publisher": "National Institute of Standards and Technology (US)",
+      "accessible": true,
+      "used_for": "quart (U.S. liquid) to liter: 9.463 529 x 10^-1 L. Used for the capacity arithmetic in the capacity checklist guide.",
+      "notes": "Read 2026-11-17 by session arena/391fd8db-zone4 (the Q section, quart (U.S. liquid) row)."
+    },
+    {
+      "id": "S-NIST-SP811",
+      "title": "NIST Special Publication 811: Guide for the Use of the International System of Units (SI)",
+      "url": "https://www.nist.gov/pml/special-publication-811",
+      "publisher": "National Institute of Standards and Technology (US)",
+      "accessible": true,
+      "used_for": "The publication that contains the conversion factors in Appendix B.8.",
+      "notes": "Read 2026-11-17 by session arena/391fd8db-zone4."
+    },
+    {
+      "id": "S-GPC",
+      "title": "Global Privacy Control: the browser signal and its specification (W3C)",
+      "url": "https://w3c.github.io/gpc/",
+      "publisher": "W3C (linked from globalprivacycontrol.org)",
+      "accessible": true,
+      "used_for": "The Global Privacy Control signal the tracker honours: no event is recorded or sent when the browser sends it.",
+      "notes": "Linked as the full specification from globalprivacycontrol.org, read 2026-11-17 by session arena/391fd8db-zone4. The specification text itself was not re-read this session."
+    },
+    {
+      "id": "S-OA-SEC4",
+      "title": "Associates Operating Agreement, Section 4 (no representation about traffic or income)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "The reason the campaign ledger has no forecast or conversion-score column.",
+      "notes": "Previously registered (Operating Agreement, Section 4). Cited for the ledger's no-forecast rule; this session did not re-read the page."
     }
   ],
   "non_official_reference_only": [

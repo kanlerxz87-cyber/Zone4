@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "description": "The five defined measurement events, what each one records, what is never sent, and how the optional self-hosted endpoint is switched on. The brief asks for five defined events; this repository had no event list before 2026-11-17, so the five below are proposed here and listed as a question for the owner (Q-45, D-40).",
+    "observed_utc": "2026-11-17",
+    "endpoint_default": "",
+    "endpoint_status": "Not built and not deployed. This repository has no endpoint code yet. Until an endpoint exists and its URL is set, no measurement data leaves the browser. GitHub Pages serves static files only, so the endpoint must run on an HTTPS host the owner controls (D-41).",
+    "consent_status": "Open (D-16, Q-49). Cookies are not used and no identifier is stored. Whether a consent notice is needed for the owner's audience is a legal question, so no endpoint is set up until it is decided.",
+    "status": "Proposed definitions, not implemented. No event fires on the live site yet."
+  },
+  "events": [
+    {
+      "id": "E1",
+      "name": "page_view",
+      "fires": "Once per page load, after the page has rendered.",
+      "fields": {
+        "page": "Site-relative path such as /products.html. No query string, no fragment."
+      },
+      "purpose": "Which pages are read. Read alongside Search Console queries once the owner connects it (Q-50)."
+    },
+    {
+      "id": "E2",
+      "name": "outbound_click",
+      "fires": "When a visitor follows a product link: any link with data-track=outbound_click.",
+      "fields": {
+        "page": "Path of the page the link is on.",
+        "link_id": "L-01 to L-05, from data/links.json.",
+        "asin": "Observed target ASIN (from data/links.json, not inferred from the click).",
+        "placement": "product-card, product-table or article-cta."
+      },
+      "purpose": "Which product links are used. It counts clicks on this site's links, not sales; orders come only from Associates reporting."
+    },
+    {
+      "id": "E3",
+      "name": "chooser_answer",
+      "fires": "When the three-question chooser on the front page returns a route.",
+      "fields": {
+        "page": "Path of the page.",
+        "route": "p1, p2 or p3: the product the route points to. The answers themselves are not sent."
+      },
+      "purpose": "Which format readers are routed to."
+    },
+    {
+      "id": "E4",
+      "name": "article_complete",
+      "fires": "Once per article view, when the end-of-article marker scrolls into view.",
+      "fields": {
+        "page": "Path of the article."
+      },
+      "purpose": "Whether the article is read to the end. A reader-engagement measure, not a conversion."
+    },
+    {
+      "id": "E5",
+      "name": "where_next_click",
+      "fires": "When a reader follows a link in the Where next block.",
+      "fields": {
+        "page": "Path of the article the block is on.",
+        "to": "Site-relative path of the target page."
+      },
+      "purpose": "Whether readers move between the guides, the comparison and the chooser."
+    }
+  ],
+  "privacy_rules": [
+    "No cookies are set and no visitor identifier is created or stored.",
+    "The browser sends only the event name and the fields listed above. It sends no referrer, no query string and no search terms.",
+    "The endpoint does not write the client IP address or the user-agent string. Its access log is turned off.",
+    "The endpoint stores daily counts per event, page and link, not one row per visitor.",
+    "If the browser sends Do Not Track or Global Privacy Control, no event is recorded or sent.",
+    "Each event is one HTTPS POST of at most 2 KB to the endpoint. Unknown fields are dropped; invalid events are refused with HTTP 400.",
+    "The local log on the Analytics page stays in the visitor's own browser and is never sent unless the owner sets an endpoint."
+  ],
+  "sources": [
+    {
+      "url": "https://w3c.github.io/gpc/",
+      "ref": "Global Privacy Control specification (W3C), linked as the full spec from globalprivacycontrol.org; the browser signal the tracker honours"
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "ref": "Program Policies: the Associates reporting that the counts are not a substitute for"
+    },
+    {
+      "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "ref": "FTC Disclosures 101: disclosure placement, which the page-level measurement must not hide"
+    }
+  ]
+}
