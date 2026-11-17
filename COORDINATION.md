@@ -1307,5 +1307,9 @@ same brief at wrap-up time — PR #82 (`arena/1f4a7a22-zone4`) and PR #69 (`aren
 `arena/3d2ad125-zone4`'s log) — neither is merged or closed by this session; their reviewers should read this
 reconciliation first.
 
-**PR record:** appended below after the merge.
+**PR record:** PR [#85](https://github.com/kanlerxz87-cyber/Zone4/pull/85) (`arena/cc32105d-zone4` → `main`)
+merged 2026-11-17 with `gh pr merge --merge`; PR checks (audit, verify ×2) green; Pages `built` for `5535e536`,
+HTTPS enforced, live at https://kanlerxz87-cyber.github.io/Zone4/ (confirmed via the GitHub Pages API). The merge
+commit on main is `5535e536`. Follow-up PRs #82 (`arena/1f4a7a22-zone4`) and #69 (`arena/6554fead-zone4`) were open
+at wrap-up and are left to their owners, with this reconciliation noted above.
 
