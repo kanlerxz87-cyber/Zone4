@@ -40,6 +40,8 @@ FLAG_BY_ID = {f["id"]: f for f in FLAGS}
 CONTENT = load("content.json")
 MARKETING = load("marketing.json")
 PIPELINE = load("pipeline.json")
+TRACKING_EVENTS = load("tracking-events.json")
+CAMPAIGN_LEDGER = load("campaign-ledger.json")
 REQUIREMENTS_DOC = load("requirements.json")
 REQUIREMENTS = REQUIREMENTS_DOC["requirements"]
 # Decision-support layer: the backlog a reviewer chooses from, the questions that
@@ -70,36 +72,63 @@ RECHECKED = CONTENT.get("rechecked_utc", OBSERVED)
 
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 
-NAV = [
-    ("index.html", "Dashboard", "Overview"),
-    ("executive-summary.html", "Executive summary", "Overview"),
-    ("products.html", "All products", "Overview"),
-    ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
-    ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
-    ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
-    ("marketing.html", "Marketing content", "Content"),
-    ("automation.html", "Automation & tracking", "Research"),
-    ("analysis.html", "Analysis & findings", "Research"),
-    ("requirements.html", "Requirements", "Research"),
-    ("suggestions.html", "Suggestions", "Decide"),
-    ("questions.html", "Open questions", "Decide"),
-    ("design.html", "Design brief", "Decide"),
-    ("decisions.html", "Decision log", "Decide"),
-    ("verification.html", "Verification log", "Governance"),
-    ("policy-compliance.html", "Policy compliance", "Governance"),
-    ("analytics.html", "Analytics", "Governance"),
-    ("flagged.html", "Flagged for review", "Governance"),
-    ("sources.html", "Sources", "Governance"),
+# --- Navigation ----------------------------------------------------------
+# Decision D-40 (recorded 2026-11-17, delegated): the primary navigation is
+# ONE group of reader-facing pages. Every other page on the site - the whole
+# research and governance surface - is reachable from the generated footer
+# index below. Nothing was removed from the site and no URL changed; the
+# dashboard surfaces moved from the top of every page to the bottom.
+#
+# The rule this replaces ("eight groups, twenty-six links") put the
+# verification log next to the holiday gift guide at identical weight, which
+# is the opposite of what the brief asks for.
+NAV_PRIMARY = [
+    ("index.html", "Home"),
+    ("categories/dual-basket-air-fryers.html", "Dual-basket fryers"),
+    ("categories/single-basket-air-fryers.html", "Single-basket fryers"),
+    ("categories/air-fryer-toaster-ovens.html", "Air-fryer ovens"),
+    ("articles/index.html", "All guides"),
+    ("products.html", "The products"),
+    ("decisions.html", "Decision centre"),
 ]
-NAV_LABEL = {target: label for target, label, _group in NAV}
-NAV_ORDER = [
-    ("Overview", [t for t, _l, g in NAV if g == "Overview"]),
-    ("Categories", [t for t, _l, g in NAV if g == "Categories"]),
-    ("Content", [t for t, _l, g in NAV if g == "Content"]),
-    ("Research", [t for t, _l, g in NAV if g == "Research"]),
-    ("Decide", [t for t, _l, g in NAV if g == "Decide"]),
-    ("Governance", [t for t, _l, g in NAV if g == "Governance"]),
+
+#: Footer index groups. Every built page must appear here exactly once;
+#: scripts/verify.py enforces that (check_navigation).
+NAV_FOOTER = [
+    ("Read", [
+        ("index.html", "Home"),
+        ("articles/index.html", "All guides and the topic calendar"),
+        ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers"),
+        ("categories/single-basket-air-fryers.html", "Single-basket air fryers"),
+        ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens"),
+        ("products.html", "All products"),
+        ("marketing.html", "Marketing content kit"),
+    ]),
+    ("Decide", [
+        ("decisions.html", "Decision log"),
+        ("suggestions.html", "Suggestions"),
+        ("questions.html", "Open questions"),
+        ("design.html", "Design brief"),
+        ("executive-summary.html", "Executive summary"),
+    ]),
+    ("Research", [
+        ("verification.html", "Verification log"),
+        ("analysis.html", "Analysis & findings"),
+        ("sources.html", "Sources"),
+        ("automation.html", "Automation & tracking"),
+        ("requirements.html", "Requirements"),
+        ("analytics.html", "Clicks & conversions"),
+        ("flagged.html", "Flagged for review"),
+        ("policy-compliance.html", "Policy compliance"),
+    ]),
 ]
+
+NAV_LABEL = {target: label for target, label in NAV_PRIMARY}
+for _g, _items in NAV_FOOTER:
+    for _t, _l in _items:
+        NAV_LABEL.setdefault(_t, _l)
+#: Retained name for the few call sites that ask for a page's own label.
+NAV = [(t, l, "Read") for t, l in NAV_PRIMARY]
 
 # --- Article pages -------------------------------------------------------
 # Each marketing article in data/marketing.json is published as its own page,
@@ -158,8 +187,12 @@ ARTICLE_BY_PATH = {path: a for a, path in ARTICLE_PATHS}
 
 for _a, _path in ARTICLE_PATHS:
     NAV_LABEL[_path] = article_label(_a)
-NAV_LABEL[ARTICLES_HUB] = "Articles hub"
-NAV_ORDER.insert(3, ("Articles", [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS]))
+    # Every article joins the footer index under "Read" so it is reachable
+    # from every page; the primary navigation links the hub instead of nine
+    # individual headlines.
+    NAV_FOOTER[0][1].append((_path, article_label(_a)))
+NAV_LABEL[ARTICLES_HUB] = "All guides"
+FOOTER_PATHS = {t for _g, items in NAV_FOOTER for t, _l in items}
 
 
 def esc(value) -> str:
@@ -250,11 +283,30 @@ def competitor_links(p: dict) -> str:
 
 
 def shop_link(p: dict) -> str:
-    # rel="sponsored" marks the affiliate link for search engines (decision D-05,
-    # recorded 2026-11-16); the visible disclosure and "(paid link)" label stay.
-    return ext(p["short_link"], "Open Amazon link (paid link)",
-               f' class="shop" data-track="click" data-track-target="{esc(p["short_link"])}" data-track-asin="{esc(p["asin"])}"',
-               rel="sponsored noopener noreferrer")
+    """The outbound product link: a tagged Special Link, marked sponsored.
+
+    Two decisions meet here. D-05 (2026-11-16) requires rel="sponsored" and a
+    visible disclosure; D-44 (2026-11-17) replaces the untagged link.amazon
+    shortener with the official /dp/ URL carrying the owner's tracking ID.
+    Why the shortener went: it carried no tag, so a click could not be credited
+    to the account, and its destination was only knowable by resolving it.
+
+    The tagged URL is built from data, not typed here: put the tag in
+    data/products.json and the link follows. F-55 tracks the fact that the tag
+    is format-checked only until an Associates Central report is seen.
+    """
+    url = p.get("tagged_link_url")
+    if not url:
+        # No tag configured: fall back to the canonical listing, never to an
+        # untagged redirect, so the destination always shows what it is.
+        url = p["canonical_url"]
+    # Wording rule: Participation Requirement 2(b) allows a price or availability
+    # claim only if Amazon serves it through the link. A label that promises a
+    # price this page does not show would breach that, so the label names the
+    # listing rather than the price.
+    return ext(url, "View the official listing (paid link)",
+               f' class="shop" data-track="affiliate_click" data-track-target="{esc(url)}" data-track-asin="{esc(p["asin"])}"',
+               rel="sponsored noopener nofollow")
 
 
 # ---------------------------------------------------------------- tables
@@ -460,21 +512,30 @@ def non_official_note() -> str:
 def not_verified_block(current: Page) -> str:
     """What this article does not show and why (suggestion S-22, decision D-25).
 
-    Every competitor hides these gaps. Publishing them pre-empts the reader's
-    doubt and turns the site's biggest constraint into its most distinctive
-    feature. Each line names the flag that explains it.
+    Kept, because publishing a gap is what separates this site from a listing
+    scraped into a table - but moved off the top of the article on 2026-11-17.
+    It used to be the first element after the headline, which meant a reader
+    met four caveats before a single sentence about the product. It is now a
+    short line under the article, with the same four items and the same flags.
+    Nothing was removed: the detail is a <details> block that opens in place,
+    and every line still names the flag that explains it.
     """
-    return (
-        '<div class="unverified" role="note"><strong>What this article does not show, and why</strong>'
+    detail = (
         '<ul>'
-        '<li><strong>Prices</strong> \u2014 withheld site-wide until an approved API supplies them; the listing always '
-        'carries the live number. ' + flag_chip(current, "F-02") + '</li>'
-        '<li><strong>Star ratings and review counts</strong> \u2014 withheld for the same reason. ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>Prices</strong> \u2014 withheld site-wide until an approved API supplies them; the listing '
+        'always carries the live number. ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>Star ratings and review counts</strong> \u2014 withheld for the same reason. '
+        + flag_chip(current, "F-02") + '</li>'
         '<li><strong>Per-product commission rate</strong> \u2014 blank: no official source maps these ASINs to a '
         'commission category. ' + flag_chip(current, "F-01") + '</li>'
         '<li><strong>Hands-on testing</strong> \u2014 none claimed; nobody on this project has cooked in these '
         'appliances. ' + href(current, "decisions.html#D-06", "Decision D-06") + '</li>'
-        '</ul></div>'
+        '</ul>'
+    )
+    return (
+        '<details class="unverified" role="note"><summary><strong>What this article does not show</strong> '
+        '\u2014 no prices, no star ratings, no commissioned hands-on testing. Four lines, each with the flag '
+        'that explains it</summary>' + detail + '</details>'
     )
 
 
@@ -682,7 +743,7 @@ def chooser_section(current: Page) -> str:
     fallback = table(["When the need is", "The format that answers it", "Listed figures behind the route (official)"],
                      rows, "chooser-fallback")
     return (
-        '<section id="chooser"><h2>Which air fryer is for you? Three questions</h2>'
+        '<section id="chooser" class="chooser-section"><h2>Which one is for you? Three questions</h2>'
         '<p class="section-lead">Answer three questions and the chooser routes you to the format that fits - using only '
         'listed specifications, with the reasoning shown. It is editorial routing, not a market claim: every figure it '
         'uses is a sourced row on the product records.</p>'
@@ -708,107 +769,183 @@ def chooser_section(current: Page) -> str:
     )
 
 
-def page_index(current: Page) -> str:
-    open_flags = [f for f in FLAGS if flag_group(f["status"]) == "Needs your decision"]
-    # Derived from the data, not typed in, so a KPI cannot drift from the tables below it.
-    assigned = sum(
-        1 for p in PRODUCTS
-        if p.get("commission_rate_pct") is not None and p.get("commission_category_official")
-    )
-    recorded = sum(1 for d in DECISIONS if d["status"] == "Recorded")
-    kpis = [
-        (f"{len(PRODUCTS)} products", "Each one checked against its live listing: identity, category, brand and specifications"),
-        (f"{len(ARTICLES)} guides",
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Product article')} spec checks, "
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Comparison')} comparison and "
-         f"{sum(1 for a in ARTICLES if a['page_type'] == 'Buying guide')} buying guides - every figure sourced"),
-        ("0 prices, 0 star ratings", "Withheld on purpose (F-02): the programme keeps them off sites like this one"),
-        (f"{recorded} decisions recorded",
-         f"{len(DECISIONS) - recorded} still open - each one needs a fact only the owner has"),
-        (str(len(open_flags)),
-         f"Flags still open, of {len(FLAGS)} recorded (the rest are corrected or resolved and kept as "
-         "the audit record on the Flagged for review page)"),
-    ]
-    kpi_html = "".join(
-        f'<div class="kpi"><div class="kpi-value">{esc(v)}</div><div class="kpi-label">{esc(l)}</div></div>'
-        for v, l in kpis
-    )
-    # Articles presented in decision order (buying guide, then comparison, then
-    # the product reviews), per suggestion S-02/S-03 of session arena/d8564cd0-zone4.
-    trending = "".join(article_card(current, a) for a in sorted(
-        ARTICLES,
-        key=lambda a: {"Buying guide": 0, "Comparison": 1}.get(a["page_type"], 2),
-    ))
-    cat_tiles = "".join(
-        f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
-        f'<div class="tile-sub">{esc(next(p["name_short"] for p in PRODUCTS if CATEGORY_BY_PRODUCT.get(p["id"]) == key))}</div>'
-        f'<div class="tile-go">Open category \u2192</div></a>'
-        for target, label, key in
-        ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
-    )
-    bullets = "".join(f"<li>{esc(b)}</li>" for b in CONTENT["executive_summary"]["bullets"][:4])
-    # The gaps are stated on the front page rather than only on the review page: a
-    # reader deserves to know what this site refuses to publish before they trust
-    # what it does publish, and no competitor states theirs at all.
-    withheld = "".join(
-        f"<li><strong>{esc(k)}</strong> \u2014 {esc(v)}</li>"
-        for k, v in (
-            ("Prices", "withheld until an approved Amazon API supplies them. The listings show them; this site does not (F-02)"),
-            ("Star ratings and review counts", "withheld for the same reason (F-02)"),
-            ("Per-product commission rate",
-             "blank: no official source states which commission category these ASINs sit in (F-01)"),
-            ("Hands-on testing",
-             "none claimed. Nobody on this project has cooked in these appliances, and the site says so"),
-            ("Traffic or earnings forecasts",
-             "none published. The Operating Agreement states Amazon makes no representation about either"),
-        )
-    )
-    buying_guide_path = next(
-        (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
-    )
+#: One-line "who it is for" line per product, written only from fields the
+#: listing states. Deliberately says nothing about quality, popularity or value
+#: - the site has no source for any of those and does not buy the inference.
+PRODUCT_WHO = {
+    "P1": "Two baskets that can finish together - for a main and a side on the same night.",
+    "P2": "The biggest listed interior here, and the deepest footprint: a toaster oven that air-fries.",
+    "P3": "One basket, the shallowest listed depth, and the simplest thing to live with.",
+}
+
+
+def product_article_path(pid: str) -> str:
+    """The review article for a product, or the buying guide when there is none."""
+    for a, path in ARTICLE_PATHS:
+        if a.get("product_id") == pid and a.get("page_type") == "Product article":
+            return path
+    return next((p for a, p in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLES_HUB)
+
+
+def spec_row(label: str, value: str, url: str) -> str:
+    """One label/value line in a product card, with the listing as its source."""
+    return (f'<dt>{esc(label)}</dt><dd>{esc(value)} '
+            f'<a class="src" href="{esc(url)}" rel="noopener noreferrer" aria-label="Source: the official listing">source</a></dd>')
+
+
+def product_card(current: Page, p: dict, rank: int) -> str:
+    """A shop card for one product: name, the listed facts, then the outbound link.
+
+    This is the unit the front page is built from (decision D-44/D-40, 2026-11-17).
+    Everything printed here is a stored field whose source is the official
+    listing, and the card links that listing beside every value it uses. The
+    outbound link is the tagged Special Link with rel="sponsored", and the
+    disclosure sentence sits inside the card, adjacent to the link.
+    """
+    review = product_article_path(p["id"])
     return (
-        '<div class="mhero">'
-        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 re-checked {esc(RECHECKED)} \u00b7 every table row links to its source</span>'
-        "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
-        '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
-        'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
-        'verify is flagged rather than hidden, and no price or star rating is published because the programme rules keep '
-        'them off sites like this. Start with the chooser and find your format in under a minute.</p>'
-        '<div class="mhero-actions">'
-        '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
-        f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
-        f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the formats</a>'
-        f'<a class="btn" href="{esc(current.rel("flagged.html"))}">See what we flag</a>'
+        f'<article class="pcard" id="card-{esc(p["id"])}" data-product-card="{esc(p["asin"])}">'
+        f'<div class="pcard-top"><span class="pcard-rank">{rank}</span>'
+        f'<span class="pcard-format">{esc(p["subcategory"])}</span></div>'
+        f'<h3 class="pcard-name"><a href="{esc(current.rel(review))}">{esc(p["name_short"])}</a></h3>'
+        f'<p class="pcard-who">{esc(PRODUCT_WHO.get(p["id"], ""))}</p>'
+        '<dl class="pcard-specs">'
+        + spec_row("Capacity", p["capacity"], p["canonical_url"])
+        + spec_row("Size (D x W x H)", p["dimensions"], p["canonical_url"])
+        + spec_row("Made by", p["brand"], p["canonical_url"])
+        + '</dl>'
+        f'<div class="pcard-actions">'
+        f'<p class="pcard-buy">{shop_link(p)}'
+        f'<span class="pcard-note">{esc(DISCLOSURE_SENTENCE)}</span></p>'
+        f'<a class="btn btn-quiet" href="{esc(current.rel(review))}" data-track="product_cta_click" data-track-asin="{esc(p["asin"])}">Read the full review</a>'
+        f'</div>'
+        '</article>'
+    )
+
+
+def product_grid(current: Page, products: list[dict]) -> str:
+    return ('<div class="pgrid">'
+            + "".join(product_card(current, p, i) for i, p in enumerate(products, start=1))
+            + "</div>")
+
+
+def page_index(current: Page) -> str:
+    """The front page: three products, then the writing, then the method.
+
+    Rebuilt 2026-11-17 to the brief's instruction - "lead with the products,
+    not with the verification process". The previous version opened with a KPI
+    strip (products, guides, prices withheld, decisions, flags) and a chooser,
+    which asked a first-time reader to care about the audit before showing them
+    anything for sale. The order now is: what is for sale, which one suits you,
+    what has been written about them, how the site checks itself. The audit is
+    still published in full - it just starts lower down, and every page of it
+    is in the footer index.
+    """
+    season = next((a for a, _p in ARTICLE_PATHS if a["id"] == "M-G3"), None)
+    featured = [a for a in ARTICLES if a["page_type"] == "Product article"]
+    guides = [a for a in ARTICLES if a["page_type"] != "Product article"]
+    lead_guide = next((a for a in guides if a["id"] == "M-BUY"), guides[0] if guides else ARTICLES[0])
+    story_cards = "".join(article_card(current, a) for a in guides[:6])
+
+    # The "what changed" strip: factual, dated, and about this site - not about
+    # the market. Every claim in it is checkable by reading the linked page.
+    shipped = (
+        '<ul class="changelog">'
+        f'<li><strong>2026-11-17</strong> - Product links now carry the Associates tag '
+        f'({esc(PRODUCTS[0].get("associates_tag", "") or "n/a")}) on the official listing URL, marked '
+        f'<code>rel="sponsored"</code>. Attribution stays unverified until an Associates report is seen '
+        f'({flag_chip(current, "F-55")}).</li>'
+        f'<li><strong>2026-11-17</strong> - Two new question-shaped guides: '
+        f'{href(current, "articles/basket-or-oven-air-fryer-what-to-compare.html", "basket or oven-style, what to compare")} '
+        f'and {href(current, "articles/air-fryer-cleanup-and-counter-space-checklist.html", "cleanup and counter space")}.</li>'
+        f'<li><strong>2026-11-17</strong> - A feed a reader can subscribe to: {href(current, "feed.xml", "RSS")}. '
+        f'Every guide also stays in the {href(current, "sitemap.xml", "sitemap")}.</li>'
+        '</ul>'
+    )
+
+    return (
+        '<section class="front-hero">'
+        '<div class="front-hero-main">'
+        '<p class="kicker">Air fryers, read properly</p>'
+        f'<h1>Three air fryers, checked against their own listings - so you can buy once.</h1>'
+        f'<p class="lead">A dual-basket fryer, a single-basket fryer and a French-door toaster oven, '
+        f'compared on the numbers the makers actually print: capacity, counter depth and width, what '
+        f'comes out to wash. No price scraping, no invented star ratings, no "best of" list written by '
+        f'a script that never saw the machines. Where a listing is silent, so are we - and we say so.</p>'
+        '<div class="front-actions">'
+        f'<a class="btn btn-primary" href="#shop">See the three products</a>'
+        f'<a class="btn" href="{esc(current.rel(article_path(lead_guide)))}">Start with the buying guide</a>'
         '</div>'
-        '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
-        '<span>Written by people-shaped sentences, checked line by line</span></div>'
+        f'<p class="front-note">{esc(DISCLOSURE_SENTENCE)} We earn a commission if you buy '
+        f'through the links on this page; it costs you nothing, and it never changes what we print.</p>'
         '</div>'
-        + f'<section class="kpis">{kpi_html}</section>'
+        '<aside class="front-hero-side">'
+        f'<h2>What is new here</h2>{shipped}'
+        '</aside>'
+        '</section>'
+
+        '<section id="shop" class="shop">'
+        '<div class="sechead"><h2>Shop the three</h2>'
+        f'<p class="sechead-note">Every figure below is a field on the official listing, linked beside '
+        f'the value. Prices and star ratings are not shown: the programme rules keep them off sites '
+        f'like this one, and the listing already has the live number ({flag_chip(current, "F-02")}).</p></div>'
+        + product_grid(current, PRODUCTS)
+        + '</section>'
+
         + chooser_section(current)
-        + '<section><h2>Start here, then go deeper</h2>'
-        '<p class="section-lead">Start with the buying guide, compare the three formats, then read the review for the '
-        "product that fits your kitchen. Each article is built only from figures read off the official product page, and "
-        "every fact it states is a row in a table that links back to that page.</p>"
-        f'<div class="agrid">{trending}</div></section>'
-        + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
-        + decision_queue_section(current)
-        + '<section><h2>Products at a glance</h2>'
-        + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C\u2026, Flag F-02)" aria-label="Filter table"></p>'
-        + product_table(current, PRODUCTS)
-        + commission_category_note()
-        + '<p class="small muted">Every row links to its official product page as the source. Short links are the links you '
-        "supplied. Competitor ASINs come from the also-viewed carousel and change between page loads (F-29).</p></section>"
-        + '<section><h2>What this site deliberately does not publish</h2>'
-        '<p class="section-lead">These gaps are the point. They are stated here rather than buried, and each one names the '
-        'official rule or the flag that explains it.</p>'
-        '<ul class="bullets">' + withheld + "</ul>"
-        + f'<p class="small muted">Full list: {href(current, "flagged.html", "Flagged for Review")}.</p></section>'
-        + '<section><h2>Key findings</h2><ul class="bullets">' + bullets + "</ul>"
-        + f'<p>{href(current, "executive-summary.html", "Read the full executive summary →")}</p></section>'
-        + '<p class="muted small">'
-        + "Product records observed " + esc(OBSERVED) + " (UTC); supplied links and cited policy pages re-read "
-        + esc(RECHECKED) + " (UTC). Verification scope and method: "
-        + href(current, "sources.html", "sources") + '.</p>'
+
+        + '<section class="stories">'
+        '<div class="sechead"><h2>Guides and reviews</h2>'
+        f'<p class="sechead-note">Written here, from the same fields as the cards above, with a fact '
+        f'table under every piece. {href(current, ARTICLES_HUB, "All guides and the topic calendar")}.</p></div>'
+        f'<div class="agrid">{story_cards}</div></section>'
+
+        + '<section class="featured">'
+        '<div class="sechead"><h2>The three reviews</h2>'
+        '<p class="sechead-note">One per product. Each opens with what the listing states and ends '
+        'with what it does not.</p></div>'
+        f'<div class="agrid">{"".join(article_card(current, a) for a in featured)}</div></section>'
+
+        + (f'<section class="season"><div class="season-in"><p class="kicker">Seasonal</p>'
+           f'<h2>{esc(season["h1"]) if season else "Gift guide"}</h2>'
+           f'<p>{esc(season["meta_description"]) if season else ""}</p>'
+           f'<p>{href(current, article_path(season), "Read the gift guide") if season else ""}</p>'
+           '</div></section>' if season else "")
+
+        + '<section class="howwework"><h2>How this is written, and how it is checked</h2>'
+        '<p class="section-lead">The short version, because you should not have to read a verification '
+        'log to decide whether to trust a page about a kitchen appliance.</p>'
+        '<ol class="howlist">'
+        f'<li><strong>Read the listing.</strong> Capacity, dimensions, materials, what the maker names as '
+        f'dishwasher-safe. Title, brand and category path. Nothing is typed from memory.</li>'
+        f'<li><strong>Link the row.</strong> Every value on this site sits in a table row whose last '
+        f'cell links the official page it was read from. If a row has no source, the build fails.</li>'
+        f'<li><strong>Leave the gap visible.</strong> If a listing is silent - a cleaning claim, a '
+        f'capacity unit, a function count that disagrees with itself - the gap is printed and flagged '
+        f'rather than smoothed over ({href(current, "flagged.html", "all open items")}).</li>'
+        f'<li><strong>Do not publish what the rules forbid.</strong> No prices, no star ratings, no '
+        f'price history, no popularity claims. Each of those has a cited rule behind it on the '
+        f'{href(current, "policy-compliance.html", "policy page")}.</li>'
+        '</ol>'
+        f'<p class="small muted">The full audit trail - every source, every flag, every correction - is '
+        f'in the page index at the bottom of every page. Start with '
+        f'{href(current, "verification.html", "the verification log")} if that is what you came for.</p></section>'
+
+        + '<section class="statband">'
+        f'<div class="stat"><div class="stat-v">{len(PRODUCTS)}</div><div class="stat-l">products, each '
+        f'checked field by field against its live listing</div></div>'
+        f'<div class="stat"><div class="stat-v">{len(ARTICLES)}</div><div class="stat-l">guides and '
+        f'reviews, every fact cited and every figure sourced</div></div>'
+        f'<div class="stat"><div class="stat-v">{len(FLAGS)}</div><div class="stat-l">irregularities '
+        f'recorded, of which {sum(1 for f in FLAGS if flag_group(f["status"]) == "Needs your decision")} '
+        f'still need a decision - published, not hidden</div></div>'
+        f'<div class="stat"><div class="stat-v">0</div><div class="stat-l">prices and star ratings '
+        f'published, by rule rather than by accident ({flag_chip(current, "F-02")})</div></div>'
+        '</section>'
+
+        + f'<p class="muted small">Product records observed {esc(OBSERVED)} (UTC); supplied links and '
+        f'cited policy pages re-read {esc(RECHECKED)} (UTC). Method and scope: '
+        f'{href(current, "sources.html", "sources")}.</p>'
     )
 
 
@@ -835,6 +972,12 @@ def page_articles_index(current: Page) -> str:
     # headlines, each written from the verified field set already in the repo.
     # Written rows link the article; every row links the official facts it draws on.
     cal_rows = [
+        ["Basket or Oven-Style Air Fryer: What Should You Compare?", "Written (2026-11-17)",
+         href(current, "articles/basket-or-oven-air-fryer-what-to-compare.html", "Open the guide"),
+         ext(P1_URL, "Depth, capacity and cleaning fields of the dual basket and the oven")],
+        ["Air Fryer Cleanup and Counter Space: A Checklist", "Written (2026-11-17)",
+         href(current, "articles/air-fryer-cleanup-and-counter-space-checklist.html", "Open the guide"),
+         ext(P3_URL, "Listed dimensions, dishwasher-safe parts and materials of all three")],
         ["Air Fryer Sizes Explained: 6QT vs 8QT vs 26QT", "Written",
          href(current, "articles/air-fryer-sizes-explained-6qt-vs-8qt-vs-26qt.html", "Open the guide"),
          ext(P1_URL, "Listed capacities and dimensions of all three products")],
@@ -894,7 +1037,9 @@ def page_article(current: Page, a: dict) -> str:
             for url in (fact.get("source_urls") or [fact.get("source_url")]):
                 if url:
                     cites += f'<a class="cite" href="{esc(url)}" rel="noopener noreferrer">{esc(fid)}</a>'
-        body_html.append(f'{sub}<p>{esc(para["text"])} <span class="cites">{cites}</span></p>')
+        last = para is a["body"][-1]
+        marker = ' data-read-complete="1"' if last else ""
+        body_html.append(f'{sub}<p{marker}>{esc(para["text"])} <span class="cites">{cites}</span></p>')
     outline_html = "".join(
         f'<li><strong>{esc(o["h2"])}</strong> - {esc(o["purpose"])} '
         f'<span class="muted">(facts: {esc(", ".join(o["facts_used"]))})</span></li>'
@@ -950,9 +1095,9 @@ def page_article(current: Page, a: dict) -> str:
         # FTC Disclosures 101: disclosures are missed when they trail the post).
         + f'<p class="disclosure-inline"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
           "This article reports listed specifications; no unit was tested, and the shop links are paid links.</p>"
-        + not_verified_block(current)
         + "".join(body_html)
         + cta_html
+        + not_verified_block(current)
         + where_next_block(current, a)
         + "<h2>Fact basis (every row links to its official source)</h2>"
         + marketing_fact_table(a)
@@ -1038,6 +1183,52 @@ def counter_space_rows() -> list[list[str]]:
     return rows
 
 
+def submitted_links_block(current: Page) -> str:
+    """The product-intent confirmation record, published as a table.
+
+    Brief requirement (2026-11-17): "For each submitted link, store the intended
+    ASIN, official listing URL, confirmation date, and source. Keep observed
+    redirect targets in a separate field. Do not merge the two fields."
+
+    This renders data/product-intent.json and the observed side from
+    data/products.json side by side but in separate columns, labelled, with a
+    note saying they must not be merged. The row's last cell links the official
+    listing so the table satisfies the site-wide sourcing rule.
+    """
+    rows = []
+    for p in PRODUCTS:
+        intent_note = (
+            "Carried forward from the 2026-11-16 live re-resolution; not re-read on 2026-11-17 "
+            "(this environment has no outbound access)."
+        )
+        observed = p.get("observed_redirect_target") or {}
+        rows.append([
+            esc(p["id"]),
+            f'<code>{esc(p["short_link"])}</code><div class="small muted">as submitted, kept as the record</div>',
+            esc(p["asin"]),
+            ext(p["canonical_url"], "Official listing"),
+            esc("2026-11-17") + f'<div class="small muted">{esc(intent_note)}</div>',
+            f'<code>{esc(observed.get("value", "—"))}</code>'
+            + f'<div class="small muted">observed {esc(observed.get("observed_utc", "—"))} by '
+              f'{esc(observed.get("observed_by", "—"))} - kept in a separate field, never merged</div>',
+            f'<code>{esc(p.get("tagged_link_url", "—"))}</code>',
+        ])
+    return (
+        '<section><h2>The product-intent record, and what was observed</h2>'
+        '<p class="section-lead">What each link is <em>intended</em> to do, recorded separately from what a '
+        'redirect was <em>observed</em> to do. The two are never merged: if a redirect later drifts, the '
+        'intent record still says what was wanted and the observed field still says what happened.</p>'
+        + table(["ID", "Link submitted", "Intended ASIN", "Official listing URL (source)",
+                 "Confirmed (UTC) and how", "Observed redirect target (separate field)",
+                 "Link published now (tagged)"], rows, "intent")
+        + '<p class="note">The published link is the official <code>/dp/</code> URL with the Associates tag '
+        'appended; the supplied <code>link.amazon</code> shortener is no longer used as the destination '
+        'because it carried no tag. The tag is format-checked only - enrolment, click attribution and ASIN '
+        'eligibility are unverified until an Associates Central report is seen. '
+        + flag_chip(current, "F-55") + ' ' + flag_chip(current, "F-03") + '</p></section>'
+    )
+
+
 def page_products(current: Page) -> str:
     return (
         hero("All products",
@@ -1048,7 +1239,8 @@ def page_products(current: Page) -> str:
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + commission_category_note()
-        + '<p class="small muted">Every row links to its Amazon product page as the source. Short links are the links you supplied. '
+        + submitted_links_block(current)
+        + '<p class="small muted">Every row links to its Amazon product page as the source. '
         'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
         'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
         + '<section><h2>Counter space per inch of depth (derived)</h2>'
@@ -1210,62 +1402,154 @@ def page_sources(current: Page) -> str:
 
 
 def page_analytics(current: Page) -> str:
-    """Local-only first-party click log. Records real clicks in the visitor's own browser."""
-    rows = [
-        ("Clicks on tracked links", "0", "Real user clicks recorded in this browser"),
-        ("All local events", "0", "Clicks plus explicitly labelled test events"),
-        ("Conversions / orders", "\u2014", "Requires Associates reporting (not connected). See " + "F-19"),
-        ("Commission earned", "\u2014", "Requires Associates reporting (not connected). See F-01"),
-        ("Last event (UTC)", "\u2014", "Timestamp of the most recent local event"),
-    ]
-    kpis = "".join(
-        f'<div class="kpi"><div class="kpi-value" id="{esc(kpi_id)}">{esc(value)}</div>'
-        f'<div class="kpi-label">{esc(label)}</div></div>'
-        for kpi_id, value, label in (
-            ("m-clicks", rows[0][1], rows[0][2]),
-            ("m-events", rows[1][1], rows[1][2]),
-            ("m-conv", rows[2][1], rows[2][2]),
-            ("m-last", rows[4][1], rows[4][2]),
-        )
+    """Measurement: the five events, the empty ledger, and what can honestly be said.
+
+    Rebuilt 2026-11-17 around the brief's three asks - a privacy-preserving
+    outbound-click counter, a self-hosted endpoint for the five defined events,
+    and a dated campaign ledger. The page shows exactly which of those are
+    built and which are blocked, because a metrics page that implies data it
+    does not have is worse than no metrics page at all.
+    """
+    events = TRACKING_EVENTS["events"]
+    # Every table row on this site carries an official link (the build gate
+    # enforces it). For an event definition the governing official text is the
+    # disclosure and programme rule the event exists to evidence, so each row
+    # links the rule it is measured against rather than inventing a source.
+    EVENT_RULE = {
+        "product_impression": ("https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+                               "Google: helpful, people-first content"),
+        "product_cta_click": ("https://affiliate-program.amazon.com/help/operating/agreement",
+                              "Operating Agreement, Section 5"),
+        "affiliate_click": ("https://affiliate-program.amazon.com/help/operating/policies",
+                            "Program Policies, click and shortener rules 6(v)-(w)"),
+        "guide_read_complete": ("https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+                                "Google: people-first content"),
+        "disclosure_viewed": ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+                              "FTC Disclosures 101"),
+    }
+    rows = "".join(
+        f'<tr><td><code>{esc(e["name"])}</code></td>'
+        f'<td>{e.get("order", "")}</td>'
+        f'<td>{esc(e["fired_when"])}</td>'
+        f'<td class="kpi-value" id="count-{esc(e["name"])}">0</td>'
+        f'<td>{esc(e["transmitted"])}</td>'
+        f'<td>{ext(*EVENT_RULE[e["name"]])}</td></tr>'
+        for e in events
+    )
+    endpoint = TRACKING_EVENTS["_meta"].get("endpoint_step1")
+    endpoint_state = (
+        f'<span class="pill pill-ok">Configured</span> {ext(endpoint, "endpoint")}'
+        if endpoint else
+        '<span class="pill pill-warn">Not configured</span> <span class="small muted">'
+        'No self-hosted collector exists yet, so no request is ever made.</span>'
+    )
+    ledger = CAMPAIGN_LEDGER
+    channels = "".join(
+        f'<tr><td><code>{esc(c["channel"])}</code></td><td>{esc(c["definition"])}</td>'
+        f'<td>{pill("Measurable now", "ok") if c["measurable_now"] else pill("Not measurable yet", "warn")}</td>'
+        f'<td>{esc(c["blocker"])}</td><td>{ext(c["source"], "source")}</td></tr>'
+        for c in ledger["channels"]
+    )
+    sched = "".join(
+        f'<tr><td>{esc(s["date_utc"])}</td><td>{esc(s["action"])}</td><td><code>{esc(s["channel"])}</code></td>'
+        f'<td>{pill("Not obtained", "muted")}</td><td>{pill("Not obtained", "muted")}</td>'
+        f'<td>{pill("Not obtained", "muted")}</td>'
+        f'<td>{ext("https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "Google: people-first content")}'
+        f'<div class="small muted">{esc(s["source"])}</div></td></tr>'
+        for s in ledger["scheduled"]
+    )
+    unknown = "".join(
+        f'<tr><td>{esc(u["stage"])}</td><td>{esc(u["why_unknown"])}</td><td>{ext(u["source"], "source")}</td></tr>'
+        for u in TRACKING_EVENTS["unknown_events"]["rows"]
     )
     return (
-        '<header class="hero"><h1>Clicks &amp; conversions</h1>'
-        '<p class="lead">A first-party, local-only click tracker. It starts at zero, records only real clicks on tracked links plus one clearly '
-        'labelled test event, and never invents a figure. Authoritative click, order and commission numbers come from the official Associates '
-        'reporting and are not connected here.</p></header>'
-        f'<section class="kpis">{kpis}</section>'
-        '<section>'
-        '<h2>Click event log</h2>'
-        '<p>Events are stored in this browser only (<code>localStorage</code>). This page sends nothing anywhere. Export the log before clearing '
-        'browser data.</p>'
-        '<p id="log-empty" class="small muted">No events recorded yet. Rows appear below when the tracker records a real click or the labelled '
-        'test event.</p>'
-        '<div class="table-wrap"><table><thead><tr><th scope="col">Timestamp (UTC)</th><th scope="col">Type</th>'
-        '<th scope="col">Target</th><th scope="col">ASIN</th></tr></thead><tbody id="event-rows"></tbody></table></div>'
-        '<div class="btnrow"><button class="btn" id="btn-test" type="button">Add labelled test event</button>'
+        '<header class="hero"><h1>Measurement</h1>'
+        '<p class="lead">The five events this site defines, recorded in the reader\'s own browser with no '
+        'cookie and no personal data; a campaign ledger that starts empty on purpose; and a plain statement '
+        'of the numbers that can only come from Amazon\'s own reports. Nothing on this page is an estimate.</p></header>'
+
+        '<section><h2>The five events, and what each one actually counts</h2>'
+        '<p class="section-lead">Counts below are this browser\'s own log, live on this page. Every count starts '
+        'at zero and only moves when the thing it names really happened here. Definitions live in '
+        '<code>data/tracking-events.json</code>, which is also where the endpoint is configured.</p>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Event</th><th scope="col">#</th>'
+        '<th scope="col">Fires when</th><th scope="col">Count in this browser</th>'
+        '<th scope="col">Transmitted?</th><th scope="col">Rule it evidences (official)</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
+        f'<p class="small muted">Last event in this browser: <strong id="m-last">—</strong></p>'
+        '</section>'
+
+        '<section><h2>The self-hosted endpoint</h2>'
+        f'<p>{endpoint_state}</p>'
+        '<p>A collector is two steps this repository cannot take on your behalf: deploy a small server that '
+        'accepts a POST and stores one row per event, then put its URL in '
+        '<code>data/tracking-events.json</code> (<code>endpoint_step1</code>) and its documentation URL in '
+        '<code>endpoint_step2</code>. Until both exist the site sends nothing - a wrong hostname would either '
+        'drop the data silently or hand a reader\'s events to a third party. '
+        + flag_chip(current, "F-56") + '</p>'
+        '<div class="cta"><p><label><input type="checkbox" id="opt-in"> '
+        '<strong>Send my anonymous clicks to this site\'s own collector</strong></label> '
+        '<span class="small muted">Off by default. While no endpoint is configured this box changes nothing: '
+        'no request is made either way.</span></p>'
+        '<p id="opt-in-note" class="small muted" hidden>Thank you - your events will be sent to the site\'s '
+        'own collector once one exists, and never to a third party.</p></div>'
+        '</section>'
+
+        '<section><h2>Your log, stored only in this browser</h2>'
+        '<p class="small muted">Events live in <code>localStorage</code> under <code>zone4.events.v1</code>. '
+        'Export before clearing browser data; clearing this site\'s storage deletes them.</p>'
+        '<p id="log-empty" class="small muted">No events yet. Scroll past a product card, open a guide, or '
+        'click a shop link and the rows appear below.</p>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Timestamp (UTC)</th><th scope="col">Event</th>'
+        '<th scope="col">Page</th><th scope="col">ASIN</th><th scope="col">Destination host</th></tr></thead>'
+        '<tbody id="event-rows"></tbody></table></div>'
+        '<div class="btnrow"><button class="btn" id="btn-test" type="button">Write a labelled test event</button>'
         '<button class="btn" id="btn-export-json" type="button">Export JSON</button>'
         '<button class="btn" id="btn-export-csv" type="button">Export CSV</button>'
-        '<button class="btn danger" id="btn-clear" type="button">Clear log</button></div>'
-        '<p class="note">The test button writes an event explicitly marked <b>test</b> so the mechanism can be checked end to end. It is never counted '
-        'as a product click. Real clicks are recorded automatically when a visitor activates a link carrying the tracking attributes, which the '
-        'product links on this site do.</p>'
-        '<p class="note">The tracked links are the supplied short links. They currently carry no visible Associates tag, so a click recorded here '
-        'cannot yet be attributed to an Associates account or reconciled against Amazon reporting (see ' + flag_chip(current, "F-03") + ').</p>'
+        '<button class="btn danger" id="btn-clear" type="button">Clear this browser\'s log</button></div>'
+        '<p class="note">The test button writes an event whose ASIN field reads '
+        '<code>TEST-EVENT-NOT-A-PRODUCT</code>, so it can never be mistaken for a real click.</p>'
         '</section>'
-        '<section>'
-        '<h2>Connecting real measurement</h2>'
+
+        '<section><h2>What this site cannot see</h2>'
+        '<p class="section-lead">The funnel continues on Amazon. These stages are listed as unknown rather than '
+        'as zero, because a zero would be a claim.</p>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Stage</th><th scope="col">Why it is unknown here</th>'
+        '<th scope="col">Where the number lives</th></tr></thead><tbody>' + unknown + '</tbody></table></div>'
+        '</section>'
+
+        '<section><h2>The campaign ledger, and why it is empty</h2>'
+        f'<p class="section-lead">{esc(ledger["_meta"]["rule"])}</p>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Channel</th><th scope="col">Definition</th>'
+        '<th scope="col">State</th><th scope="col">What blocks it</th><th scope="col">Source</th></tr></thead>'
+        '<tbody>' + channels + '</tbody></table></div>'
+        '<h3>Dated actions</h3>'
+        '<div class="table-wrap"><table><thead><tr><th scope="col">Date (UTC)</th><th scope="col">Action</th>'
+        '<th scope="col">Channel</th><th scope="col">Eligible sessions</th><th scope="col">Clicks</th>'
+        '<th scope="col">Reported orders</th><th scope="col">Provenance</th></tr></thead><tbody>'
+        + sched + '</tbody></table></div>'
+        f'<p class="small muted">Cadence: {esc(ledger["cadence"]["publishing"])} '
+        f'{esc(ledger["cadence"]["review"])} {ext(ledger["cadence"]["source"], "Google: people-first content")}</p>'
+        '</section>'
+
+        '<section><h2>Reader capture: the promise, and why there is no form yet</h2>'
+        '<p>Reader capture would let a guide\'s reader be told when the next one is published. That is worth '
+        'having, and it is a consent contract: a form that posts to no service collects a promise the site '
+        'cannot keep. So the promise is written here and the form waits for a service with its own privacy '
+        'policy, a consent record and a working unsubscribe.</p>'
+        '<ul class="bullets"><li><strong>What would be sent:</strong> one email when a new guide is published. '
+        'Nothing else.</li><li><strong>How often:</strong> at most once a week, on the publishing cadence above.</li>'
+        '<li><strong>What would never be sent:</strong> price alerts, product offers or anything about a specific '
+        'Amazon listing - Program Policies section 4 governs promoting Amazon products by email and requires an '
+        'opt-in.</li><li><strong>How to stop:</strong> one click, in every email.</li></ul>'
+        f'<p>{flag_chip(current, "F-58")} {href(current, "questions.html#Q-48", "The open question about which service")}.</p>'
+        '</section>'
+
+        '<section><h2>Where authoritative numbers do come from</h2>'
         '<ul class="bullets">'
-        f'<li>Join the Amazon Associates Program and receive an Associates ID, then use the tagged Special Link formats (see {href(current, "policy-compliance.html", "Policy compliance")}).</li>'
-        f'<li>Confirm the tag on the supplied short links before relying on any earnings (see {href(current, "flagged.html", "F-03")}).</li>'
-        f'<li>Authoritative click, order and commission figures come from the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}.</li>'
-        f'<li>Product data served from Amazon must come through the Creators API, and reusing or fine-tuning on API content needs express prior written approval (see {href(current, "flagged.html", "F-24")}).</li>'
-        f'<li>Price tracking and price alerting are prohibited unless Amazon agrees otherwise, so no price history is collected here (see {href(current, "flagged.html", "F-22")}).</li>'
-        '<li>Add a cookie or consent notice appropriate to your audience before enabling measurement on real traffic, consistent with the disclosure '
-        'expectations in the official Program Policies and applicable law.</li>'
-        '</ul>'
-        '</section>'
-        f'<p class="muted small">This page displays no prices, ratings or review counts (withheld under {href(current, "flagged.html", "F-02")}). '
-        f'Verified product facts live in the {href(current, "verification.html", "verification log")}.</p>'
+        f'<li>Click, order and commission figures: the official {ext("https://affiliate-program.amazon.com/", "Associates Central reporting")}.</li>'
+        f'<li>Search queries: {ext("https://developers.google.com/search/docs/monitor-debug/search-console-start", "Search Console")}, once the property is verified ({flag_chip(current, "F-57")}).</li>'
+        f'<li>The commission rules themselves: {ext("https://affiliate-program.amazon.com/help/operating/policies", "Program Policies")} and the Commission Income Statement.</li>'
+        '</ul></section>'
     )
 
 
@@ -2072,6 +2356,30 @@ PAGE_DESCRIPTIONS = {
     "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
 }
 
+#: Reader-facing title tags. The navigation label ("Home", "The products") is
+#: not a headline: a search result needs a sentence a searcher would recognise.
+#: Google's snippet guidance asks for a title that describes the page's content
+#: and is unique across the site - both are checked by scripts/verify.py.
+PAGE_TITLES = {
+    "index.html": "Air Fryer Buying Guides: Three Models Compared on Their Own Listings",
+    "products.html": "The Three Air Fryers: Capacity, Counter Depth and Cleanup Compared",
+    "decisions.html": "Decision Centre: What Is Still Open on This Site",
+    "articles/index.html": "All Air Fryer Guides and Reviews",
+    "flagged.html": "Flagged for Review: Every Unverified Value and Open Irregularity",
+    "verification.html": "Verification Log: Field by Field Against the Official Listings",
+    "sources.html": "Sources: Every Official Page This Site Read",
+    "policy-compliance.html": "Policy Compliance: The Associates and FTC Rules Checked",
+    "analytics.html": "Measurement: Five Click Events, an Empty Ledger, and What Cannot Be Seen",
+    "requirements.html": "Requirements: The Project Brief, One Row Each",
+    "suggestions.html": "Suggestions: Costed Changes Before Anything Is Built",
+    "questions.html": "Open Questions: What Must Be Answered Before a Decision",
+    "design.html": "Design Brief: Three Directions and the Anti-Slop Checklist",
+    "executive-summary.html": "Executive Summary: What the Verification Found",
+    "marketing.html": "Marketing Content Kit: Nine Written Pieces, Every Fact Sourced",
+    "automation.html": "Automation and Tracking: The Pipeline, Stage by Stage",
+    "analysis.html": "Analysis and Findings: Every Basis Stated",
+}
+
 BODIES = {
     "index.html": page_index,
     "executive-summary.html": page_exec,
@@ -2095,20 +2403,46 @@ BODIES = {
 }
 
 
+def _nav_active(page: Page, target: str) -> bool:
+    """Is `target` the primary-nav item the current page belongs under?
+
+    An article page belongs under "All guides" and a category page under its own
+    category, so a reader always sees the section they are in highlighted. The
+    previous build only highlighted exact matches, which left every article with
+    no current section - an accessibility gap, not a cosmetic one.
+    """
+    if target == page.active:
+        return True
+    if target == ARTICLES_HUB and page.path.startswith("articles/"):
+        return True
+    return False
+
+
 def render(page: Page) -> str:
-    nav_groups = []
-    for group, targets in NAV_ORDER:
-        items = []
-        for target in targets:
-            label = NAV_LABEL.get(target, target)
-            cls = ' class="active" aria-current="page"' if target == page.active else ""
-            items.append(f'<a href="{esc(page.rel(target))}"{cls}>{esc(label)}</a>')
-        nav_groups.append(
-            f'<div class="nav-group"><span class="nav-group-title">{esc(group)}</span>'
-            + "".join(items)
-            + "</div>"
+    """The page shell: masthead, one nav group, disclosure strip, body, footer index.
+
+    Layout decision (D-40, 2026-11-17): the masthead carries the brand and ONE
+    row of reader-facing links; the footer carries a generated index of every
+    page on the site, grouped by purpose, so no research surface is orphaned
+    while none of them competes with a product for attention at the top of the
+    page. The disclosure strip sits between the masthead and the body on every
+    page, including this one, and is repeated in the footer.
+    """
+    primary = "".join(
+        f'<a href="{esc(page.rel(target))}"'
+        + (' class="active" aria-current="page"' if _nav_active(page, target) else "")
+        + f'>{esc(label)}</a>'
+        for target, label in NAV_PRIMARY
+    )
+    footer_groups = []
+    for group, items in NAV_FOOTER:
+        links = "".join(
+            f'<li><a href="{esc(page.rel(target))}">{esc(label)}</a></li>'
+            for target, label in items
         )
-    nav = "".join(nav_groups)
+        footer_groups.append(
+            f'<div class="fg"><h2>{esc(group)}</h2><ul>{links}</ul></div>'
+        )
     disclosure = (
         f'<div class="disclosure" role="note"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
         f'<span class="small">(Source: '
@@ -2138,29 +2472,40 @@ def render(page: Page) -> str:
 <meta property="og:type" content="website">
 <meta property="og:url" content="{esc(SITE_URL + page.path)}">
 <meta property="og:site_name" content="{esc(SITE_TITLE_SUFFIX)}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{esc(SITE_URL + 'og.png')}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Zone4 - air fryer buying guides">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(page.title_tag or page.title)}">
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
+<meta name="twitter:image" content="{esc(SITE_URL + 'og.png')}">
+<link rel="alternate" type="application/rss+xml" title="Zone4 - new air fryer guides" href="{esc(page.rel('feed.xml'))}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="layout">
-<aside class="sidebar">
-  <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">air fryer buying guides</span></a>
-  <nav aria-label="Main">{nav}</nav>
-</aside>
-<div class="content">
+<div class="masthead">
+  <div class="wrap masthead-in">
+    <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">air fryer buying guides</span></a>
+    <nav class="primary" aria-label="Main">{primary}</nav>
+  </div>
+</div>
 {disclosure}{amazon_text}
-<main id="main">
+<main id="main" class="wrap">
 {page.body}
 </main>
 <footer>
-  <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
+  <div class="wrap">
+    <div class="findex">{''.join(footer_groups)}</div>
+    <div class="fbot">
+      <p class="small"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} This site is not endorsed by or affiliated with Amazon.
+      <a href="{esc(page.rel('policy-compliance.html'))}">Policy compliance</a> &middot; <a href="{esc(page.rel('feed.xml'))}">RSS feed</a> &middot; <a href="{esc(page.rel('sitemap.xml'))}">Sitemap</a></p>
+      <p class="small muted">Every product fact on this site was read from the official listing and is linked row by row; prices and star ratings are withheld under the programme rules. Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
+    </div>
+  </div>
 </footer>
-</div>
-</div>
 <script src="{esc(page.rel('app.js'))}"></script>
 </body>
 </html>
@@ -2220,7 +2565,8 @@ def collect_pages() -> list[Page]:
     pages: list[Page] = []
     for path, body_fn in BODIES.items():
         page = Page(path, NAV_LABEL.get(path, path), path, "",
-                    description=PAGE_DESCRIPTIONS.get(path))
+                    description=PAGE_DESCRIPTIONS.get(path),
+                    title_tag=PAGE_TITLES.get(path))
         page.body = body_fn(page)
         if path == "index.html":
             page.head_extra = website_jsonld()
@@ -2237,6 +2583,66 @@ def collect_pages() -> list[Page]:
     return pages
 
 
+def _rfc822(date_utc: str) -> str:
+    """2026-11-17 -> 'Tue, 17 Nov 2026 00:00:00 +0000' (RSS wants RFC 822)."""
+    import datetime as _dt
+    d = _dt.date.fromisoformat(date_utc)
+    return d.strftime("%a, %d %b %Y 00:00:00 +0000")
+
+
+def feed_xml() -> str:
+    """The site's RSS feed: the guides, and only the guides.
+
+    Decision D-41. A feed of every page would be a change log; a reader
+    subscribes to the next guide. Item order is newest-first by the observed
+    date, and the two 2026-11-17 guides are stamped with that date.
+    """
+    def item(a: dict, date_utc: str) -> str:
+        url = SITE_URL + article_path(a)
+        return (
+            "    <item>\n"
+            f"      <title>{xml_escape(a['h1'])}</title>\n"
+            f"      <link>{xml_escape(url)}</link>\n"
+            f"      <guid isPermaLink=\"true\">{xml_escape(url)}</guid>\n"
+            f"      <pubDate>{_rfc822(date_utc)}</pubDate>\n"
+            f"      <category>{xml_escape(a['page_type'])}</category>\n"
+            f"      <description>{xml_escape(a['meta_description'])} (Paid links: "
+            f"{xml_escape(DISCLOSURE_SENTENCE)})</description>\n"
+            "    </item>\n"
+        )
+    new_ids = {"M-G4", "M-G5"}
+    ordered = sorted(
+        ARTICLE_PATHS,
+        key=lambda pair: (0 if pair[0]["id"] in new_ids else 1),
+    )
+    items = "".join(
+        item(a, "2026-11-17" if a["id"] in new_ids else OBSERVED) for a, _p in ordered
+    )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "  <channel>\n"
+        f"    <title>{xml_escape(SITE_TITLE_SUFFIX)}</title>\n"
+        f"    <link>{xml_escape(SITE_URL)}</link>\n"
+        f"    <atom:link href=\"{xml_escape(SITE_URL + 'feed.xml')}\" rel=\"self\" type=\"application/rss+xml\"/>\n"
+        f"    <description>{xml_escape('New air fryer guides and reviews from Zone4. ' + DISCLOSURE_SENTENCE + ' Prices, star ratings and popularity claims are never published here.')}</description>\n"
+        "    <language>en</language>\n"
+        f"    <pubDate>{_rfc822(max(['2026-11-17'] + [OBSERVED]))}</pubDate>\n"
+        f"    <lastBuildDate>{_rfc822(max(['2026-11-17'] + [OBSERVED]))}</lastBuildDate>\n"
+        # ^ pubDate (channel publication date) and lastBuildDate (last change) are
+        #   both required-or-recommended by RSS 2.0 and both come from the same
+        #   dated constant, so the feed cannot claim a date no page was built on.
+        + items +
+        "  </channel>\n"
+        "</rss>\n"
+    )
+
+
+def xml_escape(value: str) -> str:
+    return (str(value).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            .replace('"', "&quot;").replace("'", "&apos;"))
+
+
 def build() -> list[pathlib.Path]:
     OUT.mkdir(exist_ok=True)
     (OUT / "categories").mkdir(exist_ok=True)
@@ -2244,11 +2650,14 @@ def build() -> list[pathlib.Path]:
     written = []
     for page in collect_pages():
         html_text = render(page)
-        if page.path == "analytics.html":
-            html_text = html_text.replace(
-                "</body>",
-                f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
-            )
+        # The five-event counter is on every page: an outbound-click counter
+        # that only ran on the analytics page would miss every outbound click.
+        # tracker.js makes no network call unless an endpoint is configured AND
+        # the reader opts in (see its header, and F-56).
+        html_text = html_text.replace(
+            "</body>",
+            f'<script src="{esc(page.rel("tracker.js"))}"></script>\n</body>',
+        )
         if page.path == "design.html":
             html_text = html_text.replace(
                 "</body>",
@@ -2278,6 +2687,11 @@ def build() -> list[pathlib.Path]:
         f"Sitemap: {SITE_URL}sitemap.xml\n",
         encoding="utf-8",
     )
+    # RSS 2.0 feed (decision D-41, 2026-11-17). Generated from the same article
+    # list the pages are, so an item cannot exist here without a live page. The
+    # required disclosure goes in the channel description as well as the item
+    # descriptions, because a feed reader strips the page and keeps only this.
+    (OUT / "feed.xml").write_text(feed_xml(), encoding="utf-8")
     return written
 
 

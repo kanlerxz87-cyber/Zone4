@@ -35,6 +35,9 @@ OFFICIAL_HOSTS = {
     # FTC consumer guidance, Amazon Actions status pages).
     "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
     "github.io", "oauth-redirect.googleusercontent.com",
+    # RSS Advisory Board: the publisher of the RSS 2.0 specification, cited for
+    # the feed's required elements (added 2026-11-17, D-41).
+    "www.rssboard.org",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
@@ -582,6 +585,131 @@ def check_required_pages() -> None:
                     fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
+def check_navigation() -> None:
+    """D-40: one primary nav group, and every built page in the footer index.
+
+    The brief asks for both halves, so both are checked: a second primary group
+    is a regression to the old eight-group rail, and a page missing from the
+    footer index is an orphaned research surface.
+    """
+    index = DOCS / "index.html"
+    if not index.exists():
+        fail("docs/index.html missing")
+        return
+    raw = index.read_text(encoding="utf-8")
+    navs = re.findall(r'<nav class="primary"[^>]*>(.*?)</nav>', raw, re.S)
+    if len(navs) != 1:
+        fail(f"expected exactly one primary nav row, found {len(navs)}")
+    nav_groups = re.findall(r'class="nav-group"', raw)
+    if nav_groups:
+        fail("the retired multi-group sidebar markup is still present")
+    findex = re.search(r'<div class="findex">(.*?)</div>\s*</div>\s*<div class="fbot"', raw, re.S)
+    if not findex:
+        fail("footer index (.findex) missing from the page shell")
+        return
+    footer_block = findex.group(1)
+    built = {str(p.relative_to(DOCS)) for p in DOCS.rglob("*.html")}
+    for rel in sorted(built):
+        # A page is reachable if its own path appears as a footer href; the
+        # builder writes relative paths, so match on the tail of the href.
+        if f'href="{rel}"' not in footer_block and f'href="../{rel}"' not in footer_block \
+                and f'href="../../{rel}"' not in footer_block:
+            fail(f"docs/{rel} is not listed in the footer index (D-40)")
+    # Every page must carry the same single primary row.
+    for page in sorted(DOCS.rglob("*.html")):
+        body = page.read_text(encoding="utf-8")
+        if body.count('<nav class="primary"') != 1:
+            fail(f"{page.relative_to(ROOT)}: expected exactly one primary nav row")
+
+
+def check_feed() -> None:
+    """D-41: the feed exists, is well-formed, and matches the published guides."""
+    import xml.etree.ElementTree as ET
+    feed = DOCS / "feed.xml"
+    if not feed.exists():
+        fail("docs/feed.xml missing (decision D-41)")
+        return
+    try:
+        root = ET.fromstring(feed.read_text(encoding="utf-8"))
+    except ET.ParseError as exc:
+        fail(f"docs/feed.xml is not well-formed XML: {exc}")
+        return
+    channel = root.find("channel")
+    if root.tag != "rss" or channel is None:
+        fail("docs/feed.xml is not an RSS 2.0 document")
+        return
+    items = channel.findall("item")
+    articles = load("marketing.json")["articles"]
+    if len(items) != len(articles):
+        fail(f"feed has {len(items)} items but {len(articles)} articles are published")
+    for field in ("title", "link", "description", "pubDate"):
+        if channel.find(field) is None:
+            fail(f"feed channel is missing <{field}>")
+    desc = (channel.findtext("description") or "")
+    if DISCLOSURE not in desc:
+        fail("feed channel description does not carry the required disclosure")
+    slugs = {a["slug"].strip("/") for a in articles}
+    for item in items:
+        link = item.findtext("link") or ""
+        slug = link.rsplit("/", 1)[-1].removesuffix(".html")
+        if slug not in slugs:
+            fail(f"feed item {link} does not correspond to a published article")
+        target = DOCS / "articles" / f"{slug}.html"
+        if not target.exists():
+            fail(f"feed advertises a page that does not exist: {link}")
+        if item.findtext("pubDate") is None:
+            fail(f"feed item {link} has no pubDate")
+    for page in sorted(DOCS.rglob("*.html")):
+        if 'type="application/rss+xml"' not in page.read_text(encoding="utf-8"):
+            fail(f"{page.relative_to(ROOT)}: does not advertise the feed (rel=alternate)")
+
+
+def check_tracked_links() -> None:
+    """D-44 + F-55: every outbound shop link is tagged, sponsored, and disclosed.
+
+    Three separate rules, each with a reason:
+      * the tag must be present, or the click cannot be attributed (F-03/F-55);
+      * rel must contain "sponsored" (D-05, Google's paid-link guidance);
+      * the disclosure sentence must sit in the same paragraph as the link, not
+        merely somewhere on the page (FTC Disclosures 101).
+    """
+    products = load("products.json")["products"]
+    tag = products[0].get("associates_tag")
+    if not tag:
+        fail("no Associates tag configured in data/products.json")
+        return
+    intent = load("product-intent.json")
+    by_id = {r["product_id"]: r for r in intent["products"]}
+    for p in products:
+        rec = by_id.get(p["id"])
+        if not rec:
+            fail(f"{p['id']}: no row in data/product-intent.json")
+            continue
+        if rec["intended_asin"] != p["asin"]:
+            fail(f"{p['id']}: intent ASIN {rec['intended_asin']} != product ASIN {p['asin']}")
+        if rec["official_listing_url"] != p["canonical_url"]:
+            fail(f"{p['id']}: intent listing URL does not match the canonical URL")
+        if not rec.get("confirmed_date_utc") or not rec.get("confirmation_source"):
+            fail(f"{p['id']}: intent record lacks a confirmation date or source")
+        expected = f"{p['canonical_url']}?tag={tag}"
+        if p.get("tagged_link_url") != expected:
+            fail(f"{p['id']}: tagged_link_url is not {expected}")
+        # The observed side must exist and must not be the intent side.
+        observed = (p.get("observed_redirect_target") or {})
+        if not observed.get("observed_utc") or not observed.get("observed_by"):
+            fail(f"{p['id']}: observed redirect target lacks a date or observer")
+        if "intended" in json.dumps(observed).lower():
+            fail(f"{p['id']}: observed and intended records appear merged")
+    for page in sorted(DOCS.rglob("*.html")):
+        raw = page.read_text(encoding="utf-8")
+        for m in re.finditer(r'<a [^>]*class="shop"[^>]*>', raw):
+            a_tag = m.group(0)
+            if f"tag={tag}" not in a_tag:
+                fail(f"{page.relative_to(ROOT)}: shop link without tag {tag}")
+            if "sponsored" not in a_tag:
+                fail(f"{page.relative_to(ROOT)}: shop link without rel=sponsored (D-05)")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -605,6 +733,9 @@ def main() -> int:
     check_site()
     check_design_page()
     check_required_pages()
+    check_navigation()
+    check_feed()
+    check_tracked_links()
     check_root_entry()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")

@@ -19,7 +19,21 @@
       }
     },
     "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50% and Home at 3.00%. These are category-level references only; the official sources reviewed do not map the supplied ASINs to a commission category. Product-level rate fields are intentionally null (F-01).",
-    "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands)."
+    "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands).",
+    "product_intent_record": {
+      "description": "Product-intent confirmation record. For every link submitted by the owner, the intended ASIN, the official listing URL it must resolve to, the date it was confirmed and the source of the confirmation are stored here. Observed redirect targets are NOT stored in this record: they live in data/products.json under each product's short_link_resolution / observed_redirect_target field, so that a later drift in a redirect cannot silently overwrite what was intended.",
+      "created_utc": "2026-11-17",
+      "created_by": "arena/59645da8-zone4",
+      "rule": "Separate from anywhere the observed redirect target is recorded. This record states what the link is intended to do and what it was checked to do; it is not evidence that Amazon attributes a click to the tag. The ASIN is the checkable identifier (Amazon's own definition: a 10-character product identifier used in /dp/ URLs), so the intent record is anchored to it rather than to a title that can change.",
+      "what_this_is_not": "It is not a claim that the link earns. Whether a click is attributed depends on the tag being present and valid in the enrolled Associates account - an account fact this repository cannot read (F-03, open).",
+      "tag_received_utc": "2026-11-17",
+      "tag_received_via": "Owner message in the 2026-11-17 session brief: 'Selected Tracking ID: shopnow047c-20'.",
+      "tag_format_check": "Matches the US Store ID pattern the official docs describe: a lowercase name, a hyphen, and a two-digit suffix. Format is a syntax check only - it is not evidence that the tag is enrolled or that Amazon will credit it.",
+      "tag_format_source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "tag_verification_status": "Unverified in-programme. The site can confirm the tag is present on every outbound link; only Associates Central can confirm the tag is enrolled, that clicks are recorded against it and that the three ASINs are eligible. See flags F-03 (updated) and F-55.",
+      "testing_rule": "One link per product is tested in the enrolled Associates workflow: open the link, confirm it lands on the intended ASIN, then confirm the click appears in Associates Central reporting before the second and third links are scaled. Until that report is seen, the links are published but the earning claim stays qualified."
+    },
+    "tag_note_2026_11_17": "The owner supplied the Associates tracking ID shopnow047c-20 on 2026-11-17. Every outbound product link on the site now carries it (tag= on the official /dp/ URL, rel=\"sponsored\"), replacing the untagged link.amazon short links as the destination. The supplies short links are retained in short_link and in the product-intent record's submitted_link_raw field as the submitted artefact. The site does not claim in-programme attribution until an Associates Central report is seen (F-03 updated; F-55 added)."
   },
   "products": [
     {
@@ -78,7 +92,17 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "associates_tag": "shopnow047c-20",
+      "tagged_link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "tagged_link_status": "Tag applied 2026-11-17 (owner-supplied tracking ID). Syntax checked only; enrolment, click attribution and ASIN eligibility are unverified (F-03, F-55).",
+      "observed_redirect_target": {
+        "value": "https://www.amazon.com/dp/B0CDY277D3",
+        "observed_utc": "2026-11-16",
+        "observed_by": "arena/4c552c78-zone4",
+        "record": "data/verification-session-4c552c78.json",
+        "note": "Where the supplied short link was last observed to land. Stored separately from the intent record on purpose: if a redirect later changes, the intent record still says what was wanted and this field says what happened. Not re-observed on 2026-11-17."
+      }
     },
     {
       "id": "P2",
@@ -136,7 +160,17 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "associates_tag": "shopnow047c-20",
+      "tagged_link_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "tagged_link_status": "Tag applied 2026-11-17 (owner-supplied tracking ID). Syntax checked only; enrolment, click attribution and ASIN eligibility are unverified (F-03, F-55).",
+      "observed_redirect_target": {
+        "value": "https://www.amazon.com/dp/B09B7SB46R",
+        "observed_utc": "2026-11-16",
+        "observed_by": "arena/4c552c78-zone4",
+        "record": "data/verification-session-4c552c78.json",
+        "note": "Where the supplied short link was last observed to land. Stored separately from the intent record on purpose: if a redirect later changes, the intent record still says what was wanted and this field says what happened. Not re-observed on 2026-11-17."
+      }
     },
     {
       "id": "P3",
@@ -192,7 +226,17 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "associates_tag": "shopnow047c-20",
+      "tagged_link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "tagged_link_status": "Tag applied 2026-11-17 (owner-supplied tracking ID). Syntax checked only; enrolment, click attribution and ASIN eligibility are unverified (F-03, F-55).",
+      "observed_redirect_target": {
+        "value": "https://www.amazon.com/dp/B08DKYBTPH",
+        "observed_utc": "2026-11-16",
+        "observed_by": "arena/4c552c78-zone4",
+        "record": "data/verification-session-4c552c78.json",
+        "note": "Where the supplied short link was last observed to land. Stored separately from the intent record on purpose: if a redirect later changes, the intent record still says what was wanted and this field says what happened. Not re-observed on 2026-11-17."
+      }
     }
   ]
 }

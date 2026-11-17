@@ -591,3 +591,232 @@ table.flags td:nth-child(3) { min-width: 220px; }
   .disclosure, .disclosure-inline { font-size: 12.5px; }
   main { padding: 10px 14px 28px; }
 }
+
+/* ===========================================================================
+   2026-11-17 — publication shell (decision D-40) and the product-first front
+   page. Everything below is additive and driven by the same tokens as the
+   rest of the sheet; the class names the builder emits are unchanged except
+   for the new .masthead / .primary / .findex / .pcard / .front-* blocks.
+
+   Why the shell changed: the sidebar put eight groups and twenty-six links -
+   including "Verification log" and "Requirements" - on the same rail as the
+   gift guide, so every reader met the audit before the products. The brief
+   for 2026-11-17 asks for the opposite, while keeping every research page
+   reachable. Hence: a masthead with ONE row of reader links, and a generated
+   footer index that lists every page on the site.
+   =========================================================================== */
+
+/* --- Frame: masthead over a single column --------------------------------- */
+.layout { display: block; min-height: 0; }
+.sidebar { display: none; }        /* retired; kept so no old markup breaks */
+.masthead {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(250, 247, 242, .94);
+  backdrop-filter: saturate(1.4) blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+main.wrap { padding-top: 6px; padding-bottom: 44px; }
+.masthead-in {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 22px; min-height: 68px; padding-top: 10px; padding-bottom: 10px;
+}
+.masthead .brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; }
+.masthead .brand-name {
+  font-family: var(--serif); font-size: 25px; font-weight: 700;
+  color: var(--ink); letter-spacing: -.01em;
+}
+.masthead .brand-tag {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: .14em;
+  color: var(--muted); font-weight: 700;
+}
+nav.primary { display: flex; flex-wrap: wrap; gap: 2px 4px; align-items: center; }
+nav.primary a {
+  display: inline-block; padding: 8px 11px; border-radius: 999px;
+  color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600;
+  white-space: nowrap;
+}
+nav.primary a:hover { background: var(--accent-soft); color: var(--accent-strong); }
+nav.primary a.active { background: var(--accent-soft); color: var(--accent-strong); }
+
+/* Disclosure strip: directly under the masthead, on every page. */
+.disclosure { padding: 9px 28px; }
+
+/* --- Footer index --------------------------------------------------------- */
+footer { border-top: 1px solid var(--line); background: var(--panel-soft); padding: 30px 0 40px; margin-top: 10px; }
+.findex { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px 26px; }
+.findex h2 {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .13em;
+  color: var(--muted); font-family: inherit; font-weight: 700; margin: 0 0 8px;
+}
+.findex ul { list-style: none; margin: 0; padding: 0; }
+.findex li { margin: 0 0 5px; }
+.findex a { color: var(--ink); text-decoration: none; font-size: 13.5px; }
+.findex a:hover { color: var(--accent-strong); text-decoration: underline; }
+.fbot { margin-top: 26px; padding-top: 16px; border-top: 1px dashed var(--line); }
+.fbot p { margin: 0 0 8px; max-width: 92ch; }
+
+/* --- Front page ------------------------------------------------------------ */
+.front-hero {
+  display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 34px; align-items: start; padding: 44px 0 30px;
+  border-bottom: 1px solid var(--line); margin-bottom: 8px;
+}
+.kicker {
+  text-transform: uppercase; letter-spacing: .16em; font-size: 11.5px;
+  font-weight: 750; color: var(--accent-strong); margin: 0 0 12px;
+}
+.front-hero h1 {
+  font-size: clamp(30px, 4.4vw, 47px); line-height: 1.08; letter-spacing: -.022em;
+  margin: 0 0 16px; max-width: 22ch;
+}
+.front-hero .lead { font-size: 17px; line-height: 1.62; color: #4a453d; max-width: 62ch; }
+.front-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 14px; }
+.front-note {
+  font-size: 13px; color: var(--muted); max-width: 62ch;
+  border-left: 3px solid var(--accent-soft); padding-left: 12px;
+}
+.front-hero-side {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 22px; box-shadow: var(--shadow);
+}
+.front-hero-side h2 { margin: 0 0 12px; font-size: 15px; letter-spacing: .02em; }
+.changelog { list-style: none; margin: 0; padding: 0; }
+.changelog li {
+  font-size: 13.5px; line-height: 1.55; color: #4a453d;
+  padding: 0 0 11px; margin-bottom: 11px; border-bottom: 1px dashed var(--line);
+}
+.changelog li:last-child { border-bottom: 0; padding-bottom: 0; margin-bottom: 0; }
+.changelog strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.sechead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; }
+.sechead h2 { margin-bottom: 4px; }
+.sechead-note { color: var(--muted); font-size: 13.5px; max-width: 70ch; margin: 0 0 14px; }
+.section-lead { max-width: 74ch; }
+
+/* Product cards: the shop grid the front page is built from. */
+.shop { padding-top: 34px; }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(285px, 1fr)); gap: 18px; }
+.pcard {
+  display: flex; flex-direction: column; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 16px; padding: 20px 20px 16px;
+  box-shadow: var(--shadow); transition: box-shadow .16s ease, border-color .16s ease, transform .16s ease;
+}
+.pcard:hover { border-color: #d8c9b2; box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.pcard-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.pcard-rank {
+  flex: 0 0 26px; height: 26px; border-radius: 50%; background: var(--accent-soft);
+  color: var(--accent-strong); display: grid; place-items: center;
+  font-weight: 750; font-size: 12.5px;
+}
+.pcard-format {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  font-weight: 700; color: var(--muted);
+}
+.pcard-name { font-size: 19px; line-height: 1.28; margin: 0 0 6px; letter-spacing: -.012em; }
+.pcard-name a { color: var(--ink); text-decoration: none; }
+.pcard-name a:hover { color: var(--accent-strong); }
+.pcard-who { color: #55504a; font-size: 14px; line-height: 1.5; margin: 0 0 14px; min-height: 3em; }
+.pcard-specs {
+  margin: 0 0 16px; padding: 12px 0 0; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 13px;
+}
+.pcard-specs dt { color: var(--muted); font-weight: 600; white-space: nowrap; }
+.pcard-specs dd { margin: 0; color: var(--ink); }
+.pcard-specs .src {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--accent); text-decoration: none; font-weight: 700;
+}
+.pcard-specs .src:hover { text-decoration: underline; }
+.pcard-actions { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.pcard-actions .btn { text-align: center; }
+.btn-quiet { background: transparent; box-shadow: none; border-color: var(--line); }
+.shop .pcard .shop, td .shop {
+  display: inline-block; background: var(--accent-strong); color: #fff;
+  border: 1px solid var(--accent-strong); border-radius: 10px; padding: 10px 16px;
+  font-weight: 700; font-size: 14.5px; text-decoration: none; box-shadow: var(--shadow);
+}
+.shop .pcard .shop:hover, td .shop:hover {
+  background: #7c3409; color: #fff; transform: translateY(-1px);
+}
+.pcard-note { font-size: 11px; color: var(--muted); margin: 12px 0 0; line-height: 1.45; }
+
+/* The chooser sits under the shop grid on the front page. */
+.chooser-section { padding-top: 40px; }
+
+/* Seasonal band */
+.season { margin: 40px 0 0; }
+.season-in {
+  background: linear-gradient(135deg, #fdf0e0 0%, var(--panel) 62%);
+  border: 1px solid var(--line); border-radius: 16px; padding: 26px 30px;
+  box-shadow: var(--shadow);
+}
+.season-in h2 { margin: 0 0 8px; font-size: 25px; }
+.season-in p { margin: 0 0 8px; max-width: 68ch; color: #4a453d; }
+
+/* How it is written */
+.howwework { padding-top: 42px; }
+.howlist { counter-reset: how; list-style: none; padding: 0; margin: 16px 0 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.howlist li {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px 16px 52px; position: relative; font-size: 14px; line-height: 1.58; color: #4a453d;
+}
+.howlist li::before {
+  counter-increment: how; content: counter(how);
+  position: absolute; left: 16px; top: 15px;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft);
+  color: var(--accent-strong); font-weight: 750; font-size: 12.5px;
+  display: grid; place-items: center;
+}
+.howlist strong { color: var(--ink); }
+
+/* Stat band */
+.statband {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px; background: var(--line); margin: 44px 0 10px;
+  border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+}
+.stat { background: var(--panel); padding: 20px 22px; }
+.stat-v { font-family: var(--serif); font-size: 32px; font-weight: 700; color: var(--accent-strong); line-height: 1; }
+.stat-l { font-size: 13px; color: var(--muted); margin-top: 7px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .front-hero { grid-template-columns: 1fr; gap: 22px; padding-top: 30px; }
+  .masthead-in { flex-direction: column; align-items: flex-start; gap: 4px; }
+  nav.primary { gap: 0; }
+  nav.primary a { padding: 7px 9px; font-size: 13.5px; }
+  .masthead { position: static; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .disclosure { padding: 9px 16px; }
+  .front-hero h1 { font-size: 30px; }
+  .front-actions .btn { width: 100%; text-align: center; min-height: 44px; }
+  nav.primary { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+  nav.primary a { text-align: left; }
+  .pcard-specs { grid-template-columns: 1fr; gap: 2px; }
+  .pcard-specs dt { margin-top: 6px; }
+  .season-in { padding: 20px 18px; }
+  .stat-v { font-size: 26px; }
+}
+@media print {
+  .masthead, .disclosure, footer .findex { display: none; }
+  .front-hero { display: block; }
+  .pcard { break-inside: avoid; }
+}
+
+/* --- The "what this article does not show" disclosure ----------------------
+   Moved from above the article body to a summary under it (2026-11-17): a
+   reader should meet the product before the caveats, and a <details> keeps the
+   four items one click away rather than gone. */
+details.unverified {
+  margin: 26px 0 6px; padding: 14px 18px; background: var(--panel-soft);
+  border: 1px solid var(--line); border-left: 3px solid #d9b168; border-radius: 10px;
+  font-size: 13.5px; color: #55504a;
+}
+details.unverified summary { cursor: pointer; font-size: 14px; color: var(--ink); }
+details.unverified summary::marker { color: var(--accent); }
+details.unverified ul { margin: 10px 0 2px; padding-left: 20px; }
+details.unverified li { margin-bottom: 6px; }
+details.unverified[open] summary { margin-bottom: 4px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; }

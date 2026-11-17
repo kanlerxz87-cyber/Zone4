@@ -59,8 +59,19 @@ OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
     "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
     "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
-    "github.io",
+    "github.io", "www.rssboard.org",
 }
+#: The masthead's single navigation row (decision D-40). Kept here so the audit
+#: can tell a primary page from a footer-indexed one.
+PRIMARY_NAV = [
+    ("index.html", "Home"),
+    ("categories/dual-basket-air-fryers.html", "Dual-basket fryers"),
+    ("categories/single-basket-air-fryers.html", "Single-basket fryers"),
+    ("categories/air-fryer-toaster-ovens.html", "Air-fryer ovens"),
+    ("articles/index.html", "All guides"),
+    ("products.html", "The products"),
+    ("decisions.html", "Decision centre"),
+]
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
@@ -230,6 +241,15 @@ def load_short_links() -> set[str]:
     return {p["short_link"] for p in products}
 
 
+def load_tag() -> str:
+    """The Associates tag configured in data/products.json (else empty)."""
+    try:
+        doc = json.loads((DATA / "products.json").read_text(encoding="utf-8"))
+        return doc["products"][0].get("associates_tag") or ""
+    except Exception:  # noqa: BLE001 - a missing tag is reported, not raised
+        return ""
+
+
 def load_asins() -> set[str]:
     products = json.loads((DATA / "products.json").read_text(encoding="utf-8"))["products"]
     return {p["asin"] for p in products}
@@ -290,7 +310,13 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
                 if host not in OFFICIAL_HOSTS:
                     fail(f"{rel}: external anchor to non-official host: {url}")
                 rel_attr = next((r for u, r in sp.external_anchors if u == url), "") or ""
-                if "noopener" not in rel_attr or "noreferrer" not in rel_attr:
+                if "noopener" not in rel_attr:
+                    fail(f"{rel}: external anchor missing rel=\"noopener\": {url}")
+                # Sponsored links drop noreferrer on purpose (D-05): the
+                # affiliate click must arrive at Amazon with its referrer so the
+                # click can be attributed, while noopener still protects the
+                # opener. Every other external link keeps both.
+                elif "sponsored" not in rel_attr and "noreferrer" not in rel_attr:
                     fail(f"{rel}: external anchor missing rel=\"noopener noreferrer\": {url}")
             elif host not in OFFICIAL_HOSTS:
                 warn(f"{rel}: external {tag} from non-official host: {url}")
@@ -317,22 +343,50 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
             nav_paths.add(str(target.relative_to(DOCS.resolve())))
         except ValueError:
             warn(f"{rel}: link escapes docs/: {href_url}")
+    # Non-HTML companions the build writes next to the pages: a link to one of
+    # these is a real, shipped file, not a missing page (added 2026-11-17 with
+    # the feed and the social card).
+    companions = {"feed.xml", "sitemap.xml", "robots.txt", "og.png", "styles.css",
+                  "app.js", "tracker.js", "design.js"}
     for np_ in sorted(nav_paths):
+        if np_ in companions:
+            continue
         if np_ not in on_disk:
             fail(f"{rel}: nav/inline link target missing on disk: {np_}")
     if len(sp.aria_current) > 1:
         warn(f"{rel}: more than one aria-current=\"page\"")
+    # Restated 2026-11-17 (D-40). The site now has two navigation surfaces: one
+    # primary row in the masthead, and a footer index of every page. "Is this
+    # page in a nav" therefore stopped being a useful test - every page is in
+    # the footer index by design. What still matters is that a reader can see
+    # which section they are in, i.e. that exactly one primary item is marked
+    # current. That is checked below against the primary row only.
     page_rel = str(path.relative_to(DOCS))
+    primary_hrefs = {href for href, _l in PRIMARY_NAV}
+    marked = [u for u in sp.aria_current]
+    if page_rel in {h.split("#")[0] for h in primary_hrefs}:
+        if len(marked) != 1:
+            warn(f"{rel}: primary nav page without exactly one aria-current=\"page\"")
+    elif page_rel.startswith("articles/") or page_rel.startswith("categories/"):
+        # These belong under "All guides" / their category and are highlighted
+        # by the builder; if the marker is missing the reader loses their place.
+        if len(marked) != 1:
+            warn(f"{rel}: section page without a current primary-nav item")
     if page_rel not in nav_paths:
-        warn(f"{rel}: page not present in the shared sidebar nav")
-    elif not sp.aria_current:
-        warn(f"{rel}: nav page without aria-current=\"page\"")
+        warn(f"{rel}: page not linked from anywhere on the site")
 
     # -- affiliate link hygiene: the FTC/Amazon disclosure is adjacent to each
     # link, and the link carries a plain-language paid-link label.
     for href, row_no, paragraph in sp.shop_links:
-        if href not in short_links:
-            fail(f"{rel}: shop link is not one of the supplied link.amazon short links: {href}")
+        # Changed 2026-11-17 (decision D-44, flag F-55): the live destination is
+        # the official /dp/ URL carrying the owner's Associates tag, not the
+        # untagged link.amazon shortener. The supplied short links stay on the
+        # record in data/product-intent.json and as text on products.html.
+        host = urlparse(href).hostname or ""
+        if host not in {"www.amazon.com", "amazon.com", "link.amazon"}:
+            fail(f"{rel}: shop link is not an Amazon host: {href}")
+        elif "tag=" not in href and host == "link.amazon":
+            warn(f"{rel}: shop link is the untagged supplied shortener: {href}")
         if row_no == 0:
             context = " ".join(paragraph or [])
         elif 1 <= row_no <= len(sp.row_texts):
@@ -347,6 +401,14 @@ def check_page(path: pathlib.Path, sp: PageParser, short_links: set[str]) -> Non
 
 
 def check_products_coverage(asins: set[str], short_links: set[str]) -> None:
+    """Every supplied ASIN and short link stays on the record.
+
+    Changed 2026-11-17 (D-44): the live shop links are now tagged /dp/ URLs, so
+    the supplied short links no longer appear as hrefs. They must still appear
+    as text on products.html - that page is the record of what the owner
+    submitted, and dropping them would lose the audit trail. The tagged link is
+    also checked, because a shop link with no tag earns nothing (F-55).
+    """
     page = DOCS / "products.html"
     if not page.exists():
         fail("docs/products.html missing")
@@ -357,7 +419,13 @@ def check_products_coverage(asins: set[str], short_links: set[str]) -> None:
             fail(f"products.html: ASIN {a} not listed")
     for s in sorted(short_links):
         if s not in raw:
-            fail(f"products.html: supplied short link {s} not listed")
+            fail(f"products.html: supplied short link {s} not listed as the submitted record")
+    tag = load_tag()
+    if tag:
+        if f"tag={tag}" not in raw:
+            fail(f"products.html: no link carries the configured tag {tag}")
+    else:
+        warn("products.html: no Associates tag configured in data/products.json")
 
 
 def check_live() -> None:

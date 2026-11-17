@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "description": "The five events this site defines for click and conversion measurement (brief: 'record the five defined events'). This file defines them; it does not contain measurements. Every count row is null because no authorised first-party report has been obtained - a count can only enter this file from an Associates Central report or from the site's own opted-in endpoint, never from an estimate.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/59645da8-zone4",
+    "privacy_rule": "No cookie, no fingerprint, no session replay, no cross-site identifier and no personal data. The client-side record holds the event name, the page path, the product ASIN and the browser's own timestamp, in localStorage, on the visitor's machine. Nothing is transmitted: the endpoint pair below is deliberately null.",
+    "opt_in_rule": "Transmission is off until the reader opts in on the analytics page, and both endpoint fields are empty by default. With endpoint_step1 and endpoint_step2 both null the outbound-click counter still records locally and never calls the network - the fetch is guarded by a null check, so an unconfigured endpoint cannot leak a request.",
+    "endpoint_step1": null,
+    "endpoint_step2": null,
+    "endpoint_note": "A self-hosted collector is two steps this repository cannot take on the owner's behalf: (1) deploy a small server that accepts a POST and stores one row per event; (2) put its URL in endpoint_step1 and the collector's public documentation URL in endpoint_step2. Until both exist the site does not guess a hostname: a wrong endpoint would either drop data silently or send a reader's events to a third party, which is what the privacy rule above rules out.",
+    "source_of_truth": "Authoritative click, order and commission figures come only from Associates Central reporting. This file records the on-site half of the funnel (impression, outbound click) that Amazon cannot see."
+  },
+  "events": [
+    {
+      "name": "product_impression",
+      "order": 1,
+      "fired_when": "A product card or a product table row is at least half visible in the viewport for one second (IntersectionObserver; no scroll handler). Fires once per product per page view.",
+      "why": "Answers 'was the product seen at all'. Without it, a page with no clicks cannot be told apart from a page nobody scrolled to.",
+      "fields": [
+        "event",
+        "page_path",
+        "asin",
+        "ts"
+      ],
+      "personal_data": "None. The page path and the ASIN are public. The timestamp is the browser clock at the moment of view.",
+      "stored_in": "localStorage key zone4.events.v1 on the visitor's device.",
+      "transmitted": "No, unless the reader opts in and an endpoint is configured."
+    },
+    {
+      "name": "product_cta_click",
+      "order": 2,
+      "fired_when": "The reader activates a call-to-action control that is not itself the outbound link - for example the 'Read the full review' button on a product card.",
+      "why": "Separates interest from departure. A reader who opens the review and a reader who leaves for the shop are different outcomes, and only this event makes the difference visible.",
+      "fields": [
+        "event",
+        "page_path",
+        "asin",
+        "ts"
+      ],
+      "personal_data": "None.",
+      "stored_in": "localStorage key zone4.events.v1.",
+      "transmitted": "No, unless the reader opts in and an endpoint is configured."
+    },
+    {
+      "name": "affiliate_click",
+      "order": 3,
+      "fired_when": "The browser follows an outbound Amazon link carrying rel=\"sponsored\". The event is written to local storage before the navigation starts.",
+      "why": "The denominator for every later conversion claim, and the one number on this site that is both first-party and honestly obtainable.",
+      "fields": [
+        "event",
+        "page_path",
+        "asin",
+        "destination_host",
+        "ts"
+      ],
+      "personal_data": "None. destination_host records the Amazon host the reader was sent to, so a mis-set link is visible in the log.",
+      "stored_in": "localStorage key zone4.events.v1.",
+      "transmitted": "No, unless the reader opts in and an endpoint is configured."
+    },
+    {
+      "name": "guide_read_complete",
+      "order": 4,
+      "fired_when": "The reader reaches the end of an article body: the last paragraph of the review or guide passes half the viewport. Fires once per article per page view.",
+      "why": "Tells an editorial session which guides are actually read rather than merely opened - the question a publishing cadence has to answer before a second wave is written.",
+      "fields": [
+        "event",
+        "page_path",
+        "ts"
+      ],
+      "personal_data": "None.",
+      "stored_in": "localStorage key zone4.events.v1.",
+      "transmitted": "No, unless the reader opts in and an endpoint is configured."
+    },
+    {
+      "name": "disclosure_viewed",
+      "order": 5,
+      "fired_when": "The disclosure strip under the masthead has been in the viewport for one second on the current page. Fires once per page view.",
+      "why": "A compliance check, not a marketing one: it evidences that the required sentence was actually shown above the fold, which is what the FTC and the Operating Agreement ask for and what no click count can show.",
+      "fields": [
+        "event",
+        "page_path",
+        "ts"
+      ],
+      "personal_data": "None.",
+      "stored_in": "localStorage key zone4.events.v1.",
+      "transmitted": "No, unless the reader opts in and an endpoint is configured."
+    }
+  ],
+  "unknown_events": {
+    "note": "Funnel stages the brief names that this site cannot honestly emit. Listed as unknowns, never as zeroes.",
+    "rows": [
+      {
+        "stage": "Add to cart / basket",
+        "why_unknown": "Happens on Amazon, after the reader leaves this site. Only Associates Central can report it.",
+        "source": "https://affiliate-program.amazon.com/"
+      },
+      {
+        "stage": "Order placed",
+        "why_unknown": "Same as above. What counts as a qualifying purchase is defined by the Commission Income Statement, not by anything this site can observe.",
+        "source": "https://affiliate-program.amazon.com/help/operating/policies"
+      },
+      {
+        "stage": "Shipped order and paid commission",
+        "why_unknown": "Associates Central earnings report plus the settlement rules. Nothing on this site can see it.",
+        "source": "https://affiliate-program.amazon.com/help/operating/agreement"
+      }
+    ]
+  }
+}

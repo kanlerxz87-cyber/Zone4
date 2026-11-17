@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "description": "The campaign ledger. Empty by design: one row per dated marketing action, and no row may be added except from an authorised first-party report or from a change this repository itself made and can date. No conversion rate, revenue estimate or forecast is calculated anywhere in this file.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/59645da8-zone4",
+    "rule": "Eligible sessions, clicks and reported orders are entered only when they arrive from an Associates Central report or from the site's own opted-in endpoint (data/tracking-events.json). A null cell means 'not obtained', not zero. An empty ledger is the honest starting state; a filled one with invented numbers would be the one thing this project must never ship.",
+    "provenance_rule": "Every future row carries date_utc, source (which report, or which deploy), channel and the report's own date. Where the action date and the report date differ, both are recorded.",
+    "what_is_not_here": "No conversion score, no revenue forecast, no 'trending' ranking and no ROI projection. Prices, ratings and per-ASIN commission rates are withheld site-wide (F-01, F-02), so per-product revenue arithmetic is not possible even with a ledger row."
+  },
+  "channels": [
+    {
+      "channel": "organic_search",
+      "definition": "Sessions that arrived from a search-engine result.",
+      "measurable_now": false,
+      "blocker": "No search-console property and no endpoint are connected. SG-29 is an owner step recorded on the Suggestions page.",
+      "source": "https://developers.google.com/search/docs/monitor-debug/search-console-start"
+    },
+    {
+      "channel": "direct_or_referral",
+      "definition": "Sessions from a typed URL, a bookmark or another site.",
+      "measurable_now": false,
+      "blocker": "No endpoint is configured, so the site sees nothing server-side.",
+      "source": "https://developers.google.com/search/docs/monitor-debug/search-console-start"
+    },
+    {
+      "channel": "on_site_navigation",
+      "definition": "Clicks from one page of this site to another, measured locally by the five events in data/tracking-events.json in the visitor's own browser.",
+      "measurable_now": true,
+      "blocker": "Measured per visitor; there is no aggregate until the reader opts in and an endpoint exists.",
+      "source": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+    }
+  ],
+  "ledger": [],
+  "cadence": {
+    "publishing": "One new guide per calendar week, published on a fixed weekday and recorded in the scheduled table below. A cadence is a commitment about the site's own behaviour, not a claim about traffic.",
+    "review": "The ledger is reviewed on the same weekday as publication. A week with no publishable row is recorded as a missed week rather than backfilled.",
+    "why_weekly": "Google's guidance rewards content written for people and updated when facts change; it does not reward volume. One well-sourced guide a week is a rate this project can hold with a single reviewer.",
+    "source": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+  },
+  "scheduled": [
+    {
+      "date_utc": "2026-11-17",
+      "action": "Publish the SG-27 to SG-30 reader-facing pass (one navigation group, shipped feed, documented analytics steps, five-event counter) and the two question-shaped guides M-G4 and M-G5 in data/marketing.json.",
+      "channel": "on_site_navigation",
+      "source": "This repository: the git commit dated 2026-11-17 on branch arena/59645da8-zone4.",
+      "eligible_sessions": null,
+      "clicks": null,
+      "reported_orders": null
+    }
+  ]
+}

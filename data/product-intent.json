@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "description": "Product-intent confirmation record. For every link submitted by the owner, the intended ASIN, the official listing URL it must resolve to, the date it was confirmed and the source of the confirmation are stored here. Observed redirect targets are NOT stored in this record: they live in data/products.json under each product's short_link_resolution / observed_redirect_target field, so that a later drift in a redirect cannot silently overwrite what was intended.",
+    "created_utc": "2026-11-17",
+    "created_by": "arena/59645da8-zone4",
+    "rule": "Separate from anywhere the observed redirect target is recorded. This record states what the link is intended to do and what it was checked to do; it is not evidence that Amazon attributes a click to the tag. The ASIN is the checkable identifier (Amazon's own definition: a 10-character product identifier used in /dp/ URLs), so the intent record is anchored to it rather than to a title that can change.",
+    "what_this_is_not": "It is not a claim that the link earns. Whether a click is attributed depends on the tag being present and valid in the enrolled Associates account - an account fact this repository cannot read (F-03, open).",
+    "tag_received_utc": "2026-11-17",
+    "tag_received_via": "Owner message in the 2026-11-17 session brief: 'Selected Tracking ID: shopnow047c-20'.",
+    "tag_format_check": "Matches the US Store ID pattern the official docs describe: a lowercase name, a hyphen, and a two-digit suffix. Format is a syntax check only - it is not evidence that the tag is enrolled or that Amazon will credit it.",
+    "tag_format_source": "https://affiliate-program.amazon.com/help/operating/policies",
+    "tag_verification_status": "Unverified in-programme. The site can confirm the tag is present on every outbound link; only Associates Central can confirm the tag is enrolled, that clicks are recorded against it and that the three ASINs are eligible. See flags F-03 (updated) and F-55.",
+    "testing_rule": "One link per product is tested in the enrolled Associates workflow: open the link, confirm it lands on the intended ASIN, then confirm the click appears in Associates Central reporting before the second and third links are scaled. Until that report is seen, the links are published but the earning claim stays qualified."
+  },
+  "products": [
+    {
+      "product_id": "P1",
+      "intended_asin": "B0CDY277D3",
+      "official_listing_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "submitted_link_raw": "https://link.amazon/B04G1MEwY",
+      "confirmed_date_utc": "2026-11-17",
+      "confirmation_source": "2026-11-17 session re-read of the stored record and the 2026-11-16 re-resolution logged in data/verification-session-4c552c78.json; the link -> ASIN mapping was not re-resolved live on 2026-11-17 because this environment has no outbound access to link.amazon or amazon.com.",
+      "confirmation_kind": "Carried forward from the last live re-resolution (2026-11-16); not re-read today.",
+      "tag_to_apply": "shopnow047c-20",
+      "tagged_special_link": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+      "link_code": null,
+      "link_code_note": "No linkCode parameter is added. Amazon's Special Link generator supplies linkCode and ref_ values that this environment cannot mint, and inventing them would make the link look more official than it is. The tag alone is a valid Associates parameter; the generator's extras are an optimisation, not a requirement.",
+      "tracking_report_seen": null,
+      "tracking_report_seen_note": "No Associates Central report has been read; this repository has no account access."
+    },
+    {
+      "product_id": "P2",
+      "intended_asin": "B09B7SB46R",
+      "official_listing_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "submitted_link_raw": "https://link.amazon/B02NbDxp3",
+      "confirmed_date_utc": "2026-11-17",
+      "confirmation_source": "2026-11-17 session re-read of the stored record and the 2026-11-16 re-resolution logged in data/verification-session-4c552c78.json; not re-resolved live on 2026-11-17 (no outbound access from this environment).",
+      "confirmation_kind": "Carried forward from the last live re-resolution (2026-11-16); not re-read today.",
+      "tag_to_apply": "shopnow047c-20",
+      "tagged_special_link": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+      "link_code": null,
+      "link_code_note": "Same rule as P1: no invented linkCode or ref_ parameter.",
+      "tracking_report_seen": null,
+      "tracking_report_seen_note": "No Associates Central report has been read."
+    },
+    {
+      "product_id": "P3",
+      "intended_asin": "B08DKYBTPH",
+      "official_listing_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "submitted_link_raw": "https://link.amazon/B00hJ57DV",
+      "confirmed_date_utc": "2026-11-17",
+      "confirmation_source": "2026-11-17 session re-read of the stored record and the 2026-11-16 re-resolution logged in data/verification-session-4c552c78.json; not re-resolved live on 2026-11-17 (no outbound access from this environment).",
+      "confirmation_kind": "Carried forward from the last live re-resolution (2026-11-16); not re-read today.",
+      "tag_to_apply": "shopnow047c-20",
+      "tagged_special_link": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+      "link_code": null,
+      "link_code_note": "Same rule as P1: no invented linkCode or ref_ parameter.",
+      "tracking_report_seen": null,
+      "tracking_report_seen_note": "No Associates Central report has been read."
+    }
+  ]
+}

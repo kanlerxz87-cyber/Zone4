@@ -11,7 +11,9 @@
       "The word 'amazon' as a search keyword - Participation Requirement 6(e) and Trademark Guidelines 1: Amazon Marks are to be used only to advertise the availability of products on an Amazon Site, with a corresponding Special Link, and are not to be used in Search Engine keyword use. The suggested title tags and meta descriptions below contain no Amazon Mark."
     ],
     "updated_utc": "2026-11-16",
-    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail."
+    "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail.",
+    "added_2026_11_17": "Two question-shaped guides added from the owner's 2026-11-17 editorial hypotheses: M-G4 'Basket or oven-style air fryer: what should you compare?' and M-G5 'Air fryer cleanup and counter space: a checklist'. Both are written from fact rows already verified against the three official listings, and both state explicitly where the evidence stops. Every article CTA now points at a tagged Special Link built from the owner's tracking ID (F-03 updated, F-55 added).",
+    "cta_wording_note_2026_11_17": "CTA text no longer promises price or availability. Participation Requirement 2(b) permits showing prices and availability only where Amazon serves the link or an approved API supplies them; a button promising either would breach that rule even though the destination listing does show them. The buttons now name the listing."
   },
   "articles": [
     {
@@ -43,7 +45,7 @@
         }
       ],
       "title_tag": "Chefman 6-Quart Dual-Basket Air Fryer: Spec Check, Sizes and Sync Finish",
-      "meta_description": "Two independent 3-quart baskets, a 200-450\u00b0F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
+      "meta_description": "Two independent 3-quart baskets, a 200-450°F digital range and easy-view windows: what the Chefman 6-quart dual-basket lists, who it fits, and every figure linked to its source.",
       "h1": "Two baskets, one finish line: the Chefman 6-quart dual-basket air fryer",
       "outline": [
         {
@@ -271,10 +273,11 @@
         }
       ],
       "cta": {
-        "text": "Check the current listing and availability",
+        "text": "Open the official listing for the dual-basket fryer and check it against the fields on this page.",
         "link_label": "Open the Chefman 6 quart dual basket listing",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -503,7 +506,7 @@
           "value": "Store link: Visit the Emeril Store; Innovation IQ is the contributor to a customer-review video, not the product brand or byline.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Brand store link, customer-review video block, and Item details table on the Amazon product page",
-          "note": "The review block also carries \u201cEarns Commissions\u201d; it is not a product-brand designation."
+          "note": "The review block also carries “Earns Commissions”; it is not a product-brand designation."
         },
         {
           "id": "M-P2-F9",
@@ -555,10 +558,11 @@
         }
       ],
       "cta": {
-        "text": "Check the current listing and availability",
+        "text": "Open the official listing for the French-door oven and check it against the fields on this page.",
         "link_label": "Open the 26QT French door air fryer toaster oven listing",
-        "link_url": "https://link.amazon/B02NbDxp3",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B09B7SB46R?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -597,7 +601,7 @@
         }
       ],
       "title_tag": "Chefman 8-Quart TurboFry 4-in-1 Air Fryer: Spec Check and Size Fit",
-      "meta_description": "Four presets, a 200-400\u00b0F range and a 450\u00b0F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
+      "meta_description": "Four presets, a 200-400°F range and a 450°F Hi-Fry option: the Chefman 8-quart single-basket air fryer's listed numbers, who it suits, and a source link behind every one.",
       "h1": "One big basket, 450 degrees: the Chefman 8-quart TurboFry 4-in-1",
       "outline": [
         {
@@ -809,10 +813,11 @@
         }
       ],
       "cta": {
-        "text": "Check the current listing and availability",
+        "text": "Open the official listing for the single-basket fryer and check it against the fields on this page.",
         "link_label": "Open the Chefman 8 quart air fryer listing",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating, review count or Amazon popularity badge appears in this article.",
@@ -1017,10 +1022,11 @@
         }
       ],
       "cta": {
-        "text": "Open the listing for the format you are considering",
+        "text": "Open the dual-basket listing and compare its fields against the oven's before you choose.",
         "link_label": "Dual basket listing",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating or review count appears anywhere in the comparison table.",
@@ -1243,7 +1249,7 @@
           "value": "Brand Name: Emeril; Manufacturer: Emeril Lagasse; product page links to the Emeril Store.",
           "source_url": "https://www.amazon.com/dp/B09B7SB46R",
           "source_ref": "Item details table and brand store link on the Amazon product page",
-          "note": "Confirmed; F-05 resolved. \u201cInnovation IQ\u201d is a customer-review video contributor, not the product brand."
+          "note": "Confirmed; F-05 resolved. “Innovation IQ” is a customer-review video contributor, not the product brand."
         },
         {
           "id": "M-BUY-F7",
@@ -1255,15 +1261,16 @@
         }
       ],
       "cta": {
-        "text": "Open the listing for the format that fits your kitchen",
+        "text": "Open the single-basket listing and run the method on this page against it.",
         "link_label": "Single basket fryer listing",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating or review count appears in the guide.",
         "Every step is tied to a verified field; no step depends on a withheld value.",
-        "Capacity units are kept as listed, and P2\u2019s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
+        "Capacity units are kept as listed, and P2’s function-count discrepancy is flagged; the P2 brand and manufacturer are confirmed from the Item details table (F-05 resolved)."
       ],
       "nav_label": "Buying guide"
     },
@@ -1513,10 +1520,11 @@
         }
       ],
       "cta": {
-        "text": "Check the current listing and availability for the format that fit your counter",
+        "text": "Open the dual-basket listing and check the sizes against your own counter.",
         "link_label": "Open the air fryer listings",
-        "link_url": "https://link.amazon/B04G1MEwY",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating, review count or popularity badge appears in this article.",
@@ -1742,10 +1750,11 @@
         }
       ],
       "cta": {
-        "text": "Check the current listing and availability before you wrap it",
+        "text": "Open the single-basket listing and check the format against the counter you are buying for.",
         "link_label": "Open the air fryer listings",
-        "link_url": "https://link.amazon/B00hJ57DV",
-        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
+        "link_url_note": "Tagged Special Link built from the owner's tracking ID shopnow047c-20 on 2026-11-17. Format-checked only; in-programme attribution is unverified until an Associates Central report is seen (F-03 updated, F-55)."
       },
       "compliance_notes": [
         "No price, star rating or review count appears in this gift guide (F-02); the omission is explained in the copy and points the reader to the live listing.",
@@ -1754,6 +1763,553 @@
         "No capacity conversions are made between quarts and liters."
       ],
       "nav_label": "Holiday gift guide"
+    },
+    {
+      "id": "M-G4",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "/basket-or-oven-air-fryer-what-to-compare/",
+      "nav_label": "Basket or oven",
+      "target_keywords": [
+        {
+          "term": "basket or oven air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "term": "air fryer basket vs oven style",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        },
+        {
+          "term": "what to compare before buying an air fryer",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        }
+      ],
+      "title_tag": "Basket or Oven-Style Air Fryer: What to Compare Before You Buy",
+      "meta_description": "Basket or oven-style air fryer? Compare the two formats on the four fields a listing actually states - counter depth, usable capacity, what fits inside, and cleanup - using the verified figures for one dual-basket fryer and one French-door oven.",
+      "h1": "Basket or oven-style air fryer: what should you compare?",
+      "outline": [
+        {
+          "h2": "The four fields that decide it",
+          "purpose": "Name the comparison up front so the rest of the guide is checkable.",
+          "facts_used": [
+            "M-G4-F1",
+            "M-G4-F2",
+            "M-G4-F3",
+            "M-G4-F4"
+          ]
+        },
+        {
+          "h2": "Counter depth first, because it disqualifies",
+          "purpose": "Start with the one number that can rule a format out before any cooking question.",
+          "facts_used": [
+            "M-G4-F2",
+            "M-G4-F4"
+          ]
+        },
+        {
+          "h2": "Capacity is listed in two units, so compare within a format",
+          "purpose": "Show why a litres-to-quarts comparison is not available on this evidence.",
+          "facts_used": [
+            "M-G4-F1",
+            "M-G4-F3",
+            "M-G4-F7"
+          ]
+        },
+        {
+          "h2": "What the basket format gives you",
+          "purpose": "Two independent zones, Sync Finish, windows.",
+          "facts_used": [
+            "M-G4-F5"
+          ]
+        },
+        {
+          "h2": "What the oven format gives you",
+          "purpose": "Presets, rotisserie, and the depth it asks for.",
+          "facts_used": [
+            "M-G4-F6",
+            "M-G4-F4"
+          ]
+        },
+        {
+          "h2": "Cleanup and handling, from the listed material and basket fields",
+          "purpose": "Say only what the listings state about dishwasher-safe parts and materials.",
+          "facts_used": [
+            "M-G4-F8"
+          ]
+        },
+        {
+          "h2": "A one-screen checklist",
+          "purpose": "Close with the checklist a reader can carry into the shop.",
+          "facts_used": [
+            "M-G4-F3",
+            "M-G4-F4",
+            "M-G4-F8"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G4-B1",
+          "h": "The four fields that decide it",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F2",
+            "M-G4-F3",
+            "M-G4-F4"
+          ],
+          "text": "Basket or oven-style is the first fork in the air-fryer aisle, and the listings make it harder than it needs to be by advertising capacity in whatever unit suits the product. Four fields decide it, and all four are printed on the listing: listed counter depth, listed capacity in its own unit, what the format can physically hold, and what the maker says about cleaning. What follows compares one dual-basket fryer and one French-door oven on exactly those four fields and nothing else."
+        },
+        {
+          "id": "M-G4-B2",
+          "h": "Counter depth first, because it disqualifies",
+          "fact_ids": [
+            "M-G4-F2",
+            "M-G4-F4"
+          ],
+          "text": "Measure the counter before you read another word. The dual-basket fryer lists 13.38 inches of depth; the French-door oven lists 16.9. That is three and a half inches of difference between two machines that both call themselves air fryers, and on a shallow counter run it is the difference between a usable appliance and one that lives on a chair. A common countertop is 24 inches deep, so both fit a standard run - but a machine placed under a wall cabinet, beside a kettle, or on a trolley needs the real number, not the standard one."
+        },
+        {
+          "id": "M-G4-B3",
+          "h": "Capacity is listed in two units, so compare within a format",
+          "fact_ids": [
+            "M-G4-F1",
+            "M-G4-F3",
+            "M-G4-F7"
+          ],
+          "text": "The dual basket lists 6 quarts in its title and 6 liters in its item details - the same machine, two units. The oven lists 24.6 liters. This site does not convert between them, because converting on the reader's behalf would launder a listing inconsistency into a clean number that no source actually states. Read the ratio as an ordering rather than a measurement: the oven's listed interior is several times the fryer's listed capacity, and that ordering is what matters, not the decimal places."
+        },
+        {
+          "id": "M-G4-B4",
+          "h": "What the basket format gives you",
+          "fact_ids": [
+            "M-G4-F5"
+          ],
+          "text": "Two independent 3-quart baskets, a Sync Finish control named in the title, easy-view windows through which you can watch food without pulling the drawer, and a 200 to 450 degree F range with a Hi-Fry option. In practice that is the format for a main and a side finishing at the same time, and for lifting a basket out to shake it. It is not the format for a tray of anything: the shape is a basket, not a shelf."
+        },
+        {
+          "id": "M-G4-B5",
+          "h": "What the oven format gives you",
+          "fact_ids": [
+            "M-G4-F6",
+            "M-G4-F4"
+          ],
+          "text": "French doors that open without pulling the machine forward, presets counted differently in two places on the listing (24 in one title segment, 25 in a feature heading - flagged rather than resolved, F-26), a dual-speed fan and a rotisserie named in the stored title segment. It is the format that can stand in for a toaster oven as well as a fryer, and it asks for 16.9 inches of depth to do it."
+        },
+        {
+          "id": "M-G4-B6",
+          "h": "Cleanup and handling, from the listed material and basket fields",
+          "fact_ids": [
+            "M-G4-F8"
+          ],
+          "text": "Both listings name parts as dishwasher-safe: the dual basket's two nonstick baskets are, and the single-basket fryer's basket is. Neither listing states that the whole machine is washable, so the honest reading is that the baskets come out and the housings get wiped. The dual basket's listed materials are metal and plastic; the oven's are stainless steel. Where a listing does not state a cleaning fact, this guide does not supply one."
+        },
+        {
+          "id": "M-G4-B7",
+          "h": "A one-screen checklist",
+          "fact_ids": [
+            "M-G4-F3",
+            "M-G4-F4",
+            "M-G4-F8"
+          ],
+          "text": "Measure the counter and write the depth down. Decide whether main-and-side-at-once is a weekly need or a nice-to-have; if it is a need, the basket format answers it directly. Decide whether the machine must also replace a toaster or a small oven; if it must, you are shopping in the oven format and the depth comes with it. Check what the listing actually names as dishwasher-safe rather than assuming the whole appliance is. Then open the two listings and compare the same four fields you started with."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G4-F1",
+          "field": "Dual-basket capacity as listed",
+          "value": "Title: 6 Quart combined (2 independent 3QT baskets); Item details capacity field: 6 liters",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "Two units on one page; both reported as listed (F-06)."
+        },
+        {
+          "id": "M-G4-F2",
+          "field": "Dual-basket dimensions as listed",
+          "value": "13.38\"D x 11.81\"W x 10.63\"H",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G4-F3",
+          "field": "French-door oven capacity as listed",
+          "value": "24.6 liters",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G4-F4",
+          "field": "French-door oven dimensions as listed",
+          "value": "16.9\"D x 15.8\"W x 14.8\"H",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G4-F5",
+          "field": "Dual-basket format and stated features",
+          "value": "Two independent 3-quart nonstick, dishwasher-safe baskets; Sync Finish named in the title; easy-view windows; 200-450 degrees F digital range; Hi-Fry named",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "Listing prose is not reproduced."
+        },
+        {
+          "id": "M-G4-F6",
+          "field": "Oven format and stated features",
+          "value": "French-door air fryer toaster oven; 24 one-touch presets in the current title segment (F-26 records the 25 reading elsewhere on the page); dual-speed fan and rotisserie named in the stored title segment",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G4-F7",
+          "field": "Capacity units across the set",
+          "value": "Capacities are listed in mixed units (quarts and liters); this site reports them as listed and does not convert",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "Derived convention of this site, stated so the reader can check it."
+        },
+        {
+          "id": "M-G4-F8",
+          "field": "Cleaning claims named on the listings",
+          "value": "Dual basket: two nonstick dishwasher-safe frying baskets. Single basket: dishwasher-safe basket. French-door oven: no dishwasher-safe claim was read in the stored fields",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B08DKYBTPH",
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "A blank is left rather than inferred for the oven."
+        }
+      ],
+      "cta": {
+        "text": "Open the dual-basket listing and compare its four fields against the oven's.",
+        "link_label": "Open the dual-basket listing (paid link)",
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3?tag=shopnow047c-20",
+        "link_url_note": "Tagged Special Link, built 2026-11-17 from the owner's tracking ID. Format-checked only (F-55).",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or popularity badge appears in this article.",
+        "Capacity figures are reported in their listed units and never converted.",
+        "The 24-versus-25 preset discrepancy is disclosed, not resolved (F-26).",
+        "The guide compares listing fields, not appliances under test: no hands-on claim is made (D-06)."
+      ]
+    },
+    {
+      "id": "M-G5",
+      "product_id": "ALL",
+      "page_type": "Buying guide",
+      "slug": "/air-fryer-cleanup-and-counter-space-checklist/",
+      "nav_label": "Cleanup & counter space",
+      "target_keywords": [
+        {
+          "term": "air fryer cleanup",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B0CDY277D3"
+        },
+        {
+          "term": "air fryer counter space",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B08DKYBTPH"
+        },
+        {
+          "term": "questions to ask before buying a multi function kitchen appliance",
+          "intent": "Informational",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/dp/B09B7SB46R"
+        }
+      ],
+      "title_tag": "Air Fryer Cleanup and Counter Space: A No-Hype Checklist",
+      "meta_description": "A checklist for the two things a listing never shows: where the appliance lives and how it gets cleaned. Built from the listed depth, width and dishwasher-safe fields of three air fryers, with every number linked to the page it came from.",
+      "h1": "Air fryer cleanup and counter space: a checklist for the parts a listing leaves out",
+      "outline": [
+        {
+          "h2": "Two questions the listing never answers",
+          "purpose": "Frame the checklist around space and cleaning rather than features.",
+          "facts_used": [
+            "M-G5-F1",
+            "M-G5-F4"
+          ]
+        },
+        {
+          "h2": "Measure the run, not the counter",
+          "purpose": "Turn depth and width into a fit decision.",
+          "facts_used": [
+            "M-G5-F1",
+            "M-G5-F2"
+          ]
+        },
+        {
+          "h2": "What is actually dishwasher-safe",
+          "purpose": "Report only the parts each listing names.",
+          "facts_used": [
+            "M-G5-F3",
+            "M-G5-F4",
+            "M-G5-F5"
+          ]
+        },
+        {
+          "h2": "Materials and what they mean for wiping",
+          "purpose": "Read the listed materials as a cleaning signal, no more.",
+          "facts_used": [
+            "M-G5-F6"
+          ]
+        },
+        {
+          "h2": "Four questions to ask before buying a multi-function appliance",
+          "purpose": "Generalise the checklist beyond these three products.",
+          "facts_used": [
+            "M-G5-F7",
+            "M-G5-F8"
+          ]
+        },
+        {
+          "h2": "The checklist, one screen",
+          "purpose": "Leave the reader with the list.",
+          "facts_used": [
+            "M-G5-F2",
+            "M-G5-F3",
+            "M-G5-F7"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G5-B1",
+          "h": "Two questions the listing never answers",
+          "fact_ids": [
+            "M-G5-F1",
+            "M-G5-F4"
+          ],
+          "text": "Air fryer listings are good at functions and bad at the two things that decide whether you keep using the appliance: whether it fits where you want to put it, and how much of it you have to wash by hand. Neither question needs a lab. Both can be answered from fields the listings already print, plus a tape measure and a look at your own counter."
+        },
+        {
+          "id": "M-G5-B2",
+          "h": "Measure the run, not the counter",
+          "fact_ids": [
+            "M-G5-F1",
+            "M-G5-F2"
+          ],
+          "text": "The three machines here list depths of 13.38, 12.75 and 16.9 inches, and widths of 11.81, 13.5 and 15.8 inches. Depth decides whether the appliance sits under a cabinet or overhangs the front edge of the counter; width decides whether it shares a run with the kettle and the coffee machine. Write both numbers down for the gap you actually have, then check them against the listing. A 24-inch counter is deep enough for all three; the run around them is usually the binding constraint, not the counter itself."
+        },
+        {
+          "id": "M-G5-B3",
+          "h": "What is actually dishwasher-safe",
+          "fact_ids": [
+            "M-G5-F3",
+            "M-G5-F4",
+            "M-G5-F5"
+          ],
+          "text": "This is where marketing language earns its reputation. The dual-basket fryer states that its two nonstick frying baskets are dishwasher-safe. The single-basket fryer states that its basket is. The French-door oven's stored fields carry no dishwasher-safe claim at all. That is not a claim that it cannot go in a dishwasher - it is an absence, and this guide leaves it as an absence rather than filling it in."
+        },
+        {
+          "id": "M-G5-B4",
+          "h": "Materials and what they mean for wiping",
+          "fact_ids": [
+            "M-G5-F6"
+          ],
+          "text": "The listings name their materials: metal and plastic for the dual basket, plastic and stainless steel for the single basket, stainless steel for the oven. Materials are a rough signal for how the outside will look after a month of cooking, not a cleaning instruction. The instruction you need is the one in the maker's own guide, which is not part of this site's verified field set."
+        },
+        {
+          "id": "M-G5-B5",
+          "h": "Four questions to ask before buying a multi-function appliance",
+          "fact_ids": [
+            "M-G5-F7",
+            "M-G5-F8"
+          ],
+          "text": "First: which parts come out, and which of those does the maker say are dishwasher-safe? Second: how deep and how wide is it, and does that fit the run you have rather than the counter in general? Third: which of its functions would you actually use in a normal week - a preset list is a menu, not a habit. Fourth: what does the maker's documentation say about cleaning the heating element and the interior, and is that somewhere you can reach? None of these four needs a review score to answer."
+        },
+        {
+          "id": "M-G5-B6",
+          "h": "The checklist, one screen",
+          "fact_ids": [
+            "M-G5-F2",
+            "M-G5-F3",
+            "M-G5-F7"
+          ],
+          "text": "Depth and width written down for the real gap. The listed figures for the machine you are considering, checked against them. The parts the maker names as dishwasher-safe, highlighted on the listing. The functions you would use in a normal week, circled. The maker's cleaning instructions, found and read. If a listing is silent on one of these, treat it as silent - not as a no, and not as a yes."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G5-F1",
+          "field": "Listed dimensions of all three products",
+          "value": "Dual basket 13.38\"D x 11.81\"W x 10.63\"H; single basket 12.75\"D x 13.5\"W x 10\"H; French-door oven 16.9\"D x 15.8\"W x 14.8\"H",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B08DKYBTPH",
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F2",
+          "field": "Shallowest listed depth in the set",
+          "value": "12.75 inches (single-basket fryer)",
+          "source_urls": [
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "Derived by comparing the three listed depth fields; no conversion."
+        },
+        {
+          "id": "M-G5-F3",
+          "field": "Dishwasher-safe parts as listed, dual basket",
+          "value": "Two nonstick, dishwasher-safe frying baskets",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F4",
+          "field": "Dishwasher-safe parts as listed, single basket",
+          "value": "Basket stated dishwasher-safe",
+          "source_urls": [
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F5",
+          "field": "Dishwasher-safe parts as listed, oven",
+          "value": "No dishwasher-safe claim was read in the stored fields; left blank rather than inferred",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "An absence, not a negative claim."
+        },
+        {
+          "id": "M-G5-F6",
+          "field": "Materials as listed",
+          "value": "Dual basket: metal, plastic. Single basket: plastic, stainless steel. Oven: stainless steel",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B08DKYBTPH",
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F7",
+          "field": "Cleaning and care documentation",
+          "value": "The maker's own cleaning instructions are not part of this site's verified field set; the listings do not reproduce them",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": "Stated so the reader knows where this site's evidence stops."
+        },
+        {
+          "id": "M-G5-F8",
+          "field": "Function and preset counts as listed",
+          "value": "Dual basket: Hi-Fry and Sync Finish named. Single basket: 4 presets named. Oven: 24 presets in one title segment, 25 in a feature heading (F-26)",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B08DKYBTPH",
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)",
+            "Listing field read on the official product page (2026-11-14; re-read 2026-11-16)"
+          ],
+          "note": ""
+        }
+      ],
+      "cta": {
+        "text": "Open the single-basket listing and check the depth and cleaning fields against your run.",
+        "link_label": "Open the single-basket listing (paid link)",
+        "link_url": "https://www.amazon.com/dp/B08DKYBTPH?tag=shopnow047c-20",
+        "link_url_note": "Tagged Special Link, built 2026-11-17 from the owner's tracking ID. Format-checked only (F-55).",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No price, star rating, review count or popularity badge appears in this article.",
+        "An unstated cleaning claim on the oven is recorded as an absence, never as a negative (F-02, F-15 rules followed).",
+        "No hands-on testing is claimed: nothing here is a first-hand report of cleaning any appliance (D-06).",
+        "The preset discrepancy is carried forward rather than resolved (F-26)."
+      ]
     }
   ],
   "seo_rules": [
