@@ -1,7 +1,6 @@
 # Executive Summary — Zone4 Amazon Affiliate Research Site
 
-**Date:** 2026-11-16 (UTC) — delegated decision round recorded and implemented (section 2c); same-day re-verification (sections 5c/5d); decision-support layer added 2026-11-15; independent re-verification 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
-**Date:** 2026-11-16 (UTC) — design brief, traffic programme and decision-ordering added; links and cited official pages re-verified 2026-11-16; decision-support layer 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
+**Date:** 2026-11-17 (UTC) — reader-measurement and product-intent pass (section 8); delegated decision round 2026-11-16 (section 2c); decision-support layer 2026-11-15; product facts observed 2026-11-14 (UTC) · **Live site:** https://kanlerxz87-cyber.github.io/Zone4/ · **Scope of truth:** `data/*.json` → built into `docs/` by `scripts/build_site.py`, checked by `scripts/verify.py`
 
 ---
 
@@ -282,3 +281,51 @@ different questions and both matter to the brief, which asks for organic traffic
 second, and no ranking, traffic or growth figure is published anywhere on the site.
 
 *Every table row above carries its source; values that could not be confirmed from an official source are blank, withheld, or flagged — never inferred.*
+
+
+---
+
+## 8. Session notes — 2026-11-17 (`arena/cc32105d-zone4`): product intent, measurement, publication front page
+
+**Product-intent confirmation record (the brief's "do not merge the two fields").** Each product now carries, in
+`data/products.json` and on `docs/products.html`, the intended ASIN (provisional, pending the owner's confirmation —
+D-13), the official listing URL, the confirmation date and the source in one block, and the observed redirect targets
+as dated observations in a separate block. The two are never merged, and the check is now explicit: Amazon's published
+ASIN guide (re-read live 2026-11-17) defines an ASIN as a unique 10-character alphanumeric code found after `/dp/`,
+and the three submitted codes (`B04G1MEwY`, `B02NbDxp3`, `B00hJ57DV`, nine characters each) are therefore link codes,
+not product identifiers — flag **F-55**.
+
+**Click and conversion measurement, defined before it is collected.** The tracker now runs on every page and records
+the five defined events (`EV-1` product-link click, `EV-2` chooser run, `EV-3` chooser route, `EV-4` guide view,
+`EV-5` in-page call to action), plus one labelled test event that is never counted. The campaign ledger
+(`data/campaign-ledger.json`) is defined and empty: timestamp, source, channel, eligible sessions, clicks and reported
+orders, filled only from authorized first-party reports with a dated provenance trail. No conversion score and no
+revenue forecast exists anywhere. The self-hosted endpoint the brief asks for cannot run on GitHub Pages (a static
+host), so its contract is published and the tracker already speaks it once a host is chosen — flag **F-56**,
+decision **D-40**, questions **Q-45/Q-48**.
+
+**Publication front page, feed and cadence.** The front page now leads with the chooser, the guides and the products;
+the decision queue and every other dashboard surface sit in one sidebar group and the new footer directory, and the
+disclosure strip appears under the masthead on every page and again in the footer (enforced by the verifier). A
+deterministic RSS feed (`docs/feed.xml`) carries one item per published guide; the publishing cadence is one
+question-shaped guide per week from the topic calendar, each landing in the sitemap and feed in the same build. The
+first weekly guide shipped with this pass: **"The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy"**
+(topic T-04), every number sourced. The surviving anti-slop defect (F-53, identifiers printed as prose in the three
+product openers) is corrected under recorded decision **D-36**; D-35 (adopt the warm-editorial specification), D-37
+(keep the steady headline register) and D-38 (dependency-ordered decision queue) were recorded to reconcile the
+register with what is already published. New register rows: suggestions **S-37…S-41**, questions **Q-45…Q-48**,
+decisions **D-40…D-42**, flags **F-55/F-56**.
+
+**Same-day re-verification (full record: `data/verification-session-cc32105d.json`, 15 rows).** The three supplied
+links re-resolved to the recorded ASINs with no `tag=` (F-03 stands). P1 and P3 titles match exactly; P2's second
+title segment again reads the 2026-11-15/16 alternative (F-44, fifth dated read) with "24" (F-26) and "Six Cooking
+Accessories Included" (F-50). The third carousel slots that had rotated away each showed the originally stored ASIN
+again (F-29: rotation confirmed in both directions). Commission Table 1 re-read unchanged (Kitchen 4.50%); Operating
+Agreement (2025-10-15) and Program Policies (2026-04-14) re-read and match the cited dates. Item details tables were
+again not exposed (F-38 stands).
+
+**Open after this session (12 decisions, none blocking the live site):** D-01 (Associates tag), D-02 (Creators API),
+D-08 (per-ASIN rate), D-13 (product intent confirmation), D-14 (marketplace/tracking ID), D-15 (research automation
+authority), D-16 (privacy/consent), D-22 (photography), D-39 (token layer), D-40 (analytics endpoint host), D-41
+(reader capture), D-42 (Search Console verification). The named blockers stay the same: an Associates account and a
+tracking ID first, because nothing can earn until the links carry a tag.

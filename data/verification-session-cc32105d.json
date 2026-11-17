@@ -1,0 +1,154 @@
+{
+ "_meta": {
+  "session": "arena/cc32105d-zone4",
+  "date_utc": "2026-11-17",
+  "method": "The platform's page-fetch tool read the live official pages; outbound curl to Amazon is blocked in this sandbox. Prices and star ratings visible on the live pages were read but are NOT published anywhere (F-02). The 2026-11-17 renders again served the condensed Product summary layout, which omits Item details / Product information tables (F-38).",
+  "record": "One row per read; match/drift against the stored records in data/products.json and data/flags.json. No value was inferred; every unverified product-level rate cell stays blank (F-01)."
+ },
+ "rows": [
+  {
+   "id": "R-01",
+   "what": "Supplied short link P1",
+   "url": "https://link.amazon/B04G1MEwY",
+   "observed": "Resolved to https://www.amazon.com/dp/B0CDY277D3 (session-tracking parameters; no tag= parameter)",
+   "result": "match",
+   "flags": [
+    "F-03"
+   ]
+  },
+  {
+   "id": "R-02",
+   "what": "Supplied short link P2",
+   "url": "https://link.amazon/B02NbDxp3",
+   "observed": "Resolved to https://www.amazon.com/dp/B09B7SB46R (no tag= parameter)",
+   "result": "match",
+   "flags": [
+    "F-03"
+   ]
+  },
+  {
+   "id": "R-03",
+   "what": "Supplied short link P3",
+   "url": "https://link.amazon/B00hJ57DV",
+   "observed": "Resolved to https://www.amazon.com/dp/B08DKYBTPH (th=1 variant parameter; no tag= parameter)",
+   "result": "match",
+   "flags": [
+    "F-03"
+   ]
+  },
+  {
+   "id": "R-04",
+   "what": "P1 listing title and breadcrumb",
+   "url": "https://www.amazon.com/dp/B0CDY277D3",
+   "observed": "Title matches name_listing exactly: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black. Breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers matches.",
+   "result": "match",
+   "flags": []
+  },
+  {
+   "id": "R-05",
+   "what": "P1 also-viewed carousel",
+   "url": "https://www.amazon.com/dp/B0CDY277D3",
+   "observed": "Slots 1-3 read B0B7C327LK, B0BYKGN61Q, B0CNSB81V6 - the stored order exactly.",
+   "result": "match (dated snapshot)",
+   "flags": [
+    "F-29"
+   ]
+  },
+  {
+   "id": "R-06",
+   "what": "P2 listing title",
+   "url": "https://www.amazon.com/dp/B09B7SB46R",
+   "observed": "Second segment again reads 'Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included' - a fifth dated read agreeing with the 2026-11-15/16 readings and differing from the 2026-11-14 stored second segment. Title says 24 against the feature section's 25 (F-26); title says six accessories against the description's seven (F-50).",
+   "result": "drift recorded (F-44)",
+   "flags": [
+    "F-44",
+    "F-26",
+    "F-50"
+   ]
+  },
+  {
+   "id": "R-07",
+   "what": "P2 also-viewed carousel",
+   "url": "https://www.amazon.com/dp/B09B7SB46R",
+   "observed": "Slot 3 showed B0F92GL7JH (HotKing) again - the originally stored value, after later reads had rotated to B0D1BGLW25. Rotation confirmed in both directions.",
+   "result": "drift recorded (F-29)",
+   "flags": [
+    "F-29"
+   ]
+  },
+  {
+   "id": "R-08",
+   "what": "P3 listing title and breadcrumb",
+   "url": "https://www.amazon.com/dp/B08DKYBTPH",
+   "observed": "Title matches name_listing exactly: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel. Breadcrumb matches; th=1 variant parameter present.",
+   "result": "match",
+   "flags": []
+  },
+  {
+   "id": "R-09",
+   "what": "P3 also-viewed carousel",
+   "url": "https://www.amazon.com/dp/B08DKYBTPH",
+   "observed": "Slot 3 showed B0C33CHG99 (Cosori) - the stored value - after later reads had rotated to B09MR7QWKZ. Slots 1-2 read B0CNY1YVDD, B09MR7QWKZ.",
+   "result": "drift recorded (F-29)",
+   "flags": [
+    "F-29"
+   ]
+  },
+  {
+   "id": "R-10",
+   "what": "Standard Commission Income Statement, Table 1",
+   "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+   "observed": "'Physical Books, Kitchen, Automotive - 4.50%' and 'Toys, Furniture, Home, ... - 3.00%' read again unchanged. Still no official per-ASIN category mapping, so product-level rate cells stay blank.",
+   "result": "match",
+   "flags": [
+    "F-01"
+   ]
+  },
+  {
+   "id": "R-11",
+   "what": "Associates Program Operating Agreement",
+   "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+   "observed": "Updated October 15, 2025. Section 5 disclosure sentence read verbatim: 'As an Amazon Associate I earn from qualifying purchases.' Section 4's no-representation clause on traffic and commission income re-read.",
+   "result": "match",
+   "flags": []
+  },
+  {
+   "id": "R-12",
+   "what": "Associates Program Policies",
+   "url": "https://affiliate-program.amazon.com/help/operating/policies",
+   "observed": "Updated April 14, 2026 - matches the date the site cites. Commission Income Statement Sections 1 (Special Link session definition) re-read.",
+   "result": "match",
+   "flags": []
+  },
+  {
+   "id": "R-13",
+   "what": "Amazon's published ASIN guide",
+   "url": "https://sell.amazon.com/blog/what-is-an-asin",
+   "observed": "Read live: an ASIN is 'a unique 10-character alphanumeric code assigned to every product listed in the Amazon store', typically starting 'B0', and 'the ASIN appears after /dp/' in the product-detail URL. The three submitted link codes (9 characters each) therefore are not ASINs; the observed identifiers (10 characters, after /dp/) are.",
+   "result": "match (identifier rule for F-55)",
+   "flags": [
+    "F-55"
+   ]
+  },
+  {
+   "id": "R-14",
+   "what": "General ASIN help-page address (nodeId=G201963240)",
+   "url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=G201963240",
+   "observed": "Returned Amazon's 'We can't find the page' response on 2026-11-17. Not relied on; the published ASIN guide (R-13) is the cited source instead.",
+   "result": "unreadable (method note)",
+   "flags": [
+    "F-55"
+   ]
+  },
+  {
+   "id": "R-15",
+   "what": "Item details / Product information tables (P1-P3)",
+   "url": "https://www.amazon.com/dp/B0CDY277D3",
+   "observed": "Not exposed in any fetched chunk of the 2026-11-17 renders. Table-only fields keep their corroboration from the About bullets and description on earlier reads.",
+   "result": "not readable (F-38 stands)",
+   "flags": [
+    "F-38"
+   ]
+  }
+ ]
+}

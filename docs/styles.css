@@ -73,6 +73,15 @@ a:hover { color: var(--accent-strong); }
 .disclosure a { color: #5c4700; font-weight: 600; }
 main { padding: 12px 30px 34px; max-width: 1400px; }
 footer { padding: 16px 30px; color: var(--muted); border-top: 1px solid var(--line); background: var(--panel-soft); }
+/* Footer directory (arena/cc32105d-zone4): one grouped list of every page. */
+.foot-nav { display: flex; flex-wrap: wrap; gap: 26px; margin: 12px 0 10px; }
+.foot-col { min-width: 170px; }
+.foot-title { display: block; font-weight: 700; color: var(--ink); margin-bottom: 6px; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.foot-col ul { list-style: none; margin: 0; padding: 0; }
+.foot-col li { margin: 3px 0; font-size: 13px; }
+.foot-col a { color: var(--muted); text-decoration: none; }
+.foot-col a:hover, .foot-col a:focus { color: var(--accent-strong); text-decoration: underline; }
+footer .disclosure { margin-bottom: 8px; }
 
 /* --- Headings ------------------------------------------------------------- */
 h1, h2, h3, .mhero h1, .acard-title, .tile-title, .scard h3, .dcard-q, .kpi-text {
