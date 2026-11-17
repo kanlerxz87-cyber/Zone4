@@ -1230,29 +1230,49 @@ def submitted_links_block(current: Page) -> str:
 
 
 def page_products(current: Page) -> str:
+    """The product records: cards first, then the full field table, then the method.
+
+    Reordered 2026-11-17. The page used to open with a paragraph about withheld
+    prices and unverified commission categories before the reader had seen a
+    single product. The products now come first; the caveats that belong on the
+    page are stated beside the values they qualify (in the table cells) and
+    summarised once, underneath.
+    """
     return (
-        hero("All products",
-         "One row per user-supplied link. Prices and ratings are withheld under the Associates policy. The "
-         "commission category Amazon assigns to each ASIN is not confirmed by any official source, so the "
-         "product-level rate cells are blank and only the official category-level Kitchen rate (4.50%) is "
-         "quoted, with its source; all trend data remains unverified and blank.")
-        + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C…, Flag F-02)" aria-label="Filter table"></p>'
+        '<header class="hero"><h1>The three products, and every field we could read</h1>'
+        '<p class="lead">One record per supplied link, read from the official listing and linked back to it. '
+        'Where a field is withheld by rule or unverifiable from outside the account, the cell says so rather '
+        'than being filled in.</p></header>'
+        + product_grid(current, PRODUCTS)
+        + '<section><h2>The full record, field by field</h2>'
+        '<p class="section-lead">The same data in the form the audit needs: every column a field, every row a '
+        'product, every cell traceable. Withheld prices and ratings are marked in place; the commission band '
+        'is quoted only at the category level it was read at.</p>'
+        '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: Chefman, B0C, Flag F-02)" aria-label="Filter table"></p>'
         + product_table(current, PRODUCTS)
         + commission_category_note()
+        + '</section>'
         + submitted_links_block(current)
-        + '<p class="small muted">Every row links to its Amazon product page as the source. '
-        'Also-viewed entries are identified by ASIN; the stored labels are the exact listing-title prefixes as read '
-        'on the official pages (F-20), and the carousel changes between loads (F-29). The full title is on each linked page.</p>'
         + '<section><h2>Counter space per inch of depth (derived)</h2>'
         '<p class="section-lead">A question no listing answers: how much cooking capacity does each unit give back for the '
         'counter depth it takes? The arithmetic is shown in full, the inputs are the listed values above, and the result is '
-        'labelled derived - it is this site&rsquo;s calculation, not a claim made by any listing (decision D-26).</p>'
+        'labelled derived, not a claim made by any listing (decision D-26).</p>'
         + table(["Product", "Capacity as listed", "Counter depth as listed", "Capacity per inch of depth",
                  "The arithmetic", "Source of the inputs (official)"], counter_space_rows(), "derived")
         + '<p class="note">Units are kept exactly as listed and never converted (F-10): the French-door oven&rsquo;s row is '
         'in liters, the other two in quarts, so read the ratio within each row rather than ranking the rows against each '
-        'other. Depth is the first dimension as listed; the unit&rsquo;s own footprint also includes its width and height '
-        'on the rows above.</p></section>'
+        'other.</p></section>'
+        + '<section><h2>What is not on this page, and why</h2><ul class="bullets">'
+        '<li><strong>Prices.</strong> Participation Requirement 2(b) allows them only where Amazon serves the link or an '
+        'approved API supplies them. The listing always carries the live number. ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>Star ratings and review counts.</strong> Withheld for the same reason (6(t)). ' + flag_chip(current, "F-02") + '</li>'
+        '<li><strong>A per-product commission rate.</strong> Table 1 is read at category level; no official source maps these '
+        'ASINs to a category from outside Associates Central. ' + flag_chip(current, "F-01") + '</li>'
+        '<li><strong>Trend, popularity and conversion.</strong> No official source exists for any of them, and a badge read '
+        'off a listing is not a measurement. ' + flag_chip(current, "F-15") + '</li>'
+        '<li><strong>Hands-on testing.</strong> None claimed. Nobody on this project has cooked in these appliances. '
+        + href(current, "decisions.html#D-06", "Decision D-06") + '</li>'
+        '</ul></section>'
     )
 
 

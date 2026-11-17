@@ -1,12 +1,89 @@
-# Zone4 — Amazon affiliate product research (verified)
+# Zone4 — an air fryer buying-guide publication, built so every number has a receipt
 
-A static research site for three user-supplied Amazon product links. It publishes only values that were checked against an official source. Anything that could not be verified is left blank and flagged.
+**Live site:** https://kanlerxz87-cyber.github.io/Zone4/
 
-Which generator produces the live pages: **only** `scripts/build_site.py` writes `docs/` (the published site). The engine under `engine/` renders its own separate preview into `build/site-preview/` and never writes `docs/`; see ENGINE.md, "Relationship to the published site". `tools/check_links.py` checks that engine preview and fails on a clean checkout until `python3 -m engine.cli build` has created it.
+Three countertop air fryers, compared on the fields their own listings print. The site is a
+publication first — product cards, guides, a chooser, an RSS feed — and an audit trail second:
+a verification log, a source register, a flag register and a decision queue, all reachable from the
+footer index on every page.
 
-**Live site (GitHub Pages):** https://kanlerxz87-cyber.github.io/Zone4/
+It never publishes a price, a star rating or a popularity claim: the Associates programme rules
+allow those only where Amazon serves the link or an approved API supplies them, and neither is
+connected. Where a listing is silent, the page says so.
 
-The repository's Pages source is `main` `/` (legacy build). The root `index.html` redirects to `docs/index.html`, and the root `.nojekyll` stops Jekyll processing. Setting the Pages source to `main` `/docs` in Settings would also work; the redirect then becomes unused but harmless.
+**Associates tag on every outbound product link:** `shopnow047c-20` — applied 2026-11-17 as
+`https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` with `rel="sponsored"`. Present on the link is
+verifiable here; whether the tag is *enrolled* and whether a click is *credited* are Associates
+Central facts and are recorded as unverified (F-03, F-55). No earnings figure or forecast is published.
+
+## Current state (2026-11-17)
+
+| | Count | Where it lives |
+|---|---|---|
+| Products, each read field by field from its listing | 3 | `data/products.json` |
+| Published pieces: 3 reviews, 1 comparison, 5 guides | 9 | `data/marketing.json` |
+| Pages in the published site | 29 | `docs/` (generated) |
+| Requirements from the brief, one row each | 40 | `data/requirements.json` |
+| Irregularities and unverified items recorded (41 still open) | 58 | `data/flags.json` |
+| Costed suggestions | 40 | `data/suggestions.json` |
+| Questions that gate a decision (24 already answered from a source) | 48 | `data/questions.json` |
+| Decisions (30 recorded, the rest open) | 43 | `data/decisions.json` |
+| Official sources, each marked read or not read | 32 | `data/sources.json` |
+| Associate/FTC rules checked against the site | 30 | `data/policies.json` |
+| Findings with their basis and confidence | 18 | `data/content.json` |
+| Measurement events defined | 5 | `data/tracking-events.json` |
+
+## How the site is built
+
+**Only `scripts/build_site.py` writes `docs/`.** It reads `data/*.json` and emits every page, the
+sitemap, the feed and the robots file. Run it, then check it:
+
+```bash
+python3 scripts/build_site.py      # writes docs/ (29 pages + feed.xml + sitemap.xml + robots.txt)
+python3 scripts/verify.py          # data, links, anchors, disclosure, per-row sources, feed, tagged links
+python3 qa/audit_site.py --strict-warnings
+python3 scripts/make_og_image.py   # regenerates docs/og.png; needs Pillow (build-time only)
+python3 -m unittest discover -s tests
+node tools/node/tracker-smoke.mjs  # the five-event counter: no network call, no personal fields
+```
+
+`scripts/verify.py` fails the build on any of these, among others: a table row with no official
+source link; a page missing from the footer index; a second primary navigation group; a shop link
+without the Associates tag or without `rel="sponsored"`; a feed item with no live page; two pages
+sharing a meta description; an Amazon Mark in a title tag or keyword.
+
+The engine under `engine/` is a separate, offline pipeline with its own preview output
+(`build/site-preview/`). It never writes `docs/`. See `ENGINE.md`.
+
+## The rules this repository enforces on itself
+
+1. **No value without a source.** A table row must contain a link to the official page that supports
+   it, or show an explicit withheld/unverified state. The build fails otherwise.
+2. **No inference.** If a listing does not state it, the site does not publish it. A blank is left
+   blank and flagged.
+3. **No prohibited data.** No prices, star ratings, review counts, price history or popularity
+   claims. Each has a cited rule on the policy-compliance page.
+4. **Disclosure adjacent to the link.** The Associates sentence sits in the same paragraph as every
+   outbound product link, and again under the masthead and in the footer.
+5. **Flags do not block publication; they block silence.** Everything unverified is published on the
+   Flagged for review page with its source links.
+
+## Documentation index
+
+| Path | Purpose |
+|---|---|
+| `ENGINE.md` | The automation engine: what it does, what it refuses to do, and its publish gate |
+| `DESIGN_PROMPT.md` | A paste-ready design brief generated from `data/design.json` |
+| `COORDINATION.md` | The shared task board and the log of every session that has worked here |
+| `EXECUTIVE_SUMMARY.md` | The long-form summary (the site's own Executive summary page is the reader version) |
+| `qa/README.md` | How the independent QA audit differs from `scripts/verify.py` |
+
+---
+
+## Historical record (kept for the audit trail)
+
+The sections below record the repository as it stood on earlier dates. Counts in them are historical
+and are superseded by the table above.
 
 ## What is in the repo
 

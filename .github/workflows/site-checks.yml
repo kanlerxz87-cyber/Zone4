@@ -23,3 +23,34 @@ jobs:
         run: python3 scripts/verify.py
       - name: Confirm committed docs/ matches the build
         run: git diff --exit-code -- docs
+
+  tracker:
+    # The counter is client-side, so its guarantees can only be checked by
+    # executing it. This job runs the real docs/tracker.js against a DOM stub and
+    # asserts that no network call happens while the endpoint is unconfigured
+    # (F-56) and that no personal field enters the local record.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Five-event counter smoke test
+        run: node tools/node/tracker-smoke.mjs
+
+  social-card:
+    # The social preview image is generated, not photographed, so it must be
+    # reproducible: if the committed PNG does not match what the script draws,
+    # someone edited the binary by hand and the build stops.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Pillow (build-time only)
+        run: pip install --disable-pip-version-check "pillow==13.0.0"
+      - name: Regenerate the social card
+        run: python3 scripts/make_og_image.py
+      - name: Committed card matches the generator
+        run: git diff --exit-code -- docs/og.png

@@ -61,6 +61,9 @@ jobs:
       - name: Published site checks (links, anchors, disclosure, row sources, policy guards)
         run: python3 scripts/verify.py
 
+      - name: Independent QA audit of the committed site
+        run: python3 qa/audit_site.py --strict-warnings
+
       - name: Committed docs/ matches the build
         run: git diff --exit-code -- docs
 
