@@ -19,6 +19,7 @@ import json
 import pathlib
 import re
 import sys
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from urllib.parse import urlparse
 
@@ -491,8 +492,32 @@ def check_site() -> None:
         sp.feed(page.read_text(encoding="utf-8"))
         parsed[page] = sp
         rel = page.relative_to(ROOT)
-        if DISCLOSURE not in " ".join(sp.text_parts):
+        visible = " ".join(sp.text_parts)
+        if DISCLOSURE not in visible:
             fail(f"{rel}: disclosure sentence missing")
+        raw = page.read_text(encoding="utf-8")
+        footer_match = re.search(r"<footer>(.*?)</footer>", raw, re.S)
+        if not footer_match or DISCLOSURE not in html.unescape(footer_match.group(1)):
+            fail(f"{rel}: affiliate disclosure must be repeated in the footer")
+        if raw.count('<div class="nav-group">') != 1:
+            fail(f"{rel}: shared navigation must contain exactly one group")
+        shop_anchors = re.findall(r'<a\b[^>]*class="[^"]*\bshop\b[^"]*"[^>]*>', raw)
+        for anchor in shop_anchors:
+            rel_attr = re.search(r'\brel="([^"]*)"', anchor)
+            if not rel_attr or "sponsored" not in rel_attr.group(1).split():
+                fail(f"{rel}: product link is missing rel=\"sponsored\": {anchor[:140]}")
+        if not footer_match or 'class="footer-directory"' not in footer_match.group(1):
+            fail(f"{rel}: footer site directory is missing")
+        elif footer_match:
+            footer_hrefs = re.findall(r'<a\b[^>]*href="([^"]+)"', footer_match.group(1))
+            footer_targets = set()
+            for href_value in footer_hrefs:
+                parsed_href = urlparse(href_value)
+                if not parsed_href.scheme and parsed_href.path:
+                    footer_targets.add((page.parent / parsed_href.path).resolve())
+            missing_from_footer = [target.relative_to(DOCS) for target in pages if target.resolve() not in footer_targets]
+            if missing_from_footer:
+                fail(f"{rel}: footer directory omits page(s): {', '.join(map(str, missing_from_footer))}")
         for bad in sp.bad_rows:
             fail(f"{rel}: table row {bad} has no link to an official source")
         raw = page.read_text(encoding="utf-8")
@@ -582,6 +607,33 @@ def check_required_pages() -> None:
                     fail(f"docs/{rel}: 'Where next' block does not reach {target}")
 
 
+def check_rss_feed() -> None:
+    feed_path = DOCS / "feed.xml"
+    if not feed_path.exists():
+        fail("docs/feed.xml missing")
+        return
+    try:
+        root = ET.parse(feed_path).getroot()
+    except ET.ParseError as exc:
+        fail(f"docs/feed.xml is not valid XML: {exc}")
+        return
+    if root.tag != "rss" or root.get("version") != "2.0":
+        fail("docs/feed.xml must be an RSS 2.0 document")
+        return
+    channel = root.find("channel")
+    if channel is None:
+        fail("docs/feed.xml has no channel")
+        return
+    items = channel.findall("item")
+    articles = load("marketing.json")["articles"]
+    if len(items) != len(articles):
+        fail(f"docs/feed.xml has {len(items)} items; expected {len(articles)} published articles")
+    expected = ["https://kanlerxz87-cyber.github.io/Zone4/docs/articles/" + a["slug"].strip("/") + ".html" for a in articles]
+    actual = [item.findtext("link") for item in items]
+    if actual != expected:
+        fail("docs/feed.xml article links do not match the published article records")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -603,6 +655,7 @@ def main() -> int:
     check_decision_support()
     check_design()
     check_site()
+    check_rss_feed()
     check_design_page()
     check_required_pages()
     check_root_entry()

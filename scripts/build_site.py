@@ -71,7 +71,7 @@ RECHECKED = CONTENT.get("rechecked_utc", OBSERVED)
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 
 NAV = [
-    ("index.html", "Dashboard", "Overview"),
+    ("index.html", "Home", "Overview"),
     ("executive-summary.html", "Executive summary", "Overview"),
     ("products.html", "All products", "Overview"),
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
@@ -92,14 +92,9 @@ NAV = [
     ("sources.html", "Sources", "Governance"),
 ]
 NAV_LABEL = {target: label for target, label, _group in NAV}
-NAV_ORDER = [
-    ("Overview", [t for t, _l, g in NAV if g == "Overview"]),
-    ("Categories", [t for t, _l, g in NAV if g == "Categories"]),
-    ("Content", [t for t, _l, g in NAV if g == "Content"]),
-    ("Research", [t for t, _l, g in NAV if g == "Research"]),
-    ("Decide", [t for t, _l, g in NAV if g == "Decide"]),
-    ("Governance", [t for t, _l, g in NAV if g == "Governance"]),
-]
+# One flat navigation group keeps the storefront easy to scan. The same page
+# directory is repeated in the footer for readers who reach the end of an article.
+NAV_ORDER = [("Explore", [t for t, _label, _group in NAV])]
 
 # --- Article pages -------------------------------------------------------
 # Each marketing article in data/marketing.json is published as its own page,
@@ -159,7 +154,7 @@ ARTICLE_BY_PATH = {path: a for a, path in ARTICLE_PATHS}
 for _a, _path in ARTICLE_PATHS:
     NAV_LABEL[_path] = article_label(_a)
 NAV_LABEL[ARTICLES_HUB] = "Articles hub"
-NAV_ORDER.insert(3, ("Articles", [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS]))
+NAV_ORDER[0] = ("Explore", NAV_ORDER[0][1] + [ARTICLES_HUB] + [p for _a, p in ARTICLE_PATHS])
 
 
 def esc(value) -> str:
@@ -768,7 +763,7 @@ def page_index(current: Page) -> str:
     )
     return (
         '<div class="mhero">'
-        f'<span class="badge">Verified {esc(OBSERVED)} \u00b7 re-checked {esc(RECHECKED)} \u00b7 every table row links to its source</span>'
+        '<span class="badge">A practical guide to three very different countertop formats</span>'
         "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
         '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
         'compared on the numbers their makers actually list. Every figure here comes with its receipt, what we cannot '
@@ -2109,6 +2104,11 @@ def render(page: Page) -> str:
             + "</div>"
         )
     nav = "".join(nav_groups)
+    directory_targets = list(dict.fromkeys(target for _group, targets in NAV_ORDER for target in targets))
+    footer_links = "".join(
+        f'<a href="{esc(page.rel(target))}">{esc(NAV_LABEL.get(target, target))}</a>'
+        for target in directory_targets
+    )
     disclosure = (
         f'<div class="disclosure" role="note"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} '
         f'<span class="small">(Source: '
@@ -2143,6 +2143,7 @@ def render(page: Page) -> str:
 <meta name="twitter:description" content="{esc(page.description or SITE_DESCRIPTION)}">
 {page.head_extra}
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
+<link rel="alternate" type="application/rss+xml" title="Zone4 articles" href="{esc(page.rel('feed.xml'))}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -2157,6 +2158,8 @@ def render(page: Page) -> str:
 {page.body}
 </main>
 <footer>
+  <p class="footer-disclosure"><strong>Disclosure:</strong> {esc(DISCLOSURE_SENTENCE)} <span class="small">(Source: {ext(DISCLOSURE_SOURCE, "Associates Operating Agreement, Section 5")}) This site is not endorsed by or affiliated with Amazon.</span></p>
+  <nav class="footer-directory" aria-label="Site directory"><strong>Explore the site</strong><div class="footer-links">{footer_links}<a href="{esc(page.rel('feed.xml'))}">RSS feed</a></div></nav>
   <p class="small">Data observed {esc(OBSERVED)} (UTC). Source of truth: the data/ folder in the repository. Build: scripts/build_site.py. Checks: scripts/verify.py.</p>
 </footer>
 </div>
@@ -2270,6 +2273,31 @@ def build() -> list[pathlib.Path]:
         + "</urlset>\n"
     )
     (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    # RSS is generated from the same article records as the site. Publication dates
+    # are deliberately omitted because the source data has no verified per-article
+    # dates; subscribers still get canonical links and the editorial descriptions.
+    feed_items = []
+    for article, article_url in ARTICLE_PATHS:
+        item_url = SITE_URL + article_url.lstrip("/")
+        feed_items.append(
+            "  <item>\n"
+            f"    <title>{html.escape(article['h1'])}</title>\n"
+            f"    <link>{html.escape(item_url)}</link>\n"
+            f"    <guid isPermaLink=\"true\">{html.escape(item_url)}</guid>\n"
+            f"    <description>{html.escape(article['meta_description'])}</description>\n"
+            "  </item>\n"
+        )
+    feed = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0"><channel>\n'
+        f"  <title>{html.escape(SITE_TITLE_SUFFIX)} articles</title>\n"
+        f"  <link>{html.escape(SITE_URL)}</link>\n"
+        "  <description>Question-led air-fryer guides built from sourced product facts.</description>\n"
+        "  <language>en-us</language>\n"
+        + "".join(feed_items)
+        + "</channel></rss>\n"
+    )
+    (OUT / "feed.xml").write_text(feed, encoding="utf-8")
     # robots.txt: mechanical SEO hygiene that points crawlers at the sitemap this
     # build just wrote (suggestion S-09 shipped the sitemap; the pointer costs
     # nothing and decides nothing). Added by arena/f9f20f21-zone4 (2026-11-16).
