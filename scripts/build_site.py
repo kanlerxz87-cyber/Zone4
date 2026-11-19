@@ -50,7 +50,7 @@ SITE_DESCRIPTION = (
 INDEX_TITLE_TAG = "Find the air fryer that fits your kitchen"
 INDEX_DESCRIPTION = (
     "Compare three countertop air fryers on the numbers their listings actually state. A three-question "
-    "chooser, seven sourced buying guides and a receipt behind every figure - no prices, ratings or guesses."
+    "chooser, eight sourced buying guides and a receipt behind every figure - no prices, ratings or guesses."
 )
 
 
@@ -112,8 +112,10 @@ NAV = [
     ("automation.html", "Automation & tracking", "Research"),
     ("analysis.html", "Analysis & findings", "Research"),
     ("requirements.html", "Requirements", "Research"),
+    ("decision-centre.html", "Decision centre", "Decide"),
     ("suggestions.html", "Suggestions", "Decide"),
     ("questions.html", "Open questions", "Decide"),
+    ("information-gaps.html", "Information gaps", "Decide"),
     ("design.html", "Design brief", "Decide"),
     ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
@@ -964,7 +966,8 @@ def page_articles_index(current: Page) -> str:
          ext(P2_URL, "Format and footprint figures; price rule from the Programme Policies")],
         ["Hi-Fry, Sync Finish, Shake Reminder: An Air Fryer Feature Glossary", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
          ext(P3_URL, "Named features across the three listings")],
-        ["The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy", "Planned (wave 1)", "<span class=\"muted\">On the calendar</span>",
+        ["The First-Air-Fryer Checklist: Seven Numbers to Check Before You Buy", "Written",
+         href(current, "articles/first-air-fryer-checklist-seven-numbers.html", "Open the guide"),
          ext(P1_URL, "The verified field set: capacity, dimensions, range, presets")],
         ["Two Baskets or One? The Sync-Finish Question, Answered With Specs", "Planned (wave 2)", "<span class=\"muted\">On the calendar</span>",
          ext(P1_URL, "Dual-basket format fields (Sync Finish, 2 x 3QT)")],
@@ -1090,9 +1093,23 @@ def page_exec(current: Page) -> str:
     bullets = "".join(f"<li>{esc(b)}</li>" for b in es["bullets"])
     decisions = "".join(f"<li>{esc(d)}</li>" for d in es["decisions_needed"])
     not_built = "".join(f"<li>{esc(d)}</li>" for d in CONTENT["not_built"])
+    # The editorial position statement (adopted from PR #69, 2026-11-19): six
+    # promises that state only editorial choices, every factual claim behind
+    # them already published with a source elsewhere on the site.
+    editorial = CONTENT.get("editorial") or {}
+    editorial_html = ""
+    if editorial.get("promise"):
+        editorial_html = (
+            '<section><h2>What this publication promises</h2>'
+            f'<p class="section-lead">{esc(editorial.get("note", ""))}</p>'
+            '<ul class="bullets">'
+            + "".join(f"<li>{esc(p)}</li>" for p in editorial["promise"])
+            + "</ul></section>"
+        )
     return (
         hero("Executive summary", es["headline"])
         + f'<section><h2>What the verification found</h2><ul class="bullets">{bullets}</ul></section>'
+        + editorial_html
         + f'<section><h2>Decisions needed from you</h2><ol>{decisions}</ol>'
         + f'<p class="small muted">Each of these is written up on the {href(current, "decisions.html", "Decision log")} with its options, '
           f'cost and reversibility, and each one unlocks a costed entry on the {href(current, "suggestions.html", "Suggestions")} page. '
@@ -1514,9 +1531,9 @@ def page_suggestions(current: Page) -> str:
          "The change register. Every entry states the problem, the proposed change, what it costs, what it risks and the "
          "check that would prove it worked. A reviewer chooses here first; the Decision log records the choice; only then "
          "does anything ship."),
-        (f"{done_count} shipped or staged on 2026-11-16",
-         "The delegated decision round adopted the voice, brand, topic, chooser, disclosure and guardrail proposals. Each "
-         "shipped item names the decision that released it; the fact rule never moved."),
+        (f"{done_count} shipped or staged",
+         "Under the recorded decisions of 2026-11-16 and 2026-11-17. Each shipped item names the decision that released it; "
+         "the fact rule never moved."),
         (f"{open_count} still need you",
          "These wait on a fact only the owner has - an Associates account, an API application, a budget or a lawyer. They "
          "are recorded as recommended, never as decided."),
@@ -2167,6 +2184,188 @@ def page_decisions(current: Page) -> str:
     )
 
 
+def page_decision_centre(current: Page) -> str:
+    """The review-before-you-build hub: suggestions, questions, decisions, flags.
+
+    Adopted 2026-11-19 from the editorial pass of stale PR #69
+    (arena/6554fead-zone4, taken over under the 60-minute handoff rule) and
+    re-based on this builder's template and the live registers: the hub counts
+    and the gating-decision rows are derived from the data, so the page cannot
+    drift from the registers it summarises. This is the page the owner brief
+    asks for - a place to review the suggestions and choose a path before
+    anything is implemented.
+    """
+    open_decisions = [d for d in DECISIONS if d["status"].startswith("Open")]
+    hub = [
+        (str(len(SUGGESTIONS)), "Suggestions", "Every change worth making, costed and risk-assessed. Read this first: it is the menu.",
+         "suggestions.html", "Open the register &rarr;"),
+        (str(len(QUESTIONS)), "Open questions", "What is known, what is missing, how the gap is closed and who can close it. Read this second: some menu items cannot be ordered yet.",
+         "questions.html", "Open the questions &rarr;"),
+        (str(len(open_decisions)), "Decisions waiting", f"{len(DECISIONS) - len(open_decisions)} recorded, {len(open_decisions)} open. The choice itself, with its options, cost and reversibility. Nothing is acted on until it appears here.",
+         "decisions.html", "Open the queue &rarr;"),
+        (str(len(FLAGS)), "Flagged for review", "Defects, gaps and unverified items found while building the site, each with its source and the action needed.",
+         "flagged.html", "Open the flag register &rarr;"),
+    ]
+    hub_html = "".join(
+        f'<a class="hub-card" href="{esc(current.rel(target))}"><div class="hub-count">{esc(count)}</div>'
+        f'<div class="hub-title">{esc(title)}</div><div class="hub-body">{esc(body)}</div>'
+        f'<div class="hub-go">{go}</div></a>'
+        for count, title, body, target, go in hub
+    )
+    steps = [
+        ("Read the suggestions, P1 first",
+         "Each carries the problem, the proposal, the cost, the risk and the check that would prove it worked. P3 items are housekeeping and can wait."),
+        ("Answer the questions each one depends on",
+         "A suggestion that needs a Partner Tag cannot be built before the tag exists. The questions page names the owner of each answer, so nothing sits in the wrong queue."),
+        ("Record the choice in the decision log",
+         "Options, cost and reversibility are already written out. Recording a choice is a one-line entry, and the site keeps behaving exactly as it does now until it is recorded."),
+        ("Only then does anything change",
+         "Changes ship through a pull request that must pass the build, the verifier and the QA audit: links, per-row sourcing, disclosure, no prices or ratings, no Amazon marks in titles. A broken build cannot be published."),
+    ]
+    path_html = "".join(
+        f'<div class="path-item"><div class="path-num"></div><div><h3>{esc(h)}</h3><p>{esc(p)}</p></div></div>'
+        for h, p in steps
+    )
+    # The three open decisions whose answers unlock the largest visible groups.
+    # Rendered from the register (question, recommendation, unlocks, source), so
+    # the table cannot quote a decision the register no longer carries.
+    gate_ids = ("D-02", "D-16", "D-42")
+    gate_rows = []
+    by_id = {d["id"]: d for d in DECISIONS}
+    for gid in gate_ids:
+        d = by_id.get(gid)
+        if not d:
+            continue
+        unlocks = " ".join(
+            f'<a class="flag-chip" href="{esc(current.rel("suggestions.html"))}#{esc(s)}">{esc(s)}</a>'
+            for s in d.get("linked_suggestions") or []
+        ) or '<span class="muted">none</span>'
+        src = d["sources"][0] if d.get("sources") else None
+        gate_rows.append([
+            f'<a href="{esc(current.rel("decisions.html"))}#{esc(d["id"])}"><strong>{esc(d["id"])}</strong></a> &middot; {esc(d["question"])}',
+            esc(d.get("recommendation") or ""),
+            unlocks,
+            ext(src["url"], src.get("ref", "official source")) if src else "",
+        ])
+    recorded_tag = next((d for d in DECISIONS if d["id"] == "D-01"), None)
+    tag_note = (
+        f'The outbound-tagging decision ({href(current, "decisions.html#D-01", "D-01")}/{href(current, "decisions.html#D-14", "D-14")}) is already '
+        f'recorded: the published product links are the tagged Special Links. What remains on that thread is account-side confirmation '
+        f'({flag_chip(current, "F-57")}) and the one-link-per-product test, not a design choice.'
+        if recorded_tag else ""
+    )
+    return (
+        hero("Decision centre",
+             "One place to review what could change, see what is still unknown, and choose a path before anything is implemented. "
+             "Nothing on this site is actioned by a suggestion: a change happens only after a decision is recorded and a checked "
+             "build replaces the page.")
+        + f'<div class="hub-grid">{hub_html}</div>'
+        + '<section><h2>The order to work in</h2>'
+          '<p class="section-lead">Four steps, in this order. Skipping to step four is what produces sites that look finished and cannot earn.</p>'
+          f'<div class="path">{path_html}</div></section>'
+        + '<section><h2>The open decisions that gate the rest</h2>'
+          '<p class="section-lead">Each of these blocks a group of suggestions, and each needs an answer only the owner or Amazon can give. '
+          f'The full list of {len(open_decisions)} open decisions is on the {href(current, "decisions.html", "Decision log")}.</p>'
+          + table(["Decision", "Recommendation (an argument, not a decision)", "Unlocks", "Official source"], gate_rows, "compact")
+          + f'<p class="small muted">{tag_note}</p></section>'
+        + '<section><h2>What this site does with an answer</h2>'
+          f'<p>A recorded decision becomes a suggestion marked for implementation, then a pull request, then a build that has to pass the same '
+          f'gates as every page here: every table row sourced to an official page, the Associates disclosure on every page, no price or star rating, '
+          f'no Amazon mark in a title or a target keyword, and no unverified value published. The gates are listed on '
+          f'{href(current, "policy-compliance.html", "policy compliance")} and enforced by <code>scripts/verify.py</code> and '
+          f'<code>qa/audit_site.py</code>.</p>'
+          f'<p class="small muted">The full audit trail of this project, including the sessions that built it, is in <code>COORDINATION.md</code> in '
+          f'the repository. Every flag published on the site names the source it was checked against; the summaries of what is still missing are on '
+          f'{href(current, "information-gaps.html", "Information gaps")}.</p></section>'
+    )
+
+
+def page_information_gaps(current: Page) -> str:
+    """What this project can prove, what it cannot, and who can close each gap.
+
+    Adopted 2026-11-19 from stale PR #69 (arena/6554fead-zone4) and re-based on
+    this builder's template. Every row pulls its question text, flag chip and
+    official source from the registers at build time, so a corrected register
+    row corrects this page with it. This is the brief's "clear list of
+    questions, information and answers that need to be addressed before any
+    decision can be made".
+    """
+    q_by = {q["id"]: q for q in QUESTIONS}
+    # (what is missing, why it matters and what would close it, question id, flag id)
+    gaps = [
+        ("A confirmed Associates Partner Tag on the published links",
+         "Until the tag is confirmed active in the account, a click cannot be attributed and no commission can be earned. Only the account holder can supply it.",
+         "Q-01", "F-03"),
+        ("Whether shopnow047c-20 is a registered, active tag",
+         "The ID arrived as owner input, not as a value any official page states. Associates Central is the only place that answers yes or no (S-39's test protocol is ready).",
+         "Q-50", "F-57"),
+        ("Prices and star ratings on the public pages",
+         "Permitted only through Amazon-served links or approved API data. Amazon's stated prerequisite for the API is 10 qualifying sales in 30 days, so this is downstream of the tag.",
+         "Q-02", "F-02"),
+        ("The per-ASIN commission category",
+         "The public table gives category rates; no public source maps an ASIN to a band. It is visible in Associates Central to the account holder.",
+         "Q-03", "F-01"),
+        ("Search demand for each candidate topic",
+         "No official source supplies a search-volume figure, so topic choice is editorial until Search Console reports measured queries (SG-29).",
+         "Q-40", "F-15"),
+        ("Product photography",
+         "The only honest routes are the owner's own photographs or images served through an approved Amazon tool. Neither exists yet (D-22).",
+         "Q-20", "F-31"),
+        ("Search Console verification and measured queries",
+         "No account has verified the property, so no impression or click data exists to choose the next topic from (D-42, S-40).",
+         "Q-48", "F-61"),
+        ("Product-intent records for the two additional links",
+         "Their destinations were resolved to meat-thermometer listings and held (F-56); the intended-ASIN confirmation record the brief requires is still missing, and the scope decision is yours (F-55).",
+         "Q-45", "F-55"),
+    ]
+    gap_rows = []
+    for missing, why, qid, fid in gaps:
+        q = q_by.get(qid)
+        src = q["sources"][0] if q and q.get("sources") else None
+        gap_rows.append([
+            esc(missing),
+            esc(why),
+            f'<a href="{esc(current.rel("questions.html"))}#{esc(qid)}"><strong>{esc(qid)}</strong></a>',
+            flag_chip(current, fid),
+            ext(src["url"], src.get("ref", "official source")) if src else "",
+        ])
+    open_questions = [q for q in QUESTIONS if q["kind"] != "Known"]
+    owner_qs = [q for q in open_questions if q["answerable_by"].startswith("The site owner")]
+    other_qs = [q for q in open_questions if not q["answerable_by"].startswith("The site owner")]
+
+    def qlist(items):
+        return "".join(
+            f'<li><strong><a href="{esc(current.rel("questions.html"))}#{esc(q["id"])}">{esc(q["id"])}</strong></a> '
+            f'{esc(q["question"])} <span class="muted small">&mdash; {esc(q["answerable_by"])} &middot; {esc(q["kind"])}</span></li>'
+            for q in items
+        )
+    return (
+        hero("Information gaps",
+             "What this project can already prove, what it still cannot, and exactly who can close each gap. Nothing on this list is closed by "
+             "inference, and no placeholder value stands in for a missing answer.")
+        + '<section><h2>What this project can already prove</h2>'
+          '<p class="section-lead">Three supplied links resolved to three verified air-fryer listings, and every value published about them was read '
+          'from an official page and is linked to it in the same row. The proof lives in the '
+          f'{href(current, "verification.html", "verification log")} and the {href(current, "products.html", "product records")}; the '
+          f'{href(current, "flagged.html", "Flagged for Review")} page lists everything that could not be confirmed.</p></section>'
+        + '<section><h2>What we do not have, and what would close it</h2>'
+          '<p class="section-lead">A gap stays a gap until a named party answers it. Each row links the question that tracks it, the flag that '
+          'publishes it, and the official rule the gap turns on.</p>'
+          + table(["Missing", "Why it matters, and what would close it", "Question", "Flag", "Official rule the gap turns on"],
+                  gap_rows, "compact")
+          + "</section>"
+        + f'<section><h2>The {len(open_questions)} questions that are not answered yet</h2>'
+          f'<p class="section-lead">{len(owner_qs)} of them need an answer only the site owner can give; {len(other_qs)} are discoverable but have '
+          f'not been discovered from an official source yet. The full register, with each row\'s "what is already known" and "how the missing piece '
+          f'is discovered" columns, is on {href(current, "questions.html", "Open questions")}.</p>'
+          f'<h3>Answerable by the site owner</h3><ol>{qlist(owner_qs)}</ol>'
+          + (f'<h3>Discoverable, not yet discovered</h3><ol>{qlist(other_qs)}</ol>' if other_qs else "")
+          + f'<p class="small muted">The choices that follow from those answers are on {href(current, "decisions.html", "Decision log")}; the menu '
+            f'they unlock is on {href(current, "suggestions.html", "Suggestions")}; the review order is '
+            f'{href(current, "decision-centre.html", "Decision centre")}.</p></section>'
+    )
+
+
 # Every page states what it contains, in its own words. Google's snippet
 # guidance asks for a unique description per page; the article pages already
 # carried their own, and these cover the rest. The build fails if two pages
@@ -2190,6 +2389,8 @@ PAGE_DESCRIPTIONS = {
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
+    "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in and what happens to an answer.",
+    "information-gaps.html": f"What this project can already prove about the three air fryers, the {len([q for q in QUESTIONS if q['kind'] != 'Known'])} questions that are not answered yet, and the named party who can close each gap.",
     "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. Nothing on it has been applied.",
     "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
 }
@@ -2209,6 +2410,8 @@ BODIES = {
     "policy-compliance.html": page_policy,
     "suggestions.html": page_suggestions,
     "questions.html": page_questions,
+    "decision-centre.html": page_decision_centre,
+    "information-gaps.html": page_information_gaps,
     "design.html": page_design,
     "decisions.html": page_decisions,
     "analytics.html": page_analytics,
@@ -2230,7 +2433,18 @@ def render(page: Page) -> str:
             + "".join(items)
             + "</div>"
         )
-    nav = "".join(nav_groups)
+        nav = "".join(nav_groups)
+        # The feed is a first-class publication surface: it is linked from the
+        # sidebar, the footer directory and every page head (SG-27, 2026-11-17
+        # parallel pass; added to the sidebar 2026-11-19 so the nav check on
+        # that row holds literally, not just through the footer). It is appended
+        # inside the single navigation group - scripts/verify.py enforces that
+        # the sidebar holds exactly one nav-group.
+        if nav.endswith("</div>"):
+            nav = (
+                nav[: -len("</div>")]
+                + f'<a href="{esc(page.rel("feed.xml"))}">RSS feed</a></div>'
+            )
     directory_targets = list(dict.fromkeys(target for _group, targets in NAV_ORDER for target in targets))
     footer_links = "".join(
         f'<a href="{esc(page.rel(target))}">{esc(NAV_LABEL.get(target, target))}</a>'

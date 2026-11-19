@@ -581,6 +581,7 @@ def check_required_pages() -> None:
         "automation.html", "analysis.html", "requirements.html", "suggestions.html", "verification.html",
         "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
         "suggestions.html", "questions.html", "design.html", "decisions.html",
+        "decision-centre.html", "information-gaps.html",
         "categories/dual-basket-air-fryers.html",
         "categories/single-basket-air-fryers.html",
         "categories/air-fryer-toaster-ovens.html",
@@ -826,7 +827,8 @@ def check_publication() -> None:
         fail(f"measure.js events are {sorted(events)}, not the five defined events")
     surfaces = ["index.html", "executive-summary.html", "products.html", "guides/index.html", "marketing.html",
                 "automation.html", "analysis.html", "requirements.html", "suggestions.html", "questions.html",
-                "design.html", "decisions.html", "verification.html", "policy-compliance.html", "links.html",
+                "design.html", "decisions.html", "decision-centre.html", "information-gaps.html",
+                "verification.html", "policy-compliance.html", "links.html",
                 "measurement.html", "analytics.html", "flagged.html", "sources.html"]
     for path in DOCS.rglob("*.html"):
         rel = str(path.relative_to(DOCS))

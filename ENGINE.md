@@ -36,7 +36,7 @@ python3 -m engine.cli build          # regenerate the site from data/*.json
 Tests and CI:
 
 ```bash
-python3 -m unittest discover -s tests     # 83 tests, stdlib only
+python3 -m unittest discover -s tests     # 92 tests (83 engine + 9 analytics endpoint), stdlib only
 python3 -m engine.cli build               # writes build/site-preview (required by the next line)
 python3 tools/check_links.py              # links, per-row sourcing, CSS, disclosure — fails on a clean checkout until the preview above exists
 ```

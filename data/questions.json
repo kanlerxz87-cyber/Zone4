@@ -15,7 +15,8 @@
     "updated_utc": "2026-11-16",
     "update_note": "Q-06, Q-12, Q-21 and Q-37 closed by the owner decisions recorded on 2026-11-16 (delegated). Q-36 re-verified on 2026-11-16. Everything else stands: the gaps that need an account holder, a seller, a lawyer or a budget stay open, and each row still says how the missing piece could be discovered.",
     "added_by_89900251_2026_11_16": "Q-38 to Q-44 are the design and organic-traffic path. Q-38, Q-39, Q-42 and Q-44 are already answered from official sources read on 2026-11-16 and are recorded so a reviewer does not have to re-derive them. Q-40 is the one genuine unknown in the traffic programme: search demand. Q-41 and Q-43 are owner decisions with options in D-39 and D-37.",
-    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's Q-45-Q-49 (from arena/cc32105d-zone4 and earlier sessions) already cover the endpoint (Q-46), reader consent (Q-47), Search Console (Q-48) and the ledger's report source (Q-49). This session's Search Console question was withdrawn as a duplicate of Q-48; its tag-registration question was appended as Q-50."
+    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's Q-45-Q-49 (from arena/cc32105d-zone4 and earlier sessions) already cover the endpoint (Q-46), reader consent (Q-47), Search Console (Q-48) and the ledger's report source (Q-49). This session's Search Console question was withdrawn as a duplicate of Q-48; its tag-registration question was appended as Q-50.",
+    "correction_2026_11_19": "arena/a4eb2a1d-zone4: Q-50 had landed as a verbatim copy of Q-45 (same question, same known text, same blocks) although this register's 2026-11-17 reconciliation note records it as the tag-registration question and Q-01's known text points at it for exactly that. Q-50 is rewritten as the tag-registration question with its own discovery path; Q-45 keeps the link-intent question. Q-01's known text also said 'Five additional URLs' where two exist. Recorded as flag F-70."
   },
   "questions": [
     {
@@ -24,7 +25,7 @@
       "question": "Is the Associates account enrolled under the supplied Partner Tag, and have the published links been generated and validated in that account?",
       "why_it_matters": "Without an account there is no tag, and without a tag no click can be attributed. Every revenue figure the brief asks for is downstream of this single fact.",
       "kind": "Unknown - not discoverable from here",
-      "known": "The user supplied `shopnow047c-20` as the selected tracking ID. This session cannot confirm that it is active, belongs to an enrolled Associates account, or has been applied to any Special Link. The three previously reviewed destinations had no visible `tag=` parameter in their 2026-11-16 re-check. Five additional URLs are separately unverified (F-55). The 2026-11-17 reads (data/verification-session-1f4a7a22.json) re-resolved the three links to the same ASINs, again with no tag=; decisions D-01/D-14 (recorded 2026-11-17) publish the tagged Special Links (https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20) as the outbound hrefs, while the supplied short links stay recorded, unjudged (FLG-003 unresolved). Whether the ID is registered and active is question Q-50.",
+      "known": "The user supplied `shopnow047c-20` as the selected tracking ID. This session cannot confirm that it is active, belongs to an enrolled Associates account, or has been applied to any Special Link. The three previously reviewed destinations had no visible `tag=` parameter in their 2026-11-16 re-check. The two additional URLs are separately unverified (F-55); their destinations were later resolved to meat thermometers and held (F-56). The 2026-11-17 reads (data/verification-session-1f4a7a22.json) re-resolved the three links to the same ASINs, again with no tag=; decisions D-01/D-14 (recorded 2026-11-17) publish the tagged Special Links (https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20) as the outbound hrefs, while the supplied short links stay recorded, unjudged (FLG-003 unresolved). Whether the ID is registered and active is question Q-50.",
       "how_to_discover": "In Associates Central, confirm account enrollment and that shopnow047c-20 is the account Partner Tag. Generate or validate one Special Link per intended product; re-resolve each destination and confirm a test click in the authorized reporting workflow before scaling.",
       "answerable_by": "The site owner",
       "blocks": [
@@ -1143,29 +1144,25 @@
     },
     {
       "id": "Q-50",
-      "area": "Product identity and links",
-      "question": "Are the two newly added short links intended to represent additional products, and can the intended product be confirmed for each of the five distinct candidate links?",
-      "why_it_matters": "The three existing links have historical destination verification but lack a separate product-intent confirmation record. Two additional links appear in the latest request and have not been resolved. Publishing without confirming intended products risks sending readers to the wrong listing.",
-      "kind": "Unknown - discoverable",
-      "known": "The brief repeats the three link.amazon URLs already in the product register and adds https://link.amazon/B0c8moW59 and https://link.amazon/B0f3GKalj. The first three have historical destination verification records. The two additional destinations are unverified in this session. The user also supplied shopnow047c-20, whose account association and use in Special Links are unconfirmed.",
-      "how_to_discover": "In Associates Central, validate one Special Link per intended product and confirm its destination and tracking report. For each of the five distinct products, store intended ASIN, official listing URL, confirmation date and source; keep the observed redirect target in a separate field. Do not use a short-link token itself as an ASIN.",
-      "answerable_by": "The account holder or an authorized Associates user; the public listing pages can then be checked against the intended product.",
+      "area": "Money",
+      "question": "Is shopnow047c-20 a registered, active Partner Tag on the enrolled Associates account, and do the published Special Links resolve through it?",
+      "why_it_matters": "The whole attribution chain hangs on this one fact: an unregistered or inactive tag means every tagged Special Link on the site attributes nothing, however well the pages rank. It is also the fact only Associates Central can supply, so it is separated from Q-01 (account enrolment and the one-link-per-product test) to keep the owner's to-do list unambiguous.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "shopnow047c-20 was supplied in the owner's 2026-11-17 brief as the selected tracking ID and is recorded verbatim as owner input in data/associates.json. Whether it is registered to an enrolled account, still active, and actually applied to the Special Links published since decisions D-01/D-14 cannot be confirmed from outside Associates Central (F-57). The 2026-11-17 reads of the supplied short links still show no tag= parameter (F-03).",
+      "how_to_discover": "In Associates Central, open the tracking-ID list and confirm shopnow047c-20 is present, active and selected when each Special Link is generated; then run the one-link-per-product test protocol (S-39, five steps in data/associates.json) and confirm the test click appears in the authorized tracking report.",
+      "answerable_by": "The site owner",
       "blocks": [
-        "S-37",
-        "D-40"
+        "S-39",
+        "Revenue measurement"
       ],
       "sources": [
         {
-          "url": "https://link.amazon/B0c8moW59",
-          "ref": "New user-submitted link; destination not independently verified in this pass."
-        },
-        {
-          "url": "https://link.amazon/B0f3GKalj",
-          "ref": "New user-submitted link; destination not independently verified in this pass."
-        },
-        {
           "url": "https://affiliate-program.amazon.com/help/operating/policies",
-          "ref": "Amazon Associates Program Policies: Special Link requirements"
+          "ref": "Participation Requirements 2(b): the tag format XXXXX-## that a Partner Tag must match"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement: the account and tag the agreement creates"
         }
       ],
       "flags": [

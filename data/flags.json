@@ -675,13 +675,13 @@
       "id": "F-52",
       "severity": "Medium",
       "title": "Three of five article headlines repeat one construction, and four of five title tags repeat one modifier",
-      "detail": "The five published articles were read line by line on 2026-11-16. Three H1s end in a clause about the site's own checking process: M-P1 'Chefman 6 Quart Dual Basket Air Fryer Oven: two baskets, every figure checked'; M-P2 'Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: the listed facts, both function counts included'; M-P3 'Chefman 8 Quart TurboFry 4-in-1 Air Fryer: one basket, every figure checked'. M-P1 and M-P3 differ only in the words 'two baskets' and 'one basket'. Four of the five title tags contain the word 'Verified' ('Verified Two-Basket Specs', 'Verified Listed Specs', 'Verified Single-Basket Specs', 'Verified Comparison'). No published fact is affected and no figure is wrong: this is a presentation defect, and it is the most visible reason the site reads as generated rather than written. It is exactly the pattern Google's spam policies describe as keyword stuffing at its mildest, and it is the pattern the brief's 'should not read like some AI slop website' complaint names. Update 2026-11-16 (arena/89900251-zone4, post-rebase): the copy pass shipped by session arena/c509aba1-zone4 (delegated owner decisions D-12/D-17/D-18/D-20/D-25/D-27 recorded 2026-11-16) has already rewritten every article headline and title tag. Reading all seven articles living on main at the merge point: no H1 now describes the site's checking process, no two share a construction, and no title tag contains the word 'Verified'. That part of this flag is therefore corrected on main, and the option sets on the Design brief page stand as alternatives rather than as fixes. One symptom survives: M-P3 still opens with 'Some listings need paragraphs of interpretation; this one mostly needs reading', which is the page commenting on its own composition (checklist row AS-03). Update 2026-11-17 (arena/1f4a7a22-zone4): the surviving symptom was fixed under decision D-36 - the M-P3 opener no longer describes its own composition, and the ASIN-and-category-path prose (F-53) was rewritten out of the three product articles' second paragraphs; every fact and fact_id is unchanged.",
+      "detail": "The five published articles were read line by line on 2026-11-16. Three H1s end in a clause about the site's own checking process: M-P1 'Chefman 6 Quart Dual Basket Air Fryer Oven: two baskets, every figure checked'; M-P2 'Emeril Lagasse 26QT French Door Air Fryer Toaster Oven: the listed facts, both function counts included'; M-P3 'Chefman 8 Quart TurboFry 4-in-1 Air Fryer: one basket, every figure checked'. M-P1 and M-P3 differ only in the words 'two baskets' and 'one basket'. Four of the five title tags contain the word 'Verified' ('Verified Two-Basket Specs', 'Verified Listed Specs', 'Verified Single-Basket Specs', 'Verified Comparison'). No published fact is affected and no figure is wrong: this is a presentation defect, and it is the most visible reason the site reads as generated rather than written. It is exactly the pattern Google's spam policies describe as keyword stuffing at its mildest, and it is the pattern the brief's 'should not read like some AI slop website' complaint names. Update 2026-11-16 (arena/89900251-zone4, post-rebase): the copy pass shipped by session arena/c509aba1-zone4 (delegated owner decisions D-12/D-17/D-18/D-20/D-25/D-27 recorded 2026-11-16) has already rewritten every article headline and title tag. Reading all seven articles living on main at the merge point: no H1 now describes the site's checking process, no two share a construction, and no title tag contains the word 'Verified'. That part of this flag is therefore corrected on main, and the option sets on the Design brief page stand as alternatives rather than as fixes. One symptom survives: M-P3 still opens with 'Some listings need paragraphs of interpretation; this one mostly needs reading', which is the page commenting on its own composition (checklist row AS-03). Update 2026-11-17 (arena/1f4a7a22-zone4): the surviving symptom was fixed under decision D-36 - the M-P3 opener no longer describes its own composition, and the ASIN-and-category-path prose (F-53) was rewritten out of the three product articles' second paragraphs; every fact and fact_id is unchanged. Update 2026-11-19 (arena/a4eb2a1d-zone4): the 2026-11-17 note above overstated the state of the copy. The M-P3 opener rewrite recorded under D-36 was written in commit c25cb2d of arena/1f4a7a22-zone4 but lost in that session's later merge reconciliation, so the published page still opened with 'Some listings need paragraphs of interpretation; this one mostly needs reading' while this flag claimed it was gone. The opener was restored verbatim from that commit on 2026-11-19 (fact_ids unchanged: M-P3-F2); with the 2026-11-16 headline and title-tag pass, every part of this flag is now corrected in the shipped copy.",
       "sources": [
         "https://developers.google.com/search/docs/essentials/spam-policies",
         "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
       ],
-      "status": "Partly corrected 2026-11-16 by arena/c509aba1-zone4; the AS-03 opener on M-P3 remains",
-      "action": "Apply checklist row AS-03 to the M-P3 opener (D-36): one sentence that names a fact or a kitchen situation instead of describing the writing. The headline options on the Design brief page remain available as a second register if wanted."
+      "status": "Corrected 2026-11-16 (headlines and title tags, arena/c509aba1-zone4) and 2026-11-19 (M-P3 opener, arena/a4eb2a1d-zone4); kept as the audit record",
+      "action": "None outstanding: headlines, title tags and the M-P3 opener are corrected in this build. If a future copy pass touches M-P3-B1, keep it a fact or kitchen-situation sentence, not a comment about the writing (checklist row AS-03)."
     },
     {
       "id": "F-53",
@@ -864,6 +864,39 @@
       ],
       "status": "Corrected 2026-11-17 (arena/cc32105d-zone4); kept",
       "action": "None: the format check is recorded; the intended products still await the owner's confirmation under D-13/D-40."
+    },
+    {
+      "id": "F-68",
+      "severity": "Low",
+      "title": "Two suggestion rows pointed at the wrong decisions (S-45 and S-46); corrected 2026-11-19",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line register review. S-45 (Ship the RSS feed and its subscribe affordances, status Implemented 2026-11-17) carried decision D-44, which is open and concerns the measurement surfaces; the decision that released the feed is D-45 (Recorded: keep the shipped RSS feed). S-46 (Reader capture: an email follow option, only after the privacy basis exists) carried decision D-45 (the feed decision) while its own problem text names D-16 as the gate; it now points at D-16. The register's 2026-11-17 reconciliation note also misdescribes the rows it added (\"S-45 test protocol, S-46 feed\"); as landed, the Associates Central one-link test protocol is S-39, S-45 is the feed and S-46 is reader capture. No published page content, product fact or link changed - the pointers are register metadata only.",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: pointers corrected in data/suggestions.json and the correction recorded in the register's _meta. Re-check at the next register review that implemented rows point at Recorded decisions.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json"
+      ]
+    },
+    {
+      "id": "F-69",
+      "severity": "Low",
+      "title": "Documentation counts and a layout description had drifted from the shipped site; reconciled 2026-11-19",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line repo review. Four documentation surfaces described an older build: (1) the executive-summary bullets and decisions list in data/content.json still said 'seven question-led articles', '40 costed suggestions, 49 questions and 42 decisions', listed three already-recorded decisions as still needed, and said 'S-38 proposes five events ... not implemented' and 'no server endpoint', although seven articles, 46 suggestions, the five defined events in data/ledger.json, the staged endpoint in analytics-endpoint/ and decisions D-35-D-38 all existed on main by 2026-11-17; (2) EXECUTIVE_SUMMARY.md said 44 suggestions / 49 questions / 42 decisions (30 recorded) against the registers' 46 / 50 / 45 (33 recorded) before this session's additions; (3) README.md said 46 suggestions and 67 flags; (4) REQ-22's delivered text claimed thirty-four pages but enumerated only thirty-three (the design brief page was missing from the list), and REQ-23 still described the pre-2026-11-17 landing page ('KPI tiles and article cards', purpose-grouped sidebar) although the shop-front rebuild (D-21/S-42) and the single-navigation-group rule (scripts/verify.py) now govern. All counts and descriptions were recomputed from the registers and the shipped pages in this session (this flag is itself one of the new rows: the register now carries 70 flags).",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: counts re-derived from the registers in this build. Any future count edit should be made against the registers, not typed by hand.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/content.json"
+      ]
+    },
+    {
+      "id": "F-70",
+      "severity": "Low",
+      "title": "Q-50 had landed as a duplicate of Q-45; rewritten as the tag-registration question (2026-11-19)",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line register review. The questions register's own 2026-11-17 reconciliation note records Q-50 as the tag-registration question, and Q-01's known text defers to 'question Q-50' for whether shopnow047c-20 is registered and active - but the row that landed carried Q-45's question text, known text and blocks verbatim, with only the flag differing (F-57 vs F-55). Q-50 now asks the tag-registration question with its own discovery path (Associates Central tracking-ID list plus the S-39 one-link test); Q-45 keeps the link-intent question. Q-01's known text also said 'Five additional URLs are separately unverified' where two exist; corrected to two. Register metadata only - no published product fact, link or page claim changed.",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: the row is rewritten to match the register's own record of what it was added as. Re-check at the next register review that Q-45 and Q-50 stay distinct.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/questions.json"
+      ]
     }
   ]
 }
