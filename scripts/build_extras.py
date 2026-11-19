@@ -532,68 +532,6 @@ def _review_body(bs, page) -> str:
         if not group:
             continue
         items = []
-        for s in group:
-            st = s["status"]
-            kind = "ok" if st.startswith("Applied") else ("warn" if st.startswith("Partly") else "muted")
-            shipped = (
-                f'<p class="small"><strong>What shipped on 2026-11-19.</strong> {e(s["shipped_note"])}</p>'
-                if s.get("shipped_note") else ""
-            )
-            flags_cell = " ".join(bs.flag_chip(page, f) for f in s["flags"]) if s["flags"] else "&mdash;"
-            items.append(
-                f'<article class="scard" id="{e(s["id"])}">'
-                '<div class="scard-head"><div>'
-                f'<span class="scard-id">{e(s["id"])}</span>{prio(prio_key)}'
-                '</div>'
-                f'{pill(kind, st)}'
-                '</div>'
-                f'<h3>{e(s["title"])}</h3>'
-                f'<p class="scard-problem">{e(s["problem"])}</p>'
-                f'<p><strong>What we would change.</strong> {e(s["proposal"])}</p>'
-                + shipped
-                + f'<p><strong>Why it is worth doing.</strong> {e(s["why"])}</p>'
-                '<dl class="sgrid">'
-                f'<dt>Cost</dt><dd>{e(s["effort"])}</dd>'
-                f'<dt>Risk</dt><dd>{e(s["risk"])}</dd>'
-                f'<dt>How you would know it worked</dt><dd>{e(s["check"])}</dd>'
-                '</dl>'
-                f'<p class="scard-foot"><span>Reserved decision: {e(s["decision"])} '
-                '(not written to the decision log until you record a choice)</span>'
-                f'<span>Flags: {flags_cell}</span></p>'
-                f'<ul class="scard-src">{src_list(s["sources"])}</ul>'
-                '</article>'
-            )
-
-        for s in group:
-            st = s["status"]
-            kind = "ok" if st.startswith("Applied") else ("warn" if st.startswith("Partly") else "muted")
-            shipped = ""
-            if s.get("shipped_note"):
-                shipped = f'<p class="small"><strong>What shipped on 2026-11-19.</strong> {e(s["shipped_note"])}</p>'
-            flags_cell = " ".join(bs.flag_chip(page, f) for f in s["flags"]) if s["flags"] else "&mdash;"
-            items.append(
-                f'<article class="scard" id="{e(s["id"])}">'
-                '<div class="scard-head"><div>'
-                f'<span class="scard-id">{e(s["id"])}</span>{prio(prio_key)}'
-                '</div>'
-                f'{pill(kind, st)}'
-                '</div>'
-                f'<h3>{e(s["title"])}</h3>'
-                f'<p class="scard-problem">{e(s["problem"])}</p>'
-                f'<p><strong>What we would change.</strong> {e(s["proposal"])}</p>'
-                + shipped
-                + f'<p><strong>Why it is worth doing.</strong> {e(s["why"])}</p>'
-                '<dl class="sgrid">'
-                f'<dt>Cost</dt><dd>{e(s["effort"])}</dd>'
-                f'<dt>Risk</dt><dd>{e(s["risk"])}</dd>'
-                f'<dt>How you would know it worked</dt><dd>{e(s["check"])}</dd>'
-                '</dl>'
-                f'<p class="scard-foot"><span>Reserved decision: {e(s["decision"])} '
-                '(not written to the decision log until you record a choice)</span>'
-                f'<span>Flags: {flags_cell}</span></p>'
-                f'<ul class="scard-src">{src_list(s["sources"])}</ul>'
-                '</article>'
-            )
         cards.append(
             f'<section><h2>{e(heading)}</h2><p class="section-lead">{e(lead)}</p>'
             f'<div class="scards">{"".join(items)}</div></section>'
