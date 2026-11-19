@@ -22,7 +22,8 @@
       "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build.",
       "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete.",
       "Implemented 2026-11-19": "Decision recorded 2026-11-19 and the change is live in this build.",
-      "Partly implemented 2026-11-19": "Decision recorded 2026-11-19; part of the change is live in this build and the rest is staged, blocked on an owner fact, or taken by a concurrent session."
+      "Partly implemented 2026-11-19": "Decision recorded 2026-11-19; part of the change is live in this build and the rest is staged, blocked on an owner fact, or taken by a concurrent session.",
+      "Decision recorded 2026-11-19 - work remains": "The direction was recorded on 2026-11-19; the deferred part is scheduled and the reason is in the decision log."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
@@ -835,8 +836,9 @@
       "flags": [
         "F-51"
       ],
-      "status": "Awaiting decision",
-      "decision": "D-35"
+      "status": "Implemented 2026-11-17",
+      "decision": "D-35",
+      "status_note_2026_11_19": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' was stale - D-35 was recorded on 2026-11-17 (the DIR-A warm-editorial specification adopted) and the Design brief page ships the three specified directions and the paste-ready prompt in this build. Decision pointer unchanged (D-35)."
     },
     {
       "id": "S-33",
@@ -899,8 +901,9 @@
         "F-51",
         "F-52"
       ],
-      "status": "Awaiting decision",
-      "decision": "D-37"
+      "status": "Implemented 2026-11-17",
+      "decision": "D-37",
+      "status_note_2026_11_19": "Status corrected 2026-11-19 (F-89): D-37 was recorded on 2026-11-17 (steady headline register, no rewrite) and the topic calendar ships on the front page, the Articles hub and the Design brief page. Decision pointer unchanged (D-37)."
     },
     {
       "id": "S-35",
@@ -923,8 +926,9 @@
         }
       ],
       "flags": [],
-      "status": "Awaiting decision",
-      "decision": "D-38"
+      "status": "Implemented 2026-11-19",
+      "decision": "D-38",
+      "status_note_2026_11_19": "Status corrected 2026-11-19 (F-89): D-38 was recorded and the Decision centre page (shipped 2026-11-19) publishes the review order, the gating-decision table, the choose-a-path triage and the launch path the row asked for. Decision pointer unchanged (D-38)."
     },
     {
       "id": "S-36",
@@ -1036,7 +1040,8 @@
           "ref": "Operating Agreement Section 1: the links must properly use the tagged Special Link formats"
         }
       ],
-      "status": "Needs a decision first"
+      "status": "Owner action required",
+      "status_note_2026_11_19": "Status corrected 2026-11-19 (F-89): D-01 was recorded on 2026-11-17, so this row's decision half is done - the published outbound links are the tagged Special Links (data/associates.json). What remains is the Associates Central one-link-per-product test (F-57, F-58), which only the account holder can run; the five-step protocol in data/associates.json is ready for it."
     },
     {
       "id": "S-40",
@@ -1142,7 +1147,7 @@
       "effort": "S",
       "risk": "Low - additive module; no claim is made until a query is measured.",
       "check": "The module appears only once a query source is connected, and each suggested title still resolves to a verified fact row.",
-      "status": "Awaiting decision",
+      "status": "Needs a decision first",
       "decision": "D-33",
       "sources": [
         {
@@ -1157,7 +1162,8 @@
       "flags": [
         "F-15",
         "F-19"
-      ]
+      ],
+      "status_note_2026_11_19": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' was stale - D-33 was recorded on 2026-11-16 (the optimisation loop stays unwired until real reporting exists). The row now waits on the open questions Q-40/Q-46 (measured queries and a hosted endpoint), not on a decision; its decision pointer (D-33) is the recorded gate itself."
     },
     {
       "id": "S-45",
@@ -1354,9 +1360,10 @@
         }
       ],
       "flags": [],
-      "status": "Awaiting decision",
+      "status": "Needs a decision first",
       "decision": "D-17",
-      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The pointer is D-17 because adopting any topic beyond the recorded eight is a calendar revision that the owner reviews; until then the candidates stay proposals with their fact-row ids attached."
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The pointer is D-17 because adopting any topic beyond the recorded eight is a calendar revision that the owner reviews; until then the candidates stay proposals with their fact-row ids attached.",
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89, the same pass that corrected S-32/S-34/S-35/S-39/S-44): 'Awaiting decision' pointed at recorded D-17. The row now waits on the open demand question (Q-40/Q-59) that gates the calendar's measured review; the next wave itself was recorded the same day under D-50 (T-09/T-10), so the prepared-candidate half of this row is partly overtaken. Decision pointer unchanged (D-17, the calendar decision)."
     },
     {
       "id": "SG-33",
@@ -1379,9 +1386,10 @@
         }
       ],
       "flags": [],
-      "status": "Awaiting decision",
+      "status": "Decision recorded 2026-11-16 - work remains",
       "decision": "D-09",
-      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after checking the built pages: og:image appears on none of them (grep across docs/), and S-09's status already read 'partly implemented'. This row stages the unfinished half rather than re-opening what D-09 already approved."
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after checking the built pages: og:image appears on none of them (grep across docs/), and S-09's status already read 'partly implemented'. This row stages the unfinished half rather than re-opening what D-09 already approved.",
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' pointed at recorded D-09. The direction is decided (S-09's social-preview half, recorded 2026-11-16 as partly implemented); the og:image work itself has since shipped (D-47/F-79), and what this row adds is the per-article structured-data extension. Decision pointer unchanged (D-09)."
     },
     {
       "id": "SG-34",
@@ -1434,8 +1442,9 @@
         "F-65"
       ],
       "status": "Awaiting decision",
-      "decision": "D-17",
-      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The calendar dates used (2026-11-27, 2026-12-25) are fixed calendar dates, not claims about demand. F-65 already records that the cadence is owner-changeable, so this row asks rather than changes."
+      "decision": "D-52",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The calendar dates used (2026-11-27, 2026-12-25) are fixed calendar dates, not claims about demand. F-65 already records that the cadence is owner-changeable, so this row asks rather than changes.",
+      "status_note_2026_11_19_eb90e04d": "Decision pointer re-pointed 2026-11-19 (F-89 pass): 'Awaiting decision' pointed at recorded D-17, but this row genuinely awaits a cadence choice the owner must make, so it now points at the new open decision D-52 (linked question Q-54). Nothing about the proposal changed."
     },
     {
       "id": "SG-36",
@@ -1485,9 +1494,10 @@
       "flags": [
         "F-71"
       ],
-      "status": "Awaiting decision",
+      "status": "Decision recorded 2026-11-16 - work remains",
       "decision": "D-10",
-      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after reconciling the counts by hand for this pass. The pointer is D-10 (documentation in line with the code), recorded 2026-11-16; this row stages the automation that would make the reconciliation unnecessary."
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after reconciling the counts by hand for this pass. The pointer is D-10 (documentation in line with the code), recorded 2026-11-16; this row stages the automation that would make the reconciliation unnecessary.",
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' pointed at recorded D-10. The documentation-alignment direction is decided (recorded 2026-11-16, partly implemented); generating the counts is the remaining work, not a pending choice. Decision pointer unchanged (D-10)."
     },
     {
       "id": "SG-38",
@@ -1662,7 +1672,7 @@
       "effort": "One short block per guide, written by hand from the existing fact rows; roughly an hour per article.",
       "risk": "Low, but the block must not drift into a claim the fact table cannot source. Keep every sentence traceable to a published fact row or delete it.",
       "check": "Each guide opens with a direct answer to its question; every sentence in the block traces to a sourced fact row or is removed; no popularity or volume claim appears.",
-      "status": "Awaiting decision",
+      "status": "Needs a decision first",
       "sources": [
         {
           "url": "https://developers.google.com/search/docs/appearance/snippet",
@@ -1674,7 +1684,8 @@
         }
       ],
       "flags": [],
-      "decision": "D-48"
+      "decision": "D-48",
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89, caught by the new build gate): 'Awaiting decision' pointed at recorded D-48, whose own recommendation states these two structural pieces 'stay in the suggestion register for a separate decision'. No separate decision row exists yet, so the row waits for one to be written. Decision pointer unchanged (D-48, the applied direction the row extends)."
     },
     {
       "id": "SG-45",
@@ -1686,7 +1697,7 @@
       "effort": "One to two days: template restructure plus responsive rules. Reversible.",
       "risk": "Medium. It restructures article markup, so the fact-table source-link and disclosure checks must be re-verified page by page. No value changes; only the location of the already-sourced tables moves.",
       "check": "Every article renders a reading column and a sticky evidence rail; the rail carries the fact table, flags and sources; all source links still resolve; verify.py and qa/audit_site.py stay green on every article page.",
-      "status": "Awaiting decision",
+      "status": "Needs a decision first",
       "sources": [
         {
           "url": "https://developers.google.com/search/docs/appearance/page-experience",
@@ -1698,7 +1709,8 @@
         }
       ],
       "flags": [],
-      "decision": "D-48"
+      "decision": "D-48",
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89, caught by the new build gate): 'Awaiting decision' pointed at recorded D-48, whose own recommendation states these two structural pieces 'stay in the suggestion register for a separate decision'. No separate decision row exists yet, so the row waits for one to be written. Decision pointer unchanged (D-48, the applied direction the row extends)."
     },
     {
       "id": "S-48",
@@ -1887,6 +1899,72 @@
         "F-88",
         "F-84"
       ]
+    },
+    {
+      "id": "S-55",
+      "priority": "P2 - Adds real value",
+      "title": "Give the two thermometer listings their first editorial coverage: two question-shaped topics on the existing calendar",
+      "problem": "Decision D-46 published P4 and P5 (meat thermometers, identity-verified 2026-11-19) as product cards and a Meat thermometers category, but the editorial programme stops at the eight air-fryer topics (T-01..T-08): no article, no calendar entry and no guide covers the two newest listings, so a reader who reaches the thermometers category has nothing to read next.",
+      "proposal": "Extend the question-shaped topic calendar with two Wave 3 topics built only from the claims each listing's own title states (read 2026-11-19 and re-read the same day by session arena/eb90e04d-zone4): T-09 - 'Instant-read or wireless? Matching the thermometer to the way you cook' (P4's instant-read claims against P5's wireless-probe claims, both as titled) and T-10 - 'Stocking stuffer or serious tool? What each thermometer listing promises on its own title line' (the gift positioning is the listing's own claim, quoted as titled, never this site's). Write each as a guide on the existing 14-day cadence dates (next due 2026-12-01), with the same sourced fact-table rule as every other guide.",
+      "why": "The brief asks for catchy topics related to the products being promoted, and the two promoted listings currently have zero editorial surface. Their titles carry concrete, checkable claims (accuracy, certification, waterproofing, probe count, heat rating, gift positioning as titled) - exactly the raw material the site's evidence rule allows - and the cadence to publish them already exists.",
+      "effort": "One build change to add the calendar rows; roughly half a day per guide on its cadence date.",
+      "risk": "Scope: the calendar was approved for air fryers (D-17), so extending it is a real editorial-scope change - recorded under D-50 so the owner can reverse it. Evidence: the P4/P5 capacity, dimensions and model fields are blank (F-60), so the guides can compare only title claims and the recorded special-feature rows, not spec tables, and must say so. No popularity or demand claim is made anywhere (F-15, D-19).",
+      "check": "The front-page roadmap and the Articles-hub calendar show the two Wave 3 rows as Planned, each linked to its official listing; each guide lands in data/guides.json, docs/sitemap.xml and docs/feed.xml on its cadence date with a sourced fact table.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing title and breadcrumb (read 2026-11-19; re-read 2026-11-19 by arena/eb90e04d-zone4)"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 listing title and breadcrumb (read 2026-11-19; re-read 2026-11-19 by arena/eb90e04d-zone4)"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/publishing.json",
+          "ref": "The 14-day cadence and the no-claims measurement rule"
+        }
+      ],
+      "flags": [
+        "F-60",
+        "F-15"
+      ],
+      "status": "Decision recorded 2026-11-19 - work remains",
+      "decision": "D-50",
+      "status_note_2026_11_19": "Recorded under D-50 (agent, standing no-manual-input brief, same basis as D-46): the calendar rows ship in this build; the two guides are written on their cadence dates, not early. The owner can reverse the scope by reverting D-50 (and D-46) and rebuilding. Numbering note: proposed as S-47/S-48 while PRs #97-#102 merged; renumbered to the next free id each time."
+    },
+    {
+      "id": "S-56",
+      "priority": "P2 - Adds real value",
+      "title": "Put the owner-only gates on the Decision centre as one panel, so a reviewer sees the minimum only-they-can-do list",
+      "problem": "The Decision centre explains the review order well, but the actions only the account holder can perform are scattered across four registers: the tag confirmation (Q-50/F-57), the one-link-per-product test (S-39/F-58), endpoint hosting (Q-46/F-59), Search Console verification (Q-48/F-61) and the authorized report source for the campaign ledger (Q-49). A reviewer has to re-derive that list every time.",
+      "proposal": "Add an 'Only the account holder can do these' section to the Decision centre page, rendered from the registers at build time: each row names the action, what it unblocks, the flag that tracks it and the register entry that defines it. Nothing new is claimed - the panel only aggregates what the registers already state.",
+      "why": "This is the brief's 'clear list of what must be answered before any decision can reasonably be made': five minutes on one panel replaces an afternoon across four pages, and it makes visible that most of the remaining open work is account-side, not build-side.",
+      "effort": "One build change; no register row changes.",
+      "risk": "Staleness - a hard-coded panel would become the exact drift class this site keeps catching (F-71, F-90), so it is derived from the registers at build time and the rows link the entries they summarise.",
+      "check": "The panel renders the owner-only rows with live flag chips and links; removing a flag or changing its status changes the panel in the same build.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/associates.json",
+          "ref": "The one-link-per-product test protocol (S-39) and the tracking-ID record"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - Participation Requirements 2(b), the tag rule the test confirms"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json",
+          "ref": "F-57/F-58/F-59/F-61, the account-side flags the panel aggregates"
+        }
+      ],
+      "flags": [
+        "F-57",
+        "F-58",
+        "F-59",
+        "F-61"
+      ],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-51",
+      "status_note_2026_11_19": "Shipped in this session's build (D-51 recorded under the standing brief); rendered beside the parallel sessions' choose-a-path triage (SG-36), the storefront surfaces (D-47), the applied DIR-A presentation layer (D-48) and the dated-article work (D-49, PR #102), not instead of them. Numbering note: proposed as S-48/S-49 while PRs #97-#102 merged; renumbered to the next free id each time."
     }
   ]
 }

@@ -217,7 +217,7 @@ def article_label(a: dict) -> str:
 def observed_suffix(a: dict) -> str:
     """' - observed <date>' when the article record names one, otherwise nothing at all.
 
-    Decision D-49 (2026-11-19, arena/0272d56e-zone4), which replaced flag F-88's defect: an
+    Decision D-49 (2026-11-19, arena/0272d56e-zone4), which replaced the dated-byline defect (S-54 records the five undated articles): an
     article page never inherits the builder's OBSERVED constant. That constant is the date some
     session last re-read the listings, not the date this article read its facts, so a record with
     no dated field of its own prints no date rather than a borrowed one. The dated artefact behind
@@ -2137,8 +2137,9 @@ def page_design(current: Page) -> str:
         '<header class="hero"><h1>Design brief</h1>'
         '<p class="lead">Three visual directions specified far enough to build, the ten writing '
         'patterns that make this site read as machine output with a replacement for each, two '
-        'finished headline options for every published article, an eight-topic organic-traffic '
-        'programme, and the prompt that assembles all of it. The adopted DIR-A presentation layer is applied to the storefront and articles (D-47, 2026-11-19); the three directions, the anti-pattern list and the topic programme remain a proposal register until each is recorded and built.</p>'
+        'finished headline options for every published article, a ten-topic organic-traffic '
+        'programme (D-17, extended to the two published thermometer listings by D-50), and the '
+        'prompt that assembles all of it. The adopted DIR-A presentation layer is applied to the storefront and articles (D-48, 2026-11-19); the three directions, the anti-pattern list and the topic programme remain a proposal register until each is recorded and built.</p>'
         '<p class="muted small">'
         f'{len(DIRECTIONS)} directions &middot; {len(ANTI_SLOP)} anti-patterns &middot; '
         f'{len(HEADLINE_OPTIONS)} headline rewrites &middot; {len(TOPICS)} topics &middot; '
@@ -2193,8 +2194,8 @@ def page_design(current: Page) -> str:
         'them make a comparison claim, so they wait on D-12 letting the comparison page conclude.</p>'
         '</section>'
         '<section><h2>The organic-traffic topic programme</h2>'
-        '<p class="section-lead">Eight topics, each with the question it answers, the intent behind '
-        'it, the verified fact rows it is built from and the pages it must link to. No row carries a '
+        '<p class="section-lead">' + str(len(TOPICS)) + ' topics, each with the question it answers, the intent behind '
+        'it, the verified fact rows or dated listing titles it is built from and the pages it must link to. No row carries a '
         'search-volume, traffic or revenue estimate: no official source supplies one (F-15), and '
         'the Operating Agreement makes no representation about the traffic any site can expect.</p>'
         + table(["ID", "Wave", "Working title", "Question it answers", "Intent",
@@ -2480,6 +2481,48 @@ def page_decision_centre(current: Page) -> str:
         f'{href(current, "decisions.html#D-38", "D-38")} (option A: publish the queue in dependency order). The paths present strategy, '
         'not outcomes: nothing changes on the site because a path is read, and no step is treated as decided until it is recorded on the Decision log.</p></section>'
     )
+    # The account-side actions (S-48, recorded under D-48): derived from the
+    # registers at build time so the panel cannot become the drift class the
+    # review keeps catching (F-89, F-90). Each row links the flag that tracks it
+    # and the register entry that defines it.
+    q_by = {q["id"]: q for q in QUESTIONS}
+    owner_actions = [
+        ("Confirm shopnow047c-20 is a registered, active Partner Tag on the enrolled Associates account",
+         "Whether the published tagged Special Links can attribute a click at all (Q-01, Q-50)",
+         "F-57", "Q-50",
+         ("https://affiliate-program.amazon.com/help/operating/policies", "Participation Requirements 2(b): the tag parameter every link must carry")),
+        ("Run the one-link-per-product Special Link test in Associates Central (the five-step protocol in data/associates.json is ready)",
+         "Whether one destination and one reporting event per product is confirmed before the pattern scales (S-39)",
+         "F-58", "Q-01",
+         ("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies: Special Links and tracking")),
+        ("Choose the hosting and privacy boundary for the first-party analytics endpoint, or approve the local-only boundary",
+         "Whether the five defined events ever flow into the campaign ledger (D-41, D-43, D-44)",
+         "F-59", "Q-46",
+         ("https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "FTC Disclosures 101: placement and clarity of measurement disclosures")),
+        ("Verify the site in Google Search Console and submit the sitemap and feed",
+         "Whether the next topic is chosen from measured queries instead of instinct (D-42, SG-29)",
+         "F-61", "Q-48",
+         ("https://developers.google.com/search/docs/appearance/page-experience", "Google Search Central: page experience and site presentation")),
+        ("Name the authorized first-party report that may fill the campaign ledger",
+         "Whether any reported-order row can ever be appended (Q-49's rule: timestamped, provenance-backed, never estimated)",
+         None, "Q-49",
+         ("https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "Commission Income Statement: Amazon creates and distributes the click and order reports")),
+    ]
+    owner_rows = []
+    for action, unblocks, fid, qid, rule in owner_actions:
+        q = q_by.get(qid)
+        reg = (
+            f'<a href="{esc(current.rel("questions.html"))}#{esc(qid)}"><strong>{esc(qid)}</strong></a>'
+            f' {esc(q["question"][:110])}' if q else f'<strong>{esc(qid)}</strong>'
+        )
+        owner_rows.append([
+            esc(action),
+            esc(unblocks),
+            flag_chip(current, fid) if fid else '<span class="muted">register rule only</span>',
+            reg,
+            ext(rule[0], rule[1]),
+        ])
+
     return (
         hero("Decision centre",
              "One place to review what could change, see what is still unknown, and choose a path before anything is implemented. "
@@ -2489,6 +2532,13 @@ def page_decision_centre(current: Page) -> str:
         + '<section><h2>The order to work in</h2>'
           '<p class="section-lead">Four steps, in this order. Skipping to step four is what produces sites that look finished and cannot earn.</p>'
           f'<div class="path">{path_html}</div></section>'
+        + '<section><h2>Only the account holder can do these</h2>'
+          '<p class="section-lead">The minimum list of actions no build, agent or script can perform. Everything else on this site can be '
+          'prepared, checked and shipped without waiting; these five cannot, and until they are done the site can be useful but cannot '
+          'earn attributed commission or choose topics from measured data. Each row links the flag that tracks it and the register entry '
+          'that defines it.</p>'
+          + table(["Action (account-side)", "What it unblocks", "Flag", "Register", "Official rule the action turns on"], owner_rows, "compact")
+          + '</section>'
         + '<section><h2>The open decisions that gate the rest</h2>'
           '<p class="section-lead">Each of these blocks a group of suggestions, and each needs an answer only the owner or Amazon can give. '
           f'The full list of {len(open_decisions)} open decisions is on the {href(current, "decisions.html", "Decision log")}.</p>'
@@ -2535,6 +2585,9 @@ def page_information_gaps(current: Page) -> str:
         ("Search demand for each candidate topic",
          "No official source supplies a search-volume figure, so topic choice is editorial until Search Console reports measured queries (SG-29).",
          "Q-40", "F-15"),
+        ("Search demand beyond the two thermometer topics",
+         "The two Wave 3 topics (D-50) are built from verified title claims, so no demand data was needed to add them; choosing anything beyond them on instinct would break the evidence rule (D-19).",
+         "Q-57", "F-15"),
         ("Product photography",
          "The only honest routes are the owner's own photographs or images served through an approved Amazon tool. Neither exists yet (D-22).",
          "Q-20", "F-31"),
@@ -2571,7 +2624,8 @@ def page_information_gaps(current: Page) -> str:
              "What this project can already prove, what it still cannot, and exactly who can close each gap. Nothing on this list is closed by "
              "inference, and no placeholder value stands in for a missing answer.")
         + '<section><h2>What this project can already prove</h2>'
-          '<p class="section-lead">Three supplied links resolved to three verified air-fryer listings, and every value published about them was read '
+          '<p class="section-lead">Five supplied links resolved to five verified listings - three countertop air fryers and two meat '
+          'thermometers (published under D-46) - and every value published about them was read '
           'from an official page and is linked to it in the same row. The proof lives in the '
           f'{href(current, "verification.html", "verification log")} and the {href(current, "products.html", "product records")}; the '
           f'{href(current, "flagged.html", "Flagged for Review")} page lists everything that could not be confirmed.</p></section>'
@@ -2677,7 +2731,7 @@ def _sponsor_amazon_anchors(doc: str) -> str:
 
     Every such link now carries the Associates tag (see _tag_amazon_hrefs), so every one is an
     affiliate link. Before 2026-11-19 the tagging pass ran after rendering and never set rel, so
-    63 tagged Associates help and category links went out without it (F-74). The click counter
+    63 tagged Associates help and category links went out without it (F-76). The click counter
     (docs/measure.js) also selects on rel="sponsored", so untagged-rel links were not counted.
     """
     def repl(m: "re.Match[str]") -> str:
@@ -2872,7 +2926,7 @@ def article_jsonld(a: dict) -> str:
     # record can state. Google's Article guidance is explicit that it is not the date a crawler last
     # saw the page, so a record without a dated publication source publishes no date in its
     # structured data either. Both keys previously carried the builder's OBSERVED value on every
-    # article page, which is the defect flag F-88 records.
+    # article page, which is the dated-byline defect S-54 records.
     if a.get("published_utc"):
         data["datePublished"] = a["published_utc"]
         data["dateModified"] = a["published_utc"]
@@ -3025,8 +3079,8 @@ def build() -> list[pathlib.Path]:
     # are deliberately omitted because the source data has no verified per-article
     # dates; subscribers still get canonical links and the editorial descriptions.
     # RSS is generated from the same records as the pages. A pubDate appears only for an article
-    # whose own record carries a dated publication source (decision D-49, flag F-88), so the feed
-    # never states a date it cannot cite - and the five undated articles are the reason flag F-84
+    # whose own record carries a dated publication source (decision D-49), so the feed
+    # never states a date it cannot cite - and the five undated articles are the reason S-54
     # is open: a reader that sorts by date has nothing to sort those items on.
     feed_items = []
     for article, article_url in ARTICLE_PATHS:

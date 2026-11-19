@@ -1360,6 +1360,36 @@
           "ref": "Operating Agreement Section 1 defines Program Content, which includes images; read 2026-11-19 and recorded in data/verification-session-0272d56e.json."
         }
       ]
+    },
+    {
+      "id": "Q-59",
+      "area": "Editorial programme",
+      "question": "What search demand exists for meat-thermometer comparison questions, and should investment follow the two calendar topics before any data exists?",
+      "why_it_matters": "D-46 published the two thermometer listings and D-50 added two calendar topics, but every search-demand question in this register (Q-40) was written for the eight air-fryer topics. Extending the programme further on instinct would repeat the exact pattern the evidence rule (D-19) exists to stop.",
+      "kind": "Unknown - discoverable",
+      "known": "Both listings are verified: titles and breadcrumbs were read 2026-11-19 and re-read the same day by arena/eb90e04d-zone4, matching the records. No official source supplies a search-volume figure for any topic (F-15). The two Wave 3 topics are built only from title claims and the recorded special-feature rows, so no demand data was needed to add them; demand data becomes necessary only when choosing beyond them.",
+      "how_to_discover": "First-party data only: verify the property in Google Search Console (D-42, owner-side, F-61), then read impressions and queries per page, the way data/publishing.json already specifies - measured queries and on-site clicks after 14 days of events exist. Any keyword-volume tool is a third-party estimate and this site does not cite third parties for figures.",
+      "answerable_by": "The site owner, once Search Console is connected (D-42). Until then the editorial queue stays capped at the two recorded Wave 3 topics.",
+      "blocks": [],
+      "flags": [
+        "F-15",
+        "F-61"
+      ],
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing (title and breadcrumb read 2026-11-19)"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 listing (title and breadcrumb read 2026-11-19)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - people-first topic choice"
+        }
+      ],
+      "status": "Open - waits on the owner's Search Console verification (D-42)"
     }
   ]
 }

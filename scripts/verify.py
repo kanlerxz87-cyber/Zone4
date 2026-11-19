@@ -245,6 +245,13 @@ def check_decision_support() -> None:
             fail(f"suggestion {s['id']} points at unknown decision {d}")
         if not d:
             fail(f"suggestion {s['id']} has no decision row")
+        # A suggestion must not sit in the decision queue while the decision it
+        # points at is already recorded (F-89): a stale "Awaiting decision"
+        # sends the reviewer to re-decide something that was decided.
+        if d and s["status"] == "Awaiting decision":
+            drow = next((x for x in decisions if x["id"] == d), None)
+            if drow and not drow["status"].startswith("Open"):
+                fail(f"suggestion {s['id']} says 'Awaiting decision' but decision {d} is {drow['status']}")
         if not s["sources"]:
             fail(f"suggestion {s['id']} cites no source")
         for source in s["sources"]:
@@ -310,6 +317,7 @@ def check_design() -> None:
     suggestions = {s["id"] for s in load("suggestions.json")["suggestions"]}
     articles = {a["id"] for a in load("marketing.json")["articles"]}
     products = {p["id"] for p in load("products.json")["products"]}
+    extras = {p["id"] for p in load("products-extra.json")["products"]}
 
     # A bare number followed by a unit or a currency sign would be a figure the
     # site has no official source for. The brief must stay qualitative.
@@ -357,7 +365,16 @@ def check_design() -> None:
         for fid in t["fact_rows"]:
             if fid not in fact_ids:
                 fail(f"design {t['id']}: unknown fact row {fid}")
-        if t["wave"] not in {"Wave 1 - foundational four", "Wave 2"}:
+        if not t["fact_rows"]:
+            # A topic with no marketing fact rows is allowed only when its claims
+            # come from the dated products-extra listing titles (D-47). The rule
+            # keeps a topic from citing no verified source at all (F-89 era:
+            # every claim in the calendar must trace to a dated read).
+            basis = "products-extra listing titles (read 2026-11-19)"
+            pids = set(t.get("product_ids") or [])
+            if t.get("claim_basis") != basis or not pids or not pids <= extras:
+                fail(f"design {t['id']}: no fact rows and no products-extra claim basis")
+        if t["wave"] not in {"Wave 1 - foundational four", "Wave 2", "Wave 3 - thermometer listings (D-50)"}:
             fail(f"design {t['id']}: undeclared wave {t['wave']}")
 
     # The launch path must be five real decisions in order, or the page's
@@ -899,7 +916,7 @@ def check_publication() -> None:
             if not href:
                 continue
             h = href.group(1)
-            # Any Amazon link that carries the Associates tag is an affiliate link (F-74, 2026-11-19).
+            # Any Amazon link that carries the Associates tag is an affiliate link (F-76, 2026-11-19).
             tagged_amazon = "amazon.com/" in h and "tag=" in h
             if "amazon.com/dp/" in h or h.startswith("https://link.amazon/") or tagged_amazon:
                 rel_attr = re.search(r'rel="([^"]*)"', attrs)
@@ -977,7 +994,7 @@ def check_reader_surfaces() -> None:
       1. every page declares a canonical URL of its own (flag F-86);
       2. every page carries a social preview image with alt text, and that image exists;
       3. an Article datePublished equals its record's published_utc, and a record with no dated
-         publication source publishes no date at all (decision D-49, flag F-88);
+         publication source publishes no date at all (decision D-49);
       4. an inline diagram names itself as a diagram in its accessible name, which is the line
          between the site's own drawings and the product photography D-22 holds back.
     """

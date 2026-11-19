@@ -2029,6 +2029,124 @@
           "ref": "article_jsonld() and the byline helper, which read the record instead of the builder constant."
         }
       ]
+    },
+    {
+      "id": "D-50",
+      "question": "Extend the question-shaped topic calendar to the two published meat-thermometer listings (P4, P5), with the guides written on the existing 14-day cadence dates?",
+      "linked_question": "Q-59",
+      "linked_suggestions": [
+        "S-55"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Add two Wave 3 topics built only from the listings' own title claims; write each guide on its cadence date",
+          "commits_to": "T-09/T-10 on the front-page roadmap and the Articles-hub calendar, each linked to its official listing; one guide per cadence date (next 2026-12-01) with a sourced fact table; no popularity, demand or superiority claim (D-19, F-15). The guides compare title claims and the recorded special-feature rows only and say so (F-60).",
+          "effort": "One build change for the calendar rows; half a day per guide on its date.",
+          "reversible": "Yes: remove the Wave 3 rows and rebuild."
+        },
+        {
+          "key": "B",
+          "label": "Keep the calendar air-fryer-only (D-17 as approved)",
+          "commits_to": "The thermometer listings stay product cards and a category page with no editorial surface; the brief's request for topics related to the products being promoted stays unmet for P4/P5.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The brief asks for catchy, question-shaped topics for the products being promoted; the two listings' titles carry concrete checkable claims (accuracy, certification, waterproofing, probe count, heat rating, gift positioning as titled), and the cadence already exists. The scope stays honest because the guides can only compare title claims and recorded features (F-60) and must state that limit.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing title and breadcrumb (read 2026-11-19; re-read 2026-11-19 by arena/eb90e04d-zone4)"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 listing title and breadcrumb (read 2026-11-19; re-read 2026-11-19 by arena/eb90e04d-zone4)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: people-first content - topics written for readers, not for volume"
+        }
+      ],
+      "recorded_choice": "Option A: the calendar extends to the thermometer listings as Wave 3 (T-09, T-10), effective in this build; the two guides are written on their cadence dates and not early. Recorded by the agent under the standing no-manual-input brief, the same basis as D-46; the owner can reverse it. Numbered D-47/D-48/D-49 in this session's branch while PRs #97-#102 merged; renumbered to the next free id each time.",
+      "recorded_date_utc": "2026-11-19",
+      "recorded_by": "arena/eb90e04d-zone4 (standing delegation: no manual input)"
+    },
+    {
+      "id": "D-51",
+      "question": "Should the Decision centre carry an 'only the account holder can do these' panel, aggregated from the owner-only flags and questions?",
+      "linked_question": "Q-46, Q-48, Q-49, Q-50",
+      "linked_suggestions": [
+        "S-56"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Add the panel, derived from the registers at build time",
+          "commits_to": "A Decision-centre section listing the account-side actions (tag confirmation F-57, one-link test F-58, endpoint hosting F-59, Search Console verification F-61, the authorized ledger report Q-49), each row linked to the flag and register entry it summarises. No new claim, no new status. Ships beside the choose-a-path triage (SG-36), the storefront surfaces (D-47), the applied DIR-A layer (D-48) and the dated-article work (D-49), not instead of them.",
+          "effort": "One build change; no register row changes.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "B",
+          "label": "Keep the account-side actions distributed across the four registers",
+          "commits_to": "The reviewer keeps re-deriving the only-they-can-do list from the flags, questions, suggestions and decisions pages separately.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The brief asks for a clear list of what must be addressed before decisions can reasonably be made; the panel is that list, and deriving it at build time keeps it out of the drift class this register keeps catching (F-71, F-90).",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/associates.json",
+          "ref": "The one-link-per-product test protocol the panel points at"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - the tag rule (2(b)) the account-side actions confirm"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json",
+          "ref": "F-57/F-58/F-59/F-61, the flags the panel aggregates"
+        }
+      ],
+      "recorded_choice": "Option A: the panel ships on the Decision centre in this build, rendered from the registers at build time. Numbered D-48/D-49/D-50 in this session's branch while PRs #97-#102 merged; renumbered to the next free id each time.",
+      "recorded_date_utc": "2026-11-19",
+      "recorded_by": "arena/eb90e04d-zone4 (standing delegation: no manual input)"
+    },
+    {
+      "id": "D-52",
+      "question": "Front-load the 2026 gift window: publish the next two calendar pieces inside 2026-11-27..2026-12-25 (roughly weekly), then return to the 14-day cadence in January?",
+      "linked_question": "Q-54",
+      "linked_suggestions": [
+        "SG-35"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Front-load: two pieces inside the gift window, then back to 14 days in January",
+          "commits_to": "publishing.json records the temporary cadence with its end date; the next two guides (T-09 then T-10 by the recorded queue order) are written and published inside the window on their dates; the sitemap and feed pick each up the same day. Calendar arithmetic only - no popularity, demand or forecast claim (D-19, F-15).",
+          "effort": "One cadence edit plus the two guide builds.",
+          "reversible": "Yes: revert the cadence and the remaining dates re-derive from it."
+        },
+        {
+          "key": "B",
+          "label": "Keep the 14-day cadence (recorded 2026-11-17)",
+          "commits_to": "The next guide lands 2026-12-01, the one after 2026-12-15; no seasonal front-load. The gift guide already published carries the window.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "No recorded recommendation: the seasonal dates are calendar arithmetic (D-19-compliant either way) and the choice is the owner's; Q-54 names what each answer commits. What the register does record: declining it costs nothing, and taking it costs two guide builds inside the window.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first content - the standard the cadence serves; no official source governs publishing frequency itself"
+        }
+      ]
     }
   ],
   "log": [
@@ -2297,6 +2415,20 @@
       "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open. Filed as D-48 and renumbered D-49 when a concurrent session took D-48 for the presentation layer.",
       "recorded_by": "arena/00ba6c2e-zone4",
       "evidence": "Not applicable: nothing has been decided."
+    },
+    {
+      "date_utc": "2026-11-19",
+      "decision": "D-50",
+      "choice": "Option A - the topic calendar extends to the thermometer listings as Wave 3 (T-09, T-10); the guides are written on their cadence dates (next 2026-12-01), not early.",
+      "recorded_by": "arena/eb90e04d-zone4 (standing delegation: no manual input)",
+      "evidence": "Live reads 2026-11-19 of both thermometer listings (data/verification-session-eb90e04d.json): titles and breadcrumbs match the stored records exactly; prices and ratings visible on the pages were not copied (F-02). F-89 records the status corrections found in the same review. Numbered D-47/D-48/D-49 while PRs #97-#102 merged; renumbered to the next free id each time."
+    },
+    {
+      "date_utc": "2026-11-19",
+      "decision": "D-51",
+      "choice": "Option A - the Decision centre gains the owner-only-actions panel, derived from the registers at build time.",
+      "recorded_by": "arena/eb90e04d-zone4 (standing delegation: no manual input)",
+      "evidence": "The panel aggregates F-57/F-58/F-59/F-61 and Q-49 from the registers; S-56 registers the proposal and its check. Ships beside SG-36's choose-a-path triage (PR #97), D-47's storefront surfaces (PR #98), D-48's applied DIR-A layer (PR #101) and D-49's dated-article work (PR #102)."
     }
   ],
   "paths": {
