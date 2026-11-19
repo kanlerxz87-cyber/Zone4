@@ -20,9 +20,9 @@ import build_site  # noqa: E402  (the builder owns the prompt assembly)
 
 HEADER = """# Design prompt — the brief for the visual overhaul
 
-**Status:** proposal, not implemented. Generated from `data/design.json` by
+**Status:** adopted and partly applied. Generated from `data/design.json` by
 `scripts/render_design_prompt.py`; do not edit by hand, edit the data and re-run the script.
-Last generated 2026-11-16 by `arena/89900251-zone4`.
+Last generated 2026-11-19 by `arena/d7393cc0-zone4`.
 
 **How to use:** fill the seven bracketed slots from the recorded decisions, then paste the block
 below to a designer or a design tool. The slot table at the end names the decision that fills each
@@ -53,7 +53,11 @@ FOOTER = """
 """
 
 FOOTER_TAIL = """
-Nothing in this prompt is applied to the site. Each slot is a decision recorded on the
+The adopted DIR-A presentation layer is applied to the storefront and articles (2026-11-19,
+decision D-47): the publication masthead, the DIR-A palette and typography, the editorial card
+system, mono listing figures, the paper hero, the sticky disclosure component and the 'how we
+checked' byline link. The three directions, the anti-pattern list and the topic programme stay
+proposals until each is individually recorded and built. Each slot is a decision recorded on the
 [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html) page; until one is
 recorded the bracket stays, because guessing at a brand name or a voice is exactly the kind of
 invention this site refuses to publish.

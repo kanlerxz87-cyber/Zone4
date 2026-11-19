@@ -1159,7 +1159,7 @@ def page_article(current: Page, a: dict) -> str:
     meta_line = (
         f'<div class="ameta">{esc(a["page_type"])}'
         + (f' \u00b7 <span class="chip">{esc(cat_label)}</span>' if cat_label else "")
-        + f' \u00b7 {article_read_minutes(a)} min read \u00b7 {len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+        + f' \u00b7 {article_read_minutes(a)} min read \u00b7 {len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)} \u00b7 {href(current, "verification.html", "how we checked")}</div>'
     )
     seo_html = (
         "<dl class=\"seo\">"
@@ -2087,7 +2087,7 @@ def page_design(current: Page) -> str:
         '<p class="lead">Three visual directions specified far enough to build, the ten writing '
         'patterns that make this site read as machine output with a replacement for each, two '
         'finished headline options for every published article, an eight-topic organic-traffic '
-        'programme, and the prompt that assembles all of it. Nothing on this page has been applied.</p>'
+        'programme, and the prompt that assembles all of it. The adopted DIR-A presentation layer is applied to the storefront and articles (D-47, 2026-11-19); the three directions, the anti-pattern list and the topic programme remain a proposal register until each is recorded and built.</p>'
         '<p class="muted small">'
         f'{len(DIRECTIONS)} directions &middot; {len(ANTI_SLOP)} anti-patterns &middot; '
         f'{len(HEADLINE_OPTIONS)} headline rewrites &middot; {len(TOPICS)} topics &middot; '
@@ -2570,7 +2570,7 @@ PAGE_DESCRIPTIONS = {
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
     "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in, three ready-weighed paths through the open decisions, and what happens to an answer.",
     "information-gaps.html": f"What this project can already prove about the three air fryers, the {len([q for q in QUESTIONS if q['kind'] != 'Known'])} questions that are not answered yet, and the named party who can close each gap.",
-    "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. Nothing on it has been applied.",
+    "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. The adopted DIR-A presentation layer is applied; the directions remain a proposal register (D-47).",
     "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
 }
 
@@ -2735,10 +2735,10 @@ def _render_page_raw(page: Page) -> str:
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="layout">
-<aside class="sidebar">
+<header class="masthead">
   <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">air fryer buying guides</span></a>
-  <nav aria-label="Main">{nav}</nav>
-</aside>
+  <nav aria-label="Main" class="topnav">{nav}</nav>
+</header>
 <div class="content">
 {disclosure}{amazon_text}
 <main id="main">
