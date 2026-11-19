@@ -8,12 +8,12 @@
   "decision_ids": "D-48 to D-60 are reserved for these proposals. They are not written into data/decisions.json by this session: that register is the owner's decision log, and writing 'open' rows into it would change the count published on the Decisions page. A row here becomes a D-row there only when the owner records a choice."
  },
  "review": {
-  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the twelve questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01, RD-03, RD-08, RD-12), each labelled with what shipped and what still waits on an answer; nothing else is applied. The thirteen proposals are newly filed here; the site's fifty earlier suggestions stay in their own register (data/suggestions.json) and are not duplicated, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
+  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the twelve questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01 fully; RD-03, RD-06 and RD-08 partly), each labelled with what shipped and what still waits on an answer; nothing else is applied. The thirteen proposals are newly filed here; the site's fifty earlier suggestions stay in their own register (data/suggestions.json) and are not duplicated, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
   "flow": [
    {
     "step": 1,
     "title": "Read the twelve proposals",
-    "what": "Each has its problem, its proposed change, its cost, its risk and the check that proves it worked. Four carry a dated partial or full application from 2026-11-19, and each of those says exactly what shipped and what is still waiting on you; the rest are proposals only."
+    "what": "Each has its problem, its proposed change, its cost, its risk and the check that proves it worked. Five carry a dated application from 2026-11-19 - one complete, four partial, each naming exactly what shipped and what still waits on you; the rest are proposals only."
    },
    {
     "step": 2,
@@ -358,8 +358,8 @@
     "F-43"
    ],
    "decision": "D-59",
-   "status": "Partly applied 2026-11-19",
-   "shipped_note": "One captioned, alt-texted diagram ships per category page. A social preview image is still a proposal."
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 13,

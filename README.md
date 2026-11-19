@@ -8,11 +8,11 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 ## Executive summary
 
 - The currently verified product register contains **three** earlier supplied products: ASINs `B0CDY277D3`, `B09B7SB46R`, and `B08DKYBTPH`. Their link and listing checks are recorded in the dated verification data; the latest prior re-check is 2026-11-16.
-- The latest brief repeats the three earlier URLs and adds two new candidates: [`B0c8moW59`](https://link.amazon/B0c8moW59) and [`B0f3GKalj`](https://link.amazon/B0f3GKalj). The first three destinations have historical dated verification records; the two new destinations were **not independently resolved in this session**, are not treated as ASINs, and are excluded from product pages under **F-55**. This is not a claim that either new link is invalid. Product-intent confirmation records are still needed for all five distinct links.
+- The latest brief repeats the three earlier URLs and adds two more: [`B0c8moW59`](https://link.amazon/B0c8moW59) and [`B0f3GKalj`](https://link.amazon/B0f3GKalj). All five were re-resolved to listings on 2026-11-19 (`data/intent-links.json` keeps the intended ASIN and the observed redirect in separate fields). The two later links open meat-thermometer listings and are published in their own category under decision **D-46**; resolution is not a finding that any supplied link is valid or invalid.
 - The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication. See **Q-01 / Q-50 / F-03 / F-58** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
-- The site includes a three-question product chooser, format categories, eight question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **50 suggestions**, **51 questions**, **46 decisions** (34 recorded, 12 open), and **72 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The site includes a three-question product chooser, four categories with scale-drawn footprint diagrams, eight question-led articles plus four published question-shaped guides, a product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
+- The review gate is now one page: **Review what to change** (`docs/review.html`, data `data/redesign.json`) files **13 proposals** and **12 gating questions**, each with cost, risk, the check that proves it worked and an official source. Four proposals carry a dated application from 2026-11-19: RD-01 complete; RD-03, RD-06 and RD-08 partly, each naming what still waits; the rest are proposals only. The older registers are unchanged beside it: **50 suggestions**, **51 questions**, **46 decisions** (34 recorded, 12 open) and **72 flags**. Unresolved and access-dependent work is not reported as complete.
 
 ## Important limits and next checks
 
@@ -40,6 +40,9 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 | `docs/categories/*.html` | Dual-basket, single-basket and air-fry toaster-oven category pages. |
 | `docs/products.html` | Three verified product records and a derived counter-space comparison. |
 | `docs/requirements.html` | All 35 request requirements, with status, evidence and source. |
+| `docs/review.html` | The review gate: 13 storefront proposals with cost, risk and proof, beside the 12 questions that must be answered before any is built. |
+| `docs/about.html` | Who writes the site, how each number is checked, what it will not publish, and how to correct it. |
+| `docs/imagery.html` | Every picture on the site and where it comes from; why no listing photography is copied. |
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
 | `docs/decisions.html` | Options and recorded decisions; open decisions remain visible. |
@@ -48,14 +51,16 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 | `docs/verification.html`, `docs/sources.html`, `docs/policy-compliance.html` | Field-level verification, sources, and policy checklist. |
 | `docs/flagged.html` | Unverified facts, unresolved link identities and review items. |
 | `docs/feed.xml`, `docs/sitemap.xml`, `docs/robots.txt` | RSS 2.0 article feed, sitemap, and crawler guidance. |
-The disclosure appears beneath the masthead and again in every page footer. All site pages are reachable from one flat navigation group and the footer directory. Product purchase links are marked `rel="sponsored"`; this attribute does not replace the visible disclosure or prove that a link is an Amazon Special Link.
+The disclosure appears beneath the masthead and again in every page footer. All site pages are reachable from one flat navigation group and the footer directory (the proposal to split the primary bar from the footer directory is RD-02 on the Review page, and is not applied). Product purchase links are marked `rel="sponsored"`; this attribute does not replace the visible disclosure or prove that a link is an Amazon Special Link.
 
 ## Data and code map
 
 | Path | Contents |
 |---|---|
 | `data/products.json` | Current product records (three) and cited listing fields. |
-| `data/marketing.json` | Seven articles, their fact rows and editorial metadata. |
+| `data/marketing.json` | Eight articles, their fact rows and editorial metadata. |
+| `data/redesign.json` | The 13 storefront proposals and 12 gating questions behind `docs/review.html`; nothing in it is applied by the build. |
+| `data/imagery.json` | The imagery record: every asset, what it was drawn from, and the policy that keeps listing photography off the site. |
 | `data/sources.json` | Official-source registry. |
 | `data/flags.json` | 72 flags; F-55/F-56 record the two additional link destinations (resolved 2026-11-19 and published under D-46), F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68/F-69 the parallel session's P4 title-drift and untagged-link findings, F-70/F-71/F-72 the 2026-11-19 register and documentation corrections. |
 | `data/associates.json` | The owner-selected tracking ID, the three tagged Special Links and the five-step one-link-per-product Associates Central test protocol (2026-11-17). |
