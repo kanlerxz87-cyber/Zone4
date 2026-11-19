@@ -650,7 +650,7 @@ class TestSiteBuild(unittest.TestCase):
             self.assertLess(shop_at, transparency_at, "products must come before the audit band")
 
     def test_social_preview_card_exists_and_is_referenced(self):
-        """F-75: the card and its tags had never shipped. Pin both."""
+        """F-79: the card and its tags had never shipped. Pin both."""
         card = ROOT / "docs" / "social-card.png"
         self.assertTrue(card.exists(), "docs/social-card.png is missing")
         self.assertGreater(card.stat().st_size, 4096)

@@ -890,7 +890,7 @@ def check_publication() -> None:
             if not href:
                 continue
             h = href.group(1)
-            # Any Amazon link that carries the Associates tag is an affiliate link (F-78, 2026-11-19).
+            # Any Amazon link that carries the Associates tag is an affiliate link (F-74, 2026-11-19).
             tagged_amazon = "amazon.com/" in h and "tag=" in h
             if "amazon.com/dp/" in h or h.startswith("https://link.amazon/") or tagged_amazon:
                 rel_attr = re.search(r'rel="([^"]*)"', attrs)

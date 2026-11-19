@@ -2178,7 +2178,7 @@
    "decision": "D-47",
    "choice": "Option A - ship the social preview card, per-page BreadcrumbList markup, the grouped single nav group and the sticky product bar now, using text-and-shape artwork only and no product photography.",
    "recorded_by": "arena/67175642-zone4 (standing delegation: no manual input)",
-   "evidence": "Built pages inspected 2026-11-19 (no og:image on 38 pages, no sticky bar on any article, one flat nav list). Gates after the change: build deterministic, verify.py PASS, qa/audit_site.py --strict-warnings PASS, 92/92 tests. S-18 photography decision untouched; F-77 records the missing preview image."
+   "evidence": "Built pages inspected 2026-11-19 (no og:image on 38 pages, no sticky bar on any article, one flat nav list). Gates after the change: build deterministic, verify.py PASS, qa/audit_site.py --strict-warnings PASS, 92/92 tests. S-18 photography decision untouched; F-79 records the missing preview image."
   }
  ],
  "paths": {
