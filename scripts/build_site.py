@@ -125,13 +125,16 @@ NAV = [
     ("analysis.html", "Analysis & findings", "Research"),
     ("requirements.html", "Requirements", "Research"),
     ("decision-centre.html", "Decision centre", "Decide"),
+    ("review.html", "Review what to change", "Decide"),
     ("suggestions.html", "Suggestions", "Decide"),
     ("questions.html", "Open questions", "Decide"),
     ("information-gaps.html", "Information gaps", "Decide"),
     ("design.html", "Design brief", "Decide"),
     ("decisions.html", "Decision log", "Decide"),
     ("verification.html", "Verification log", "Governance"),
+    ("about.html", "About this site", "Shop"),
     ("links.html", "Product-intent record", "Governance"),
+    ("imagery.html", "Imagery policy", "Governance"),
     ("measurement.html", "Measurement & ledger", "Governance"),
     ("policy-compliance.html", "Policy compliance", "Governance"),
     ("analytics.html", "Analytics", "Governance"),
@@ -356,6 +359,19 @@ def competitor_links(p: dict) -> str:
     )
 
 
+# The decision each listing answers, as a short label a shopper can act on.
+# Every phrase repeats a field already published in the sourced table on the same
+# page (basket count, listed depth, listed capacity), so the label is not a new
+# claim - it is the same row, written as a reason to click.
+CTA_LABEL = {
+    "P1": "Best for two dishes at once \u2014 see the dual-basket listing",
+    "P2": "Best for hosting \u2014 see the 26QT French-door oven",
+    "P3": "Best for a shallow counter \u2014 see the 8-quart basket",
+    "P4": "See the 1-second meat thermometer listing",
+    "P5": "See the smart wireless thermometer listing",
+}
+
+
 def shop_link(p: dict) -> str:
     # The published outbound product link is the tagged Special Link
     # https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 (decisions D-01/D-14,
@@ -366,7 +382,8 @@ def shop_link(p: dict) -> str:
     # "(paid link)" label stay. The supplied short link stays recorded data in
     # data/intent-links.json; it is not judged valid or invalid (FLG-003 unresolved).
     url = SPECIAL_LINKS.get(p["id"], tagged_url(f"https://www.amazon.com/dp/{p['asin']}"))
-    return ext(url, "Open Amazon link (paid link)",
+    label = CTA_LABEL.get(p["id"], "Open Amazon link (paid link)")
+    return ext(url, f"{label} (paid link)",
                f' class="shop" data-track="click" data-track-target="{esc(url)}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
 
@@ -904,6 +921,9 @@ def transparency_band(current: Page) -> str:
         f'<div class="tcount"><span class="tcount-n">{recorded}</span> decisions recorded</div>'
     )
     links = [
+        ("Review what to change", "Every proposal for the shop, its cost and risk, and the questions that gate it: choose a path first.", "review.html"),
+        ("About this site", "Who writes it, how each number is checked, and how to correct one.", "about.html"),
+        ("Imagery", "Every picture here, and the rule that keeps listing photography off the site.", "imagery.html"),
         ("Verification log", "Every published value and the listing it was read from.", "verification.html"),
         ("Policy compliance", "The programme and FTC rules this site is checked against.", "policy-compliance.html"),
         ("Flagged for review", "Every irregularity and unverified item, with its source.", "flagged.html"),
@@ -930,13 +950,13 @@ def transparency_band(current: Page) -> str:
         "</ul>"
     )
     return (
-        '<section id="transparency"><h2>The data behind the shop</h2>'
-        '<p class="section-lead">This site publishes only what an official listing or policy page states. Everything below '
-        'is the receipt: the verification log, the policy checks, the open flags and the decision surface. It is one click '
-        'away and never in the way of the buying decision.</p>'
+        '<section id="transparency"><h2>Why you can trust these numbers</h2>'
+        '<p class="section-lead">Every figure on this site was read from an official listing or policy page, and the receipt '
+        'sits one click from the number. Nothing is tested, estimated or copied from another review site. Where a value '
+        'cannot be confirmed it is left blank and flagged rather than guessed.</p>'
         f'<div class="tcounts">{counts}</div>'
         f'<div class="transgrid">{cards}</div>'
-        '<h3>What this site deliberately does not publish</h3>'
+        '<h3>What we will not claim</h3>'
         '<p class="section-lead">Stated here rather than buried, each naming the rule or flag behind it.</p>'
         + withheld
         + '</section>'
@@ -953,7 +973,9 @@ def page_index(current: Page) -> str:
     magazine / research appendix split) and completes D-21's "amend" decision.
     """
     cat_tiles = "".join(
-        f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
+        f'<a class="tile" href="{esc(current.rel(target))}" data-measure="category">'
+        f'{build_extras.footprint_figure(key)}'
+        f'<div class="tile-title">{esc(label)}</div>'
         f'<div class="tile-sub">{esc(_category_product_name(key))}</div>'
         f'<div class="tile-go">Open category \u2192</div></a>'
         for target, label, key in
@@ -969,10 +991,9 @@ def page_index(current: Page) -> str:
     return (
         '<div class="mhero">'
         '<span class="badge">A practical guide to three very different countertop formats \u00b7 every figure links to the listing it was read from</span>'
-        "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
-        '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
-        'compared on the numbers their makers actually list. Start with the chooser to find your format in under a '
-        'minute, then read the guide that answers the question you arrived with.</p>'
+        "<h1>Crispy dinners, one counter square.</h1>"
+        '<p class="lead">Three air fryers \u2014 dual basket, single basket and French-door oven \u2014 compared on the '
+        'numbers their listings state, so you can pick your format in a minute and be sure before you buy.</p>'
         '<div class="mhero-actions">'
         '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
         f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
@@ -1312,7 +1333,9 @@ def page_category(current: Page, key: str) -> str:
             " ".join(flag_chip(current, f) for f in p["flags"]),
         ])
     return (
-        hero(cat["title"], cat["intro"])
+        '<div class="cathero">'
+        f'<div class="cathero-figure">{build_extras.footprint_figure(key)}</div>'
+        f'<div class="cathero-lead">{hero(cat["title"], cat["intro"])}</div></div>'
         + table(headers, rows, "products")
         + f'<section><h2>Category notes</h2><p>All products here sit under the Amazon path <em>{esc(prods[0]["category_path"])}</em>. '
         f'See {href(current, "analysis.html", "Analysis & findings")} for the cross-category view and '
@@ -1439,6 +1462,13 @@ def page_sources(current: Page) -> str:
         + table(["ID", "Source (link)", "Publisher", "Read?", "Used for", "Notes"], source_rows(), "sources")
         + non_official_note()
     )
+
+
+def page_review_redirect(current: Page) -> str:
+    """The Review page's body is written by scripts/build_extras.py, which owns the
+    review register (data/redesign.json) and the page's card/table markup. Defined
+    here so the page is listed in one navigation table with every other surface."""
+    return ""
 
 
 def page_analytics(current: Page) -> str:
@@ -2533,6 +2563,9 @@ PAGE_DESCRIPTIONS = {
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
     "sources.html": "Every source used, whether it was actually read, and what it was used for. Unread sources are marked and nothing is inferred from them.",
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
+    "about.html": "Who writes this site, how each number is checked against the listing, what it deliberately will not publish, and how to correct it.",
+    "imagery.html": "Every picture on this site and where it comes from: original footprint diagrams drawn from the listed dimensions, with no copied or generated product photography.",
+    "review.html": "Every proposal that would make this site read like a publication, each with its cost, risk and proof of success, beside the questions that must be answered before any of them is built.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
     "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in, three ready-weighed paths through the open decisions, and what happens to an answer.",
@@ -2560,6 +2593,9 @@ BODIES = {
     "information-gaps.html": page_information_gaps,
     "design.html": page_design,
     "decisions.html": page_decisions,
+    "review.html": page_review_redirect,
+    "about.html": page_review_redirect,
+    "imagery.html": page_review_redirect,
     "analytics.html": page_analytics,
     "flagged.html": page_flagged,
     "sources.html": page_sources,
@@ -2884,6 +2920,18 @@ def build() -> list[pathlib.Path]:
         written.append(out)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
     extra_written = build_extras.write_all(sys.modules[__name__])
+    # The Review page is part of the shared navigation, so its shell is rendered by
+    # this builder; build_extras owns its body (data/redesign.json) and writes it here
+    # so one pipeline still writes every published page.
+    for extra_path, body_for in (
+        ("review.html", build_extras.review_body_for),
+        ("about.html", build_extras.about_body_for),
+        ("imagery.html", build_extras.imagery_body_for),
+    ):
+        if extra_path in extra_written:
+            pg = next(x for x in collect_pages() if x.path == extra_path)
+            pg.body = body_for(sys.modules[__name__], pg)
+            (OUT / extra_path).write_text(render(pg), encoding="utf-8")
     written += [OUT / p for p in extra_written]
     # A generated sitemap of the site's own pages: every URL in it is one this
     # build produced, on the Pages host for this repository. Nothing here is a

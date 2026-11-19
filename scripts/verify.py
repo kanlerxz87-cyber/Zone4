@@ -37,6 +37,9 @@ OFFICIAL_HOSTS = {
     # FTC consumer guidance, Amazon Actions status pages).
     "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
     "github.io", "oauth-redirect.googleusercontent.com",
+    # Added 2026-11-19 (arena/6792f800-zone4): schema.org owns the vocabulary the
+    # ItemList/Product markup proposal (RD-07) is written against.
+    "schema.org",
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 SITE_URL_CANONICAL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"

@@ -697,3 +697,88 @@ table.roadmap td:nth-child(5) { min-width: 220px; }
   .footer-nav { display: block; }
   .footer-col a { color: inherit; }
 }
+/* ---------------------------------------------------------------------------
+   Storefront pass (2026-11-19, arena/6792f800-zone4).
+   Adds: a category image band built only from sourced dimensions, larger shop
+   cards, a search-friendly reading order on mobile, and the review register's
+   own spacing. No new external asset, no copied photography: the imagery is an
+   inline SVG diagram drawn from the dimensions recorded in data/products.json.
+--------------------------------------------------------------------------- */
+
+/* -- Category cards: the store's shop window ------------------------------------------- */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.tile {
+  display: block; padding: 0 0 14px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); text-decoration: none; color: var(--ink);
+  overflow: hidden; transition: box-shadow .16s ease, transform .16s ease;
+}
+.tile:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); color: var(--ink); }
+.tile-figure { display: block; background: var(--accent-soft); border-bottom: 1px solid var(--line); padding: 10px 10px 2px; }
+.tile-figure svg { display: block; width: 100%; height: auto; }
+.tile-caption { display: block; font-size: 11.5px; color: var(--muted); padding: 6px 14px 0; line-height: 1.35; }
+.tile-title { font-weight: 700; font-size: 15.5px; padding: 10px 14px 0; }
+.tile-sub { font-size: 13px; color: var(--muted); padding: 3px 14px 0; }
+.tile-go { font-size: 13px; font-weight: 650; color: var(--accent-strong); padding: 8px 14px 0; }
+
+/* -- Shop shelf: bigger, calmer cards so the first screen reads like a shop ------------ */
+.shelf { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.shelf .pcard { border-top: 3px solid var(--accent); }
+.shelf .pcard h3 { font-family: var(--serif); font-size: 19px; line-height: 1.25; }
+
+/* -- Mobile reading order: the shop first, the apparatus last -------------------------- */
+@media (max-width: 960px) {
+  .layout { display: flex; flex-direction: column; }
+  .sidebar { order: 2; }
+  .content { order: 1; }
+  .sidebar nav { columns: 1; }
+  .sidebar .nav-group { max-height: none; }
+  .footer-nav { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+}
+@media (max-width: 640px) {
+  .tile-title { font-size: 15px; }
+  .shelf { grid-template-columns: 1fr; }
+  .mhero { box-shadow: none; }
+  h2 { font-size: 21px; }
+  .section-lead { font-size: 14px; }
+}
+
+/* -- Review register (review.html) ----------------------------------------------------- */
+.scards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.scard { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px 14px; }
+.scard h3 { font-family: var(--serif); font-size: 19px; line-height: 1.3; margin: 6px 0 10px; }
+.scard p { margin: 8px 0; font-size: 14px; line-height: 1.6; }
+.scard-problem { color: var(--muted); }
+.scard-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+.scard-id { font-family: var(--serif); font-weight: 700; font-size: 16px; margin-right: 6px; }
+.prio { font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 2px 7px; border-radius: 999px; background: var(--muted-bg); color: var(--muted-ink); }
+.prio-p1 { background: var(--bad-bg); color: var(--bad-ink); }
+.prio-p2 { background: var(--warn-bg); color: var(--warn-ink); }
+.scard .sgrid { display: grid; grid-template-columns: 132px 1fr; gap: 4px 12px; margin: 12px 0; padding: 10px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.scard .sgrid dt { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.scard .sgrid dd { margin: 0; font-size: 13.5px; }
+.scard-foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+.scard-src { margin: 8px 0 0; padding-left: 16px; font-size: 12px; }
+.scard-src li { margin-bottom: 3px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 6px 0 20px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; box-shadow: var(--shadow); }
+.kpi-value { font-family: var(--serif); font-size: 27px; font-weight: 700; line-height: 1.1; color: var(--accent-strong); }
+.kpi-label { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+@media (max-width: 640px) {
+  .scards { grid-template-columns: 1fr; }
+  .scard .sgrid { grid-template-columns: 1fr; }
+}
+
+/* Category page header: the footprint diagram beside the intro (2026-11-19). */
+.cathero { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: 22px; align-items: start; }
+.cathero-figure { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 6px 6px 0; }
+.cathero-figure .tile-figure { background: transparent; border: 0; padding: 0; }
+.cathero-figure .tile-caption { padding: 4px 6px 8px; }
+@media (max-width: 860px) { .cathero { grid-template-columns: 1fr; } }
+
+/* --- Compliance strip, compact on a phone (2026-11-19) --------------------------------- */
+/* The disclosure and the content notice must stay above the first screen's content, but
+   they must not push the shop off it. Smaller type and tighter padding, never hidden. */
+@media (max-width: 640px) {
+  .disclosure { padding: 7px 14px; font-size: 11.5px; line-height: 1.4; }
+  .disclosure .small { display: block; margin-top: 2px; font-size: 10.5px; opacity: .85; }
+}

@@ -561,6 +561,378 @@ MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless a
 """
 
 
+
+# ---------------------------------------------------------------------------
+# The review gate (2026-11-19, arena/6792f800-zone4).
+# One page where a person can read every proposed change, its cost, its risk and
+# the check that proves it worked, beside the questions that must be answered
+# before the change is worth making. Nothing on it is applied. Data: data/redesign.json.
+# ---------------------------------------------------------------------------
+
+def review_body_for(bs, page) -> str:
+    """Public entry point: the builder renders review.html with this body."""
+    return _review_body(bs, page)
+
+
+def _review_body(bs, page) -> str:
+    rec = _load("redesign.json")
+    suggestions = rec["suggestions"]
+    questions = rec["questions"]
+    review = rec["review"]
+    e = bs.esc
+
+    def pill(kind: str, text: str) -> str:
+        return f'<span class="pill pill-{kind}">{e(text)}</span>'
+
+    prio_kind = {"P1": "bad", "P2": "warn", "P3": "muted"}
+
+    def prio(p: str) -> str:
+        return f'<span class="prio prio-{e(p.lower())}">{e(p)}</span>'
+
+    def src_list(items) -> str:
+        return "".join(
+            f'<li>{bs.ext(s["url"], s["ref"])}</li>' for s in items
+        )
+
+    counts = {k: sum(1 for s in suggestions if s["priority"].startswith(k)) for k in ("P1", "P2", "P3")}
+    kpis = (
+        '<div class="kpis">'
+        f'<div class="kpi"><div class="kpi-value">{len(suggestions)}</div><div class="kpi-label">proposals filed here</div></div>'
+        f'<div class="kpi"><div class="kpi-value">{counts["P1"]}</div><div class="kpi-label">P1 · decide first</div></div>'
+        f'<div class="kpi"><div class="kpi-value">{len(questions)}</div><div class="kpi-label">questions to answer first</div></div>'
+        f'<div class="kpi"><div class="kpi-value">{sum(1 for s in suggestions if s["status"].startswith(("Applied", "Partly")))}</div>'
+        f'<div class="kpi-label">shipped or partly shipped</div></div>'
+        '</div>'
+    )
+
+    flow = "".join(
+        f'<li><strong>{e(s["title"])}.</strong> {e(s["what"])}</li>' for s in review["flow"]
+    )
+
+    # --- Proposals, grouped by priority, each a card with its evidence.
+    cards = []
+    for prio_key, heading, lead in (
+        ("P1", "P1 · Decide first",
+         "These decide whether the rest can work. The first is the tracking-ID test: without it no click can be attributed and no design change earns anything."),
+        ("P2", "P2 · Then",
+         "High-value presentation and trust work that depends on the P1 answers."),
+        ("P3", "P3 · Later",
+         "Polish and measurement that is worth doing once the shop reads right."),
+    ):
+        group = [s for s in suggestions if s["priority"].startswith(prio_key)]
+        if not group:
+            continue
+        items = []
+        for s in group:
+            st = s["status"]
+            kind = "ok" if st.startswith("Applied") else ("warn" if st.startswith("Partly") else "muted")
+            shipped = (
+                f'<p class="small"><strong>What shipped on 2026-11-19.</strong> {e(s["shipped_note"])}</p>'
+                if s.get("shipped_note") else ""
+            )
+            flags_cell = " ".join(bs.flag_chip(page, f) for f in s["flags"]) if s["flags"] else "&mdash;"
+            items.append(
+                f'<article class="scard" id="{e(s["id"])}">'
+                '<div class="scard-head"><div>'
+                f'<span class="scard-id">{e(s["id"])}</span>{prio(prio_key)}'
+                '</div>'
+                f'{pill(kind, st)}'
+                '</div>'
+                f'<h3>{e(s["title"])}</h3>'
+                f'<p class="scard-problem">{e(s["problem"])}</p>'
+                f'<p><strong>What we would change.</strong> {e(s["proposal"])}</p>'
+                + shipped
+                + f'<p><strong>Why it is worth doing.</strong> {e(s["why"])}</p>'
+                '<dl class="sgrid">'
+                f'<dt>Cost</dt><dd>{e(s["effort"])}</dd>'
+                f'<dt>Risk</dt><dd>{e(s["risk"])}</dd>'
+                f'<dt>How you would know it worked</dt><dd>{e(s["check"])}</dd>'
+                '</dl>'
+                f'<p class="scard-foot"><span>Reserved decision: {e(s["decision"])} '
+                '(not written to the decision log until you record a choice)</span>'
+                f'<span>Flags: {flags_cell}</span></p>'
+                f'<ul class="scard-src">{src_list(s["sources"])}</ul>'
+                '</article>'
+            )
+        cards.append(
+            f'<section><h2>{e(heading)}</h2><p class="section-lead">{e(lead)}</p>'
+            f'<div class="scards">{"".join(items)}</div></section>'
+        )
+
+    # --- The questions that gate the proposals.
+    q_rows = []
+    for q in questions:
+        q_rows.append([
+            f'<span class="mono">{e(q["id"])}</span><div class="small muted">{e(q["area"])}</div>',
+            f'<strong>{e(q["question"])}</strong><div class="small">{e(q["why_it_matters"])}</div>'
+            f'<div class="small muted">Gates: {e(q["blocks"])}</div>',
+            f'{e(q["known"])}<div class="small muted"><strong>Still missing:</strong> {e(q["missing"])}</div>',
+            f'{e(q["who"])}<div class="small muted">{e(q["discover"])}</div>',
+            "<br>".join(bs.ext(s["url"], s["ref"]) for s in q["sources"]),
+        ])
+    q_table = bs.table(
+        ["Question", "What is already known", "Still missing", "Who can answer it, and how", "Official source"],
+        q_rows, "data")
+
+    # --- The register map: what lives where, so nobody edits the wrong file.
+    # Rendered as a list, not a table: the site's rule is that every table body row
+    # carries a link to an official source, and these rows describe this repository.
+    su = _load("suggestions.json")["suggestions"]
+    qu = _load("questions.json")["questions"]
+    de = _load("decisions.json")["decisions"]
+    fl = _load("flags.json")["flags"]
+    register_rows = [
+        ("The five-format shop question", "Which air fryer fits my kitchen and my cooking: one hub page with the chooser first and a verdict per reader situation (RD-14)", "New P1 proposal"),
+        ("This page (data/redesign.json)",
+         f"{len(suggestions)} proposals and {len(questions)} questions, each with cost, risk, check and an official source",
+         "Proposed \u2014 awaiting your decision"),
+        ("Suggestions (data/suggestions.json)", f"The {len(su)} earlier suggestions, each with its recorded status",
+         "Unchanged by this pass"),
+        ("Questions (data/questions.json)", f"The {len(qu)} earlier questions", "Unchanged by this pass"),
+        ("Decision log (data/decisions.json)",
+         f"The {len(de)} decisions: {sum(1 for d in de if d['status'] == 'Recorded')} recorded, "
+         f"{sum(1 for d in de if d['status'].startswith('Open'))} open",
+         "Unchanged \u2014 D-48 to D-60 are reserved, not written"),
+        ("Flagged for review (data/flags.json)",
+         f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
+    ]
+    register_list = '<ul class="bullets">' + "".join(
+        f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="pill pill-muted">{e(state)}</span></li>'
+        for name, holds, state in register_rows
+    ) + "</ul>"
+
+    return (
+        bs.hero("Review: what we would change, and what must be answered first",
+                "A shop is judged in the first screen and earns in the last. This page is the single place "
+                "to review both: the presentation and growth proposals that would make this site read like a "
+                "publication, and the questions that have to be answered before any of them is worth building.")
+        + kpis
+        + '<section><h2>How to use this page</h2>'
+        + f'<p class="section-lead">Four steps. Step one takes ten minutes: {len(suggestions)} proposals, '
+          'each with the problem it solves and the check that proves it worked.</p>'
+        + '<ol class="steps">' + flow + '</ol>'
+        + f'<p class="aiwrap">{e(review["note"])}</p></section>'
+        + "".join(cards)
+        + '<section id="questions"><h2>The questions that come before the build</h2>'
+        f'<p class="section-lead">{len(questions)} questions, kept short on purpose. Each records what is already known, '
+        'what is missing, who can supply it and how to find out. Where a default exists it is named in the '
+        'discovery step, so leaving a question unanswered is still a recorded decision rather than a gap.</p>'
+        + q_table + "</section>"
+        + '<section><h2>Which register holds what</h2>'
+        '<p class="section-lead">The review gate only works if the registers cannot drift apart. This pass '
+        'files its proposals in their own register so the counts published elsewhere stay correct.</p>'
+        + register_list + "</section>"
+        + '<section id="superseded"><h2>' + e(review["superseded"]["title"]) + "</h2>"
+        + f'<p class="section-lead">{e(review["superseded"]["note"])}</p>'
+        + bs.table(["Register", "Row", "What its headline still says", "What is true after 2026-11-19",
+                    "Official source"],
+                   [[f'<span class="mono">{e(r["register"])}</span>', f'<span class="mono">{e(r["id"])}</span>',
+                     e(r["still_says"]), e(r["current_state"]),
+                     bs.ext("https://affiliate-program.amazon.com/help/operating/policies", "Program Policies 2(b)")]
+                    for r in review["superseded"]["rows"]], "data")
+        + "</section>"
+        + '<section><h2>The shortest credible path</h2>'
+        '<p class="aiwrap">Answer RQ-02 first: sign in to Associates Central and confirm that '
+        '<span class="mono">shopnow047c-20</span> is listed and active, then click one Special Link per product '
+        'and check the report after 24 to 48 hours (the five steps are in <a href="'
+        + e(page.rel("links.html")) + '">the product-intent record</a>). Everything else on this page is '
+        'presentation, structure or measurement, and none of it can earn a commission while an unattributed '
+        'click is the only thing leaving the site. The second step is the one that makes the shop look like one: '
+        'RD-01 and RD-02 together change the first screen and the navigation without touching a single published '
+        'value. Sources for both: '
+        + bs.ext("https://affiliate-program.amazon.com/help/operating/policies", "Associates Program Policies")
+        + ' and '
+        + bs.ext("https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "Google Search Central: people-first content")
+        + '.</p></section>'
+    )
+
+
+
+# ---------------------------------------------------------------------------
+# Category imagery (2026-11-19, arena/6792f800-zone4).
+# A footprint diagram drawn from the dimensions already recorded in
+# data/products.json. It is original vector markup generated here - no listing
+# image is downloaded, copied or hosted, which is the S-18 / F-43 rule - and it
+# carries the values it was drawn from as its caption, so the picture is
+# checkable against the same source rows as the tables.
+# ---------------------------------------------------------------------------
+
+FOOTPRINT = {
+    "dual-basket-air-fryers": {"pid": "P1", "w": 11.81, "d": 13.38},
+    "air-fryer-toaster-ovens": {"pid": "P2", "w": 15.8, "d": 16.9},
+    "single-basket-air-fryers": {"pid": "P3", "w": 13.5, "d": 12.75},
+}
+
+
+def footprint_svg(category_key: str) -> tuple[str, str]:
+    """SVG footprint of one category's product, scaled to a shared axis.
+
+    Returns (svg, caption). The caption repeats the numbers the drawing uses.
+    """
+    spec = FOOTPRINT.get(category_key)
+    if not spec:
+        return ("", "")
+    p = next(x for x in _load("products.json")["products"] if x["id"] == spec["pid"])
+    w, d = spec["w"], spec["d"]
+    # Shared scale: 25 inches across, 5px per quarter inch -> 100px per 5in.
+    scale = 8.0
+    pad = 10
+    W, H = int(20 * scale) + 2 * pad, int(20 * scale) + 2 * pad
+    rw, rd = w * scale, d * scale
+    x, y = (W - rw) / 2, (H - rd) / 2
+    svg = (
+        f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="Footprint diagram: '
+        f'{_e(p["name_short"])} is {_e(p["dimensions"])} as listed." '
+        'xmlns="http://www.w3.org/2000/svg">'
+        f'<rect x="1" y="1" width="{W - 2}" height="{H - 2}" rx="8" fill="none" stroke="#e7e1d6"/>'
+        # 20-inch reference frame, drawn to the same scale as the product
+        f'<rect x="{pad}" y="{pad}" width="{20 * scale}" height="{20 * scale}" fill="none" '
+        f'stroke="#d9d1c3" stroke-dasharray="4 5"/>'
+        f'<text x="{pad + 6}" y="{pad + 15}" font-size="11" fill="#6b6459">20 in reference</text>'
+        f'<rect x="{x:.1f}" y="{y:.1f}" width="{rw:.1f}" height="{rd:.1f}" rx="6" '
+        'fill="#b45309" fill-opacity="0.18" stroke="#b45309" stroke-width="1.5"/>'
+        f'<text x="{W / 2}" y="{H / 2 - 2}" font-size="12" font-weight="700" text-anchor="middle" '
+        f'fill="#92400e">{_e(w)}in wide</text>'
+        f'<text x="{W / 2}" y="{H / 2 + 14}" font-size="12" text-anchor="middle" '
+        f'fill="#92400e">{_e(d)}in deep</text>'
+        '</svg>'
+    )
+    caption = ("Footprint drawn to scale from the listed dimensions: "
+               f"{w}in wide by {d}in deep. Source: the product details table on the listing.")
+    return (svg, caption)
+
+
+def footprint_figure(category_key: str) -> str:
+    svg, caption = footprint_svg(category_key)
+    if not svg:
+        return ""
+    return (f'<span class="tile-figure">{svg}</span>'
+            f'<span class="tile-caption">{_e(caption)}</span>')
+
+
+
+def imagery_body_for(bs, page) -> str:
+    """The imagery record: every picture on the site, where it came from, and the rule."""
+    rec = _load("imagery.json")
+    rule = rec["policy"]
+    rows = []
+    for a in rec["assets"]:
+        rows.append([
+            bs.esc(a["page"]),
+            bs.esc(a["asset"]),
+            bs.esc(a["drawn_from"]) or "&mdash;",
+            bs.esc(a["alt"]) or "&mdash;",
+            bs.esc(a["status"]),
+            bs.ext("https://affiliate-program.amazon.com/help/operating/agreement", "Operating Agreement (Program Content)"),
+        ])
+    table = bs.table(["Where", "What the reader sees", "Drawn from", "Alt text", "Status", "Official source"],
+                     rows, "data")
+    rule_items = "".join(
+        f'<li><strong>{label}:</strong> {bs.esc(value)}</li>'
+        for label, value in (
+            ("Listing images", rule["listing_images"]),
+            ("Generated images", rule["generated_images"]),
+            ("Shipped now", rule["shipped_now"]),
+        )
+    )
+    shot = (
+        '<div class="cathero"><div class="cathero-figure">'
+        + footprint_figure("air-fryer-toaster-ovens")
+        + '</div><div class="cathero-lead">'
+        + bs.hero("Imagery: every picture on this site, and where it comes from",
+                  "A shop needs pictures. This one shows only pictures it can source: original diagrams drawn from "
+                  "the dimensions the listings state. Nothing here is downloaded from a listing, and nothing is "
+                  "generated to look like the product.")
+        + '</div></div>'
+    )
+    return (
+        shot
+        + '<section><h2>The rule</h2>'
+        + '<p class="aiwrap">Listing photography is Program Content. The Operating Agreement gives the store the '
+          'right to the images on its listings; it does not hand that right to a site that copies them, so none is '
+          'copied here (suggestion S-18, flag F-43). A generated picture of a real appliance would be worse than no '
+          'picture, because it would show something the reader cannot buy. What is left is the honest middle: draw '
+          'the one thing a photograph cannot show as clearly as a diagram &mdash; how much counter the appliance '
+          'takes.</p>'
+        + f'<ul class="bullets">{rule_items}</ul></section>'
+        + '<section><h2>Every asset, in one table</h2>'
+        + '<p class="section-lead">Each row links the rule it is checked against; the planned row says what it is '
+          'waiting for.</p>' + table + "</section>"
+        + '<section><h2>What would let a real photograph appear</h2>'
+        + '<p class="aiwrap">Either route is an owner decision, not an editorial one: supply original photographs '
+          'with a written release, or confirm in writing that the '
+        + bs.ext("https://affiliate-program.amazon.com/creatorsapi", "Creators API")
+        + " permits live listing images. Both are recorded on the "
+        + f'<a href="{bs.esc(page.rel("review.html"))}">Review page</a> as questions RQ-03 and RQ-05.</p></section>'
+    )
+
+
+
+def register_numbers(bs) -> str:
+    """Small, honest counts for the About page: computed, never typed."""
+    su = len(_load("suggestions.json")["suggestions"])
+    qu = len(_load("questions.json")["questions"])
+    de = _load("decisions.json")["decisions"]
+    fl = len(_load("flags.json")["flags"])
+    rec = sum(1 for d in de if d["status"] == "Recorded")
+    return f"{su} suggestions, {qu} questions, {len(de)} decisions ({rec} recorded, {len(de) - rec} open) and {fl} flags"
+
+
+def about_body_for(bs, page) -> str:
+    """Who writes this, how it is made, what it will not say, and how to correct it."""
+    editorial = (_load("content.json").get("editorial") or {})
+    # Reuse the repository's own published position statement; fall back to the
+    # build gate's rule if that statement ever moves.
+    promise = editorial.get("promise") or []
+    method = " ".join(promise) if promise else (
+        "Each page is drafted with automated assistance, then every factual value is read from the official listing "
+        "or policy page and recorded as a dated row in data/. A value that cannot be read is left blank and flagged.")
+    corr = editorial.get("corrections") or (
+        "Send a correction with the URL and the listing or policy page that contradicts it. A corrected value is "
+        "re-read from the official page and the row keeps its new date; nothing is silently overwritten.")
+    sections = [
+        '<section><h2>What this site is</h2>',
+        '<p class="aiwrap">Zone4 is a small buying guide for countertop air fryers and, since the 2026-11-19 brief, '
+        'two submitted meat-thermometer listings. It covers a handful of products rather than a catalogue, and it '
+        'writes about the specification fields a shopper can check against the listing: capacity, footprint, basket '
+        'format and the features the page names.</p>',
+        '<p class="aiwrap">It earns through the Amazon Associates programme. Every outbound product link is a tagged '
+        'Special Link, carries rel=&quot;sponsored&quot;, and sits next to the disclosure sentence that also appears '
+        'under the masthead and in every footer.</p></section>',
+        '<section><h2>How the content is produced</h2>',
+        f'<p class="aiwrap">{bs.esc(method)}</p>',
+        '<p class="aiwrap">The site publishes with automated assistance and says so here rather than in a footnote. '
+        'What the automation does not do is invent a number: the build refuses to publish a table row without an '
+        'official source link, and the checks in the repository fail if one appears.</p></section>',
+        '<section><h2>What it will not publish</h2><ul class="bullets">',
+        '<li><strong>Prices and star ratings</strong>, until an approved API supplies them (flag F-02).</li>',
+        '<li><strong>Per-product commission rates</strong>, because no official source maps these listings to a '
+        'commission category (flag F-01).</li>',
+        '<li><strong>Hands-on test results.</strong> Nobody here has cooked in these appliances, and the site does '
+        'not pretend otherwise.</li>',
+        '<li><strong>Trend or popularity claims.</strong> A claim like that needs a dated official snapshot, and none '
+        'exists (decision D-19, flag F-15).</li>',
+        '<li><strong>Forecasts</strong> of traffic, orders or revenue. The programme makes no representation about '
+        'any of them.</li></ul></section>',
+        '<section><h2>Corrections</h2>',
+        f'<p class="aiwrap">{bs.esc(corr)}</p>',
+        '<p class="aiwrap">Every published value, the page it was read from and the date of the read are listed on '
+        f'the {bs.href(page, "verification.html", "verification log")}; anything that could not be confirmed is on '
+        f'the {bs.href(page, "flagged.html", "Flagged for review")} page.</p></section>',
+        '<section><h2>How the site is governed</h2>',
+        f'<p class="aiwrap">The editorial and technical backlog is public: {bs.esc(register_numbers(bs))}. The two '
+        f'review surfaces are the {bs.href(page, "review.html", "Review page")} (the proposals and the questions '
+        f'that gate them) and the {bs.href(page, "decision-centre.html", "Decision centre")} (the same registers in '
+        'review order).</p></section>',
+    ]
+    return (
+        bs.hero("About this site",
+                "Who writes it, how each number is checked, what it deliberately will not publish, and how to "
+                "correct it.")
+        + "".join(sections)
+    )
+
+
 def write_all(bs) -> list[str]:
     """Write every extra page into bs.OUT and return the docs-relative paths written.
 
@@ -619,6 +991,15 @@ def write_all(bs) -> list[str]:
         page.body = fn(bs, page)
         (out / path).write_text(bs.render(page), encoding="utf-8")
         written.append(path)
+
+    # review.html is rendered by scripts/build_site.py (it is part of the shared
+    # navigation and needs the page shell); its body comes from review_body_for().
+    (out / "review.html").write_text("", encoding="utf-8")
+    written.append("review.html")
+    (out / "about.html").write_text("", encoding="utf-8")
+    written.append("about.html")
+    (out / "imagery.html").write_text("", encoding="utf-8")
+    written.append("imagery.html")
 
     # feed.xml is written by scripts/build_site.py, which owns the one RSS feed (guides are added there).
     (out / "measure.js").write_text(MEASURE_JS, encoding="utf-8")
