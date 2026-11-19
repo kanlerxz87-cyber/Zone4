@@ -1,0 +1,136 @@
+{
+ "_meta": {
+  "session": "arena/67175642-zone4",
+  "date_utc": "2026-11-19",
+  "purpose": "Re-read the two meat-thermometer listings and one air-fryer listing from their official Amazon pages through the platform page-fetch tool (no login, one read per URL), to fill the fields F-60 left blank and to re-confirm the titles the site publishes. Only values the listing itself states are recorded. Prices and star ratings were seen on the pages and are NOT recorded (F-02).",
+  "method": "Each listing was fetched and the following sections read where present: page title, category breadcrumb, the 'Purchase options and add-ons' Item-details table, the 'About this item' bullets, and any model notice. Values are copied as the listing words them; nothing is converted, averaged or inferred.",
+  "limitations": "The fetch tool renders the page as text, so an element that only appears interactively cannot be confirmed. No account, no Associates Central session and no browser were available, so the Associates Central checks (F-57, F-58) were not performed."
+ },
+ "rows": [
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Listing title",
+   "observed": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+   "matches_record": true,
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Category breadcrumb",
+   "observed": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+   "matches_record": true,
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Brand (Item details)",
+   "observed": "ThermoMaven",
+   "matches_record": null,
+   "note": "Was blank (F-60); now recorded.",
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Special Feature (Item details)",
+   "observed": "Auto Off, Fast Reading System, High Accuracy, Ultra Clear Screen, Waterproof",
+   "matches_record": null,
+   "note": "Was blank (F-60); now recorded.",
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Capacity / Dimensions / Model number",
+   "observed": "Not stated in the Item-details table that was read",
+   "matches_record": true,
+   "note": "Stays blank (F-60). A meat thermometer has no air-fryer capacity.",
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P4",
+   "asin": "B0DHZTCNR5",
+   "field": "Newer-model notice",
+   "observed": "This page displays 'There is a newer model of this item' linking to ASIN B0GL7Z4KP4 (same title, Orange).",
+   "matches_record": null,
+   "note": "New finding, recorded as F-74.",
+   "source": "https://www.amazon.com/dp/B0DHZTCNR5"
+  },
+  {
+   "product_id": "P5",
+   "asin": "B0DZFD6R9Z",
+   "field": "Listing title",
+   "observed": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+   "matches_record": true,
+   "source": "https://www.amazon.com/dp/B0DZFD6R9Z"
+  },
+  {
+   "product_id": "P5",
+   "asin": "B0DZFD6R9Z",
+   "field": "Brand (Item details)",
+   "observed": "CHEF iQ",
+   "matches_record": null,
+   "note": "Was blank (F-60); now recorded.",
+   "source": "https://www.amazon.com/dp/B0DZFD6R9Z"
+  },
+  {
+   "product_id": "P5",
+   "asin": "B0DZFD6R9Z",
+   "field": "Special Feature (Item details)",
+   "observed": "5 Sensors, Unlimited Range",
+   "matches_record": null,
+   "note": "Was blank (F-60); now recorded.",
+   "source": "https://www.amazon.com/dp/B0DZFD6R9Z"
+  },
+  {
+   "product_id": "P5",
+   "asin": "B0DZFD6R9Z",
+   "field": "Size variants",
+   "observed": "The listing offers 1, 2, 3 and 4 Probe variants; the recorded title is the 3 Probes variant.",
+   "matches_record": true,
+   "note": "Variant family noted; no variant price recorded (F-02).",
+   "source": "https://www.amazon.com/dp/B0DZFD6R9Z"
+  },
+  {
+   "product_id": "P1",
+   "asin": "B0CDY277D3",
+   "field": "Listing title",
+   "observed": "CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black",
+   "matches_record": true,
+   "source": "https://www.amazon.com/dp/B0CDY277D3"
+  },
+  {
+   "product_id": "P1",
+   "asin": "B0CDY277D3",
+   "field": "Category breadcrumb",
+   "observed": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+   "matches_record": true,
+   "source": "https://www.amazon.com/dp/B0CDY277D3"
+  },
+  {
+   "product_id": "P1",
+   "asin": "B0CDY277D3",
+   "field": "Price and star rating",
+   "observed": "Present on the page; deliberately not recorded or republished.",
+   "matches_record": true,
+   "note": "F-02 stands.",
+   "source": "https://www.amazon.com/dp/B0CDY277D3"
+  }
+ ],
+ "policies": [
+  {
+   "url": "https://affiliate-program.amazon.com/help/operating/policies",
+   "read_utc": "2026-11-19",
+   "note": "Header re-read: 'Updated: April 14, 2026', incorporated by reference in the Operating Agreement, with the Commission Income Statement, Participation Requirements, Products Statement, Mobile Application Policy, Trademark Guidelines, IP License and Influencer Program Policy sections listed. No change since the 2026-11-17 read; the Participation Requirement 2(b) tag requirement enforced by scripts/verify.py is unchanged."
+  }
+ ],
+ "not_checked": [
+  "Associates Central: tracking-ID registration (F-57) and the one-link-per-product test (F-58) - no account access.",
+  "Search Console property and query data (F-61, Q-48) - owner-side.",
+  "Prices, availability, coupons and star ratings - never published (F-02, Program Policies 2(b)).",
+  "P2 (B09B7SB46R) and P3 (B08DKYBTPH) were not re-fetched this session; their last full read remains 2026-11-16."
+ ]
+}
