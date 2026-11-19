@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "session": "arena/d696a32c-zone4",
+    "date_utc": "2026-11-19",
+    "method": "Platform page-fetch tool, one read per URL, no login, no access control used or bypassed. Each canonical listing page was read for its page title, category breadcrumb and also-viewed module. The Operating Agreement (Updated October 15, 2025) and Program Policies (Updated April 14, 2026) headers and the cited sections were re-read. Prices, star ratings and review counts visible on the pages were NOT copied (F-02). Item details / Product details table rows were not inside the retrievable chunks on any of the five pages, so no specification value was re-confirmed or changed (F-38, F-60).",
+    "not_done": [
+      "Associates Central: no account access in this sandbox, so no tag registration, one-link test or tracking-report check (F-57, F-58).",
+      "The five supplied link.amazon short links were not re-resolved this session; the 2026-11-19 resolution records in data/intent-links.json stand.",
+      "Item details (brand, model, dimensions, capacity) for P4 and P5 were not reached (F-60); brand and special-feature values rest on the dated 2026-11-19 Item-details reads recorded in data/products-extra.json.",
+      "Google Search Console property state and any query or impression data - no account is connected (F-61)."
+    ],
+    "result_summary": "All five listing titles match the stored records except P2's second title segment, which again shows the variant already recorded under F-66 (stored name_listing kept, variant not overwritten). All five breadcrumbs match. Also-viewed membership is stable except for the already-flagged carousel churn under F-29 (P1 slots 2/3 swapped vs the stored snapshot; P3 slot 2 shows B09MR7QWKZ, the same sighting arena/0272d56e-zone4 recorded). The Operating Agreement Section 5 sentence the site quotes was re-read verbatim and matches DISCLOSURE_SENTENCE. No stored product value was changed by this session."
+  },
+  "rows": [
+    {
+      "id": "V1",
+      "subject": "P1 listing title",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Page title: 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen'",
+      "result": "Match, word for word, to data/products.json P1 name_listing. The '6 Quart' title wording against the stored '6 liters' details-table row keeps F-63 live; no value changed.",
+      "affects": "data/products.json P1 name_listing; F-63"
+    },
+    {
+      "id": "V2",
+      "subject": "P1 breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (node 17659096011). Also-viewed slots 1-3: B0B7C327LK, B0CNSB81V6, B0BYKGN61Q.",
+      "result": "Breadcrumb matches. Also-viewed membership matches the stored snapshot; slots 2 and 3 are swapped vs the stored order [B0B7C327LK, B0BYKGN61Q, B0CNSB81V6]. Same live order arena/0272d56e-zone4 saw. Recorded as a dated sighting under F-29; the stored snapshot is not overwritten.",
+      "affects": "F-29 dated note; data/products.json P1 competitors (snapshot kept)"
+    },
+    {
+      "id": "V3",
+      "subject": "P2 listing title",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": "Page title: 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen'",
+      "result": "First segment matches; second segment is the variant already recorded in data/products.json name_listing_variant_2026_11_19 (F-66), not the stored name_listing second segment. Second sighting of the same variant; stored record kept, no overwrite.",
+      "affects": "data/products.json P2 name_listing + variant; F-66; F-50"
+    },
+    {
+      "id": "V4",
+      "subject": "P2 breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": "Breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers. Also-viewed slots 1-3: B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH.",
+      "result": "Match with the stored breadcrumb and the stored also-viewed order exactly.",
+      "affects": "data/products.json P2 category_path and competitors"
+    },
+    {
+      "id": "V5",
+      "subject": "P3 listing title",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": "Page title: 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen' (served with ?th=1 appended after the redirect).",
+      "result": "Match with the stored name_listing, including the 450F Hi-Fry wording quoted in M-P3's fact table.",
+      "affects": "data/products.json P3 name_listing; M-P3 fact rows"
+    },
+    {
+      "id": "V6",
+      "subject": "P3 breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": "Breadcrumb as P1/P2. Also-viewed slots 1-3: B0CNY1YVDD, B09MR7QWKZ, B0C33CHG99.",
+      "result": "Breadcrumb matches. Slot 2 shows B09MR7QWKZ (Gourmia 8 Qt), the same sighting arena/0272d56e-zone4 recorded; the stored snapshot slot 2 is B0D5FX6VRL. Recorded as a dated sighting under F-29; the stored snapshot is not overwritten.",
+      "affects": "F-29 dated note; data/products.json P3 competitors (snapshot kept)"
+    },
+    {
+      "id": "V7",
+      "subject": "P4 listing title, breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "read": "Title 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black'; breadcrumb Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat (node 289810). Also-viewed slots 1-3: B0GL7Z4KP4 (Orange variant), B0DNMTK56N, B0F5X3NSR4.",
+      "result": "Title and breadcrumb match the stored record exactly, including the IP67 wording F-68 records as drift against the 2026-11-17 read. Also-viewed is a dated observation only: no competitor snapshot is stored for P4, so nothing is compared or overwritten. Brand/model/capacity/dimensions stay as recorded (F-60).",
+      "affects": "data/products-extra.json P4; F-60; F-68; F-78"
+    },
+    {
+      "id": "V8",
+      "subject": "P5 listing title, breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "read": "Title 'CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3'; breadcrumb as P4. Also-viewed slots 1-3: B0FXBQ3KX1 (2-probe variant), B0D1TMFTPN, B0H2JP9YDM.",
+      "result": "Match, character for character, with the stored name_listing. Title claims in listing_claims_in_title are still exactly the title's own words. Also-viewed is a dated observation only (no stored snapshot for P5). Blanks stay blank (F-60).",
+      "affects": "data/products-extra.json P5; F-60"
+    },
+    {
+      "id": "V9",
+      "subject": "Item details / Product details tables (all five pages)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "The Item details / Product details table region was not inside the retrievable chunks on any of the five pages today (ad, brand-store and protection-plan modules occupy that region of the fetched document).",
+      "result": "No specification value was re-confirmed or changed. Stored values rest on their own dated reads (F-38 for P1-P3; F-60 for P4/P5).",
+      "affects": "F-38; F-60"
+    },
+    {
+      "id": "V10",
+      "subject": "Operating Agreement header, Section 1, Section 4 and Section 5",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "read": "Header 'Updated: October 15, 2025'. Section 1 defines Special Links as links that must properly use the special tagged link formats Amazon provides, and Program Content as the data, images, text, link formats, widgets, links, marketing content and linking tools Amazon may make available. Section 4 states Amazon makes no representation about the amount of traffic or commission income an Associate can expect. Section 5 requires the statement 'As an Amazon Associate I earn from qualifying purchases.' clearly and prominently on the Site.",
+      "result": "Match with the agreement this site behaves under: the Section 5 sentence is verbatim the DISCLOSURE_SENTENCE published above the main content and in every footer; the Section 4 no-representation sentence is the rule behind the empty campaign ledger and the no-forecast rule in data/ledger.json; the Section 1 Program Content boundary is what holds product imagery back (D-22, F-43).",
+      "affects": "data/sources.json S-OA; data/ledger.json no-forecast rule; D-22; F-43"
+    },
+    {
+      "id": "V11",
+      "subject": "Program Policies header and Commission Income Statement Section 1",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read": "Header 'Updated: April 14, 2026'. Commission Income Statement Section 1(b) defines the Session as beginning at the Special Link click and ending at the first of 24 hours elapsing, an order being placed, or the customer clicking another publisher's Special Link; Section 1(c) covers 1-Click purchases during the Session and cart orders completed no later than 89 days after the initial click, with shipment and payment within 180 days.",
+      "result": "Match with the five-event definitions and attribution windows in data/ledger.json (impression, click, session, order, refund) and engine.tracking. No policy value was changed.",
+      "affects": "data/ledger.json five_events; engine/tracking.py EVENT_TYPES"
+    },
+    {
+      "id": "V12",
+      "subject": "Prices, ratings and review counts (all five pages)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Prices, star ratings and review counts were visible on the pages read.",
+      "result": "Deliberately not copied into this record or onto the site (F-02). No price, rating or review-count value appears in this file.",
+      "affects": "F-02"
+    }
+  ]
+}

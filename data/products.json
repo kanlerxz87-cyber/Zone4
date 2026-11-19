@@ -26,6 +26,12 @@
       "session": "arena/0272d56e-zone4",
       "read": "P1 (B0CDY277D3), P2 (B09B7SB46R) and P3 (B08DKYBTPH) were opened again from their official listing URLs. P1's title and breadcrumb reproduce name_listing and category_path exactly. P3's title and breadcrumb reproduce name_listing exactly (the page is served with ?th=1 appended after the redirect). P2's first title segment and breadcrumb reproduce; the second segment reads the variant F-66 records, so the stored name_listing is kept and the variant is recorded below rather than overwriting it. The Item details / Product details table region was not inside the retrievable chunks on any of the three pages today, so no specification value was re-confirmed or changed (F-38). Prices and star ratings were visible on the pages read and are not published (F-02).",
       "record": "data/verification-session-0272d56e.json"
+    },
+    "reverification_2026_11_19_d696a32c": {
+      "date_utc": "2026-11-19",
+      "session": "arena/d696a32c-zone4",
+      "read": "P1 (B0CDY277D3), P2 (B09B7SB46R) and P3 (B08DKYBTPH) were opened again from their official listing URLs. P1 and P3 titles and breadcrumbs reproduce the stored records exactly. P2's first title segment and breadcrumb reproduce; the second segment again shows the variant F-66 records, so the stored name_listing is kept and the variant is not overwritten. Also-viewed: P1 slots 2/3 swapped vs the stored snapshot (same live order as arena/0272d56e-zone4); P2 matches exactly; P3 slot 2 shows B09MR7QWKZ (same sighting as arena/0272d56e-zone4). The Item details table region was not inside the retrievable chunks, so no specification value was re-confirmed or changed (F-38). Prices and star ratings were visible and are not published (F-02).",
+      "record": "data/verification-session-d696a32c.json"
     }
   },
   "products": [

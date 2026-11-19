@@ -1390,6 +1390,116 @@
         }
       ],
       "status": "Open - waits on the owner's Search Console verification (D-42)"
+    },
+    {
+      "id": "Q-60",
+      "area": "Measurement",
+      "question": "What counter-depth answers do readers give the chooser, and which format does that route them to?",
+      "why_it_matters": "The chooser routes on counter depth, but no one knows what depths readers actually have. If most answers cluster shallow, the single-basket card and its guide deserve the next editorial investment; if they cluster deep, the oven does. Without the measured distribution the site is guessing which format to lead with.",
+      "kind": "Unknown - discoverable",
+      "known": "The chooser's three depth bands and its routing table are published and sourced (S-19, D-23). No chooser answer has ever been recorded: the endpoint that would count it is built but not hosted (F-59), and the local browser log starts at zero by design.",
+      "how_to_discover": "Host the endpoint (D-43, owner-side), then read the category_click and page_view counts per path after 14 days of events, the way data/publishing.json specifies. Until then the distribution stays blank and the front page keeps its current order.",
+      "answerable_by": "The site owner, once the endpoint is hosted (D-43). The agent can read the counts the moment they exist.",
+      "blocks": [
+        "S-58"
+      ],
+      "flags": [
+        "F-59"
+      ],
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B08DKYBTPH",
+          "ref": "P3 listing: the shallowest listed depth behind the chooser's shallow band"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - let measured reader behaviour shape the next piece"
+        }
+      ],
+      "status": "Open - waits on endpoint hosting (D-43)"
+    },
+    {
+      "id": "Q-61",
+      "area": "Money",
+      "question": "Which of the five listings earns the first attributed click in Associates reporting, and on what date?",
+      "why_it_matters": "The site publishes five tagged Special Links, but attribution is unconfirmed until the one-link-per-product test passes (F-58). The first attributed click is the moment the site goes from a verified register to an earning shop - and which listing earns it decides whether the thermometer category (D-46) is a shop or a distraction.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "All five published outbound URLs are the tagged Special Links with the owner-supplied ID shopnow047c-20 (D-01/D-14, D-46). No Associates Central report has been read in this repository, so no click, order or commission figure exists here (F-57, F-58, Q-49).",
+      "how_to_discover": "The account holder runs the five-step protocol in data/associates.json (confirm the ID, build one Special Link per product, click each once from the site, check Today's Earnings after 24-48 hours) and records the result with the date. Only that report can answer this question; the site's own click counter cannot.",
+      "answerable_by": "The site owner, inside Associates Central (F-57, F-58).",
+      "blocks": [
+        "S-57"
+      ],
+      "flags": [
+        "F-57",
+        "F-58"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - Participation Requirements 2(b), the tag rule the test confirms"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 listing: one of the five destinations the test covers"
+        }
+      ],
+      "status": "Open - waits on the Associates Central one-link test (F-58)"
+    },
+    {
+      "id": "Q-62",
+      "area": "Editorial programme",
+      "question": "Which search queries bring readers to the gift-season section, and do they match the holiday article's title?",
+      "why_it_matters": "The gift-season section (S-58) is written for the 2026 window on calendar dates alone. Whether it earns its place depends on what people actually type in November and December - and whether those queries match the holiday article's title or name a different question the calendar has not written yet.",
+      "kind": "Unknown - discoverable",
+      "known": "The holiday article (M-G3) and the gift-season section are published and dated. No Search Console property is verified and no query data exists (F-61, Q-40, Q-59), so no query has ever been observed for any page.",
+      "how_to_discover": "Verify the property in Google Search Console (D-42, owner-side), submit the sitemap, then read Performance queries for the holiday article and the front page after the window opens. The starter baseline set (SG-38) gives the comparison point.",
+      "answerable_by": "The site owner, once Search Console is connected (D-42).",
+      "blocks": [
+        "S-58"
+      ],
+      "flags": [
+        "F-61",
+        "F-15"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - choose the next topic from measured queries"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing title (read 2026-11-19): the gift wording the section quotes only as titled"
+        }
+      ],
+      "status": "Open - waits on Search Console verification (D-42)"
+    },
+    {
+      "id": "Q-63",
+      "area": "Measurement",
+      "question": "What is the measured 75% scroll rate per guide, and which guide loses readers first?",
+      "why_it_matters": "The five defined events include guide_read_75 for exactly this purpose: knowing where readers stop tells the site which guide needs a shorter opening, a clearer short answer (S-59) or a different next topic. Without it, every rewrite is a guess.",
+      "kind": "Unknown - discoverable",
+      "known": "The guide_read_75 event is defined, the endpoint code accepts it, and the page script sends it - but the endpoint is not hosted (F-59), so no scroll event has ever been counted. The four published guides and the queued thermometer guide are the pages this question covers.",
+      "how_to_discover": "Host the endpoint (D-43, owner-side), then read daily guide_read_75 counts per path after 14 days. Compare the rate per guide, not the raw count, so a longer guide is not punished for its length.",
+      "answerable_by": "The site owner, once the endpoint is hosted (D-43). The agent can read the counts the moment they exist.",
+      "blocks": [
+        "S-59"
+      ],
+      "flags": [
+        "F-59"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - improve the page readers actually reach"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B09B7SB46R",
+          "ref": "P2 listing: the product behind the multi-function guide this question covers"
+        }
+      ],
+      "status": "Open - waits on endpoint hosting (D-43)"
     }
   ]
 }
