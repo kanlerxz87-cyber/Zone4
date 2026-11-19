@@ -58,7 +58,8 @@
     },
     "renumbering_notes": [
       "arena/cc32105d-zone4's session-local F-55 (identifier-format check) renumbered to F-67 on integration on 2026-11-17: arena/68d67712-zone4 and arena/3d2ad125-zone4 had already taken F-55 to F-66 on main while this branch was in flight. Every cross-reference was rewritten. This session's planned F-56 (endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59 on main."
-    ]
+    ],
+    "added_by_f598c2b6_2026_11_19": "F-74: post-PR-#91 line-by-line review - decision-receipt rendering defect (D-36/D-38), the D-38 subject collision split into D-47, stale pre-D-46 README/executive-summary text, article/category under-counts, the 'recorded on 2026-11-16' meta claim, and S-32/S-34/S-35/S-37 status drift."
   },
   "flags": [
     {
@@ -857,13 +858,13 @@
       "id": "F-67",
       "severity": "Low",
       "title": "The identifier-format check behind the product-intent record: the three published link path codes are not ASINs",
-      "detail": "Checked 2026-11-17 against Amazon's published ASIN guide (sell.amazon.com, cited here): an ASIN is a unique 10-character alphanumeric code that appears after /dp/ in the product URL, and typically starts 'B0'. The three published link path codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, nine characters each) fail that format, so they are short-link path codes and not product identifiers; the identifiers recorded in data/intent-links.json (B0CDY277D3, B09B7SB46R, B08DKYBTPH) are 10 characters and appear after /dp/ in the redirect targets, consistent with the guide. The product-intent confirmation records keep the two fields separate (F-55 covers the two links still unmatched). The numeric detail here is the character count of identifiers as printed; no product-level capacity, rating or price figure is involved.",
+      "detail": "Checked 2026-11-17 against Amazon's published ASIN guide (sell.amazon.com, cited here): an ASIN is a unique 10-character alphanumeric code that appears after /dp/ in the product URL, and typically starts 'B0'. The three published link path codes (B04G1MEwY, B02NbDxp3, B00hJ57DV, nine characters each) fail that format, so they are short-link path codes and not product identifiers; the identifiers recorded in data/intent-links.json (B0CDY277D3, B09B7SB46R, B08DKYBTPH) are 10 characters and appear after /dp/ in the redirect targets, consistent with the guide. The product-intent confirmation records keep the two fields separate (F-55 covers the two links still unmatched). The numeric detail here is the character count of identifiers as printed; no product-level capacity, rating or price figure is involved. Update 2026-11-19 (arena/f598c2b6-zone4): the two later submitted path codes (B0c8moW59, B0f3GKalj) are also nine characters and also fail the 10-character /dp/ format, so the check now covers all five submitted links; F-55 was resolved on identity on 2026-11-19 and product-intent records exist for all five, so the closing clause about F-55 above is historical.",
       "sources": [
         "https://sell.amazon.com/blog/what-is-an-asin",
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/blob/main/data/intent-links.json"
       ],
       "status": "Corrected 2026-11-17 (arena/cc32105d-zone4); kept",
-      "action": "None: the format check is recorded; the intended products still await the owner's confirmation under D-13/D-40."
+      "action": "None: the format check is recorded for all five submitted links. The intended products are confirmed in data/intent-links.json; what remains is the enrolled-workflow confirmation (D-13/D-40 open, F-58)."
     },
     {
       "id": "F-68",
@@ -933,6 +934,20 @@
       ],
       "status": "Corrected 2026-11-19 (arena/79fe1c8d-zone4); kept as the audit record",
       "action": "Reviewer: confirm in a normal browser that each short-link citation opens to the ASIN named beside it, and confirm in Associates Central that shopnow047c-20 is the enrolled tag (F-57)."
+    },
+    {
+      "id": "F-74",
+      "severity": "Medium",
+      "title": "Two decisions never rendered their recorded text (D-36/D-38 field-schema mismatch), D-38 collided the dependency-queue and storefront-reading-order subjects, and the README/executive summary still described the pre-D-46 hold state",
+      "detail": "Added 2026-11-19 by arena/f598c2b6-zone4 during the post-PR-#91 line-by-line review. Findings, in the order found: (1) scripts/build_site.py renders a decision's receipt only from recorded_choice + recorded_date_utc, but D-36 and D-38 stored their recorded text in a decision/reason pair, so both showed a 'Recorded' pill with nothing recorded beneath it. (2) D-38's card asks the dependency-queue question (S-35: publish the decision queue in dependency order) while its decision/reason text and its 2026-11-17 log entry carried the storefront reading order recorded by arena/cc32105d-zone4 - two different subjects on one row, and the log's evidence field pointed readers at 'the options and recommendation already on the decision card', which described neither. Reconstructed from git history: the card was created Open by ab5decd (2026-11-16), flipped to Recorded without content by 5097bc2 (2026-11-17), and given the storefront text later; the derived order itself has shipped on the Decision log page and the design brief since 2026-11-16. Correction: D-36's text folded into recorded_choice; D-38 now records the dependency choice (matching the shipped pages); the storefront reading order was re-filed as new row D-47 with a matching card; the log entry moved to D-47 and D-38 gained its own 2026-11-19 entry; scripts/verify.py now fails any Recorded decision without recorded_choice and a YYYY-MM-DD recorded_date_utc. (3) Documentation drift after D-46: README.md's executive bullet and EXECUTIVE_SUMMARY.md's bullet and decision-path step 2 still said the two thermometer links were 'excluded from product pages under F-55' and that intent records were 'still needed for all five', contradicting the same documents' own limits tables and data/intent-links.json (all five records exist; P4/P5 published under D-46 on 2026-11-19). (4) README under-counted the article set (Seven vs eight, after M-G4) and omitted the Meat thermometers category row. (5) build_site.py's executive-summary and decisions meta descriptions claimed the recorded decisions were 'recorded on 2026-11-16'; the log shows 26 on 2026-11-16, 1 on 2026-11-15, 7 on 2026-11-17 and 1 on 2026-11-19, so the date claim was wrong for every build after 2026-11-16 - reworded to the owner's written delegations. (6) Suggestions S-32, S-34 and S-35 still read 'Awaiting decision' although D-35/D-37/D-38 are Recorded and each deliverable (design brief page, topic/headline tables, dependency-order queue) is live; statuses corrected to Implemented 2026-11-17/2026-11-19 with the vocabulary extended. (7) S-37's problem/proposal still described F-55 as open and the candidates as excluded; both now carry a dated 2026-11-19 update and the row stays Awaiting decision because the Associates Central one-link test (F-58) is owner-side. No published product fact, price, rating, commission or traffic figure changed anywhere.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/decisions.json",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/verify.py"
+      ],
+      "status": "Corrected 2026-11-19 (arena/f598c2b6-zone4); kept as the audit record",
+      "action": "Done in this session: decisions D-36/D-38/D-47 and the log corrected, README.md and EXECUTIVE_SUMMARY.md rewritten to the post-D-46 state, meta descriptions reworded, S-32/S-34/S-35 statuses corrected, S-37 updated, and a verify.py gate added so a Recorded decision without rendered receipt text cannot pass again. Remaining owner-side items are unchanged (F-57, F-58, F-59, F-61)."
     }
   ]
 }

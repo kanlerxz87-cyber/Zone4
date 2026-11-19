@@ -6,11 +6,11 @@
 
 ## At a glance
 
-- **Three existing product records** are carried from prior verification sessions: `B0CDY277D3`, `B09B7SB46R` and `B08DKYBTPH`. The verification files record the exact dates, fields read and limits; the last prior re-check was 2026-11-16.
-- The latest request repeats the three previously checked URLs and adds two candidates: `https://link.amazon/B0c8moW59` and `https://link.amazon/B0f3GKalj`. The first three destinations have historical dated verification records; the two new destinations were not independently verified in this session and are excluded from product pages under **F-55**. This does not mean either is invalid. Separate product-intent confirmation records are still needed for all five distinct links.
+- **Three existing product records** are carried from prior verification sessions: `B0CDY277D3`, `B09B7SB46R` and `B08DKYBTPH`. The verification files record the exact dates, fields read and limits; the last re-check of those three was 2026-11-17, and the two meat-thermometer listings were read on 2026-11-19.
+- The latest request repeats the three previously checked URLs and adds two candidates: `https://link.amazon/B0c8moW59` and `https://link.amazon/B0f3GKalj`. All five distinct links now have product-intent confirmation records (intended ASIN, official listing URL, confirmation date and source, with observed redirect targets kept separate). The two new destinations were re-resolved on 2026-11-19 to the meat-thermometer ASINs `B0DHZTCNR5` and `B0DZFD6R9Z` and are published as tagged Special Links in their own category under **D-46** (**F-55** resolved on identity; **F-56** resolved by D-46). This does not mean either supplied short link is valid or invalid (Zone3 FLG-003 unresolved); what remains unconfirmed is the enrolled-workflow side — tag registration (**F-57**) and the one-link-per-product Associates Central test (**F-58**).
 - The user supplied **`shopnow047c-20`** as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish the outbound product links as the tagged Special Links `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — final destination URLs, each destination-verified on 2026-11-17, no shortener (2(b); 6(v)–(w)). What is not confirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication (**Q-01, Q-50, F-03, F-58**).
 - The site is an editorial affiliate publication: one flat navigation group, product chooser, format category pages, comparison, eight question-led articles, source-linked fact tables, and a site directory in every footer. The affiliate disclosure appears below the masthead and again in every footer; product links use `rel="sponsored"`.
-- The decision-support system contains **50 suggestions**, **51 questions**, and **46 decisions** (34 recorded; 12 open). **F-55** and **F-56** are resolved: both additional supplied links were re-resolved on 2026-11-19 to their recorded meat-thermometer ASINs and are published as tagged Special Links in their own category under **D-46**.
+- The decision-support system contains **50 suggestions**, **51 questions**, and **47 decisions** (35 recorded; 12 open). **F-55** and **F-56** are resolved: both additional supplied links were re-resolved on 2026-11-19 to their recorded meat-thermometer ASINs and are published as tagged Special Links in their own category under **D-46**.
 - The static site includes `docs/feed.xml`, `docs/sitemap.xml`, and `docs/robots.txt`. RSS items are generated from article records; publication dates are omitted because none are supplied in the source data.
 
 ## Product and content status
@@ -39,7 +39,7 @@ These are editorial working hypotheses, not claims about popularity, search volu
 ## Decision path
 
 1. Confirm account enrollment and that `shopnow047c-20` is the account’s Partner Tag (F-57), then run the five-step one-link-per-product protocol in `data/associates.json` (S-45) and verify the destination and reporting signal. The tagged Special Links are already the published outbound links; the test gates attribution and scaling, not publication (D-01/D-14, F-58).
-2. Create a product-intent confirmation record for each of the five distinct intended products: intended ASIN, official listing URL, confirmation date and source. Store observed redirect targets separately. Keep the two new links out of product content until confirmed.
+2. ~~Create a product-intent confirmation record for each of the five distinct intended products~~ — done: all five records exist in `data/intent-links.json`, each with intended ASIN, official listing URL, confirmation date and source, and observed redirect targets stored separately. The remaining account-side step is the one-link-per-product Associates Central test for each published Special Link (S-39 protocol, F-58) and tag confirmation (F-57).
 3. Decide what privacy-preserving measurement infrastructure can be hosted, and review consent, retention and event definitions before collecting visitor-level data.
 4. Verify the site in Search Console and start a dated publishing cadence. Choose future topics from actual first-party query data only after it exists.
 5. Review the remaining suggestions and open questions in the site’s decision queue before adopting further design, account, photography or automation changes.
@@ -72,7 +72,9 @@ and re-applied only its unique delta:
 
 - **F-53 corrected** (the last machine-output defect: identifiers printed as prose in the three product openers):
   the openers are rewritten across all eight articles under recorded decision **D-36**. D-35 (warm-editorial
-  specification), D-37 (steady headline register) and D-38 (storefront reading order) were recorded the same day.
+  specification), D-37 (steady headline register) and the storefront reading order were recorded the same day;
+  the storefront choice was filed as D-38 at the time and was re-filed as **D-47** on 2026-11-19 when the
+  line-by-line review found the row collision (F-74 — D-38's card had always asked the dependency-queue question).
 - **F-67 added**: the identifier-format check behind the product-intent record. Amazon's published ASIN guide
   (read live 2026-11-17) defines an ASIN as a 10-character code appearing after `/dp/`; the three published link
   path codes are nine characters and appear in the short-link path, so they are not ASINs. The check is cited in
@@ -97,6 +99,35 @@ This session recorded decisions **D-01/D-14** under the owner's 2026-11-17 brief
 **2026-11-19 update (arena/4cfacb30-zone4).** All five submitted links are now published. The two meat-thermometer links were re-resolved from their short links; each opens to the ASIN recorded (B0DHZTCNR5, B0DZFD6R9Z), and the listing titles and breadcrumbs were read. Under decision D-46, taken by the agent under the owner's standing no-manual-input brief, they sit in a Meat thermometers category with the same tagged Special Link status as the three air-fryer listings. Their thermometer guide waits for its cadence date (2026-12-01). Two findings from the same session need review: the P4 title on the live page differs from the 2026-11-17 record (F-68), and most Amazon links on the site were untagged, which Program Policies 2(b) does not allow; every www.amazon.com link now carries the tag and the build fails if one does not (F-69). The Associates Central tests (F-57, F-58) remain owner-side and unrun.
 
 **Two merge reconciliations** (after PRs #79–#83, then after PRs #84–#86): three other sessions worked overlapping slices of the same brief. Each time, main's register rows kept their numbers; this session's rows were renumbered to the next free ids (final state: D-43 endpoint hosting, D-44 measurement surfaces in the design brief, D-45 keep the shipped feed, S-45 test protocol, S-46 feed, Q-50 tag registration); rows duplicated by peers' shipped work were withdrawn (following the established duplicate-drop precedent); the parallel intent/ledger files were withdrawn in favour of the canonical ones with their unique content folded in additively; and the "hold tagged links" gate was updated with dated notes — the owner's brief directs replacing ambiguous outbound links with validated Special Links, so the tagged links are published and the Associates Central test gates attribution and scaling, not publication. Flag citations point at main's numbering (F-57 unverified tracking ID, F-58 pending validation; F-55/F-56 are the two held thermometer candidates).
+
+## Session notes — 2026-11-19 (arena/f598c2b6-zone4): post-PR-#91 line-by-line review
+
+A consistency pass over the merged tree after PR #91 (and rebased onto PRs #92/#93 from
+`arena/79fe1c8d-zone4` while in progress). No published product fact, price, rating, commission or traffic
+figure changed. What it corrected, all recorded as **F-74**:
+
+- **Decision receipts that never rendered.** The builder only reads `recorded_choice` + `recorded_date_utc`,
+  but D-36 and D-38 stored their recorded text in a `decision`/`reason` pair, so both cards showed a
+  "Recorded" pill with nothing recorded beneath it. D-36's text is now folded into the rendered fields.
+- **D-38's subject collision, split into two rows.** D-38's card asks the dependency-queue question (S-35)
+  while its recorded text and its 2026-11-17 log entry carried the storefront reading order — two different
+  subjects on one row. D-38 now records the dependency choice (matching the derived-order pages that have
+  shipped since 2026-11-16); the storefront reading order was re-filed as the new row **D-47** with a card
+  that matches it. Totals: 47 decisions, 35 recorded, 12 open.
+- **Stale pre-D-46 text removed** from this document and `README.md`: both still said the two thermometer
+  links were "excluded from product pages under F-55" and that intent records were "still needed for all
+  five", contradicting their own limits tables and `data/intent-links.json`. `README.md` also under-counted
+  the article set (seven vs eight after M-G4) and omitted the Meat thermometers category row; its "latest
+  re-check 2026-11-16" line now reflects the 2026-11-17 and 2026-11-19 reads.
+- **Meta descriptions reworded.** The executive-summary and decision-log descriptions claimed the recorded
+  decisions were "recorded on 2026-11-16"; the log shows 26 on 2026-11-16, 1 on 2026-11-15, 7 on 2026-11-17
+  and 1 on 2026-11-19, so the date claim was wrong for every build after 2026-11-16.
+- **Suggestion statuses corrected:** S-32, S-34 and S-35 read "Awaiting decision" although D-35/D-37/D-38
+  are recorded and each deliverable (design brief page, topic/headline tables, dependency-order queue) is
+  live — now Implemented 2026-11-17/2026-11-19. S-37 keeps "Awaiting decision" (D-40 open) but its
+  problem/proposal now carry a dated 2026-11-19 update for the resolved F-55 state.
+- **A new gate:** `scripts/verify.py` now fails any Recorded decision that has no `recorded_choice` and
+  `YYYY-MM-DD` `recorded_date_utc`, so the receipt-rendering defect cannot pass review again.
 
 ## Full source list
 

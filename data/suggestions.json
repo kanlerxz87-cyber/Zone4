@@ -20,7 +20,8 @@
       "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes.",
       "Implemented 2026-11-17": "Decision recorded 2026-11-17 and the change is live in this build.",
       "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build.",
-      "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete."
+      "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete.",
+      "Implemented 2026-11-19": "Decision recorded 2026-11-19 and the change is live in this build."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
@@ -833,7 +834,7 @@
       "flags": [
         "F-51"
       ],
-      "status": "Awaiting decision",
+      "status": "Implemented 2026-11-17",
       "decision": "D-35"
     },
     {
@@ -897,7 +898,7 @@
         "F-51",
         "F-52"
       ],
-      "status": "Awaiting decision",
+      "status": "Implemented 2026-11-17",
       "decision": "D-37"
     },
     {
@@ -921,7 +922,7 @@
         }
       ],
       "flags": [],
-      "status": "Awaiting decision",
+      "status": "Implemented 2026-11-19",
       "decision": "D-38"
     },
     {
@@ -952,8 +953,8 @@
       "id": "S-37",
       "priority": "P1 - Decide first",
       "title": "Confirm product intent for all five links and validate the two new candidates",
-      "problem": "The latest request repeats three links already present in the product register and adds two new candidate URLs. The existing three have historical destination checks but no separate intended-product confirmation record; the two new destinations are not verified (F-55).",
-      "proposal": "Keep the current three product records unchanged until the account holder confirms intent and the Associates workflow validates the links. Create one product-intent confirmation record per intended product: ASIN, official listing URL, confirmation date and source. Record observed redirect target separately. Validate the two new candidates before adding any product pages.",
+      "problem": "The latest request repeats three links already present in the product register and adds two new candidate URLs. The existing three have historical destination checks but no separate intended-product confirmation record; the two new destinations are not verified (F-55). Update 2026-11-19 (arena/f598c2b6-zone4): F-55 is resolved on identity - both new links were re-resolved to B0DHZTCNR5 and B0DZFD6R9Z and all five product-intent confirmation records now exist with intended ASIN, official listing URL, confirmation date and source kept separate from the observed redirect (data/intent-links.json); the two thermometer listings are published under D-46.",
+      "proposal": "Keep the current three product records unchanged until the account holder confirms intent and the Associates workflow validates the links. Create one product-intent confirmation record per intended product: ASIN, official listing URL, confirmation date and source. Record observed redirect target separately. Validate the two new candidates before adding any product pages. Update 2026-11-19: the confirmation-record half is built for all five links and P4/P5 are published under D-46. What remains is the enrolled-workflow half only - the one-link-per-product Associates Central test (F-58) and tag confirmation (F-57) - which needs the account holder; the row stays Awaiting decision (D-40) until that test passes.",
       "why": "A short-link code alone does not establish the intended product, a valid Special Link or a tracking association. Keeping intent and observation separate makes mistakes reviewable rather than silently treating a redirect as authorization.",
       "effort": "One confirmation record per intended product; do not publish a candidate that cannot be confirmed.",
       "risk": "Requires an authorized Associates account and access to its reporting workflow. The five links are not described as invalid; their status is unresolved.",

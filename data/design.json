@@ -686,7 +686,7 @@
   {
    "step": 1,
    "decision": "D-01",
-   "choice": "Put an Associates tag on the three links, or relabel them as plain product links",
+   "choice": "Put an Associates tag on the three links, or relabel them as plain product links (recorded 2026-11-17: the tagged Special Links are published; registration and the one-link-per-product test remain - F-57, F-58)",
    "what_it_unblocks": "Every revenue step. Until this is answered nothing the site earns can be attributed, and the disclosure sentence is only accurate if the links carry a tag.",
    "cost": "About 15 minutes once account access exists"
   },
@@ -708,7 +708,7 @@
    "step": 4,
    "decision": "D-36",
    "choice": "Run the anti-slop pass, or at least the two defect fixes",
-   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change. Most of this pass already shipped on 2026-11-16; what is open is the M-P3 opener that describes its own composition and the ASIN-and-breadcrumb prose in the three product articles (F-53).",
+   "what_it_unblocks": "D-35. The visual direction should be judged on final copy, not on copy that is about to change. Most of this pass shipped on 2026-11-16 and the remaining opener and identifier prose were corrected under F-53 on 2026-11-17 (D-36).",
    "cost": "Two days, or half a day for the two defects alone"
   },
   {

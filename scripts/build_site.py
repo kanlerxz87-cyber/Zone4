@@ -452,6 +452,40 @@ def verification_rows(current: Page) -> list[list[str]]:
         for field, value, status, source, flag in items:
             flag_html = flag_chip(current, flag) if flag else ""
             rows.append([esc(p["id"]), esc(field), esc(value), status_pill(status), source, flag_html])
+
+    # P4/P5 (published under D-46 on 2026-11-19): identity-scope rows only.
+    # The Item details table was never read for these listings, so the field
+    # rows stay blank and flagged (F-60) rather than inferred.
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    intent_src = ext("https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/intent-links.json",
+                     "Product-intent confirmation record")
+    for p in extra:
+        src = ext(p["canonical_url"], "Amazon page")
+        read = p.get("title_read_utc") or "2026-11-19"
+        items = [
+            ("Listing title", p["name_listing"], f"Verified (title read {read})", src, ""),
+            ("ASIN", p["asin"], "Verified (from resolved URL)", src, "F-04"),
+            ("Category path", p["category_path"], f"Verified (breadcrumb read {read})", src, ""),
+            ("Brand", "Blank", "Unverified (blank)", src, "F-60"),
+            ("Model number", "Blank", "Unverified (blank)", src, "F-60"),
+            ("Capacity (as listed)", "Blank", "Unverified (blank)", src, "F-60"),
+            ("Dimensions (as listed)", "Blank", "Unverified (blank)", src, "F-60"),
+            ("Price", "Not published", "Withheld (policy)", src, "F-02"),
+            ("Star rating / review count", "Not published", "Withheld (policy)", src, "F-02"),
+            commission_verification_item(p, sched),
+            ("Trend / conversion", "Blank", "Unverified", src, "F-15"),
+            ("Associates tag in link", "Tagged Special Link published (shopnow047c-20)",
+             "Published; registration unverified", src, "F-57"),
+            ("Product-intent confirmation",
+             "Intended ASIN and official listing URL recorded; observed redirect kept in a separate field",
+             "Recorded 2026-11-19", intent_src, "F-58"),
+        ]
+        if p.get("name_listing_prior"):
+            items.append(("Listing title (earlier read)", p["name_listing_prior"],
+                          "Superseded (title drift)", src, "F-68"))
+        for field, value, status, source, flag in items:
+            flag_html = flag_chip(current, flag) if flag else ""
+            rows.append([esc(p["id"]), esc(field), esc(value), status_pill(status), source, flag_html])
     return rows
 
 
@@ -1327,10 +1361,10 @@ def page_analysis(current: Page) -> str:
 
 def page_verification(current: Page) -> str:
     return (
-        hero("Verification log", "Field-by-field check for each product. Each row links to the official source it was checked against. Blank or withheld values are flagged.")
+        hero("Verification log", "Field-by-field check for each published product. Each row links to the official source it was checked against. Blank or withheld values are flagged: the three air-fryer records carry full field reads, and the two meat-thermometer listings carry identity reads with the unread Item-details fields left blank (F-60).")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: P2, Unverified, F-02)" aria-label="Filter table"></p>'
         + table(["Product", "Field", "Value", "Status", "Source link", "Flag"], verification_rows(current), "verification")
-        + f'<p class="small muted">Observed {esc(OBSERVED)} (UTC). Every row was re-read against the official source on that date. Re-check before publishing.</p>'
+        + f'<p class="small muted">P1-P3 field rows observed {esc(OBSERVED)} (UTC) and re-read on 2026-11-16 and 2026-11-17; the P4/P5 identity rows were read on 2026-11-19. Every row names the source it was checked against. Re-check before publishing.</p>'
     )
 
 
@@ -1764,7 +1798,7 @@ def page_questions(current: Page) -> str:
         'automated collection needs a legal opinion (Q-07).</p>'
         f'<p class="small muted">Related: {href(current, "suggestions.html", "Suggestions")} for what each answer would unlock, '
         f'{href(current, "decisions.html", "Decision log")} for the choices already recorded '
-        f'({sum(1 for d in DECISIONS if d["status"] == "Recorded")} recorded on 2026-11-16 under the owner&rsquo;s delegation).</p>'
+        f'({sum(1 for d in DECISIONS if d["status"] == "Recorded")} recorded under the owner&rsquo;s written delegations).</p>'
         '</section>'
     )
 
@@ -1997,17 +2031,19 @@ def page_design(current: Page) -> str:
         '<header class="hero"><h1>Design brief</h1>'
         '<p class="lead">Three visual directions specified far enough to build, the ten writing '
         'patterns that make this site read as machine output with a replacement for each, two '
-        'finished headline options for every published article, an eight-topic organic-traffic '
-        'programme, and the prompt that assembles all of it. Nothing on this page has been applied.</p>'
+        'finished headline options for each of the five original pieces, an eight-topic organic-traffic '
+        'programme, and the prompt that assembles all of it. The direction family and the writing rules '
+        'have been adopted through recorded decisions (D-18, D-35, D-36, D-37); the switchable token '
+        'layer that would make any direction previewable is still open (D-39).</p>'
         '<p class="muted small">'
         f'{len(DIRECTIONS)} directions &middot; {len(ANTI_SLOP)} anti-patterns &middot; '
-        f'{len(HEADLINE_OPTIONS)} headline rewrites &middot; {len(TOPICS)} topics &middot; '
+        f'{len(HEADLINE_OPTIONS)} headline option sets &middot; {len(TOPICS)} topics &middot; '
         '0 traffic, revenue or search-volume figures published</p></header>'
         '<section class="kpis kpis-stack">'
         '<div class="kpi"><div class="kpi-value kpi-text">A proposal, not a changelog</div>'
         '<div class="kpi-label">Each section is bound to a decision row. When that decision is '
-        'recorded, the change is made and the register is updated. Until then the site is '
-        'unchanged, and that is deliberate.</div></div>'
+        'recorded, the change is made and the register is updated - as D-18, D-35, D-36 and D-37 '
+        'now are. Until a decision is recorded the site is unchanged, and that is deliberate.</div></div>'
         '<div class="kpi"><div class="kpi-value kpi-text">Two directions are free; one is narrowed</div>'
         '<div class="kpi-label">The bold deal-finder look is only viable in an evidence-only form, '
         'because the price, rating and price-tracking rules bar the tactics the look normally '
@@ -2018,9 +2054,11 @@ def page_design(current: Page) -> str:
         'may be said. No third-party SEO or marketing blog is cited for any rule or figure.</div></div>'
         '</section>'
         '<section><h2>The shortest credible path</h2>'
-        '<p class="section-lead">The decision queue holds ' + str(len(DECISIONS)) + ' open choices. '
-        'These five are ordered by what each one unblocks, so answering them in this order avoids '
-        'doing the expensive one twice.</p>'
+        '<p class="section-lead">The decision queue holds '
+        + str(sum(1 for d in DECISIONS if d["status"].startswith("Open"))) + ' open choices. '
+        'These five steps are the launch path the register recorded: each is ordered by what it '
+        'unblocks, so working in this order avoids doing the expensive one twice. All five are now '
+        'recorded - the cells say when - and the current open queue is on the Decision log.</p>'
         + table(["Step", "Decision", "What to choose", "What it unblocks", "Cost",
                  "Source behind the step (official)"],
                 path_rows, "launch-path")
@@ -2408,8 +2446,8 @@ def page_information_gaps(current: Page) -> str:
 # share one (see scripts/verify.py), so this cannot silently regress.
 PAGE_DESCRIPTIONS = {
     "index.html": INDEX_DESCRIPTION,
-    "executive-summary.html": f"What the verification found, the {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} decisions that still need the owner and the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} recorded on 2026-11-16, and what is deliberately not built. Each statement links to the official source behind it.",
-    "products.html": "Three air-fryer product records side by side: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
+    "executive-summary.html": f"What the verification found, the {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} decisions that still need the owner and the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} recorded under the owner's written delegations, and what is deliberately not built. Each statement links to the official source behind it.",
+    "products.html": "Three air-fryer product records side by side plus two submitted meat-thermometer listings: brand, category path, listed capacity, dimensions and also-viewed competitors, with prices, ratings and commission cells deliberately blank.",
     "categories/dual-basket-air-fryers.html": "The dual-basket air-fryer category: the Chefman 6 quart record, its listed specifications, the competing ASINs shown beside it on the listing, and the article written from those facts.",
     "categories/single-basket-air-fryers.html": "The single-basket air-fryer category: the Chefman 8 quart record, its listed presets and footprint, the size variants on the same page, and the article written from those facts.",
     "categories/air-fryer-toaster-ovens.html": "The air-fry toaster oven category: the Emeril Lagasse 26 quart record, its listed functions and footprint, and the two specification inconsistencies disclosed rather than resolved.",
@@ -2417,7 +2455,7 @@ PAGE_DESCRIPTIONS = {
     "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
     "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
     "requirements.html": f"All {len(REQUIREMENTS)} items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
-    "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
+    "verification.html": "A field-by-field verification log for all five published products: every published value, the official page it was read from, and a flag wherever it could not be confirmed - full field reads for the three air fryers, identity reads for the two meat thermometers.",
     "policy-compliance.html": f"{len(RULES)} Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
     "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
@@ -2427,8 +2465,8 @@ PAGE_DESCRIPTIONS = {
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
     "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in and what happens to an answer.",
     "information-gaps.html": f"What this project can already prove about the three air fryers, the {len([q for q in QUESTIONS if q['kind'] != 'Known'])} questions that are not answered yet, and the named party who can close each gap.",
-    "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. Nothing on it has been applied.",
-    "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
+    "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for each of the five original pieces, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. The direction family and writing rules are adopted (D-18/D-35/D-36/D-37); the switchable token layer is still open (D-39).",
+    "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded under the owner's written delegations.",
 }
 
 BODIES = {

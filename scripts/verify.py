@@ -286,6 +286,18 @@ def check_decision_support() -> None:
     if recorded != logged:
         fail(f"decision log and register disagree: recorded={sorted(recorded)} logged={sorted(logged)}")
 
+    # A recorded decision must carry the text the page actually renders as its
+    # receipt. The builder reads only recorded_choice + recorded_date_utc, so a
+    # row that stores its choice anywhere else shows as Recorded with nothing
+    # recorded beneath it (the F-74 defect).
+    for d in decisions:
+        if d["status"] != "Recorded":
+            continue
+        if not (d.get("recorded_choice") or "").strip():
+            fail(f"decision {d['id']} is Recorded but has no recorded_choice to render")
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", (d.get("recorded_date_utc") or "").strip()):
+            fail(f"decision {d['id']} is Recorded but has no YYYY-MM-DD recorded_date_utc")
+
 
 def check_design() -> None:
     """The design brief must obey the same sourcing rules as every other page.
