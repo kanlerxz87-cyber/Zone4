@@ -1165,6 +1165,19 @@
       ],
       "status": "Corrected 2026-11-19 (arena/d696a32c-zone4); kept as the audit record",
       "action": "Reviewer: none required beyond the standing spot-checks; the block is verified by parsing the built pages."
+    },
+    {
+      "id": "F-93",
+      "severity": "Medium",
+      "title": "The published pages used 65 classes that no stylesheet defined, and the CI link and CSS-coverage check ran only on the engine preview",
+      "detail": "Found 2026-11-19 by arena/1eabf5f1-zone4 while re-running the gates on main ed4f66a. `python3 tools/check_links.py --root docs` failed with 65 problems on 23 pages: `nav-sub` and `nav-sub-title` (the top-navigation sub-group labels), `hub-card`/`hub-*` (the hub cards), `cathero`/`cathero-figure`/`cathero-lead` (category heroes), `tile-figure`/`tile-caption` (footprint figures), `path`/`path-item`/`path-num` (decision-path steps), `compact` (dense tables) and `sun` (the shop-card call to action). The stylesheet `docs/styles.css` defined none of them. Rendered in a headless Chromium: the sub-group labels appeared at body size beside the links, and the category footprint SVG rendered 1220 px wide, over the hero text. The CI workflow ran the coverage check only on the engine preview (`build/site-preview`, which has its own stylesheet), so the published site was never checked. Fix: rules for those classes added to `docs/styles.css` (tokens only); `site-checks.yml` now runs `python3 tools/check_links.py --root docs`. After the fix the published-tree check passes (23 pages, 957 CSS lines) and rendered SVG width is 233-234 px. Numbering: recorded as F-91 in this session's first branch state; F-91 and F-92 were taken on main by PRs #106 and #107 while this session worked, so it is F-93.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/tools/check_links.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/.github/workflows/site-checks.yml",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css"
+      ],
+      "status": "Corrected 2026-11-19 (arena/1eabf5f1-zone4); kept as the audit record",
+      "action": "Reviewer: none required. Keep the published-tree check in CI; a new generated class must come with a rule in docs/styles.css or the check fails."
     }
   ]
 }

@@ -889,3 +889,69 @@ table.facts td:nth-child(2), table.facts td:nth-child(4) { font-family: var(--mo
    card - it is a date, not a selling point, and it sits above the actions it explains. */
 .shop-card { display: flex; flex-direction: column; }
 .shop-dates { margin-top: auto; padding-top: 8px; }
+
+/* --- Classes the generated pages use that had no rule (2026-11-19, arena/1eabf5f1-zone4) ---
+   tools/check_links.py (run with --root docs) found 65 uses across 23 pages with no rule in this
+   file: the top-navigation sub-groups, the category hub cards, the category hero with its footprint
+   figure, the decision-path steps, compact tables and the shop-card call to action. Each rule below
+   reuses the existing tokens; no colour or layout of an already-styled element is changed. */
+
+/* Top navigation sub-groups: a small label, then its links (scripts/build_site.py, NAV). */
+.nav-sub { display: flex; flex-wrap: wrap; align-items: center; margin-right: 4px; }
+.nav-sub-title {
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--muted); padding: 0 6px 0 11px; white-space: nowrap;
+}
+.topnav .nav-sub + .nav-sub { border-left: 1px solid var(--line); padding-left: 4px; margin-left: 4px; }
+
+/* Category hub cards: the counts-and-links grid on the front page and the hubs. */
+.hub-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 12px 0 18px; }
+.hub-card {
+  display: flex; flex-direction: column; gap: 6px; background: var(--panel); color: var(--ink);
+  border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; text-decoration: none;
+  box-shadow: var(--shadow); transition: border-color .15s ease, transform .15s ease;
+}
+.hub-card:hover { border-color: var(--accent); transform: translateY(-2px); color: var(--ink); }
+.hub-count { font-family: var(--serif); font-size: 30px; font-weight: 700; line-height: 1; color: var(--accent-strong); }
+.hub-title { font-family: var(--serif); font-weight: 700; font-size: 17px; line-height: 1.3; }
+.hub-body { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.hub-go { margin-top: auto; padding-top: 6px; color: var(--accent); font-weight: 650; font-size: 13.5px; }
+
+/* Category hero: footprint figure beside the lead text; stacks on narrow screens. */
+.cathero { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
+.cathero-figure, .cathero-lead { min-width: 0; }
+@media (max-width: 760px) { .cathero { grid-template-columns: minmax(0, 1fr); gap: 16px; } }
+
+/* Footprint figure (an SVG drawn to scale from the listed dimensions) and its caption. */
+.tile-figure {
+  display: block; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px; box-shadow: var(--shadow);
+}
+.tile-figure svg { display: block; width: 100%; height: auto; max-width: 240px; margin: 0 auto; }
+.tile-caption { display: block; margin-top: 8px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+
+/* Decision path: numbered steps read in order (decision-centre "Four steps"). */
+.path { counter-reset: path-step; margin: 12px 0 18px; border-top: 1px solid var(--line); }
+.path-item {
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; align-items: start;
+  padding: 16px 0; border-bottom: 1px solid var(--line); counter-increment: path-step;
+}
+.path-num {
+  width: 36px; height: 36px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-strong);
+  display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 700;
+}
+.path-num::before { content: counter(path-step); }
+.path-item h3 { margin: 2px 0 4px; font-size: 16.5px; }
+.path-item p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+/* Compact tables: dense register-style tables inside .table-wrap. */
+table.compact th, table.compact td { padding: 8px 10px; }
+table.compact td { font-size: 13px; }
+
+/* Shop-card call to action (outbound Amazon link, rel="sponsored"): one terracotta button per card. */
+.shop-actions a.sun {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--terracotta); color: #fff;
+  padding: 9px 14px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px;
+}
+.shop-actions a.sun:hover { background: var(--accent-strong); color: #fff; }
+.shop-actions a.sun:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
