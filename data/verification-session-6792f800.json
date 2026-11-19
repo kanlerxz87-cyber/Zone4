@@ -9,7 +9,8 @@
    "Prices, ratings and review counts were not read into any record and are still withheld (F-02).",
    "No search-engine data: the sitemap and feed are generated and correct, but no property is verified in Search Console (SG-29, D-42, RQ-08)."
   ],
-  "result_summary": "Repository review and storefront pass. Findings: (1) four flags still described the pre-D-01 link state and the thermometers as held - corrected as F-73; (2) no page named an author, a method statement or a correction path - the About page was added; (3) no product imagery existed at all - scaled footprint diagrams drawn from the listed dimensions were added, with an imagery policy page; (4) the landing hero advertised the checking method instead of the reader's outcome - rewritten; (5) the review surface the brief asks for did not exist - the Review page and its register were added with 14 proposals and 13 gating questions. No product value, link target, tracking tag or policy claim changed; the only register correction is the F-73 wording fix, recorded as its own flag."
+  "result_summary": "Repository review and storefront pass. Findings: (1) four flags still described the pre-D-01 link state and the thermometers as held - corrected as F-73; (2) no page named an author, a method statement or a correction path - the About page was added; (3) no product imagery existed at all - scaled footprint diagrams drawn from the listed dimensions were added, with an imagery policy page; (4) the landing hero advertised the checking method instead of the reader's outcome - rewritten; (5) the review surface the brief asks for did not exist - the Review page and its register were added with 14 proposals and 13 gating questions. No product value, link target, tracking tag or policy claim changed; the only register correction is the F-73 wording fix, recorded as its own flag.",
+  "merge_note": "Merged with origin/main at 2026-11-19 after parallel sessions published flags F-73, F-74 and F-75. This session's register correction was renumbered from F-73 to F-76; both sides of COORDINATION.md, README.md, EXECUTIVE_SUMMARY.md and data/flags.json were kept (main's flags plus this session's four in-place corrections and its new flag), and every generated page was rebuilt from source."
  },
  "rows": [
   {
@@ -59,6 +60,12 @@
    "check": "A page where proposals can be reviewed before implementation",
    "observed": "docs/review.html files 14 proposals and 13 questions with cost, risk, acceptance check and an official source; four carry a dated application; counts are printed from the register",
    "record": "data/redesign.json"
+  },
+  {
+   "area": "Merge",
+   "check": "Nothing from a parallel session was dropped",
+   "observed": "main's F-73 (short-link citations), F-74 (sponsored rel on tagged Amazon links) and F-75 (the 'AI slop' claim is unverified) are all present with their details; this session's corrections to F-56/F-57/F-58/F-60 and its new F-76 are present; 76 flag anchors render on the Flagged page; COORDINATION.md keeps both sessions' entries",
+   "record": "data/flags.json, COORDINATION.md"
   }
  ]
 }
