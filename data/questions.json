@@ -12,7 +12,7 @@
     "rule": "An Unknown is never closed by inference. It is closed by a named source, a named party's answer, or an explicit owner decision recorded in the Decision log.",
     "ported_00ba6c2e_2026_11_15": "Q-16 to Q-19 were ported from the parallel session's decision worksheet (arena/bb85f073-zone4, PR #50), which asked about the audience, privacy and consent, budget and time horizon, and trade-name clearance. Those four gaps were not in this register and are kept rather than dropped. Their seven-row worksheet itself was merged into decisions.json D-15/D-16 to avoid two conflicting D-01 numbering schemes.",
     "ported_d2a62d6b_2026_11_15": "Q-20 to Q-22 are the open questions from the parallel session arena/d2a62d6b-zone4 that this register did not already hold (where product photography comes from, paid versus organic traffic, and whether an email list or an incentive may be tied to the links). Q-23 to Q-37 are that session's verified answers, quoted verbatim from the official source each row cites: the register declared a 'Known' kind but had no rows using it, so the answers were ported in rather than dropped.",
-    "updated_utc": "2026-11-16",
+    "updated_utc": "2026-11-19T23:20:00Z",
     "update_note": "Q-06, Q-12, Q-21 and Q-37 closed by the owner decisions recorded on 2026-11-16 (delegated). Q-36 re-verified on 2026-11-16. Everything else stands: the gaps that need an account holder, a seller, a lawyer or a budget stay open, and each row still says how the missing piece could be discovered.",
     "added_by_89900251_2026_11_16": "Q-38 to Q-44 are the design and organic-traffic path. Q-38, Q-39, Q-42 and Q-44 are already answered from official sources read on 2026-11-16 and are recorded so a reviewer does not have to re-derive them. Q-40 is the one genuine unknown in the traffic programme: search demand. Q-41 and Q-43 are owner decisions with options in D-39 and D-37.",
     "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's Q-45-Q-49 (from arena/cc32105d-zone4 and earlier sessions) already cover the endpoint (Q-46), reader consent (Q-47), Search Console (Q-48) and the ledger's report source (Q-49). This session's Search Console question was withdrawn as a duplicate of Q-48; its tag-registration question was appended as Q-50.",
@@ -1302,6 +1302,62 @@
         {
           "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
           "ref": "FTC: Endorsements, Influencers, and Reviews - endorsements must reflect honest opinions and disclose connections"
+        }
+      ]
+    },
+    {
+      "id": "Q-57",
+      "area": "Editorial standards and content",
+      "question": "What publication date should each of the five original articles carry, and which dated artefact is that date taken from?",
+      "why_it_matters": "Under decision D-49 a page states a date only when its own record names the dated source behind it. Five records have one and publish it; the five earliest have none, so their pages print no date and their feed items carry no pubDate, which is what F-88 and F-84 are about. The interim rule is correct but it is not free: an undated article reads as stale beside a dated one.",
+      "kind": "Unknown - discoverable",
+      "known": "No dated publication record for the five earliest slugs exists inside this checkout, because the repository's git history here is a shallow clone: 'git rev-list --count HEAD' returns 1 and there is no first-added commit for any docs/articles file to inherit a date from.",
+      "how_to_discover": "From a full clone, run 'git log --diff-filter=A --format=%ad --date=short -- docs/articles/<slug>.html' for each of the five slugs and use the author date of the commit that first added the file. Alternatively accept the first dated register mention as the date, since that is a dated artefact of the same project: F-74 and the marketing records already carry such mentions. Either way the answer must be stored per article as published_utc with published_source naming which of the two it came from, exactly as M-G2 to M-G6 do.",
+      "answerable_by": "Owner, or any session with a full clone of the repository history.",
+      "blocks": [
+        "S-48",
+        "S-54"
+      ],
+      "flags": [
+        "F-88",
+        "F-84"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+          "ref": "Google Search Central: Article structured data - datePublished is the date the article first appeared in public. Registered as S-GSC-ART; not re-fetched in this session."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json",
+          "ref": "Five of the ten records now carry published_utc and published_source; the five earliest carry neither."
+        }
+      ]
+    },
+    {
+      "id": "Q-58",
+      "area": "Reader-facing design",
+      "question": "Does the owner accept the site's current imagery budget - footprint diagrams drawn from recorded dimensions, and one typographic preview card - as the whole of it, or should product photography be commissioned now that D-22 has been open since 2026-11-16?",
+      "why_it_matters": "D-22 holds product photography back until an authorised route exists, and it is the reason shop cards and article pages have no picture of the appliance. The furniture that is allowed is now in place and labelled (data/imagery.json), so the only remaining question about imagery is this one. Until it is answered the site reads as a table site, which is a deliberate limit rather than an oversight, but it is a limit the owner set and only the owner can lift.",
+      "kind": "Owner decision",
+      "known": "Two sessions independently reached the same conclusion about self-drawn furniture on 2026-11-19 and the shipped result is the stronger of the two: inline SVG footprint diagrams drawn to scale from the dimensions in data/products.json on the category tiles and pages (data/imagery.json), and docs/social-card.png. A per-card format-schematic set drafted by the second session was dropped at the merge rather than stacked beside it. Amazon listing photography is Program Content and stays out (S-18, F-43).",
+      "how_to_discover": "Read docs/about.html and data/imagery.json, then choose: keep the site text-and-shape only, commission original photography of appliances the owner actually owns, or wait for an approved image route. Only the second changes what appears on a shop card, and it needs the owner to shoot or licence the images - no tool in this repository can source a compliant product photo.",
+      "answerable_by": "Owner (D-22 names you as the decider).",
+      "blocks": [
+        "S-49",
+        "S-52"
+      ],
+      "flags": [
+        "F-43",
+        "F-79"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/imagery.json",
+          "ref": "The shipped imagery register and the policy note it carries."
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 1 defines Program Content, which includes images; read 2026-11-19 and recorded in data/verification-session-0272d56e.json."
         }
       ]
     }

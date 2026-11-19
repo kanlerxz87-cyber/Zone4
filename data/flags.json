@@ -57,9 +57,11 @@
       "renumbered_on_rebase_2026_11_16": "F-47 to F-51 as written collided with main's F-47..F-50, added by three concurrent 2026-11-16 sessions. Renumbered to F-51..F-54 so that both registers survive; no other session's flag was touched."
     },
     "renumbering_notes": [
-      "arena/cc32105d-zone4's session-local F-55 (identifier-format check) renumbered to F-67 on integration on 2026-11-17: arena/68d67712-zone4 and arena/3d2ad125-zone4 had already taken F-55 to F-66 on main while this branch was in flight. Every cross-reference was rewritten. This session's planned F-56 (endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59 on main."
+      "arena/cc32105d-zone4's session-local F-55 (identifier-format check) renumbered to F-67 on integration on 2026-11-17: arena/68d67712-zone4 and arena/3d2ad125-zone4 had already taken F-55 to F-66 on main while this branch was in flight. Every cross-reference was rewritten. This session's planned F-56 (endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59 on main.",
+      "2026-11-19 (arena/0272d56e-zone4), third entry: a concurrent session merged PR #101 while this window's PR #102 was open and filed its own rows at F-82 and D-48, so this window's dates flag moved from F-82 to F-88 and its dates decision from D-48 to D-49, in the ids this window's own rows cite as well as in its own ids. F-83 to F-87 keep the numbers assigned in the second entry; no row of another session was renumbered."
     ],
-    "renumbering_2026_11_19_storefront": "arena/67175642-zone4 raised four flags in the same window as several parallel sessions, and the numbers collided twice as main advanced. Final numbers, after rebasing onto 390ea78: F-76 (thermometer shop cards rendered an air-fryer capacity line - corrected), F-77 (P4 listing shows a newer-model notice - owner decision), F-78 (no social preview image had ever shipped - corrected), F-80 (the front page's h1 rendered below the product cards - corrected). F-79 belongs to a parallel session. The other sessions keep their own F-73, F-74 and F-75 as merged on main. No flag content changed in renumbering; this note is the audit trail."
+    "renumbering_2026_11_19_storefront": "arena/67175642-zone4 raised four flags in the same window as several parallel sessions, and the numbers collided twice as main advanced. Final numbers, after rebasing onto 390ea78: F-76 (thermometer shop cards rendered an air-fryer capacity line - corrected), F-77 (P4 listing shows a newer-model notice - owner decision), F-78 (no social preview image had ever shipped - corrected), F-80 (the front page's h1 rendered below the product cards - corrected). F-79 belongs to a parallel session. The other sessions keep their own F-73, F-74 and F-75 as merged on main. No flag content changed in renumbering; this note is the audit trail.",
+    "updated_utc": "2026-11-19T23:20:00Z"
   },
   "flags": [
     {
@@ -1042,6 +1044,78 @@
       ],
       "status": "Fixed 2026-11-19",
       "action": "Fixed: the .mono token is defined in docs/styles.css and applied to ASIN, dimension and figure values (SG-41, D-48). The class now resolves to a monospace stack."
+    },
+    {
+      "id": "F-83",
+      "severity": "Low",
+      "title": "An article fact note cited the wrong flag (F-10 for a unit mismatch, which is F-06 and F-63)",
+      "detail": "Found 2026-11-19 by arena/0272d56e-zone4. M-G4-F1's note reads 'Two different units on one page; both reported as listed (F-10).' F-10 is about whether the also-viewed module is labelled 'Sponsored'. The unit mismatch on that row is F-06 (title quarts versus details-table litres) and, for the same listing, F-63. The note is published in the article's fact table, so a reader following the citation landed on an unrelated flag. Corrected to cite F-06 and F-63. No value changed. Source cited: https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json (The register the correction was applied to). Source cited: https://www.amazon.com/dp/B0CDY277D3 (The listing whose title and details-table units differ). Filed as F-83 after this session rebased onto main, where F-77 was already taken by another session's row; the renumbering is recorded in _meta.renumbering_notes. Renumbered again on 2026-11-19 when a concurrent session merged while this PR was open and took F-82 for the .mono stylesheet fix: this row is F-88.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json",
+        "https://www.amazon.com/dp/B0CDY277D3"
+      ],
+      "status": "Corrected 2026-11-19 (arena/0272d56e-zone4)",
+      "action": "None."
+    },
+    {
+      "id": "F-84",
+      "severity": "Medium",
+      "title": "Five of the ten feed items carry no pubDate, so readers order them by guesswork",
+      "detail": "pubDate is an optional element of an RSS item, so a reader that sorts by date has no basis for an item without one: the item may be shown as undated, placed last, or left out of a date-sorted view. Since decision D-49 removed the invented date, the five earliest articles lost the pubDate they previously carried, so the feed now leads with the 2026-11-17 guides while the genuinely newest content (2026-11-19) sits behind them and five of the ten article items have no date element at all (docs/feed.xml, 2026-11-19). The feed is still well-formed and scripts/verify.py counts dated items against the records that can support one. This is a consequence of telling the truth about dates, not a defect in the rule: it is resolved by answering Q-52, not by restoring a guess. Filed as F-84 after this session rebased onto main, where F-79 was already taken by another session's row; the renumbering is recorded in _meta.renumbering_notes. Renumbered again on 2026-11-19 when a concurrent session merged while this PR was open and took F-82 for the .mono stylesheet fix: this row is F-88.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json",
+        "https://developers.google.com/search/docs/appearance/structured-data/article"
+      ],
+      "status": "Open - needs owner input",
+      "action": "Either answer Q-52 with the dated publication record for the five undated articles, or accept an explicitly undated feed. Do not order the feed by build date to fake recency."
+    },
+    {
+      "id": "F-85",
+      "severity": "Medium",
+      "title": "The verification page implied every product had a field-by-field log, and dated its whole table to one old read",
+      "detail": "docs/verification.html is generated from data/products.json only, so its rows cover P1 to P3. Two things made that look like a claim about the whole site: the page's own description said it covered 'all three products' at a time when the site publishes five product records, and its closing line stated that every row had been re-read on 2026-11-14, which was true of the oldest pass and not of the dated re-reads since. Fixed 2026-11-19 (this session) by naming which records the table covers, where the P4 and P5 reads are recorded and why their specification rows cannot exist (F-60), and by replacing the single blanket re-read date with the earliest row date plus the newest dated verification record on file, chosen from data/verification-session-*.json by the builder rather than hard-coded. Sources: the page as rebuilt on 2026-11-19, and page_verification() with _newest_verification_read(), which derive both sentences from the data files. Filed as F-85 after this session rebased onto main, where F-80 was already taken by another session's row; the renumbering is recorded in _meta.renumbering_notes. Renumbered again on 2026-11-19 when a concurrent session merged while this PR was open and took F-82 for the .mono stylesheet fix: this row is F-88.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/verification.html",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py"
+      ],
+      "status": "Corrected (kept as the audit record)",
+      "action": "Nothing to do. If a field-by-field log for the two thermometers is ever wanted, it needs an Item details table read, which F-38 and F-60 record as unreachable - not a reformat of this page."
+    },
+    {
+      "id": "F-86",
+      "severity": "Low",
+      "title": "No page declared a canonical URL, so the same page had several indexable addresses",
+      "detail": "Every page set og:url but no rel=\"canonical\", so the Pages path, its directory form and the repository-root redirect are fetchable copies of one page, and Google chooses which to treat as authoritative. Found 2026-11-19 by arena/0272d56e-zone4 while wiring head metadata: main already ships the preview card and its og:image, og:image:alt, og:image:width/height, twitter:image and twitter:image:alt tags, which is why the earlier missing-image finding filed on this session's base was dropped rather than renumbered - main's F-84 records it and docs/social-card.png is the asset. The canonical link was the part still missing beside them. Fixed the same day: the page template emits <link rel=\"canonical\"> to the page's own Pages URL, scripts/verify.py requires it on every page, and both checkers treat the site's own Pages origin as internal rather than as an external host. Renumbered again on 2026-11-19 when a concurrent session merged while this PR was open and took F-82 for the .mono stylesheet fix: this row is F-88.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+        "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+      ],
+      "status": "Corrected (kept as the audit record)",
+      "action": "Confirm which address the owner wants canonical. SITE_URL in scripts/build_site.py is the single source for both the canonical and the og:url values, so a custom domain changes one line."
+    },
+    {
+      "id": "F-87",
+      "severity": "Low",
+      "title": "Six flag records carried their own text twice, because a dated update appended the whole previous detail instead of replacing it",
+      "detail": "F-03, F-26, F-29, F-38, F-44 and F-50 each stored a detail string in which the entire earlier text appeared once and then again with a dated sentence appended. The pattern comes from the register's own convention: a session re-reading a flag adds its dated note, and appending to the whole previous string rather than replacing it duplicates every earlier word. Found 2026-11-19 by arena/0272d56e-zone4 in a sentence-level diff across every register field, which is the only way it surfaced: no single row looked wrong on its own. The six were rewritten once each, keeping every dated sentence in order and dropping only the repeated copy. Renumbered to F-87 on the merge onto main, where F-75 held another session's row; on main the six rows were still doubled and are de-duplicated by this window's change, while three further pairs of main's own rows repeat text between them (F-74 and F-76 byte-identically) and are left to their authors. Renumbered again on 2026-11-19 when a concurrent session merged while this PR was open and took F-82 for the .mono stylesheet fix: this row is F-88.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/flags.json"
+      ],
+      "status": "Corrected (kept as the audit record)",
+      "action": "When a pass re-reads a flag, replace the detail and keep the dated sentences; do not append to a copy of the old string. A register-wide duplicate-sentence check belongs in scripts/verify.py if the pattern recurs."
+    },
+    {
+      "id": "F-88",
+      "severity": "Medium",
+      "title": "63 tagged Amazon links on 19 pages were missing rel=\"sponsored\" (corrected 2026-11-19)",
+      "detail": "Found in a line-by-line audit of the rendered pages on 2026-11-19 (arena/14efcc78-zone4). The tagging pass in scripts/build_site.py adds the Associates tag to every www.amazon.com link (Program Policies 2(b)) after rendering, but never set rel=\"sponsored\". The result: 63 anchors on 19 pages (Associates help and Conditions of Use links, and the Air Fryers category browse link) carried the tracking ID with no sponsored rel. verify.py checked only /dp/ and link.amazon links, so the gap passed every gate. measure.js also counts an outbound click only when rel contains 'sponsored', so clicks on those 63 anchors were not counted. Corrected at source: the tagging pass now also sets rel=\"sponsored\" on every www.amazon.com anchor, and verify.py requires it on every tagged Amazon link. A negative test (sponsor pass disabled) makes verify.py fail; with the fix restored it passes. The docs diff was checked: the only changes are the added rel token. The 63 counted anchors are the pre-fix state on main af593ba. Numbered F-74 because F-73 was taken on main by arena/79fe1c8d-zone4 (short-link citations) during this session. Filed as F-74 on this window's base, then F-82, and F-88 after PR #101 took F-82 for the .mono stylesheet fix; every id this row cites is the one now in the register.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+      ],
+      "status": "Corrected 2026-11-19 (arena/14efcc78-zone4); kept as the audit record",
+      "action": "No owner action. Re-run scripts/verify.py after any change to a link-rendering function. Confirm on the live site after the next Pages build that the Air Fryers category and Associates help links carry rel=\"sponsored\"."
     }
   ]
 }

@@ -12,7 +12,8 @@
     "ported_d2a62d6b_2026_11_15": "D-21 to D-34 were added for the fifteen suggestions ported from the parallel session arena/d2a62d6b-zone4 (now S-17 to S-31), because every suggestion in this register must point at a decision row. Q-37 was added for the same reason: the editorial redesign that session shipped is a choice, not a settled fact. All fourteen are open; none has been recorded as decided.",
     "delegation_2026_11_16": "The owner's session brief of 2026-11-16 states: 'There should be no manual input on my part. Work on your own to finish all tasks in this session.' Under that delegation this session recorded the presentation, voice and policy decisions that needed no fact the owner alone has (D-03 to D-07, D-09 to D-12, D-17 to D-21, D-23 to D-34). Decisions that need an account, a budget, a seller or a lawyer (D-01, D-02, D-08, D-13, D-14, D-15, D-16, D-22) stay open: they cannot be answered from any official source this project can read.",
     "added_by_89900251_2026_11_16": "D-35 to D-39 are the design and traffic path. D-35 is the executable detail for the three options already in D-18, not a new set of options. D-36 and D-37 cover the copy and headline changes the F-52 and F-53 defects need. D-38 and D-39 are decision-process and build-order items.",
-    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): arena/cc32105d-zone4 had also recorded D-35-D-38 and appended rows at D-42/S-39-S-44/Q-47-Q-49. Main's rows kept their numbers; this session's endpoint-hosting, design-brief-surfaces and feed decisions were renumbered D-43/D-44/D-45, its tag-registration question was renumbered Q-50, and its duplicate Search Console question and reader-capture and brief-components suggestions were withdrawn in favour of main's rows. Recorded here: D-01/D-14 (tagged Special Links per the owner's brief) and D-45 (keep the shipped feed)."
+    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): arena/cc32105d-zone4 had also recorded D-35-D-38 and appended rows at D-42/S-39-S-44/Q-47-Q-49. Main's rows kept their numbers; this session's endpoint-hosting, design-brief-surfaces and feed decisions were renumbered D-43/D-44/D-45, its tag-registration question was renumbered Q-50, and its duplicate Search Console question and reader-capture and brief-components suggestions were withdrawn in favour of main's rows. Recorded here: D-01/D-14 (tagged Special Links per the owner's brief) and D-45 (keep the shipped feed).",
+    "updated_utc": "2026-11-19T23:20:00Z"
   },
   "decisions": [
     {
@@ -1977,6 +1978,57 @@
       ],
       "recorded_date_utc": "2026-11-19",
       "recorded_choice": "A"
+    },
+    {
+      "id": "D-49",
+      "question": "Should an article publish a date only when the repository holds a dated record for that article, which leaves five early articles undated and removes the site-wide observation date from every Article block?",
+      "linked_question": "Q-57",
+      "linked_suggestions": [
+        "S-48",
+        "S-54"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Per-article dates from dated records only; no date where no record exists",
+          "commits_to": "scripts/build_site.py stops writing OBSERVED into datePublished and dateModified; each page's byline and its structured data read the article record's own published_utc, and a record without one prints no date line at all. Five records gain published_utc with a published_source naming the dated artefact; the other five publish undated until Q-57 is answered. scripts/verify.py enforces the equality so the rule cannot rot.",
+          "effort": "Shipped 2026-11-19, including the check.",
+          "reversible": "Yes: restoring the old default is one line in article_jsonld, but it would put an invented date back on the site."
+        },
+        {
+          "key": "B",
+          "label": "Keep using the observation date for every page",
+          "commits_to": "Every article keeps claiming a datePublished that is the date a session last read the listings, which is a different fact. It also makes all ten articles look equally fresh forever.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The site's whole claim is that it publishes only what a dated source supports; a structured-data date is a published claim about when content appeared, and there is no record for it on five of the ten articles. The date is recoverable later from the git history or the owner's records (Q-57); an invented one is a defect to be found and retracted, which is what F-88 became.",
+      "decision": "Option A recorded 2026-11-19 by arena/0272d56e-zone4 under the owner's standing no-manual-input brief, replacing the invented dates F-88 records. Applied the same day: article_jsonld emits dates only from published_utc, the byline follows the same field, docs/feed.xml gains pubDate on the same basis, and scripts/verify.py fails any page that states a date its record cannot cite. The consequence for the five undated articles is F-84 and S-54; the closing input is Q-57. This decision says nothing about product photography, which stays gated on D-22, and it does not touch the preview card or breadcrumb surfaces main shipped under D-47. Recorded as D-48 on this window's base and renumbered D-49 while PR #102 was open, because arena/d7393cc0-zone4 merged PR #101 and took D-48 for the DIR-A presentation layer. The two decisions do not touch: that one governs how pages are dressed, this one governs which date a page may state.",
+      "recorded_utc": "2026-11-19T22:40:00Z",
+      "recorded_by": "arena/0272d56e-zone4 (standing delegation: no manual input)",
+      "log": [
+        {
+          "date_utc": "2026-11-19",
+          "choice": "Option A - per-article dates from dated records only; no date where no record exists.",
+          "evidence": "data/marketing.json now carries published_utc and published_source on five records and nothing on the other five; docs/articles/*.html print a date exactly where the record has one; scripts/verify.py check_reader_surfaces compares the structured-data date with the record and fails an unsupported date. Gates: verify.py PASS, qa/audit_site.py --strict-warnings PASS, unittest OK, double build byte-identical."
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+          "ref": "Google Search Central: Article structured data - datePublished is the date the article first appeared in public; dateModified is for substantive updates. Registered as S-GSC-ART; not re-fetched in this session."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json",
+          "ref": "The five dated records and their published_source fields, and the five that deliberately have neither."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "article_jsonld() and the byline helper, which read the record instead of the builder constant."
+        }
+      ]
     }
   ],
   "log": [
@@ -2238,6 +2290,13 @@
       "choice": "A",
       "recorded_by": "arena/d7393cc0-zone4",
       "evidence": "Applied under the owner's standing no-manual-input brief. The masthead shell, DIR-A stylesheet layer, mono figures, paper hero, sticky disclosure component and the 'how we checked' byline link are built and the full gate set is green. The undefined .mono class is fixed (F-82). SG-44 and SG-45 remain proposed, not built, because each restructures article markup and needs per-article re-verification. Renumbered from D-47 to avoid the parallel session's D-47 (publication surfaces)."
+    },
+    {
+      "date_utc": "2026-11-15",
+      "decision": "D-49",
+      "choice": "No owner decision has been recorded yet. The queue above was created in this session and every item is open. Filed as D-48 and renumbered D-49 when a concurrent session took D-48 for the presentation layer.",
+      "recorded_by": "arena/00ba6c2e-zone4",
+      "evidence": "Not applicable: nothing has been decided."
     }
   ],
   "paths": {

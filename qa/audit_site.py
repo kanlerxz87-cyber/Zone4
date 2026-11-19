@@ -300,17 +300,20 @@ def check_page(path: pathlib.Path, sp: PageParser, special_links: set[str]) -> N
         fail(f"{rel}: location-claim residue found (flag F-09: user location must not be asserted)")
 
     # -- links
+    # 2026-11-19 (arena/0272d56e-zone4): this site's own Pages origin is internal, so a canonical
+    # link, an og:url or a self-reference is not judged as an external host.
+    own_origin = "https://kanlerxz87-cyber.github.io/Zone4/"
     for tag, url in sp.links:
         parsed = urlparse(url)
         if parsed.scheme in ("http", "https"):
             host = parsed.hostname or ""
             if tag == "a":
-                if host not in OFFICIAL_HOSTS:
+                if host not in OFFICIAL_HOSTS and not url.startswith(own_origin):
                     fail(f"{rel}: external anchor to non-official host: {url}")
                 rel_attr = next((r for u, r in sp.external_anchors if u == url), "") or ""
                 if "noopener" not in rel_attr or "noreferrer" not in rel_attr:
                     fail(f"{rel}: external anchor missing rel=\"noopener noreferrer\": {url}")
-            elif host not in OFFICIAL_HOSTS:
+            elif host not in OFFICIAL_HOSTS and not url.startswith(own_origin):
                 warn(f"{rel}: external {tag} from non-official host: {url}")
             continue
         if parsed.scheme or url.startswith("mailto:"):

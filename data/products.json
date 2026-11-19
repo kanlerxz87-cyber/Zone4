@@ -20,7 +20,13 @@
     },
     "commission_note": "The public official Standard Commission Income Statement Table 1 lists Kitchen at 4.50% and Home at 3.00%. These are category-level references only; the official sources reviewed do not map the supplied ASINs to a commission category. Product-level rate fields are intentionally null (F-01).",
     "reverification_949aaac1_2026_11_14": "Session arena/949aaac1-zone4 re-read all three \"Customers who viewed this item also viewed\" carousels on 2026-11-14. For every one of the three products the stored ASINs appeared in the stored order with the same listing titles: P1 -> B0B7C327LK (Chefman 6 Quart Dual Basket Air Fryer - Digital Touchscreen...), B0BYKGN61Q (Gourmia Air Fryer - 10 Qt Dual Basket Capacity, Stainless Steel...), B0CNSB81V6 (Nutrichef Double Basket Air Fryer 8.8 QT...); P2 -> B0BZ52FLKC (Emeril Lagasse Dual Zone Technology 25QT Air Fryer Oven), B0FM5KF34G (Ninja French Door Premier Air Fry Oven, 10-in-1, 20.3 Qt, Stainless, FO101), B0F92GL7JH (HotKing Dual-Zone Air Fryer Toaster Oven Combo, 28 QT XL Convection Oven); P3 -> B0CNY1YVDD (Chefman Air Fryer - 6 QT Compact Airfryer...), B0D5FX6VRL (Chefman Air Fryer - 6 QT Compact Airfryer...), B0C33CHG99 (Cosori TurboBlaze Air Fryer, 9-in-1, 6 Qt, PFAS-Free Ceramic Coating). The one previously blank label (B0CNSB81V6) was filled from that verbatim read rather than inferred. The three short links were also re-resolved: link.amazon/B04G1MEwY -> B0CDY277D3, link.amazon/B02NbDxp3 -> B09B7SB46R, link.amazon/B00hJ57DV -> B08DKYBTPH. No tag parameter appeared in any resolved URL (F-03 stands).",
-    "product_intent_record_2026_11_17": "Added by arena/cc32105d-zone4: a product-intent confirmation record per product (intended ASIN, official listing URL, confirmation date and source) kept strictly separate from the observed redirect targets, which are stored as dated observations in their own field. The two fields are never merged (F-55)."
+    "product_intent_record_2026_11_17": "Added by arena/cc32105d-zone4: a product-intent confirmation record per product (intended ASIN, official listing URL, confirmation date and source) kept strictly separate from the observed redirect targets, which are stored as dated observations in their own field. The two fields are never merged (F-55).",
+    "reverification_2026_11_19": {
+      "date_utc": "2026-11-19",
+      "session": "arena/0272d56e-zone4",
+      "read": "P1 (B0CDY277D3), P2 (B09B7SB46R) and P3 (B08DKYBTPH) were opened again from their official listing URLs. P1's title and breadcrumb reproduce name_listing and category_path exactly. P3's title and breadcrumb reproduce name_listing exactly (the page is served with ?th=1 appended after the redirect). P2's first title segment and breadcrumb reproduce; the second segment reads the variant F-66 records, so the stored name_listing is kept and the variant is recorded below rather than overwriting it. The Item details / Product details table region was not inside the retrievable chunks on any of the three pages today, so no specification value was re-confirmed or changed (F-38). Prices and star ratings were visible on the pages read and are not published (F-02).",
+      "record": "data/verification-session-0272d56e.json"
+    }
   },
   "products": [
     {
@@ -137,7 +143,9 @@
       "commission_rate_pct": null,
       "commission_category_official": null,
       "commission_rate_source": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
-      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01)."
+      "commission_rate_status": "Unverified for this ASIN: the official Table 1 lists the Kitchen category at 4.50%, but no official source reviewed here confirms Amazon assigns this ASIN to that commission category. Leave the product-level rate blank (F-01).",
+      "name_listing_variant_2026_11_19": "Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included [read 2026-11-19; second sighting of the variant F-66 describes; name_listing above kept as the stored record]",
+      "name_listing_variant_source": "https://www.amazon.com/dp/B09B7SB46R (page title read 2026-11-19)"
     },
     {
       "id": "P3",

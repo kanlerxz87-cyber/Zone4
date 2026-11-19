@@ -174,6 +174,36 @@ def _card_facts(p: dict) -> list[str]:
     return facts
 
 
+def _recheck_line(bs, p) -> str:
+    """'Figures read <date> · listing page re-checked <date>' for one product record.
+
+    Both dates come out of the product registers rather than being typed here: the figures-read date
+    is the record's own read field, and the re-check date is taken from the dated
+    _meta.reverification_* keys the re-reading pass writes into data/products.json and
+    data/products-extra.json. A card therefore cannot advertise a fresher check than the data
+    supports, and a record with no dated read says so instead of going quiet.
+    """
+    read = p.get("read_on") or p.get("observed_utc") or p.get("verification_date") or ""
+    recheck = ""
+    for name in ("products.json", "products-extra.json"):
+        meta = _load(name).get("_meta", {})
+        for key in meta:
+            if not key.startswith("reverification_"):
+                continue
+            tail = key.split("reverification_", 1)[1]
+            date = tail.replace("_", "-") if len(tail) == 10 else ""
+            if date and date > recheck:
+                recheck = date
+    parts = []
+    if read:
+        parts.append(f"figures read {read}")
+    if recheck:
+        parts.append(f"listing page re-checked {recheck}")
+    if not parts:
+        return "no dated read recorded for this record yet"
+    return " · ".join(parts)
+
+
 def shop_section(bs, current) -> str:
     """Products first: one card per listing, above the verification material."""
     guides = published_guides()
@@ -192,6 +222,7 @@ def shop_section(bs, current) -> str:
             f'<h3>{_e(p["name_short"])}</h3>'
             f'<p class="small mono">ASIN {_e(p["asin"])} · {_e(p["id"])}</p>'
             f'<ul class="small">{facts_html}</ul>'
+            f'<p class="small muted shop-dates">{_e(_recheck_line(bs, p))}</p>'
             f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "Check price on Amazon", p["asin"], "shop sun")} '
             + PAID_NOTE
             + f'<a href="{_e(current.rel("products.html"))}" class="small">Source record</a> {guide_html}</p></article>'
@@ -492,18 +523,21 @@ def _measurement_body(bs, page) -> str:
 def feed_items(bs) -> list[str]:
     """RSS items for the published guides, appended by scripts/build_site.py to its single feed.
 
-    Publication dates are omitted, as in the article items: no per-guide date has been verified
-    as an output of the source data (see the note in build_site.build()).
+    Each item carries the guide record's own published_utc - 2026-11-17, the day the four guides
+    went live - and never a build clock: decision D-49 lets a page state a date only when its own
+    record can name the dated source behind it, and the same rule now governs the feed.
     """
     items = []
     for g in published_guides():
         url = bs.SITE_URL + "guides/" + g["slug"] + ".html"
+        pub_date = f"    <pubDate>{bs.rfc822(g['published_utc'])}</pubDate>\n" if g.get("published_utc") else ""
         items.append(
             "  <item>\n"
             f"    <title>{_e(g['h1'])}</title>\n"
             f"    <link>{_e(url)}</link>\n"
             f"    <guid isPermaLink=\"true\">{_e(url)}</guid>\n"
             f"    <description>{_e(g['meta_description'])}</description>\n"
+            f"{pub_date}"
             "  </item>\n"
         )
     return items
@@ -692,7 +726,7 @@ def _review_body(bs, page) -> str:
         ("Decision log (data/decisions.json)",
          f"The {len(de)} decisions: {sum(1 for d in de if d['status'] == 'Recorded')} recorded, "
          f"{sum(1 for d in de if d['status'].startswith('Open'))} open",
-         "Unchanged \u2014 D-48 to D-60 are reserved, not written"),
+         "Unchanged \u2014 D-50 to D-60 are reserved, not written (D-48 is the DIR-A presentation layer and D-49 the per-article date rule, both recorded 2026-11-19)"),
         ("Flagged for review (data/flags.json)",
          f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
     ]
