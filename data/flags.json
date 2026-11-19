@@ -933,6 +933,18 @@
       ],
       "status": "Corrected 2026-11-19 (arena/79fe1c8d-zone4); kept as the audit record",
       "action": "Reviewer: confirm in a normal browser that each short-link citation opens to the ASIN named beside it, and confirm in Associates Central that shopnow047c-20 is the enrolled tag (F-57)."
+    },
+    {
+      "id": "F-74",
+      "severity": "Low",
+      "title": "The brief's claim that the site 'reads like some AI slop website' is itself unverified: no page, sentence or surface is named as evidence",
+      "detail": "Added 2026-11-19 by arena/bc21d56d-zone4. The current session brief repeats the 2026-11-17 wording ('It should not read like some AI slop website like it looks like now') but names no page, sentence or surface. What the register can establish: ten anti-patterns (AS-01..AS-10 in data/design.json) were documented from observed evidence and their replacements applied under recorded decisions D-12 (voice) and D-36 (copy pass); F-52 records the one opener defect found and its correction; every published article was rewritten to the recorded voice. Whether further surfaces still read as machine output is an owner judgement that no official source or register row currently evidences. This flag publishes the gap instead of treating the complaint as a finding. Q-52 asks the owner for the named examples; SG-34 stages the evidence pass that converts each named example into an AS-11+ row.",
+      "status": "Needs review (owner input requested)",
+      "action": "Reviewer/owner: name the published pages or sentences that read as machine output (question Q-52). Each named example becomes an anti-pattern row with its evidence and a replacement, and the openers are re-read against the expanded list (SG-34). If no example is named, that answer is recorded and this flag closes with the owner-confirmed result.",
+      "sources": [
+        "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/design.json"
+      ]
     }
   ]
 }

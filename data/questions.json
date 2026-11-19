@@ -1190,6 +1190,120 @@
         }
       ],
       "status": "Answered by D-46 (2026-11-19, agent under the standing brief; reversible)"
+    },
+    {
+      "id": "Q-52",
+      "area": "Editorial voice and content standards",
+      "question": "Which published pages or sentences read as machine output to the owner, and what would the opposite look like on this site?",
+      "why_it_matters": "The brief states the site 'should not read like some AI slop website like it looks like now' but names no page, sentence or surface (F-74). The anti-slop register documents ten observed patterns with evidence and replacements; a complaint without examples cannot be turned into a targeted fix, only into rewrites that might miss what the owner actually saw.",
+      "kind": "Owner decision",
+      "known": "The register method: every anti-pattern row (AS-01..AS-10 in data/design.json) names the pattern, the evidence and a replacement. Eight published articles were rewritten once under the recorded voice decision D-12 and the 2026-11-17 copy pass D-36; F-52 records the one opener defect found and its correction.",
+      "how_to_discover": "The owner names the pages or quotes the sentences that read as machine output. Each named example becomes an AS-11+ row with its evidence and replacement, and the openers are re-read against the expanded list (SG-34). If no example is named, that answer is recorded and F-74 closes with the owner-confirmed result.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "SG-34"
+      ],
+      "flags": [
+        "F-74"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: what makes content helpful and people-first"
+        },
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search Central: Google's guidance on AI-generated content"
+        }
+      ]
+    },
+    {
+      "id": "Q-53",
+      "area": "Design brief",
+      "question": "Which single reader should the design prompt's [AUDIENCE] slot name first, and how will the site know when it has chosen wrong?",
+      "why_it_matters": "Six of the prompt's seven slots are filled from recorded decisions; the [AUDIENCE] slot still ships open. Until it is named, every surface speaks to everyone, which reads as speaking to no one - the reader-side of the not-slop requirement - and the brief a designer receives stays incomplete.",
+      "kind": "Owner decision",
+      "known": "Q-16 asks the broader audience question (use cases) and Q-04 asks whether amazon.com is the right storefront; neither names one primary reader. The slot stays open until an owner statement or dated measurement fills it with attribution.",
+      "how_to_discover": "The owner names one primary reader (for example a first-time buyer measuring a small counter, a gift buyer, or an upgrader replacing an older appliance); or, once D-42 is actioned, the first months of measured queries name the reader from evidence. Fill the slot with attribution to whichever supplied it (SG-31), and review the choice against the measured queries after a season.",
+      "answerable_by": "The site owner (or dated measurement once Search Console is connected)",
+      "blocks": [
+        "SG-31"
+      ],
+      "flags": [],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful content is created for a specific, intended audience"
+        }
+      ]
+    },
+    {
+      "id": "Q-54",
+      "area": "Publishing cadence",
+      "question": "Should the one-guide-per-14-days cadence temporarily front-load the 2026 gift window (2026-11-27 to 2026-12-25) and revert in January?",
+      "why_it_matters": "The gift guide is published and the next calendar piece at the current cadence falls after the season's peak days. The cadence was recorded as an owner-changeable default (F-65); the seasonal dates are calendar arithmetic, not forecasts, so this is the one cadence change that needs no demand data to justify - and declining it costs nothing.",
+      "kind": "Owner decision",
+      "known": "The cadence (one guide per 14 days) was recorded 2026-11-17 and flagged owner-changeable (F-65). The recorded evidence rule D-19 allows calendar-based framing; no popularity or demand claim is needed or permitted for the season.",
+      "how_to_discover": "The owner confirms or declines the temporary cadence (SG-35). If confirmed, publishing.json records the temporary cadence with its end date; if declined, the 14-day cadence stands and the calendar review happens after the season.",
+      "answerable_by": "The site owner",
+      "blocks": [
+        "SG-35"
+      ],
+      "flags": [
+        "F-65"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first content - the standard the cadence serves; no official source governs publishing frequency itself"
+        }
+      ]
+    },
+    {
+      "id": "Q-55",
+      "area": "Measurement",
+      "question": "Which queries should form the starter baseline set - one per published page, drawn from each page's own question - and who records it before any measurement exists?",
+      "why_it_matters": "The plan is to choose the next topic from measured queries (D-42, SG-29), but nothing defines what the measurements will be compared against. Without a written baseline recorded before data arrives, 'did the right page arrive for its question' is unanswerable in hindsight and topic choices drift back to instinct.",
+      "kind": "Owner decision",
+      "known": "The five-event measurement contract and the ledger's provenance rules exist (data/ledger.json). D-42 names no baseline set, and Q-40 records that no search-volume figure exists for any topic - the baseline is a hypothesis record, not a demand claim.",
+      "how_to_discover": "Draft the set from the published pages themselves (one query per page, from its own title and question - SG-38), label it as the site's hypothesis record with its creation date, and compare the first dated Search Console rows against it once the property is verified.",
+      "answerable_by": "The site owner (any session can draft the set; recording it as the baseline is the owner's confirmation)",
+      "blocks": [
+        "SG-38"
+      ],
+      "flags": [],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience and measurement guidance (the D-42 decision's source)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: the people-first standard the pages were written to"
+        }
+      ]
+    },
+    {
+      "id": "Q-56",
+      "area": "Reader participation",
+      "question": "Does the owner want an on-page reader-question intake (readers submit the question they arrived with), and who writes the answers under what moderation and privacy rules?",
+      "why_it_matters": "The site's growth plan is question-shaped content chosen from measured demand; an intake is the one channel where readers supply questions directly, and it is the natural feed for the measured 'what readers ask next' module proposed in S-44. Without a decision, the only follow channel is the RSS feed (SG-30) and the question data stays one-sided.",
+      "kind": "Owner decision",
+      "known": "Reader capture of contact details is gated on the privacy decisions D-16/D-41. An intake that publishes answers about products is endorsement-adjacent: any published answer that recommends a product carries the material-connection disclosure the FTC guidance requires.",
+      "how_to_discover": "Owner decision: yes or no; who writes the answers; whether answers are pre-moderated before publication; and the privacy rule for anything submitted. If approved, it ships only after the privacy boundary decision (D-16) is recorded.",
+      "answerable_by": "The site owner",
+      "blocks": [],
+      "flags": [],
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: Disclosures 101 - material connections must be disclosed clearly and conspicuously"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews - endorsements must reflect honest opinions and disclose connections"
+        }
+      ]
     }
   ]
 }

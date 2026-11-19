@@ -2127,5 +2127,114 @@
       "recorded_by": "arena/4cfacb30-zone4 (standing delegation: no manual input)",
       "evidence": "Live reads 2026-11-19 of the two short links and listing pages (data/verification-session-4cfacb30.json). F-56 resolved by this decision; F-68 raised for the P4 title drift."
     }
-  ]
+  ],
+  "paths": {
+    "_meta": {
+      "description": "Choose-a-path triage for the Decision centre page (added 2026-11-19, arena/bc21d56d-zone4, implementing the presentation D-38 option A commits). The paths are presentations of the open decisions in coherent orders, not recorded choices: the queue stays the source of truth and every path is optional. The builder refuses to render a path step that names an unknown or no-longer-open decision.",
+      "added_utc": "2026-11-19",
+      "added_by": "arena/bc21d56d-zone4"
+    },
+    "paths": [
+      {
+        "id": "PATH-A",
+        "name": "Path A - measurement and attribution first",
+        "one_line": "Make every click and query countable before adding anything new.",
+        "best_for": "The owner wants to know what is working before spending another hour on content or looks.",
+        "steps": [
+          {
+            "decision": "D-41",
+            "why": "Approve the privacy boundary: local-only analytics, or a first-party endpoint with a separate consent flow. Nothing may flow until this is recorded.",
+            "unblocks": "D-43, D-16, reader capture (SG-30), the campaign ledger"
+          },
+          {
+            "decision": "D-43",
+            "why": "Choose where the endpoint runs. The endpoint code and the five event definitions exist in the repository; hosting is the owner's call.",
+            "unblocks": "The five defined events; F-59 closes"
+          },
+          {
+            "decision": "D-16",
+            "why": "Confirm what measurement is acceptable and the consent wording that goes with it before scaling.",
+            "unblocks": "The measured 'what readers ask next' module (S-44)"
+          },
+          {
+            "decision": "D-42",
+            "why": "Verify the property in Search Console and submit the sitemap and feed.",
+            "unblocks": "Measured queries for topic choice (SG-29, Q-40); the starter baseline (SG-38)"
+          },
+          {
+            "decision": "D-02",
+            "why": "Pursue Creators API access so prices and ratings can be published lawfully.",
+            "unblocks": "The blank price and rating cells; gated on Amazon's stated sales prerequisite (Q-02)"
+          },
+          {
+            "decision": "D-08",
+            "why": "Publish the per-ASIN commission rate once known, or publish no rate at all.",
+            "unblocks": "An honest answer to the commission question on the products page"
+          }
+        ],
+        "delays": "Presentation polish (D-39, D-22) and catalogue widening (D-40, D-13).",
+        "cost_note": "Mostly account work and configuration; the writing cadence is unchanged."
+      },
+      {
+        "id": "PATH-B",
+        "name": "Path B - audience and catalogue first",
+        "one_line": "Learn who arrives, then widen what the site can honestly promote.",
+        "best_for": "The owner wants growth in what the site covers before investing in how it measures or looks.",
+        "steps": [
+          {
+            "decision": "D-42",
+            "why": "Verify Search Console first: measured queries tell the calendar which questions arrive before anything is widened.",
+            "unblocks": "Evidence-based topic choice (SG-29, Q-40, Q-53)"
+          },
+          {
+            "decision": "D-13",
+            "why": "Confirm the three supplied links are the intended products.",
+            "unblocks": "The product register's intent record closes cleanly"
+          },
+          {
+            "decision": "D-40",
+            "why": "Confirm the intended products for all five links and how the two thermometer listings stay scoped (D-46 governs until reversed).",
+            "unblocks": "A five-product catalogue decision; the thermometer category's scope"
+          },
+          {
+            "decision": "D-15",
+            "why": "State what research automation is authorised and from what source it may read.",
+            "unblocks": "Faster verified listings without manual re-reading"
+          },
+          {
+            "decision": "D-22",
+            "why": "Choose the photography route: the owner's own photos or images served through an approved Amazon tool.",
+            "unblocks": "Real product imagery on the category and product pages (S-18)"
+          }
+        ],
+        "delays": "Endpoint hosting (D-43, D-16) and the token-layer polish (D-39).",
+        "cost_note": "Some owner confirmations and one or two build passes; no measurement work beyond Search Console."
+      },
+      {
+        "id": "PATH-C",
+        "name": "Path C - presentation first",
+        "one_line": "Finish the look the brief asks for, at the smallest decision cost.",
+        "best_for": "The owner wants the 'polished marketing site' read fixed before anything else is touched.",
+        "steps": [
+          {
+            "decision": "D-39",
+            "why": "Move colour, type and spacing into a token layer so a direction can be switched in one file.",
+            "unblocks": "Every future visual pass gets cheaper and reversible"
+          },
+          {
+            "decision": "D-22",
+            "why": "Decide the photography route (owner photos or an approved Amazon tool) - the one visual input a listing cannot supply.",
+            "unblocks": "Real imagery; closes S-18's open decision"
+          },
+          {
+            "decision": "D-44",
+            "why": "Decide whether the measurement surfaces added 2026-11-17 fold into the design brief or stay as shipped.",
+            "unblocks": "A single, settled brief for the next design pass"
+          }
+        ],
+        "delays": "All measurement (D-41, D-43, D-16, D-42) and any catalogue widening (D-40, D-13).",
+        "cost_note": "The smallest set: three decisions, build work only, nothing account-side."
+      }
+    ]
+  }
 }
