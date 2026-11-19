@@ -631,6 +631,36 @@ class TestSiteBuild(unittest.TestCase):
         with self.assertRaises(ValueError):
             _self_check("<p>[[UNVERIFIED: price — nope]]</p>", "x")
 
+    def test_landing_page_puts_its_headline_before_the_shop_grid(self):
+        """Document order (2026-11-19): one h1, first in <main>, then the products.
+
+        The 2026-11-17 gate required the shop grid to precede the hero, which left
+        the page's only <h1> below the first product card. This pins the corrected
+        order so it cannot silently revert.
+        """
+        index = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        main = index[index.find('<main id="main">'):index.find('</main>')]
+        self.assertEqual(main.count("<h1"), 1, "the landing page must carry exactly one h1")
+        h1_at, shop_at = main.find("<h1"), main.find('id="shop"')
+        self.assertNotEqual(h1_at, -1)
+        self.assertNotEqual(shop_at, -1)
+        self.assertLess(h1_at, shop_at, "the h1 must open <main>, before the shop grid")
+        transparency_at = main.find('id="transparency"')
+        if transparency_at != -1:
+            self.assertLess(shop_at, transparency_at, "products must come before the audit band")
+
+    def test_social_preview_card_exists_and_is_referenced(self):
+        """F-75: the card and its tags had never shipped. Pin both."""
+        card = ROOT / "docs" / "social-card.png"
+        self.assertTrue(card.exists(), "docs/social-card.png is missing")
+        self.assertGreater(card.stat().st_size, 4096)
+        for page in sorted((ROOT / "docs").rglob("*.html")):
+            text = page.read_text(encoding="utf-8")
+            rel = page.relative_to(ROOT / "docs")
+            self.assertIn('property="og:image"', text, str(rel))
+            self.assertIn("social-card.png", text, str(rel))
+            self.assertIn('name="twitter:image"', text, str(rel))
+
     def test_nav_links_cover_every_page(self):
         s = store()
         html = page_rates(s, Agent(store=s, cfg=Config()).run())

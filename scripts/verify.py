@@ -930,8 +930,33 @@ def check_publication() -> None:
         if f'href="{p["short_link"]}"' in products_html:
             fail(f"products.html links the supplied short link of {p['id']} as an href")
     index = (DOCS / "index.html").read_text(encoding="utf-8")
-    if index.find('id="shop"') == -1 or index.find('id="shop"') > index.find('class="mhero"'):
-        fail("index.html: the product section must come before the hero (products first)")
+    # "Products first" means products before the verification apparatus, not
+    # before the page's own headline. Until 2026-11-19 this check required the
+    # shop grid to precede the hero, which pushed the page's only <h1> below the
+    # first product card - bad for a reader arriving cold and for the document
+    # order a crawler reads. The rule now is: the hero (with the h1) opens the
+    # <main>, then the shop section, and the shop section still comes before
+    # every research/governance surface.
+    shop_at = index.find('id="shop"')
+    hero_at = index.find('class="mhero"')
+    h1_at = index.find("<h1")
+    if shop_at == -1:
+        fail("index.html: the product section (#shop) is missing")
+    elif hero_at == -1 or h1_at == -1:
+        fail("index.html: the hero or its <h1> is missing")
+    elif not (h1_at < shop_at):
+        fail("index.html: the shop section must come after the page's <h1> (one h1, first in document order)")
+    else:
+        # Scope to <main>: the sidebar and footer link these surfaces on every
+        # page, which says nothing about what the reader meets first.
+        main_start = index.find('<main id="main">')
+        main_end = index.find('</main>')
+        main_html = index[main_start:main_end] if main_start != -1 and main_end != -1 else index
+        shop_in_main = main_html.find('id="shop"')
+        for later in ('id="transparency"',):
+            pos = main_html.find(later)
+            if pos != -1 and pos < shop_in_main:
+                fail(f"index.html: the shop section must come before {later} (products before the audit)")
 
 
 def main() -> int:

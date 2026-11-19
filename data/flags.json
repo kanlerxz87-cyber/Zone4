@@ -1006,6 +1006,18 @@
     "https://developers.google.com/search/docs/appearance/page-experience",
     "https://affiliate-program.amazon.com/help/operating/policies"
    ]
+  },
+  {
+   "id": "F-78",
+   "severity": "Medium",
+   "title": "The landing page's only <h1> rendered below the first product card",
+   "detail": "Found 2026-11-19 by arena/67175642-zone4 while reading the built front page in document order. scripts/build_site.py emitted the shop grid before the hero block, so <main> opened with a product card and the page's single <h1> appeared after five cards. scripts/verify.py enforced it: a check required index.html's #shop to appear before .mhero, on a literal reading of the brief's 'lead with the products, not with the verification process'. That intent is right, but the implementation put the headline after the products, which is the wrong order for a reader arriving cold and leaves a search engine's first screenful without the page heading. Corrected the same day: the hero with its <h1> opens <main>, the shop grid sits directly beneath it, and the audit band still comes last. The gate was rewritten to test the intent - the h1 first, then the products, then the transparency band - with a new regression test.",
+   "status": "Corrected 2026-11-19 (arena/67175642-zone4); kept as the audit record",
+   "action": "None for published content. The ordering, the gate and the test now agree; no product fact or link changed.",
+   "sources": [
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py"
+   ]
   }
  ]
 }

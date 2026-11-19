@@ -962,9 +962,12 @@ def page_index(current: Page) -> str:
     buying_guide_path = next(
         (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
     )
+    # The hero (with the page's only <h1>) comes first; the shop grid sits
+    # directly under it. Before 2026-11-19 the grid rendered above the h1, so the
+    # first thing a shopping page said — to a reader arriving cold and to a
+    # crawler reading document order — was a product card, not what the page is.
     return (
-        shop_section_hook(current)
-        + '<div class="mhero">'
+        '<div class="mhero">'
         '<span class="badge">A practical guide to three very different countertop formats \u00b7 every figure links to the listing it was read from</span>'
         "<h1>Find the air fryer that fits your counter \u2014 with every number fact-checked.</h1>"
         '<p class="lead">Three countertop air fryers \u2014 a dual-basket, a single-basket and a French-door toaster oven \u2014 '
@@ -978,6 +981,7 @@ def page_index(current: Page) -> str:
         '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
         '<span>Written in plain sentences, checked line by line</span></div>'
         '</div>'
+        + shop_section_hook(current)
         + featured_section(current)
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
         + chooser_section(current)
