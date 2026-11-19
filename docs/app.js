@@ -74,3 +74,26 @@
     out.hidden = false;
   });
 })();
+
+// Sticky disclosure component (DIR-A, decision D-47): once the page headline
+// scrolls past, the required affiliate disclosure repeats as a fixed bar so it
+// stays with the endorsement. The static disclosure under the masthead is the
+// source of truth; this is a progressive enhancement and does nothing if JS is
+// off. No network requests, no data leaves the browser.
+(function () {
+  var src = document.querySelector('.disclosure');
+  if (!src || !window.matchMedia('(min-width: 961px)').matches) return;
+  var bar = document.createElement('div');
+  bar.className = 'disclosure-sticky';
+  bar.setAttribute('role', 'note');
+  bar.innerHTML = src.innerHTML;
+  document.body.appendChild(bar);
+  var main = document.getElementById('main') || document.body;
+  function onScroll() {
+    var past = main.getBoundingClientRect().top < 0;
+    bar.classList.toggle('is-visible', past);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+})();

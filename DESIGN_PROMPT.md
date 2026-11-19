@@ -1,8 +1,8 @@
 # Design prompt — the brief for the visual overhaul
 
-**Status:** proposal, not implemented. Generated from `data/design.json` by
+**Status:** adopted and partly applied. Generated from `data/design.json` by
 `scripts/render_design_prompt.py`; do not edit by hand, edit the data and re-run the script.
-Last generated 2026-11-16 by `arena/89900251-zone4`.
+Last generated 2026-11-19 by `arena/d7393cc0-zone4`.
 
 **How to use:** fill the seven bracketed slots from the recorded decisions, then paste the block
 below to a designer or a design tool. The slot table at the end names the decision that fills each
@@ -127,7 +127,7 @@ decision.
 
 | Slot | Filled from | Current value |
 |---|---|---|
-| `[DIRECTION]` | D-18 (direction family) and D-35 (the specification to build from) | Warm editorial (DIR-A), adopted 2026-11-17 (D-35); the token and component list on the Design brief page is the specification. |
+| `[DIRECTION]` | D-18 (direction family) and D-35 (the specification to build from) | Warm editorial (DIR-A), adopted 2026-11-17 (D-35); the token and component list on the Design brief page is the specification. The safe presentation layer is applied to the storefront and articles (D-47, 2026-11-19); the full direction stays a build reference. |
 | `[BRAND]` | D-18 and Q-19 (trade-name clearance) | Zone4 - air fryer buying guides (recorded 2026-11-16, D-18). |
 | `[VOICE]` | D-12 and the S-12 voice decision | Warm, plain, decision-first (recorded 2026-11-16, D-12), now with the shop-not-audit rule: reader surfaces lead with the products and the questions a buyer asks; the verification machinery lives in one dashboard group and the footer, never in the headline. |
 | `[TOPICS]` | D-17 (which wave) | The eight-topic question calendar (D-17) on the Articles hub, one guide per week to sitemap and feed (cadence set 2026-11-17). |
@@ -135,7 +135,11 @@ decision.
 | `[TREND_RULE]` | D-19 (the evidence rule for popularity words) | Popularity claims only as dated snapshots of an official page (D-19); no traffic, revenue or search-volume figure anywhere (F-15, F-51). |
 | `[AUDIENCE]` | Q-16 and Q-04 | still open (Q-16 and Q-04) |
 
-Nothing in this prompt is applied to the site. Each slot is a decision recorded on the
+The adopted DIR-A presentation layer is applied to the storefront and articles (2026-11-19,
+decision D-47): the publication masthead, the DIR-A palette and typography, the editorial card
+system, mono listing figures, the paper hero, the sticky disclosure component and the 'how we
+checked' byline link. The three directions, the anti-pattern list and the topic programme stay
+proposals until each is individually recorded and built. Each slot is a decision recorded on the
 [Decision log](https://kanlerxz87-cyber.github.io/Zone4/docs/decisions.html) page; until one is
 recorded the bracket stays, because guessing at a brand name or a voice is exactly the kind of
 invention this site refuses to publish.

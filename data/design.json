@@ -11,7 +11,8 @@
   "directions_map_to": "The three directions are the executable detail for the three options already in decision D-18 (A warm editorial, B crisp data-journalism, C bold deal-finder). They do not add options; they give each existing option the specification a designer needs.",
   "launch_path_note": "The five steps are a recommendation, not a rule. They are ordered by what each one unblocks, not by how hard each is. Note that steps 2 and 3 were recorded on 2026-11-16 by session arena/c509aba1-zone4 under the owner's written delegation, and step 5's visual direction (D-18, warm editorial) was recorded and shipped in the same build. The path therefore now serves the next design pass rather than the current one, and it is kept because the dependency reasoning still holds for anyone picking the work up cold.",
   "updated_2026_11_17": "arena/cc32105d-zone4: prompt slots now carry the recorded picks instead of 'not yet chosen'; T-04 published; the F-53 anti-pattern row carries its correction note (D-36). The shop-not-audit clause was added to [VOICE] on the owner's 2026-11-17 brief.",
-  "updated_2026_11_19": "arena/a4eb2a1d-zone4: T-04 marked written (published_article M-G4) when the checklist article shipped."
+  "updated_2026_11_19": "arena/a4eb2a1d-zone4: T-04 marked written (published_article M-G4) when the checklist article shipped.",
+  "applied_2026_11_19": "arena/d7393cc0-zone4 (D-47): the adopted DIR-A presentation layer is applied to the storefront and articles - publication masthead, DIR-A palette/typography, editorial cards, mono listing figures, paper hero, sticky disclosure component and the byline link to how we checked. The directions, anti-patterns and topic programme remain a proposal register until each is recorded and built."
  },
  "directions": [
   {
@@ -649,7 +650,7 @@
   {
    "slot": "[DIRECTION]",
    "filled_from": "D-18 (direction family) and D-35 (the specification to build from)",
-   "current": "Warm editorial (DIR-A), adopted 2026-11-17 (D-35); the token and component list on the Design brief page is the specification."
+   "current": "Warm editorial (DIR-A), adopted 2026-11-17 (D-35); the token and component list on the Design brief page is the specification. The safe presentation layer is applied to the storefront and articles (D-47, 2026-11-19); the full direction stays a build reference."
   },
   {
    "slot": "[BRAND]",
