@@ -767,3 +767,10 @@ table.roadmap td:nth-child(5) { min-width: 220px; }
   .scards { grid-template-columns: 1fr; }
   .scard .sgrid { grid-template-columns: 1fr; }
 }
+
+/* Category page header: the footprint diagram beside the intro (2026-11-19). */
+.cathero { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: 22px; align-items: start; }
+.cathero-figure { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 6px 6px 0; }
+.cathero-figure .tile-figure { background: transparent; border: 0; padding: 0; }
+.cathero-figure .tile-caption { padding: 4px 6px 8px; }
+@media (max-width: 860px) { .cathero { grid-template-columns: 1fr; } }

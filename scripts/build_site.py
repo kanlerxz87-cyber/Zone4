@@ -921,7 +921,7 @@ def page_index(current: Page) -> str:
     magazine / research appendix split) and completes D-21's "amend" decision.
     """
     cat_tiles = "".join(
-        f'<a class="tile" href="{esc(current.rel(target))}">'
+        f'<a class="tile" href="{esc(current.rel(target))}" data-measure="category">'
         f'{build_extras.footprint_figure(key)}'
         f'<div class="tile-title">{esc(label)}</div>'
         f'<div class="tile-sub">{esc(_category_product_name(key))}</div>'
@@ -1251,7 +1251,9 @@ def page_category(current: Page, key: str) -> str:
             " ".join(flag_chip(current, f) for f in p["flags"]),
         ])
     return (
-        hero(cat["title"], cat["intro"])
+        '<div class="cathero">'
+        f'<div class="cathero-figure">{build_extras.footprint_figure(key)}</div>'
+        f'<div class="cathero-lead">{hero(cat["title"], cat["intro"])}</div></div>'
         + table(headers, rows, "products")
         + f'<section><h2>Category notes</h2><p>All products here sit under the Amazon path <em>{esc(prods[0]["category_path"])}</em>. '
         f'See {href(current, "analysis.html", "Analysis & findings")} for the cross-category view and '
