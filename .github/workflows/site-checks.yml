@@ -21,6 +21,9 @@ jobs:
         run: python3 scripts/build_site.py
       - name: Verify data, links, anchors, disclosure, row sources and policy guards
         run: python3 scripts/verify.py
+      - name: "Check the published tree (docs/): links, anchors, CSS coverage, row sources, disclosure"
+        # tools/check_links.py defaults to the engine preview; this step checks the pages GitHub Pages serves.
+        run: python3 tools/check_links.py --root docs
       - name: Confirm committed docs/ matches the build
         # Session branches commit generated pages; some owned by other sessions
         # may still be mid-edit, so the drift check gates the merge target only.
