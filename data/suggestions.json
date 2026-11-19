@@ -1965,6 +1965,120 @@
       "status": "Implemented 2026-11-19",
       "decision": "D-51",
       "status_note_2026_11_19": "Shipped in this session's build (D-51 recorded under the standing brief); rendered beside the parallel sessions' choose-a-path triage (SG-36), the storefront surfaces (D-47), the applied DIR-A presentation layer (D-48) and the dated-article work (D-49, PR #102), not instead of them. Numbering note: proposed as S-48/S-49 while PRs #97-#102 merged; renumbered to the next free id each time."
+    },
+    {
+      "id": "S-57",
+      "priority": "P2 - Adds real value",
+      "title": "Ship ItemList structured data for the five products, with no offers, price or ratings",
+      "problem": "The front page and the products page describe the five products in prose and tables, but carry no machine-readable list a search engine can read as a list. The Article and BreadcrumbList markup already shipped (S-50, S-51); the store pages are the remaining gap (RD-07).",
+      "proposal": "Emit an ItemList JSON-LD block on the front page and the products page: one ListItem per product (P1-P5) with the product name, the published tagged Special Link URL, the brand as listed and the subcategory. Omit offers, price, aggregateRating and review entirely - the site publishes none (F-02), and structured-data guidance forbids marking up content the reader cannot see.",
+      "why": "It is the cheapest findability step left: one builder beside website_jsonld(), derived from the same product registers, so the list cannot drift from the shop cards. It feeds the design prompt's traffic programme without a single new claim.",
+      "effort": "One JSON-LD builder in scripts/build_site.py plus two head_extra attachments; no data change.",
+      "risk": "Structured data is machine-readable claims. Any field that is not sourced must be omitted, not estimated - so the block carries name, URL, brand and category only, each already a published sourced row.",
+      "check": "The JSON-LD parses; every URL in it is the published tagged Special Link for that ASIN; no offers, no price, no aggregateRating; scripts/verify.py and qa/audit_site.py stay green.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+          "ref": "Google: Product structured data - list shape and the rule against marking up unseen content"
+        },
+        {
+          "url": "https://schema.org/Product",
+          "ref": "schema.org: Product vocabulary the ItemList is written against"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - Participation Requirements 2(b) and 6(t), which bound what the list may carry"
+        }
+      ],
+      "flags": [
+        "F-02"
+      ],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-53",
+      "status_note_2026_11_19": "Shipped in this session's build under recorded decision D-53 (RD-07 partial: the ItemList only; offers markup stays blocked on RQ-03/D-02)."
+    },
+    {
+      "id": "S-58",
+      "priority": "P2 - Adds real value",
+      "title": "Add a dated gift-season section to the front page for the 2026 window",
+      "problem": "The holiday guide exists as a single article (M-G3) that a gift shopper has to discover through the article shelf. Seasonal traffic arrives on a predictable schedule, and the 2026 window (27 November to 25 December) opens eight days after this record - with no front-page surface carrying it, the site starts the window from zero (RD-10).",
+      "proposal": "Add one front-page section after the chooser: a dated gift-season block that names the window as calendar dates, links the published holiday guide, and shows the five shop links with their existing decision labels. The P4 gift wording is quoted only as titled, with its official listing linked. No price, rating, popularity or sales-rank claim appears; the section does not decide the open cadence question (D-52).",
+      "why": "A stable seasonal surface is how a small site compounds a recurring search peak instead of restarting every year (RD-10). Dating the season keeps it honest, and every line resolves to a listed field or a published guide, so it needs no new verification.",
+      "effort": "One render function in scripts/build_site.py reusing shop_link() and the existing holiday article path; no data change.",
+      "risk": "Seasonal framing may not become a popularity claim: the evidence rule (D-19) applies, so the section states dates and listed fields only, and the cadence front-load stays an open owner choice (D-52, Q-54).",
+      "check": "The section states its season and dates; every shop link carries rel=sponsored and the tag; no trend, sales-rank, price or rating claim appears; the holiday article and the comparison stay reachable.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - seasonal pages written for readers, dated honestly"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing title (read 2026-11-19): the gift wording quoted only as titled"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - the disclosure and tagging rules the shop links carry"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-53",
+      "status_note_2026_11_19": "Shipped in this session's build under recorded decision D-53 (RD-10 partial: one dated seasonal section on the front page; a stable seasonal hub URL and archived prior seasons remain proposed)."
+    },
+    {
+      "id": "S-59",
+      "priority": "P2 - Adds real value",
+      "title": "Put a short-answer block at the top of each guide, shaped for a featured snippet",
+      "problem": "Each guide opens with its dek and then goes straight into sections. A reader (or a snippet) looking for the answer to the guide's own question has to read the whole page to find it. The direct-answer shape was filed as SG-44 and left as a proposal because it restructures guide markup.",
+      "proposal": "Prepend one short-answer block to each published guide: a single paragraph naming the formats the guide compares (from the products' own subcategories) and pointing to the fact table for every figure. No new figure, no new claim - the block restates the guide's scope, not its numbers, and the fact table below remains the only place figures appear.",
+      "why": "It is the difference between a page that answers its own title and a page that buries the answer. It also gives every guide the same first-paragraph shape search snippets prefer, without writing for machines.",
+      "effort": "One render change in scripts/build_extras.py _guide_body; no data change.",
+      "risk": "A short answer that restated a number without its source would break the per-row sourcing rule, so the block carries no number at all - formats only, with the fact table named as the source of every figure.",
+      "check": "Every published guide renders the block; the block contains no price, rating, traffic or popularity figure; scripts/verify.py guide checks stay green.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google: control your snippets - direct answers to the page's own question"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - answer the question the title asks"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-53",
+      "status_note_2026_11_19": "Shipped in this session's build under recorded decision D-53 (SG-44 partial: the short-answer block only; the sticky evidence rail in SG-45 remains proposed)."
+    },
+    {
+      "id": "S-60",
+      "priority": "P3 - Housekeeping",
+      "title": "Give the Decision centre a five-that-matter-now list derived from the open decisions",
+      "problem": "The Decision centre already carries the hub counts, the order to work in, the owner-only panel, the gating decisions and the three paths. A reviewer opening it still has to scan the full open queue to find where to start. RD-13 asks for a one-screen summary; the hub grid is half of it.",
+      "proposal": "Add a five-that-matter-now ordered list directly under the hub grid, rendered from the first five open decisions in register order at build time, each linking to its Decision log anchor. Counts stay computed from the registers, never typed, so the list cannot drift.",
+      "why": "The review gate only works if a person can finish it. Five named starting points turn a 13-item queue into a first step, and the derivation rule keeps the list honest when the queue changes.",
+      "effort": "One render block in scripts/build_site.py page_decision_centre; no data change.",
+      "risk": "None to published values. The list presents open decisions only; it records no choice and changes no status.",
+      "check": "The list renders exactly the first five open decisions with live anchors; recording a decision changes the list in the same build; the page still validates.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful content - summaries that respect the reader's time"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/decisions.json",
+          "ref": "The decision queue the list is derived from at build time"
+        }
+      ],
+      "flags": [],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-53",
+      "status_note_2026_11_19": "Shipped in this session's build under recorded decision D-53 (RD-13 partial: the summary list only; anchored filters and a printable review sheet remain proposed)."
     }
   ]
 }

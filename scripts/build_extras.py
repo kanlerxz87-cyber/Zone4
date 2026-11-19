@@ -243,7 +243,23 @@ def _page_html(bs, page, body: str):
 
 
 def _guide_body(bs, page, g: dict) -> str:
-    sections = []
+    # Short-answer block (suggestion S-59, decision D-53, SG-44 partial):
+    # one paragraph naming the formats compared, from the products' own
+    # subcategories, pointing to the fact table for every figure. It carries
+    # no number at all, so it cannot restate a figure without its source.
+    _prods = [next(x for x in all_products(bs) if x["id"] == pid) for pid in g["product_ids"]]
+    _formats = []
+    for _p in _prods:
+        _f = _p.get("subcategory", "")
+        if _f and _f not in _formats:
+            _formats.append(_f)
+    _formats_text = ", ".join(_formats) if _formats else "the listings named below"
+    _short_answer = (
+        f'<section><h2>Short answer</h2><p>This guide compares {_e(_formats_text)} on the points '
+        f'their listings state. Every figure it uses is a row in the fact table at the end of the guide, '
+        f'each linked to the official listing it was read from.</p></section>'
+    )
+    sections = [_short_answer]
     for s in g["sections"]:
         paras = "".join(f"<p>{_e(t)}</p>" for t in s["paragraphs"])
         sections.append(f"<section><h2>{_e(s['h2'])}</h2>{paras}</section>")

@@ -2147,6 +2147,56 @@
           "ref": "Google Search Central: people-first content - the standard the cadence serves; no official source governs publishing frequency itself"
         }
       ]
+    },
+    {
+      "id": "D-53",
+      "question": "Ship the safe storefront polish that needs no owner account - ItemList structured data, a dated gift-season front-page section, guide short-answer blocks and a decision-centre summary - under the standing brief?",
+      "linked_question": "Q-60, Q-61, Q-62, Q-63",
+      "linked_suggestions": [
+        "S-57",
+        "S-58",
+        "S-59",
+        "S-60"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Ship all four pieces now, derived only from already-verified rows",
+          "commits_to": "ItemList JSON-LD on the front page and the products page listing the five products with name, tagged Special Link URL, brand and category only - no offers, no price, no aggregateRating (RD-07, F-02). A gift-season section on the front page for the 2026 window (27 November to 25 December, calendar dates only) that links the published holiday guide and the five shop links with their decision labels, quoting the P4 gift wording only as titled (RD-10, D-19). A short-answer block at the top of each published guide naming the formats compared and pointing to the fact table, with no new figure (SG-44). A five-that-matter-now list on the Decision centre derived from the open decisions at build time (RD-13). No new product value, price, rating, traffic or popularity claim; the gift-window cadence question (D-52) stays open and the section does not answer it.",
+          "effort": "One build change across scripts/build_site.py and scripts/build_extras.py; no register value changes.",
+          "reversible": "Yes: revert the four render changes and rebuild."
+        },
+        {
+          "key": "B",
+          "label": "File the four pieces as proposals only (RD-07, RD-10, SG-44, RD-13 stay Proposed)",
+          "commits_to": "The front page, guides and Decision centre keep their current render; the gift window passes with only the already-published holiday article carrying it.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. Each piece is derived from rows the site already publishes with sources, needs no account, no photography and no measurement, and is reversible in one revert. The gift window opens eight days after this record (2026-11-27), so the seasonal section is the only piece with a date attached; the other three are evergreen. The brief asks for a polished shop, catchy question-led topics and a reviewable suggestion section - this ships the polish while keeping every gated choice (D-52 cadence, D-22 photography, D-41/D-43 measurement) exactly where it is.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content - the standard the short-answer blocks and the gift section serve"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+          "ref": "Google: Product structured data - the shape the ItemList follows, with unsourced fields omitted"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies - Participation Requirements 2(b) (tagged Special Links) and 6(t) (ratings withheld), which bound the ItemList"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing title (read 2026-11-19; re-read 2026-11-19 by arena/d696a32c-zone4): the gift wording quoted only as titled"
+        }
+      ],
+      "recorded_choice": "Option A: the four pieces ship in this build under the standing no-manual-input brief, the same basis as D-46, D-50 and D-51; the owner can reverse any of them by reverting the render change. D-52 (gift-window cadence) is not decided by this record.",
+      "recorded_date_utc": "2026-11-19",
+      "recorded_by": "arena/d696a32c-zone4 (standing delegation: no manual input)"
     }
   ],
   "log": [
@@ -2429,6 +2479,13 @@
       "choice": "Option A - the Decision centre gains the owner-only-actions panel, derived from the registers at build time.",
       "recorded_by": "arena/eb90e04d-zone4 (standing delegation: no manual input)",
       "evidence": "The panel aggregates F-57/F-58/F-59/F-61 and Q-49 from the registers; S-56 registers the proposal and its check. Ships beside SG-36's choose-a-path triage (PR #97), D-47's storefront surfaces (PR #98), D-48's applied DIR-A layer (PR #101) and D-49's dated-article work (PR #102)."
+    },
+    {
+      "date_utc": "2026-11-19",
+      "decision": "D-53",
+      "choice": "Option A - ship the safe storefront polish (ItemList structured data, gift-season front-page section, guide short-answer blocks, decision-centre summary) derived only from already-verified rows.",
+      "recorded_by": "arena/d696a32c-zone4 (standing delegation: no manual input)",
+      "evidence": "Fresh re-reads 2026-11-19 of all five listings plus the Operating Agreement and Program Policies (data/verification-session-d696a32c.json): titles and breadcrumbs match except P2's already-recorded variant (F-66); Section 5 sentence re-read verbatim; no stored product value changed. The four render changes carry no price, rating, offer, traffic or popularity claim (F-02, F-15, D-19)."
     }
   ],
   "paths": {

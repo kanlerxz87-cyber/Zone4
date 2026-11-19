@@ -815,6 +815,45 @@ def chooser_section(current: Page) -> str:
     )
 
 
+def gift_season_section(current: Page) -> str:
+    """A dated gift-season block on the front page (suggestion S-58, decision D-53).
+
+    Names the 2026 window as calendar dates only and links the published
+    holiday guide plus the five shop links with their decision labels. The P4
+    gift wording is quoted only as titled, with its official listing linked.
+    No price, rating, popularity or sales-rank claim appears (D-19, F-02,
+    F-15), and the open cadence question (D-52) is not answered here.
+    """
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    all_p = list(PRODUCTS) + list(extra)
+    holiday_path = next(
+        (path for a, path in ARTICLE_PATHS if a["id"] == "M-G3"),
+        "articles/holiday-2026-air-fryer-gift-guide.html",
+    )
+    items = "".join(
+        f'<li><p>{shop_link(p)} <span class="small">Paid link. {esc(DISCLOSURE_SENTENCE)}</span></p></li>'
+        for p in all_p
+    )
+    p4 = next(p for p in extra if p["id"] == "P4")
+    return (
+        '<section id="gift-season"><h2>Gift season: match the appliance to the counter they have</h2>'
+        '<p class="section-lead">For the 2026 gift window (27 November to 25 December), the useful question is not '
+        'which appliance is popular - this site makes no popularity claim - but which format fits the counter and '
+        'the cooking it will do. The published holiday guide works through that choice from listed specifications '
+        'only; the five listings below are the same shop links as above, with the decision each one answers.</p>'
+        f'<p><a class="btn" href="{esc(current.rel(holiday_path))}">Read the holiday gift guide</a></p>'
+        f'<ul class="bullets">{items}</ul>'
+        f'<p class="small">One listing titles itself a gift: the P4 title carries '
+        f'&ldquo;Stocking Stuffers Gifts for Men&rdquo; as titled, alongside its accuracy and waterproofing claims. '
+        f'That wording is the seller&rsquo;s title, not a test result here: '
+        f'{ext(p4["canonical_url"], "read it on the official listing")}. '
+        f'The two thermometer listings are compared on their own title claims in the '
+        f'{href(current, "categories/meat-thermometers.html", "meat thermometers category")}.</p>'
+        f'<p class="small muted">{esc(DISCLOSURE_SENTENCE)} Every shop link above is a paid link.</p>'
+        "</section>"
+    )
+
+
 def shop_section_hook(current: Page) -> str:
     """Products first on the landing page (see scripts/build_extras.py)."""
     return build_extras.shop_section(sys.modules[__name__], current)
@@ -1021,6 +1060,7 @@ def page_index(current: Page) -> str:
         + featured_section(current)
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
         + chooser_section(current)
+        + gift_season_section(current)
         + '<section><h2>The three, side by side</h2>'
         '<p class="section-lead">The decision fields a shopper actually compares, taken straight from the listings. '
         'Prices, ratings and per-product commission stay off this table by rule \u2014 see the full verified record for '
@@ -2523,12 +2563,24 @@ def page_decision_centre(current: Page) -> str:
             ext(rule[0], rule[1]),
         ])
 
+    # Five that matter now (suggestion S-60, decision D-53, RD-13 partial):
+    # the first five open decisions in register order, derived at build time
+    # so the list cannot drift from the queue it summarises.
+    five = open_decisions[:5]
+    five_html = "".join(
+        f'<li><a href="{esc(current.rel("decisions.html"))}#{esc(d["id"])}"><strong>{esc(d["id"])}</strong></a> '
+        f'{esc(d["question"])}</li>'
+        for d in five
+    )
     return (
         hero("Decision centre",
              "One place to review what could change, see what is still unknown, and choose a path before anything is implemented. "
              "Nothing on this site is actioned by a suggestion: a change happens only after a decision is recorded and a checked "
              "build replaces the page.")
         + f'<div class="hub-grid">{hub_html}</div>'
+        + '<section><h2>Five that matter now</h2>'
+          '<p class="section-lead">The first five open decisions in register order. Start here, or pick one of the three paths below.</p>'
+          f'<ol>{five_html}</ol></section>'
         + '<section><h2>The order to work in</h2>'
           '<p class="section-lead">Four steps, in this order. Skipping to step four is what produces sites that look finished and cannot earn.</p>'
           f'<div class="path">{path_html}</div></section>'
@@ -2954,6 +3006,38 @@ def website_jsonld() -> str:
     )
 
 
+def itemlist_jsonld() -> str:
+    """JSON-LD ItemList for the five products (suggestion S-57, decision D-53).
+
+    Carries only fields the site already publishes with sources: product name,
+    the published tagged Special Link URL, brand as listed and subcategory.
+    No offers, no price, no aggregateRating and no review - the site publishes
+    none (F-02), and structured-data guidance forbids marking up content the
+    reader cannot see (RD-07 partial; offers stay blocked on D-02).
+    """
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    items = []
+    for pos, p in enumerate(list(PRODUCTS) + list(extra), start=1):
+        url = SPECIAL_LINKS.get(p["id"], tagged_url(f"https://www.amazon.com/dp/{p['asin']}"))
+        items.append({
+            "@type": "ListItem",
+            "position": pos,
+            "item": {
+                "@type": "Product",
+                "name": p["name_short"],
+                "url": url,
+                "brand": {"@type": "Brand", "name": p["brand"]},
+                "category": p["subcategory"],
+            },
+        })
+    data = {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": items}
+    return (
+        '<script type="application/ld+json">'
+        + json.dumps(data, ensure_ascii=False)
+        + "</script>"
+    )
+
+
 def breadcrumb_ld(trail: list[tuple[str, str]]) -> str:
     """BreadcrumbList JSON-LD from (name, site-relative path) pairs.
 
@@ -2999,9 +3083,11 @@ def collect_pages() -> list[Page]:
                     description=PAGE_DESCRIPTIONS.get(path))
         page.body = body_fn(page)
         if path == "index.html":
-            page.head_extra = website_jsonld() + breadcrumb_jsonld(
+            page.head_extra = website_jsonld() + itemlist_jsonld() + breadcrumb_jsonld(
                 page, [("Home", "index.html")])
             page.title_tag = INDEX_TITLE_TAG
+        elif path == "products.html":
+            page.head_extra = itemlist_jsonld()
         elif path.startswith("categories/"):
             # Nested one level under the shop: Home > All products > this category.
             page.head_extra = breadcrumb_jsonld(page, [

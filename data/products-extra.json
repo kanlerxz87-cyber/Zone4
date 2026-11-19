@@ -8,6 +8,12 @@
       "session": "arena/0272d56e-zone4",
       "result": "Both listing pages re-opened. P4's title still carries 'IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black' and P5's title still matches its stored name_listing character for character; both breadcrumbs still read Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. brand, model_number, capacity and dimensions remain null: the Item details table was again not reachable inside the retrievable chunks, and /gp/product/technical-reflections/<ASIN> redirects to the full product page rather than a table. F-60 stays open with its dated note; nothing inferred.",
       "record": "data/verification-session-0272d56e.json"
+    },
+    "reverification_2026_11_19_d696a32c": {
+      "date_utc": "2026-11-19",
+      "session": "arena/d696a32c-zone4",
+      "result": "Both listing pages re-opened. P4's title still carries 'IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black' and P5's title still matches its stored name_listing character for character; both breadcrumbs still read Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. Also-viewed modules observed as dated sightings only (P4: B0GL7Z4KP4, B0DNMTK56N, B0F5X3NSR4; P5: B0FXBQ3KX1, B0D1TMFTPN, B0H2JP9YDM); no competitor snapshot is stored for either product, so nothing is compared or overwritten. brand, model_number, capacity and dimensions remain as recorded: the Item details table was again not reachable inside the retrievable chunks (F-60).",
+      "record": "data/verification-session-d696a32c.json"
     }
   },
   "products": [
