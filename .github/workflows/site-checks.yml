@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Hand-typed counts agree with the registers (SG-37 gate, flag F-91)
+        run: python3 scripts/check_doc_counts.py
       - name: Rebuild the site from data/
         run: python3 scripts/build_site.py
       - name: Verify data, links, anchors, disclosure, row sources and policy guards
