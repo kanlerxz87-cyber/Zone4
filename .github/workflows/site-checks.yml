@@ -21,7 +21,7 @@ jobs:
         run: python3 scripts/build_site.py
       - name: Verify data, links, anchors, disclosure, row sources and policy guards
         run: python3 scripts/verify.py
-      - name: Check the published tree (docs/): internal links, anchors, CSS coverage, row sources, disclosure
+      - name: "Check the published tree (docs/): links, anchors, CSS coverage, row sources, disclosure"
         # tools/check_links.py defaults to the engine preview; this step checks the pages GitHub Pages serves.
         run: python3 tools/check_links.py --root docs
       - name: Confirm committed docs/ matches the build
