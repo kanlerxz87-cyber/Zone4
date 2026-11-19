@@ -81,6 +81,10 @@ QUESTIONS = QUESTIONS_DOC["questions"]
 DECISIONS_DOC = load("decisions.json")
 DECISIONS = DECISIONS_DOC["decisions"]
 DECISION_LOG = DECISIONS_DOC["log"]
+# The choose-a-path triage (added 2026-11-19, SG-36): the open decisions
+# presented as three coherent orders. Presentations of the register, not
+# recorded choices; the queue itself stays the source of truth.
+DECISION_PATHS = DECISIONS_DOC.get("paths", {}).get("paths", [])
 # The design brief: three specified visual directions, the anti-"AI slop"
 # checklist, the organic-traffic topic programme and the headline options.
 # Like the other registers it is a proposal surface, and every row in it cites
@@ -2230,6 +2234,12 @@ def page_decision_centre(current: Page) -> str:
     drift from the registers it summarises. This is the page the owner brief
     asks for - a place to review the suggestions and choose a path before
     anything is implemented.
+
+    The choose-a-path triage (SG-36, 2026-11-19) renders the open decisions as
+    three coherent orders from `data/decisions.json`'s `paths` key. It is a
+    presentation of the register, not a recorded choice: the build refuses a
+    path step that names an unknown or no-longer-open decision, so the section
+    cannot claim a decision that the queue no longer carries as open.
     """
     open_decisions = [d for d in DECISIONS if d["status"].startswith("Open")]
     hub = [
@@ -2290,6 +2300,50 @@ def page_decision_centre(current: Page) -> str:
         f'({flag_chip(current, "F-57")}) and the one-link-per-product test, not a design choice.'
         if recorded_tag else ""
     )
+    # The choose-a-path triage (SG-36, 2026-11-19): the open decisions presented
+    # as three coherent orders, rendered from data/decisions.json's paths key.
+    # Guard: a path may only present decisions the register still carries as
+    # open, so the section cannot outlive the queue it summarises.
+    dec_by_id = {d["id"]: d for d in DECISIONS}
+    path_sections = []
+    for path in DECISION_PATHS:
+        path_rows = []
+        for n, step in enumerate(path["steps"], start=1):
+            did = step["decision"]
+            d = dec_by_id.get(did)
+            if d is None:
+                raise SystemExit(f"decision-centre paths: {path['id']} names unknown decision {did}")
+            if not d["status"].startswith("Open"):
+                raise SystemExit(
+                    f"decision-centre paths: {path['id']} names decision {did}, "
+                    f"whose status is now '{d['status']}' - update the path or remove the step"
+                )
+            src = d["sources"][0] if d.get("sources") else None
+            path_rows.append([
+                str(n),
+                f'<a href="{esc(current.rel("decisions.html"))}#{esc(did)}"><strong>{esc(did)}</strong></a> &middot; {esc(d["question"])}',
+                esc(step["why"]),
+                esc(step["unblocks"]),
+                ext(src["url"], src.get("ref", "official source")) if src else "",
+            ])
+        path_sections.append(
+            f'<h3>{esc(path["name"])}</h3>'
+            f'<p class="section-lead">{esc(path["one_line"])} <em>Best for: {esc(path["best_for"])}</em></p>'
+            + table(["Step", "Decision (open)", "Why it comes at this point", "What it unblocks", "Official source"],
+                    path_rows, "compact")
+            + f'<p class="small muted">Deliberately delays: {esc(path["delays"])} &middot; Cost: {esc(path["cost_note"])}</p>'
+        )
+    paths_html = (
+        '<section id="choose-a-path"><h2>Choose a path: the open decisions as three coherent orders</h2>'
+        '<p class="section-lead">Three ways to work through the same queue, each a recommendation assembled from the register at build time - '
+        'not a recorded choice. Every step names a decision that is open right now (the build refuses to render one that is not), and each row '
+        'carries the decision\'s own official source. Pick one path and answer it top to bottom, or ignore all three and work the numeric queue '
+        f'on the {href(current, "decisions.html", "Decision log")}; the queue, not this section, is the source of truth.</p>'
+        + "".join(path_sections)
+        + f'<p class="small muted">Derived from suggestion {href(current, "suggestions.html#SG-36", "SG-36")} under recorded decision '
+        f'{href(current, "decisions.html#D-38", "D-38")} (option A: publish the queue in dependency order). The paths present strategy, '
+        'not outcomes: nothing changes on the site because a path is read, and no step is treated as decided until it is recorded on the Decision log.</p></section>'
+    )
     return (
         hero("Decision centre",
              "One place to review what could change, see what is still unknown, and choose a path before anything is implemented. "
@@ -2304,6 +2358,7 @@ def page_decision_centre(current: Page) -> str:
           f'The full list of {len(open_decisions)} open decisions is on the {href(current, "decisions.html", "Decision log")}.</p>'
           + table(["Decision", "Recommendation (an argument, not a decision)", "Unlocks", "Official source"], gate_rows, "compact")
           + f'<p class="small muted">{tag_note}</p></section>'
+        + paths_html
         + '<section><h2>What this site does with an answer</h2>'
           f'<p>A recorded decision becomes a suggestion marked for implementation, then a pull request, then a build that has to pass the same '
           f'gates as every page here: every table row sourced to an official page, the Associates disclosure on every page, no price or star rating, '
@@ -2425,7 +2480,7 @@ PAGE_DESCRIPTIONS = {
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
-    "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in and what happens to an answer.",
+    "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in, three ready-weighed paths through the open decisions, and what happens to an answer.",
     "information-gaps.html": f"What this project can already prove about the three air fryers, the {len([q for q in QUESTIONS if q['kind'] != 'Known'])} questions that are not answered yet, and the named party who can close each gap.",
     "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. Nothing on it has been applied.",
     "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
