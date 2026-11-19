@@ -1171,6 +1171,28 @@
       "flags": [
         "F-57"
       ]
+    },
+    {
+      "id": "Q-51",
+      "area": "Product identity and links",
+      "question": "Should the two meat-thermometer listings be published on the air-fryer site, in their own category, or kept held?",
+      "why_it_matters": "The first brief asks for marketing of all five submitted links, but the site was built as an air-fryer guide. Holding two listings leaves part of the brief unmet; publishing them widens the site's subject.",
+      "kind": "Owner decision",
+      "known": "Both short links now open to the ASINs recorded (B0DHZTCNR5, B0DZFD6R9Z), and each listing's title and breadcrumb were read on 2026-11-19 (data/verification-session-4cfacb30.json). They carry the same evidence as P1-P3.",
+      "how_to_discover": "The owner may reverse decision D-46 by setting HELD_PRODUCT_IDS in scripts/build_extras.py back to {P4,P5} and rebuilding.",
+      "answerable_by": "The site owner (optional: the decision stands unless the owner reverses it).",
+      "blocks": [],
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing, read 2026-11-19"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 listing, read 2026-11-19"
+        }
+      ],
+      "status": "Answered by D-46 (2026-11-19, agent under the standing brief; reversible)"
     }
   ]
 }

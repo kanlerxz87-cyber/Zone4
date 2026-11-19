@@ -108,6 +108,7 @@ NAV = [
     ("categories/dual-basket-air-fryers.html", "Dual-basket air fryers", "Categories"),
     ("categories/single-basket-air-fryers.html", "Single-basket air fryers", "Categories"),
     ("categories/air-fryer-toaster-ovens.html", "Air-fry toaster ovens", "Categories"),
+    ("categories/meat-thermometers.html", "Meat thermometers", "Categories"),
     ("marketing.html", "Marketing content", "Content"),
     ("automation.html", "Automation & tracking", "Research"),
     ("analysis.html", "Analysis & findings", "Research"),
@@ -139,7 +140,19 @@ CATEGORY_BY_PRODUCT = {
     "P1": "dual-basket-air-fryers",
     "P2": "air-fryer-toaster-ovens",
     "P3": "single-basket-air-fryers",
+    # Added with decision D-46 (2026-11-19): the two submitted meat-thermometer listings.
+    "P4": "meat-thermometers",
+    "P5": "meat-thermometers",
 }
+
+
+def _category_product_name(key: str) -> str:
+    """Short product name for a category tile: P1-P3 from products.json, P4-P5 from products-extra.json."""
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    for p in list(PRODUCTS) + list(extra):
+        if CATEGORY_BY_PRODUCT.get(p["id"]) == key:
+            return p["name_short"]
+    return ""
 CATEGORY_TITLE = {t: l for t, l, _g in NAV if t.startswith("categories/")}
 PRODUCT_BY_ID = {p["id"]: p for p in PRODUCTS}
 # Canonical listing URLs, used by the chooser's plain-text routing table so every
@@ -887,7 +900,7 @@ def page_index(current: Page) -> str:
     """
     cat_tiles = "".join(
         f'<a class="tile" href="{esc(current.rel(target))}"><div class="tile-title">{esc(label)}</div>'
-        f'<div class="tile-sub">{esc(next(p["name_short"] for p in PRODUCTS if CATEGORY_BY_PRODUCT.get(p["id"]) == key))}</div>'
+        f'<div class="tile-sub">{esc(_category_product_name(key))}</div>'
         f'<div class="tile-go">Open category \u2192</div></a>'
         for target, label, key in
         ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
@@ -2217,7 +2230,29 @@ BODIES = {
 }
 
 
+def _tag_amazon_hrefs(doc: str) -> str:
+    """Add the Associates tag to every www.amazon.com link on a page (Program Policies 2(b)).
+
+    Participation Requirement 2(b): "you must include your Associates ID or "tag" ... as a parameter in
+    the URL of each link you place on your Site to an Amazon Site." Before 2026-11-19 most source and
+    competitor links on the site were untagged (F-69). Links that already carry a tag are left as they
+    are. Only the www.amazon.com host is changed; affiliate-program.amazon.com (Associates pages) is not.
+    """
+    def repl(m: "re.Match[str]") -> str:
+        url = m.group(1)
+        base, hash_part = (url.split("#", 1) + [""])[:2] if "#" in url else (url, "")
+        if "tag=" in base:
+            return m.group(0)
+        sep = "&amp;" if "?" in base else "?"
+        return f'href="{base}{sep}tag={TRACKING_ID}' + (f"#{hash_part}" if hash_part else "") + '"'
+    return re.sub(r'href="(https://www\.amazon\.com/[^"]*)"', repl, doc)
+
+
 def render(page: Page) -> str:
+    return _tag_amazon_hrefs(_render_page_raw(page))
+
+
+def _render_page_raw(page: Page) -> str:
     nav_groups = []
     for group, targets in NAV_ORDER:
         items = []
