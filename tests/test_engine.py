@@ -95,6 +95,25 @@ class TestDataLayer(unittest.TestCase):
         s = store()
         self.assertEqual(s.audit(), [])
 
+    def test_associates_protocol_covers_every_published_product(self):
+        associates = json.loads((ROOT / "data/associates.json").read_text())
+        intent = json.loads((ROOT / "data/intent-links.json").read_text())
+        intended = {row["product_id"]: row for row in intent["links"]}
+        special = associates["special_links"]
+        recorded = {row["product_id"]: row for row in special}
+        self.assertEqual(len(recorded), len(special), "Associates records must not repeat a product")
+        self.assertEqual(set(recorded), set(intended),
+                         "one-link-per-product protocol must cover all five published products")
+        protocol = "\n".join(associates["test_protocol"]["steps"])
+        for product_id, intent_row in intended.items():
+            with self.subTest(product=product_id):
+                row = recorded[product_id]
+                self.assertEqual(row["asin"], intent_row["intended_asin"])
+                self.assertEqual(row["submitted_link"], intent_row["submitted_url"])
+                self.assertEqual(row["special_link_url"], intent_row["published_outbound_url"])
+                self.assertIn(intent_row["intended_asin"], protocol)
+                self.assertTrue(row.get("test_status"))
+
     def test_audit_catches_unverified_row_with_a_value(self):
         tmp = Path(tempfile.mkdtemp())
         shutil.copytree(ROOT / "data", tmp, dirs_exist_ok=True)

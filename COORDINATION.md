@@ -1630,3 +1630,21 @@ Scope rule: this session does not touch `engine/`, `analytics-endpoint/`, `data/
 - **Deploy:** GitHub Pages reports `built` (source `main` `/`). The `pages-build-deployment` run on `ede547d` succeeded. The live category page `https://kanlerxz87-cyber.github.io/Zone4/docs/categories/air-fryer-toaster-ovens.html` was fetched after the deploy: status success, disclosure, footprint caption and shop/table content render as built.
 - **Follow-up:** this record is committed on the branch and merged through a small follow-up PR, because the session may not push to `main` directly.
 
+
+
+## Session log — `arena/1dfa4980-zone4` (2026-11-19)
+
+**Claim.** See the board row above: complete the Associates one-link-per-product test record for the five published product links, without making account-specific claims.
+
+**Finding.** `data/intent-links.json` and the site contain five products (P1–P5), but `data/associates.json` listed only P1–P3 and its protocol asked for three link clicks. The product-intent page also said that the test gated scaling “beyond these three links.” This left the two published thermometer products outside the explicit test checklist.
+
+**What changed.** Added P4/B0DHZTCNR5 and P5/B0DZFD6R9Z to `data/associates.json`, using their submitted URLs and published tagged URLs already present in the separate product-intent records. Both remain explicitly pending. The protocol now names all five ASINs and requires destination and account-report confirmation for each; the unsupported “24–48 hours” wait was removed. The product-intent page wording now accurately says five published products and states that none of the account-side checks has been run. Added a regression test that rejects missing/duplicate product records and checks each Associates row’s submitted URL, intended ASIN and published URL against `data/intent-links.json`. No outbound URL or product fact changed; the five supplied short links remain recorded verbatim and unjudged (FLG-003).
+
+**Sources and verification limits.** No new external page was read in this session. Product IDs, submitted links, official listing URLs and dated confirmation records were taken from `data/intent-links.json` (official Amazon listing URLs: `https://www.amazon.com/dp/B0CDY277D3`, `https://www.amazon.com/dp/B09B7SB46R`, `https://www.amazon.com/dp/B08DKYBTPH`, `https://www.amazon.com/dp/B0DHZTCNR5`, and `https://www.amazon.com/dp/B0DZFD6R9Z`); P4/P5 source dates and limits are also in `data/products-extra.json`. The policy link remains the official Associates Program Policies page, `https://affiliate-program.amazon.com/help/operating/policies`. These are existing dated records, not fresh reads by this session. Associates Central enrollment, the live tag, destination tests and reporting are not accessible here; no test is claimed complete and no click/conversion attribution is inferred.
+
+**Verification performed.** `python3 scripts/build_site.py` (43 pages; repeated build byte-identical) → `python3 scripts/verify.py` PASS → `python3 qa/audit_site.py --strict-warnings` PASS (0 warnings) → `python3 -m unittest discover -s tests -v` 95/95 PASS → `python3 -m engine.cli build` + `python3 tools/check_links.py` PASS → `python3 -m engine.cli audit` 0/7 ready (expected: verification/policy gates remain closed) → `python3 scripts/render_design_prompt.py` no diff. The generated `docs/links.html` contains the five-product pending-test wording.
+
+**Outstanding gates.** F-57 (account/tag confirmation), F-58 (one-link-per-product Associates test), F-59 (endpoint hosting), F-61 (Search Console) and the empty authorized-report ledger remain as recorded; no conversion score, revenue forecast or search-demand figure was added.
+
+**PR, merge and Pages.** Pending; update this log after the PR and deployment result.
+
