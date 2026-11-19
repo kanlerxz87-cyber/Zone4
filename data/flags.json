@@ -1108,14 +1108,39 @@
     {
       "id": "F-88",
       "severity": "Medium",
-      "title": "63 tagged Amazon links on 19 pages were missing rel=\"sponsored\" (corrected 2026-11-19)",
-      "detail": "Found in a line-by-line audit of the rendered pages on 2026-11-19 (arena/14efcc78-zone4). The tagging pass in scripts/build_site.py adds the Associates tag to every www.amazon.com link (Program Policies 2(b)) after rendering, but never set rel=\"sponsored\". The result: 63 anchors on 19 pages (Associates help and Conditions of Use links, and the Air Fryers category browse link) carried the tracking ID with no sponsored rel. verify.py checked only /dp/ and link.amazon links, so the gap passed every gate. measure.js also counts an outbound click only when rel contains 'sponsored', so clicks on those 63 anchors were not counted. Corrected at source: the tagging pass now also sets rel=\"sponsored\" on every www.amazon.com anchor, and verify.py requires it on every tagged Amazon link. A negative test (sponsor pass disabled) makes verify.py fail; with the fix restored it passes. The docs diff was checked: the only changes are the added rel token. The 63 counted anchors are the pre-fix state on main af593ba. Numbered F-74 because F-73 was taken on main by arena/79fe1c8d-zone4 (short-link citations) during this session. Filed as F-74 on this window's base, then F-82, and F-88 after PR #101 took F-82 for the .mono stylesheet fix; every id this row cites is the one now in the register.",
+      "title": "Retired duplicate of F-76: the sponsored-rel finding was re-appended under a new id by PR #102's renumbering sweep; rewritten 2026-11-19",
+      "detail": "Added 2026-11-19 by arena/0272d56e-zone4 (PR #102) as the sponsored-rel finding while F-76 already carried it - the same duplicate-row defect class as F-74 (left behind by PR #98's sweep). Found and rewritten 2026-11-19 by arena/eb90e04d-zone4's register-integrity pass, under the register's duplicate-row precedent (F-72's Q-50 rewrite, F-74's rewrite). The finding itself lives on as F-76.",
       "sources": [
         "https://affiliate-program.amazon.com/help/operating/policies",
         "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
       ],
-      "status": "Corrected 2026-11-19 (arena/14efcc78-zone4); kept as the audit record",
-      "action": "No owner action. Re-run scripts/verify.py after any change to a link-rendering function. Confirm on the live site after the next Pages build that the Air Fryers category and Associates help links carry rel=\"sponsored\"."
+      "status": "Retired 2026-11-19 (arena/eb90e04d-zone4); superseded by F-76",
+      "action": "Reviewer: no action; this row is a pointer. The live finding and its check are on F-76."
+    },
+    {
+      "id": "F-89",
+      "severity": "Low",
+      "title": "Eleven suggestion rows carried statuses their linked decisions had already resolved (S-32, S-34, S-35, S-39, S-44, SG-32, SG-33, SG-35, SG-37, SG-44, SG-45); corrected 2026-11-19 and the build now checks the agreement",
+      "detail": "Added 2026-11-19 by arena/eb90e04d-zone4 during the line-by-line register review. scripts/verify.py's check_decision_support validated that every suggestion points at an existing decision and that every status is a declared vocabulary entry, but never compared the two. Four rows from the 2026-11-16/17 sessions still said 'Awaiting decision' while their linked decisions had been recorded (S-32 to D-35, S-34 to D-37, S-35 to D-38, S-44 to D-33; S-39 said 'Needs a decision first' although its decision half, D-01, was recorded and its remaining half is the account-side one-link test F-57/F-58); PR #97's rows (SG-32, SG-33, SG-35, SG-37) reintroduced the same defect the same day; and PR #101's SG-44/SG-45 reintroduced it again, pointing at recorded D-48 whose own recommendation says those two pieces 'stay in the suggestion register for a separate decision'. The gate added with this flag caught every one of them at build time before publication. On a page whose purpose is 'review suggestions and choose the best path before implementing', a stale 'Awaiting decision' sends the reviewer to re-decide something already decided. Corrections: S-32/S-34 'Implemented 2026-11-17', S-35 'Implemented 2026-11-19', S-39 'Owner action required', S-44/SG-32/SG-44/SG-45 'Needs a decision first', SG-33/SG-37 'Decision recorded 2026-11-16 - work remains', SG-35 re-pointed at the new open decision D-52. The verifier now fails the build if any suggestion's status is 'Awaiting decision' while its linked decision is recorded. Numbering note: recorded as F-74/F-82/F-83 in this session's branch while PRs #97-#102 were in flight; renumbered to the next free ids each time (final F-89); no register collision occurred.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/decisions.json"
+      ],
+      "status": "Corrected 2026-11-19 (arena/eb90e04d-zone4); kept as the audit record",
+      "action": "Reviewer: spot-check any suggestion on docs/suggestions.html against its linked decision on docs/decisions.html; the verify gate now enforces the agreement at build time."
+    },
+    {
+      "id": "F-90",
+      "severity": "Low",
+      "title": "Two publication texts lagged the D-46 thermometer publication: the Information-gaps proof line said three verified listings, and the design prompt's topic slot said 'one guide per week' against the recorded 14-day cadence",
+      "detail": "Added 2026-11-19 by arena/eb90e04d-zone4 during the line-by-line review. (1) The Information gaps page opened its 'What this project can already prove' section with 'Three supplied links resolved to three verified air-fryer listings', written before D-46 published P4/P5; the proven set is five listings (three countertop air fryers and two meat thermometers) whose titles and breadcrumbs were read 2026-11-19 and re-read the same day by this session. (2) The design brief's [TOPICS] prompt slot said 'one guide per week' while data/publishing.json records a 14-day interval and every decision and log entry since 2026-11-17 uses it. Both corrected in the same build, and the thermometer search-demand gap (Q-59) was added to the same page's gap table. Numbering note: recorded as F-75/F-83/F-84 in this session's branch while PRs #97-#102 were in flight; renumbered three times (F-77, F-84, F-90).",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/publishing.json",
+        "https://www.amazon.com/dp/B0DHZTCNR5",
+        "https://www.amazon.com/dp/B0DZFD6R9Z"
+      ],
+      "status": "Corrected 2026-11-19 (arena/eb90e04d-zone4); kept as the audit record",
+      "action": "Reviewer: none required beyond the standing spot-checks; both texts are now reconciled with the registers."
     }
   ]
 }

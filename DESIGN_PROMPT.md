@@ -130,7 +130,7 @@ decision.
 | `[DIRECTION]` | D-18 (direction family) and D-35 (the specification to build from) | Warm editorial (DIR-A), adopted 2026-11-17 (D-35); the token and component list on the Design brief page is the specification. The safe presentation layer is applied to the storefront and articles (D-47, 2026-11-19); the full direction stays a build reference. |
 | `[BRAND]` | D-18 and Q-19 (trade-name clearance) | Zone4 - air fryer buying guides (recorded 2026-11-16, D-18). |
 | `[VOICE]` | D-12 and the S-12 voice decision | Warm, plain, decision-first (recorded 2026-11-16, D-12), now with the shop-not-audit rule: reader surfaces lead with the products and the questions a buyer asks; the verification machinery lives in one dashboard group and the footer, never in the headline. |
-| `[TOPICS]` | D-17 (which wave) | The eight-topic question calendar (D-17) on the Articles hub, one guide per week to sitemap and feed (cadence set 2026-11-17). |
+| `[TOPICS]` | D-17 (which wave) | The ten-topic question calendar (D-17; extended to the two published thermometer listings as Wave 3 by D-50 on 2026-11-19) on the front-page roadmap and the Articles hub, one guide per 14 days to sitemap and feed (cadence set 2026-11-17). |
 | `[HEADLINES]` | D-37 (steady or punchy register) | Steady register as published (D-37 recorded 2026-11-17); punchy variants on the Design brief page stay parked behind D-12. |
 | `[TREND_RULE]` | D-19 (the evidence rule for popularity words) | Popularity claims only as dated snapshots of an official page (D-19); no traffic, revenue or search-volume figure anywhere (F-15, F-51). |
 | `[AUDIENCE]` | Q-16 and Q-04 | still open (Q-16 and Q-04) |

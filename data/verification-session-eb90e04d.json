@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "session": "arena/eb90e04d-zone4",
+    "date_utc": "2026-11-19",
+    "method": "platform page-fetch tool, one read per URL, no login, no access control used or bypassed. Each canonical thermometer listing page was read for its page title and category breadcrumb. Prices, star ratings and review counts visible on the pages were NOT copied (F-02). Item details tables were not read in this session (F-38, F-60).",
+    "not_done": [
+      "Associates Central: no account access in this sandbox, so no tag registration, one-link test or tracking-report check (F-57, F-58).",
+      "The three air-fryer listings (P1-P3) were not re-read this session; their latest dated reads are 2026-11-17 and 2026-11-19 (see content.json recheck notes and data/verification-session-4cfacb30.json).",
+      "Item details (brand, model, dimensions, capacity) for P4 and P5 were not reached (F-60).",
+      "The P4/P5 short links were not re-resolved this session; the 2026-11-19 resolution records in data/intent-links.json stand."
+    ],
+    "result_summary": "Both thermometer listing titles match the stored records exactly (including P4's 2026-11-19 corrected title, F-68), and both breadcrumbs match the recorded category path ending in Thermometers & Timers > Meat. The two Wave 3 topics (T-09, T-10, D-50) quote only claims these reads re-confirmed."
+  },
+  "rows": [
+    {
+      "id": "V20-P4",
+      "product_id": "P4",
+      "asin": "B0DHZTCNR5",
+      "check": "canonical listing title and breadcrumb",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed": "Title: 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "matches_record": true
+    },
+    {
+      "id": "V20-P5",
+      "product_id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "check": "canonical listing title and breadcrumb",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed": "Title: 'CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000\u00b0F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "matches_record": true
+    }
+  ]
+}
