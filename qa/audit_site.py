@@ -246,8 +246,7 @@ def load_special_links() -> set[str]:
     URLs); the supplied short links remain recorded data but are not valid hrefs.
     """
     intent = json.loads((DATA / "intent-links.json").read_text(encoding="utf-8"))
-    return {l["tracking_id_candidate_url"] for l in intent["links"]
-            if l["product_id"] not in ("P4", "P5")}
+    return {l["tracking_id_candidate_url"] for l in intent["links"]}
 
 
 def load_asins() -> set[str]:

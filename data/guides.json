@@ -351,7 +351,7 @@
       ],
       "published_utc": "2026-11-17",
       "disclosure": "As an Amazon Associate I earn from qualifying purchases.",
-      "publication_status": "Held (F-55 on main): not built or listed until the candidate listings are confirmed."
+      "publication_status": "Queued by the publishing cadence (data/publishing.json): not built before its next due date, 2026-12-01 (D-46). Its products are published now; the guide is not."
     }
   ]
 }

@@ -1839,6 +1839,46 @@
       ],
       "recorded_date_utc": "2026-11-17",
       "recorded_choice": "Option A - the feed shipped 2026-11-17 by the merged sessions (articles + published guides, deterministic build, feed checks in scripts/verify.py). Recorded during the merge reconciliation; the parallel feed builder produced by arena/1f4a7a22-zone4 was withdrawn as a duplicate."
+    },
+    {
+      "id": "D-46",
+      "question": "Publish the two submitted meat-thermometer listings (P4 B0DHZTCNR5, P5 B0DZFD6R9Z) as a separate Meat thermometers category, with the same tagged Special Link status as P1-P3?",
+      "linked_question": "Q-51",
+      "linked_suggestions": [],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Publish P4 and P5 in their own category, tagged Special Links, same status as P1-P3; the thermometer guide waits for its cadence date",
+          "commits_to": "Two product cards, a Meat thermometers category page, tagged outbound links with rel=sponsored, the disclosure on every page. The guide is built on 2026-12-01 under data/publishing.json. Attribution is still unverified until the Associates Central test (F-58).",
+          "effort": "Built in this session.",
+          "reversible": "Yes: set HELD_PRODUCT_IDS back to {P4,P5} and rebuild."
+        },
+        {
+          "key": "B",
+          "label": "Keep P4 and P5 held as text only until the owner decides the scope (F-56 as filed)",
+          "commits_to": "No outbound link for the two listings; the brief's request to market all five products stays unmet for these two.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. The brief asks for marketing for all five links, and the owner has asked for no manual input. Both listings now have the same evidence as P1-P3: each short link opens to the ASIN recorded, and the title and breadcrumb were read on 2026-11-19. The untested Associates step applies to all five equally, so holding only these two adds no protection.",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 listing (title and breadcrumb read 2026-11-19)"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 listing (title and breadcrumb read 2026-11-19)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Program Policies (Participation Requirements 2(b): the tag as a URL parameter)"
+        }
+      ],
+      "recorded_date_utc": "2026-11-19",
+      "recorded_choice": "Option A - recorded by arena/4cfacb30-zone4 under the owner's standing delegation (no manual input). The owner may reverse it (option B) at any time; the reversal is a one-line data/build change."
     }
   ],
   "log": [
@@ -2079,6 +2119,13 @@
       "choice": "Option A - keep the shipped RSS feed (articles + published guides; one feed writer; head <link rel=alternate> and footer link on every page). Recorded during the merge reconciliation; the parallel feed builder was withdrawn as a duplicate.",
       "recorded_by": "arena/1f4a7a22-zone4 (owner's standing delegation)",
       "evidence": "Owner brief 2026-11-17: make the site findable (sitemap+feed); the feed shipped via PRs #79/#83 and is verified by scripts/verify.py's feed checks. Standing delegation: 'There should be no manual input on my part.'"
+    },
+    {
+      "date_utc": "2026-11-19",
+      "decision": "D-46",
+      "choice": "Option A - publish P4 and P5 in a Meat thermometers category with tagged Special Links, same status as P1-P3; guide queued to 2026-12-01.",
+      "recorded_by": "arena/4cfacb30-zone4 (standing delegation: no manual input)",
+      "evidence": "Live reads 2026-11-19 of the two short links and listing pages (data/verification-session-4cfacb30.json). F-56 resolved by this decision; F-68 raised for the P4 title drift."
     }
   ]
 }

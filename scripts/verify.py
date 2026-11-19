@@ -663,7 +663,7 @@ def check_measurement() -> None:
                 fail(f"intent-links {pid}: redirect-history observation is not on an official host")
             if l["intended_asin"] not in (obs.get("final_url_without_query", obs.get("target_url", ""))):
                 fail(f"intent-links {pid}: a redirect-history observation must carry the intended ASIN it resolved to")
-        # Held products (P4/P5) publish nothing; P1-P3 publish the tagged Special Link.
+        # Every product publishes the tagged Special Link (D-01/D-14, extended to P4/P5 by D-46).
         if pid in published:
             expected = l["tracking_id_candidate_url"]
             if l["published_outbound_url"] != expected:
@@ -708,9 +708,10 @@ def check_rss_feed() -> None:
         return
     items = channel.findall("item")
     articles = load("marketing.json")["articles"]
-    # Articles first, then the published guides (scripts/build_extras.py); held guides are not listed.
-    held = {"P4", "P5"}
-    guides_pub = [g for g in load("guides.json")["guides"] if not any(pid in held for pid in g["product_ids"])]
+    # Articles first, then the published guides (scripts/build_extras.py); queued guides and held products are not listed.
+    held = set()  # D-46 (2026-11-19): no product is held
+    guides_pub = [g for g in load("guides.json")["guides"]
+                  if not any(pid in held for pid in g["product_ids"]) and not str(g.get("publication_status", "")).startswith("Queued")]
     expected = (["https://kanlerxz87-cyber.github.io/Zone4/docs/articles/" + a["slug"].strip("/") + ".html" for a in articles]
                 + ["https://kanlerxz87-cyber.github.io/Zone4/docs/guides/" + g["slug"] + ".html" for g in guides_pub])
     if len(items) != len(expected):
@@ -742,7 +743,7 @@ def check_publication() -> None:
     import xml.etree.ElementTree as ET
     intent = load("intent-links.json")
     extra = load("products-extra.json")["products"]
-    HELD_PRODUCT_IDS = {"P4", "P5"}  # held until F-55 on main is resolved (see scripts/build_extras.py)
+    HELD_PRODUCT_IDS = set()  # empty since D-46 (2026-11-19); see scripts/build_extras.py
     base_products = load("products.json")["products"]
     known_asins = {p["asin"] for p in base_products + extra}
     tag = intent["_meta"]["tracking_id"]
@@ -868,8 +869,8 @@ def check_publication() -> None:
         items = []
     feed_links = {i.findtext("link") for i in items}
     for g in guides:
-        if any(pid in {"P4", "P5"} for pid in g["product_ids"]):
-            continue  # held (F-55 on main): not listed in the feed
+        if str(g.get("publication_status", "")).startswith("Queued"):
+            continue  # queued by the publishing cadence (data/publishing.json): not listed in the feed
         if SITE_URL + "guides/" + g["slug"] + ".html" not in feed_links:
             fail(f"feed.xml lacks guide {g['slug']}")
     sitemap = (DOCS / "sitemap.xml").read_text(encoding="utf-8")
@@ -878,16 +879,21 @@ def check_publication() -> None:
         if (SITE_URL + rel) not in sitemap:
             fail(f"sitemap.xml lacks {rel}")
     products_html = (DOCS / "products.html").read_text(encoding="utf-8")
+    # Program Policies 2(b): every link to an Amazon site must carry the Associates tag (F-69, 2026-11-19).
+    for page_path in DOCS.rglob("*.html"):
+        body = page_path.read_text(encoding="utf-8")
+        for m in re.finditer(r'href="(https://www\.amazon\.com/[^"]*)"', body):
+            if "tag=" not in m.group(1):
+                fail(f"{page_path.relative_to(DOCS)}: untagged Amazon link {m.group(1)[:80]} (Program Policies 2(b))")
+                break
+    tag_for_html = intent["_meta"]["tracking_id"]
     for p in extra:
         if p["id"] in HELD_PRODUCT_IDS:
-            # Held: listed as text only. The short link must not be a link (F-55 on main).
-            if f'href="{p["short_link"]}"' in products_html:
-                fail(f"products.html links the held short link of {p['id']} (F-55 on main)")
-            if p["asin"] not in products_html or p["short_link"] not in products_html:
-                fail(f"products.html does not list held record {p['id']} ({p['asin']})")
-            continue
-        if p["asin"] not in products_html or p["short_link"] not in products_html:
-            fail(f"products.html does not list {p['id']} ({p['asin']})")
+            continue  # no held products since D-46
+        if f'href="https://www.amazon.com/dp/{p["asin"]}?tag={tag_for_html}"' not in products_html:
+            fail(f"products.html does not link {p['id']} ({p['asin']}) as its tagged Special Link")
+        if f'href="{p["short_link"]}"' in products_html:
+            fail(f"products.html links the supplied short link of {p['id']} as an href")
     index = (DOCS / "index.html").read_text(encoding="utf-8")
     if index.find('id="shop"') == -1 or index.find('id="shop"') > index.find('class="mhero"'):
         fail("index.html: the product section must come before the hero (products first)")
