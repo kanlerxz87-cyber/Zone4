@@ -1416,3 +1416,33 @@ at wrap-up and are left to their owners, with this reconciliation noted above.
 **PR and merge record:** PR [#90](https://github.com/kanlerxz87-cyber/Zone4/pull/90) (`arena/a4eb2a1d-zone4` -> `main`). Merge commit, PR checks and the Pages deployment are recorded in the follow-up entry below once the merge completes.
 
 **Follow-up: PR, merge, checks and Pages (2026-11-19, arena/a4eb2a1d-zone4).** PR #90 merged to `main` at 2026-11-19T13:57:43Z as merge commit [`b07b0a0`](https://github.com/kanlerxz87-cyber/Zone4/commit/b07b0a078b633c13c7742972a9cffe046d821fc8). Pre-merge PR checks: `audit` pass, `verify` pass x2. Post-merge `main` runs: CI (engine tests, preview build, site integrity) success, Site checks success, QA audit success, and the Pages build-and-deployment run completed with `success`. Live check through the platform fetch tool after deployment: `https://kanlerxz87-cyber.github.io/Zone4/docs/decision-centre.html` renders with the merged counts (50 suggestions, 51 questions, 12 open decisions, 72 flags) and `https://kanlerxz87-cyber.github.io/Zone4/docs/information-gaps.html` renders the post-D-46 gap table including the hosted-endpoint row (Q-46/F-59). The two stale PRs were closed with adopted-record comments: [#69](https://github.com/kanlerxz87-cyber/Zone4/pull/69) (decision-centre/information-gaps pages + editorial statement adopted) and [#87](https://github.com/kanlerxz87-cyber/Zone4/pull/87) (SG-27..SG-30 and M-G4 adopted; campaign-ledger/F-67/older rows not adopted).
+
+---
+
+## Session log - arena/82d5f1f5-zone4 (2026-11-19)
+
+**Claim.** Final verification and close-out on the assigned active branch. The assigned branch `arena/82d5f1f5-zone4` is at commit `af593baca70a74268f09e64f30643d2b21117297`, which is also the tip of `main` (merge commit of PR #91). Everything the brief asks for is already integrated on `main`: the shop-like publication landing page, category subpages, sourced product tables, suggestions/questions/decisions registers, executive summary, verification log, Flagged for Review page, build/verify/QA gates and GitHub Pages publication. No file change was required, so nothing was edited.
+
+**Branch note.** The branch is pinned to its assigned name; no `session-<id>/<task>` branch was created, and nothing was pushed to any other branch.
+
+**Verification performed on the final tree (this session, 2026-11-19).**
+- `python3 scripts/build_site.py` -> 38 pages regenerated, deterministic (second build byte-identical; `git diff --exit-code -- docs` clean)
+- `python3 scripts/verify.py` -> PASS: data valid, 38 pages checked (links, anchors, disclosure on every page, per-row official source, no prices or ratings, no Amazon Mark in titles/keywords, unique meta descriptions, register cross-references)
+- `python3 qa/audit_site.py` -> PASS, 38 pages, 0 warnings
+- `python3 -m unittest discover -s tests` -> 92/92 OK
+- `python3 -m engine.cli build` + `python3 tools/check_links.py` -> PASS: no broken links, every table row sourced or flagged, CSS complete, disclosure present
+- `python3 -m engine.cli audit` -> 0/7 ready, 7 blocked by the compliance gate (unverified price/disclosure fields; the designed behaviour - the engine refuses to publish unverified fields)
+- `python3 scripts/render_design_prompt.py` -> no diff (design brief in sync with `data/design.json`)
+
+**GitHub Pages (confirmed via api.github.com; this sandbox cannot reach github.io directly).**
+- Pages source: `main` `/` (legacy), HTTPS enforced, public URL https://kanlerxz87-cyber.github.io/Zone4/ (root `index.html` redirects to `docs/index.html`)
+- Latest Pages build: status `built`, commit `af593baca70a74268f09e64f30643d2b21117297`, built 2026-11-19T14:00:30Z
+- Latest workflow runs on `main` at af593ba: CI (engine tests, preview build, site integrity) success; Site checks success; QA audit success
+
+**Pull request / merge.** None required: HEAD of this branch is identical to `main` (PR #91 already merged this state), so there is no integration branch to merge. The site is live and every gate is green.
+
+**Irregularities published (none block the merge).** 72 flags are on the Flagged for Review page (`docs/flagged.html`, source `data/flags.json`), each with official-source links and an action. Standing open items: F-01 (per-ASIN commission category - category-level Table 1 bands verified, product-level blank by rule), F-02 (prices/ratings withheld), F-03 (no Associates `tag=` in the three supplied short links - enrolment of tracking ID `shopnow047c-20` unconfirmed), F-11/F-12 (automated retrieval and AI-article restrictions; neither is built), F-57/F-58 (Associates Central tag confirmation and one-link Special Link test; no account access in this sandbox), F-59 (analytics endpoint built, not hosted), F-61 (Search Console), plus dated drift flags F-29/F-44/F-66/F-68/F-69. Unverified cells are left blank and flagged; nothing was inferred or filled in.
+
+**Deliverable summary.** Shop front: story-led hero, three-question chooser, buyer-facing comparison table, category tiles (dual-basket, single-basket, air-fry toaster oven, meat thermometers), eight sourced guides, question-shaped content roadmap, disclosure under the masthead and in the footer on every page, every outbound product link tagged `shopnow047c-20` with `rel=\"sponsored\"`, RSS feed and sitemap generated, one navigation group in the footer reaching every dashboard surface. Decision-support surface: 50 suggestions, 51 questions, 46 decisions (12 open, awaiting owner answers), reviewed before anything is implemented. All sources official and linked; per-page titles and meta descriptions unique.
+
+**Status:** done. Site live at https://kanlerxz87-cyber.github.io/Zone4/ with all checks green.
