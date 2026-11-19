@@ -8,12 +8,12 @@
   "decision_ids": "D-48 to D-60 are reserved for these proposals. They are not written into data/decisions.json by this session: that register is the owner's decision log, and writing 'open' rows into it would change the count published on the Decisions page. A row here becomes a D-row there only when the owner records a choice."
  },
  "review": {
-  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the twelve questions that must be answered before the change is worth making. Nothing here is applied. The thirteen proposals are newly filed here; the site's fifty earlier suggestions stay in their own register (data/suggestions.json) and are not duplicated, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
+  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the twelve questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01, RD-03, RD-08, RD-12), each labelled with what shipped and what still waits on an answer; nothing else is applied. The thirteen proposals are newly filed here; the site's fifty earlier suggestions stay in their own register (data/suggestions.json) and are not duplicated, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
   "flow": [
    {
     "step": 1,
     "title": "Read the twelve proposals",
-    "what": "Each has its problem, its proposed change, its cost, its risk and the check that proves it worked. None of them is built on this branch."
+    "what": "Each has its problem, its proposed change, its cost, its risk and the check that proves it worked. Four carry a dated partial or full application from 2026-11-19, and each of those says exactly what shipped and what is still waiting on you; the rest are proposals only."
    },
    {
     "step": 2,
@@ -57,7 +57,9 @@
    "flags": [
     "F-46"
    ],
-   "decision": "D-48"
+   "decision": "D-48",
+   "status": "Applied 2026-11-19",
+   "shipped_note": "The landing-page H1 and lead now lead with the reader's outcome; the receipts moved to the trust row. Article-level headline questions stay with decision D-37."
   },
   {
    "seq": 2,
@@ -81,7 +83,9 @@
     }
    ],
    "flags": [],
-   "decision": "D-49"
+   "decision": "D-49",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 3,
@@ -111,7 +115,9 @@
    "flags": [
     "F-43"
    ],
-   "decision": "D-50"
+   "decision": "D-50",
+   "status": "Partly applied 2026-11-19",
+   "shipped_note": "The diagram route shipped: scaled footprint diagrams drawn from the listed dimensions appear on the four category tiles and at the top of each category page (docs/imagery.html records every asset). Photographs still need either an owner release or written word from Amazon (RQ-05)."
   },
   {
    "seq": 4,
@@ -141,7 +147,9 @@
    "flags": [
     "F-15"
    ],
-   "decision": "D-51"
+   "decision": "D-51",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 5,
@@ -163,7 +171,9 @@
    "flags": [
     "F-15"
    ],
-   "decision": "D-52"
+   "decision": "D-52",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 6,
@@ -191,7 +201,9 @@
     }
    ],
    "flags": [],
-   "decision": "D-53"
+   "decision": "D-53",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 7,
@@ -221,7 +233,9 @@
    "flags": [
     "F-02"
    ],
-   "decision": "D-54"
+   "decision": "D-54",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 8,
@@ -245,7 +259,9 @@
     }
    ],
    "flags": [],
-   "decision": "D-55"
+   "decision": "D-55",
+   "status": "Partly applied 2026-11-19",
+   "shipped_note": "The About page shipped with the production note and the correction path. Naming a person still needs the owner (RQ-06)."
   },
   {
    "seq": 9,
@@ -267,7 +283,9 @@
    "flags": [
     "F-60"
    ],
-   "decision": "D-56"
+   "decision": "D-56",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 10,
@@ -289,7 +307,9 @@
    "flags": [
     "F-15"
    ],
-   "decision": "D-57"
+   "decision": "D-57",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 11,
@@ -309,7 +329,9 @@
     }
    ],
    "flags": [],
-   "decision": "D-58"
+   "decision": "D-58",
+   "status": "Proposed",
+   "shipped_note": ""
   },
   {
    "seq": 12,
@@ -335,7 +357,9 @@
    "flags": [
     "F-43"
    ],
-   "decision": "D-59"
+   "decision": "D-59",
+   "status": "Partly applied 2026-11-19",
+   "shipped_note": "One captioned, alt-texted diagram ships per category page. A social preview image is still a proposal."
   },
   {
    "seq": 13,
@@ -355,7 +379,9 @@
     }
    ],
    "flags": [],
-   "decision": "D-60"
+   "decision": "D-60",
+   "status": "Proposed",
+   "shipped_note": ""
   }
  ],
  "questions": [

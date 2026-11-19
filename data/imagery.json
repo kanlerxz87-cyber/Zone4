@@ -7,11 +7,11 @@
  "policy": {
   "listing_images": "Not used. Downloaded or hosted listing photography is Program Content and is out of scope for this site (suggestion S-18; flag F-43).",
   "generated_images": "Not used for products. An AI-generated picture of a real appliance would misrepresent it, so product imagery stays absent until an authorised route exists.",
-  "shipped_now": "Original inline SVG footprint diagrams, drawn to scale from the dimensions already recorded in data/products.json, captioned with the numbers used and labelled as drawn from the listing's product details table."
+  "shipped_now": "Original inline SVG footprint diagrams, drawn to scale from the dimensions already recorded in data/products.json, captioned with the numbers used and labelled as drawn from the listing's product details table. They ship on the four category tiles and at the top of each category page (added 2026-11-19)."
  },
  "assets": [
   {
-   "page": "index.html (category tiles)",
+   "page": "index.html (category tiles) and each category page header",
    "asset": "SVG footprint diagram",
    "products": [
     "P1",
