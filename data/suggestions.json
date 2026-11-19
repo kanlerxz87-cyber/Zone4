@@ -25,10 +25,12 @@
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
     "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
-    "updated_utc": "2026-11-16",
+    "updated_utc": "2026-11-19",
     "update_note": "Statuses updated after the 2026-11-16 delegated decision round: what shipped in this build, what is confirmed as standing policy, what was not adopted, and what still needs an owner fact (S-01, S-02, S-08, S-18). The register stays the place to review a change before it is made; nothing here was implemented before its decision was recorded.",
     "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items.",
-    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's S-39 (validated Special Links with the one-link test) and S-40 (Search Console) already covered this session's tagged-links and Search Console proposals, and S-41-S-44 cover the front-page and module surfaces. This session's rows were withdrawn where covered; S-45 (the five-step Associates Central test protocol, owner action) and S-46 (the shipped RSS feed) were appended; S-01/S-33 were flipped to Implemented 2026-11-17 (D-01/D-14 recorded; D-36 recorded)."
+    "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's S-39 (validated Special Links with the one-link test) and S-40 (Search Console) already covered this session's tagged-links and Search Console proposals, and S-41-S-44 cover the front-page and module surfaces. This session's rows were withdrawn where covered; S-45 (the five-step Associates Central test protocol, owner action) and S-46 (the shipped RSS feed) were appended; S-01/S-33 were flipped to Implemented 2026-11-17 (D-01/D-14 recorded; D-36 recorded).",
+    "reconciliation_2026_11_19": "arena/a4eb2a1d-zone4: SG-27..SG-30 (the parallel-pass rows named in the owner brief: nav labels, the shipped RSS feed, Search Console, reader capture) imported from stale PR #87 after its 60-minute claim expired with no board row; decision pointers and statuses corrected as noted on each row. Main stayed canonical for every row both branches carried.",
+    "crossref_correction_2026_11_19": "arena/a4eb2a1d-zone4: two wrong decision pointers corrected. S-45 (ship the RSS feed) pointed at D-44 (open: measurement surfaces) and now points at D-45 (recorded: keep the shipped RSS feed), the decision that released it. S-46 (reader capture) pointed at D-45 (the feed decision) and now points at D-16 (open: measurement and privacy boundary), which its own problem text names as the gate. The 2026-11-17 reconciliation note above also misdescribes the rows it added (\"S-45 test protocol, S-46 feed\"); as landed, the Associates Central test protocol is S-39, S-45 is the shipped feed and S-46 is reader capture. Recorded as flag F-68."
   },
   "suggestions": [
     {
@@ -1177,7 +1179,7 @@
       ],
       "flags": [],
       "status": "Implemented 2026-11-17",
-      "decision": "D-44",
+      "decision": "D-45",
       "status_note_2026_11_17": "Shipped 2026-11-17 by arena/68d67712-zone4 (docs/feed.xml) and arena/3d2ad125-zone4 (guide entries in the same feed); verified by scripts/verify.py's feed checks."
     },
     {
@@ -1204,7 +1206,107 @@
         "F-26"
       ],
       "status": "Needs a decision first",
-      "decision": "D-45"
+      "decision": "D-16"
+    },
+    {
+      "id": "SG-27",
+      "priority": "P2 - Adds real value",
+      "title": "Give the navigation labels a publication pass so the site reads like a magazine, not a dashboard",
+      "problem": "The sidebar navigation works, but its group and page labels are dashboard vocabulary. A buyer arriving from search should see the same language a buying-advice publication uses, so the nav itself reinforces the shop-like reading experience rather than the audit process behind it.",
+      "proposal": "Review every navigation group title and page label for publication tone, keep the single navigation group the brief requires, and ensure the RSS feed link is reachable from the nav and footer. Labels stay accurate to the page they point at; nothing is renamed into a claim.",
+      "why": "Navigation is the first thing a reader scans. Publication-grade labels lower the perceived machine-generated feel and make the site feel curated, which is the whole point of the polish pass.",
+      "effort": "Under an hour.",
+      "risk": "Presentation only. Labels must still match the page they link to, so each rename is checked against the page title.",
+      "check": "Every nav label is unique and describes the destination; the feed link appears in nav and footer; the build and verifier stay green.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "The navigation this would relabel (scripts/build_site.py)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content - presentation guidance"
+        }
+      ],
+      "flags": [],
+      "status": "Implemented 2026-11-17",
+      "decision": "D-21",
+      "status_note_2026_11_19": "Imported 2026-11-19 from stale PR #87 (arena/0bdd37f3-zone4) under the 60-minute handoff rule; content unchanged apart from this note."
+    },
+    {
+      "id": "SG-28",
+      "priority": "P2 - Adds real value",
+      "title": "Ship the RSS feed so every new guide is discoverable the moment it is published",
+      "problem": "The site has a sitemap and structured data, but no feed. A publication that publishes on a cadence should give readers and aggregators a machine-readable list of new articles, and the brief names the shipped RSS feed as part of the publication polish.",
+      "proposal": "Generate an RSS 2.0 feed (docs/feed.xml) from the article data at build time, link it from every page head with a <link rel=\"alternate\" type=\"application/rss+xml\">, add it to the sitemap and robots, and add a footer link. Each item carries the article title, link, description and publication date, sourced from the article's own data.",
+      "why": "A feed is the standard discovery channel for a publishing cadence. It costs nothing, needs no account, and makes the 'publish a guide, then measure arrival' loop possible for feed readers as well as search.",
+      "effort": "Under an hour.",
+      "risk": "Low. The feed is generated from the same article data the pages use, so it cannot drift from the published articles. No external host is added.",
+      "check": "docs/feed.xml exists, is well-formed XML, lists every published article URL, and the verifier confirms the feed is wired into the sitemap, robots and page heads.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+          "ref": "The shipped RSS feed this suggestion adds"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: making content discoverable"
+        }
+      ],
+      "flags": [],
+      "status": "Implemented 2026-11-17",
+      "decision": "D-45",
+      "status_note_2026_11_19": "Imported 2026-11-19 from stale PR #87 (arena/0bdd37f3-zone4) under the 60-minute handoff rule; content unchanged apart from this note."
+    },
+    {
+      "id": "SG-29",
+      "priority": "P2 - Adds real value",
+      "title": "Connect Google Search Console so the next topic is chosen from measured queries, not instinct",
+      "problem": "The brief asks to measure whether anyone arrives and to choose the next topic from measured queries. Without Search Console connected, the site can publish guides and a feed but cannot see which queries actually bring readers, so topic selection stays instinct-led.",
+      "proposal": "Once the owner confirms a Google account, add the GitHub Pages property to Search Console, verify ownership, and read the queries, impressions and clicks report. Feed those measured queries back into the topic calendar. The site itself needs no code change; the verification is an owner action.",
+      "why": "This is the measurement step the brief names explicitly. It turns the publishing cadence from a guess into a measured loop, and it is the only way to know which of the question-shaped guides actually arrive.",
+      "effort": "Owner action, roughly an hour with the account.",
+      "risk": "None to the site. Search Console is read-only for the site; it changes no published content and no disclosure.",
+      "check": "Search Console reports impressions and clicks for the site's URLs, and the topic calendar records which queries drove the next guide.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: measure performance in Search Console"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/pipeline.json",
+          "ref": "The measurement pipeline this feeds (data/pipeline.json)"
+        }
+      ],
+      "flags": [],
+      "status": "Awaiting decision",
+      "decision": "D-42",
+      "status_note_2026_11_19": "Imported 2026-11-19 from stale PR #87; status mapped to the register vocabulary and the decision pointer corrected from D-30 (deals section - unrelated) to D-42 (who verifies the site in Search Console, open). D-09 recorded the decision to connect; the account that can verify is still owner-only (F-61)."
+    },
+    {
+      "id": "SG-30",
+      "priority": "P2 - Adds real value",
+      "title": "Add a reader-capture surface so returning readers can follow the publishing cadence",
+      "problem": "A publication that publishes on a cadence needs a way for a reader who found one guide to come back for the next. There is no capture surface today, so each guide starts from a cold visitor again.",
+      "proposal": "Add a minimal, privacy-preserving reader-capture section (an email signup that posts to a self-hosted endpoint or a provider the owner chooses) with a clear consent notice and a link to the privacy policy. Do not build it until the provider, consent basis and retention are decided, because capture without a lawful basis is the one part of this that cannot be automated safely.",
+      "why": "Returning readers are the difference between a one-off click and a publication with an audience. But the consent and retention decisions are owner-only, so this is staged rather than built.",
+      "effort": "Half a day once the provider and consent basis are chosen.",
+      "risk": "Privacy. Capture without a documented consent basis and retention policy would breach the disclosure expectations in the Program Policies and applicable law, so it is gated on the privacy decision.",
+      "check": "A capture surface exists with a consent notice and privacy link, the endpoint is self-hosted or owner-chosen, and the disclosure and privacy review pass.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: Disclosures 101 - placement and clarity"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Associates Operating Agreement - disclosure and content rules"
+        }
+      ],
+      "flags": [],
+      "status": "Needs a decision first",
+      "decision": "D-16",
+      "status_note_2026_11_19": "Imported 2026-11-19 from stale PR #87; status mapped to the register vocabulary. Gated on D-16 (measurement and privacy boundary, open) exactly as the reader-capture row S-46 and Q-47 are; the RSS feed stays the capture channel until then."
     }
   ]
 }

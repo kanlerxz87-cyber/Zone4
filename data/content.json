@@ -3,29 +3,28 @@
  "disclosure_source": "https://affiliate-program.amazon.com/help/operating/agreement",
  "observed_date": "2026-11-14",
  "executive_summary": {
-  "headline": "Three previously verified countertop air fryers - a dual-basket, a single-basket and a French-door toaster oven - compared on their officially listed facts. Two newly added link destinations remain unverified and are excluded. The publication keeps source receipts visible and missing information explicit.",
+  "headline": "Three previously verified countertop air fryers - a dual-basket, a single-basket and a French-door toaster oven - compared on their officially listed facts, plus two submitted meat-thermometer listings published in their own category under decision D-46. The publication keeps source receipts visible and missing information explicit.",
   "bullets": [
-   "Product register: the three links repeated in the latest brief have dated destination checks to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH; the latest prior re-check is 2026-11-16. Two further links (B0c8moW59 and B0f3GKalj) are unverified and excluded under F-55. This is not a finding that they are invalid.",
-   "Tracking ID: shopnow047c-20 was supplied by the user, but its active account association and use in validated Special Links are not confirmed. The three prior resolved URLs had no visible tag parameter at the 2026-11-16 re-check (F-03). Validate destination and report before scaling.",
-   "Reader-facing publication: the site has a three-question chooser, three format categories, a product comparison and seven question-led articles, each with sourced fact rows. The topic titles are editorial hypotheses, not popularity or search-volume claims.",
-   "Measurement: the Analytics page stores outbound-click events in each visitor browser only. There is no server endpoint or connected Associates conversion report. S-38 proposes five events for review; the event taxonomy is not implemented. The campaign ledger remains empty until authorized first-party reports are available.",
+   "Product register: the three links repeated in the latest brief have dated destination checks to ASINs B0CDY277D3, B09B7SB46R and B08DKYBTPH (latest re-check 2026-11-17). The two further links were resolved to meat-thermometer listings (B0DHZTCNR5 and B0DZFD6R9Z) and are published as tagged Special Links in a Meat thermometers category under decision D-46 (F-55 resolved on identity; F-56 resolved by D-46); each intent record now carries its observed redirect. Resolution is not a finding that either link is invalid.",
+   "Tracking ID: shopnow047c-20 was supplied by the user, but its active account association is not confirmed (F-57, Q-50). The three prior resolved URLs had no visible tag parameter at the 2026-11-17 re-check (F-03). Since decisions D-01/D-14 were recorded on 2026-11-17 the published outbound hrefs are the tagged Special Links (https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20); the supplied short links stay recorded as data, unjudged (FLG-003). Confirm destination and tracking report in Associates Central before scaling (S-39).",
+   "Reader-facing publication: the site has a three-question chooser, three format categories, a product comparison and eight question-led articles, each with sourced fact rows, plus four published question-shaped guides on a one-guide-per-14-days cadence (data/publishing.json). The topic titles are editorial hypotheses, not popularity or search-volume claims.",
+   "Measurement: the Analytics page stores outbound-click events in each visitor browser only. The five events the brief defines, their official attribution windows and the empty campaign ledger are recorded in data/ledger.json, and the self-hosted endpoint code exists in analytics-endpoint/, but nothing is hosted (F-59) and no Associates conversion report is connected. No conversion score or revenue forecast is published; the ledger stays empty until authorized first-party reports supply rows (Q-49).",
    "Search groundwork: unique page metadata, Open Graph fields, structured data, sitemap, robots.txt and a generated RSS feed are present. Search Console is not verified and no search queries or impressions are recorded. RSS item publication dates are omitted because no verified per-article dates exist.",
    "Policy boundaries: prices, ratings, review counts and per-product commission assignments remain withheld or blank. No trend, conversion or revenue estimate is published. Automated product research is gated on account/API access and terms review.",
-   "Decision support: 40 costed suggestions, 49 questions and 42 decisions (30 recorded; 12 open) are published alongside the site, each question naming the flag, suggestion and decision it sits behind.",
+   "Decision support: 50 costed suggestions, 51 questions and 46 decisions (34 recorded; 12 open) are published alongside the site, each question naming the flag, suggestion and decision it sits behind. The Decision centre and Information gaps pages summarise the same registers in review order.",
    "Disclosure and navigation: the Associates disclosure appears below the masthead and repeats in every footer. Product purchase links use rel=\"sponsored\"; verification checks that attribute, disclosure placement, footer coverage, all site-directory links and the single navigation group.",
    "Anti-slop fix and delegated decision round (2026-11-17): the last machine-output defect (F-53, identifiers printed as prose in the product openers) is corrected under recorded decision D-36; D-35 (warm-editorial specification adopted), D-37 (steady headline register kept) and D-38 (storefront reading order) were recorded to reconcile the register with the published site. The identifier-format check behind the product-intent record is recorded as F-67: the link path codes are not ASINs, verified against Amazon's published ASIN guide.",
    "Re-verified 2026-11-17 (arena/cc32105d-zone4, 15-row record in data/verification-session-cc32105d.json): the three supplied links re-resolve to the recorded ASINs with no tag parameter (F-03 stands); P2's second title segment again reads the later variant (F-44, fifth agreeing read; F-26 and F-50 stand); the carousel slots that had rotated away each showed the originally stored ASIN again (F-29). Commission Table 1 and the Operating Agreement (2025-10-15) and Program Policies (2026-04-14) dates re-read unchanged."
   ],
   "decisions_needed": [
-   "D-01: confirm that shopnow047c-20 is the active Partner Tag for an enrolled Associates account; generate or validate each Special Link and confirm its destination plus a reporting event.",
-   "D-40: confirm intended product identity for the five distinct links and keep intended ASIN/listing URL/date/source separate from observed redirect targets.",
-   "D-41: decide whether to remain browser-local or review a first-party analytics endpoint and separate reader opt-in; consent, retention and event payloads must be decided first.",
-   "D-02 and D-08: confirm API access and per-ASIN commission categories before publishing prices, ratings or product-level commission values.",
-   "D-15 and D-16: define authorized research automation and measurement/privacy boundaries before any data collection or scaling.",
+   "D-02 and D-08: confirm API access and the per-ASIN commission category before publishing prices, ratings or product-level commission values.",
+   "D-13 and D-40: confirm the intended product identity for all five distinct links, keeping intended ASIN/listing URL/date/source separate from observed redirect targets.",
+   "D-15 and D-16: define the authorised research automation and the measurement/privacy boundary before any data collection or scaling.",
    "D-22: choose a lawful source for real product photography; no product photography is currently published.",
-   "D-35, D-36 and D-37: review the proposed design specification, remaining copy pass and headline alternatives before further editorial changes.",
    "D-39: decide whether to move the design tokens into a switchable layer before further design work; a proposal, not a prerequisite for reading the current site.",
-   "D-42: decide whether to verify the site in a search console (owner account required; Q-48, S-40)."
+   "D-41 and D-43: decide where (and whether) the self-hosted analytics endpoint runs; its code and the five defined events are staged but not hosted (F-59).",
+   "D-42: decide which Google account verifies the site in Search Console and who submits the sitemap and feed (owner account required; Q-48, S-40, SG-29).",
+   "D-44: confirm the measurement surfaces added on 2026-11-17 (empty campaign ledger, tagged-CTA component, feed subscribe affordances) as the design brief carries them."
   ]
  },
  "analysis": [
@@ -243,11 +242,11 @@
   "Price tracking, price alerting and cross-retailer price comparison (restricted by 6(y) and 6(z)). Flag F-22.",
   "Email or outreach campaigns carrying Special Links (would need to be opt-in only, and Program Content must stay out of offline material). Flag F-27.",
   "Campaign optimisation (needs the attributed data above; the loop itself is specified on the Automation page).",
-  "Product photography on the site. No image is published, because the only honest routes are your own photographs of the actual units or images served through approved tools, and neither exists yet (F-31, suggestion S-04).",
-  "A paid-search campaign. Not attempted: it is constrained by Participation Requirement 6(f) and Commission Income Statement 2(c) to 2(e), and no budget decision has been made (F-23, decision D-09).",
-  "A self-hosted analytics endpoint and shared five-event stream. GitHub Pages is static; the five event names in S-38 are proposals only (D-41).",
-  "Search Console verification and measured query/impression reporting; property access is not connected (S-09).",
-  "Reader signup or email capture; no personal information is collected and no consent/provider review has been completed (D-41)."
+  "Product photography on the site. No image is published, because the only honest routes are your own photographs of the actual units or images served through approved tools, and neither exists yet (F-31, suggestion S-18, decision D-22).",
+  "A paid-search campaign. Not attempted: it is constrained by Participation Requirement 6(f) and Commission Income Statement 2(c) to 2(e), and decision D-29 (recorded) keeps it out of scope (F-23).",
+  "A hosted self-hosted analytics endpoint and shared five-event stream. The endpoint code (analytics-endpoint/) and the five defined events with their official attribution windows (data/ledger.json) exist in the repository, but nothing is hosted (F-59) and no event stream flows; decisions D-41 and D-43 remain open.",
+  "Search Console verification and measured query/impression reporting; property access is not connected and the verifying account is undecided (S-40, SG-29, D-42).",
+  "Reader signup or email capture; no personal information is collected and no consent/provider review has been completed (D-16, Q-47, S-46, SG-30). The shipped RSS feed stays the only follow channel."
  ],
  "site_disclaimer": {
   "text": "CERTAIN CONTENT THAT APPEARS ON THIS SITE COMES FROM AMAZON. THIS CONTENT IS PROVIDED AS IS AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME.",
@@ -258,5 +257,16 @@
  "rechecked_utc": "2026-11-17",
  "recheck_note_2026_11_16": "arena/c509aba1-zone4 independently re-read the three supplied short links (all resolve to the recorded ASINs), the three product pages (titles and breadcrumbs match the stored records; P2's second title segment matches the 2026-11-15 variant reading recorded in F-44), the public commission table (Kitchen 4.50%, Home 3.00% in Table 1), the Operating Agreement (updated 2025-10-15), the disclosure help page (exact sentence confirmed) and FTC Disclosures 101. Record: data/verification-session-c509aba1.json.",
  "_meta_note_89900251_2026_11_16": "rechecked_utc advanced from 2026-11-15 to 2026-11-16 by arena/89900251-zone4 after this session re-resolved all three supplied short links and re-read the cited official pages. Four executive-summary bullets and two decisions_needed entries were appended for the design brief, the two presentation defects, the re-verification and the stale cross-reference corrections.",
- "recheck_note_2026_11_17": "arena/cc32105d-zone4 re-read the three short links, the three listing pages, the Standard Commission Income Statement Table 1, the Operating Agreement and the Program Policies on 2026-11-17; the record is data/verification-session-cc32105d.json (15 rows). Nothing diverged from the stored values beyond the dated drift already flagged (F-29, F-44, F-50); Item details tables were again not exposed (F-38)."
+ "recheck_note_2026_11_17": "arena/cc32105d-zone4 re-read the three short links, the three listing pages, the Standard Commission Income Statement Table 1, the Operating Agreement and the Program Policies on 2026-11-17; the record is data/verification-session-cc32105d.json (15 rows). Nothing diverged from the stored values beyond the dated drift already flagged (F-29, F-44, F-50); Item details tables were again not exposed (F-38).",
+ "editorial": {
+  "note": "Position statement adopted 2026-11-19 from the editorial pass of stale PR #69 (arena/6554fead-zone4) under the 60-minute handoff rule, and published on the executive-summary page. It states only editorial choices; every factual claim in it is one already published with a source elsewhere in this repository. No counts are carried here - counts belong to the registers.",
+  "promise": [
+   "Every number on this site was read from an official page and is linked to it in the same paragraph.",
+   "Where a listing contradicts itself, both readings are published. The site does not pick the tidier one.",
+   "Nothing is inferred: if the listing does not say what a feature does, neither does the review.",
+   "Prices, star ratings and review counts are not republished. They are visible on the listing, one click away.",
+   "Nobody here has cooked in these appliances, and no page claims otherwise.",
+   "Every gap, defect and unverified value is listed on the Flagged for Review page with its source."
+  ]
+ }
 }

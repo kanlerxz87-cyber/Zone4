@@ -888,6 +888,39 @@
       ],
       "status": "Corrected 2026-11-19 (arena/4cfacb30-zone4); kept as the audit record",
       "action": "A reviewer confirms in Associates Central that shopnow047c-20 is the enrolled Partner Tag (F-57) and reviews the tagged source links in a normal browser."
+    },
+    {
+      "id": "F-70",
+      "severity": "Low",
+      "title": "Two suggestion rows pointed at the wrong decisions (S-45 and S-46); corrected 2026-11-19",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line register review. S-45 (Ship the RSS feed and its subscribe affordances, status Implemented 2026-11-17) carried decision D-44, which is open and concerns the measurement surfaces; the decision that released the feed is D-45 (Recorded: keep the shipped RSS feed). S-46 (Reader capture: an email follow option, only after the privacy basis exists) carried decision D-45 (the feed decision) while its own problem text names D-16 as the gate; it now points at D-16. The register's 2026-11-17 reconciliation note also misdescribes the rows it added (\"S-45 test protocol, S-46 feed\"); as landed, the Associates Central one-link test protocol is S-39, S-45 is the feed and S-46 is reader capture. No published page content, product fact or link changed - the pointers are register metadata only.",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: pointers corrected in data/suggestions.json and the correction recorded in the register's _meta. Re-check at the next register review that implemented rows point at Recorded decisions.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json"
+      ]
+    },
+    {
+      "id": "F-71",
+      "severity": "Low",
+      "title": "Documentation counts and a layout description had drifted from the shipped site; reconciled 2026-11-19",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line repo review. Four documentation surfaces described an older build: (1) the executive-summary bullets and decisions list in data/content.json still said 'seven question-led articles', '40 costed suggestions, 49 questions and 42 decisions', listed three already-recorded decisions as still needed, and said 'S-38 proposes five events ... not implemented' and 'no server endpoint', although seven articles, 46 suggestions, the five defined events in data/ledger.json, the staged endpoint in analytics-endpoint/ and decisions D-35-D-38 all existed on main by 2026-11-17; (2) EXECUTIVE_SUMMARY.md said 44 suggestions / 49 questions / 42 decisions (30 recorded) against the registers' 46 / 50 / 45 (33 recorded) before this session's additions; (3) README.md said 46 suggestions and 67 flags; (4) REQ-22's delivered text claimed thirty-four pages but enumerated only thirty-three (the design brief page was missing from the list), and REQ-23 still described the pre-2026-11-17 landing page ('KPI tiles and article cards', purpose-grouped sidebar) although the shop-front rebuild (D-21/S-42) and the single-navigation-group rule (scripts/verify.py) now govern. All counts and descriptions were recomputed from the registers and the shipped pages in this session (this flag is itself one of the new rows: after the 2026-11-19 merges the register carries 72 flags (F-68/F-69 are arena/4cfacb30-zone4's rows from PR #88; this session's rows are F-70, F-71 and F-72)).",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: counts re-derived from the registers in this build. Any future count edit should be made against the registers, not typed by hand.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/content.json"
+      ]
+    },
+    {
+      "id": "F-72",
+      "severity": "Low",
+      "title": "Q-50 had landed as a duplicate of Q-45; rewritten as the tag-registration question (2026-11-19)",
+      "detail": "Added 2026-11-19 by arena/a4eb2a1d-zone4 during the line-by-line register review. The questions register's own 2026-11-17 reconciliation note records Q-50 as the tag-registration question, and Q-01's known text defers to 'question Q-50' for whether shopnow047c-20 is registered and active - but the row that landed carried Q-45's question text, known text and blocks verbatim, with only the flag differing (F-57 vs F-55). Q-50 now asks the tag-registration question with its own discovery path (Associates Central tracking-ID list plus the S-39 one-link test); Q-45 keeps the link-intent question. Q-01's known text also said 'Five additional URLs are separately unverified' where two exist; corrected to two. Register metadata only - no published product fact, link or page claim changed.",
+      "status": "Corrected 2026-11-19 (arena/a4eb2a1d-zone4)",
+      "action": "None: the row is rewritten to match the register's own record of what it was added as. Re-check at the next register review that Q-45 and Q-50 stay distinct.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/questions.json"
+      ]
     }
   ]
 }
