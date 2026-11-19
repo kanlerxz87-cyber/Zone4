@@ -307,6 +307,19 @@ def competitor_links(p: dict) -> str:
     )
 
 
+# The decision each listing answers, as a short label a shopper can act on.
+# Every phrase repeats a field already published in the sourced table on the same
+# page (basket count, listed depth, listed capacity), so the label is not a new
+# claim - it is the same row, written as a reason to click.
+CTA_LABEL = {
+    "P1": "Best for two dishes at once \u2014 see the dual-basket listing",
+    "P2": "Best for hosting \u2014 see the 26QT French-door oven",
+    "P3": "Best for a shallow counter \u2014 see the 8-quart basket",
+    "P4": "See the 1-second meat thermometer listing",
+    "P5": "See the smart wireless thermometer listing",
+}
+
+
 def shop_link(p: dict) -> str:
     # The published outbound product link is the tagged Special Link
     # https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20 (decisions D-01/D-14,
@@ -317,7 +330,8 @@ def shop_link(p: dict) -> str:
     # "(paid link)" label stay. The supplied short link stays recorded data in
     # data/intent-links.json; it is not judged valid or invalid (FLG-003 unresolved).
     url = SPECIAL_LINKS.get(p["id"], tagged_url(f"https://www.amazon.com/dp/{p['asin']}"))
-    return ext(url, "Open Amazon link (paid link)",
+    label = CTA_LABEL.get(p["id"], "Open Amazon link (paid link)")
+    return ext(url, f"{label} (paid link)",
                f' class="shop" data-track="click" data-track-target="{esc(url)}" data-track-asin="{esc(p["asin"])}"',
                rel="sponsored noopener noreferrer")
 
