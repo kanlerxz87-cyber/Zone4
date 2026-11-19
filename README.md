@@ -40,7 +40,7 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 | `docs/guides/*.html` | Four question-shaped buying guides and the guides hub. |
 | `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. The thermometer page carries its own two-question chooser with a no-script fallback table. |
 | `docs/products.html` | Five product records and a derived counter-space comparison. |
-| `docs/requirements.html` | All 35 request requirements, with status, evidence and source. |
+| `docs/requirements.html` | All 36 request requirements, with status, evidence and source. |
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
 | `docs/decisions.html` | Options and recorded decisions; open decisions remain visible. |
