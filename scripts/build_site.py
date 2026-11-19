@@ -2785,6 +2785,19 @@ def website_jsonld() -> str:
     )
 
 
+def breadcrumb_ld(trail: list[tuple[str, str]]) -> str:
+    """BreadcrumbList JSON-LD from (name, site-relative path) pairs.
+
+    Public (no underscore) so scripts/build_extras.py can reuse it for the guide
+    pages and the meat-thermometer category it writes itself.
+    """
+    items = []
+    for pos, (name, target) in enumerate(trail, start=1):
+        items.append({"@type": "ListItem", "position": pos, "name": name, "item": SITE_URL + target})
+    data = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
+
+
 def breadcrumb_jsonld(page: "Page", trail: list[tuple[str, str]]) -> str:
     """JSON-LD BreadcrumbList for a page that sits under a visible parent.
 

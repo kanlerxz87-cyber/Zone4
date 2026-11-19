@@ -34,12 +34,12 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 
 | Page | Purpose |
 |---|---|
-| `docs/index.html` | Shop-front publication front page: hero, lead guide, article shelf, category tiles, chooser, buyer comparison and a question-shaped content roadmap. |
+| `docs/index.html` | Shop-front publication front page: hero, the five listings as shop cards, lead guide, article shelf, category tiles, the three-question chooser, buyer comparison and a question-shaped content roadmap. |
 | `docs/articles/index.html` | Article hub and the question-led topic calendar. |
 | `docs/articles/*.html` | Eight individual buyer guides and product-format articles. |
 | `docs/guides/*.html` | Four question-shaped buying guides and the guides hub. |
-| `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. |
-| `docs/products.html` | Five verified product records and a derived counter-space comparison. |
+| `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. The thermometer page carries its own two-question chooser with a no-script fallback table. |
+| `docs/products.html` | Five product records and a derived counter-space comparison. |
 | `docs/requirements.html` | All 35 request requirements, with status, evidence and source. |
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
@@ -66,8 +66,10 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers; `data/decisions.json` also carries the three-path triage the Decision centre renders (SG-36). |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
-| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. |
-| `scripts/build_site.py` | Static Pages-site builder, including RSS, sitemap and robots.txt generation. |
+| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. The latest, `verification-session-67175642.json` (2026-11-19), re-read the P4, P5 and P1 listings and the Program Policies header. |
+| `scripts/build_site.py` | Static Pages-site builder, including RSS, sitemap, robots.txt, the grouped sidebar and the per-page `BreadcrumbList`/`Article`/`WebSite` structured data. |
+| `scripts/build_extras.py` | Guides, the product-intent record, the measurement page, the feed and the shop/article surfaces the builder calls. |
+| `scripts/make_social_card.sh` | Builds `docs/social-card.png`, the 1200x630 preview image behind `og:image`/`twitter:image`. Text and shapes only: no product photography (S-18 is still open). |
 | `scripts/verify.py` | Deterministic data, disclosure, source, link, SEO and page-directory checks. |
 | `qa/audit_site.py` | Independent audit of committed HTML. |
 | `engine/`, `tests/`, `ENGINE.md` | Separate research-engine prototype, its tests and its operational limits. |
@@ -77,6 +79,7 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 Run from a clean checkout with Python 3:
 
 ```bash
+python3 scripts/make_social_card.sh   # only after changing the card's copy
 python3 scripts/build_site.py
 python3 scripts/render_design_prompt.py
 python3 scripts/verify.py

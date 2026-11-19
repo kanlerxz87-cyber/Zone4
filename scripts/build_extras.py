@@ -582,7 +582,8 @@ def write_all(bs) -> list[str]:
     # The body needs the page object to build relative links, so it is generated after the page exists.
     page = bs.Page("guides/index.html", "Guides", "guides/index.html", "",
                    description="Question-shaped guides, each fact linked to the official listing page it was read from.",
-                   title_tag="Buying guides: answers from the listings")
+                   title_tag="Buying guides: answers from the listings",
+                   head_extra=bs.breadcrumb_ld([("Home", "index.html"), ("Guides", "guides/index.html")]))
     page.body = _guide_page_body_index(bs, page, guides)
     (out / "guides/index.html").write_text(bs.render(page), encoding="utf-8")
     written.append("guides/index.html")
@@ -590,7 +591,8 @@ def write_all(bs) -> list[str]:
     for g in guides:
         path = "guides/" + g["slug"] + ".html"
         page = bs.Page(path, g["h1"], path, "", description=g["meta_description"], title_tag=g["title_tag"],
-                       head_extra=_article_ld(bs, g))
+                       head_extra=_article_ld(bs, g) + bs.breadcrumb_ld(
+                           [("Home", "index.html"), ("Guides", "guides/index.html"), (g["h1"], path)]))
         page.body = _guide_body(bs, page, g)
         (out / path).write_text(bs.render(page), encoding="utf-8")
         written.append(path)
@@ -599,7 +601,9 @@ def write_all(bs) -> list[str]:
     tpath = "categories/meat-thermometers.html"
     page = bs.Page(tpath, "Meat thermometers", tpath, "",
                    description="Meat thermometers: the two submitted listings, with the title and category breadcrumb each page states, and the claims as titled.",
-                   title_tag="Meat thermometers: the two listings")
+                   title_tag="Meat thermometers: the two listings",
+                   head_extra=bs.breadcrumb_ld([("Home", "index.html"), ("All products", "products.html"),
+                                                ("Meat thermometers", tpath)]))
     page.body = _thermometer_body(bs, page)
     (out / tpath).write_text(bs.render(page), encoding="utf-8")
     written.append(tpath)
