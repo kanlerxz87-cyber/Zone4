@@ -774,3 +774,11 @@ table.roadmap td:nth-child(5) { min-width: 220px; }
 .cathero-figure .tile-figure { background: transparent; border: 0; padding: 0; }
 .cathero-figure .tile-caption { padding: 4px 6px 8px; }
 @media (max-width: 860px) { .cathero { grid-template-columns: 1fr; } }
+
+/* --- Compliance strip, compact on a phone (2026-11-19) --------------------------------- */
+/* The disclosure and the content notice must stay above the first screen's content, but
+   they must not push the shop off it. Smaller type and tighter padding, never hidden. */
+@media (max-width: 640px) {
+  .disclosure { padding: 7px 14px; font-size: 11.5px; line-height: 1.4; }
+  .disclosure .small { display: block; margin-top: 2px; font-size: 10.5px; opacity: .85; }
+}
