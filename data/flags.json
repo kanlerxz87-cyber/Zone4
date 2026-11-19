@@ -58,7 +58,8 @@
   },
   "renumbering_notes": [
    "arena/cc32105d-zone4's session-local F-55 (identifier-format check) renumbered to F-67 on integration on 2026-11-17: arena/68d67712-zone4 and arena/3d2ad125-zone4 had already taken F-55 to F-66 on main while this branch was in flight. Every cross-reference was rewritten. This session's planned F-56 (endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59 on main."
-  ]
+  ],
+  "renumbering_2026_11_19_storefront": "arena/67175642-zone4 raised four flags in the same window as several parallel sessions, and the numbers collided twice as main advanced. Final numbers, after rebasing onto 390ea78: F-76 (thermometer shop cards rendered an air-fryer capacity line - corrected), F-77 (P4 listing shows a newer-model notice - owner decision), F-78 (no social preview image had ever shipped - corrected), F-80 (the front page's h1 rendered below the product cards - corrected). F-79 belongs to a parallel session. The other sessions keep their own F-73, F-74 and F-75 as merged on main. No flag content changed in renumbering; this note is the audit trail."
  },
  "flags": [
   {
@@ -960,10 +961,70 @@
   },
   {
    "id": "F-76",
+   "severity": "Medium",
+   "title": "63 tagged Amazon links on 19 pages were missing rel=\"sponsored\" (corrected 2026-11-19)",
+   "detail": "Found in a line-by-line audit of the rendered pages on 2026-11-19 (arena/14efcc78-zone4). The tagging pass in scripts/build_site.py adds the Associates tag to every www.amazon.com link (Program Policies 2(b)) after rendering, but never set rel=\"sponsored\". The result: 63 anchors on 19 pages (Associates help and Conditions of Use links, and the Air Fryers category browse link) carried the tracking ID with no sponsored rel. verify.py checked only /dp/ and link.amazon links, so the gap passed every gate. measure.js also counts an outbound click only when rel contains 'sponsored', so clicks on those 63 anchors were not counted. Corrected at source: the tagging pass now also sets rel=\"sponsored\" on every www.amazon.com anchor, and verify.py requires it on every tagged Amazon link. A negative test (sponsor pass disabled) makes verify.py fail; with the fix restored it passes. The docs diff was checked: the only changes are the added rel token. The 63 counted anchors are the pre-fix state on main af593ba. Numbered F-76 because F-73 was taken on main by arena/79fe1c8d-zone4 (short-link citations) during this session.",
+   "sources": [
+    "https://affiliate-program.amazon.com/help/operating/policies",
+    "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+   ],
+   "status": "Corrected 2026-11-19 (arena/14efcc78-zone4); kept as the audit record",
+   "action": "No owner action. Re-run scripts/verify.py after any change to a link-rendering function. Confirm on the live site after the next Pages build that the Air Fryers category and Associates help links carry rel=\"sponsored\"."
+  },
+  {
+   "id": "F-77",
+   "severity": "Medium",
+   "title": "The meat-thermometer shop cards rendered an air-fryer 'Capacity and dimensions' line",
+   "detail": "Observed 2026-11-19 by arena/67175642-zone4. After decision D-46 published P4 and P5, the home-page shop cards for both thermometers printed 'Capacity and dimensions: not recorded for this listing yet (F-60)'. Neither product has an air-fryer capacity, and the only confirmed absent values were a model number and dimensions, so the line read as an unresolved air-fryer record on a thermometer card - the opposite of a shop front. Cause: scripts/build_extras.py rendered one hard-coded air-fryer card template for every product. Corrected the same day: the card facts are now chosen per category (_card_facts), and the thermometer cards show the brand and listed special features read from the Item details tables.",
+   "status": "Corrected 2026-11-19 (arena/67175642-zone4); kept as the audit record",
+   "action": "None. The regenerated cards carry brand and special-feature rows with their read date; capacity, dimensions and model stay blank and are explained on the category page (F-60).",
+   "sources": [
+    "https://www.amazon.com/dp/B0DHZTCNR5",
+    "https://www.amazon.com/dp/B0DZFD6R9Z"
+   ]
+  },
+  {
+   "id": "F-78",
+   "severity": "Medium",
+   "title": "P4's official listing shows a 'There is a newer model of this item' notice",
+   "detail": "Read 2026-11-19 by arena/67175642-zone4 on https://www.amazon.com/dp/B0DHZTCNR5. The listing for P4 (ThermoMaven 1 Sec Professional Digital Meat Thermometer, Black) displays 'There is a newer model of this item' linking to ASIN B0GL7Z4KP4 (the same title in Orange). This site publishes no replacement advice, because Amazon's notice identifies an ASIN, not a comparison, and no test of either unit has been run here. A shopper should see the notice rather than discover it after clicking through, so it is recorded here and stated on the product-intent record and the Meat thermometers category page.",
+   "status": "Needs review (owner may change the featured listing)",
+   "action": "Owner decision: whether P4 stays the featured instant-read, or the candidate ASIN B0GL7Z4KP4 is submitted as its own link and evaluated in its place. Neither is adopted here. Until then the notice is stated on the site.",
+   "sources": [
+    "https://www.amazon.com/dp/B0DHZTCNR5",
+    "https://www.amazon.com/dp/B0GL7Z4KP4"
+   ]
+  },
+  {
+   "id": "F-79",
+   "severity": "Low",
+   "title": "No social preview image was ever shipped, although the guidance S-09 cites asks for one",
+   "detail": "Observed 2026-11-19 by arena/67175642-zone4: no og:image or twitter:image tag existed on any of the 38 published pages, and docs/ contained no image asset, while suggestion S-09 records 'a social preview image' as a stated goal (partly implemented 2026-11-16). The deferral was deliberate - S-18 (real product photography, never generated or copied) is still waiting on the owner - but a text-and-shape card needs no product photography and no Program Content. Corrected the same day: scripts/make_social_card.sh builds docs/social-card.png (1200x630, site palette, the required disclosure line on the card) and every page now carries og:image, twitter:image, alt text and the summary_large_image card type.",
+   "status": "Corrected 2026-11-19 (arena/67175642-zone4); kept as the audit record",
+   "action": "None. S-18 is untouched: the card deliberately contains no product imagery. If a photograph is ever added, the Program Content and IP License questions in F-25 apply first.",
+   "sources": [
+    "https://developers.google.com/search/docs/appearance/page-experience",
+    "https://affiliate-program.amazon.com/help/operating/policies"
+   ]
+  },
+  {
+   "id": "F-80",
+   "severity": "Medium",
+   "title": "The landing page's only <h1> rendered below the first product card",
+   "detail": "Found 2026-11-19 by arena/67175642-zone4 while reading the built front page in document order. scripts/build_site.py emitted the shop grid before the hero block, so <main> opened with a product card and the page's single <h1> appeared after five cards. scripts/verify.py enforced it: a check required index.html's #shop to appear before .mhero, on a literal reading of the brief's 'lead with the products, not with the verification process'. That intent is right, but the implementation put the headline after the products, which is the wrong order for a reader arriving cold and leaves a search engine's first screenful without the page heading. Corrected the same day: the hero with its <h1> opens <main>, the shop grid sits directly beneath it, and the audit band still comes last. The gate was rewritten to test the intent - the h1 first, then the products, then the transparency band - with a new regression test.",
+   "status": "Corrected 2026-11-19 (arena/67175642-zone4); kept as the audit record",
+   "action": "None for published content. The ordering, the gate and the test now agree; no product fact or link changed.",
+   "sources": [
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py"
+   ]
+  },
+  {
+   "id": "F-81",
    "severity": "Low",
    "title": "Three flags still described the pre-D-01 link state: 'no link carries the tag', 'the short links are published', 'the thermometers are held'",
-   "detail": "Found and corrected 2026-11-19 by arena/6792f800-zone4 (numbered F-73 in this session's first build; renumbered F-76 at the merge, because parallel sessions published F-73, F-74 and F-75 on main while this branch was open) during a line-by-line read of the register against the built pages. F-57 said 'No link on the site carries the tag yet'; F-58's title and action said the published outbound links were the supplied short links and that they should be 'replaced' after a test; F-56's title said the two thermometer listings were held and that the site 'is still an air-fryer guide'; F-60 said the thermometer title claims were not published 'while the listings are held'. None of those statements has been true since decisions D-01/D-14 (tagged Special Links published, 2026-11-17) and D-46 (P4/P5 published, 2026-11-19). The flags stay open where an owner action is genuinely outstanding (F-57 the account confirmation, F-58 the one-link test, F-56 the optional scope reversal); what changed is the description of the current state, not the requirement. No product value, price, rating, link target or status count changed.",
-   "status": "Corrected 2026-11-19 (arena/6792f800-zone4); renumbered F-76 at merge",
+   "detail": "Found and corrected 2026-11-19 by arena/6792f800-zone4 (numbered F-73 in this session's first build; renumbered F-76 at the first merge and F-81 at the second, because parallel sessions published F-73, F-74 and F-75 on main while this branch was open) during a line-by-line read of the register against the built pages. F-57 said 'No link on the site carries the tag yet'; F-58's title and action said the published outbound links were the supplied short links and that they should be 'replaced' after a test; F-56's title said the two thermometer listings were held and that the site 'is still an air-fryer guide'; F-60 said the thermometer title claims were not published 'while the listings are held'. None of those statements has been true since decisions D-01/D-14 (tagged Special Links published, 2026-11-17) and D-46 (P4/P5 published, 2026-11-19). The flags stay open where an owner action is genuinely outstanding (F-57 the account confirmation, F-58 the one-link test, F-56 the optional scope reversal); what changed is the description of the current state, not the requirement. No product value, price, rating, link target or status count changed.",
+   "status": "Corrected 2026-11-19 (arena/6792f800-zone4); numbered F-81 after two merges",
    "action": "None outstanding. The next register review should read each open flag against the current build before quoting its text on any page.",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies",

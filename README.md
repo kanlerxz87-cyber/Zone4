@@ -11,8 +11,9 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 - The latest brief repeats the three earlier URLs and adds two more: [`B0c8moW59`](https://link.amazon/B0c8moW59) and [`B0f3GKalj`](https://link.amazon/B0f3GKalj). All five were re-resolved to listings on 2026-11-19 (`data/intent-links.json` keeps the intended ASIN and the observed redirect in separate fields). The two later links open meat-thermometer listings and are published in their own category under decision **D-46**; resolution is not a finding that any supplied link is valid or invalid.
 - The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication. See **Q-01 / Q-50 / F-03 / F-58** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
-- The site includes a three-question product chooser, four categories with scale-drawn footprint diagrams, eight question-led articles plus four published question-shaped guides, a product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
+- The site includes a three-question product chooser, format categories, eight question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
 - The storefront review gate is one page: **Review what to change** (`docs/review.html`, data `data/redesign.json`) files the proposals for the shop, each with cost, risk, the check that proves it worked and an official source, beside the questions that must be answered before any is built. Four carry a dated application (RD-01 complete; RD-03, RD-06 and RD-08 partly). Every count on that page is printed from its register, so it cannot drift.
+- The suggestion and decision pages are the review gate: **59 suggestions**, **56 questions**, **47 decisions** (35 recorded, 12 open), and **80 flags** are maintained in the JSON registers and published to their matching pages. The [Decision centre](https://kanlerxz87-cyber.github.io/Zone4/docs/decision-centre.html) renders the open decisions as three ready-weighed paths so a reviewer can choose a path before anything is implemented. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
@@ -34,13 +35,13 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 
 | Page | Purpose |
 |---|---|
-| `docs/index.html` | Shop-front publication front page: hero, lead guide, article shelf, category tiles, chooser, buyer comparison and a question-shaped content roadmap. |
+| `docs/index.html` | Shop-front publication front page: hero, the five listings as shop cards, lead guide, article shelf, category tiles, the three-question chooser, buyer comparison and a question-shaped content roadmap. |
 | `docs/articles/index.html` | Article hub and the question-led topic calendar. |
 | `docs/articles/*.html` | Eight individual buyer guides and product-format articles. |
 | `docs/guides/*.html` | Four question-shaped buying guides and the guides hub. |
-| `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. |
-| `docs/products.html` | Five verified product records and a derived counter-space comparison. |
-| `docs/requirements.html` | All 35 request requirements, with status, evidence and source. |
+| `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. The thermometer page carries its own two-question chooser with a no-script fallback table. |
+| `docs/products.html` | Five product records and a derived counter-space comparison. |
+| `docs/requirements.html` | All 36 request requirements, with status, evidence and source. |
 | `docs/review.html` | The review gate: every storefront proposal with its cost, risk and proof, beside the questions that must be answered before any is built. Counts are printed on the page from the register. |
 | `docs/about.html` | Who writes the site, how each number is checked, what it will not publish, and how to correct it. |
 | `docs/imagery.html` | Every picture on the site and where it comes from; why no listing photography is copied. |
@@ -64,15 +65,15 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `data/products.json` | Current product records (three) and cited listing fields. |
 | `data/marketing.json` | Eight articles, their fact rows and editorial metadata. |
 | `data/sources.json` | Official-source registry. |
-| `data/flags.json` | 76 flags; F-74 records the sponsored-rel gap on 63 tagged Amazon links, corrected 2026-11-19; F-75 records that the brief's "AI slop" claim is itself unverified, with the owner's examples requested (2026-11-19, arena/bc21d56d-zone4); F-55/F-56 record the two additional link destinations (resolved 2026-11-19 and published under D-46), F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68/F-69 the parallel session's P4 title-drift and untagged-link findings, F-70/F-71/F-72 the 2026-11-19 register and documentation corrections, F-73 the short-link citations (2026-11-19, arena/79fe1c8d-zone4), F-76 the 2026-11-19 correction of four flags that still described the pre-D-01 link state. |
-| `data/redesign.json` | The storefront proposals and gating questions behind `docs/review.html`; nothing in it is applied by the build. |
-| `data/imagery.json` | The imagery record: every asset, what it was drawn from, and the policy that keeps listing photography off the site. |
+| `data/flags.json` | 81 flags; F-55/F-56 record the two additional link destinations (resolved 2026-11-19 and published under D-46), F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68/F-69 the parallel session's P4 title-drift and untagged-link findings, F-70/F-71/F-72 the 2026-11-19 register and documentation corrections, F-81 the 2026-11-19 correction of four flags that still described the pre-D-01 link state, F-73 the short-link citations (arena/79fe1c8d-zone4), F-74 the sponsored-rel gap (corrected), F-75 the 'AI slop' claim recorded as unverified, F-76 the thermometer-card copy defect (corrected), F-77 the P4 newer-model notice (owner decision), F-78 the missing social preview image (corrected), F-80 the front-page h1 rendered below the product cards (corrected). |
 | `data/associates.json` | The owner-selected tracking ID, the three tagged Special Links and the five-step one-link-per-product Associates Central test protocol (2026-11-17). |
 | `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers; `data/decisions.json` also carries the three-path triage the Decision centre renders (SG-36). |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
-| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. |
-| `scripts/build_site.py` | Static Pages-site builder, including RSS, sitemap and robots.txt generation. |
+| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. The latest, `verification-session-67175642.json` (2026-11-19), re-read the P4, P5 and P1 listings and the Program Policies header. |
+| `scripts/build_site.py` | Static Pages-site builder, including RSS, sitemap, robots.txt, the grouped sidebar and the per-page `BreadcrumbList`/`Article`/`WebSite` structured data. |
+| `scripts/build_extras.py` | Guides, the product-intent record, the measurement page, the feed and the shop/article surfaces the builder calls. |
+| `scripts/make_social_card.sh` | Builds `docs/social-card.png`, the 1200x630 preview image behind `og:image`/`twitter:image`. Text and shapes only: no product photography (S-18 is still open). |
 | `scripts/verify.py` | Deterministic data, disclosure, source, link, SEO and page-directory checks. |
 | `qa/audit_site.py` | Independent audit of committed HTML. |
 | `engine/`, `tests/`, `ENGINE.md` | Separate research-engine prototype, its tests and its operational limits. |
@@ -82,6 +83,7 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 Run from a clean checkout with Python 3:
 
 ```bash
+python3 scripts/make_social_card.sh   # only after changing the card's copy
 python3 scripts/build_site.py
 python3 scripts/render_design_prompt.py
 python3 scripts/verify.py
