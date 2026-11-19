@@ -343,7 +343,7 @@
       "area": "Site",
       "requirement": "Live site with a clean landing page and subpages organized by category.",
       "status": "Delivered",
-      "delivered": "Thirty-seven generated pages: the publication front page (shop and guides first), executive summary, requirements, all-products catalogue (with the product-intent confirmation record), three category pages, combined marketing page, articles hub, eight article pages, the guides hub and four published question-shaped guides, product-intent record page, design brief, decision centre, information gaps, measurement and ledger page, automation/tracking, analysis, suggestions, open questions, decision log, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site, with a generated sitemap, robots.txt and RSS feed.",
+      "delivered": "Thirty-eight generated pages: the publication front page (shop and guides first), executive summary, requirements, all-products catalogue (with the product-intent confirmation record), four category pages (air-fryer-toaster-ovens, dual-basket, single-basket, meat thermometers), combined marketing page, articles hub, eight article pages, the guides hub and four published question-shaped guides, product-intent record page, design brief, decision centre, information gaps, measurement and ledger page, automation/tracking, analysis, suggestions, open questions, decision log, verification, policy compliance, analytics, Flagged for Review and sources. GitHub Pages serves the site, with a generated sitemap, robots.txt and RSS feed.",
       "blocker": "",
       "sources": [
         "https://api.github.com/repos/kanlerxz87-cyber/Zone4/pages"

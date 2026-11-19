@@ -29,20 +29,24 @@ DATA = ROOT / "data"
 # once the owner hosts it. Empty means the site sends no measurement request at all.
 MEASURE_ENDPOINT = ""
 
-# Held candidates (2026-11-17). The open flag on main (F-55, filed by another session) says the two
-# newly submitted links must not be added to product cards or affiliate calls to action until their
-# identity and destination are confirmed in the enrolled Associates workflow. Their records stay in
-# data/ and are shown on the links page as plain text, with no link and no sponsored link.
-HELD_PRODUCT_IDS = {"P4", "P5"}
+# Held candidates. Empty since 2026-11-19 (decision D-46, arena/4cfacb30-zone4): P4 and P5 were
+# re-resolved from their short links to the recorded ASINs and are published as tagged Special Links
+# with the same status as P1-P3 (D-01/D-14). To hold them again, set this to {"P4", "P5"} and rebuild.
+HELD_PRODUCT_IDS: set[str] = set()
 
 
 def is_held(pid: str) -> bool:
     return pid in HELD_PRODUCT_IDS
 
 
+def is_queued(g: dict) -> bool:
+    """A guide whose publication_status says it is queued waits for its cadence date (data/publishing.json)."""
+    return str(g.get("publication_status", "")).startswith("Queued")
+
+
 def published_guides() -> list[dict]:
     return [g for g in _load("guides.json")["guides"]
-            if not any(is_held(pid) for pid in g["product_ids"])]
+            if not any(is_held(pid) for pid in g["product_ids"]) and not is_queued(g)]
 
 # The five defined events. Anything else the page script sends is refused by the endpoint.
 EVENTS = [
@@ -114,7 +118,7 @@ def _guide_for_product(guides: list[dict], pid: str) -> dict | None:
 
 
 def extra_products_section(bs, current) -> str:
-    """Published candidate listings on the All products page (none while they are held)."""
+    """Candidate listings on the All products page: tagged Special Links (decision D-46), or text only if held."""
     rows = []
     for p in _load("products-extra.json")["products"]:
         if is_held(p["id"]):
@@ -131,15 +135,16 @@ def extra_products_section(bs, current) -> str:
             f'<tr><td class="mono">{_e(p["id"])}</td>'
             f'<td><a href="{_e(p["canonical_url"])}" rel="sponsored noopener noreferrer">{_e(p["name_short"])}</a></td>'
             f'<td class="mono">{_e(p["asin"])}</td><td>{_e(p["category_path"])}</td>'
-            f'<td>{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td></tr>'
+            f'<td>{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])}<br>' + PAID_NOTE
+            + f'<div class="small muted">Supplied short link (recorded, not judged): <span class="mono">{_e(p["short_link"])}</span></div></td></tr>'
         )
     if not rows:
         return ""
     return ('<section><h2>Other submitted listings</h2>'
-            '<p class="section-lead">Records for further submitted links are kept in the product-intent record '
-            'and are not published as links until their identity is confirmed (F-55).</p>'
+            '<p class="section-lead">Published under decision D-46 (2026-11-19): each short link was re-resolved to the ASIN '
+            'shown, and each outbound link is the tagged Special Link. Attribution is pending the Associates Central test (F-58).</p>'
             '<div class="tablewrap"><table class="data"><thead><tr><th scope="col">ID</th><th scope="col">Product (source link)</th><th scope="col">ASIN</th>'
-            '<th scope="col">Category (Amazon path, as read)</th><th scope="col">Short link</th></tr></thead><tbody>' + "".join(rows)
+            '<th scope="col">Category (Amazon path, as read)</th><th scope="col">Affiliate link (tagged Special Link)</th></tr></thead><tbody>' + "".join(rows)
             + '</tbody></table></div></section>')
 
 
@@ -253,24 +258,28 @@ def _thermometer_body(bs, page) -> str:
             f'<td class="mono">{_e(p["asin"])}</td>'
             f'<td>{_e(p["category_path"])}</td>'
             f'<td>{_e(p["brand_status"])}</td>'
-            f'<td>{_shop_link(p["short_link"], "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td>'
+            f'<td>{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td>'
             f'<td class="mono">{_e(", ".join(p["flags"]))}</td></tr>'
         )
     table = ('<div class="tablewrap"><table class="data"><thead><tr><th scope="col">ID</th><th scope="col">Product (source link)</th>'
-             '<th scope="col">ASIN</th><th scope="col">Category (Amazon path, as read)</th><th scope="col">Brand</th><th scope="col">Short link</th><th scope="col">Flags</th>'
+             '<th scope="col">ASIN</th><th scope="col">Category (Amazon path, as read)</th><th scope="col">Brand</th><th scope="col">Affiliate link (tagged Special Link)</th><th scope="col">Flags</th>'
              '</tr></thead><tbody>' + "".join(rows) + "</tbody></table></div>")
     g = next(x for x in _load("guides.json")["guides"] if x["slug"] == "what-to-check-in-a-meat-thermometer")
+    guide_line = (f'<p>Read the guide: <a href="{_e(page.rel("guides/" + g["slug"] + ".html"))}">{_e(g["h1"])}</a>.</p>'
+                  if not is_queued(g) else
+                  '<p class="small muted">A buying guide for meat thermometers is queued by the publishing cadence '
+                  '(next due 2026-12-01).</p>')
     return (
-        '<header class="hero"><h1>Meat thermometers</h1><p class="lead">The two listings added on 2026-11-17 from '
-        'the submitted links. Only the title and the category breadcrumb were read; brand, model, capacity and '
-        'dimensions are blank until the Item details table is read (F-60). The listing is a kitchen thermometer, '
-        'outside the air fryer scope of the first brief (F-56).</p></header>'
+        '<header class="hero"><h1>Meat thermometers</h1><p class="lead">Two listings from the submitted links, published '
+        'under decision D-46 (2026-11-19). Each short link was re-resolved to the ASIN shown, and the title and category '
+        'breadcrumb were read. Brand, model, capacity and dimensions are blank until the Item details table is read (F-60). '
+        'Attribution is pending the Associates Central test (F-58).</p></header>'
         f'<section><h2>Listings</h2>{table}</section>'
         f'<section><h2>What the titles state</h2><p class="section-lead">Claims as titled, not tested by this site.</p>'
         '<ul class="bullets">'
         + "".join(f'<li><strong>{_e(p["name_short"])}</strong>: {_e("; ".join(p["listing_claims_in_title"]))}</li>'
                   for p in _load("products-extra.json")["products"])
-        + f'</ul><p>Read the guide: <a href="{_e(page.rel("guides/" + g["slug"] + ".html"))}">{_e(g["h1"])}</a>.</p></section>'
+        + f'</ul>{guide_line}</section>'
     )
 
 
@@ -496,7 +505,14 @@ def write_all(bs) -> list[str]:
         (out / path).write_text(bs.render(page), encoding="utf-8")
         written.append(path)
 
-    # The meat-thermometer category is held with its candidate listings (see HELD_PRODUCT_IDS).
+    # The meat-thermometer category (decision D-46): its two listings are published; its guide waits for the cadence.
+    tpath = "categories/meat-thermometers.html"
+    page = bs.Page(tpath, "Meat thermometers", tpath, "",
+                   description="Meat thermometers: the two submitted listings, with the title and category breadcrumb each page states, and the claims as titled.",
+                   title_tag="Meat thermometers: the two listings")
+    page.body = _thermometer_body(bs, page)
+    (out / tpath).write_text(bs.render(page), encoding="utf-8")
+    written.append(tpath)
 
     for path, title, desc, fn in (
         ("links.html", "Product-intent record", "The intended ASIN, official listing, confirmation date and "

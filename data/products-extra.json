@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Two product records added on 2026-11-17 from the two new submitted links. Only what the official listing page showed in its title and category breadcrumb is recorded. Brand, model, dimensions, capacity and rating are NOT recorded: the Item details table was not reached in the reads on 2026-11-17, so the values stay blank and flagged (F-60). Prices and star ratings are withheld (F-02).",
+    "description": "Two product records added on 2026-11-17 from the two new submitted links. Only what the official listing page showed in its title and category breadcrumb is recorded. Brand, model, dimensions, capacity and rating are NOT recorded: the Item details table was not reached in the reads on 2026-11-17, so the values stay blank and flagged (F-60). Prices and star ratings are withheld (F-02). 2026-11-19 (arena/4cfacb30-zone4): P4 and P5 published under D-46; P4 title drift recorded as F-68 (the 2026-11-19 title replaces the 2026-11-17 text, which is kept as name_listing_prior).",
     "read_utc": "2026-11-17",
     "read_by": "arena/3d2ad125-zone4"
   },
@@ -11,12 +11,13 @@
       "short_link": "https://link.amazon/B0c8moW59",
       "canonical_url": "https://www.amazon.com/dp/B0DHZTCNR5",
       "name_short": "ThermoMaven 1 Sec Professional Digital Meat Thermometer",
-      "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black",
+      "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
       "listing_claims_in_title": [
         "±0.5℉ accuracy",
         "NIST&NSF Certified",
-        "Highly waterproof",
         "Auto-rotate bright LED screen",
+        "IP67 waterproof (as titled)",
+        "Stocking stuffers gifts for men (as titled)",
         "Black colour (as titled)"
       ],
       "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
@@ -30,9 +31,13 @@
       "special_feature": null,
       "flags": [
         "F-56",
-        "F-60"
+        "F-60",
+        "F-68"
       ],
-      "publication_status": "Held (F-55 on main): record kept; not shown as a product card, link or category."
+      "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
+      "name_listing_prior": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black [read 2026-11-17; superseded by the 2026-11-19 read, F-68]",
+      "title_read_utc": "2026-11-19",
+      "title_read_source": "https://www.amazon.com/dp/B0DHZTCNR5 (page title and breadcrumb read 2026-11-19)"
     },
     {
       "id": "P5",
@@ -61,7 +66,9 @@
         "F-56",
         "F-60"
       ],
-      "publication_status": "Held (F-55 on main): record kept; not shown as a product card, link or category."
+      "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
+      "title_read_utc": "2026-11-19",
+      "title_read_source": "https://www.amazon.com/dp/B0DZFD6R9Z (page title and breadcrumb read 2026-11-19; matches name_listing)"
     }
   ]
 }
