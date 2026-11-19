@@ -630,6 +630,15 @@ def _review_body(bs, page) -> str:
         '<p class="section-lead">The review gate only works if the registers cannot drift apart. This pass '
         'files its proposals in their own register so the counts published elsewhere stay correct.</p>'
         + register_list + "</section>"
+        + '<section id="superseded"><h2>' + e(review["superseded"]["title"]) + "</h2>"
+        + f'<p class="section-lead">{e(review["superseded"]["note"])}</p>'
+        + bs.table(["Register", "Row", "What its headline still says", "What is true after 2026-11-19",
+                    "Official source"],
+                   [[f'<span class="mono">{e(r["register"])}</span>', f'<span class="mono">{e(r["id"])}</span>',
+                     e(r["still_says"]), e(r["current_state"]),
+                     bs.ext("https://affiliate-program.amazon.com/help/operating/policies", "Program Policies 2(b)")]
+                    for r in review["superseded"]["rows"]], "data")
+        + "</section>"
         + '<section><h2>The shortest credible path</h2>'
         '<p class="aiwrap">Answer RQ-02 first: sign in to Associates Central and confirm that '
         '<span class="mono">shopnow047c-20</span> is listed and active, then click one Special Link per product '

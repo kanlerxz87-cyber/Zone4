@@ -30,7 +30,43 @@
     "title": "Only then build",
     "what": "The build order is the priority order: P1 first, because the tracking-ID test (RQ-02) decides whether any of the rest can earn."
    }
-  ]
+  ],
+  "superseded": {
+   "title": "Rows in the older registers that describe an earlier state",
+   "note": "Read these with their dated update notes, not their headlines. Nothing below changes a published product value; each is a wording correction the next register review should apply.",
+   "rows": [
+    {
+     "register": "suggestions.json",
+     "id": "S-39",
+     "still_says": "“Replace the untagged outbound links with validated Special Links”",
+     "current_state": "Every outbound product link is already the tagged Special Link (D-01/D-14) and the build tags every www.amazon.com href (F-69). The untested half is the Associates Central one-link-per-product test (F-58, Q-50, RQ-02)."
+    },
+    {
+     "register": "flags.json",
+     "id": "F-56",
+     "still_says": "the thermometer listings are held and the site is still an air-fryer guide",
+     "current_state": "Published in their own Meat thermometers category under D-46, reversible with HELD_PRODUCT_IDS."
+    },
+    {
+     "register": "flags.json",
+     "id": "F-57",
+     "still_says": "“No link on the site carries the tag yet”",
+     "current_state": "Corrected 2026-11-19 (F-73): every product link carries shopnow047c-20; only the account confirmation is outstanding."
+    },
+    {
+     "register": "flags.json",
+     "id": "F-58",
+     "still_says": "the published outbound links are the short links as supplied",
+     "current_state": "Corrected 2026-11-19 (F-73): the published hrefs are the tagged Special Links; the one-link test itself has still not run."
+    },
+    {
+     "register": "flags.json",
+     "id": "F-60",
+     "still_says": "the thermometer title claims are not published “while the listings are held”",
+     "current_state": "Corrected 2026-11-19 (F-73): the listings are published; their title wording stays labelled as the listing's claim and their specification blanks stay blank."
+    }
+   ]
+  }
  },
  "suggestions": [
   {
