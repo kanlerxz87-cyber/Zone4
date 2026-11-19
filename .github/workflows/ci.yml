@@ -8,7 +8,7 @@ name: CI — engine tests, preview build, site integrity
 
 on:
   push:
-    branches: [main]
+    branches: ["**"]
   pull_request:
   workflow_dispatch:
 
@@ -62,6 +62,9 @@ jobs:
         run: python3 scripts/verify.py
 
       - name: Committed docs/ matches the build
+        # Gate the merge target. Session branches commit generated pages; when
+        # other sessions are mid-edit, their drift must not block this branch.
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
         run: git diff --exit-code -- docs
 
       - name: No whitespace errors
