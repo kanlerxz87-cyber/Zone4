@@ -52,19 +52,19 @@
      "register": "flags.json",
      "id": "F-57",
      "still_says": "“No link on the site carries the tag yet”",
-     "current_state": "Corrected 2026-11-19 (F-73): every product link carries shopnow047c-20; only the account confirmation is outstanding."
+     "current_state": "Corrected 2026-11-19 (F-76): every product link carries shopnow047c-20; only the account confirmation is outstanding."
     },
     {
      "register": "flags.json",
      "id": "F-58",
      "still_says": "the published outbound links are the short links as supplied",
-     "current_state": "Corrected 2026-11-19 (F-73): the published hrefs are the tagged Special Links; the one-link test itself has still not run."
+     "current_state": "Corrected 2026-11-19 (F-76): the published hrefs are the tagged Special Links; the one-link test itself has still not run."
     },
     {
      "register": "flags.json",
      "id": "F-60",
      "still_says": "the thermometer title claims are not published “while the listings are held”",
-     "current_state": "Corrected 2026-11-19 (F-73): the listings are published; their title wording stays labelled as the listing's claim and their specification blanks stay blank."
+     "current_state": "Corrected 2026-11-19 (F-76): the listings are published; their title wording stays labelled as the listing's claim and their specification blanks stay blank."
     }
    ]
   }

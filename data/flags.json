@@ -924,10 +924,46 @@
   },
   {
    "id": "F-73",
+   "severity": "Medium",
+   "title": "Supplied short links still appeared as clickable, untagged sponsored links on register and audit pages (41 hrefs on 8 pages); now shown as text or pointed to the official listing",
+   "detail": "Added 2026-11-19 by arena/79fe1c8d-zone4 during the repo re-verification. After the tagged Special Links were published as the shop buttons (D-01/D-14, D-46), 41 links to the three supplied short-link hosts (link.amazon/...) remained on the analysis, decisions, flags, questions, requirements, sources and suggestions pages as citations. They carried no tag, so they were not the published Special Links. F-69's tagging rule covers only www.amazon.com hosts, so it did not reach them. Fix in scripts/build_site.py (ext): each short link is now an ordinary link to the official_listing_url in its data/intent-links.json record (the same listing the record names as the intended ASIN), labelled with the short link and the ASIN it opens to; the tag is added by the existing www.amazon.com rule. A short link with no record would render as plain text. Result: 0 short-link hrefs; all 815 Amazon product links carry the tag and rel=\"sponsored\"; 0 untagged www.amazon.com links. The supplied short links are not judged valid or invalid (Zone3 FLG-003 remains unresolved). Also noted: F-58's title still says the published outbound links are the short links; that text predates D-01/D-14 and is kept as the audit record. The Associates Central one-link test (F-58) and tag registration (F-57) remain owner actions.",
+   "sources": [
+    "https://affiliate-program.amazon.com/help/operating/policies",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/intent-links.json"
+   ],
+   "status": "Corrected 2026-11-19 (arena/79fe1c8d-zone4); kept as the audit record",
+   "action": "Reviewer: confirm in a normal browser that each short-link citation opens to the ASIN named beside it, and confirm in Associates Central that shopnow047c-20 is the enrolled tag (F-57)."
+  },
+  {
+   "id": "F-74",
+   "severity": "Medium",
+   "title": "63 tagged Amazon links on 19 pages were missing rel=\"sponsored\" (corrected 2026-11-19)",
+   "detail": "Found in a line-by-line audit of the rendered pages on 2026-11-19 (arena/14efcc78-zone4). The tagging pass in scripts/build_site.py adds the Associates tag to every www.amazon.com link (Program Policies 2(b)) after rendering, but never set rel=\"sponsored\". The result: 63 anchors on 19 pages (Associates help and Conditions of Use links, and the Air Fryers category browse link) carried the tracking ID with no sponsored rel. verify.py checked only /dp/ and link.amazon links, so the gap passed every gate. measure.js also counts an outbound click only when rel contains 'sponsored', so clicks on those 63 anchors were not counted. Corrected at source: the tagging pass now also sets rel=\"sponsored\" on every www.amazon.com anchor, and verify.py requires it on every tagged Amazon link. A negative test (sponsor pass disabled) makes verify.py fail; with the fix restored it passes. The docs diff was checked: the only changes are the added rel token. The 63 counted anchors are the pre-fix state on main af593ba. Numbered F-74 because F-73 was taken on main by arena/79fe1c8d-zone4 (short-link citations) during this session.",
+   "sources": [
+    "https://affiliate-program.amazon.com/help/operating/policies",
+    "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links"
+   ],
+   "status": "Corrected 2026-11-19 (arena/14efcc78-zone4); kept as the audit record",
+   "action": "No owner action. Re-run scripts/verify.py after any change to a link-rendering function. Confirm on the live site after the next Pages build that the Air Fryers category and Associates help links carry rel=\"sponsored\"."
+  },
+  {
+   "id": "F-75",
+   "severity": "Low",
+   "title": "The brief's claim that the site 'reads like some AI slop website' is itself unverified: no page, sentence or surface is named as evidence",
+   "detail": "Numbered F-75 on 2026-11-19 (arena/bc21d56d-zone4): the flag was drafted as F-73, renumbered F-74, then renumbered again because parallel sessions took F-73 in PR #92 (short-link citations, arena/79fe1c8d-zone4) and F-74 in PR #94 (sponsored-rel gate, arena/14efcc78-zone4) while this session worked. Added 2026-11-19 by arena/bc21d56d-zone4. The current session brief repeats the 2026-11-17 wording ('It should not read like some AI slop website like it looks like now') but names no page, sentence or surface. What the register can establish: ten anti-patterns (AS-01..AS-10 in data/design.json) were documented from observed evidence and their replacements applied under recorded decisions D-12 (voice) and D-36 (copy pass); F-52 records the one opener defect found and its correction; every published article was rewritten to the recorded voice. Whether further surfaces still read as machine output is an owner judgement that no official source or register row currently evidences. This flag publishes the gap instead of treating the complaint as a finding. Q-52 asks the owner for the named examples; SG-34 stages the evidence pass that converts each named example into an AS-11+ row.",
+   "status": "Needs review (owner input requested)",
+   "action": "Reviewer/owner: name the published pages or sentences that read as machine output (question Q-52). Each named example becomes an anti-pattern row with its evidence and a replacement, and the openers are re-read against the expanded list (SG-34). If no example is named, that answer is recorded and this flag closes with the owner-confirmed result.",
+   "sources": [
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/design.json"
+   ]
+  },
+  {
+   "id": "F-76",
    "severity": "Low",
    "title": "Three flags still described the pre-D-01 link state: 'no link carries the tag', 'the short links are published', 'the thermometers are held'",
-   "detail": "Found and corrected 2026-11-19 by arena/6792f800-zone4 during a line-by-line read of the register against the built pages. F-57 said 'No link on the site carries the tag yet'; F-58's title and action said the published outbound links were the supplied short links and that they should be 'replaced' after a test; F-56's title said the two thermometer listings were held and that the site 'is still an air-fryer guide'; F-60 said the thermometer title claims were not published 'while the listings are held'. None of those statements has been true since decisions D-01/D-14 (tagged Special Links published, 2026-11-17) and D-46 (P4/P5 published, 2026-11-19). The flags stay open where an owner action is genuinely outstanding (F-57 the account confirmation, F-58 the one-link test, F-56 the optional scope reversal); what changed is the description of the current state, not the requirement. No product value, price, rating, link target or status count changed.",
-   "status": "Corrected 2026-11-19 (arena/6792f800-zone4)",
+   "detail": "Found and corrected 2026-11-19 by arena/6792f800-zone4 (numbered F-73 in this session's first build; renumbered F-76 at the merge, because parallel sessions published F-73, F-74 and F-75 on main while this branch was open) during a line-by-line read of the register against the built pages. F-57 said 'No link on the site carries the tag yet'; F-58's title and action said the published outbound links were the supplied short links and that they should be 'replaced' after a test; F-56's title said the two thermometer listings were held and that the site 'is still an air-fryer guide'; F-60 said the thermometer title claims were not published 'while the listings are held'. None of those statements has been true since decisions D-01/D-14 (tagged Special Links published, 2026-11-17) and D-46 (P4/P5 published, 2026-11-19). The flags stay open where an owner action is genuinely outstanding (F-57 the account confirmation, F-58 the one-link test, F-56 the optional scope reversal); what changed is the description of the current state, not the requirement. No product value, price, rating, link target or status count changed.",
+   "status": "Corrected 2026-11-19 (arena/6792f800-zone4); renumbered F-76 at merge",
    "action": "None outstanding. The next register review should read each open flag against the current build before quoting its text on any page.",
    "sources": [
     "https://affiliate-program.amazon.com/help/operating/policies",

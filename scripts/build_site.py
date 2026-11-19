@@ -81,6 +81,10 @@ QUESTIONS = QUESTIONS_DOC["questions"]
 DECISIONS_DOC = load("decisions.json")
 DECISIONS = DECISIONS_DOC["decisions"]
 DECISION_LOG = DECISIONS_DOC["log"]
+# The choose-a-path triage (added 2026-11-19, SG-36): the open decisions
+# presented as three coherent orders. Presentations of the register, not
+# recorded choices; the queue itself stays the source of truth.
+DECISION_PATHS = DECISIONS_DOC.get("paths", {}).get("paths", [])
 # The design brief: three specified visual directions, the anti-"AI slop"
 # checklist, the organic-traffic topic programme and the headline options.
 # Like the other registers it is a proposal surface, and every row in it cites
@@ -273,7 +277,30 @@ def link_rel(url: str, rel: str = "noopener noreferrer") -> str:
     return rel
 
 
+_SHORT_LINK_MAP: dict[str, dict] | None = None
+
+
+def _short_link_targets() -> dict[str, dict]:
+    """Submitted short link -> its product-intent record (data/intent-links.json)."""
+    global _SHORT_LINK_MAP
+    if _SHORT_LINK_MAP is None:
+        data = json.loads((ROOT / "data" / "intent-links.json").read_text(encoding="utf-8"))
+        _SHORT_LINK_MAP = {r["submitted_url"]: r for r in data["links"]}
+    return _SHORT_LINK_MAP
+
+
 def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
+    if url.startswith("https://link.amazon/"):
+        # 2026-11-19 (F-73): a supplied short link is never published as the outbound target.
+        # Citations point to the official listing that the recorded product-intent record
+        # names (intended ASIN, official_listing_url), and the short link stays visible as text.
+        rec = _short_link_targets().get(url)
+        if rec is not None:
+            target = rec["official_listing_url"]
+            label = f"{text or url} (opens to ASIN {rec['intended_asin']})"
+            rel = link_rel(target, rel)
+            return f'<a href="{esc(target)}" rel="{esc(rel)}"{extra}>{esc(label)}</a>'
+        return f"<code>{esc(url)}</code>"
     rel = link_rel(url, rel)
     label = esc(text if text is not None else url)
     return f'<a href="{esc(url)}" rel="{esc(rel)}"{extra}>{label}</a>'
@@ -2237,6 +2264,12 @@ def page_decision_centre(current: Page) -> str:
     drift from the registers it summarises. This is the page the owner brief
     asks for - a place to review the suggestions and choose a path before
     anything is implemented.
+
+    The choose-a-path triage (SG-36, 2026-11-19) renders the open decisions as
+    three coherent orders from `data/decisions.json`'s `paths` key. It is a
+    presentation of the register, not a recorded choice: the build refuses a
+    path step that names an unknown or no-longer-open decision, so the section
+    cannot claim a decision that the queue no longer carries as open.
     """
     open_decisions = [d for d in DECISIONS if d["status"].startswith("Open")]
     hub = [
@@ -2297,6 +2330,50 @@ def page_decision_centre(current: Page) -> str:
         f'({flag_chip(current, "F-57")}) and the one-link-per-product test, not a design choice.'
         if recorded_tag else ""
     )
+    # The choose-a-path triage (SG-36, 2026-11-19): the open decisions presented
+    # as three coherent orders, rendered from data/decisions.json's paths key.
+    # Guard: a path may only present decisions the register still carries as
+    # open, so the section cannot outlive the queue it summarises.
+    dec_by_id = {d["id"]: d for d in DECISIONS}
+    path_sections = []
+    for path in DECISION_PATHS:
+        path_rows = []
+        for n, step in enumerate(path["steps"], start=1):
+            did = step["decision"]
+            d = dec_by_id.get(did)
+            if d is None:
+                raise SystemExit(f"decision-centre paths: {path['id']} names unknown decision {did}")
+            if not d["status"].startswith("Open"):
+                raise SystemExit(
+                    f"decision-centre paths: {path['id']} names decision {did}, "
+                    f"whose status is now '{d['status']}' - update the path or remove the step"
+                )
+            src = d["sources"][0] if d.get("sources") else None
+            path_rows.append([
+                str(n),
+                f'<a href="{esc(current.rel("decisions.html"))}#{esc(did)}"><strong>{esc(did)}</strong></a> &middot; {esc(d["question"])}',
+                esc(step["why"]),
+                esc(step["unblocks"]),
+                ext(src["url"], src.get("ref", "official source")) if src else "",
+            ])
+        path_sections.append(
+            f'<h3>{esc(path["name"])}</h3>'
+            f'<p class="section-lead">{esc(path["one_line"])} <em>Best for: {esc(path["best_for"])}</em></p>'
+            + table(["Step", "Decision (open)", "Why it comes at this point", "What it unblocks", "Official source"],
+                    path_rows, "compact")
+            + f'<p class="small muted">Deliberately delays: {esc(path["delays"])} &middot; Cost: {esc(path["cost_note"])}</p>'
+        )
+    paths_html = (
+        '<section id="choose-a-path"><h2>Choose a path: the open decisions as three coherent orders</h2>'
+        '<p class="section-lead">Three ways to work through the same queue, each a recommendation assembled from the register at build time - '
+        'not a recorded choice. Every step names a decision that is open right now (the build refuses to render one that is not), and each row '
+        'carries the decision\'s own official source. Pick one path and answer it top to bottom, or ignore all three and work the numeric queue '
+        f'on the {href(current, "decisions.html", "Decision log")}; the queue, not this section, is the source of truth.</p>'
+        + "".join(path_sections)
+        + f'<p class="small muted">Derived from suggestion {href(current, "suggestions.html#SG-36", "SG-36")} under recorded decision '
+        f'{href(current, "decisions.html#D-38", "D-38")} (option A: publish the queue in dependency order). The paths present strategy, '
+        'not outcomes: nothing changes on the site because a path is read, and no step is treated as decided until it is recorded on the Decision log.</p></section>'
+    )
     return (
         hero("Decision centre",
              "One place to review what could change, see what is still unknown, and choose a path before anything is implemented. "
@@ -2311,6 +2388,7 @@ def page_decision_centre(current: Page) -> str:
           f'The full list of {len(open_decisions)} open decisions is on the {href(current, "decisions.html", "Decision log")}.</p>'
           + table(["Decision", "Recommendation (an argument, not a decision)", "Unlocks", "Official source"], gate_rows, "compact")
           + f'<p class="small muted">{tag_note}</p></section>'
+        + paths_html
         + '<section><h2>What this site does with an answer</h2>'
           f'<p>A recorded decision becomes a suggestion marked for implementation, then a pull request, then a build that has to pass the same '
           f'gates as every page here: every table row sourced to an official page, the Associates disclosure on every page, no price or star rating, '
@@ -2435,7 +2513,7 @@ PAGE_DESCRIPTIONS = {
     "review.html": "Every proposal that would make this site read like a publication, each with its cost, risk and proof of success, beside the questions that must be answered before any of them is built.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
-    "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in and what happens to an answer.",
+    "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in, three ready-weighed paths through the open decisions, and what happens to an answer.",
     "information-gaps.html": f"What this project can already prove about the three air fryers, the {len([q for q in QUESTIONS if q['kind'] != 'Known'])} questions that are not answered yet, and the named party who can close each gap.",
     "design.html": f"The design brief for this site: {len(DIRECTIONS)} specified visual directions, the {len(ANTI_SLOP)} writing patterns that make it read as machine output with a replacement for each, two headline options for every published article, {len(TOPICS)} organic-traffic topics and the paste-ready prompt that assembles them. Nothing on it has been applied.",
     "decisions.html": f"The decision queue for this site: every open choice with its options, cost and reversibility, shown in the order each unblocks the others, plus the {sum(1 for d in DECISIONS if d['status'] == 'Recorded')} decisions recorded on 2026-11-16 under the owner's delegation.",
@@ -2484,7 +2562,31 @@ def _tag_amazon_hrefs(doc: str) -> str:
             return m.group(0)
         sep = "&amp;" if "?" in base else "?"
         return f'href="{base}{sep}tag={TRACKING_ID}' + (f"#{hash_part}" if hash_part else "") + '"'
-    return re.sub(r'href="(https://www\.amazon\.com/[^"]*)"', repl, doc)
+    doc = re.sub(r'href="(https://www\.amazon\.com/[^"]*)"', repl, doc)
+    return _sponsor_amazon_anchors(doc)
+
+
+def _sponsor_amazon_anchors(doc: str) -> str:
+    """Mark every www.amazon.com anchor rel="sponsored" (Google: paid and affiliate links).
+
+    Every such link now carries the Associates tag (see _tag_amazon_hrefs), so every one is an
+    affiliate link. Before 2026-11-19 the tagging pass ran after rendering and never set rel, so
+    63 tagged Associates help and category links went out without it (F-74). The click counter
+    (docs/measure.js) also selects on rel="sponsored", so untagged-rel links were not counted.
+    """
+    def repl(m: "re.Match[str]") -> str:
+        attrs = m.group(1)
+        if not re.search(r'\bhref="https://www\.amazon\.com/', attrs):
+            return m.group(0)
+        rel = re.search(r'\brel="([^"]*)"', attrs)
+        if rel:
+            if "sponsored" in rel.group(1).split():
+                return m.group(0)
+            attrs = attrs.replace(rel.group(0), f'rel="sponsored {rel.group(1)}"', 1)
+        else:
+            attrs = attrs + ' rel="sponsored"'
+        return f"<a{attrs}>"
+    return re.sub(r"<a\b([^>]*)>", repl, doc)
 
 
 def render(page: Page) -> str:

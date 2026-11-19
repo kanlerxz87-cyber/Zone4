@@ -862,7 +862,9 @@ def check_publication() -> None:
             if not href:
                 continue
             h = href.group(1)
-            if "amazon.com/dp/" in h or h.startswith("https://link.amazon/"):
+            # Any Amazon link that carries the Associates tag is an affiliate link (F-74, 2026-11-19).
+            tagged_amazon = "amazon.com/" in h and "tag=" in h
+            if "amazon.com/dp/" in h or h.startswith("https://link.amazon/") or tagged_amazon:
                 rel_attr = re.search(r'rel="([^"]*)"', attrs)
                 if not rel_attr or "sponsored" not in rel_attr.group(1).split():
                     fail(f"{rel}: product link without rel=\"sponsored\": {h[:80]}")
