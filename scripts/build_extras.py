@@ -148,6 +148,32 @@ def extra_products_section(bs, current) -> str:
             + '</tbody></table></div></section>')
 
 
+def _card_facts(p: dict) -> list[str]:
+    """The two or three figures a shopper compares, worded for the product's category.
+
+    Air fryers are compared on capacity and counter footprint; a meat thermometer
+    has neither, so printing a "capacity" line on its card was a defect (F-77,
+    fixed 2026-11-19). Everything printed here is a value an official listing
+    states and the data file records; nothing is inferred.
+    """
+    facts: list[str] = []
+    if _category_for(p) == "meat-thermometers":
+        if p.get("brand"):
+            facts.append(f"Brand as listed: {_e(p['brand'])}")
+        if p.get("special_feature"):
+            facts.append(f"Features as listed: {_e(p['special_feature'])}")
+        if p.get("model_number"):
+            facts.append(f"Model as listed: {_e(p['model_number'])}")
+        if not facts:
+            facts.append("<span class=\"spec-note\">Listing figures not yet recorded for this product (F-60).</span>")
+        return facts
+    if p.get("capacity"):
+        facts.append(f"Capacity as listed: {_e(p['capacity'])}")
+    if p.get("dimensions"):
+        facts.append(f"Dimensions as listed: {_e(p['dimensions'])}")
+    return facts
+
+
 def shop_section(bs, current) -> str:
     """Products first: one card per listing, above the verification material."""
     guides = published_guides()
@@ -156,12 +182,8 @@ def shop_section(bs, current) -> str:
         if is_held(p["id"]):
             continue
         cat = _category_for(p)
-        facts = []
-        if p.get("capacity"):
-            facts.append(f"Capacity as listed: {_e(p['capacity'])}")
-        if p.get("dimensions"):
-            facts.append(f"Dimensions as listed: {_e(p['dimensions'])}")
-        facts_html = "".join(f"<li>{f}</li>" for f in facts) or "<li>Capacity and dimensions: not recorded for this listing yet (F-60)</li>"
+        facts = _card_facts(p)
+        facts_html = "".join(f"<li>{f}</li>" for f in facts) or "<li class=\"spec-note\">Listing figures not recorded yet.</li>"
         guide = _guide_for_product(guides, p["id"])
         guide_html = (f'<a href="{_e(current.rel("guides/" + guide["slug"] + ".html"))}">Read the guide</a>'
                       if guide else "")
@@ -170,8 +192,9 @@ def shop_section(bs, current) -> str:
             f'<h3>{_e(p["name_short"])}</h3>'
             f'<p class="small mono">ASIN {_e(p["asin"])} · {_e(p["id"])}</p>'
             f'<ul class="small">{facts_html}</ul>'
-            f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])} ' + PAID_NOTE +
-            f'<a href="{_e(current.rel("products.html"))}">Source record</a> {guide_html}</p></article>'
+            f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "Check price on Amazon", p["asin"], "shop sun")} '
+            + PAID_NOTE
+            + f'<a href="{_e(current.rel("products.html"))}" class="small">Source record</a> {guide_html}</p></article>'
         )
     return (
         '<section class="shop-section" id="shop"><h2>Shop the listings</h2>'
@@ -248,21 +271,74 @@ def _guide_page_body_index(bs, page, guides: list[dict]) -> str:
     )
 
 
+def _thermometer_chooser(page) -> str:
+    """Two questions that separate the two thermometer listings on stated facts only.
+
+    The air-fryer chooser answers 'which format for my kitchen'; two thermometers
+    raise a different question - how many things are you tracking at once, and
+    how much range do you need. Both facts are read from the listings' own Item
+    details (2026-11-19) and the title claims recorded for each product, so the
+    routing is checkable. No popularity, rating or accuracy claim is used to rank
+    them: both brands claim NIST certification in their titles and this site has
+    tested neither.
+    """
+    fallback = (
+        '<div class="tablewrap"><table class="data chooser-fallback"><thead><tr>'
+        '<th scope="col">When the need is</th><th scope="col">The listing that states it</th>'
+        '<th scope="col">The listed text behind the route (official)</th></tr></thead><tbody>'
+        '<tr><td>One probe is enough: a roast, a steak, frying oil or candy</td>'
+        '<td><a href="#P4">ThermoMaven instant-read (P4)</a></td>'
+        '<td><a href="https://www.amazon.com/dp/B0DHZTCNR5" rel="sponsored noopener noreferrer">'
+        'Official listing (B0DHZTCNR5)</a>: the title lists a 1-second read and &plusmn;0.5&deg;F; '
+        'Item details list Auto Off, Fast Reading System and an ultra-clear screen</td></tr>'
+        '<tr><td>Several probes at once, or a long range away from the grill</td>'
+        '<td><a href="#P5">CHEF iQ Sense (P5)</a></td>'
+        '<td><a href="https://www.amazon.com/dp/B0DZFD6R9Z" rel="sponsored noopener noreferrer">'
+        'Official listing (B0DZFD6R9Z)</a>: Item details list 5 sensors and unlimited range; '
+        'the title lists 3 ultra-thin probes and WiFi</td></tr>'
+        '</tbody></table></div>'
+    )
+    return (
+        '<section id="therm-chooser"><h2>Which thermometer is for you? Two questions</h2>'
+        '<p class="section-lead">Answer two questions and this routes you to the listing whose stated features answer them. '
+        'It is editorial routing on the listings\' own text, not a rating: neither unit has been tested here, and no '
+        'star rating is published (F-02).</p>'
+        '<div class="chooser" id="therm-form">'
+        '<fieldset><legend>1. How many things do you want to track at once?</legend>'
+        '<label><input type="radio" name="tprobes" value="one" checked> One cut or one pan of oil</label>'
+        '<label><input type="radio" name="tprobes" value="several"> Several pieces at once (roasts, multiple steaks)</label>'
+        '</fieldset>'
+        '<fieldset><legend>2. Do you need to watch it from far away?</legend>'
+        '<label><input type="radio" name="trange" value="close" checked> I am standing right there</label>'
+        '<label><input type="radio" name="trange" value="far"> Away from the grill, indoors, or in another room</label>'
+        '</fieldset>'
+        '<button class="btn btn-primary" type="button" id="therm-go">Show my match</button>'
+        '</div>'
+        '<div class="chooser-result" id="therm-result" role="status" aria-live="polite"></div>'
+        '<h3>The routing, in plain text</h3>'
+        '<p class="small muted">The same logic, in a table you can check without scripts.</p>'
+        + fallback + '</section>'
+    )
+
+
 def _thermometer_body(bs, page) -> str:
     rows = []
     for p in _load("products-extra.json")["products"]:
         rows.append(
-            f'<tr><td class="mono">{_e(p["id"])}</td>'
+            f'<tr id="{_e(p["id"])}"><td class="mono">{_e(p["id"])}</td>'
             f'<td><a href="{_e(p["canonical_url"])}" rel="sponsored noopener noreferrer">{_e(p["name_short"])}</a>'
             f'<div class="small muted">{_e(p["name_listing"])}</div></td>'
             f'<td class="mono">{_e(p["asin"])}</td>'
             f'<td>{_e(p["category_path"])}</td>'
-            f'<td>{_e(p["brand_status"])}</td>'
+            f'<td>{_e(p["brand"] or "Not stated")}<div class="small muted">{_e(p["brand_status"])}</div></td>'
+            f'<td>{_e(p["special_feature"] or "Not stated")}</td>'
             f'<td>{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon", p["asin"])}<br>' + PAID_NOTE + '</td>'
             f'<td class="mono">{_e(", ".join(p["flags"]))}</td></tr>'
         )
     table = ('<div class="tablewrap"><table class="data"><thead><tr><th scope="col">ID</th><th scope="col">Product (source link)</th>'
-             '<th scope="col">ASIN</th><th scope="col">Category (Amazon path, as read)</th><th scope="col">Brand</th><th scope="col">Affiliate link (tagged Special Link)</th><th scope="col">Flags</th>'
+             '<th scope="col">ASIN</th><th scope="col">Category (Amazon path, as read)</th>'
+             '<th scope="col">Brand (Item details, read 2026-11-19)</th><th scope="col">Special feature (Item details, read 2026-11-19)</th>'
+             '<th scope="col">Affiliate link (tagged Special Link)</th><th scope="col">Flags</th>'
              '</tr></thead><tbody>' + "".join(rows) + "</tbody></table></div>")
     g = next(x for x in _load("guides.json")["guides"] if x["slug"] == "what-to-check-in-a-meat-thermometer")
     guide_line = (f'<p>Read the guide: <a href="{_e(page.rel("guides/" + g["slug"] + ".html"))}">{_e(g["h1"])}</a>.</p>'
@@ -271,15 +347,29 @@ def _thermometer_body(bs, page) -> str:
                   '(next due 2026-12-01).</p>')
     return (
         '<header class="hero"><h1>Meat thermometers</h1><p class="lead">Two listings from the submitted links, published '
-        'under decision D-46 (2026-11-19). Each short link was re-resolved to the ASIN shown, and the title and category '
-        'breadcrumb were read. Brand, model, capacity and dimensions are blank until the Item details table is read (F-60). '
-        'Attribution is pending the Associates Central test (F-58).</p></header>'
+        'under decision D-46 (2026-11-19). Each short link was re-resolved to the ASIN shown. On 2026-11-19 the Item '
+        'details tables were also read: the brand and the listed special features are recorded from them and shown below. '
+        'Model number and dimensions stay blank because neither table states them, and a meat thermometer has no air-fryer '
+        'capacity to compare (F-60). Attribution is pending the Associates Central test (F-58).</p></header>'
         f'<section><h2>Listings</h2>{table}</section>'
-        f'<section><h2>What the titles state</h2><p class="section-lead">Claims as titled, not tested by this site.</p>'
+        + _thermometer_chooser(page)
+        + f'<section><h2>What the titles state</h2><p class="section-lead">Claims as titled, not tested by this site.</p>'
         '<ul class="bullets">'
         + "".join(f'<li><strong>{_e(p["name_short"])}</strong>: {_e("; ".join(p["listing_claims_in_title"]))}</li>'
                   for p in _load("products-extra.json")["products"])
-        + f'</ul>{guide_line}</section>'
+        + f'</ul>'
+        '<div class="cta"><p><strong>Before you choose the instant-read:</strong> the P4 listing states '
+        '&ldquo;There is a newer model of this item&rdquo; and links to ASIN B0GL7Z4KP4 (the same title in Orange). '
+        'This site publishes no replacement advice, because that notice compares no features and no unit has been '
+        'tested here. It is recorded as '
+        '<a href="' + _e(page.rel("flagged.html")) + '#F-78">F-78</a> so you can see it before you click through '
+        'rather than after.</p></div>'
+        + f'{guide_line}'
+        '<p class="small muted">Brand and special-feature values were read from the '
+        '&ldquo;Purchase options and add-ons&rdquo; table on each listing on 2026-11-19 and are '
+        f'recorded per product in <a href="{_e(page.rel("links.html"))}">the product-intent record</a> '
+        'and <code>data/products-extra.json</code>. Nothing else was copied from the listing prose.</p>'
+        '</section>'
     )
 
 

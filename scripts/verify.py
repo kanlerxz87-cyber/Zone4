@@ -722,6 +722,30 @@ def check_rss_feed() -> None:
         fail("docs/feed.xml article and guide links do not match the published records")
 
 
+def check_social_card() -> None:
+    """The social preview image exists and every page points at it (S-09, F-79, 2026-11-19).
+
+    F-79 recorded that no og:image had ever been shipped although S-09 asked for
+    one. This check fails the build if the asset disappears or a page loses its
+    tags, so the gap cannot silently reopen.
+    """
+    card = DOCS / "social-card.png"
+    if not card.exists():
+        fail("docs/social-card.png is missing (build it with scripts/make_social_card.sh)")
+        return
+    if card.stat().st_size < 4096:
+        fail("docs/social-card.png is suspiciously small; rebuild it with scripts/make_social_card.sh")
+    for path in DOCS.rglob("*.html"):
+        rel = str(path.relative_to(DOCS))
+        text = path.read_text(encoding="utf-8")
+        if 'property="og:image"' not in text or "social-card.png" not in text:
+            fail(f"{rel}: og:image pointing at social-card.png is missing")
+        if 'name="twitter:image"' not in text:
+            fail(f"{rel}: twitter:image is missing")
+        if 'content="summary_large_image"' not in text:
+            fail(f"{rel}: twitter card type is not summary_large_image")
+
+
 def check_root_entry() -> None:
     """GitHub Pages serves the repo root (legacy source). The root must redirect to docs/."""
     idx = ROOT / "index.html"
@@ -789,9 +813,16 @@ def check_publication() -> None:
             fail(f"products-extra {p['id']}: canonical URL does not match its ASIN")
         if not p["category_url"].startswith("https://www.amazon.com/"):
             fail(f"products-extra {p['id']}: category URL is not an official Amazon page")
-        for k in ("brand", "capacity", "dimensions"):
+        for k in ("capacity", "dimensions", "model_number"):
+            # These three stay blank: neither thermometer listing's Item details table
+            # states a capacity, dimensions or model row (F-60, re-read 2026-11-19).
+            # Brand and special_feature are allowed once their read is dated and sourced.
             if p.get(k) not in (None, ""):
                 fail(f"products-extra {p['id']}: {k} is set but its Item details were not read; keep it blank")
+        for k in ("brand", "special_feature"):
+            if p.get(k) not in (None, ""):
+                if not p.get("item_details_read_utc") or not p.get("item_details_source"):
+                    fail(f"products-extra {p['id']}: {k} is set without a dated Item-details read and its source")
     guides = load("guides.json")["guides"]
     slugs, metas = set(), set()
     for g in guides:
@@ -859,7 +890,7 @@ def check_publication() -> None:
             if not href:
                 continue
             h = href.group(1)
-            # Any Amazon link that carries the Associates tag is an affiliate link (F-74, 2026-11-19).
+            # Any Amazon link that carries the Associates tag is an affiliate link (F-78, 2026-11-19).
             tagged_amazon = "amazon.com/" in h and "tag=" in h
             if "amazon.com/dp/" in h or h.startswith("https://link.amazon/") or tagged_amazon:
                 rel_attr = re.search(r'rel="([^"]*)"', attrs)
@@ -915,6 +946,7 @@ def main() -> int:
     check_design_page()
     check_required_pages()
     check_root_entry()
+    check_social_card()
     check_measurement()
     check_publication()
     if failures:
