@@ -21,12 +21,13 @@
       "Implemented 2026-11-17": "Decision recorded 2026-11-17 and the change is live in this build.",
       "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build.",
       "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete.",
-      "Implemented 2026-11-19": "Decision recorded 2026-11-19 and the change is live in this build."
+      "Implemented 2026-11-19": "Decision recorded 2026-11-19 and the change is live in this build.",
+      "Partly implemented 2026-11-19": "Decision recorded 2026-11-19; part of the change is live in this build and the rest is staged, blocked on an owner fact, or taken by a concurrent session."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
     "ported_d2a62d6b_2026_11_15": "S-17 to S-31 were ported from the parallel session arena/d2a62d6b-zone4, which built its own suggestions board against the same brief before this one landed. Thirteen of its rows duplicated an entry already here and were not re-added under a second number. The fifteen kept cover the marketing redesign and navigation split, product photography, the 'which one is for you' chooser, the mobile pass, the 'what we could not verify' block, the counter-space analysis, internal linking, the link-earning angle, the paid-search guardrail, the rejected deals section, the single-retailer rule, the above-the-fold disclosure, real measurement before optimisation, and the crawler guardrail. S-17 and S-21 are marked as implemented and reversible because that session shipped them; both still need the owner's sign-off (F-46, D-21).",
-    "updated_utc": "2026-11-19",
+    "updated_utc": "2026-11-19T23:20:00Z",
     "update_note": "Statuses updated after the 2026-11-16 delegated decision round: what shipped in this build, what is confirmed as standing policy, what was not adopted, and what still needs an owner fact (S-01, S-02, S-08, S-18). The register stays the place to review a change before it is made; nothing here was implemented before its decision was recorded.",
     "added_by_89900251_2026_11_16": "S-32 to S-36 are the design and organic-traffic path, added 2026-11-16. S-33 is graded P1 because the two defects it fixes (F-52, F-53) are the most visible cause of the brief's central complaint and neither changes a published value. S-32, S-34, S-35 and S-36 are the brief, the calendar, the decision-ordering and the build-order items.",
     "reconciliation_2026_11_17b": "Second merge reconciliation (arena/1f4a7a22-zone4, after PRs #84-#86): main's S-39 (validated Special Links with the one-link test) and S-40 (Search Console) already covered this session's tagged-links and Search Console proposals, and S-41-S-44 cover the front-page and module surfaces. This session's rows were withdrawn where covered; S-45 (the five-step Associates Central test protocol, owner action) and S-46 (the shipped RSS feed) were appended; S-01/S-33 were flipped to Implemented 2026-11-17 (D-01/D-14 recorded; D-36 recorded).",
@@ -1698,6 +1699,194 @@
       ],
       "flags": [],
       "decision": "D-48"
+    },
+    {
+      "id": "S-48",
+      "priority": "P2 - Adds real value",
+      "title": "Group the sidebar so a shopper meets the products and guides before the research machinery",
+      "problem": "The sidebar was one alphabetical list of 38 links in which 'Decisions', 'Verification log' and 'Sources' sat between 'Home' and the guides. A first-time reader looking for a product had to read the audit surface first, which is exactly the 'audit, not a shop' failure the brief names.",
+      "proposal": "Keep the single navigation group the site already enforces, and label its contents in three sub-lists: Shop (home, all products, guides, the four categories, executive summary), Read the guides (every guide and article plus the articles hub), and Research & review (the rest, plus the RSS feed). The footer directory keeps every surface reachable, so nothing is buried.",
+      "why": "Cheap, reversible and it changes the first thing a shopper sees. It is a labelling and ordering change only: no page was removed and the one-nav-group rule still holds.",
+      "effort": "Done in this session.",
+      "risk": "Low. It is a presentation change; no page, link or disclosure moved.",
+      "check": "scripts/verify.py still finds exactly one nav-group per page and a footer link to every surface; qa/audit_site.py reports exactly one aria-current per page; no published value changed.",
+      "status": "Implemented 2026-11-19",
+      "decision": "D-47",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: people-first presentation"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "S-49",
+      "priority": "P1",
+      "title": "Carry a publication date per article, so freshness is something readers and crawlers can both see",
+      "problem": "An article page stated no date, the RSS item carried none, and the Article structured data put the site-wide observation date in datePublished, which is not that article's publication date. Google's Article guidance defines datePublished as the date the article first appeared in public, so the markup was asserting a fact the repository does not hold (flag F-88).",
+      "proposal": "Each record in data/marketing.json carries published_utc plus published_source naming the dated record, and scripts/build_site.py emits datePublished/dateModified from it, never from its own OBSERVED default. scripts/verify.py fails a page whose structured-data date differs from its record, or that states a date with no record behind it. Five records are dated (M-G2 and M-G3 to 2026-11-16, M-G4, M-G5 and M-G6 to 2026-11-19); the five earliest publish no date at all rather than a borrowed one, which is S-54 and Q-57.",
+      "why": "A dated byline is the cheapest freshness signal a static page can earn, and an honest absence is worth more than a wrong date: the wrong one is the failure mode this site exists to catch.",
+      "effort": "Shipped 2026-11-19; the remaining half is one register write once a dated record exists.",
+      "risk": "A date inherited from a neighbouring record is the same defect as the observation date it replaced. The rule that keeps it out is that every published date names the dated artefact it came from.",
+      "check": "Every article page's datePublished and dateModified equal its record's published_utc, every dated record names a published_source, and undated records print no date line.",
+      "status": "Partly implemented 2026-11-19",
+      "decision": "D-49",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+          "ref": "Google Search Central: Article structured data - datePublished is the date the article first appeared in public. Registered as S-GSC-ART; not re-fetched in this session."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "article_jsonld() now reads published_utc and omits both keys when a record has none."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+          "ref": "Built 2026-11-19: nine items carry pubDate, the five undated article items carry none."
+        }
+      ],
+      "flags": [
+        "F-88",
+        "F-84"
+      ]
+    },
+    {
+      "id": "S-50",
+      "priority": "P2",
+      "title": "Ship a social preview card without touching the photography rule",
+      "problem": "A shared link rendered as bare text because no page had an og:image, and the only imagery a compliant site may use for a product is Amazon's own Program Content, which this site does not copy or host (F-43, S-18).",
+      "proposal": "Typographic card: the site's own words, palette and disclosure sentence, no product image. Two sessions reached this at once: the card now live at docs/social-card.png with og:image, og:image:alt, og:image:width/height, twitter:image and twitter:image:alt on every page was built by arena/67175642-zone4 under decision D-47. This session had written its own generator and a second card; those files were deleted on the merge rather than shipped twice, so the site has exactly one preview image and one build path.",
+      "why": "One brand asset, generated by one route. A second card of the same composition would only create drift to audit.",
+      "effort": "None - closed as delivered.",
+      "risk": "None outstanding for the card. Product imagery remains gated on S-18 and D-22.",
+      "check": "Every page head carries og:image and twitter:image pointing at docs/social-card.png, and no page references a second card file.",
+      "status": "Implemented 2026-11-19",
+      "decision": "D-47",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/social-card.png",
+          "ref": "The shipped card, generated by scripts/make_social_card.sh."
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 1: Program Content includes the images, data and text Amazon supplies; read 2026-11-19."
+        }
+      ],
+      "flags": [
+        "F-79"
+      ]
+    },
+    {
+      "id": "S-51",
+      "priority": "P3",
+      "title": "Publish the visible breadcrumb as BreadcrumbList structured data too",
+      "problem": "The visible breadcrumb trail was markup only, so a crawler saw a page with no machine-readable path.",
+      "proposal": "Closed as delivered by another session: scripts/build_site.py builds BreadcrumbList JSON-LD for the nested page types from the same (name, path) pairs the visible trail uses, recorded under decision D-47. This session's parallel implementation was not added on top of it. The one head element the build still lacked was rel=\"canonical\", filed and fixed separately as F-86.",
+      "why": "One builder, one source of truth for the trail: the machine-readable version and the visible one cannot drift apart.",
+      "effort": "None - closed as delivered.",
+      "risk": "None.",
+      "check": "Each nested page carries a BreadcrumbList block whose items match the visible crumbs.",
+      "status": "Implemented 2026-11-19",
+      "decision": "D-47",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "breadcrumb_jsonld() and the nested-page calls."
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/breadcrumb",
+          "ref": "Google Search Central: Breadcrumb structured data. Referenced as the target format; not re-fetched in this session."
+        }
+      ],
+      "flags": [
+        "F-86"
+      ]
+    },
+    {
+      "id": "S-52",
+      "priority": "P2",
+      "title": "Hold the two remaining calendar topics until a fresh dated read, rather than writing them from memory",
+      "problem": "T-05 and T-06 in data/design.json need a specification figure each - a measured footprint comparison and an energy or wattage claim. No retrievable read of an Amazon listing includes the Item details table, so the figures are not in the register and F-38 and F-60 stay open.",
+      "proposal": "Keep T-05, T-06 and T-07 at Proposed. Do not pad them with the numbers the site does hold (capacity and preset counts, already covered by T-04 and M-G4) and do not retitle them into listicles. The three topics written today (T-03, T-04, T-08) used only fields the register carries.",
+      "why": "The site's whole difference is that it stops when the source stops. Writing a comparison without dimensions would be the first invented claim on the site.",
+      "effort": "No work until the figures arrive.",
+      "risk": "The calendar looks thinner than a site that invents. That is the intended trade.",
+      "check": "T-05, T-06 and T-07 stay Proposed and no page states a footprint, weight or energy figure the register does not carry.",
+      "status": "Needs a decision first",
+      "decision": "D-47",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/design.json",
+          "ref": "topics T-05, T-06 and T-07, with their evidence_note fields."
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "Read 2026-11-19: the retrievable chunks carry the title, breadcrumb and also-viewed module, not the Item details table."
+        }
+      ],
+      "flags": [
+        "F-38",
+        "F-60"
+      ]
+    },
+    {
+      "id": "S-53",
+      "priority": "P2",
+      "title": "Give the shop cards a re-checked date, and settle where format furniture is drawn",
+      "problem": "A shop card showed the product name and the recorded figures but never said when they were read or when the listing was last re-checked, and there was no picture of any kind, so the card asked a shopper to trust an undated table (D-22 holds product photography back).",
+      "proposal": "Two halves, which landed differently. The dated line shipped: each card now reads 'figures read <date> - listing page re-checked <date>', both taken from the product records' own re-verification fields by the builder, so the date cannot be newer than the data. The diagram half did not: this session drew per-card format schematics, and main had already shipped original inline SVG footprint diagrams drawn to scale from the recorded dimensions on the category tiles and category pages. Main's version is the better one - it encodes measured numbers rather than a shape - so the per-card diagrams were dropped at the merge instead of being shipped beside it. data/imagery.json is the register for what the site shows.",
+      "why": "One kind of self-drawn furniture, sourced from recorded figures, captioned with what it is: a second diagram family would be decoration, and decoration is what this site is trying not to publish.",
+      "effort": "Shipped 2026-11-19 (the dated line); no further work planned.",
+      "risk": "A card with no picture looks plainer than a shop's. The caption says why, and the footprint diagram is one click away on the category page.",
+      "check": "Every shop card names a figures-read date and a re-check date, both derived from data; no card carries a product image.",
+      "status": "Partly implemented 2026-11-19",
+      "decision": "D-47",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/products.json",
+          "ref": "_meta.reverification_2026_11_19 and the per-product re-check fields the builder reads."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/imagery.json",
+          "ref": "The shipped imagery register: original SVG footprint diagrams, no listing or generated photography."
+        }
+      ],
+      "flags": [
+        "F-43",
+        "F-60"
+      ]
+    },
+    {
+      "id": "S-54",
+      "priority": "P2",
+      "title": "Give the five undated articles a date in the register, or make the absence a published feature",
+      "problem": "Since the invented date was removed (D-49), five of the ten article records carry no published_utc, so those pages print no date line and their feed items carry no pubDate. A reader that sorts a feed by date has no basis for an undated item, so the site's newest content is not its first item (F-84).",
+      "proposal": "Answer Q-57 with a dated record for the five slugs - the commit that first published each file, or the first dated mention of it in a register - and store it exactly as the other five store theirs, with published_source naming where the date came from. Until then the absence stands: it is a rule a reader can see, not a gap in the build. Do not order the feed by build date to fake recency.",
+      "why": "A date a page cannot cite is the class of defect this project exists to remove, and an undated page that reads as fresh is what Google's spam policies call out as misleading.",
+      "effort": "One register write once a dated artefact is chosen; no template change.",
+      "risk": "Inheriting a neighbouring record's date is as wrong as the observation date it replaced.",
+      "check": "Every feed item carries a pubDate, and each equals its record's published_utc with a dated published_source behind it.",
+      "status": "Needs a decision first",
+      "decision": "D-49",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/feed.xml",
+          "ref": "Built 2026-11-19: five of the ten article items have no pubDate element."
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/marketing.json",
+          "ref": "Five of the ten records carry no published_utc field, which is what the feed reflects."
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies, which name misleading metadata as a policy concern. Registered as S-SPAM; not re-fetched in this session."
+        }
+      ],
+      "flags": [
+        "F-88",
+        "F-84"
+      ]
     }
   ]
 }

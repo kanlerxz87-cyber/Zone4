@@ -883,3 +883,9 @@ table.facts td:nth-child(2), table.facts td:nth-child(4) { font-family: var(--mo
   .disclosure-sticky { transition: none; }
   html { scroll-behavior: auto; }
 }
+
+/* Shop-card provenance line, added 2026-11-19 (arena/0272d56e-zone4): when the figures on a
+   card were read and when the listing was last re-checked. Deliberately the quietest line on the
+   card - it is a date, not a selling point, and it sits above the actions it explains. */
+.shop-card { display: flex; flex-direction: column; }
+.shop-dates { margin-top: auto; padding-top: 8px; }

@@ -14,7 +14,8 @@
     "update_note": "2026-11-16 (arena/c509aba1-zone4): headline, title-tag and meta-description polish on the five existing articles (facts and fact_ids unchanged, per D-12's guard), two new question-led guides (M-G2 sizes explained, M-G3 seasonal gift guide) written entirely from already-verified listing fields, and two new checklist rows carrying the D-19 evidence rule and the D-29 paid-search guardrail.",
     "updated_2026_11_17": "arena/cc32105d-zone4: product-intent note - the three product openers (M-P1-B2, M-P2-B2, M-P3-B2) were rewritten so the ASIN and category path stay in the fact tables rather than in prose (F-53 corrected under decision D-36); fact rows, fact_ids and citations are unchanged.",
     "updated_2026_11_19": "arena/a4eb2a1d-zone4: article M-G4 (the first-air-fryer checklist, topic T-04) adopted from stale PR #87 (arena/0bdd37f3-zone4) under the 60-minute handoff rule. Two corrections on import: the CTA href is the final tagged listing URL (https://www.amazon.com/dp/B0CDY277D3) rather than the supplied short link, per decisions D-01/D-14; and the unused published_utc field was dropped so the article follows the same no-dates rule as every other article in the feed. All ten fact rows keep their source_urls.",
-    "opener_restore_2026_11_19": "arena/a4eb2a1d-zone4: the M-P3 opener (M-P3-B1) recorded as fixed under decision D-36 on 2026-11-17 (commit c25cb2d of arena/1f4a7a22-zone4) had been lost in that session's later merge reconciliation, so the published copy still opened with the AS-03 meta-commentary while flag F-52 claimed it was gone. The opener is restored verbatim from that commit; fact_ids are unchanged (M-P3-F2). B2 paragraphs keep the F-53 rewrites as they stand on main."
+    "opener_restore_2026_11_19": "arena/a4eb2a1d-zone4: the M-P3 opener (M-P3-B1) recorded as fixed under decision D-36 on 2026-11-17 (commit c25cb2d of arena/1f4a7a22-zone4) had been lost in that session's later merge reconciliation, so the published copy still opened with the AS-03 meta-commentary while flag F-52 claimed it was gone. The opener is restored verbatim from that commit; fact_ids are unchanged (M-P3-F2). B2 paragraphs keep the F-53 rewrites as they stand on main.",
+    "updated_2026_11_19_0272d56e": "2026-11-19 (arena/0272d56e-zone4): two calendar topics written - T-03 (feature-name glossary, M-G5) and T-08 (reading a number a listing states twice, M-G6), each fact row sourced to the official listing pages and dated. Per-article published_utc / facts_observed fields added so structured data and the feed state a date the repository can support (decision D-48, flag F-82); M-G4's wrong flag citation in a fact note corrected to F-06 and F-63 (F-83). The five original articles carry no published_utc because no dated in-repo record fixes their first publication, so their pages now publish no date rather than inheriting the observation date."
   },
   "articles": [
     {
@@ -1533,7 +1534,11 @@
         "The counter-depth fit statements are arithmetic and judgement on listed dimensions, labelled as such, not listing claims.",
         "No trend or popularity claim is made (decision D-19, 2026-11-16): the size framing is evergreen."
       ],
-      "nav_label": "Sizes explained"
+      "nav_label": "Sizes explained",
+      "published_utc": "2026-11-16",
+      "published_source": "data/marketing.json _meta.update_note: shipped 2026-11-16 by arena/c509aba1-zone4 under decision D-17.",
+      "facts_observed": "2026-11-14",
+      "facts_observed_source": "Facts are the details-table rows recorded 2026-11-14 and re-read 2026-11-16 (data/verification-session-c509aba1.json)."
     },
     {
       "id": "M-G3",
@@ -1763,7 +1768,11 @@
         "Giftee profiles are editorial routing on listed specifications and dimensions, not hands-on claims: nobody on this project has used these appliances (decision D-06).",
         "No capacity conversions are made between quarts and liters."
       ],
-      "nav_label": "Holiday gift guide"
+      "nav_label": "Holiday gift guide",
+      "published_utc": "2026-11-16",
+      "published_source": "data/marketing.json _meta.update_note: shipped 2026-11-16 by arena/c509aba1-zone4 under decision D-17.",
+      "facts_observed": "2026-11-14",
+      "facts_observed_source": "Facts are the details-table rows recorded 2026-11-14 and re-read 2026-11-16 (data/verification-session-c509aba1.json)."
     },
     {
       "id": "M-G4",
@@ -1931,7 +1940,7 @@
           "source_refs": [
             "Product page listing title and details table"
           ],
-          "note": "Two different units on one page; both reported as listed (F-10)."
+          "note": "Two different units on one page; both reported as listed (F-06, F-63)."
         },
         {
           "id": "M-G4-F2",
@@ -2065,7 +2074,583 @@
         "No prices or star ratings appear (F-02; Participation Requirements 2(b) and 6(t)).",
         "The function counts are reported as both readings the listing states (F-26); no accessory count is published as settled (F-50).",
         "Working title from the topic calendar (T-04, decision D-17); no popularity or trend claim backs the choice of topic (D-19)."
-      ]
+      ],
+      "published_utc": "2026-11-19",
+      "published_source": "data/marketing.json _meta.updated_2026_11_19: adopted onto main 2026-11-19 by arena/a4eb2a1d-zone4 (PR #90 record in COORDINATION.md)."
+    },
+    {
+      "id": "M-G5",
+      "product_id": "ALL",
+      "page_type": "Feature glossary",
+      "slug": "/air-fryer-feature-names-explained/",
+      "nav_label": "Feature-name glossary",
+      "title_tag": "Air Fryer Feature Names: What Hi-Fry, Sync Finish and Shake Reminder Actually Say",
+      "meta_description": "Nine feature names appear across three air fryer listings. Here is each one exactly as the listing states it, which names repeat, and where the definition has to come from.",
+      "h1": "Hi-Fry, Sync Finish, Shake Reminder: what these feature names do and do not tell you",
+      "target_keywords": [
+        {
+          "term": "air fryer feature names",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "hi-fry air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "sync finish dual basket air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "led shake reminder air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "outline": [
+        {
+          "h2": "The feature row is a list of labels, not a specification",
+          "purpose": "Say what the 'Special Feature' field is, using the three rows exactly as recorded.",
+          "facts_used": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ]
+        },
+        {
+          "h2": "When a name does come with a number",
+          "purpose": "Hi-Fry is the one named feature here that carries a stated figure on two of the three listings.",
+          "facts_used": [
+            "M-G5-F4",
+            "M-G5-F5",
+            "M-G5-F6"
+          ]
+        },
+        {
+          "h2": "One name appears on all three listings",
+          "purpose": "Automatic Shut-Off is the shared row; what a shared label does and does not prove.",
+          "facts_used": [
+            "M-G5-F8"
+          ]
+        },
+        {
+          "h2": "Names that appear once, and the question to ask about each",
+          "purpose": "The singletons: 2Min Button, Mute, Dual Zone Features, LED Shake Reminder, Timer, Temperature Control.",
+          "facts_used": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ]
+        },
+        {
+          "h2": "Titles carry more feature names than the details field does",
+          "purpose": "Sync Finish and Easy View Windows live in P1's title; the preset and accessory counts in P2's.",
+          "facts_used": [
+            "M-G5-F4",
+            "M-G5-F7"
+          ]
+        },
+        {
+          "h2": "Where the definition actually lives",
+          "purpose": "The listing points at the brand store; the manual is the document that defines a named mode.",
+          "facts_used": [
+            "M-G5-F9"
+          ]
+        },
+        {
+          "h2": "How to use this list on a shortlist of two",
+          "purpose": "Close with the comparison method, then the shop links.",
+          "facts_used": [
+            "M-G5-F10"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G5-B1",
+          "h": "The feature row is a list of labels, not a specification",
+          "fact_ids": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ],
+          "text": "Every air fryer listing has a field labelled Special Feature, and it is a comma-separated list of names the seller selected, not measurements. The three listings this site tracks carry nine distinct names between them. The dual-basket machine lists 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry and Mute. The French-door oven lists Automatic Shut-Off, Programmable, Temperature Control and Timer. The single-basket machine lists Automatic Shut-Off, LED Shake Reminder and Programmable. No row states a duration, a decibel figure, a temperature or a number of zones - the field records that a thing exists on the machine, and that is the whole of what it promises."
+        },
+        {
+          "id": "M-G5-B2",
+          "h": "When a name does come with a number",
+          "fact_ids": [
+            "M-G5-F4",
+            "M-G5-F5",
+            "M-G5-F6"
+          ],
+          "text": "Hi-Fry is the exception, and it is worth understanding why. The single-basket listing puts the figure in the title itself: '450°F Hi-Fry Option for Crispier Results'. On that machine the name arrives with the number attached, so you know what Hi-Fry means as a setting: the upper end of a range whose rest is stated elsewhere as 200-400°F. The dual-basket listing names Hi-Fry in its title and its feature row but attaches no figure there; its stated range, 200-450°F, appears in its own descriptive text. Same word, two different amounts of support on the page - which is the practical lesson of this whole list. A feature name is worth as much as the number printed next to it."
+        },
+        {
+          "id": "M-G5-B3",
+          "h": "One name appears on all three listings",
+          "fact_ids": [
+            "M-G5-F8"
+          ],
+          "text": "Automatic Shut-Off is the only label all three listings claim. Treat that as a category expectation rather than a differentiator: in this price-and-format band the field is where sellers tick the boxes Amazon offers, and a box three out of three sellers tick tells you the feature is table stakes. It does not tell you the three machines behave alike. The cut-off temperature, the timeout and whether the beep can be silenced are not in that row on any of the three pages."
+        },
+        {
+          "id": "M-G5-B4",
+          "h": "Names that appear once, and the question to ask about each",
+          "fact_ids": [
+            "M-G5-F1",
+            "M-G5-F2",
+            "M-G5-F3"
+          ],
+          "text": "The singletons are where a listing is genuinely different, and each has one obvious follow-up. Mute on the dual basket: which sounds does it silence, and can it be set back? 2Min Button: a two-minute add, or a two-minute reminder? LED Shake Reminder on the single basket: does it light, sound, or both, and at what point in the cycle? Temperature Control and Timer on the oven, next to a Programmable claim: programmable for how many of its presets? None of those answers is on the page this site reads, so this page does not guess them either. They are in the manual, which the listing links to at most indirectly."
+        },
+        {
+          "id": "M-G5-B5",
+          "h": "Titles carry more feature names than the details field does",
+          "fact_ids": [
+            "M-G5-F4",
+            "M-G5-F7"
+          ],
+          "text": "Sync Finish and Easy View Windows - the two names people search for when comparing dual-basket machines - do not appear in the dual basket's Special Feature row at all. They appear in its title. The same pattern holds on the oven, whose title segment names a preset count and an accessory count that its details field leaves out. When you compare two listings, read the title as a second, less controlled feature list: it is where the seller puts the claims they most want found, and it changes more often than the table does. This site has seen one of its own tracked titles change wording twice, which is why every quoted title here carries the date it was read."
+        },
+        {
+          "id": "M-G5-B6",
+          "h": "Where the definition actually lives",
+          "fact_ids": [
+            "M-G5-F9"
+          ],
+          "text": "The oven listing links to a brand store page, and that is the shape of the answer: named features are defined by the manufacturer's own material, not by the marketplace row that advertises them. Before you pay for a machine because of a feature name, open the brand's manual or support page for that model and check three things - what triggers the feature, whether it can be turned off, and what number, if any, the maker attaches to it. If the maker states none, the feature is a behaviour, not a specification, and it should not outweigh a measured figure like capacity or depth in your decision."
+        },
+        {
+          "id": "M-G5-B7",
+          "h": "How to use this list on a shortlist of two",
+          "fact_ids": [
+            "M-G5-F10"
+          ],
+          "text": "Put the two Special Feature rows side by side and cross out every name both machines claim; what survives is the actual difference, and it is usually one or two items rather than six. Then check each survivor for a number on the page, and treat the ones without a number as questions for the manual. Prices and star ratings are deliberately absent from this site, so the comparison is on listed specifications alone - the live price is always one click away on the listing itself."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G5-F1",
+          "field": "Dual-basket Special Feature row",
+          "value": "+ 2Min Button, Automatic Shut-Off, Dual Zone Features, Hi-Fry, Mute",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Product details table, 'Special Feature' row, as recorded 2026-11-14"
+          ],
+          "note": "Quoted as a list of names; the row carries no figures."
+        },
+        {
+          "id": "M-G5-F2",
+          "field": "French-door oven Special Feature row",
+          "value": "Automatic Shut-Off, Programmable, Temperature Control, Timer",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Product details table, 'Special Feature' row, as recorded 2026-11-14"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F3",
+          "field": "Single-basket Special Feature row",
+          "value": "Automatic Shut-Off, LED Shake Reminder, Programmable",
+          "source_urls": [
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Product details table, 'Special Feature' row, as recorded 2026-11-14"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F4",
+          "field": "Dual-basket listing title (re-read)",
+          "value": "'... with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets ...'",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing title, page title read again 2026-11-19"
+          ],
+          "note": "Title wording is the seller's; Sync Finish and Easy View Windows appear only in the title, not in the Special Feature row."
+        },
+        {
+          "id": "M-G5-F5",
+          "field": "Single-basket listing title (re-read)",
+          "value": "'Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen ...'",
+          "source_urls": [
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Listing title, page title read again 2026-11-19"
+          ],
+          "note": "The named feature carries a stated temperature in the title itself."
+        },
+        {
+          "id": "M-G5-F6",
+          "field": "Single-basket stated temperature range",
+          "value": "200-400 degrees F, with the 450°F Hi-Fry option named above it",
+          "source_urls": [
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "'About this item' section, as recorded in M-P3-F2"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G5-F7",
+          "field": "French-door oven title segment naming counts",
+          "value": "'24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing title, page title read 2026-11-19"
+          ],
+          "note": "Both counts are disputed elsewhere on the same page; see F-26 and F-50 and the companion piece on reading a number a listing gives twice."
+        },
+        {
+          "id": "M-G5-F8",
+          "field": "Names shared across the three rows (arithmetic on the rows above)",
+          "value": "Automatic Shut-Off appears in all three; Programmable in two; nine distinct names across the twelve listed entries",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3",
+            "https://www.amazon.com/dp/B09B7SB46R",
+            "https://www.amazon.com/dp/B08DKYBTPH"
+          ],
+          "source_refs": [
+            "Counted from the three 'Special Feature' rows quoted in this table",
+            "Counted from the three 'Special Feature' rows quoted in this table",
+            "Counted from the three 'Special Feature' rows quoted in this table"
+          ],
+          "note": "Derived only from the three rows this site records; no other listing is compared."
+        },
+        {
+          "id": "M-G5-F9",
+          "field": "Brand attribution shown on the oven page",
+          "value": "Store link: Visit the Emeril Store",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Brand store link on the product page, as recorded 2026-11-14"
+          ],
+          "note": "Cited as the route to manufacturer material, not as an endorsement."
+        },
+        {
+          "id": "M-G5-F10",
+          "field": "Price, star rating and review count",
+          "value": "",
+          "source_urls": [
+            "https://affiliate-program.amazon.com/help/operating/policies"
+          ],
+          "source_refs": [
+            "Participation Requirements 2(b) and 6(t)"
+          ],
+          "note": "Withheld: not available to a site without an approved API route (F-02)."
+        }
+      ],
+      "cta": {
+        "text": "Check the feature list on the live listing before you buy",
+        "link_label": "Open the dual-basket listing",
+        "link_url": "https://www.amazon.com/dp/B0CDY277D3",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No hands-on testing is claimed: nobody on this project has cooked in these appliances (Q-35, decision D-06).",
+        "No feature is defined beyond what the listing states; the definitions this page points to are the manufacturers' (D-19 evidence rule).",
+        "No price, star rating, review count or popularity badge appears (F-02; Participation Requirements 2(b) and 6(t)).",
+        "Listing titles are quoted with the date they were read, because this site has observed them change (F-44, F-66).",
+        "Working title from the approved topic calendar (T-03, decision D-17); no search-volume or trend claim supports the topic (D-19)."
+      ],
+      "published_utc": "2026-11-19",
+      "published_source": "Recorded at publication by arena/0272d56e-zone4 on 2026-11-19; see the PR record in COORDINATION.md. No earlier dated publication record exists for this id.",
+      "facts_observed": "2026-11-19",
+      "facts_observed_source": "Live re-read of all three listing pages 2026-11-19 (data/verification-session-0272d56e.json V1-V7); details-table rows cited from the 2026-11-14 record (F-38)."
+    },
+    {
+      "id": "M-G6",
+      "product_id": "P2",
+      "page_type": "Buying guide",
+      "slug": "/air-fryer-listing-says-24-functions-25-presets/",
+      "nav_label": "When a listing gives two numbers",
+      "title_tag": "24 Functions or 25 Presets? How to Read a Number a Listing States Twice",
+      "meta_description": "One oven lists 24 cooking functions in its title and heads its feature list with 25 presets. Both readings, where each sits on the page, and what to write down on your list.",
+      "h1": "24 functions or 25 presets? How to read a number a listing gives you twice",
+      "target_keywords": [
+        {
+          "term": "24 cooking functions air fryer",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "french door air fryer oven presets",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer cooking functions meaning",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        },
+        {
+          "term": "air fryer accessories included",
+          "intent": "Commercial investigation",
+          "volume": "",
+          "volume_status": "Not published - no official source for search volume",
+          "source_url": "https://www.amazon.com/Air-Fryers/b/ref=dp_bc_5?ie=UTF8&node=17659096011"
+        }
+      ],
+      "outline": [
+        {
+          "h2": "The case",
+          "purpose": "State both numbers and where each sits, as recorded.",
+          "facts_used": [
+            "M-G6-F1",
+            "M-G6-F2",
+            "M-G6-F3"
+          ]
+        },
+        {
+          "h2": "Count the named modes yourself",
+          "purpose": "The list that answers the question is the list of modes, not either headline count.",
+          "facts_used": [
+            "M-G6-F3"
+          ]
+        },
+        {
+          "h2": "The same page does it again with accessories",
+          "purpose": "Six in the title, seven in the description (F-50).",
+          "facts_used": [
+            "M-G6-F4"
+          ]
+        },
+        {
+          "h2": "And a third time with capacity",
+          "purpose": "26QT in the title, 24.6 liters in the table; the dual basket's 6 Quart versus 6 liters.",
+          "facts_used": [
+            "M-G6-F5",
+            "M-G6-F6"
+          ]
+        },
+        {
+          "h2": "Why titles disagree with themselves over time",
+          "purpose": "Two dated sightings of this title; the record this site keeps.",
+          "facts_used": [
+            "M-G6-F7"
+          ]
+        },
+        {
+          "h2": "What to write on your list",
+          "purpose": "The practical rule: numbers from the table, names counted from the list, date on the screenshot.",
+          "facts_used": [
+            "M-G6-F8",
+            "M-G6-F9"
+          ]
+        }
+      ],
+      "body": [
+        {
+          "id": "M-G6-B1",
+          "h": "The case",
+          "fact_ids": [
+            "M-G6-F1",
+            "M-G6-F2",
+            "M-G6-F3"
+          ],
+          "text": "The French-door oven this site tracks states its function count two ways on one page. Its title has read '24 One-Touch Preset Options' on the two most recent dated readings, and on an earlier reading the same position in the title read '24 cooking functions'. Its 'About this item' section heads the feature list '25 COOKING PRE-SETS'. Amazon states the discrepancy nowhere on the page, and this page will not invent a reconciliation: what a shopper can do is notice that the headline number and the list number are different numbers, in different fields, maintained by the same seller."
+        },
+        {
+          "id": "M-G6-B2",
+          "h": "Count the named modes yourself",
+          "fact_ids": [
+            "M-G6-F3"
+          ],
+          "text": "Under the 25 heading, the listing names eleven modes: Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm. Eleven named modes, a heading that says 25 and a title that says 24. The number that should matter to you is the one you can verify by counting on the page, because it is the one that corresponds to buttons you will actually press. If a mode you cook by is not in that list of eleven, neither headline count is going to add it."
+        },
+        {
+          "id": "M-G6-B3",
+          "h": "The same page does it again with accessories",
+          "fact_ids": [
+            "M-G6-F4"
+          ],
+          "text": "The title segment says 'Six Cooking Accessories Included'. The product description on the same page says seven, and names three of them (an air fry basket, a rotisserie spit and a bake pan) with an 'and more'. This site publishes no accessory count for that reason. It is the same class of problem as the preset count, one field apart: a number in a marketing line that the detail on the page does not sustain."
+        },
+        {
+          "id": "M-G6-B4",
+          "h": "And a third time with capacity",
+          "fact_ids": [
+            "M-G6-F5",
+            "M-G6-F6"
+          ],
+          "text": "Capacity shows the pattern most clearly, because the unit changes as well as the number. That oven is named 26QT in its title and records 24.6 liters in its details table. The dual basket is named 6 Quart and records 6 liters - and six US quarts and six litres are not the same volume, so both figures cannot describe the same unit. Neither is a rounding error you can ignore when a recipe or a pan has to fit: they are two claims from one seller, and the table row is the one that sits in the field Amazon validates."
+        },
+        {
+          "id": "M-G6-B5",
+          "h": "Why titles disagree with themselves over time",
+          "fact_ids": [
+            "M-G6-F7"
+          ],
+          "text": "There is a fourth reason not to trust a headline number blindly: the headline moves. This site read one wording of this listing's title on 2026-11-14, a different one on 2026-11-17 and the second wording again on 2026-11-19, with the ASIN unchanged throughout. A screenshot or a quote you copy into a shortlist is therefore only as good as its date. Every number this site publishes carries the page it was read from and the day it was read, including on this article's own table below."
+        },
+        {
+          "id": "M-G6-B6",
+          "h": "What to write on your list",
+          "fact_ids": [
+            "M-G6-F8",
+            "M-G6-F9"
+          ],
+          "text": "Three rules come out of this. Take measurements from the details table, never from the title, and carry the unit with the figure. Take feature counts from the named list you can count, not from either headline. Date anything you copy, because the seller can change the sentence without changing the product. Applied here: 24.6 liters and 16.9 inches deep are the numbers to plan a counter around, eleven named modes are what the preset list supports, and no accessory count is settled. Prices and ratings are not shown on this site at all, so the listing stays the place where those live."
+        }
+      ],
+      "facts": [
+        {
+          "id": "M-G6-F1",
+          "field": "Preset count in the listing title (read 2026-11-19)",
+          "value": "'24 One-Touch Preset Options'",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing title, page title read 2026-11-19"
+          ],
+          "note": ""
+        },
+        {
+          "id": "M-G6-F2",
+          "field": "Function count in the listing title (earlier dated reading)",
+          "value": "'24 cooking functions'",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Stored listing title record, data/products.json name_listing (read 2026-11-14)"
+          ],
+          "note": "Same field, different wording on a different date; see F-66."
+        },
+        {
+          "id": "M-G6-F3",
+          "field": "Feature-section heading and the modes it names",
+          "value": "'25 COOKING PRE-SETS', naming Ribs, Defrost, Bake, Toast, Chicken, Pizza, Pastry, Slow Cook, Roast, Reheat and Keep Warm",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "'About this item' section, recorded in flag F-26 from the 2026-11-14 re-verification"
+          ],
+          "note": "Eleven modes named; the count discrepancy itself is F-26."
+        },
+        {
+          "id": "M-G6-F4",
+          "field": "Accessory count, two fields on one page",
+          "value": "Title: 'Six Cooking Accessories Included'. Product Description: seven premium accessories, with three named.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing title read 2026-11-19; Product Description as recorded 2026-11-16 (F-50)"
+          ],
+          "note": "No accessory count is published elsewhere on this site."
+        },
+        {
+          "id": "M-G6-F5",
+          "field": "Capacity, two fields on one page (oven)",
+          "value": "Title: 26QT. Details table: 24.6 liters.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Listing title and 'Capacity' row of the product details table"
+          ],
+          "note": "Both kept exactly as listed; no conversion (F-06)."
+        },
+        {
+          "id": "M-G6-F6",
+          "field": "Capacity, two fields on one page (dual basket)",
+          "value": "Title: 6 Quart. Details table: 6 liters.",
+          "source_urls": [
+            "https://www.amazon.com/dp/B0CDY277D3"
+          ],
+          "source_refs": [
+            "Listing title read again 2026-11-19 and the stored 'Capacity' row"
+          ],
+          "note": "Six US quarts and six litres are different volumes (F-63)."
+        },
+        {
+          "id": "M-G6-F7",
+          "field": "Dated sightings of the same title",
+          "value": "Three readings: the 2026-11-14 wording, the 2026-11-17 wording and the 2026-11-19 wording, which matches the second; the ASIN is unchanged on all three",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "data/products.json name_listing; flags F-44 and F-66; data/verification-session-0272d56e.json row V4"
+          ],
+          "note": "Recorded as a dated variant, not as a correction to the stored record."
+        },
+        {
+          "id": "M-G6-F8",
+          "field": "The figures this site treats as decision-grade for this oven",
+          "value": "24.6 liters capacity; 16.9\"D x 15.8\"W x 14.8\"H footprint; Stainless Steel material",
+          "source_urls": [
+            "https://www.amazon.com/dp/B09B7SB46R"
+          ],
+          "source_refs": [
+            "Product details table rows as recorded 2026-11-14"
+          ],
+          "note": "Details-table rows, not title text (F-38 records which regions could be re-read)."
+        },
+        {
+          "id": "M-G6-F9",
+          "field": "Price, star rating and review count",
+          "value": "",
+          "source_urls": [
+            "https://affiliate-program.amazon.com/help/operating/policies"
+          ],
+          "source_refs": [
+            "Participation Requirements 2(b) and 6(t)"
+          ],
+          "note": "Withheld: no approved API route (F-02)."
+        }
+      ],
+      "cta": {
+        "text": "Open the listing and count the named modes yourself",
+        "link_label": "Open the French-door oven listing",
+        "link_url": "https://www.amazon.com/dp/B09B7SB46R",
+        "disclosure": "As an Amazon Associate I earn from qualifying purchases."
+      },
+      "compliance_notes": [
+        "No hands-on testing is claimed; nobody on this project has cooked in these appliances (Q-35, decision D-06).",
+        "Both readings of each disputed count are published as the listing states them; the site does not choose between them (F-26, F-50, F-63).",
+        "No price, star rating, review count or popularity badge appears (F-02; Participation Requirements 2(b) and 6(t)).",
+        "Working title from the approved topic calendar (T-08, decision D-17); no search-volume or trend claim supports the topic (D-19)."
+      ],
+      "published_utc": "2026-11-19",
+      "published_source": "Recorded at publication by arena/0272d56e-zone4 on 2026-11-19; see the PR record in COORDINATION.md. No earlier dated publication record exists for this id.",
+      "facts_observed": "2026-11-19",
+      "facts_observed_source": "Title, breadcrumb and module rows read live 2026-11-19 (data/verification-session-0272d56e.json V4-V5, V7); details-table and Product Description rows from the dated records F-26, F-38, F-50 cite."
     }
   ],
   "seo_rules": [

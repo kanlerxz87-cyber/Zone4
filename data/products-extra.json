@@ -1,80 +1,86 @@
 {
- "_meta": {
-  "description": "Two product records added on 2026-11-17 from the two new submitted links. 2026-11-19 (arena/67175642-zone4): the Item details tables of both listings were read. Only the fields the listing states are recorded - P4 brand ThermoMaven and special feature; P5 brand CHEF iQ and special feature. Capacity, dimensions and model number are still NOT recorded for either listing (a thermometer has no air-fryer capacity; the tables read carry no dimensions or model row), so they stay blank under F-60. Prices and star ratings remain withheld (F-02). P4 also carries a 'newer model of this item' notice (F-78). Earlier note kept: P4 title drift recorded as F-68 (the 2026-11-19 title replaces the 2026-11-17 text, which is kept as name_listing_prior).",
-  "read_utc": "2026-11-17",
-  "read_by": "arena/3d2ad125-zone4"
- },
- "products": [
-  {
-   "id": "P4",
-   "asin": "B0DHZTCNR5",
-   "short_link": "https://link.amazon/B0c8moW59",
-   "canonical_url": "https://www.amazon.com/dp/B0DHZTCNR5",
-   "name_short": "ThermoMaven 1 Sec Professional Digital Meat Thermometer",
-   "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
-   "listing_claims_in_title": [
-    "±0.5℉ accuracy",
-    "NIST&NSF Certified",
-    "Auto-rotate bright LED screen",
-    "IP67 waterproof (as titled)",
-    "Stocking stuffers gifts for men (as titled)",
-    "Black colour (as titled)"
-   ],
-   "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
-   "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
-   "subcategory": "Meat thermometers",
-   "brand": "ThermoMaven",
-   "brand_status": "Brand field read from the Item details table on 2026-11-19 (Purchase options and add-ons: Brand | ThermoMaven).",
-   "model_number": null,
-   "capacity": null,
-   "dimensions": null,
-   "special_feature": "Auto Off, Fast Reading System, High Accuracy, Ultra Clear Screen, Waterproof",
-   "flags": [
-    "F-56",
-    "F-60",
-    "F-68"
-   ],
-   "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
-   "name_listing_prior": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black [read 2026-11-17; superseded by the 2026-11-19 read, F-68]",
-   "title_read_utc": "2026-11-19",
-   "title_read_source": "https://www.amazon.com/dp/B0DHZTCNR5 (page title and breadcrumb read 2026-11-19)",
-   "special_feature_status": "Special Feature field read from the Item details table on 2026-11-19.",
-   "item_details_read_utc": "2026-11-19",
-   "item_details_source": "https://www.amazon.com/dp/B0DHZTCNR5 (Purchase options and add-ons table read 2026-11-19)"
+  "_meta": {
+    "description": "Two product records added on 2026-11-17 from the two new submitted links. 2026-11-19 (arena/67175642-zone4): the Item details tables of both listings were read. Only the fields the listing states are recorded - P4 brand ThermoMaven and special feature; P5 brand CHEF iQ and special feature. Capacity, dimensions and model number are still NOT recorded for either listing (a thermometer has no air-fryer capacity; the tables read carry no dimensions or model row), so they stay blank under F-60. Prices and star ratings remain withheld (F-02). P4 also carries a 'newer model of this item' notice (F-78). Earlier note kept: P4 title drift recorded as F-68 (the 2026-11-19 title replaces the 2026-11-17 text, which is kept as name_listing_prior).",
+    "read_utc": "2026-11-17",
+    "read_by": "arena/3d2ad125-zone4",
+    "reverification_2026_11_19": {
+      "date_utc": "2026-11-19",
+      "session": "arena/0272d56e-zone4",
+      "result": "Both listing pages re-opened. P4's title still carries 'IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black' and P5's title still matches its stored name_listing character for character; both breadcrumbs still read Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. brand, model_number, capacity and dimensions remain null: the Item details table was again not reachable inside the retrievable chunks, and /gp/product/technical-reflections/<ASIN> redirects to the full product page rather than a table. F-60 stays open with its dated note; nothing inferred.",
+      "record": "data/verification-session-0272d56e.json"
+    }
   },
-  {
-   "id": "P5",
-   "asin": "B0DZFD6R9Z",
-   "short_link": "https://link.amazon/B0f3GKalj",
-   "canonical_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
-   "name_short": "CHEF iQ Sense Smart Wireless Meat Thermometer",
-   "name_listing": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
-   "listing_claims_in_title": [
-    "3 ultra-thin probes",
-    "WiFi unlimited range",
-    "1000°F heat safe",
-    "5 sensors",
-    "Gen3 (as titled)"
-   ],
-   "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
-   "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
-   "subcategory": "Meat thermometers",
-   "brand": "CHEF iQ",
-   "brand_status": "Brand field read from the Item details table on 2026-11-19 (Purchase options and add-ons: Brand | CHEF iQ).",
-   "model_number": null,
-   "capacity": null,
-   "dimensions": null,
-   "special_feature": "5 Sensors, Unlimited Range",
-   "flags": [
-    "F-56",
-    "F-60"
-   ],
-   "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
-   "title_read_utc": "2026-11-19",
-   "title_read_source": "https://www.amazon.com/dp/B0DZFD6R9Z (page title and breadcrumb read 2026-11-19; matches name_listing)",
-   "special_feature_status": "Special Feature field read from the Item details table on 2026-11-19.",
-   "item_details_read_utc": "2026-11-19",
-   "item_details_source": "https://www.amazon.com/dp/B0DZFD6R9Z (Purchase options and add-ons table read 2026-11-19)"
-  }
- ]
+  "products": [
+    {
+      "id": "P4",
+      "asin": "B0DHZTCNR5",
+      "short_link": "https://link.amazon/B0c8moW59",
+      "canonical_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "name_short": "ThermoMaven 1 Sec Professional Digital Meat Thermometer",
+      "name_listing": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black",
+      "listing_claims_in_title": [
+        "±0.5℉ accuracy",
+        "NIST&NSF Certified",
+        "Auto-rotate bright LED screen",
+        "IP67 waterproof (as titled)",
+        "Stocking stuffers gifts for men (as titled)",
+        "Black colour (as titled)"
+      ],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "subcategory": "Meat thermometers",
+      "brand": "ThermoMaven",
+      "brand_status": "Brand field read from the Item details table on 2026-11-19 (Purchase options and add-ons: Brand | ThermoMaven).",
+      "model_number": null,
+      "capacity": null,
+      "dimensions": null,
+      "special_feature": "Auto Off, Fast Reading System, High Accuracy, Ultra Clear Screen, Waterproof",
+      "flags": [
+        "F-56",
+        "F-60",
+        "F-68"
+      ],
+      "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
+      "name_listing_prior": "ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified Food Thermometer, Auto-Rotate Bright LED Screen, Highly Waterproof for Grill BBQ Camping, Black [read 2026-11-17; superseded by the 2026-11-19 read, F-68]",
+      "title_read_utc": "2026-11-19",
+      "title_read_source": "https://www.amazon.com/dp/B0DHZTCNR5 (page title and breadcrumb read 2026-11-19)",
+      "special_feature_status": "Special Feature field read from the Item details table on 2026-11-19.",
+      "item_details_read_utc": "2026-11-19",
+      "item_details_source": "https://www.amazon.com/dp/B0DHZTCNR5 (Purchase options and add-ons table read 2026-11-19)"
+    },
+    {
+      "id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "short_link": "https://link.amazon/B0f3GKalj",
+      "canonical_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "name_short": "CHEF iQ Sense Smart Wireless Meat Thermometer",
+      "name_listing": "CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3",
+      "listing_claims_in_title": [
+        "3 ultra-thin probes",
+        "WiFi unlimited range",
+        "1000°F heat safe",
+        "5 sensors",
+        "Gen3 (as titled)"
+      ],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "category_url": "https://www.amazon.com/Meat-Thermometers-Timers/b/ref=dp_bc_5?ie=UTF8&node=289810",
+      "subcategory": "Meat thermometers",
+      "brand": "CHEF iQ",
+      "brand_status": "Brand field read from the Item details table on 2026-11-19 (Purchase options and add-ons: Brand | CHEF iQ).",
+      "model_number": null,
+      "capacity": null,
+      "dimensions": null,
+      "special_feature": "5 Sensors, Unlimited Range",
+      "flags": [
+        "F-56",
+        "F-60"
+      ],
+      "publication_status": "Published 2026-11-19 (D-46): product card, sponsored outbound link to the tagged Special Link, and the Meat thermometers category. Attribution pending (F-58).",
+      "title_read_utc": "2026-11-19",
+      "title_read_source": "https://www.amazon.com/dp/B0DZFD6R9Z (page title and breadcrumb read 2026-11-19; matches name_listing)",
+      "special_feature_status": "Special Feature field read from the Item details table on 2026-11-19.",
+      "item_details_read_utc": "2026-11-19",
+      "item_details_source": "https://www.amazon.com/dp/B0DZFD6R9Z (Purchase options and add-ons table read 2026-11-19)"
+    }
+  ]
 }

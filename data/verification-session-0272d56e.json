@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "session": "arena/0272d56e-zone4",
+    "date_utc": "2026-11-19",
+    "method": "Live reads through the platform page-fetch tool, one row per statement published or relied on. A row says what was read, where, and whether it matches the record this repository holds. Nothing in this file is inferred; where a region of a page could not be retrieved, the row says so and the stored value is left as it was with its own dated citation.",
+    "not_read_on_this_date": [
+      "Associates Program Standard Commission Income Statement Table 1 - the page requires sign-in; the site's 4.50% Kitchen / 3.00% Home category figures rest on the dated 2026-11-14 and 2026-11-16 reads, and per-ASIN assignment stays unverified (F-01).",
+      "Item details / Product details table rows on all five listing pages - not inside the retrievable chunks; ad and brand-store modules occupy that region of the fetched document (F-38, F-60).",
+      "Associates Program Operating Agreement Section 5 - the agreement page was retrieved and its Sections 1 to 4 were read today; the Section 5 sentence the site quotes verbatim was re-read on 2026-11-16 and 2026-11-17 (records data/verification-session-c509aba1.json and -1f4a7a22.json) and was not re-reached in today's chunk.",
+      "Google Search Console property state and any query or impression data - no account is connected (F-61)."
+    ]
+  },
+  "rows": [
+    {
+      "id": "V1",
+      "subject": "P1 listing title",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Page title: 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen'",
+      "result": "Match. Identical, word for word, to data/products.json name_listing for B0CDY277D3, and the '6 Quart' wording against the stored '6 liters' details-table row keeps F-63 live.",
+      "affects": "data/products.json P1 name_listing; F-63; M-P1 fact table"
+    },
+    {
+      "id": "V2",
+      "subject": "P1 category breadcrumb",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (node 17659096011 on the final crumb)",
+      "result": "Match. Same path and same node id as the stored category_path and category_url.",
+      "affects": "data/products.json P1 category_path; category page breadcrumb"
+    },
+    {
+      "id": "V3",
+      "subject": "P1 also-viewed module (volatility check)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Slot 1 B0B7C327LK (Chefman 6 Quart Dual Basket, 4.4 / 1,395 shown), slot 2 B0CNSB81V6 (Nutrichef 8.8 QT), slot 3 B0BYKGN61Q (Gourmia 10 Qt dual basket).",
+      "result": "Match with the stored snapshot order for slots 1-3. Ratings and prices were visible in the module and are not published (F-02).",
+      "affects": "F-29 dated note"
+    },
+    {
+      "id": "V4",
+      "subject": "P2 listing title",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": "Page title: 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen'",
+      "result": "First segment matches; second segment is the variant F-66 and F-44 describe, not the stored name_listing second segment. Recorded as a dated variant field rather than overwriting the stored record, so the change history stays visible.",
+      "affects": "data/products.json P2 name_listing + name_listing_variant_2026_11_19; F-66; F-44"
+    },
+    {
+      "id": "V5",
+      "subject": "P2 category breadcrumb and also-viewed module",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": "Breadcrumb Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers; slots 1-3 B0BZ52FLKC, B0FM5KF34G, B0F92GL7JH.",
+      "result": "Breadcrumb matches. Slots 1-2 match the stored order; slot 3 shows the stored B0F92GL7JH again after the 2026-11-15/16 rotation to B0D1BGLW25 - F-29's volatility, observed in both directions.",
+      "affects": "F-29 dated note; data/products.json P2 competitors"
+    },
+    {
+      "id": "V6",
+      "subject": "P3 listing title",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": "Page title: 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen' (the registered URL is served with ?th=1 appended after the redirect)",
+      "result": "Match. Same wording as the stored name_listing, including the 450°F Hi-Fry and the three named modes this site quotes in M-P3's fact table.",
+      "affects": "data/products.json P3 name_listing; M-P3 fact rows; M-G5-F5"
+    },
+    {
+      "id": "V7",
+      "subject": "P3 also-viewed module",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": "Slots 1-3 B0CNY1YVDD (Chefman 6 QT compact), B09MR7QWKZ (Gourmia 8 Qt), B0C33CHG99 (Cosori TurboBlaze 6 Qt).",
+      "result": "Slot 1 matches the stored order; slot 2 carries the ASIN stored in slot 2 on the 2026-11-15/16 reads; slot 3 is the originally stored B0C33CHG99 again. Recorded as a dated sighting under F-29; the stored snapshot is not overwritten.",
+      "affects": "F-29 dated note; data/products.json P3 competitors"
+    },
+    {
+      "id": "V8",
+      "subject": "P4 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "read": "Title 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black'; breadcrumb Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat (node 289810).",
+      "result": "Match with the 2026-11-19 record in data/products-extra.json, including the IP67 wording that F-68 records as drift against the 2026-11-17 read. brand/model/capacity/dimensions still blank (F-60): the Item details table was not inside the retrievable chunks.",
+      "affects": "data/products-extra.json P4; F-60; F-68"
+    },
+    {
+      "id": "V9",
+      "subject": "P5 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "read": "Title 'CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3'; breadcrumb as P4.",
+      "result": "Match, character for character, with the stored name_listing. The title claims recorded in listing_claims_in_title are still exactly the title's own words. Blanks stay blank (F-60).",
+      "affects": "data/products-extra.json P5; F-60"
+    },
+    {
+      "id": "V10",
+      "subject": "Lighter-weight details endpoints",
+      "url": "https://www.amazon.com/gp/product/technical-reflections/B0DHZTCNR5",
+      "read": "/gp/product/technical-reflections/<ASIN> and /gp/aw/d/<ASIN> were both requested for P4 and P5.",
+      "result": "Neither returns a lighter table: both redirect to the full product page (21 and 20 chunks, ad and store modules where the details table sits). Recorded so the next session does not repeat the attempt, and so F-60's blanks are explained by the retrieval limit rather than by an unread page.",
+      "affects": "F-60; F-38"
+    },
+    {
+      "id": "V11",
+      "subject": "Operating Agreement header and Sections 1 to 4",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "read": "Header 'Updated: October 15, 2025'. Section 1 defines Special Links as links that 'must properly use the special “tagged” link formats we provide' and defines Program Content as the data, images, text, link formats, widgets, links, marketing content and linking tools Amazon may make available. Section 2 makes compliance a condition of receiving commission income. Section 3 states Amazon's customers are not the Associate's customers. Section 4 opens the warranty list.",
+      "result": "Match with the agreement this site behaves under: the tagging rule (D-01/D-14, F-69, F-73) and the Program Content boundary that holds product imagery back (D-22, F-43) are both stated in today's read of Section 1.",
+      "affects": "data/sources.json S-OA note; D-22; F-69; F-43"
+    },
+    {
+      "id": "V12",
+      "subject": "Program Policies Participation Requirements",
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read": "Re-read on 2026-11-19 by arena/79fe1c8d-zone4 for requirement 2(b) (the XXXXX-## tag in every link URL to an Amazon Site) and 6(w) (no cloaking or link shortening beyond what Amazon provides), quoted verbatim in F-69's detail on main.",
+      "result": "Not re-read a second time in this session; the same-day verbatim read of the other open PR is cited instead of duplicating it. The site's rule pages, the tagged hrefs and the rel=sponsored marking were then re-checked in the built output on 2026-11-19 (see site_checks).",
+      "affects": "F-69; F-73; docs/policy-compliance.html"
+    },
+    {
+      "id": "V13",
+      "subject": "Built-output compliance spot checks",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4/actions",
+      "read": "After the rebuild: every www.amazon.com href in docs/ carries ?tag=shopnow047c-20; every shop, guide and article outbound product link carries rel containing sponsored; the disclosure strip appears above the masthead content on every page and again in every footer; no $ figure or star-rating pattern is published anywhere in docs/.",
+      "result": "Pass - scripts/verify.py and qa/audit_site.py enforce all four as gates, and both pass on the final tree.",
+      "affects": "scripts/verify.py; qa/audit_site.py"
+    }
+  ]
+}

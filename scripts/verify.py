@@ -43,6 +43,11 @@ OFFICIAL_HOSTS = {
 }
 DISCLOSURE = "As an Amazon Associate I earn from qualifying purchases."
 SITE_URL_CANONICAL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
+# 2026-11-19 (arena/0272d56e-zone4): the Pages origin this site publishes itself under. A
+# canonical link, an og:url or a self-reference is not an external link, so the official-host rule
+# below exempts it. Only this exact prefix is exempt: any other github.io page is still treated as
+# an outside host and must be in OFFICIAL_HOSTS to be linked.
+SITE_ORIGIN = "https://kanlerxz87-cyber.github.io/Zone4/"
 SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 ASIN_RE = re.compile(r"^B[0-9A-Z]{9}$")
 PRICE_RE = re.compile(r"\$\s?\d")
@@ -562,7 +567,7 @@ def check_site() -> None:
         for tag, url in sp.links:
             parsed_url = urlparse(url)
             if parsed_url.scheme in ("http", "https"):
-                if (parsed_url.hostname or "") not in OFFICIAL_HOSTS:
+                if (parsed_url.hostname or "") not in OFFICIAL_HOSTS and not url.startswith(SITE_ORIGIN):
                     fail(f"{rel}: link to non-official host: {url}")
                 continue
             if parsed_url.scheme or url.startswith("mailto:"):
@@ -581,6 +586,7 @@ def check_site() -> None:
 def check_required_pages() -> None:
     required = [
         "index.html", "executive-summary.html", "products.html", "marketing.html",
+        "about.html", "imagery.html",
         "automation.html", "analysis.html", "requirements.html", "suggestions.html", "verification.html",
         "policy-compliance.html", "analytics.html", "flagged.html", "sources.html",
         "suggestions.html", "questions.html", "design.html", "decisions.html",
@@ -962,6 +968,69 @@ def check_publication() -> None:
                 fail(f"index.html: the shop section must come before {later} (products before the audit)")
 
 
+def check_reader_surfaces() -> None:
+    """Checks added 2026-11-19 (arena/0272d56e-zone4) for the reader-facing surfaces.
+
+    Four rules, each comparing the published page with the register that produced it, so a page
+    cannot claim what the data does not support:
+
+      1. every page declares a canonical URL of its own (flag F-86);
+      2. every page carries a social preview image with alt text, and that image exists;
+      3. an Article datePublished equals its record's published_utc, and a record with no dated
+         publication source publishes no date at all (decision D-49, flag F-88);
+      4. an inline diagram names itself as a diagram in its accessible name, which is the line
+         between the site's own drawings and the product photography D-22 holds back.
+    """
+    for page in sorted(DOCS.rglob("*.html")):
+        raw = page.read_text(encoding="utf-8")
+        rel = str(page.relative_to(DOCS))
+        if f'<link rel="canonical" href="{html_escape(SITE_URL + rel)}">' not in raw:
+            fail(f"{rel}: no canonical link for its own Pages URL")
+        if 'property="og:image"' not in raw:
+            fail(f"{rel}: no og:image preview")
+        if 'property="og:image:alt"' not in raw:
+            fail(f"{rel}: og:image has no alt text")
+        for tag in re.findall(r'<svg[^>]*role="img"[^>]*>', raw):
+            label = re.search(r'aria-label="([^"]*)"', tag)
+            if not label:
+                fail(f'{rel}: an inline role="img" diagram has no accessible name')
+            elif "diagram" not in label.group(1).lower():
+                fail(f"{rel}: a role=\"img\" drawing does not name itself as a diagram: {label.group(1)[:60]!r}")
+    card = DOCS / "social-card.png"
+    if not card.exists():
+        fail("docs/social-card.png is missing while pages reference it as their preview image")
+    elif card.stat().st_size < 1000:
+        fail("docs/social-card.png looks truncated")
+
+    articles = {a["id"]: a for a in load("marketing.json")["articles"]}
+    for a in articles.values():
+        rel = "articles/" + a["slug"].strip("/") + ".html"
+        page = DOCS / rel
+        if not page.exists():
+            continue
+        raw = page.read_text(encoding="utf-8")
+        m = re.search(r'<script type="application/ld\+json">(\{.*?"@type": "Article".*?\})</script>', raw, re.S)
+        if not m:
+            fail(f"{rel}: no Article structured data block")
+            continue
+        dates = set(re.findall(r'"date(?:Published|Modified)": "([^"]*)"', m.group(1)))
+        if a.get("published_utc"):
+            if dates != {a["published_utc"]}:
+                fail(f"{rel}: structured-data date(s) {sorted(dates)} do not equal the record's published_utc "
+                     f"{a['published_utc']!r} (decision D-49)")
+            if not a.get("published_source"):
+                fail(f"marketing.json {a['id']}: published_utc has no published_source naming its dated record")
+        elif dates:
+            fail(f"{rel}: publishes a date {sorted(dates)} although article {a['id']} has no published_utc record "
+                 "(decision D-49: no date rather than a borrowed one)")
+    items = ET.parse(DOCS / "feed.xml").getroot().find("channel").findall("item")
+    dated = sum(1 for a in articles.values() if a.get("published_utc")) \
+        + sum(1 for g in load("guides.json")["guides"] if g.get("published_utc"))
+    with_date = sum(1 for it in items if it.findtext("pubDate"))
+    if with_date > dated:
+        fail(f"docs/feed.xml carries {with_date} pubDate elements; only {dated} records have a dated publication source")
+
+
 def main() -> int:
     check_data()
     check_marketing()
@@ -977,6 +1046,7 @@ def main() -> int:
     check_social_card()
     check_measurement()
     check_publication()
+    check_reader_surfaces()
     if failures:
         print(f"FAILED: {len(failures)} problem(s)")
         for f in failures:

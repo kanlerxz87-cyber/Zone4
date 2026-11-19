@@ -10,7 +10,8 @@
       "api.github.com",
       "github.com"
     ],
-    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43)."
+    "added_by_00ba6c2e_2026_11_15": "Five Google Search Central pages and one Amazon disclosure help page were added as sources on 2026-11-15 because the decision-support register cites them. Each was read in this session; the specific section relied on is named in the 'used_for' field. S-APIFAQ's notes field was corrected to point at F-35 instead of F-29 (see flag F-43).",
+    "note_2026_11_19": "Two dated live reads added by arena/0272d56e-zone4; one guidance reference flagged as not re-fetched, per the registry's own rule that accessible=True means the page content was read in a verification pass."
   },
   "sources": [
     {
@@ -293,6 +294,33 @@
       "accessible": true,
       "used_for": "The standard the editorial suggestions are judged against: automation used primarily to manipulate rankings is a spam violation, appropriate use of automation is not against the guidelines, AI gives content no special gains in search, and bylines and automation disclosures are worth considering.",
       "notes": "Read in full on 2026-11-15 by session arena/d2a62d6b-zone4 and quoted verbatim in the questions register (Q-23 to Q-37). Google's own wording is repeated rather than paraphrased wherever it is relied on."
+    },
+    {
+      "id": "S-OA-2",
+      "title": "Associates Program Operating Agreement, Sections 1 to 4 as served (header: Updated October 15, 2025)",
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "publisher": "Amazon Associates Central",
+      "accessible": true,
+      "used_for": "The Special Links requirement ('The links must properly use the special tagged link formats we provide') and the definition of Program Content as Amazon's data, images and text, which is the boundary the 2026-11-19 imagery decision D-47 draws against.",
+      "notes": "Read through the platform page-fetch tool on 2026-11-19 by arena/0272d56e-zone4; recorded in data/verification-session-0272d56e.json row V11. The Section 5 disclosure sentence was not re-reached in today's chunks and rests on the dated 2026-11-16 and 2026-11-17 re-reads."
+    },
+    {
+      "id": "S-LIST-20261119",
+      "title": "The five tracked listing pages, re-read 2026-11-19 (titles, breadcrumbs, also-viewed modules)",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "publisher": "Amazon product pages",
+      "accessible": true,
+      "used_for": "Confirming that the stored listing titles and category paths still match the live pages for P1, P3, P4 and P5, and recording the P2 title variant and the carousel rotation. No Item details row was re-readable, so no specification value was changed on this evidence.",
+      "notes": "Rows V1 to V10 of data/verification-session-0272d56e.json. The other four listing URLs are https://www.amazon.com/dp/B09B7SB46R, https://www.amazon.com/dp/B08DKYBTPH, https://www.amazon.com/dp/B0DHZTCNR5 and https://www.amazon.com/dp/B0DZFD6R9Z, all read on the same date."
+    },
+    {
+      "id": "S-GSC-ART",
+      "title": "Google Search Central: Article structured data",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "publisher": "Google",
+      "accessible": false,
+      "used_for": "The rule behind decision D-48 and flag F-74: datePublished is the date the article first appeared publicly, so a page may not borrow the site's data-observation date for it.",
+      "notes": "Cited for the standard the site's own metadata had violated. The guidance page was not fetched in this sandbox on 2026-11-19, so accessible is recorded False: the row documents the rule the register applies, and no published value depends on this source alone."
     }
   ],
   "non_official_reference_only": [
@@ -305,6 +333,11 @@
       "title": "EcomChief: Amazon affiliate commission rates 2026",
       "url": "https://ecomchief.com/blogs/news-1/amazon-affiliate-commission-rates-2026",
       "reason": "Third-party. Lists Kitchen at 4.5% in one table and 5% in another, so the sources conflict. Not used as a data value."
+    },
+    {
+      "title": "Google Search Central: Article structured data (referenced, not re-fetched on 2026-11-19)",
+      "url": "https://developers.google.com/search/docs/appearance/structured-data/article",
+      "reason": "Referenced on 2026-11-19 for the definition of datePublished while correcting F-74. The page was not retrieved in this session, so it is cited as the standard the register applies rather than as a read source, and no figure or claim on the site depends on it alone."
     }
   ]
 }

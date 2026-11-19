@@ -214,6 +214,21 @@ def article_label(a: dict) -> str:
     return p["name_short"] if p else a["page_type"]
 
 
+def observed_suffix(a: dict) -> str:
+    """' - observed <date>' when the article record names one, otherwise nothing at all.
+
+    Decision D-49 (2026-11-19, arena/0272d56e-zone4), which replaced flag F-88's defect: an
+    article page never inherits the builder's OBSERVED constant. That constant is the date some
+    session last re-read the listings, not the date this article read its facts, so a record with
+    no dated field of its own prints no date rather than a borrowed one. The dated artefact behind
+    a record that does carry one is named in published_utc_source or facts_observed_source and
+    linked in the fact table, so the byline is checkable rather than decorative.
+    """
+    if not (a.get("facts_observed") or a.get("published_utc")):
+        return ""
+    return f" \u00b7 observed {esc(a.get('facts_observed') or a['published_utc'])}"
+
+
 def article_word_count(a: dict) -> int:
     return sum(len(par["text"].split()) for par in a["body"])
 
@@ -747,7 +762,7 @@ def article_card(current: Page, a: dict, show_category: bool = True) -> str:
         f'<div class="acard-title">{esc(a["h1"])}</div>'
         f'<div class="acard-dek">{esc(a["meta_description"])}</div>'
         f'<div class="acard-meta">{article_read_minutes(a)} min read \u00b7 '
-        f'{len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+        f'{len(a["facts"])} sourced facts{observed_suffix(a)}</div>'
         "</a>"
     )
 
@@ -822,7 +837,7 @@ def featured_section(current: Page) -> str:
         f'<div class="feature-title">{esc(buy["h1"])}</div>'
         f'<div class="feature-dek">{esc(buy["meta_description"])}</div>'
         f'<div class="feature-meta">{article_read_minutes(buy)} min read \u00b7 '
-        f'{len(buy["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)}</div>'
+        f'{len(buy["facts"])} sourced facts{observed_suffix(buy)}</div>'
         f'<div class="feature-go">Read the guide \u2192</div></a>'
     )
     grid = "".join(article_card(current, a) for a in rest)
@@ -1159,7 +1174,8 @@ def page_article(current: Page, a: dict) -> str:
     meta_line = (
         f'<div class="ameta">{esc(a["page_type"])}'
         + (f' \u00b7 <span class="chip">{esc(cat_label)}</span>' if cat_label else "")
-        + f' \u00b7 {article_read_minutes(a)} min read \u00b7 {len(a["facts"])} sourced facts \u00b7 observed {esc(OBSERVED)} \u00b7 {href(current, "verification.html", "how we checked")}</div>'
+        + f' \u00b7 {article_read_minutes(a)} min read \u00b7 {len(a["facts"])} sourced facts{observed_suffix(a)} '
+        + f'\u00b7 {href(current, "verification.html", "how we checked")}</div>'
     )
     seo_html = (
         "<dl class=\"seo\">"
@@ -1407,12 +1423,47 @@ def page_analysis(current: Page) -> str:
     )
 
 
+def _newest_verification_read() -> tuple[str, str]:
+    """The newest dated verification record on file, taken from the records themselves.
+
+    Every data/verification-session-*.json row names the date its pass read the pages, so the
+    newest of those is the most recent re-read the site can cite. Derived from the files rather
+    than typed into the template so the sentence on the page cannot drift from the register.
+    """
+    best = ("", "")
+    for path in sorted(DATA.glob("verification-session-*.json")):
+        try:
+            meta = json.loads(path.read_text(encoding="utf-8")).get("_meta", {})
+        except (json.JSONDecodeError, OSError):
+            continue
+        date = meta.get("date_utc") or meta.get("read_date_utc") or meta.get("observed_utc") or ""
+        if date > best[0]:
+            best = (date, path.name)
+    return best
+
+
 def page_verification(current: Page) -> str:
+    extra = json.loads((DATA / "products-extra.json").read_text(encoding="utf-8"))["products"]
+    covered = ", ".join(p["id"] for p in PRODUCTS)
+    others = ", ".join(p["id"] for p in extra)
+    read_on, read_file = _newest_verification_read()
+    coverage = (
+        f'<p class="small muted">This table covers {esc(covered)}, the records with a field-by-field check on file. '
+        f'{esc(others)} are published too, and their listings were re-read on the dated passes recorded in '
+        f'data/intent-links.json and data/verification-session-*.json; their capacity, dimension and specification fields '
+        f'are blank on this site because no retrievable read of an Amazon page includes the Item details table, so they '
+        f'have no rows to check here (F-60). That is a limit of the read, not a value this site declined to look up.</p>'
+    )
+    recheck = (
+        f'<p class="small muted">Rows carry the date each record was read, the earliest being {esc(OBSERVED)} (UTC). '
+        f'The newest dated re-read on file is {esc(read_on)} (data/{esc(read_file)}). Re-check before publishing.</p>'
+    ) if read_on else f'<p class="small muted">Observed {esc(OBSERVED)} (UTC). Re-check before publishing.</p>'
     return (
-        hero("Verification log", "Field-by-field check for each product. Each row links to the official source it was checked against. Blank or withheld values are flagged.")
+        hero("Verification log", "Field-by-field check for each product record that has one. Each row links to the official source it was checked against. Blank or withheld values are flagged.")
         + '<p><input id="filter" class="filter" type="search" placeholder="Filter rows (for example: P2, Unverified, F-02)" aria-label="Filter table"></p>'
+        + coverage
         + table(["Product", "Field", "Value", "Status", "Source link", "Flag"], verification_rows(current), "verification")
-        + f'<p class="small muted">Observed {esc(OBSERVED)} (UTC). Every row was re-read against the official source on that date. Re-check before publishing.</p>'
+        + recheck
     )
 
 
@@ -2557,7 +2608,7 @@ PAGE_DESCRIPTIONS = {
     "automation.html": "The affiliate pipeline stage by stage, with the status of each stage, the official rule that constrains it, and every click, conversion and revenue metric left blank because nothing is connected.",
     "analysis.html": "" + str(len(CONTENT["analysis"])) + " findings on the three products and the programme rules, each stating its basis, its confidence, and the official source an opinion would have to be checked against.",
     "requirements.html": f"All {len(REQUIREMENTS)} items in the project brief, one row each, with what the site actually delivers, what blocks it and the official source that governs the status.",
-    "verification.html": "A field-by-field verification log for all three products: every published value, the official page it was read from, and a flag wherever it could not be confirmed.",
+    "verification.html": "A field-by-field verification log for the air-fryer records: every published value, the official page it was read from, the date it was read, and a flag wherever it could not be confirmed.",
     "policy-compliance.html": f"{len(RULES)} Associates-programme and FTC requirements checked against this site, each linked to the official section it comes from and to the way the site complies.",
     "analytics.html": "A first-party click log that lives only in your browser and starts at zero. No network call, no estimate, and no attributed figure until Associates reporting is connected.",
     "flagged.html": "Every irregularity and unverified item found while building this site, each with its severity, the source links behind it, and the action needed from the owner.",
@@ -2731,6 +2782,7 @@ def _render_page_raw(page: Page) -> str:
 <link rel="stylesheet" href="{esc(page.rel('styles.css'))}">
 <meta name="zone4-measure-endpoint" content="{esc(build_extras.MEASURE_ENDPOINT)}">
 <link rel="alternate" type="application/rss+xml" title="Zone4 articles" href="{esc(page.rel('feed.xml'))}">
+<link rel="canonical" href="{esc(SITE_URL + page.path)}">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -2763,6 +2815,13 @@ def _render_page_raw(page: Page) -> str:
       <a href="{esc(page.rel('design.html'))}">Design brief</a>
     </div>
     <div class="footer-col">
+      <div class="footer-t">Reader</div>
+      <a href="{esc(page.rel('about.html'))}">About this site</a>
+      <a href="{esc(page.rel('articles/index.html'))}">Article hub</a>
+      <a href="{esc(page.rel('guides/index.html'))}">Guides</a>
+      <a href="{esc(page.rel('links.html'))}">Outbound links</a>
+    </div>
+    <div class="footer-col">
       <div class="footer-t">Research</div>
       <a href="{esc(page.rel('analytics.html'))}">Analytics</a>
       <a href="{esc(page.rel('automation.html'))}">Automation &amp; tracking</a>
@@ -2781,6 +2840,16 @@ def _render_page_raw(page: Page) -> str:
 """
 
 
+def rfc822(date_str: str) -> str:
+    """A record date such as 2026-11-19 as the RFC 822 form an RSS pubDate requires.
+
+    The value is the date the article record itself states; it is never the build clock, so a
+    rebuild on a later day cannot silently make old content look new (decision D-49).
+    """
+    from datetime import datetime, timezone
+    return datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+
 def article_jsonld(a: dict) -> str:
     """JSON-LD Article metadata for one article page.
 
@@ -2794,13 +2863,19 @@ def article_jsonld(a: dict) -> str:
         "@type": "Article",
         "headline": a["h1"],
         "description": a["meta_description"],
-        "datePublished": OBSERVED,
-        "dateModified": OBSERVED,
         "inLanguage": "en",
         "author": {"@type": "Organization", "name": SITE_TITLE_SUFFIX},
         "publisher": {"@type": "Organization", "name": SITE_TITLE_SUFFIX},
         "mainEntityOfPage": SITE_URL + "articles/" + a["slug"].strip("/") + ".html",
     }
+    # Decision D-49: datePublished is the date the article first appeared in public, which only the
+    # record can state. Google's Article guidance is explicit that it is not the date a crawler last
+    # saw the page, so a record without a dated publication source publishes no date in its
+    # structured data either. Both keys previously carried the builder's OBSERVED value on every
+    # article page, which is the defect flag F-88 records.
+    if a.get("published_utc"):
+        data["datePublished"] = a["published_utc"]
+        data["dateModified"] = a["published_utc"]
     return (
         '<script type="application/ld+json">'
         + json.dumps(data, ensure_ascii=False)
@@ -2949,15 +3024,21 @@ def build() -> list[pathlib.Path]:
     # RSS is generated from the same article records as the site. Publication dates
     # are deliberately omitted because the source data has no verified per-article
     # dates; subscribers still get canonical links and the editorial descriptions.
+    # RSS is generated from the same records as the pages. A pubDate appears only for an article
+    # whose own record carries a dated publication source (decision D-49, flag F-88), so the feed
+    # never states a date it cannot cite - and the five undated articles are the reason flag F-84
+    # is open: a reader that sorts by date has nothing to sort those items on.
     feed_items = []
     for article, article_url in ARTICLE_PATHS:
         item_url = SITE_URL + article_url.lstrip("/")
+        pub_date = f"    <pubDate>{rfc822(article['published_utc'])}</pubDate>\n" if article.get("published_utc") else ""
         feed_items.append(
             "  <item>\n"
             f"    <title>{html.escape(article['h1'])}</title>\n"
             f"    <link>{html.escape(item_url)}</link>\n"
             f"    <guid isPermaLink=\"true\">{html.escape(item_url)}</guid>\n"
             f"    <description>{html.escape(article['meta_description'])}</description>\n"
+            f"{pub_date}"
             "  </item>\n"
         )
     feed_items += build_extras.feed_items(sys.modules[__name__])
