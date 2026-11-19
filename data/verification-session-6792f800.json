@@ -1,0 +1,64 @@
+{
+ "_meta": {
+  "session": "arena/6792f800-zone4",
+  "date_utc": "2026-11-19",
+  "method": "Read-only line-by-line review of the repository's own registers, build scripts and built pages. Every value quoted here was observed in this workspace: JSON registers under data/, the generator scripts under scripts/, and the HTML in docs/ after a rebuild. No external page was fetched in this session, and none of the product values in data/products.json or data/products-extra.json was re-read, changed or re-asserted.",
+  "not_done": [
+   "Associates Central was not accessed (no account access in this sandbox): tag registration (F-57), the one-link-per-product test (F-58) and every tracking report remain unverified.",
+   "Item details for P4 and P5 were not read (F-60 stays open, blanks stay blank).",
+   "Prices, ratings and review counts were not read into any record and are still withheld (F-02).",
+   "No search-engine data: the sitemap and feed are generated and correct, but no property is verified in Search Console (SG-29, D-42, RQ-08)."
+  ],
+  "result_summary": "Repository review and storefront pass. Findings: (1) four flags still described the pre-D-01 link state and the thermometers as held - corrected as F-73; (2) no page named an author, a method statement or a correction path - the About page was added; (3) no product imagery existed at all - scaled footprint diagrams drawn from the listed dimensions were added, with an imagery policy page; (4) the landing hero advertised the checking method instead of the reader's outcome - rewritten; (5) the review surface the brief asks for did not exist - the Review page and its register were added with 14 proposals and 13 gating questions. No product value, link target, tracking tag or policy claim changed; the only register correction is the F-73 wording fix, recorded as its own flag."
+ },
+ "rows": [
+  {
+   "area": "Build",
+   "check": "Every published page is generated, not hand-edited",
+   "observed": "41 HTML pages written by scripts/build_site.py (38 pages plus guides, review, about and imagery through build_extras); two consecutive builds are byte-identical",
+   "record": "scripts/build_site.py, scripts/build_extras.py"
+  },
+  {
+   "area": "Build",
+   "check": "The site checks pass on the final tree",
+   "observed": "scripts/verify.py OK on 41 pages; qa/audit_site.py --strict-warnings PASS with 0 warnings; 92 unit tests OK; scripts/render_design_prompt.py produces no diff",
+   "record": "scripts/verify.py, qa/audit_site.py, tests/"
+  },
+  {
+   "area": "Links",
+   "check": "Every outbound product link is a tagged Special Link marked sponsored",
+   "observed": "817 rel=\"sponsored\" anchors across the built pages; every www.amazon.com href carries tag=shopnow047c-20; no link.amazon short link is published as an href",
+   "record": "docs/*.html"
+  },
+  {
+   "area": "Disclosure",
+   "check": "The Associates disclosure is above the fold and in every footer",
+   "observed": "present under the masthead and in the footer on all 41 pages; verify.py fails the build if either disappears",
+   "record": "docs/*.html"
+  },
+  {
+   "area": "Registers",
+   "check": "Flag texts describe the current build",
+   "observed": "F-57, F-58, F-56 and F-60 still described the pre-D-01 state; corrected, with the finding recorded as F-73. Counts recomputed: 73 flags, 50 suggestions, 51 questions, 46 decisions (34 recorded, 12 open)",
+   "record": "data/flags.json"
+  },
+  {
+   "area": "Storefront",
+   "check": "The first screen leads with the reader's outcome",
+   "observed": "H1 rewritten to 'Crispy dinners, one counter square.'; the receipts moved to the trust row; the five product cards, with decision-led link labels, sit above the hero",
+   "record": "docs/index.html"
+  },
+  {
+   "area": "Imagery",
+   "check": "No copied or generated product photography exists",
+   "observed": "the only product visuals are inline SVG footprint diagrams drawn from the recorded dimensions, captioned with the numbers used; no bitmap asset exists in the repository",
+   "record": "data/imagery.json, docs/imagery.html"
+  },
+  {
+   "area": "Review gate",
+   "check": "A page where proposals can be reviewed before implementation",
+   "observed": "docs/review.html files 14 proposals and 13 questions with cost, risk, acceptance check and an official source; four carry a dated application; counts are printed from the register",
+   "record": "data/redesign.json"
+  }
+ ]
+}
