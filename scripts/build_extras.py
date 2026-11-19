@@ -743,11 +743,18 @@ def imagery_body_for(bs, page) -> str:
             ("Shipped now", rule["shipped_now"]),
         )
     )
+    shot = (
+        '<div class="cathero"><div class="cathero-figure">'
+        + footprint_figure("air-fryer-toaster-ovens")
+        + '</div><div class="cathero-lead">'
+        + bs.hero("Imagery: every picture on this site, and where it comes from",
+                  "A shop needs pictures. This one shows only pictures it can source: original diagrams drawn from "
+                  "the dimensions the listings state. Nothing here is downloaded from a listing, and nothing is "
+                  "generated to look like the product.")
+        + '</div></div>'
+    )
     return (
-        bs.hero("Imagery: every picture on this site, and where it comes from",
-                "A shop needs pictures. This one shows only pictures it can source: original diagrams drawn from "
-                "the dimensions the listings state. Nothing here is downloaded from a listing, and nothing is "
-                "generated to look like the product.")
+        shot
         + '<section><h2>The rule</h2>'
         + '<p class="aiwrap">Listing photography is Program Content. The Operating Agreement gives the store the '
           'right to the images on its listings; it does not hand that right to a site that copies them, so none is '

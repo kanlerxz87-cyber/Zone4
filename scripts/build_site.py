@@ -898,13 +898,13 @@ def transparency_band(current: Page) -> str:
         "</ul>"
     )
     return (
-        '<section id="transparency"><h2>The data behind the shop</h2>'
-        '<p class="section-lead">This site publishes only what an official listing or policy page states. Everything below '
-        'is the receipt: the verification log, the policy checks, the open flags and the decision surface. It is one click '
-        'away and never in the way of the buying decision.</p>'
+        '<section id="transparency"><h2>Why you can trust these numbers</h2>'
+        '<p class="section-lead">Every figure on this site was read from an official listing or policy page, and the receipt '
+        'sits one click from the number. Nothing is tested, estimated or copied from another review site. Where a value '
+        'cannot be confirmed it is left blank and flagged rather than guessed.</p>'
         f'<div class="tcounts">{counts}</div>'
         f'<div class="transgrid">{cards}</div>'
-        '<h3>What this site deliberately does not publish</h3>'
+        '<h3>What we will not claim</h3>'
         '<p class="section-lead">Stated here rather than buried, each naming the rule or flag behind it.</p>'
         + withheld
         + '</section>'
