@@ -869,7 +869,7 @@ def transparency_band(current: Page) -> str:
         f'<div class="tcount"><span class="tcount-n">{recorded}</span> decisions recorded</div>'
     )
     links = [
-        ("Review what to change", "Thirteen proposals and the twelve questions that gate them: choose a path first.", "review.html"),
+        ("Review what to change", "Every proposal for the shop, its cost and risk, and the questions that gate it: choose a path first.", "review.html"),
         ("About this site", "Who writes it, how each number is checked, and how to correct one.", "about.html"),
         ("Imagery", "Every picture here, and the rule that keeps listing photography off the site.", "imagery.html"),
         ("Verification log", "Every published value and the listing it was read from.", "verification.html"),
@@ -2432,7 +2432,7 @@ PAGE_DESCRIPTIONS = {
     "articles/index.html": "Every article on the site grouped by product format, plus the topic calendar: catchy planned titles, each answerable from already-verified figures, with every fact row linked to its source.",
     "about.html": "Who writes this site, how each number is checked against the listing, what it deliberately will not publish, and how to correct it.",
     "imagery.html": "Every picture on this site and where it comes from: original footprint diagrams drawn from the listed dimensions, with no copied or generated product photography.",
-    "review.html": "Thirteen proposals that would make this site read like a publication, each with its cost, risk and proof of success, beside the twelve questions that must be answered before any of them is built.",
+    "review.html": "Every proposal that would make this site read like a publication, each with its cost, risk and proof of success, beside the questions that must be answered before any of them is built.",
     "suggestions.html": f"{len(SUGGESTIONS)} changes worth making to this site, costed and risk-assessed, each tied to its decision and to the official rule that constrains it: what shipped on 2026-11-16, what waits on the owner, and in which order.",
     "questions.html": f"{len(QUESTIONS)} questions that must be answered before any change can reasonably be made: what is already known, what is missing, and who can supply it.",
     "decision-centre.html": f"The review-before-you-build hub: the {len(SUGGESTIONS)} suggestions, {len(QUESTIONS)} questions, {sum(1 for d in DECISIONS if d['status'].startswith('Open'))} open decisions and {len(FLAGS)} flags in one place, with the order to work in and what happens to an answer.",

@@ -591,6 +591,7 @@ def _review_body(bs, page) -> str:
     de = _load("decisions.json")["decisions"]
     fl = _load("flags.json")["flags"]
     register_rows = [
+        ("The five-format shop question", "Which air fryer fits my kitchen and my cooking: one hub page with the chooser first and a verdict per reader situation (RD-14)", "New P1 proposal"),
         ("This page (data/redesign.json)",
          f"{len(suggestions)} proposals and {len(questions)} questions, each with cost, risk, check and an official source",
          "Proposed \u2014 awaiting your decision"),
@@ -622,7 +623,7 @@ def _review_body(bs, page) -> str:
         + f'<p class="aiwrap">{e(review["note"])}</p></section>'
         + "".join(cards)
         + '<section id="questions"><h2>The questions that come before the build</h2>'
-        '<p class="section-lead">Twelve questions, kept short on purpose. Each records what is already known, '
+        f'<p class="section-lead">{len(questions)} questions, kept short on purpose. Each records what is already known, '
         'what is missing, who can supply it and how to find out. Where a default exists it is named in the '
         'discovery step, so leaving a question unanswered is still a recorded decision rather than a gap.</p>'
         + q_table + "</section>"

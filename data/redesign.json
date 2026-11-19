@@ -9,16 +9,16 @@
   "build_2026_11_19": "Applied by this session, each recomputed from the build rather than typed: RD-01 (landing-page hero), RD-03/RD-12 (footprint diagrams on the category tiles and category page headers), RD-06 (decision-led product link labels), RD-08 (About page), plus the About and Imagery pages themselves and a storefront/mobile CSS pass. RD-02, RD-04, RD-05, RD-07, RD-09, RD-10, RD-11 and RD-13 are proposals only."
  },
  "review": {
-  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the twelve questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01 fully; RD-03, RD-06 and RD-08 partly), each labelled with what shipped and what still waits on an answer; nothing else is applied. The thirteen proposals are newly filed here; the site's fifty earlier suggestions stay in their own register (data/suggestions.json) and are not duplicated, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
+  "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01 fully; RD-03, RD-06 and RD-08 partly), each labelled with what shipped and what still waits on an answer; nothing else is applied. These proposals are filed in their own register and are not duplicated into data/suggestions.json, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
   "flow": [
    {
     "step": 1,
-    "title": "Read the twelve proposals",
+    "title": "Read every proposal",
     "what": "Each has its problem, its proposed change, its cost, its risk and the check that proves it worked. Five carry a dated application from 2026-11-19 - one complete, four partial, each naming exactly what shipped and what still waits on you; the rest are proposals only."
    },
    {
     "step": 2,
-    "title": "Answer the twelve questions, or let the defaults stand",
+    "title": "Answer every question, or let the defaults stand",
     "what": "Each question records what is already known, what is missing, who can supply it and how to discover it. Where a default exists it is named in the discovery step, so silence is still a recorded decision rather than a gap."
    },
    {
@@ -419,6 +419,34 @@
    "decision": "D-60",
    "status": "Proposed",
    "shipped_note": ""
+  },
+  {
+   "seq": 14,
+   "id": "RD-14",
+   "priority": "P1 - Do first",
+   "title": "Publish the one page a shopper is actually searching for: a fit-verdict hub with the chooser above the fold",
+   "problem": "The site's pages are strong on method and thin on the page shape a first-time buyer arrives for — “which air fryer fits my kitchen and my cooking”. The comparison page compares and explicitly declines to conclude (anti-slop finding AS-05), the buying guide teaches a five-step method, and the chooser sits below two sections of cards on the landing page. A reader who wants an answer gets a procedure.",
+   "proposal": "Build one hub at /air-fryers-that-fit: the three-question chooser first, then a verdict table with one row per reader situation (two dishes at once; one big dish and a shallow counter; hosting on a deep counter), each row naming the product, the listed fields that justify it, the cash-and-counter cost of the alternative, and a decision-labelled link. Above it, a 40-word answer a reader could quote; below it, the method that produced it. It publishes no price, rating or test result — only listed fields already in the repository — so it needs no new access, only the owner's yes on ranking within verified facts (RQ-11).",
+   "why": "This is the page that earns the click it is optimised for, and it is the page competitors cannot copy without doing the same sourcing. It also gives every existing article a natural internal target.",
+   "effort": "One page assembled from existing fact rows plus the chooser component already built; half a day including the check.",
+   "risk": "Medium. A verdict is a claim, so every line must resolve to a listed field (D-12, D-19). If RQ-11 is answered no, the page can still ship as a situation table with no verdict language.",
+   "check": "Every verdict cell resolves to a fact row with a source link; no price, rating, review count or trend claim appears; the chooser is the first interactive element; the page is in the sitemap, the feed and every article's 'Where next' block.",
+   "sources": [
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: people-first content"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+     "ref": "Google: thin affiliation vs original value"
+    }
+   ],
+   "flags": [
+    "F-15"
+   ],
+   "decision": "D-61",
+   "status": "Proposed",
+   "shipped_note": ""
   }
  ],
  "questions": [
@@ -659,6 +687,28 @@
     {
      "url": "https://affiliate-program.amazon.com/help/operating/policies",
      "ref": "Program Policies: Special Links and one programme"
+    }
+   ]
+  },
+  {
+   "seq": 13,
+   "id": "RQ-13",
+   "area": "Content",
+   "question": "Will the owner allow one page to name a verdict for each reader situation, using only listed fields?",
+   "why_it_matters": "This is the single change most likely to convert a reader into a click: a page that answers “which one for me” instead of teaching a method. It is also the change that most needs the owner's consent, because a verdict is a claim.",
+   "known": "D-12 already permits conclusions and ranking where every claim resolves to a sourced fact row; D-19 bars popularity and trend language. The comparison page currently declines to conclude (AS-05).",
+   "missing": "An explicit yes or no, and whether the verdict may name a single “most kitchens” pick or only situation-by-situation rows.",
+   "who": "Site owner.",
+   "discover": "One sentence. Default if unanswered: ship the situation table with the reasoning shown and no single 'best' badge.",
+   "blocks": "RD-14",
+   "sources": [
+    {
+     "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+     "ref": "Operating Agreement: accuracy of claims"
+    },
+    {
+     "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+     "ref": "Google: people-first content"
     }
    ]
   }
