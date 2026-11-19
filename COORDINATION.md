@@ -1608,5 +1608,5 @@ Scope rule: this session does not touch `engine/`, `analytics-endpoint/`, `data/
 
 **Irregularities for review (none block the merge).** No new unresolved values. Carried forward unchanged: F-57 (tag registration), F-58 (one-link test), F-59 (endpoint hosting), F-61 (Search Console), F-78 (P4 newer-model notice), F-02 (prices/ratings withheld), F-60 (thermometer blanks), D-52 (gift-window cadence, open).
 
-**PR, merge and Pages.** To be recorded here after the merge.
+**PR, merge and Pages.** Opened as **PR #107** (base `main`, head `arena/d696a32c-zone4`) and merged without approval on 2026-11-19 (merge commit `8151913`), after one rebase round that absorbed PR #106 (`arena/975f22f7-zone4`, merged as `1cf906a` while this branch worked). That merge added only `data/verification-session-975f22f7.json` and its board row/log — no register rows — so this session's ids (S-57..S-60, Q-60..Q-63, D-53, F-91/F-92) were still the next free ids and needed no renumbering. The two `COORDINATION.md` conflicts (board rows, session logs) were resolved by keeping every row and log from both sessions. CI on the PR: verify and audit both pass. Pages deploy confirmed: `built` for commit `8151913` (2026-11-19T21:54:21Z).
 
