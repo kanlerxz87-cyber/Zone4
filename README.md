@@ -12,7 +12,7 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 - The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication. See **Q-01 / Q-50 / F-03 / F-58** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
 - The site includes a three-question product chooser, format categories, eight question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **50 suggestions**, **51 questions**, **46 decisions** (34 recorded, 12 open), and **74 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The suggestion and decision pages are the review gate: **58 suggestions**, **56 questions**, **46 decisions** (34 recorded, 12 open), and **75 flags** are maintained in the JSON registers and published to their matching pages. The [Decision centre](https://kanlerxz87-cyber.github.io/Zone4/docs/decision-centre.html) renders the open decisions as three ready-weighed paths so a reviewer can choose a path before anything is implemented. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
@@ -36,13 +36,17 @@ The full repository executive summary is [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMM
 |---|---|
 | `docs/index.html` | Shop-front publication front page: hero, lead guide, article shelf, category tiles, chooser, buyer comparison and a question-shaped content roadmap. |
 | `docs/articles/index.html` | Article hub and the question-led topic calendar. |
-| `docs/articles/*.html` | Seven individual buyer guides and product-format articles. |
-| `docs/categories/*.html` | Dual-basket, single-basket and air-fry toaster-oven category pages. |
-| `docs/products.html` | Three verified product records and a derived counter-space comparison. |
+| `docs/articles/*.html` | Eight individual buyer guides and product-format articles. |
+| `docs/guides/*.html` | Four question-shaped buying guides and the guides hub. |
+| `docs/categories/*.html` | Dual-basket, single-basket, air-fry toaster-oven and meat-thermometer category pages. |
+| `docs/products.html` | Five verified product records and a derived counter-space comparison. |
 | `docs/requirements.html` | All 35 request requirements, with status, evidence and source. |
 | `docs/suggestions.html` | Costed proposals awaiting review or marked by their actual status. |
 | `docs/questions.html` | Known facts, missing information, who can provide it, and discovery steps. |
 | `docs/decisions.html` | Options and recorded decisions; open decisions remain visible. |
+| `docs/decision-centre.html` | The review-before-you-build hub: the registers in one place, the order to work in, and three ready-weighed paths through the open decisions. |
+| `docs/information-gaps.html` | What the project can prove, what it cannot, and who can close each gap. |
+| `docs/links.html`, `docs/measurement.html` | The product-intent link record and the measurement surfaces (five defined events, campaign ledger, endpoint status). |
 | `docs/design.html` and `DESIGN_PROMPT.md` | Three design directions, anti-filler guidance, topic ideas and a prompt assembled from the design data. Slots are filled from the recorded decisions (D-12/17/18/19/35/37); only the audience slot stays open. |
 | `docs/analytics.html` | Local-only click log; no network endpoint or conversion attribution. |
 | `docs/verification.html`, `docs/sources.html`, `docs/policy-compliance.html` | Field-level verification, sources, and policy checklist. |
@@ -55,11 +59,11 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | Path | Contents |
 |---|---|
 | `data/products.json` | Current product records (three) and cited listing fields. |
-| `data/marketing.json` | Seven articles, their fact rows and editorial metadata. |
+| `data/marketing.json` | Eight articles, their fact rows and editorial metadata. |
 | `data/sources.json` | Official-source registry. |
-| `data/flags.json` | 74 flags; F-74 records the sponsored-rel gap on 63 tagged Amazon links, corrected 2026-11-19; F-55/F-56 record the two additional link destinations (resolved 2026-11-19 and published under D-46), F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68/F-69 the parallel session's P4 title-drift and untagged-link findings, F-70/F-71/F-72 the 2026-11-19 register and documentation corrections, F-73 the short-link citations (2026-11-19, arena/79fe1c8d-zone4). |
+| `data/flags.json` | 75 flags; F-74 records the sponsored-rel gap on 63 tagged Amazon links, corrected 2026-11-19; F-75 records that the brief's "AI slop" claim is itself unverified, with the owner's examples requested (2026-11-19, arena/bc21d56d-zone4); F-55/F-56 record the two additional link destinations (resolved 2026-11-19 and published under D-46), F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68/F-69 the parallel session's P4 title-drift and untagged-link findings, F-70/F-71/F-72 the 2026-11-19 register and documentation corrections, F-73 the short-link citations (2026-11-19, arena/79fe1c8d-zone4). |
 | `data/associates.json` | The owner-selected tracking ID, the three tagged Special Links and the five-step one-link-per-product Associates Central test protocol (2026-11-17). |
-| `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers. |
+| `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers; `data/decisions.json` also carries the three-path triage the Decision centre renders (SG-36). |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
 | `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. |

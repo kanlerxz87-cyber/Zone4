@@ -20,7 +20,8 @@
       "Not adopted - see the recorded decision": "Considered and not adopted under the recorded decision; revisit only if that decision changes.",
       "Implemented 2026-11-17": "Decision recorded 2026-11-17 and the change is live in this build.",
       "Confirmed by the 2026-11-17 decision": "A standing state or guardrail, confirmed by a decision recorded on 2026-11-17. Nothing new to build.",
-      "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete."
+      "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete.",
+      "Implemented 2026-11-19": "Decision recorded earlier (D-38, 2026-11-17) and the change it commits is live in this build (2026-11-19)."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
@@ -1307,6 +1308,210 @@
       "status": "Needs a decision first",
       "decision": "D-16",
       "status_note_2026_11_19": "Imported 2026-11-19 from stale PR #87; status mapped to the register vocabulary. Gated on D-16 (measurement and privacy boundary, open) exactly as the reader-capture row S-46 and Q-47 are; the RSS feed stays the capture channel until then."
+    },
+    {
+      "id": "SG-31",
+      "priority": "P2 - Adds real value",
+      "title": "Name the one reader the design prompt is written for, and fill its [AUDIENCE] slot from evidence",
+      "problem": "The design brief's paste-ready prompt fills six of its seven slots from recorded decisions. The [AUDIENCE] slot still ships open ('still open (Q-16 and Q-04)'), so the brief a designer or a design tool receives asks it to write for nobody in particular. Google's people-first guidance ties helpful content to a specific intended audience, and an unspecified audience is the reader-side condition the brief's 'reads like AI slop' complaint (F-74) describes.",
+      "proposal": "After Q-16 and Q-04 are answered - by the owner, or from dated Search Console queries once D-42 is actioned - fill the [AUDIENCE] slot with one named primary reader (for example, a first-time buyer measuring a small counter), and re-read the eight published openers and the hero sentence against that persona once. Wording only: no published value, table, link or product fact changes.",
+      "why": "Every other slot in the prompt is already filled from a recorded decision, so this is the cheapest remaining lever on whether the site reads as written for someone rather than generated at no one.",
+      "effort": "About an hour of wording once the persona is named; no build change.",
+      "risk": "Low. The failure mode to avoid is inventing a persona: the slot must be filled from an owner statement or a dated measurement record, attributed to the decision or record that supplied it.",
+      "check": "scripts/render_design_prompt.py shows the [AUDIENCE] slot filled and attributed; the persona's source (a decision or a dated measurement record) is named in the slot row; a second render is byte-identical.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful content is created for a specific, intended audience"
+        }
+      ],
+      "flags": [
+        "F-74"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-35",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 from the brief's design-suggestion request. The slot itself is filled from Q-16/Q-04 or from measured queries; the decision pointer is D-35 because that is the recorded design-specification decision the prompt slots render under. Nothing is filled until the evidence exists."
+    },
+    {
+      "id": "SG-32",
+      "priority": "P2 - Adds real value",
+      "title": "Propose the next topic wave: three question-shaped candidates prepared for the calendar's first review",
+      "problem": "The eight-topic calendar was adopted (D-17) and one topic is written (T-04). The calendar's first review has no prepared candidates, so the next wave would be chosen from instinct - the exact failure mode the cadence and the evidence rule were adopted to prevent.",
+      "proposal": "Prepare three candidates for the owner's calendar review, each question-shaped and built only from fact rows already verified in the register: (a) 'Which of the three listed footprints leaves you counter space to work?' - a decision page from the published counter-space analysis; (b) 'Which listing answers a first-time buyer's first five questions?' - a gap page built from the three product fact tables; (c) 'Two baskets, one big basket, or a toaster oven: what the listed function counts say about cleanup' - an extension of the published format comparison into the cleanup dimension. Each candidate carries its fact-row ids and its official listing sources before any writing starts.",
+      "why": "The brief asks for catchy, trendy articles. The evidence rule (D-19) and the people-first standard (D-17) are what make that publishable at speed; candidates prepared in advance are how the calendar stays question-shaped under deadline pressure instead of drifting into demand claims.",
+      "effort": "Half a day to write the three candidate rows with their fact-row ids. Writing the chosen articles is the calendar's normal cadence.",
+      "risk": "Topic candidates that imply popularity ('what people are searching for') would breach the recorded evidence rule D-19; the candidates above are framed as reader questions, not demand claims.",
+      "check": "Each candidate names its fact-row ids and links the official listing pages those facts were read from; no search-volume, popularity or traffic figure appears anywhere in the row (D-19; Operating Agreement Section 4).",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: the people-first standard the candidates are written to"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 4: no representation about traffic any site can expect"
+        }
+      ],
+      "flags": [],
+      "status": "Awaiting decision",
+      "decision": "D-17",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The pointer is D-17 because adopting any topic beyond the recorded eight is a calendar revision that the owner reviews; until then the candidates stay proposals with their fact-row ids attached."
+    },
+    {
+      "id": "SG-33",
+      "priority": "P2 - Adds real value",
+      "title": "Finish the social-preview half of S-09: a real og:image and Article structured data on every article page",
+      "problem": "S-09 is partly implemented. Structured data exists on the front page and one guide, and no published page carries an og:image, so a link shared in a chat or a social feed shows no preview image at all. The 'measure whether search traffic arrives' half of S-09 cannot fairly start from an unshareable card.",
+      "proposal": "Generate one static, text-based site-card image (owned, no product photography - D-22 governs product photos separately), wire og:image and card tags into the head builder, and extend the Article structured-data block to every article page. Re-run S-09's measurement plan once D-42 is actioned.",
+      "why": "A shared link with no preview card loses the click before the content can earn it. This is the last purely technical item on the S-09 list; the rest is measurement that waits on the owner's Search Console decision.",
+      "effort": "Half a day: one image, head-builder changes, and the per-article JSON-LD block.",
+      "risk": "Low. The image must not imply endorsement, testing claims or Amazon marks; text-only with the site name and subject avoids all three.",
+      "check": "Every published page's head carries og:image; the QA audit's head and per-page checks pass; the image file ships with a recorded provenance note (generated by this repository, not copied).",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience and presentation guidance (the S-09 decision's source)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: how titles and snippets are presented"
+        }
+      ],
+      "flags": [],
+      "status": "Awaiting decision",
+      "decision": "D-09",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after checking the built pages: og:image appears on none of them (grep across docs/), and S-09's status already read 'partly implemented'. This row stages the unfinished half rather than re-opening what D-09 already approved."
+    },
+    {
+      "id": "SG-34",
+      "priority": "P2 - Adds real value",
+      "title": "Run the slop-evidence pass: convert the owner's named examples into new anti-pattern rows, then re-read the openers against them",
+      "problem": "The brief says the site 'should not read like some AI slop website like it looks like now' but names no page or sentence (F-74). The anti-slop register (AS-01..AS-10) documents ten observed patterns with evidence and replacements; a complaint without examples cannot be turned into a targeted fix, only into rewrites that might miss what the owner actually saw.",
+      "proposal": "Take the owner's answer to Q-52 - the specific pages or sentences that read as machine output. Convert each named example into an AS-11+ row with the same structure as the existing ten (pattern, evidence, replacement), then re-read the eight published openers, the hero sentence and the category pages against the expanded list and correct what fails. If the owner names nothing, record that answer too: the register then holds an owner-confirmed result instead of an open complaint.",
+      "why": "This is the difference between acting on the brief's wording and acting on its substance. The register method keeps every fix checkable and prevents a style pendulum.",
+      "effort": "Half a day once examples arrive (or the absence is recorded).",
+      "risk": "Low. The risk is over-correcting into voiceless prose; the existing register's replacement column pattern guards against that, and the recorded voice (D-12) governs.",
+      "check": "Every new AS row names its evidence (page and quote); the design prompt render includes the new rows; the re-read result is recorded per article; no popularity or process claim is introduced.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: what makes content helpful and people-first"
+        },
+        {
+          "url": "https://developers.google.com/search/blog/2023/02/google-search-and-ai-content",
+          "ref": "Google Search Central: Google's guidance on AI-generated content and reward for helpfulness"
+        }
+      ],
+      "flags": [
+        "F-74"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-36",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The pointer is D-36 (the recorded copy-pass decision) because the pass this row stages is that decision's method applied to newly named evidence, not a new direction."
+    },
+    {
+      "id": "SG-35",
+      "priority": "P2 - Adds real value",
+      "title": "Front-load the 2026 holiday window: schedule the next two calendar pieces inside the gift season instead of at the 14-day cadence",
+      "problem": "The publishing cadence is one guide per 14 days (recorded 2026-11-17; the owner may change it, F-65). The gift guide is already published, but the next calendar piece at the current cadence falls after the season's peak: Black Friday 2026 falls on 2026-11-27 and the gift season runs to the end of December. A steady cadence that ignores the calendar wastes the seasonal window the gift guide was written for.",
+      "proposal": "Owner decision: publish the next two calendar topics inside the 2026-11-27..2026-12-25 window (roughly weekly), then return to the 14-day cadence in January. The framing stays calendar-based, which the recorded evidence rule D-19 explicitly allows; no popularity or demand claim is made about the season.",
+      "why": "The gift guide exists and the seasonal dates are calendar arithmetic, not forecasts. This is the one cadence change that needs no measurement to justify, because the season's dates are fixed.",
+      "effort": "An owner decision, plus the normal writing cadence compressed by roughly a week per piece.",
+      "risk": "Writing faster can read thinner; the anti-slop register and the fact-row discipline are the guard, and the cadence reverts in January.",
+      "check": "publishing.json records the temporary cadence with its end date; the feed and sitemap carry the pieces as they land; no traffic, demand or popularity figure is cited anywhere (D-19).",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: people-first content - the standard the cadence serves"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement Section 4: no representation about expected traffic"
+        }
+      ],
+      "flags": [
+        "F-65"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-17",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The calendar dates used (2026-11-27, 2026-12-25) are fixed calendar dates, not claims about demand. F-65 already records that the cadence is owner-changeable, so this row asks rather than changes."
+    },
+    {
+      "id": "SG-36",
+      "priority": "P2 - Adds real value",
+      "title": "Give the Decision centre a choose-a-path triage: the open decisions presented as three coherent orders",
+      "problem": "Twelve open decisions sit in one queue in numeric order. The brief asks for 'a section dedicated for suggestions so someone can review suggestions and choose the best path before implementing any changes' - the Decision centre exists and presents counts, a reading order and the gating decisions, but a reviewer must still assemble a strategy from twelve isolated rows.",
+      "proposal": "Add a 'choose a path' section to the Decision centre page, rendered at build time from a new top-level paths key in data/decisions.json: Path A orders the measurement and attribution decisions (D-41, D-43, D-16, D-42, D-02, D-08); Path B orders the audience and catalogue decisions (D-42, D-13, D-40, D-15, D-22); Path C orders the presentation decisions (D-39, D-22, D-44). Each step names what it unblocks; each path names what it deliberately delays. The paths are presentations of the register, not new decisions; the numeric queue stays the source of truth and every row keeps the decision's own official source link.",
+      "why": "D-38's recorded option A already committed the queue to dependency order and a shortest credible path; this extends the same principle from one path to the three strategies the owner can actually choose between, which is what 'choose the best path' asks for.",
+      "effort": "One build change plus the paths data. No published value, product fact, link or policy claim moves.",
+      "risk": "A derived order can look authoritative where it is a recommendation. The section states that every path is optional and the queue remains the source of truth; the build refuses to render a path step that names an unknown or no-longer-open decision.",
+      "check": "Every path step references a decision id that exists and is currently open; each rendered row carries the decision's own official source; the page states the paths are recommendations, not recorded choices.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/decisions.json",
+          "ref": "The register itself: the decisions and statuses the paths are derived from"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: does the site have a primary purpose or focus (the D-38 source)"
+        }
+      ],
+      "flags": [],
+      "status": "Implemented 2026-11-19",
+      "decision": "D-38",
+      "status_note_2026_11_19": "Added and shipped 2026-11-19 by arena/bc21d56d-zone4. This is decision-support presentation (the review surface the brief asks for), not implementation of any gated change: nothing on the site's published content, links or product records changes because of it."
+    },
+    {
+      "id": "SG-37",
+      "priority": "P3 - Housekeeping",
+      "title": "Stop the count drift for good: generate the README and executive-summary register counts from the registers at build time",
+      "problem": "README.md and EXECUTIVE_SUMMARY.md carry hard-coded register counts (suggestions, questions, decisions, flags). The counts drifted once before (F-71) and needed another hand reconciliation in this pass after parallel sessions appended rows in the same week. Every parallel session multiplies the chance the next drift ships.",
+      "proposal": "Have the build write a small generated counts file from the registers, and replace the hard-coded numbers in the two documents with wording that points at the always-current Decision centre counts (the pages are generated from the same data and cannot drift). Add a verifier rule that fails if a stale hard-coded count reappears.",
+      "why": "Documentation that states counts is the last surface that can silently disagree with the registers; the site pages cannot drift because they are generated from the registers themselves.",
+      "effort": "About two hours: one generator step, two document edits, one verifier rule.",
+      "risk": "Low. The documents' prose must keep working when read as plain files, so the wording says 'see the live page' rather than printing a number that can age.",
+      "check": "A clean-checkout build leaves no register count in the two documents that disagrees with the registers; the verifier fails a reintroduced hard-coded count.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+          "ref": "The engine documentation whose test-count line was the F-71 class of drift"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json",
+          "ref": "The registers the counts would be generated from"
+        }
+      ],
+      "flags": [
+        "F-71"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-10",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after reconciling the counts by hand for this pass. The pointer is D-10 (documentation in line with the code), recorded 2026-11-16; this row stages the automation that would make the reconciliation unnecessary."
+    },
+    {
+      "id": "SG-38",
+      "priority": "P3 - Housekeeping",
+      "title": "Define the starter query set now, so Search Console data has a baseline to be compared against on day one",
+      "problem": "D-42 (Search Console verification) is open, and the site's stated plan is to choose the next topic from measured queries (SG-29, Q-40). Nothing defines what the measurements will be compared against: when the first impressions arrive there is no record of which queries the published pages were built to answer, so 'did the right page arrive for its question' is unanswerable in hindsight.",
+      "proposal": "Record a starter query set before any measurement exists, in the ledger's provenance format: one query per published page, drawn from that page's own title and question (for example, the sizes article maps to its '6QT vs 8QT vs 26QT' question). The set is a hypothesis record, not a claim about demand; once Search Console reports, the ledger gains dated rows comparing measured queries against it.",
+      "why": "The measurement contract (five events, ledger rules) already exists; this adds the search-side baseline at zero cost, and it can be written today without any account access.",
+      "effort": "About an hour to write the set into a data file with per-query provenance.",
+      "risk": "Low. The set must be labelled as the site's own hypothesis: no search-volume figure and no claim that any query is popular (D-19).",
+      "check": "Each starter query maps to exactly one published page; the file states it is a hypothesis record with its creation date; the ledger's append-only, provenance rules apply to the future measured rows.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience and measurement guidance (the D-42 decision's source)"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: the people-first standard the pages were written to"
+        }
+      ],
+      "flags": [],
+      "status": "Needs a decision first",
+      "decision": "D-42",
+      "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4. The set itself needs no account access, but recording it on the site publishes a measurement intent, so the row waits on D-42 rather than writing the file unilaterally."
     }
   ]
 }
