@@ -1171,6 +1171,135 @@
       "flags": [
         "F-57"
       ]
+    },
+    {
+      "id": "Q-51",
+      "area": "Product photography",
+      "question": "May the site show pictures of these three appliances at all, and where would a permitted picture come from?",
+      "why_it_matters": "Nothing visible on the site changes a reader's first impression faster than a product image, and nothing on this site is more tightly gated. The FTC page forbids describing experience with a product you have not used; the Amazon IP License forbids storing or caching an image that is Product Advertising Content, and allows only a link to one. Until this is answered, every image suggestion stays on paper.",
+      "kind": "Owner decision",
+      "known": "The rule is read and cited: the IP License image rule (2(h)) and the FTC disclosure standard are both in the repository. What is NOT known is which route applies to this site: an API-served image (needs approved Creators API access, Q-02), a program-provided image route, the owner's own photographs of units they own, or no images (the current state).",
+      "how_to_discover": "Take the three cases to the answer: (1) if API access is approved, ask Associates Central which image fields the current API licenses return and whether caching is permitted for this use; (2) if the owner physically owns or buys a unit, photograph it themselves and the image is theirs with no licence question; (3) otherwise the answer is 'no images', which the site already ships. Record the answer against D-22, which already lists these routes as options.",
+      "answerable_by": "Owner, plus Associates Central or the API console for the program route",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ],
+      "flags": [
+        "F-02"
+      ]
+    },
+    {
+      "id": "Q-52",
+      "area": "Content identity",
+      "question": "Will the owner supply first-hand use notes, and does anyone here have actually used these appliances?",
+      "why_it_matters": "The single strongest defence against the 'generated content' reading is a sentence only a person who used the appliance could write. If no such experience exists, the site has to compete purely on analysis and comparison - a real choice, but a different product, and it changes which suggestions are worth building (S-47 in particular).",
+      "kind": "Owner decision",
+      "known": "Nothing in the repository records any hands-on use of P1-P3, and the site correctly claims none. The FTC guidance is read: you cannot talk about experience with a product you have not tried.",
+      "how_to_discover": "Ask the owner directly. If yes, collect three short dated notes per product via the S-47 prompts. If no, record 'no first-hand use' against D-46 so that no later session writes a review-shaped sentence by accident.",
+      "answerable_by": "Site owner",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "Q-53",
+      "area": "Content identity",
+      "question": "What does this site have that a search result or a product listing does not?",
+      "why_it_matters": "Google's quality questions ask whether a page offers 'original information, reporting, research, or analysis' and 'insight beyond the obvious'. If the honest answer today is 'a tidy comparison table and honest blanks', then the growth plan cannot be a volume plan, and the owner should know that before paying for one.",
+      "kind": "Owner decision",
+      "known": "The site's genuine differentiators today are narrow but real: it says where listings are vague, it dates every claim, and it publishes what it cannot verify. Everything else it does - comparisons, buying guides, categories - is a commodity produced by thousands of sites.",
+      "how_to_discover": "Choose the differentiator and write it down: the dated gap analysis (S-48), the owner's notes (S-47), the verification record itself, or something else the owner can supply. This answer determines which of the four content suggestions to fund first.",
+      "answerable_by": "Site owner",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "id": "Q-54",
+      "area": "Structure and navigation",
+      "question": "How many top-level sections should a reader see, and what are they called?",
+      "why_it_matters": "Navigation is the first five seconds of the experience and it is currently an alphabetical list of thirty-six links. The labels decide whether a shopper reads the site as a shop or as a filing cabinet, and this is the cheapest high-impact change available.",
+      "kind": "Owner decision",
+      "known": "The current state is recorded: one navigation group, every target reachable, and a footer directory that duplicates it. Existing recorded decisions cover voice (D-12) and brand (D-18) but not information architecture.",
+      "how_to_discover": "Pick from the five-section model in S-49 (Start here / Compare / Read / Shop / About & receipts) or name your own five. The check is mechanical: after the change, every URL must still be reachable - the existing verify.py footer-completeness check proves it or fails the build.",
+      "answerable_by": "Site owner",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google: page experience"
+        }
+      ]
+    },
+    {
+      "id": "Q-55",
+      "area": "Commercial scope",
+      "question": "Is the site an air-fryer publication, a general kitchen-gear shop, or both?",
+      "why_it_matters": "Two of the five supplied links point at meat thermometers, not air fryers. That is already flagged (F-56) as a held scope question, but the answer changes the site's name, its kitchen categories, its guide calendar and its internal linking - so it is the first question a design decision depends on, not a detail.",
+      "kind": "Owner decision",
+      "known": "Read on 2026-11-19: both thermometer links resolve to listings under Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. The air-fryer scope of the brand name, categories and guides is recorded in D-18 and the content register.",
+      "how_to_discover": "Answer one of three: (a) air fryers only - the thermometers stay held indefinitely and are removed from the brief; (b) air fryers plus thermometers as a second kitchen category (needs a brand and navigation answer first, S-49); (c) general kitchen gear - the biggest change, and the one that most affects search identity. Record against F-56.",
+      "answerable_by": "Site owner",
+      "sources": [
+        {
+          "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+          "ref": "P4 official listing (read 2026-11-19)"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+          "ref": "P5 official listing (read 2026-11-19)"
+        }
+      ],
+      "flags": [
+        "F-56"
+      ]
+    },
+    {
+      "id": "Q-56",
+      "area": "Policy and research method",
+      "question": "Can we establish what user-agent the research tool sends, and does an automated read of Amazon pages satisfy the Associates Agent Terms?",
+      "why_it_matters": "The Associates Program Policies now carry Agent Terms (section 4 of the IP License) that apply to software taking autonomous or semi-autonomous action, and require it to identify itself as an Agent in its HTTP user-agent string. This project's entire premise is automated research. If the tooling cannot satisfy the requirement, the automated-research part of the brief has to be re-scoped, not merely slowed.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "The Agent Terms are read and quoted verbatim in F-68. What is not knowable from inside this environment: the user-agent string the platform's page-fetch tool sends, whether it already identifies as an Agent, and whether Amazon treats a fetch driven by a human-typed URL as Agent access or as ordinary browsing.",
+      "how_to_discover": "Two steps, in order: (1) ask the tooling provider for the request signature it sends (a one-line answer, no account needed); (2) if it is not identified, either move future Program Content reads to a human browser session or to a tool whose signature can be set, and record the method in the sources registry. A written question to Associates Central settles the interpretation if step (1) is ambiguous.",
+      "answerable_by": "Site owner / tooling provider; Associates Central for the interpretation",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Operating Agreement"
+        }
+      ],
+      "flags": [
+        "F-68"
+      ]
     }
   ]
 }

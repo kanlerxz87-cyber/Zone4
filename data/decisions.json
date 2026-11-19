@@ -1839,6 +1839,132 @@
       ],
       "recorded_date_utc": "2026-11-17",
       "recorded_choice": "Option A - the feed shipped 2026-11-17 by the merged sessions (articles + published guides, deterministic build, feed checks in scripts/verify.py). Recorded during the merge reconciliation; the parallel feed builder produced by arena/1f4a7a22-zone4 was withdrawn as a duplicate."
+    },
+    {
+      "id": "D-46",
+      "question": "What makes the next batch of pages worth reading: whose experience, and stated how?",
+      "linked_question": "Q-51, Q-52, Q-53",
+      "linked_suggestions": [
+        "S-47",
+        "S-48"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Owner field notes plus per-product gap pages",
+          "commits_to": "The owner supplies three dated notes per product (S-47) and each product gets a page whose spine is the listing title, the listed numbers, and a 'what the listing does not state' section (S-48). Every note carries its label ('owner's own use' or 'not tested').",
+          "effort": "Two to three hours of owner typing; one to two days per product page of writing.",
+          "reversible": "Yes - notes are removable per product; pages are ordinary build output."
+        },
+        {
+          "key": "B",
+          "label": "Per-product gap pages only, with no first-hand notes",
+          "commits_to": "S-48 ships on listing data alone. The site competes on analysis and honest gaps, and never claims use. This is the choice that matches the site's current proof standard most closely.",
+          "effort": "Three to four days of writing, no owner time.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Neither - keep the current guides and invest only in structure",
+          "commits_to": "S-49 and S-50 get the effort instead. No new product-level content is written, so the site's answer to 'why read this instead of the listing' stays what it is today.",
+          "effort": "Structure only.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "B now, A as soon as the owner has an hour to write. B is buildable this week with no new facts and no new claims; A is the only option that produces something a listing cannot copy, but it is worthless if the notes are invented, so it waits for Q-52 rather than being assumed.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ]
+    },
+    {
+      "id": "D-47",
+      "question": "Do we restructure the navigation into named sections?",
+      "linked_question": "Q-54",
+      "linked_suggestions": [
+        "S-49"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Five named sections, footer directory kept complete",
+          "commits_to": "Start here / Compare / Read / Shop / About & receipts, as proposed in S-49. Sidebar becomes five labelled groups inside the single existing wrapper; the footer keeps every link so the dashboard surfaces are never more than one click away.",
+          "effort": "One to two days.",
+          "reversible": "Yes - a data and template change, fully reversible."
+        },
+        {
+          "key": "B",
+          "label": "Sections in the footer only, sidebar unchanged",
+          "commits_to": "Zero risk to the sidebar's completeness guarantee; a smaller gain, since the first screen a reader sees is unchanged.",
+          "effort": "Half a day.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Leave the flat list",
+          "commits_to": "Nothing changes. The navigation stays one alphabetical group, and the 'looks generated' reading is left to be solved by content alone.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. It is the cheapest change on the list that alters a first impression, and the existing footer-completeness check makes it safe: if a page becomes unreachable, the build fails.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google: page experience"
+        }
+      ]
+    },
+    {
+      "id": "D-48",
+      "question": "How far does the visual identity go before photography is decided?",
+      "linked_question": "Q-51",
+      "linked_suggestions": [
+        "S-50"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Section accents, an original abstract brand mark and a social preview image; no product photographs",
+          "commits_to": "CSS-only section identity plus one original illustration used for the masthead, category tiles and shared-link preview. Nothing is copied from a listing and nothing is rendered as if it were one of the three products.",
+          "effort": "Two to three days plus one illustration.",
+          "reversible": "Yes - all assets are local and removable."
+        },
+        {
+          "key": "B",
+          "label": "Type, spacing and colour only; no new images at all",
+          "commits_to": "The smallest visual pass. The site keeps rendering shared links without an image, which a current flag already records.",
+          "effort": "One day.",
+          "reversible": "Yes."
+        },
+        {
+          "key": "C",
+          "label": "Wait for the photography answer (D-22) and do nothing visual until then",
+          "commits_to": "No visual change ships in this cycle. The look stays as reviewed today until Q-51 is answered.",
+          "effort": "None now.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A. It unlocks the polish a publication has without touching the photography question, and it cannot fabricate a product claim because the only new art is abstract brand illustration. C is the honest fallback if the owner wants to settle Q-51 first.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google: page experience"
+        }
+      ]
     }
   ],
   "log": [

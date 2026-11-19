@@ -1506,6 +1506,136 @@ def suggestion_card(current: Page, s: dict, number: int) -> str:
     )
 
 
+# The review paths added 2026-11-19 (session arena/9124554d-zone4). Each path is
+# a coherent bundle a reviewer can choose in one sitting, with the open decision
+# that releases it, the questions only the owner can answer, and the register
+# rows it touches. The ids are checked below, so a renumbered row fails the build
+# rather than rendering a dead reference.
+REVIEW_PATHS = [
+    {
+        "title": "Path A - The shop front",
+        "blurb": "Make the site read like a publication a shopper can move around in, before any new "
+                 "content is written.",
+        "decision": "D-47",
+        "suggestions": ["S-49", "S-50", "S-09", "S-36"],
+        "questions": ["Q-54", "Q-51"],
+        "flags": ["F-15", "F-19"],
+        "effort": "Three to four days, no account or budget needed.",
+        "check": "Every URL still reachable from the sidebar or footer (the existing check fails the build "
+                 "if not), five named sections visible, and a social preview that renders on a shared link.",
+    },
+    {
+        "title": "Path B - The reason to read",
+        "blurb": "Give a reader something a listing cannot: what the listing leaves out, and - only if you "
+                 "have actually used them - what living with the appliance is like.",
+        "decision": "D-46",
+        "suggestions": ["S-48", "S-47", "S-34"],
+        "questions": ["Q-52", "Q-53"],
+        "flags": ["F-02", "F-38"],
+        "effort": "B is three to four days of writing; A adds an hour of your notes per product.",
+        "check": "Three product pages, each with a 'what the listing does not state' section; every note "
+                 "labelled and dated; no price, rating or invented experience claim.",
+    },
+    {
+        "title": "Path C - The money path",
+        "blurb": "Everything that decides whether a click can ever be attributed, and whether the two "
+                 "thermometers belong on this site at all.",
+        "decision": "D-01, D-14 (recorded)",
+        "suggestions": ["S-37", "S-39", "S-01", "S-38"],
+        "questions": ["Q-01", "Q-50", "Q-55"],
+        "flags": ["F-03", "F-55", "F-57", "F-58"],
+        "effort": "Ten minutes in Associates Central for the tag and the one-link test; the rest is already built.",
+        "check": "The tracking report shows one click and the tag renders in the link URL; F-57 and F-58 close "
+                 "with a date and a named source.",
+    },
+    {
+        "title": "Path D - The evidence path",
+        "blurb": "The work that makes every other path safe: an identified research method, consented "
+                 "measurement and a search console that reports facts rather than guesses.",
+        "decision": "D-43, D-44 (recorded)",
+        "suggestions": ["S-40", "S-46", "S-44"],
+        "questions": ["Q-56", "Q-47", "Q-48"],
+        "flags": ["F-59", "F-68"],
+        "effort": "A tooling question and an account; the endpoint is written but not hosted.",
+        "check": "Search Console shows the property verified and the sitemap read; the endpoint answers a "
+                 "defined event once hosted; F-68 closes with the tool's user-agent recorded.",
+    },
+]
+
+
+def review_paths_section(current: Page) -> str:
+    """The dedicated 'choose a path' surface.
+
+    The brief asks for a section where someone can review suggestions and choose
+    the best path before anything is implemented. The register already carries
+    costed cards; this groups them into four bundles so the choice is a choice
+    between directions rather than fifty individual votes. It renders only ids
+    that exist in the registers - the build fails rather than showing a dead link.
+    """
+    sug_ids = {s["id"]: s for s in SUGGESTIONS}
+    q_ids = {q["id"]: q for q in QUESTIONS}
+    dec_ids = {d["id"]: d for d in DECISIONS}
+    flag_ids = {f["id"]: f for f in FLAGS}
+
+    def chips(ids, table, page, label_of) -> str:
+        """A chip that opens the row it names. Q- and F- rows live on their own
+        pages, so the anchor is cross-page rather than a same-page jump."""
+        out = []
+        for i in ids:
+            row = table.get(i)
+            if row is None:
+                raise SystemExit(f"REVIEW_PATHS refers to unknown id {i}")
+            href_attr = f'{esc(page)}#{esc(i)}' if page else f'#{esc(i)}'
+            out.append(
+                f'<a class="path-chip" href="{href_attr}" title="{esc(label_of(row))}">{esc(i)}'
+                f'<span class="path-chip-t">{esc(label_of(row)[:46])}</span></a>'
+            )
+        return "".join(out)
+
+    cards = []
+    for p in REVIEW_PATHS:
+        dec = ", ".join(p["decision"].split(", "))
+        for d in re.findall(r"D-\d+", p["decision"]):
+            if d not in dec_ids:
+                raise SystemExit(f"REVIEW_PATHS refers to unknown decision {d}")
+        for q in p["questions"]:
+            if q not in q_ids:
+                raise SystemExit(f"REVIEW_PATHS refers to unknown question {q}")
+        for f in p["flags"]:
+            if f not in flag_ids:
+                raise SystemExit(f"REVIEW_PATHS refers to unknown flag {f}")
+        cards.append(
+            '<article class="pathway">'
+            f'<h3>{esc(p["title"])}</h3>'
+            f'<p class="pathway-blurb">{esc(p["blurb"])}</p>'
+            f'<p class="small"><strong>Released by</strong> {href(current, "decisions.html", p["decision"]) if p["decision"] else "&mdash;"}</p>'
+            f'<div class="pathway-row"><span class="pathway-k">Suggestions</span>'
+            f'{chips(p["suggestions"], sug_ids, "", lambda r: r["title"])}</div>'
+            f'<div class="pathway-row"><span class="pathway-k">Only you can answer</span>'
+            f'{chips(p["questions"], q_ids, "questions.html", lambda r: r["question"])}</div>'
+            f'<div class="pathway-row"><span class="pathway-k">Open flags</span>'
+            f'{chips(p["flags"], flag_ids, "flagged.html", lambda r: r["title"])}</div>'
+            f'<p class="small"><strong>Cost</strong> {esc(p["effort"])}</p>'
+            f'<p class="small"><strong>How you would know it worked</strong> {esc(p["check"])}</p>'
+            '</article>'
+        )
+
+    return (
+        '<section id="choose-a-path"><h2>Choose a path</h2>'
+        '<p class="section-lead">This is the review surface the brief asked for: a place to pick a '
+        'direction before any change is built. Four bundles cover every open row below. Each names the '
+        'decision that releases it, the questions only you can answer, the flags it would close and the '
+        'check that would prove it worked. Pick one, or pick rows from several - nothing here is built '
+        'until its decision is recorded in the Decision log.</p>'
+        f'<div class="pathways">{"".join(cards)}</div>'
+        '<p class="note">These are bundles of existing rows, not new claims: every chip opens the costed '
+        'card in the register below, and every source behind it is on that card. The order A to D is the '
+        'order this session would take if the choice were mechanical, because A and B need no account and '
+        'C and D are blocked on facts only an enrolled Associates account can supply.</p>'
+        '</section>'
+    )
+
+
 def page_suggestions(current: Page) -> str:
     open_count = sum(1 for s in SUGGESTIONS if s["status"].startswith(("Awaiting", "Needs")))
     done_count = sum(1 for s in SUGGESTIONS if s["status"].startswith(("Implemented", "Partly")))
@@ -1591,6 +1721,7 @@ def page_suggestions(current: Page) -> str:
         '<p class="lead">Every change worth making to this site, costed and risk-assessed, with a decision recorded before '
         'anything is built. Choose the path here; the Decision log is the receipt.</p></header>'
         f'<section class="kpis kpis-stack">{card_html}</section>'
+        + review_paths_section(current)
         + path_html + review_html
         + '<section><h2>At a glance</h2>'
         '<p class="section-lead">One line per suggestion. The full case for each is in the section below it.</p>'

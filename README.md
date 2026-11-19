@@ -12,7 +12,7 @@ Zone4 is a small editorial buying-guide site backed by a source register. It pub
 - The user supplied `shopnow047c-20` as the selected tracking ID. Decisions **D-01/D-14** (recorded 2026-11-17 under the owner's brief) publish every outbound product link as the tagged Special Link `https://www.amazon.com/dp/<ASIN>?tag=shopnow047c-20` — the final destination URL with the tag as its parameter (Participation Requirements 2(b)), no shortener. The supplied short links stay recorded verbatim in `data/intent-links.json` and are not judged valid or invalid (Zone3 FLG-003 unresolved). What remains unconfirmed is the tag's registration in Associates Central (**F-57**); the one-link-per-product test protocol (`data/associates.json`, S-45) gates attribution claims and scaling, not publication. See **Q-01 / Q-50 / F-03 / F-58** and the official [Amazon Associates policies](https://affiliate-program.amazon.com/help/operating/policies).
 - Prices, ratings, review counts, product-level commission assignments, search demand, orders and revenue are not invented or forecast. The public category commission table is a reference only; no per-ASIN mapping is confirmed.
 - The site includes a three-question product chooser, format categories, seven question-led articles, product comparison and source-backed tables. A generated RSS feed is at [`docs/feed.xml`](https://kanlerxz87-cyber.github.io/Zone4/docs/feed.xml); the sitemap and `robots.txt` are also generated.
-- The suggestion and decision pages are the review gate: **46 suggestions**, **50 questions**, **45 decisions** (33 recorded, 12 open), and **67 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
+- The suggestion and decision pages are the review gate: **50 suggestions**, **56 questions**, **48 decisions** (33 recorded, 15 open), and **68 flags** are maintained in the JSON registers and published to their matching pages. Unresolved and access-dependent work does not get reported as complete.
 
 ## Important limits and next checks
 
@@ -57,12 +57,12 @@ The disclosure appears beneath the masthead and again in every page footer. All 
 | `data/products.json` | Current product records (three) and cited listing fields. |
 | `data/marketing.json` | Seven articles, their fact rows and editorial metadata. |
 | `data/sources.json` | Official-source registry. |
-| `data/flags.json` | 67 flags; F-55/F-56 record the two new unverified link destinations, F-57 the unverified tracking ID, F-58 the pending Special Link validation. |
+| `data/flags.json` | 68 flags; F-55/F-56 record the two new link destinations and the scope question they raise, F-57 the unverified tracking ID, F-58 the pending Special Link validation, F-68 the Associates Agent Terms read on 2026-11-19. |
 | `data/associates.json` | The owner-selected tracking ID, the three tagged Special Links and the five-step one-link-per-product Associates Central test protocol (2026-11-17). |
 | `data/suggestions.json`, `data/questions.json`, `data/decisions.json` | Review-before-implementation decision-support registers. |
 | `data/requirements.json`, `data/policies.json` | Requirement status and compliance register. |
 | `data/tracking.jsonl` | Empty-by-design campaign/event ledger; append only authorized, provenance-backed data. |
-| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. |
+| `data/verification-session-*.json` | Dated verification records; read each record for its exact scope and limits. The latest is `verification-session-9124554d.json` (2026-11-19): all five supplied links re-read live plus the cited official policy pages. |
 | `scripts/build_site.py` | Static Pages-site builder, including RSS, sitemap and robots.txt generation. |
 | `scripts/verify.py` | Deterministic data, disclosure, source, link, SEO and page-directory checks. |
 | `qa/audit_site.py` | Independent audit of committed HTML. |

@@ -1205,6 +1205,107 @@
       ],
       "status": "Needs a decision first",
       "decision": "D-45"
+    },
+    {
+      "id": "S-47",
+      "priority": "P2 - Adds real value",
+      "title": "Publish the owner's own kitchen notes as a labelled 'field notes' layer, instead of illustrations pretending to be product photography",
+      "problem": "The site's weakness is not layout, it is that a reader cannot yet learn anything a listing does not already say. D-22 (photography) is open and its recommendation is 'stay text-first' precisely because a photograph of a product nobody here has handled would be a fabricated claim. Meanwhile the owner - who chose these three appliances - may have real experience that costs nothing to publish and cannot be bought: what actually fits on the counter, what a basket feels like when full, what is annoying to clean.",
+      "proposal": "Add an optional, per-product 'Field notes' block with four fixed prompts (what surprised me; what I would check before buying; what I use it for most; what I would change). Each answer is dated and labelled either 'owner's own use' or 'not tested - based on the listing'. Products with no note keep the block hidden rather than showing an empty one. This does not replace photography (D-22 stays open); it is the cheapest honest substitute for it, and it is the only content on the site no competitor listing can copy.",
+      "why": "It is the one class of content that clears Google's 'insight beyond the obvious' bar and the FTC's rule that you cannot describe experience with a product you have not used - because it records only experience the owner actually reports. It costs an hour of typing, needs no account, no API and no budget, and it is reversible per product.",
+      "effort": "About an hour per product, written by the owner. Build side: half a day for the optional block and its label rule.",
+      "risk": "Low. The only real risk is overstating: a note written from imagination would be exactly the fabricated claim the site refuses to make, so every note must carry its label and date, and a blank note must render nothing.",
+      "check": "Count of dated field notes published per product. If the owner adds none, the site is unchanged and the blocks stay hidden.",
+      "status": "Needs a decision first",
+      "decision": "D-46",
+      "flags": [
+        "F-53",
+        "F-68"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC Disclosures 101"
+        }
+      ]
+    },
+    {
+      "id": "S-48",
+      "priority": "P2 - Adds real value",
+      "title": "Publish one honest, dated product page per format - including what the listing does not say",
+      "problem": "Every competitor page restates the same listing bullets. Three of the site's own questions (what '24 cooking functions' means, why two counts disagree, what a 26QT oven costs in counter depth) are answerable only by someone who reads the listing carefully and says out loud where it is vague. That page does not exist yet in a single place a shopper lands on.",
+      "proposal": "For each of P1-P3, publish a page whose spine is fixed: (1) the exact title as listed, with the date and the row's source; (2) the three or four numbers the listing actually states, each linked; (3) a 'what the listing does not state' section, which is the part no listing has; (4) the open questions about that product, linked to the questions register; (5) a sponsored link to the final destination; (6) the disclosure. No price, no rating, no hands-on claim unless S-47 supplies one.",
+      "why": "It gives search engines a page per product with a distinct purpose, gives a shopper the one thing a listing cannot give them - the gaps - and gives the site a defensible reason to rank that does not depend on volume or trend-chasing. It also uses data that already exists, so it cannot invent anything.",
+      "effort": "One to two days per page of writing; the page template is a build change of similar size.",
+      "risk": "Low to medium. Pages must not drift into reviewing; the 'what the listing does not state' section is where that pressure will be strongest, so it is the section the check has to police.",
+      "check": "Three pages exist, each with the six fixed sections, each row source-linked, and none containing a price, a rating or an experience claim. Verify.py's existing per-row source and no-price checks apply to the new pages without change.",
+      "status": "Awaiting decision",
+      "decision": "D-46",
+      "flags": [
+        "F-02",
+        "F-38"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://www.amazon.com/dp/B0CDY277D3",
+          "ref": "P1 official listing"
+        }
+      ]
+    },
+    {
+      "id": "S-49",
+      "priority": "P1 - Decide first",
+      "title": "Break the site into four or five named sections before adding any more content",
+      "problem": "The navigation is currently one flat alphabetical group of thirty-six links mixing articles, categories, products and governance pages. A shopper looking for 'which one should I buy' sees 'Requirements', 'Measurement & ledger' and 'Policy compliance' at the same level as the buying guide. The register has said 'one navigation group' - and that is satisfied - but a single group is not the same thing as a findable structure.",
+      "proposal": "Group the sidebar into five named sections in reading order: Start here (home, chooser, buying guide), Compare (the three formats, side-by-side table), Read (articles and guides), Shop (the three products, sponsored links), and About & receipts (governance pages, flagged, sources, decisions). The footer keeps the complete directory so every dashboard surface stays one click away, and the verify.py rule that requires exactly one nav-group wrapper becomes a rule about one wrapper containing five labelled groups.",
+      "why": "This is the highest-leverage change left that does not require an account, an API or a budget. It changes how a first-time visitor reads the site in the first three seconds, and it is a prerequisite for S-50's imagery work, which needs somewhere to place a visual hierarchy.",
+      "effort": "One to two days: a nav data change plus a stylesheet pass. Every target URL already exists.",
+      "risk": "Medium. Reordering navigation can hide a page if the footer directory is not kept complete, so the existing footer-completeness check must run unchanged and the review must include it.",
+      "check": "Every current URL still reachable from the sidebar or footer (existing verify check), five labelled groups present, and no page loses an inbound link.",
+      "status": "Needs a decision first",
+      "decision": "D-47",
+      "flags": [],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google: page experience"
+        }
+      ]
+    },
+    {
+      "id": "S-50",
+      "priority": "P2 - Adds real value",
+      "title": "Give each section one distinctive visual identity built from CSS and brand illustration only - no product photographs until D-22 is answered",
+      "problem": "The stylesheet is competent and consistent, which is why the site does not look broken; it is also uniform, which is part of why it reads as generated. Every page currently opens with the same band, the same heading scale and the same card grid, so the eye has nothing to tell it that it has arrived somewhere specific.",
+      "proposal": "Three changes, all reversible and all text-and-CSS: (1) a section colour accent drawn from the existing warm palette, so Compare, Read and Shop are distinguishable at a glance without a second typeface; (2) an original, abstract brand mark or illustration (not a render of any product) for the masthead, the social preview image and category tiles - the site currently ships no image at all, which is why shared links look bare; (3) a tighter article opening - a short standfirst and one fact the article is going to answer - replacing the current wall of intro text. Photographs of the three appliances stay out entirely until D-22 is answered and an official image route is authorised.",
+      "why": "It is the polish that a publication has and a generated site does not, and it can be done with no copyright risk because nothing is copied from a listing. The social-preview image also closes a gap already flagged (F-15/F-19/F-25) about how shared links render.",
+      "effort": "Two to three days of design and CSS, plus one original illustration.",
+      "risk": "Low for the CSS and illustration. The illustration must stay abstract: a generated or copied picture of one of these appliances would be a fabricated claim about that product, which is why D-22 exists.",
+      "check": "A reader can name the section from the page's visual treatment alone; the social preview renders on a shared link; no page gains a product image while D-22 is open. Verify.py's external-host rule stays satisfied because every asset is local.",
+      "status": "Needs a decision first",
+      "decision": "D-48",
+      "flags": [
+        "F-15",
+        "F-19"
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google: page experience"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies (incl. IP License 2(h) image rule)"
+        }
+      ]
     }
   ]
 }

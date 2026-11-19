@@ -697,3 +697,31 @@ table.roadmap td:nth-child(5) { min-width: 220px; }
   .footer-nav { display: block; }
   .footer-col a { color: inherit; }
 }
+/* --- Choose-a-path review surface (2026-11-19, session arena/9124554d-zone4) ---
+   The dedicated review section on the Suggestions page: four bundles, each a
+   direction a reviewer can choose in one sitting. Pure CSS, no external assets,
+   so the audit's external-host rule stays satisfied. */
+.pathways { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0 6px; }
+.pathway {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px 20px; box-shadow: var(--shadow); border-top: 3px solid var(--accent);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.pathway h3 { margin: 0 0 2px; font-size: 17px; }
+.pathway-blurb { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
+.pathway-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin: 2px 0; }
+.pathway-k {
+  font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); min-width: 100%; font-weight: 650;
+}
+.path-chip {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  background: var(--panel-soft); border: 1px solid var(--line); border-radius: 8px;
+  padding: 3px 8px; font-size: 12.5px; font-weight: 650; text-decoration: none;
+  color: var(--accent-strong);
+}
+.path-chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+.path-chip-t { font-weight: 500; color: var(--muted); font-size: 12px; }
+@media (max-width: 720px) {
+  .path-chip-t { display: none; }
+}

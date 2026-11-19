@@ -1,0 +1,100 @@
+{
+  "_meta": {
+    "description": "Dated verification record for session arena/9124554d-zone4 (2026-11-19 UTC). Every row is one URL read through the platform's page-fetch tool, one read per URL, no login used and no access control bypassed. Values are recorded exactly as the read showed them. Prices and star ratings visible on the listing pages are deliberately NOT copied into this record or the site (F-02, F-51). Nothing here is inferred: where a field was not reached by the read, it is recorded as not read.",
+    "session": "arena/9124554d-zone4",
+    "date_utc": "2026-11-19",
+    "method": "fetch_page, one request per URL, redirects followed by the tool. The final URL recorded is the page the tool reported as its resolved URL. Page titles are quoted as the page's <title>.",
+    "scope": "Re-read of the five supplied product links and the cited official Amazon pages, to check whether the standing records still hold on this date. No product record value is changed by this session; differences are recorded as observations and, where they are new, flagged.",
+    "not_verified_here": [
+      "Associates Central enrollment, tag ownership and reporting (no account access from this sandbox; F-57)",
+      "The one-link-per-product Special Link test in the enrolled Associates workflow (F-58)",
+      "Any price, star rating, review count or per-ASIN commission assignment (withheld; F-01, F-02)",
+      "Any search volume, traffic, click, order or revenue figure (F-15, F-51)"
+    ]
+  },
+  "rows": [
+    {
+      "url_read": "https://link.amazon/B04G1MEwY",
+      "final_url": "https://www.amazon.com/dp/B0CDY277D3",
+      "title": "Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen",
+      "asins_on_page": ["B0CDY277D3"],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "tag_parameter_present": false,
+      "query_parameters_observed": ["lv", "btn_type", "gaOptInStatus", "btn_ref", "channelId", "plpRedirect"],
+      "matches_stored_record": "Yes for ASIN, listing title and category path (data/products.json P1).",
+      "note": "The read shows no tag= parameter, which is the state F-03 already records for the supplied links. The page also displays a price and star ratings; those are not copied (F-02)."
+    },
+    {
+      "url_read": "https://link.amazon/B02NbDxp3",
+      "final_url": "https://www.amazon.com/dp/B09B7SB46R",
+      "title": "Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen",
+      "asins_on_page": ["B09B7SB46R"],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "tag_parameter_present": false,
+      "query_parameters_observed": ["lv", "btn_type", "gaOptInStatus", "btn_ref", "channelId", "plpRedirect"],
+      "matches_stored_record": "First title segment matches data/products.json P2. The second segment again differs from the stored name_listing, exactly as F-66 already records; this read is a sixth consecutive day showing the alternative segment. The stored record is not overwritten here.",
+      "note": "The page displays a price and star ratings; not copied (F-02). The carousel position 3 in this read showed B0F92GL7JH (HotKing), matching the stored competitor record rather than the 2026-11-15/16/17 readings that showed B0D1BGLW25; this is a further instance of the carousel instability already recorded under F-29/F-44."
+    },
+    {
+      "url_read": "https://link.amazon/B00hJ57DV",
+      "final_url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "title": "Amazon.com: Chefman Air Fryer 8 Qt | TurboFry\u00ae 4-in-1 with 450\u00b0F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen",
+      "asins_on_page": ["B08DKYBTPH"],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers",
+      "tag_parameter_present": false,
+      "query_parameters_observed": ["lv", "btn_type", "gaOptInStatus", "btn_ref", "channelId", "plpRedirect", "th"],
+      "matches_stored_record": "Yes for ASIN, listing title and category path (data/products.json P3).",
+      "note": "The page displays a price and star ratings; not copied (F-02). Carousel position 3 showed B0C33CHG99 (Cosori), matching the stored competitor record; slot 2 showed B09MR7QWKZ, the rotation F-29 already documents."
+    },
+    {
+      "url_read": "https://link.amazon/B0c8moW59",
+      "final_url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "title": "Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, \u00b10.5\u2109 Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black : Home & Kitchen",
+      "asins_on_page": ["B0DHZTCNR5"],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "tag_parameter_present": false,
+      "query_parameters_observed": ["lv", "btn_type", "gaOptInStatus", "sp_csd", "language", "content-id", "ie", "btn_ref", "channelId", "plpRedirect"],
+      "matches_stored_record": "Yes for ASIN, first title segment and category path (data/products-extra.json P4). This is the first read by a different session to reproduce the 2026-11-17 record, so F-55's 'not independently resolved' clause now has a second, independent read behind it. That does not by itself close F-55 (intent still needs the owner's confirmation in the enrolled workflow).",
+      "note": "Title differs slightly from the stored name_listing in its trailing marketing segment ('Stocking Stuffers Gifts for Men, Black' vs 'Highly Waterproof for Grill BBQ Camping, Black'); the first segment is identical. Recorded as drift of the same class as F-66. Price and rating on the page not copied (F-02)."
+    },
+    {
+      "url_read": "https://link.amazon/B0f3GKalj",
+      "final_url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "title": "Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000\u00b0F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen",
+      "asins_on_page": ["B0DZFD6R9Z"],
+      "category_path": "Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat",
+      "tag_parameter_present": false,
+      "query_parameters_observed": ["lv", "sbo", "btn_type", "gaOptInStatus", "language", "btn_ref", "channelId", "plpRedirect", "th"],
+      "matches_stored_record": "Yes, ASIN, title and category path match data/products-extra.json P5 exactly on this read.",
+      "note": "Second independent read of this link. Price and rating on the page not copied (F-02)."
+    },
+    {
+      "url_read": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "title": "Amazon.com Associates Central - Associates Program Operating Agreement",
+      "observed": "Updated: October 15, 2025. Section 1 states that Special Links must properly use the special 'tagged' link formats Amazon provides and comply with the Agreement.",
+      "matches_stored_record": "Yes for the 'Updated' date (2025-10-15), which is what the repository records.",
+      "note": "Read for the Special Link definition only. No new obligation recorded."
+    },
+    {
+      "url_read": "https://affiliate-program.amazon.com/help/operating/policies",
+      "title": "Amazon.com Associates Central",
+      "observed": "Updated: April 14, 2026. Commission Income Statement item 1 (a)-(c) states the Session windows reported in the ledger record: 24 hours from the click, or an order completed within 89 days, and shipment/payment within 180 days. IP License 2(h) states that Product Advertising Content consisting of an image must not be stored or cached, though a link to an image may be stored for up to 24 hours; text content may be cached up to 24 hours if refreshed. IP License 2(k) prescribes the 'CERTAIN CONTENT THAT APPEARS...' notice beside Product Advertising Content consisting of text, which the site already prints. IP License 4 (Agent Terms) requires any Agent accessing Program Content to identify itself in its HTTP user-agent string as 'Agent/[agent name]' and forbids concealing that access is from an Agent or completing CAPTCHAs.",
+      "matches_stored_record": "Yes for the 'Updated' date (2026-04-14). The image rule, the text-content cache window and the Agent Terms are new readings for this repository's record and are the basis of F-68 and Q-56.",
+      "note": "No product value is taken from this page."
+    },
+    {
+      "url_read": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "title": "Disclosures 101 for Social Media Influencers | Federal Trade Commission",
+      "observed": "Page dated November 2019. 'Make sure people will see and understand the disclosure'; 'Place it so it's hard to miss'; disclosures are likely to be missed if they appear only on an ABOUT ME or profile page, 'at the end of posts or videos, or anywhere that requires a person to click MORE'; 'You can't talk about your experience with a product you haven't tried.'",
+      "matches_stored_record": "Consistent with the site's standing disclosure rule (above the fold and in the footer). The 'click MORE' sentence is the official basis for keeping the disclosure above the fold on every page, including the long register pages.",
+      "note": "No product value is taken from this page."
+    },
+    {
+      "url_read": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "title": "Creating Helpful, Reliable, People-First Content | Google Search Central",
+      "observed": "The page's quality questions include whether content provides 'original information, reporting, research, or analysis' and 'insightful analysis or interesting information that is beyond the obvious', and whether a page's main heading or title 'provides a descriptive, helpful summary of the content'. The page also says rankings are not a claim a site may make about itself.",
+      "matches_stored_record": "Consistent. This is the standard cited for S-47 through S-50 (the editorially distinctive content path) and for Q-53.",
+      "note": "Read for the editorial standard only; no ranking, traffic or demand figure is derived or reproduced."
+    }
+  ]
+}

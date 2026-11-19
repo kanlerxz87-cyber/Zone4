@@ -13,6 +13,46 @@
 - The decision-support system contains **44 suggestions**, **49 questions**, and **42 decisions** (30 recorded; 12 open). **F-55** makes the two new unverified destinations visible on the Flagged for Review page.
 - The static site includes `docs/feed.xml`, `docs/sitemap.xml`, and `docs/robots.txt`. RSS items are generated from article records; publication dates are omitted because none are supplied in the source data.
 
+## 2026-11-19 session — what changed, and what it now needs from you
+
+**What this session did.** It re-read all five supplied links and the cited official pages live (record in
+`data/verification-session-9124554d.json`), added four suggestions (S-47 to S-50), six questions (Q-51 to Q-56) and three open
+decisions (D-46 to D-48), put a dedicated **Choose a path** review surface on the Suggestions page, and raised one new flag
+(F-68). No product value, published fact, price or rating was changed.
+
+**The single most useful finding.** The two supplied links that were previously unmatched resolve, on an independent second
+read, to **meat thermometers** — `link.amazon/B0c8moW59` to `B0DHZTCNR5` and `link.amazon/B0f3GKalj` to `B0DZFD6R9Z`, both
+under *Kitchen Utensils & Gadgets > Thermometers & Timers > Meat*. So the brief already includes two products that are not air
+fryers. That is **F-56**, it is a scope question only you can answer (**Q-55**), and it changes the site's name, categories and
+guide calendar — which is why it now sits in the "choose a path" surface rather than in a footnote.
+
+**The single most important finding.** The Associates Program Policies (updated 2026-04-14) now carry **Agent Terms** at IP
+License section 4. They apply to software taking autonomous or semi-autonomous action on Program Content and require it to
+identify itself as an Agent in its HTTP user-agent string. Whether the research tooling this project depends on does so is not
+recorded anywhere in the repository, and cannot be checked from inside this environment. That is **F-68** and **Q-56**. It
+does not block the site — nothing published here depends on an Agent-collected field — but it is a precondition on the
+"automate the research" half of the brief, and it should be settled before anyone builds more automation.
+
+**The four paths you can choose between** (on the Suggestions page, under "Choose a path"):
+
+| Path | What it buys | Released by | Cost | Blocked on |
+|---|---|---|---|---|
+| A — the shop front | Sectioned navigation, a visual identity and a social preview | D-47 | 3–4 days | Q-54 (section names) |
+| B — the reason to read | Per-product "what the listing does not state" pages, plus your own dated notes if you have them | D-46 | 3–4 days, plus an hour of your notes | Q-52 (do you have first-hand use?) |
+| C — the money path | Tag attribution and the one-link-per-product Special Link test | D-01, D-14 (already recorded) | 10 minutes in Associates Central | Q-01, Q-50 |
+| D — the evidence path | Search Console, hosted endpoint, identified research method | D-43, D-44 (already recorded) | a tooling answer plus an account | Q-56, Q-47 |
+
+**On imagery, which the brief asks about directly.** No product photograph is added, and the reason is a rule rather than a
+taste: the IP License (2(h)) forbids storing or caching Program Content images and permits only a link to one, and the FTC
+forbids implying experience with a product nobody here has used. What is proposed instead is honest and cheap — an original,
+abstract brand mark and a social preview image that copy no listing, plus an optional block for your own dated notes on each
+appliance (S-47). Both stay behind their decisions until you choose.
+
+**What remains true and unchanged.** Prices, star ratings, review counts, per-ASIN commission, search demand, traffic, orders
+and revenue are still not published or forecast. The disclosure is still above the fold on every page and repeated in every
+footer. Every outbound product link is still a tagged Special Link marked `rel="sponsored"`. Every open item is still on the
+Flagged for Review page with its source link.
+
 ## Product and content status
 
 The current reader experience centers on comparing formats and listed dimensions rather than simulated “deals” or trend rankings. Existing article topics include:
