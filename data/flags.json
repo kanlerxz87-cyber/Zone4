@@ -59,7 +59,7 @@
   "renumbering_notes": [
    "arena/cc32105d-zone4's session-local F-55 (identifier-format check) renumbered to F-67 on integration on 2026-11-17: arena/68d67712-zone4 and arena/3d2ad125-zone4 had already taken F-55 to F-66 on main while this branch was in flight. Every cross-reference was rewritten. This session's planned F-56 (endpoint hosting limits of GitHub Pages) was dropped as a duplicate of F-59 on main."
   ],
-  "renumbering_2026_11_19_storefront": "arena/67175642-zone4 raised four flags in the same window as three parallel sessions. Original numbers F-73 (thermometer cards), F-74 (P4 newer-model notice), F-75 (missing social preview image) and F-76 (front-page h1 order) collided with arena/79fe1c8d-zone4's F-73 (short-link citations), arena/14efcc78-zone4's F-74 (missing rel=sponsored) and arena/bc21d56d-zone4's F-75 (the 'AI slop' claim). On the second rebase they were renumbered F-76, F-77, F-78 and F-79 respectively; the other sessions keep F-73, F-74 and F-75 as merged on main."
+  "renumbering_2026_11_19_storefront": "arena/67175642-zone4 raised four flags in the same window as several parallel sessions, and the numbers collided twice as main advanced. Final numbers, after rebasing onto 390ea78: F-76 (thermometer shop cards rendered an air-fryer capacity line - corrected), F-77 (P4 listing shows a newer-model notice - owner decision), F-78 (no social preview image had ever shipped - corrected), F-80 (the front page's h1 rendered below the product cards - corrected). F-79 belongs to a parallel session. The other sessions keep their own F-73, F-74 and F-75 as merged on main. No flag content changed in renumbering; this note is the audit trail."
  },
  "flags": [
   {
@@ -1008,7 +1008,7 @@
    ]
   },
   {
-   "id": "F-78",
+   "id": "F-80",
    "severity": "Medium",
    "title": "The landing page's only <h1> rendered below the first product card",
    "detail": "Found 2026-11-19 by arena/67175642-zone4 while reading the built front page in document order. scripts/build_site.py emitted the shop grid before the hero block, so <main> opened with a product card and the page's single <h1> appeared after five cards. scripts/verify.py enforced it: a check required index.html's #shop to appear before .mhero, on a literal reading of the brief's 'lead with the products, not with the verification process'. That intent is right, but the implementation put the headline after the products, which is the wrong order for a reader arriving cold and leaves a search engine's first screenful without the page heading. Corrected the same day: the hero with its <h1> opens <main>, the shop grid sits directly beneath it, and the audit band still comes last. The gate was rewritten to test the intent - the h1 first, then the products, then the transparency band - with a new regression test.",
