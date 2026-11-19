@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """One-off append script for the 2026-11-19 decision-support pass (arena/bc21d56d-zone4).
 
-Appends flag F-74, suggestions SG-31..SG-38, questions Q-52..Q-56 and the
+Appends flag F-75, suggestions SG-31..SG-38, questions Q-52..Q-56 and the
 decision-paths data. No existing row is modified except the suggestions
 _meta.statuses vocabulary (one dated status added, matching the 11-16/11-17
 pattern). Run from the repo root; deletes itself is NOT done (kept as the
@@ -35,13 +35,14 @@ FTC_END = "https://www.ftc.gov/business-guidance/advertising-marketing/endorseme
 # ---------------------------------------------------------------- flags ----
 flags = load("data/flags.json")
 flag_ids = {f["id"] for f in flags["flags"]}
-assert "F-74" not in flag_ids, "F-74 already exists"
-assert "F-73" in flag_ids, "F-73 (parallel session) must exist; renumber before appending"
+assert "F-75" not in flag_ids, "F-75 already exists"
+assert "F-74" in flag_ids, "F-74 (parallel session, PR #94) must exist; renumber before appending"
+assert "F-73" in flag_ids, "F-73 (parallel session, PR #92) must exist"
 flags["flags"].append({
-    "id": "F-74",
+    "id": "F-75",
     "severity": "Low",
     "title": "The brief's claim that the site 'reads like some AI slop website' is itself unverified: no page, sentence or surface is named as evidence",
-    "detail": "Added 2026-11-19 by arena/bc21d56d-zone4. The current session brief repeats the 2026-11-17 wording ('It should not read like some AI slop website like it looks like now') but names no page, sentence or surface. What the register can establish: ten anti-patterns (AS-01..AS-10 in data/design.json) were documented from observed evidence and their replacements applied under recorded decisions D-12 (voice) and D-36 (copy pass); F-52 records the one opener defect found and its correction; every published article was rewritten to the recorded voice. Whether further surfaces still read as machine output is an owner judgement that no official source or register row currently evidences. This flag publishes the gap instead of treating the complaint as a finding. Q-52 asks the owner for the named examples; SG-34 stages the evidence pass that converts each named example into an AS-11+ row.",
+    "detail": "Numbered F-75 on 2026-11-19 (arena/bc21d56d-zone4): the flag was drafted as F-73, renumbered F-74, then renumbered again because parallel sessions took F-73 in PR #92 (short-link citations, arena/79fe1c8d-zone4) and F-74 in PR #94 (sponsored-rel gate, arena/14efcc78-zone4) while this session worked. Added 2026-11-19 by arena/bc21d56d-zone4. The current session brief repeats the 2026-11-17 wording ('It should not read like some AI slop website like it looks like now') but names no page, sentence or surface. What the register can establish: ten anti-patterns (AS-01..AS-10 in data/design.json) were documented from observed evidence and their replacements applied under recorded decisions D-12 (voice) and D-36 (copy pass); F-52 records the one opener defect found and its correction; every published article was rewritten to the recorded voice. Whether further surfaces still read as machine output is an owner judgement that no official source or register row currently evidences. This flag publishes the gap instead of treating the complaint as a finding. Q-52 asks the owner for the named examples; SG-34 stages the evidence pass that converts each named example into an AS-11+ row.",
     "status": "Needs review (owner input requested)",
     "action": "Reviewer/owner: name the published pages or sentences that read as machine output (question Q-52). Each named example becomes an anti-pattern row with its evidence and a replacement, and the openers are re-read against the expanded list (SG-34). If no example is named, that answer is recorded and this flag closes with the owner-confirmed result.",
     "sources": [
@@ -370,4 +371,4 @@ dec["paths"] = {
 }
 save("data/decisions.json", dec)
 
-print("appended: F-74, SG-31..SG-38, Q-52..Q-56, decisions.paths")
+print("appended: F-75, SG-31..SG-38, Q-52..Q-56, decisions.paths")
