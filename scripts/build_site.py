@@ -316,7 +316,7 @@ def _short_link_targets() -> dict[str, dict]:
 
 def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
     if url.startswith("https://link.amazon/"):
-        # 2026-11-19 (F-77): a supplied short link is never published as the outbound target.
+        # 2026-11-19 (F-73): a supplied short link is never published as the outbound target.
         # Citations point to the official listing that the recorded product-intent record
         # names (intended ASIN, official_listing_url), and the short link stays visible as text.
         rec = _short_link_targets().get(url)
@@ -2626,7 +2626,7 @@ def _sponsor_amazon_anchors(doc: str) -> str:
 
     Every such link now carries the Associates tag (see _tag_amazon_hrefs), so every one is an
     affiliate link. Before 2026-11-19 the tagging pass ran after rendering and never set rel, so
-    63 tagged Associates help and category links went out without it (F-78). The click counter
+    63 tagged Associates help and category links went out without it (F-74). The click counter
     (docs/measure.js) also selects on rel="sponsored", so untagged-rel links were not counted.
     """
     def repl(m: "re.Match[str]") -> str:
