@@ -270,7 +270,30 @@ def link_rel(url: str, rel: str = "noopener noreferrer") -> str:
     return rel
 
 
+_SHORT_LINK_MAP: dict[str, dict] | None = None
+
+
+def _short_link_targets() -> dict[str, dict]:
+    """Submitted short link -> its product-intent record (data/intent-links.json)."""
+    global _SHORT_LINK_MAP
+    if _SHORT_LINK_MAP is None:
+        data = json.loads((ROOT / "data" / "intent-links.json").read_text(encoding="utf-8"))
+        _SHORT_LINK_MAP = {r["submitted_url"]: r for r in data["links"]}
+    return _SHORT_LINK_MAP
+
+
 def ext(url: str, text: str | None = None, extra: str = "", rel: str = "noopener noreferrer") -> str:
+    if url.startswith("https://link.amazon/"):
+        # 2026-11-19 (F-73): a supplied short link is never published as the outbound target.
+        # Citations point to the official listing that the recorded product-intent record
+        # names (intended ASIN, official_listing_url), and the short link stays visible as text.
+        rec = _short_link_targets().get(url)
+        if rec is not None:
+            target = rec["official_listing_url"]
+            label = f"{text or url} (opens to ASIN {rec['intended_asin']})"
+            rel = link_rel(target, rel)
+            return f'<a href="{esc(target)}" rel="{esc(rel)}"{extra}>{esc(label)}</a>'
+        return f"<code>{esc(url)}</code>"
     rel = link_rel(url, rel)
     label = esc(text if text is not None else url)
     return f'<a href="{esc(url)}" rel="{esc(rel)}"{extra}>{label}</a>'

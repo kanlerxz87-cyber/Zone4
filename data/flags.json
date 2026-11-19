@@ -921,6 +921,18 @@
       "sources": [
         "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/questions.json"
       ]
+    },
+    {
+      "id": "F-73",
+      "severity": "Medium",
+      "title": "Supplied short links still appeared as clickable, untagged sponsored links on register and audit pages (41 hrefs on 8 pages); now shown as text or pointed to the official listing",
+      "detail": "Added 2026-11-19 by arena/79fe1c8d-zone4 during the repo re-verification. After the tagged Special Links were published as the shop buttons (D-01/D-14, D-46), 41 links to the three supplied short-link hosts (link.amazon/...) remained on the analysis, decisions, flags, questions, requirements, sources and suggestions pages as citations. They carried no tag, so they were not the published Special Links. F-69's tagging rule covers only www.amazon.com hosts, so it did not reach them. Fix in scripts/build_site.py (ext): each short link is now an ordinary link to the official_listing_url in its data/intent-links.json record (the same listing the record names as the intended ASIN), labelled with the short link and the ASIN it opens to; the tag is added by the existing www.amazon.com rule. A short link with no record would render as plain text. Result: 0 short-link hrefs; all 815 Amazon product links carry the tag and rel=\"sponsored\"; 0 untagged www.amazon.com links. The supplied short links are not judged valid or invalid (Zone3 FLG-003 remains unresolved). Also noted: F-58's title still says the published outbound links are the short links; that text predates D-01/D-14 and is kept as the audit record. The Associates Central one-link test (F-58) and tag registration (F-57) remain owner actions.",
+      "sources": [
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/intent-links.json"
+      ],
+      "status": "Corrected 2026-11-19 (arena/79fe1c8d-zone4); kept as the audit record",
+      "action": "Reviewer: confirm in a normal browser that each short-link citation opens to the ASIN named beside it, and confirm in Associates Central that shopnow047c-20 is the enrolled tag (F-57)."
     }
   ]
 }
