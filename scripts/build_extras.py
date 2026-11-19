@@ -586,16 +586,23 @@ def _review_body(bs, page) -> str:
     # --- The register map: what lives where, so nobody edits the wrong file.
     # Rendered as a list, not a table: the site's rule is that every table body row
     # carries a link to an official source, and these rows describe this repository.
+    su = _load("suggestions.json")["suggestions"]
+    qu = _load("questions.json")["questions"]
+    de = _load("decisions.json")["decisions"]
+    fl = _load("flags.json")["flags"]
     register_rows = [
         ("This page (data/redesign.json)",
          f"{len(suggestions)} proposals and {len(questions)} questions, each with cost, risk, check and an official source",
          "Proposed \u2014 awaiting your decision"),
-        ("Suggestions (data/suggestions.json)", "The fifty earlier suggestions, each with its recorded status",
+        ("Suggestions (data/suggestions.json)", f"The {len(su)} earlier suggestions, each with its recorded status",
          "Unchanged by this pass"),
-        ("Questions (data/questions.json)", "The fifty-one earlier questions", "Unchanged by this pass"),
-        ("Decision log (data/decisions.json)", "Forty-six decisions: thirty-four recorded, twelve open",
+        ("Questions (data/questions.json)", f"The {len(qu)} earlier questions", "Unchanged by this pass"),
+        ("Decision log (data/decisions.json)",
+         f"The {len(de)} decisions: {sum(1 for d in de if d['status'] == 'Recorded')} recorded, "
+         f"{sum(1 for d in de if d['status'].startswith('Open'))} open",
          "Unchanged \u2014 D-48 to D-60 are reserved, not written"),
-        ("Flagged for review (data/flags.json)", "The seventy-two open, resolved and historical items", "Unchanged"),
+        ("Flagged for review (data/flags.json)",
+         f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
     ]
     register_list = '<ul class="bullets">' + "".join(
         f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="pill pill-muted">{e(state)}</span></li>'
