@@ -21,7 +21,7 @@ the check fails with "expected sentence not found" and the anchor in
 COUNT_SURFACES must be updated consciously in the same commit.
 
 Added 2026-11-19 by arena/3c1cee74-zone4. The drift this stops was live: see
-flag F-91 (ENGINE.md said 92 tests against a 94-test suite; README's data-map
+flag F-94 (ENGINE.md said 92 tests against a 94-test suite; README's data-map
 row said 88 flags against a 90-row register).
 """
 from __future__ import annotations
@@ -288,7 +288,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             print("nothing to fix; all hand-typed counts already match the registers")
     drifts = check(counts)
     if drifts:
-        print("Hand-typed counts disagree with the registers (SG-37 gate, flag F-91):")
+        print("Hand-typed counts disagree with the registers (SG-37 gate, flag F-94):")
         for d in drifts:
             print(f"  - {d}")
         print("Run: python3 scripts/check_doc_counts.py --fix   (numerals only, never prose)")

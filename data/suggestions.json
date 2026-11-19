@@ -1494,10 +1494,11 @@
       "flags": [
         "F-71"
       ],
-      "status": "Decision recorded 2026-11-16 - work remains",
+      "status": "Implemented 2026-11-19",
       "decision": "D-10",
       "status_note_2026_11_19": "Added 2026-11-19 by arena/bc21d56d-zone4 after reconciling the counts by hand for this pass. The pointer is D-10 (documentation in line with the code), recorded 2026-11-16; this row stages the automation that would make the reconciliation unnecessary.",
-      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' pointed at recorded D-10. The documentation-alignment direction is decided (recorded 2026-11-16, partly implemented); generating the counts is the remaining work, not a pending choice. Decision pointer unchanged (D-10)."
+      "status_note_2026_11_19_eb90e04d": "Status corrected 2026-11-19 (F-89): 'Awaiting decision' pointed at recorded D-10. The documentation-alignment direction is decided (recorded 2026-11-16, partly implemented); generating the counts is the remaining work, not a pending choice. Decision pointer unchanged (D-10).",
+      "status_note_2026_11_19_3c1cee74": "Implemented 2026-11-19 by arena/3c1cee74-zone4 as scripts/check_doc_counts.py plus a Site-checks CI step and tests/test_doc_counts.py, with the drift it stops recorded as flag F-94. Mechanism note: the recorded proposal replaced the numerals with pointers at the live page; this implementation keeps the numerals but generates and gates them instead (check mode fails every disagreement; --fix rewrites numerals only, never prose), which satisfies the recorded check - no register count in the two documents disagrees with the registers, and a reintroduced hard-coded count fails - while keeping the documents readable as plain files. Coverage extends beyond the two named documents to data/content.json and the ENGINE.md test-count line (S-10)."
     },
     {
       "id": "SG-38",
@@ -2079,6 +2080,37 @@
       "status": "Implemented 2026-11-19",
       "decision": "D-53",
       "status_note_2026_11_19": "Shipped in this session's build under recorded decision D-53 (RD-13 partial: the summary list only; anchored filters and a printable review sheet remain proposed)."
+    },
+    {
+      "id": "SG-46",
+      "priority": "P3 - Housekeeping",
+      "title": "No published surface may print a register count it does not read from the registers",
+      "problem": "The counts the site publishes about itself were the last prose that could silently age. ENGINE.md documented a test total the suite had outgrown and README's data-map row carried a flags numeral two flags behind its own enumeration (both live drift on main ed4f66a, flag F-94); and every parallel session this week has had to reconcile README and EXECUTIVE_SUMMARY numerals by hand after another session appended rows, because the two documents type the numbers as prose.",
+      "proposal": "Extend the recorded SG-37 mechanism from the two documents it names to every hand-typed surface: one checker (scripts/check_doc_counts.py) computes suggestions, questions, decisions (recorded and open), flags, requirements and the unittest discovery total from the registers and tests/; a Site-checks CI step and unit tests fail any disagreement; --fix rewrites numerals in place, never prose. The part that remains proposed: fold the same rule into scripts/verify.py so the gate runs wherever the build gates run (a logged request - verify.py sat inside arena/f598c2b6-zone4's open PR #103 claimed scope when the row was written; PR #103 merged while this session worked, so the request transfers to whoever owns verify.py next), and rely on the builder's existing computed counts for the generated pages (the Decision-centre meta description and the About-page governance line already read the registers at build time, so they cannot drift).",
+      "why": "A decision-support register that publishes wrong counts about itself undermines the same trust the register exists to protect. The gate turns count reconciliation from every session's chore into something a reintroduced stale numeral cannot survive: the CI step and the unit-test suite both fail before a drifted document can merge.",
+      "effort": "About two hours for the checker, CI step and tests (done 2026-11-19); under one hour to fold the rule into scripts/verify.py now that its claimed scope has freed.",
+      "risk": "Low. Rewrites are numerals-only by construction (the substitution keeps every non-captured character). When a document is intentionally reworded the gate fails loudly with 'expected count sentence not found', so the checker's anchors are updated consciously in the same commit rather than silently skipping a surface.",
+      "check": "scripts/check_doc_counts.py exits 0 on a clean tree; a hand-edited wrong numeral fails the Site-checks workflow and the unit-test suite; --fix repairs the drift without prose changes; tests/test_doc_counts.py holds both the parsing fixtures and the live-tree gate.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/check_doc_counts.py",
+          "ref": "The checker this row describes (added 2026-11-19)"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json",
+          "ref": "The registers every count is computed from"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+          "ref": "The test-count line whose live drift (F-94) the gate now stops"
+        }
+      ],
+      "flags": [
+        "F-94"
+      ],
+      "status": "Partly implemented 2026-11-19",
+      "decision": "D-10",
+      "status_note_2026_11_19": "Added and partly implemented in the same pass by arena/3c1cee74-zone4: the checker, the Site-checks CI step and the unit tests are live, and SG-37 is marked implemented on the same mechanism. Folding the rule into scripts/verify.py remains proposed (logged request on the coordination board; PR #103 merged mid-session, freeing verify.py for the next owner of that file)."
     }
   ]
 }
