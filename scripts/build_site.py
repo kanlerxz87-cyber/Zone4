@@ -2471,7 +2471,31 @@ def _tag_amazon_hrefs(doc: str) -> str:
             return m.group(0)
         sep = "&amp;" if "?" in base else "?"
         return f'href="{base}{sep}tag={TRACKING_ID}' + (f"#{hash_part}" if hash_part else "") + '"'
-    return re.sub(r'href="(https://www\.amazon\.com/[^"]*)"', repl, doc)
+    doc = re.sub(r'href="(https://www\.amazon\.com/[^"]*)"', repl, doc)
+    return _sponsor_amazon_anchors(doc)
+
+
+def _sponsor_amazon_anchors(doc: str) -> str:
+    """Mark every www.amazon.com anchor rel="sponsored" (Google: paid and affiliate links).
+
+    Every such link now carries the Associates tag (see _tag_amazon_hrefs), so every one is an
+    affiliate link. Before 2026-11-19 the tagging pass ran after rendering and never set rel, so
+    63 tagged Associates help and category links went out without it (F-74). The click counter
+    (docs/measure.js) also selects on rel="sponsored", so untagged-rel links were not counted.
+    """
+    def repl(m: "re.Match[str]") -> str:
+        attrs = m.group(1)
+        if not re.search(r'\bhref="https://www\.amazon\.com/', attrs):
+            return m.group(0)
+        rel = re.search(r'\brel="([^"]*)"', attrs)
+        if rel:
+            if "sponsored" in rel.group(1).split():
+                return m.group(0)
+            attrs = attrs.replace(rel.group(0), f'rel="sponsored {rel.group(1)}"', 1)
+        else:
+            attrs = attrs + ' rel="sponsored"'
+        return f"<a{attrs}>"
+    return re.sub(r"<a\b([^>]*)>", repl, doc)
 
 
 def render(page: Page) -> str:
