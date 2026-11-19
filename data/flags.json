@@ -1178,6 +1178,20 @@
       ],
       "status": "Corrected 2026-11-19 (arena/1eabf5f1-zone4); kept as the audit record",
       "action": "Reviewer: none required. Keep the published-tree check in CI; a new generated class must come with a rule in docs/styles.css or the check fails."
+    },
+    {
+      "id": "F-94",
+      "severity": "Low",
+      "title": "Hand-typed documentation counts disagreed with the registers: ENGINE.md documented 92 tests (83 engine + 9 analytics endpoint) while the suite runs 94 (85 + 9), and README's data-map row said 88 flags against the 90-row register",
+      "detail": "Added 2026-11-19 by arena/3c1cee74-zone4 while implementing the recorded SG-37 mechanism (suggestion SG-37, decision D-10). Both numerals were live drift of exactly the class SG-37 was recorded to stop, found on main ed4f66a. The ENGINE.md line is the one the owner's brief cites under S-10 ('ENGINE.md test-count line'); the README `data/flags.json` data-map numeral had gained flags F-83..F-90 in its own enumeration without being updated. Fixed by making the counts generated and gated: the new scripts/check_doc_counts.py computes suggestions, questions, decisions (recorded, open), flags, requirements and the unittest discovery total from the registers, fails on any disagreement (a Site-checks CI step and tests/test_doc_counts.py), and --fix rewrites numerals in place without touching prose. Also observed in the same pass and not fixed here, because README prose sits inside arena/f598c2b6-zone4's open PR #103 claimed scope (logged request on the coordination board; PR #103 merged during this session's work): README's data map named verification-session-67175642.json as 'the latest' although PR #106 (arena/975f22f7-zone4) merged later the same day; the gate added here checks that the named file exists, not its recency. Numbering note: drafted as F-91 on this branch while PRs #103 and the d696a32c/1eabf5f1 sessions were in flight; F-91 to F-93 were taken on main, so the row landed as F-94.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/ENGINE.md",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/README.md",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/check_doc_counts.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/suggestions.json"
+      ],
+      "status": "Corrected 2026-11-19 (arena/3c1cee74-zone4); kept as the audit record",
+      "action": "Reviewer: none required for the two numerals (now generated and gated). The README latest-verification-session pointer stays with the README prose owners."
     }
   ]
 }
