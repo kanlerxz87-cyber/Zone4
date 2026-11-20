@@ -18,7 +18,7 @@
       fetch(endpoint, {
         method: 'POST', body: JSON.stringify(payload),
         headers: { 'Content-Type': 'application/json' },
-        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error'
+        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer'
       }).catch(function () {});
     } catch (e) { /* measurement must never break reading or navigation */ }
   }
@@ -36,12 +36,12 @@
       var relativePath = dest.pathname.slice(base.pathname.length);
       var category = relativePath.match(/^categories\/([a-z0-9-]+)\.html$/);
       if (relativePath === 'feed.xml') { send('feed_click'); }
-      else if (category) { send('category_click'); }
+      else if (category) { send('category_click', 'target', category[1]); }
     }
   }
   document.addEventListener('click', onClick, false);
   document.addEventListener('auxclick', onClick, false);
-  var article = document.querySelector('article.guide');
+  var article = document.querySelector('article.guide, article.post');
   if (article && 'IntersectionObserver' in window) {
     // Marker sits at 75% of the article's own height, not of the viewport (fixed 2026-11-17).
     article.style.position = 'relative';

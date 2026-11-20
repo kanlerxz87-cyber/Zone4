@@ -30,7 +30,7 @@ DOCS = ROOT / "docs"
 
 OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
-    "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
+    "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com", "docs.github.com",
     # Added 2026-11-14 by session arena-8592c4f6: publishers of the primary sources
     # cited by the newly added rows. All are the authoritative owner of the fact they
     # are cited for (Amazon seller docs, Google Search Central, IANA root zone,
@@ -877,10 +877,10 @@ def check_publication() -> None:
     if not isinstance(pub["cadence"]["interval_days"], int) or pub["cadence"]["interval_days"] < 1:
         fail("publishing cadence interval is not a positive whole number of days")
     measure = (DOCS / "measure.js").read_text(encoding="utf-8")
-    for bad in ("document.cookie", "localStorage", "sessionStorage", "navigator.userAgent", "referrer"):
+    for bad in ("document.cookie", "localStorage", "sessionStorage", "navigator.userAgent", "document.referrer"):
         if bad in measure:
             fail(f"measure.js uses {bad}: the measurement must not store or read identifiers")
-    events = set(re.findall(r"(\w+): 1", measure.split("var EVENTS", 1)[1].split("}", 1)[0])) if "var EVENTS" in measure else set()
+    events = set(re.findall(r"send\(['\"](\w+)['\"]", measure))
     if events != {"page_view", "outbound_click", "guide_read_75", "category_click", "feed_click"}:
         fail(f"measure.js events are {sorted(events)}, not the five defined events")
     surfaces = ["index.html", "executive-summary.html", "products.html", "guides/index.html", "marketing.html",

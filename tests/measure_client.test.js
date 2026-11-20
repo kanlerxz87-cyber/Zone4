@@ -25,7 +25,7 @@ function browser({ url = endpoint, privacy = {}, dnt, fetchError = false } = {})
     document: {
       currentScript: { src: `${root}measure.js` },
       querySelector(selector) {
-        return selector === 'article.guide' ? article : { getAttribute: () => url };
+        return selector === 'article.guide, article.post' ? article : { getAttribute: () => url };
       },
       addEventListener(name, handler) { listeners[name] = handler; },
       createElement() { return { style: {}, setAttribute() {} }; },
@@ -74,7 +74,7 @@ test('real generated relative links emit the five events without affiliate queri
   assert.deepEqual(app.requests.map(({ options }) => JSON.parse(options.body)), [
     { event: 'page_view', path: `/Zone4/docs/${guidePath}` },
     { event: 'outbound_click', path: `/Zone4/docs/${guidePath}`, asin: 'B0CDY277D3' },
-    { event: 'category_click', path: `/Zone4/docs/${guidePath}` },
+    { event: 'category_click', path: `/Zone4/docs/${guidePath}`, target: 'meat-thermometers' },
     { event: 'feed_click', path: `/Zone4/docs/${guidePath}` },
     { event: 'guide_read_75', path: `/Zone4/docs/${guidePath}` },
   ]);
@@ -84,6 +84,7 @@ test('real generated relative links emit the five events without affiliate queri
     assert.equal(options.headers['Content-Type'], 'application/json');
     assert.equal(options.credentials, 'omit');
     assert.equal(options.redirect, 'error');
+    assert.equal(options.referrerPolicy, 'no-referrer');
     assert.equal(options.keepalive, true);
   }
 });

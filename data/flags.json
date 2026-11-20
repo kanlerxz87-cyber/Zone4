@@ -1209,6 +1209,20 @@
       "action": "Corrected 2026-11-20 (decision D-55). No product fact changed: the five listings were re-read the same day and their titles and breadcrumbs still match the stored records. What remains for the owner is nothing on this flag; the standing account-side items are unchanged (F-57 tracking-ID registration, F-58 one-link-per-product test).",
       "found_utc": "2026-11-20",
       "found_by": "arena/713e855d-zone4"
+    },
+    {
+      "id": "F-96",
+      "severity": "Medium",
+      "title": "Measurement readiness is not a live, purchase-attributed analytics service",
+      "detail": "2026-11-20 integration review: MEASURE_ENDPOINT remains empty, the campaign ledger has no authorized reports, and no permanent collector host is available. Concurrent PR #119 fixed link detection and browser tests; earlier origin/type fixes are retained. This session additionally bounds paths/products/category targets, stores category target totals, rejects unexpected fields and media types, handles storage errors, enforces no-referrer requests, and adds 90-day pruning. New tests cover these behaviours. No synthetic test count enters the campaign ledger. Raw event counts include repeats and potentially bots; they cannot establish unique visitors, eligible Amazon sessions, purchases or conversion rates. The Python collector requires one process, persistent disk, HTTPS/request limits at the proxy, logging/privacy review and a daily pruning maintenance job; those production gates remain open.",
+      "sources": [
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+        "https://affiliate-program.amazon.com/help/operating/policies",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/README.md",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/tests/test_analytics_endpoint.py"
+      ],
+      "status": "Needs review — hardening shipped; production deployment and attribution remain unverified (F-59/F-58)",
+      "action": "Follow the collector deployment acceptance checklist before configuring an endpoint. Use authorized Amazon reports for orders; do not compute an Amazon conversion rate from anonymous page views or raw clicks."
     }
   ]
 }
