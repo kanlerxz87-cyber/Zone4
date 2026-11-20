@@ -1682,4 +1682,6 @@ Scope rule: this session does not touch `engine/`, `analytics-endpoint/`, `data/
 
 | Task | Status | Owner | Files |
 |---|---|---|---|
-| Art-direct front-page opener with original decorative food still life, not a product likeness or test result; preserve disclosure and existing reader actions. | in progress | arena/0d83c52c-zone4 | docs/styles.css, docs/editorial-table.webp, COORDINATION.md |
+| Art-direct front-page opener with original decorative food still life, not a product likeness or test result; preserve disclosure and existing reader actions. | done | arena/0d83c52c-zone4 | docs/styles.css, docs/editorial-table.webp, COORDINATION.md |
+
+**Done locally:** original AI-generated decorative food still life, compressed to WebP; desktop split cover and mobile crop. No Amazon photography, product likeness, price, claim or measured result added. All 43 pages rebuilt, disclosure/row-source/local-link gates passed, QA zero warnings, 102 unit tests passed; engine and published-tree link checks passed. These checks verify stored records and references, not a fresh Amazon listing read. Existing [flag register](https://kanlerxz87-cyber.github.io/Zone4/flagged.html) retains account attribution, analytics hosting and query-data gates. Policy reference: https://affiliate-program.amazon.com/help/operating/policies . No account-side results available.
