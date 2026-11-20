@@ -6,33 +6,41 @@
   var endpoint = meta ? meta.getAttribute('content') : '';
   if (!endpoint) { return; }
   if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) { return; }
+  var base = new URL('./', document.currentScript.src);
+  var countedPath = location.pathname;
   var EVENTS = { page_view: 1, outbound_click: 1, guide_read_75: 1, category_click: 1, feed_click: 1 };
-  function send(name, extra) {
+  function send(name, field, value) {
     if (!EVENTS[name]) { return; }
-    var payload = { event: name, path: location.pathname };
-    if (extra) { for (var k in extra) { payload[k] = extra[k]; } }
-    var body = JSON.stringify(payload);
+    var payload = { event: name, path: countedPath };
+    if (field) { payload[field] = value; }
     try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }));
-      } else {
-        fetch(endpoint, { method: 'POST', body: body, keepalive: true, mode: 'cors' });
-      }
-    } catch (e) { /* the measurement must never break the page */ }
+      // Unlike sendBeacon, fetch can explicitly omit credentials.
+      fetch(endpoint, {
+        method: 'POST', body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error'
+      }).catch(function () {});
+    } catch (e) { /* measurement must never break reading or navigation */ }
   }
   send('page_view');
-  document.addEventListener('click', function (ev) {
-    var a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
+  function onClick(ev) {
+    if (ev.isTrusted === false || (ev.type === 'auxclick' && ev.button !== 1)) { return; }
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
     if (!a) { return; }
-    var rel = (a.getAttribute('rel') || '');
-    if (rel.indexOf('sponsored') !== -1) {
-      send('outbound_click', { asin: a.getAttribute('data-track-asin') || '' });
-    } else if (a.getAttribute('data-measure') === 'category') {
-      send('category_click', { target: a.getAttribute('href') || '' });
-    } else if (a.getAttribute('data-measure') === 'feed') {
-      send('feed_click');
+    var dest = new URL(a.href, location.href);
+    var rel = (a.getAttribute('rel') || '').toLowerCase().split(/\s+/);
+    var product = dest.pathname.match(/^\/dp\/(B[0-9A-Z]{9})(?:\/|$)/);
+    if (rel.indexOf('sponsored') !== -1 && dest.origin === 'https://www.amazon.com' && product) {
+      send('outbound_click', 'asin', product[1]);
+    } else if (dest.origin === base.origin && dest.pathname.indexOf(base.pathname) === 0) {
+      var relativePath = dest.pathname.slice(base.pathname.length);
+      var category = relativePath.match(/^categories\/([a-z0-9-]+)\.html$/);
+      if (relativePath === 'feed.xml') { send('feed_click'); }
+      else if (category) { send('category_click'); }
     }
-  }, false);
+  }
+  document.addEventListener('click', onClick, false);
+  document.addEventListener('auxclick', onClick, false);
   var article = document.querySelector('article.guide');
   if (article && 'IntersectionObserver' in window) {
     // Marker sits at 75% of the article's own height, not of the viewport (fixed 2026-11-17).
@@ -41,8 +49,13 @@
     marker.setAttribute('aria-hidden', 'true');
     marker.style.cssText = 'position:absolute;top:75%;height:1px;width:1px;pointer-events:none;';
     article.appendChild(marker);
+    var seen = false;
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { send('guide_read_75'); io.disconnect(); } });
+      if (!seen && entries.some(function (entry) { return entry.isIntersecting; })) {
+        seen = true;
+        io.disconnect();
+        send('guide_read_75');
+      }
     });
     io.observe(marker);
   }

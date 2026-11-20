@@ -40,6 +40,13 @@ jobs:
           sys.exit(0 if ok else 1)
           PY
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Reader measurement browser-script contract
+        run: node --test tests/measure_client.test.js
+
       - name: Engine unit tests
         run: python -m unittest discover -s tests -v
 
