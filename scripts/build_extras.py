@@ -729,6 +729,8 @@ def _review_body(bs, page) -> str:
         )
 
     counts = {k: sum(1 for s in suggestions if s["priority"].startswith(k)) for k in ("P1", "P2", "P3")}
+    legacy = [s for s in suggestions if not str(s.get("batch", "")).startswith("2026-11-20")]
+    batch_rows = [s for s in suggestions if str(s.get("batch", "")).startswith("2026-11-20")]
     kpis = (
         '<div class="kpis">'
         f'<div class="kpi"><div class="kpi-value">{len(suggestions)}</div><div class="kpi-label">proposals filed here</div></div>'
@@ -744,6 +746,39 @@ def _review_body(bs, page) -> str:
     )
 
     # --- Proposals, grouped by priority, each a card with its evidence.
+    def card_html(s):
+        prio_key = s["priority"][:2]
+        st = s["status"]
+        kind = "ok" if st.startswith("Applied") else ("warn" if st.startswith("Partly") else "muted")
+        shipped = (
+            f'<p class="small"><strong>What shipped on 2026-11-19.</strong> {e(s["shipped_note"])}</p>'
+            if s.get("shipped_note") else ""
+        )
+        flags_cell = " ".join(bs.flag_chip(page, f) for f in s["flags"]) if s["flags"] else "&mdash;"
+        return (
+            f'<article class="scard" id="{e(s["id"])}">'
+            '<div class="scard-head"><div>'
+            f'<span class="scard-id">{e(s["id"])}</span>{prio(prio_key)}'
+            '</div>'
+            f'{pill(kind, st)}'
+            '</div>'
+            f'<h3>{e(s["title"])}</h3>'
+            f'<p class="scard-problem">{e(s["problem"])}</p>'
+            f'<p><strong>What we would change.</strong> {e(s["proposal"])}</p>'
+            + shipped
+            + f'<p><strong>Why it is worth doing.</strong> {e(s["why"])}</p>'
+            '<dl class="sgrid">'
+            f'<dt>Cost</dt><dd>{e(s["effort"])}</dd>'
+            f'<dt>Risk</dt><dd>{e(s["risk"])}</dd>'
+            f'<dt>How you would know it worked</dt><dd>{e(s["check"])}</dd>'
+            '</dl>'
+            f'<p class="scard-foot"><span>Reserved decision: {e(s["decision"])} '
+            '(not written to the decision log until you record a choice)</span>'
+            f'<span>Flags: {flags_cell}</span></p>'
+            f'<ul class="scard-src">{src_list(s["sources"])}</ul>'
+            '</article>'
+        )
+
     cards = []
     for prio_key, heading, lead in (
         ("P1", "P1 · Decide first",
@@ -753,44 +788,41 @@ def _review_body(bs, page) -> str:
         ("P3", "P3 · Later",
          "Polish and measurement that is worth doing once the shop reads right."),
     ):
-        group = [s for s in suggestions if s["priority"].startswith(prio_key)]
+        group = [s for s in legacy if s["priority"].startswith(prio_key)]
         if not group:
             continue
-        items = []
-        for s in group:
-            st = s["status"]
-            kind = "ok" if st.startswith("Applied") else ("warn" if st.startswith("Partly") else "muted")
-            shipped = (
-                f'<p class="small"><strong>What shipped on 2026-11-19.</strong> {e(s["shipped_note"])}</p>'
-                if s.get("shipped_note") else ""
-            )
-            flags_cell = " ".join(bs.flag_chip(page, f) for f in s["flags"]) if s["flags"] else "&mdash;"
-            items.append(
-                f'<article class="scard" id="{e(s["id"])}">'
-                '<div class="scard-head"><div>'
-                f'<span class="scard-id">{e(s["id"])}</span>{prio(prio_key)}'
-                '</div>'
-                f'{pill(kind, st)}'
-                '</div>'
-                f'<h3>{e(s["title"])}</h3>'
-                f'<p class="scard-problem">{e(s["problem"])}</p>'
-                f'<p><strong>What we would change.</strong> {e(s["proposal"])}</p>'
-                + shipped
-                + f'<p><strong>Why it is worth doing.</strong> {e(s["why"])}</p>'
-                '<dl class="sgrid">'
-                f'<dt>Cost</dt><dd>{e(s["effort"])}</dd>'
-                f'<dt>Risk</dt><dd>{e(s["risk"])}</dd>'
-                f'<dt>How you would know it worked</dt><dd>{e(s["check"])}</dd>'
-                '</dl>'
-                f'<p class="scard-foot"><span>Reserved decision: {e(s["decision"])} '
-                '(not written to the decision log until you record a choice)</span>'
-                f'<span>Flags: {flags_cell}</span></p>'
-                f'<ul class="scard-src">{src_list(s["sources"])}</ul>'
-                '</article>'
-            )
+        items = [card_html(s) for s in group]
         cards.append(
             f'<section><h2>{e(heading)}</h2><p class="section-lead">{e(lead)}</p>'
             f'<div class="scards">{"".join(items)}</div></section>'
+        )
+
+    # --- The 2026-11-20 batch: the design prompt, organic traffic, anti-slop.
+    if batch_rows:
+        batch_cards = "".join(card_html(s) for s in batch_rows)
+        prompt_lines = [s["prompt_line"] for s in batch_rows if s.get("prompt_line")]
+        prompt_block = (
+            "Design a warm kitchen buying publication: a benefit-led H1 naming the reader's dinner, "
+            "one primary comparison action, a two-line trust row, warm editorial imagery separated from "
+            "listing photography, serif display type with a readable body, the disclosure strip above the "
+            "fold, a seasonal slot below the fold, and mobile order heading, actions, art.\n\n"
+            + "\n".join(f"- {line}" for line in prompt_lines)
+            + "\n\nNever: a method statement as the headline, invented prices/ratings/volumes, copied listing photography, or a buried disclosure."
+        )
+        prompt_list = "".join(f"<li>{e(line)}</li>" for line in prompt_lines)
+        cards.append(
+            '<section id="polish-batch"><h2>The 2026-11-20 batch — the design prompt, organic traffic and anti-slop</h2>'
+            '<p class="section-lead">Twelve proposals filed by arena/97ff545d-zone4 in answer to the owner brief: suggestions '
+            'that feed the site-design prompt, trendy question-shaped topics under a dated validation rule, cluster '
+            'architecture, an anti-slop gate, freshness, measurement-first ordering, structured data, distribution, '
+            'reader capture, decision receipts, a humanised storefront and an adjacent-niche scorecard. None of these '
+            'rows is applied. The matching questions (RQ-14 to RQ-25) are in the table below.</p>'
+            f'<div class="scards">{batch_cards}</div></section>'
+            '<section id="design-prompt-lines"><h2>Design-prompt-ready lines</h2>'
+            '<p class="section-lead">One paste-ready consolidated prompt, assembled from the twelve lines above. Reviewers '
+            'strike what they reject; whatever survives goes into the design conversation verbatim.</p>'
+            f'<ol class="steps">{prompt_list}</ol>'
+            f'<div class="aiwrap"><pre>{e(prompt_block)}</pre></div></section>'
         )
 
     # --- The questions that gate the proposals.
@@ -826,7 +858,7 @@ def _review_body(bs, page) -> str:
         ("Decision log (data/decisions.json)",
          f"The {len(de)} decisions: {sum(1 for d in de if d['status'] == 'Recorded')} recorded, "
          f"{sum(1 for d in de if d['status'].startswith('Open'))} open",
-         "Unchanged \u2014 D-50 to D-60 are reserved, not written (D-48 is the DIR-A presentation layer and D-49 the per-article date rule, both recorded 2026-11-19)"),
+         "Unchanged \u2014 D-62 to D-73 are reserved for the 2026-11-20 batch, not written (D-48 DIR-A presentation layer, D-49 per-article date rule, D-50 thermometer calendar, D-51 owner-actions panel, D-52 gift-window cadence, D-53 safe storefront polish — all recorded 2026-11-19)"),
         ("Flagged for review (data/flags.json)",
          f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
     ]
