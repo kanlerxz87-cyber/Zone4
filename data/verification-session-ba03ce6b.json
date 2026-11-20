@@ -1,0 +1,160 @@
+{
+  "_meta": {
+    "session": "arena/ba03ce6b-zone4",
+    "date_utc": "2026-11-20",
+    "method": "Platform fetch_page reads of each canonical Amazon listing, returned page title and category breadcrumb in chunk 0 only; compared against products.json and products-extra.json. Re-read Operating Agreement chunks 0 and 1, Program Policies chunk 0, FTC Disclosures 101, GitHub Pages overview, Google spam-policy excerpts. No login, scraped reviews, copied listing images, prices or ratings.",
+    "result_summary": "Nine of ten title/breadcrumb comparisons match the stored records. P2 title differs after its first segment, as already recorded under F-44. The same returned title and breadcrumb strings as the 2026-11-19 session were independently read again on 2026-11-20. No underlying product value was changed.",
+    "not_done": [
+      "No short-link resolution in this pass; intent and observed redirects remain separate in data/intent-links.json.",
+      "No fresh dimensions/capacity/function/brand field checks beyond title wording; do not interpret this limited re-read as a full spec or performance verification.",
+      "No Associates enrollment/tag validation, one-link report test, API authorization, live analytics endpoint, Search Console queries, purchase/revenue data or legal compliance certification."
+    ]
+  },
+  "rows": [
+    {
+      "id": "VBA03-P1-T",
+      "product_id": "P1",
+      "asin": "B0CDY277D3",
+      "check": "listing title (page title, Amazon wrapper removed)",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed": "Title: 'CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black'.",
+      "stored_value_field": "name_listing",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P1-C",
+      "product_id": "P1",
+      "asin": "B0CDY277D3",
+      "check": "category breadcrumb",
+      "source": "https://www.amazon.com/dp/B0CDY277D3",
+      "observed": "Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "stored_value_field": "category_path",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P2-T",
+      "product_id": "P2",
+      "asin": "B09B7SB46R",
+      "check": "listing title (page title, Amazon wrapper removed)",
+      "source": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed": "Title: 'Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included'.",
+      "stored_value_field": "name_listing",
+      "matches_record": false,
+      "note": "Stored name_listing differs after its first segment ('24 One-Touch Preset Options' vs the stored '24 cooking functions...' wording). The same second segment was read on 2026-11-15 and is recorded as open flag F-44; the stored value is NOT changed by this record."
+    },
+    {
+      "id": "VBA03-P2-C",
+      "product_id": "P2",
+      "asin": "B09B7SB46R",
+      "check": "category breadcrumb",
+      "source": "https://www.amazon.com/dp/B09B7SB46R",
+      "observed": "Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "stored_value_field": "category_path",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P3-T",
+      "product_id": "P3",
+      "asin": "B08DKYBTPH",
+      "check": "listing title (page title, Amazon wrapper removed)",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed": "Title: 'Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel'.",
+      "stored_value_field": "name_listing",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P3-C",
+      "product_id": "P3",
+      "asin": "B08DKYBTPH",
+      "check": "category breadcrumb",
+      "source": "https://www.amazon.com/dp/B08DKYBTPH",
+      "observed": "Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "stored_value_field": "category_path",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P4-T",
+      "product_id": "P4",
+      "asin": "B0DHZTCNR5",
+      "check": "listing title (page title, Amazon wrapper removed)",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed": "Title: 'ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black'.",
+      "stored_value_field": "name_listing",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P4-C",
+      "product_id": "P4",
+      "asin": "B0DHZTCNR5",
+      "check": "category breadcrumb",
+      "source": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "observed": "Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "stored_value_field": "category_path",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P5-T",
+      "product_id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "check": "listing title (page title, Amazon wrapper removed)",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed": "Title: 'CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3'.",
+      "stored_value_field": "name_listing",
+      "matches_record": true
+    },
+    {
+      "id": "VBA03-P5-C",
+      "product_id": "P5",
+      "asin": "B0DZFD6R9Z",
+      "check": "category breadcrumb",
+      "source": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "observed": "Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "stored_value_field": "category_path",
+      "matches_record": true
+    }
+  ],
+  "policy_checks": [
+    {
+      "check": "Required Associates identification sentence and no expected-traffic/commission guarantee",
+      "observed": "Section 5 states As an Amazon Associate I earn from qualifying purchases. Section 4 disclaims representations about expected traffic or commission income.",
+      "source": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "read_chunks": [
+        0,
+        1
+      ]
+    },
+    {
+      "check": "Program policies are separate from local analytics events",
+      "observed": "Updated April 14, 2026; Commission Income Statement defines qualifying purchases and a Session. Local page_view/outbound_click/etc. are project-defined, not Amazon order reporting.",
+      "source": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_chunks": [
+        0
+      ]
+    },
+    {
+      "check": "Prominent disclosure and experience claims",
+      "observed": "FTC says place disclosures with the endorsement, hard to miss, and do not discuss experience with a product not tried.",
+      "source": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+      "read_chunks": [
+        0
+      ]
+    },
+    {
+      "check": "Static hosting and hosting-layer data collection",
+      "observed": "GitHub describes Pages as static HTML/CSS/JavaScript hosting and states visitor IP addresses are logged and stored for security. The collector cannot run on Pages.",
+      "source": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "read_chunks": [
+        0
+      ]
+    },
+    {
+      "check": "Search presentation is not evidence of traffic",
+      "observed": "Google spam-policy excerpt permits affiliate links when treated appropriately; presentation alone does not establish ranking, popularity or measured reach.",
+      "source": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "read_chunks": [
+        0,
+        3
+      ]
+    }
+  ]
+}

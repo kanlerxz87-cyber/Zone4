@@ -1521,6 +1521,36 @@
         "F-95"
       ],
       "blocks": "Nothing blocks: D-55 was implemented at the same time as this question was raised. The general case stays open as a standing review habit."
+    },
+    {
+      "id": "Q-65",
+      "area": "Measurement interpretation",
+      "question": "Which denominator and abuse controls would make an optimization decision defensible?",
+      "why_it_matters": "Aggregate page views and repeat clicks are not unique visitors or eligible Amazon sessions. Treating orders/clicks or scrolls/page_views as an independently verified conversion measure could select the wrong next topic or product.",
+      "kind": "Unknown - discoverable",
+      "known": "The application stores bounded daily event totals without identifiers. No durable endpoint, bot-filtering evidence or authorized Associates reporting is connected. No unique-session measure or report join has been validated.",
+      "how_to_discover": "After the F-59 production acceptance gate, define each metric in a dated measurement plan. Obtain an authorized Associates report with matching dates/channel and provenance; document exclusions, repeats, bot limitations and whether metrics can legitimately be compared. If no valid denominator exists, show raw totals only and do not optimize automatically.",
+      "answerable_by": "An authorized report holder and the reviewer of the production measurement plan; the agent can validate exported authorized fields once available.",
+      "blocks": [
+        "SG-47"
+      ],
+      "flags": [
+        "F-15",
+        "F-58",
+        "F-59",
+        "F-96"
+      ],
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Commission Income Statement: Amazon Session and qualifying purchase definitions"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/README.md",
+          "ref": "Local aggregate-event contract and limitations"
+        }
+      ],
+      "status": "Open — no authorized report or production metric has been validated"
     }
   ]
 }

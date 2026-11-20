@@ -2111,6 +2111,64 @@
       "status": "Partly implemented 2026-11-19",
       "decision": "D-10",
       "status_note_2026_11_19": "Added and partly implemented in the same pass by arena/3c1cee74-zone4: the checker, the Site-checks CI step and the unit tests are live, and SG-37 is marked implemented on the same mechanism. Folding the rule into scripts/verify.py remains proposed (logged request on the coordination board; PR #103 merged mid-session, freeing verify.py for the next owner of that file)."
+    },
+    {
+      "id": "SG-47",
+      "priority": "P1 - Decide first",
+      "title": "Pass a real measurement acceptance test before generating or optimizing another campaign",
+      "problem": "Collector code and local test traffic do not demonstrate a durable public service or Amazon attribution. Automated optimization would currently have no authorized order outcome or reliable session denominator.",
+      "proposal": "Use the deployment checklist to validate HTTPS, one persistent writer, exact Origin, bounded fields, DNT/GPC, no cookies/referrer, retention maintenance and failure behaviour. Keep synthetic checks out of production evidence. Only after a dated authorized report exists should a reviewer choose a decision metric and optimization hypothesis.",
+      "why": "Prevents improvements in unverified click totals being mistaken for purchases or revenue.",
+      "effort": "Code and regression checks shipped in this pass; permanent hosting, privacy review and first-party report integration have no verified cost or completion date.",
+      "risk": "Proxy logs, bot inflation, repeated clicks and cross-process writes can compromise privacy or interpretation if the gate is bypassed.",
+      "check": "Five real browser events arrive at the permanent host, survive restart and expire as configured; malformed/cross-origin writes fail; opt-out sends nothing; authorized orders remain a separate provenance-backed dataset.",
+      "sources": [
+        {
+          "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+          "ref": "GitHub: static Pages hosting and security IP logging"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Amazon: qualifying purchases are not local analytics events"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/README.md",
+          "ref": "Production acceptance checklist and application data contract"
+        }
+      ],
+      "flags": [
+        "F-59",
+        "F-58",
+        "F-96"
+      ],
+      "status": "Owner action required",
+      "decision": "D-43"
+    },
+    {
+      "id": "SG-48",
+      "priority": "P2 - Adds real value",
+      "title": "Validate the shorter storefront with buyer tasks, not a claim that a prettier page converts",
+      "problem": "The new layout removes the homepage audit counters and roadmap, groups the research menus, and separates air fryers from thermometers. No reader study or controlled conversion evidence exists.",
+      "proposal": "Before another redesign, observe a small consented usability study: find an air-fryer format, explain the listed capacity, locate dimensions and their source, find a thermometer, notice the affiliate disclosure, and open the suggestions review gate. Record anonymous task outcomes and confusion points, not identities or invented conversion lift. Feed only the observed problems into the next design prompt.",
+      "why": "Tests the intended navigation and buyer decision path without pretending that design guarantees organic traffic or purchases.",
+      "effort": "Proposed small study; participant recruitment, consent and actual cost remain unknown. No signup collection is enabled.",
+      "risk": "A small convenience sample is qualitative; it cannot establish market-wide conversion performance or search demand.",
+      "check": "Dated, anonymized task results identify a specific failing step; every proposed follow-up names that observation and its success test.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: disclosure must be hard to miss; no invented product experience"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google: appropriately treated affiliate links; no guaranteed ranking from presentation"
+        }
+      ],
+      "flags": [
+        "F-15"
+      ],
+      "status": "Awaiting decision",
+      "decision": "D-16"
     }
   ]
 }

@@ -1107,3 +1107,32 @@ footer { padding-inline: max(24px, calc((100vw - 1220px) / 2)); }
   .content > .disclosure { display: block; }
   .mhero, .shop-grid, .shop-grid-tools { display: block; }
 }
+/* Integrate the separately merged cover art without the legacy third grid item. */
+.mhero:has(+ .shop-section) { grid-template-columns: minmax(0, 1.45fr) minmax(0, .8fr); align-items: stretch; gap: 36px; padding: 30px 0 40px; background: transparent; border-radius: 0; }
+.mhero:has(+ .shop-section) > * { grid-column: auto; }
+.mhero:has(+ .shop-section)::after { display: none; }
+.mhero:has(+ .shop-section) h1 { max-width: 18ch; line-height: 1.05; font-size: clamp(36px, 4.8vw, 64px); }
+.mhero + .shop-section .shop-card { padding: 0; border-radius: 2px; }
+.mhero + .shop-section .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.mhero + .shop-section .shop-grid-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.front-art { margin: -12px -12px 20px; }
+.front-art img { width: 100%; height: 190px; object-fit: cover; display: block; }
+.front-art figcaption { font-size: 9px; line-height: 1.5; color: #4b5546; padding-top: 7px; }
+.front-note h2 { font-size: 26px; margin-top: 16px; }
+@media (max-width: 700px) {
+  .mhero:has(+ .shop-section) { grid-template-columns: minmax(0, 1fr); padding: 14px 0 20px; }
+  .mhero + .shop-section .shop-grid, .mhero + .shop-section .shop-grid-tools { grid-template-columns: minmax(0, 1fr); }
+  .front-art img { height: 170px; }
+}
+/* Override the retired single-line sidebar strip on narrow screens. */
+.masthead, .topnav { min-width: 0; max-width: 100%; }
+.topnav .nav-group { flex-wrap: wrap; overflow: visible; margin-top: 0; }
+.topnav .nav-panel a { white-space: normal; }
+@media (max-width: 700px) {
+  .nav-panel { position: fixed; top: 180px; left: 16px; right: 16px; width: calc(100vw - 32px); }
+  .cites { white-space: normal; }
+  .pill { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  main a, main code { overflow-wrap: anywhere; }
+}
+/* Bare source URLs in prose need the same emergency wrap as linked URLs. */
+main { overflow-wrap: anywhere; }
