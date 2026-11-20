@@ -2329,7 +2329,7 @@
     },
     {
       "id": "D-57",
-      "question": "Correct the browser-proven mobile navigation/disclosure failure with a compact native directory and a rendered-layout gate?",
+      "question": "Adopt the parallel compact native menus, correct the unwrapped review prompt, and require a rendered viewport gate?",
       "linked_question": "",
       "linked_suggestions": [
         "S-63"
@@ -2338,20 +2338,20 @@
       "options": [
         {
           "key": "A",
-          "label": "Compact buyer navigation plus one native expandable full directory",
-          "commits_to": "Preserve every page and footer link, the single nav-group, current-page access, all existing cover art and product content. Reduce the masthead footprint, contain min-content overflow, and check actual viewport disclosure placement and keyboard/no-script navigation before completion.",
-          "effort": "Shared shell/CSS and a pinned browser-QA workflow.",
+          "label": "Keep the merged native menus, wrap the prompt with existing styling, and add rendered checks",
+          "commits_to": "Preserve every page, all three native menus within the single nav-group, current-page access, complete footer coverage, existing cover art and all product/proposal content. Reuse the existing promptblock style on the new review prompt. Check actual viewport disclosure placement and keyboard/no-script navigation before completion.",
+          "effort": "One prompt-wrapper class integration plus a pinned browser-QA workflow; no replacement masthead or CSS redesign.",
           "reversible": "Yes; shared-shell/CSS revert."
         },
         {
           "key": "B",
-          "label": "Keep the full directory always expanded",
-          "commits_to": "Leave the browser-proven clipping and off-screen disclosure on smaller phones while HTML-order checks continue to pass.",
+          "label": "Trust HTML/source checks without a real viewport sweep",
+          "commits_to": "Leave untested rendered overflow such as the review-page preformatted prompt even though the merged native-menu correction itself works.",
           "effort": "None.",
           "reversible": "Yes."
         }
       ],
-      "recommendation": "A as a mechanical correction under the standing no-manual-input brief; it implements the compact-navigation direction already proposed in RD-02 without removing a destination or inventing a reader metric.",
+      "recommendation": "A as a mechanical correction under the standing no-manual-input brief. A 390px merged-output retest confirms #124 already fixed the masthead; retain that implementation. The new all-page sweep identifies the new review-prompt wrapper, not a reason to redesign the storefront.",
       "sources": [
         {
           "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
@@ -2366,7 +2366,7 @@
           "ref": "Section 5 disclosure statement"
         }
       ],
-      "recorded_choice": "Option A approved before implementation on 2026-11-20. S-63 remains work-remains until browser acceptance checks pass. This is a reversible presentation correction, not an attribution, product or hosting decision.",
+      "recorded_choice": "Option A approved before implementation on 2026-11-20. S-63 remains work-remains until browser acceptance checks pass. This is a reversible presentation correction, not an attribution, product or hosting decision. Reconciled before further implementation: preserve #124’s three-menu solution; correct only the new prompt wrapper with existing CSS and add the independent browser gate. No new design-prompt proposal is accepted or applied by changing its text wrapping.",
       "recorded_date_utc": "2026-11-20",
       "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)"
     }

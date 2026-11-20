@@ -2241,11 +2241,11 @@
     {
       "id": "S-63",
       "priority": "P1 - Decide first",
-      "title": "Keep the publication and disclosure in the first screen, with an expandable directory instead of a wall of navigation",
-      "problem": "A real Chromium phone viewport exposes horizontal overflow and a disclosure below the fold on shorter phones. Source-order checks had accepted both; the current full directory consumes the masthead.",
-      "proposal": "Put a short reader-facing navigation beside the brand, and put the full existing directory in one native details/summary control. Keep the sole nav-group and every footer link. Constrain grid/flex min-content widths and keep long tables internally scrollable. Check every page at real desktop, tablet and phone viewport sizes, not only with HTML parsing.",
+      "title": "Keep compact native navigation and make rendered viewport checks cover every page, including paste-ready prompts",
+      "problem": "A real Chromium phone viewport exposes horizontal overflow and a disclosure below the fold on shorter phones. Source-order checks had accepted both; the current full directory consumes the masthead. The merged native-menu fix removes the original masthead overflow. An all-page 320px sweep still finds the new unwrapped review-page prompt stretching the document to about 4673px.",
+      "proposal": "Adopt the already-merged compact reader bar and three native menus from PR #124 rather than stacking a replacement directory on top. Keep the sole nav-group and every footer link. Apply the existing promptblock treatment to the new review-page preformatted prompt so its text wraps without changing a proposal. Check every page at real desktop, tablet and phone sizes, including keyboard operation with JavaScript disabled.",
       "why": "A buyer should encounter a useful headline and a visible disclosure, not a clipped audit menu. Native disclosure controls preserve keyboard and no-JavaScript navigation.",
-      "effort": "Small shared-shell and CSS correction plus a pinned real-browser regression workflow; no product or article changes.",
+      "effort": "Small prompt-wrapper correction and a pinned real-browser regression workflow; the parallel session’s masthead/CSS fix is retained, not redone. No product, article or proposal wording changes.",
       "risk": "Hiding a link without a working keyboard/no-script alternative would be a regression. Keep all directory links, the current-page marker and complete footer coverage; test menu activation rather than just screenshot it.",
       "check": "At tested 320px, 375px, 390px, 768px and 1440px viewports, every page has no horizontal document overflow, one h1, disclosure initially visible below the masthead, and no script error or unintended collection. Directory is keyboard-operable and all footer destinations remain. Generated site, QA and link/source guards pass.",
       "sources": [

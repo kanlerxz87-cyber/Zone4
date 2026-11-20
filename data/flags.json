@@ -1255,15 +1255,15 @@
     {
       "id": "F-99",
       "severity": "High",
-      "title": "Rendered mobile navigation overflows the viewport and pushes the disclosure below the fold despite HTML checks passing",
-      "detail": "2026-11-20 local Chromium checks at 390x844 found a masthead height of about 718px and page width about 848px on the front page and five review pages. The disclosure starts below 718px, outside a 667px-tall phone viewport. Existing verify.py checks disclosure order in HTML, not its rendered position. The expanding min-content width comes from the full navigation directory in the masthead. These are isolated layout observations, not live traffic or product evidence.",
+      "title": "Rendered layout needs a viewport gate: the former mobile masthead overflow and an unwrapped review-page prompt were invisible to HTML checks",
+      "detail": "2026-11-20 local Chromium checks at 390x844 found a masthead height of about 718px and page width about 848px on the front page and five review pages. The disclosure starts below 718px, outside a 667px-tall phone viewport. Existing verify.py checks disclosure order in HTML, not its rendered position. The expanding min-content width comes from the full navigation directory in the masthead. These are isolated layout observations, not live traffic or product evidence. Rebase follow-up: PR #124 already supplied compact native menus and min-content containment. With that work retained, the six-page 390px retest has no document overflow and the primary disclosure ends around 291px. A new all-page 320px sweep then found docs/review.html expands to about 4673px: the new paste-ready design prompt uses an unstyled pre inside .aiwrap instead of the existing wrapping .promptblock treatment. No proposal text or product fact needs to change.",
       "sources": [
         "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css",
         "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
         "https://affiliate-program.amazon.com/help/operating/agreement"
       ],
-      "status": "Needs review (responsive correction claimed 2026-11-20)",
-      "action": "D-57 approves a compact primary bar and native expandable directory, preserving the single nav-group and footer links. Add real browser viewport gates for disclosure visibility, overflow, menu access and runtime errors before marking corrected."
+      "status": "Needs review — native-menu fix adopted; review-prompt wrapper correction claimed before implementation",
+      "action": "Preserve #124’s three native menus and all #125 proposals. Reuse the existing .promptblock class on the paste-ready prompt wrapper, then pass the real Chromium all-page, five-viewport and no-script keyboard gates. HTML source order alone is not a rendered disclosure check."
     }
   ]
 }
