@@ -51,10 +51,10 @@ def published_guides() -> list[dict]:
 # The five defined events. Anything else the page script sends is refused by the endpoint.
 EVENTS = [
     ("page_view", "Once per page load", "The page path only (no query string, no referrer, no identifier)", "Daily count per path"),
-    ("outbound_click", "A click on any sponsored product link", "Path, product ID and ASIN from the link's own attributes", "Daily count per path and ASIN"),
-    ("guide_read_75", "The reader scrolls past 75% of a guide, once per page load", "Path only", "Daily count per guide"),
-    ("category_click", "A click on a category link in the navigation or on the home page", "Path and target category", "Daily count per target"),
-    ("feed_click", "A click on the RSS feed link", "Path only", "Daily count"),
+    ("outbound_click", "A click on a sponsored link to a product listing", "Path and ASIN", "Separate daily counts per path and per ASIN"),
+    ("guide_read_75", "The 75% marker becomes visible, once per page load", "Path only", "Daily count per guide"),
+    ("category_click", "A click on a link to a category page", "Source page path only; category destination is not collected", "Daily count per source page"),
+    ("feed_click", "A click on an RSS feed link on the site", "Path only", "Daily count per path"),
 ]
 
 
@@ -509,19 +509,19 @@ def _measurement_body(bs, page) -> str:
     cols = "".join(f'<th scope="col">{_e(c)}</th>' for c in ledger["columns"])
     ledger_table = (f'<div class="tablewrap"><table class="data"><thead><tr>{cols}</tr></thead>'
                     '<tbody></tbody></table></div>')
-    endpoint = ("Not hosted. The page script sends nothing until an endpoint is set."
+    endpoint = ("Off (F-59). The page script sends nothing until an endpoint is set."
                 if not MEASURE_ENDPOINT else f"Set to {_e(MEASURE_ENDPOINT)}.")
     return (
         '<header class="hero"><h1>Measurement and campaign ledger</h1><p class="lead">What the site measures, '
         'what it never stores, and the ledger that stays empty until an authorised first-party report is '
         'imported. No conversion, revenue or traffic figure is published (F-15).</p></header>'
         '<section><h2>Five defined events</h2><p class="section-lead">The page script honours Do Not Track and Global '
-        'Privacy Control and sets no cookie. The endpoint keeps counts per day and path only: no IP address, '
+        'Privacy Control and does not send cookies. The collector keeps daily aggregates only: no IP address, '
         'user agent, referrer or visitor identifier is stored.</p>'
         '<div class="tablewrap"><table class="data"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th>'
         '<th scope="col">What is stored</th><th scope="col">Aggregated as</th><th scope="col">Source</th></tr></thead><tbody>' + ev_rows + '</tbody></table></div>'
         f'<p><strong>Endpoint status:</strong> {endpoint} The server is in <code>analytics-endpoint/</code>; '
-        'it runs anywhere that accepts a Python process, not on GitHub Pages, which only serves static files.</p></section>'
+        'it needs a separate host because GitHub Pages only serves static files. Counter events are best-effort and are not unique visitors, verified Amazon clicks or orders.</p></section>'
         '<section><h2>The five defined events (campaign ledger)</h2><p class="section-lead">The brief\'s five event types '
         'with the official attribution windows each figure must satisfy before it can enter a ledger row. These are '
         'the Associates measurement events - a different vocabulary from the local counter\'s event names above.</p>'
@@ -568,33 +568,41 @@ MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless a
   var endpoint = meta ? meta.getAttribute('content') : '';
   if (!endpoint) { return; }
   if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) { return; }
+  var base = new URL('./', document.currentScript.src);
+  var countedPath = location.pathname;
   var EVENTS = { page_view: 1, outbound_click: 1, guide_read_75: 1, category_click: 1, feed_click: 1 };
-  function send(name, extra) {
+  function send(name, field, value) {
     if (!EVENTS[name]) { return; }
-    var payload = { event: name, path: location.pathname };
-    if (extra) { for (var k in extra) { payload[k] = extra[k]; } }
-    var body = JSON.stringify(payload);
+    var payload = { event: name, path: countedPath };
+    if (field) { payload[field] = value; }
     try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }));
-      } else {
-        fetch(endpoint, { method: 'POST', body: body, keepalive: true, mode: 'cors' });
-      }
-    } catch (e) { /* the measurement must never break the page */ }
+      // Unlike sendBeacon, fetch can explicitly omit credentials.
+      fetch(endpoint, {
+        method: 'POST', body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error'
+      }).catch(function () {});
+    } catch (e) { /* measurement must never break reading or navigation */ }
   }
   send('page_view');
-  document.addEventListener('click', function (ev) {
-    var a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
+  function onClick(ev) {
+    if (ev.isTrusted === false || (ev.type === 'auxclick' && ev.button !== 1)) { return; }
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
     if (!a) { return; }
-    var rel = (a.getAttribute('rel') || '');
-    if (rel.indexOf('sponsored') !== -1) {
-      send('outbound_click', { asin: a.getAttribute('data-track-asin') || '' });
-    } else if (a.getAttribute('data-measure') === 'category') {
-      send('category_click', { target: a.getAttribute('href') || '' });
-    } else if (a.getAttribute('data-measure') === 'feed') {
-      send('feed_click');
+    var dest = new URL(a.href, location.href);
+    var rel = (a.getAttribute('rel') || '').toLowerCase().split(/\\s+/);
+    var product = dest.pathname.match(/^\\/dp\\/(B[0-9A-Z]{9})(?:\\/|$)/);
+    if (rel.indexOf('sponsored') !== -1 && dest.origin === 'https://www.amazon.com' && product) {
+      send('outbound_click', 'asin', product[1]);
+    } else if (dest.origin === base.origin && dest.pathname.indexOf(base.pathname) === 0) {
+      var relativePath = dest.pathname.slice(base.pathname.length);
+      var category = relativePath.match(/^categories\\/([a-z0-9-]+)\\.html$/);
+      if (relativePath === 'feed.xml') { send('feed_click'); }
+      else if (category) { send('category_click'); }
     }
-  }, false);
+  }
+  document.addEventListener('click', onClick, false);
+  document.addEventListener('auxclick', onClick, false);
   var article = document.querySelector('article.guide');
   if (article && 'IntersectionObserver' in window) {
     // Marker sits at 75% of the article's own height, not of the viewport (fixed 2026-11-17).
@@ -603,8 +611,13 @@ MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless a
     marker.setAttribute('aria-hidden', 'true');
     marker.style.cssText = 'position:absolute;top:75%;height:1px;width:1px;pointer-events:none;';
     article.appendChild(marker);
+    var seen = false;
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { send('guide_read_75'); io.disconnect(); } });
+      if (!seen && entries.some(function (entry) { return entry.isIntersecting; })) {
+        seen = true;
+        io.disconnect();
+        send('guide_read_75');
+      }
     });
     io.observe(marker);
   }
