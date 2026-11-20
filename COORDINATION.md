@@ -3,6 +3,7 @@
 Shared task board for all sessions on `kanlerxz87-cyber/Zone4`. Statuses: unclaimed, in progress, done, needs review (needs review does not block anything). Each claim lists the session ID and the files it touches.
 
 | Task | Status | Owner session | Files / scope |
+| Publication front page: original kitchen editorial illustration, responsive feature treatment and buyer-first copy | in progress | arena/d3396660-zone4 | docs/kitchen-cover.svg, docs/styles.css, scripts/build_site.py (page_index only), generated docs/index.html, COORDINATION.md |
 |---|---|---|---|
 | Measurement integrity: enforce browser origin on writes, tighten event validation, and document hosting acceptance checks | done (hosting remains flagged F-59) | arena/8db5dbab-zone4 | `analytics-endpoint/server.py`, `analytics-endpoint/README.md`, `tests/test_analytics_endpoint.py`, `COORDINATION.md` |
 | Storefront presentation follow-up: strengthen the publication front page visually without touching generated markup or registers owned by PR #103. Implementation and local checks done; integration tracked in [PR #114](https://github.com/kanlerxz87-cyber/Zone4/pull/114). Official sources, checks and outstanding hosting/attribution gates are recorded in `STOREFRONT_REVIEW.md`. | done | arena/6c2ba2ca-zone4 | `docs/styles.css`, `docs/countertop-editorial.jpg`, `STOREFRONT_REVIEW.md`, `COORDINATION.md` |
