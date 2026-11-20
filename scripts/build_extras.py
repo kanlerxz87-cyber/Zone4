@@ -852,7 +852,7 @@ def _review_body(bs, page) -> str:
             '<p class="section-lead">One paste-ready consolidated prompt, assembled from the twelve lines above. Reviewers '
             'strike what they reject; whatever survives goes into the design conversation verbatim.</p>'
             f'<ol class="steps">{prompt_list}</ol>'
-            f'<div class="aiwrap"><pre>{e(prompt_block)}</pre></div></section>'
+            f'<div class="aiwrap promptblock"><pre>{e(prompt_block)}</pre></div></section>'
         )
 
     # --- The questions that gate the proposals.
