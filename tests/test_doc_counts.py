@@ -104,5 +104,61 @@ class RepoGate(unittest.TestCase):
         self.assertEqual(counts["recorded"] + counts["open"], counts["decisions"])
 
 
+class PublicationCounts(unittest.TestCase):
+    """The generated-site half of the gate (decision D-55, flag F-95).
+
+    Until 2026-11-20 the gate inspected four documents and nothing else, so the
+    front page's meta description, every page's social-card alt text and the
+    social preview PNG could assert "three countertop air fryers" and "eight
+    sourced guides" while five products and fourteen guides were published.
+    """
+
+    def test_counts_come_from_the_registers(self):
+        import json
+        counts = cdc.publication_counts()
+        products = json.loads((ROOT / "data" / "products.json").read_text(encoding="utf-8"))["products"]
+        extra = json.loads((ROOT / "data" / "products-extra.json").read_text(encoding="utf-8"))["products"]
+        self.assertEqual(counts["products"], len(products) + len(extra))
+        self.assertEqual(counts["air_fryers"] + counts["thermometers"], counts["products"])
+        # A published guide is an article or a question-led guide page: both hubs
+        # present their pages as guides, so the printed total is the sum.
+        self.assertGreaterEqual(counts["published_guides"], counts["articles"])
+        self.assertEqual(counts["published_guides"], counts["articles"] + counts["guides"])
+
+    def test_words_agree_with_the_numerals(self):
+        counts = cdc.publication_counts()
+        self.assertEqual(counts["products_word"], cdc._text_number(counts["products"]))
+        self.assertEqual(counts["air_fryers_word"], cdc._text_number(counts["air_fryers"]))
+        self.assertEqual(
+            counts["published_guides_word"], cdc._text_number(counts["published_guides"])
+        )
+
+    def test_the_built_pages_and_card_pass_the_gate(self):
+        # The committed docs/ tree must agree with the registers right now.
+        self.assertEqual(cdc.check_publication_counts(), [])
+
+    def test_a_stale_guide_count_fails_the_gate(self):
+        # The exact regression F-95 records: the front page's own description
+        # said "eight sourced buying guides" while fourteen were published.
+        counts = dict(cdc.publication_counts())
+        problems = cdc.check_publication_counts(
+            {**counts, "published_guides_word": "eight"}
+        )
+        self.assertTrue(
+            any("sourced buying guides" in p for p in problems),
+            msg=f"expected the stale guide count to be caught, got {problems}",
+        )
+
+    def test_a_typed_numeral_in_the_card_script_fails_the_gate(self):
+        problems = cdc.check_publication_counts(
+            {**cdc.publication_counts(), "_probe": 0}
+        )
+        self.assertEqual(problems, [])
+        # Directly exercise the literal-call detector on the real script text.
+        script = (ROOT / cdc.SOCIAL_CARD_SCRIPT).read_text(encoding="utf-8")
+        self.assertNotRegex(script, r'^card c[abc] "\d+"')
+        self.assertIn('card cc "$N_GUIDES"', script)
+
+
 if __name__ == "__main__":
     unittest.main()

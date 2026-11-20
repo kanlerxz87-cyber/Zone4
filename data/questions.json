@@ -1500,6 +1500,27 @@
         }
       ],
       "status": "Open - waits on endpoint hosting (D-43)"
+    },
+    {
+      "id": "Q-64",
+      "area": "Editorial integrity",
+      "question": "Where else does the site print a fact about itself that no gate recomputes?",
+      "why_it_matters": "F-95 was not a product-fact error; it was the site miscounting its own catalogue on 43 pages and on the social preview image. The four document surfaces the count gate checked gave a false sense of coverage: the surfaces readers and crawlers actually see were unchecked. The same class of question applies to any number or claim about the site rather than about a product - number of pages, number of categories, number of sources read, publication dates.",
+      "kind": "Known",
+      "known": "A line-by-line pass on 2026-11-20 found the catalogue counts in the meta descriptions, the social-card alt text and the preview PNG (fixed under D-55 and gated). The remaining typed numerals that describe the site rather than a product were reviewed by hand and are recorded here: the design-page proposal text that names 'three countertop air fryers' as a historical design brief, and the fixed 2026 gift-window dates. Neither is a catalogue count, so neither is gated.",
+      "how_to_discover": "Grep every page template and every script for a numeral followed by a noun the registers count (products, guides, articles, categories, sources, decisions, flags). For each hit, either route it through publication_counts()/register_counts() or record it in KNOWN_STATIC_COUNT_COPY with the reason it is not a catalogue count. Re-run this pass whenever a new page template is added.",
+      "answerable_by": "The agent, from the repository alone - no owner account and no external source is needed.",
+      "status": "Answered for the shipped pages 2026-11-20; the standing habit stays open",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content - the reader and the crawler both see the description and the preview card"
+        }
+      ],
+      "flags": [
+        "F-95"
+      ],
+      "blocks": "Nothing blocks: D-55 was implemented at the same time as this question was raised. The general case stays open as a standing review habit."
     }
   ]
 }

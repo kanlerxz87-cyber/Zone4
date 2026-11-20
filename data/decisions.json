@@ -2197,6 +2197,48 @@
       "recorded_choice": "Option A: the four pieces ship in this build under the standing no-manual-input brief, the same basis as D-46, D-50 and D-51; the owner can reverse any of them by reverting the render change. D-52 (gift-window cadence) is not decided by this record.",
       "recorded_date_utc": "2026-11-19",
       "recorded_by": "arena/d696a32c-zone4 (standing delegation: no manual input)"
+    },
+    {
+      "id": "D-54",
+      "question": "Should every catalogue count printed on the site be computed from the registers, including the counts baked into the social preview image?",
+      "linked_question": "Q-64",
+      "linked_suggestions": [
+        "SG-46"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Compute every catalogue count from the registers, in one function, and gate the generated output",
+          "commits_to": "One source of truth (scripts/build_extras.py::publication_counts()); page copy and the social card both read it; scripts/check_doc_counts.py reads the generated pages and the card script and fails on any disagreement or any typed numeral in a card() call. Cost: one function, one gate extension, nine tests. Risk: a new count surface has to be added to PUBLICATION_COPY_SURFACES or the gate will not see it.",
+          "effort": "Low - one function, one gate extension, nine tests",
+          "reversible": "Yes - revert the commit; the counts can be typed again by editing one function"
+        },
+        {
+          "key": "B",
+          "label": "Keep the numbers typed and correct them by hand when they drift",
+          "commits_to": "No code change. The numerals stay in prose and in the image script.",
+          "effort": "None now, but a manual correction every time a record is added",
+          "reversible": "Not applicable - nothing changes"
+        },
+        {
+          "key": "C",
+          "label": "Remove the counts from the page copy and the card altogether",
+          "commits_to": "No number is printed about the catalogue, so nothing can disagree.",
+          "effort": "Low - delete the count lines from the page copy and the card",
+          "reversible": "Yes - the counts can be restored from the registers at any time"
+        }
+      ],
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google: helpful, people-first content - a page description and preview card that miscount the catalogue misdescribe the page to the reader and the crawler"
+        }
+      ],
+      "recorded_by": "arena/713e855d-zone4",
+      "recommendation": "Option A. Recorded 2026-11-20 by the agent under the owner's standing brief (no manual input), because the failure it prevents was live on 43 pages at once (F-95) and because it is reversible. A count the site prints is a claim about the site: option A makes the claim and the register unable to disagree without failing the build; option B is the status quo that produced F-94 and F-95 within two days; option C gives away accurate shop copy to solve a problem the build solves. No product fact, link, disclosure or price/rating policy changes.",
+      "recorded_choice": "A",
+      "recorded_date_utc": "2026-11-20"
     }
   ],
   "log": [
@@ -2486,6 +2528,13 @@
       "choice": "Option A - ship the safe storefront polish (ItemList structured data, gift-season front-page section, guide short-answer blocks, decision-centre summary) derived only from already-verified rows.",
       "recorded_by": "arena/d696a32c-zone4 (standing delegation: no manual input)",
       "evidence": "Fresh re-reads 2026-11-19 of all five listings plus the Operating Agreement and Program Policies (data/verification-session-d696a32c.json): titles and breadcrumbs match except P2's already-recorded variant (F-66); Section 5 sentence re-read verbatim; no stored product value changed. The four render changes carry no price, rating, offer, traffic or popularity claim (F-02, F-15, D-19)."
+    },
+    {
+      "date_utc": "2026-11-20",
+      "decision": "D-54",
+      "choice": "Option A - every catalogue count the site prints (including the numerals baked into the social preview card) is computed from the registers, and the gate reads the generated output.",
+      "recorded_by": "arena/713e855d-zone4 (standing delegation: no manual input)",
+      "evidence": "Found live on the branch point 640660f: scripts/build_site.py's SITE_DESCRIPTION, INDEX_DESCRIPTION and SOCIAL_CARD_ALT and three literals in scripts/make_social_card.sh said 'three countertop air fryers' and 'eight sourced guides' while the registers held 5 products (3 air fryers + 2 thermometers) and 14 guides (10 articles + 4 published guides); the home page's transparency band printed 10 guides. Recorded as F-95. Fixed by one function (scripts/build_extras.py::publication_counts()) that the page copy and the card both read, plus scripts/check_doc_counts.py::check_publication_counts(), which reads the generated index.html and about.html and the card script's own text. Negative tests: the old description fails the gate naming the surface; 'card cc \"8\"' fails it naming the literal. Test count 102 -> 107."
     }
   ],
   "paths": {
