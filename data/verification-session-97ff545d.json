@@ -115,5 +115,18 @@
       "python3 -m engine.cli build + audit": "build OK; audit 0/7 ready (designed compliance gate), unchanged."
     },
     "test_count_note": "The original claim text recorded 102 tests (count at branch time). After the rebase the suite runs 107; no test was edited by this session."
+  },
+  "second_rebase_2026_11_20": {
+    "note": "While the PR checks ran, main advanced again through PR #124 (integration: parallel client tests, publication/measurement reliability, hub/spoke review copy, reformatted page serializer — 82 suggestions, 65 questions, 54 decisions, 96 flags, 118 Python tests). Branch rebased onto 679d131. Conflicts: COORDINATION.md (main-side integration logs kept; this session's claim log appended) and docs/review.html (generated; rebuilt from merged sources — the rebuilt page carries this session's polish-batch and design-prompt-lines sections AND main's regenerated layout and register counts). scripts/build_extras.py auto-merged again.",
+    "gates_after_second_rebase": {
+      "scripts/verify.py": "OK — 43 pages.",
+      "qa/audit_site.py --strict-warnings": "PASS — 43 pages, 0 warnings.",
+      "tools/check_links.py --root docs": "PASS — 23 pages, 1138 CSS lines.",
+      "python3 -m unittest discover -s tests": "118 passed.",
+      "python3 scripts/check_doc_counts.py": "OK — suggestions=82, questions=65, decisions=54 (41 recorded, 13 open), flags=96, requirements=36, tests=118; generated pages and the social card print products=5, air fryers=3, thermometers=2, guides=14.",
+      "python3 -m engine.cli build + audit": "build OK; audit 0/7 ready (designed compliance gate).",
+      "python3 scripts/render_design_prompt.py": "no diff.",
+      "working tree": "clean after rebuild."
+    }
   }
 }
