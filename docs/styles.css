@@ -955,3 +955,48 @@ table.compact td { font-size: 13px; }
 }
 .shop-actions a.sun:hover { background: var(--accent-strong); color: #fff; }
 .shop-actions a.sun:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+
+/* Front-page editorial art: a food still life, not an appliance or test photo.
+   The adjacent shelf scopes this treatment to the storefront hero. */
+@media screen {
+  .mhero:has(+ .shop-section) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+    column-gap: clamp(20px, 4vw, 52px);
+    align-items: start;
+    padding: clamp(20px, 4vw, 46px);
+    background: #fffaf3;
+    border-radius: 12px;
+  }
+  .mhero:has(+ .shop-section) > * { grid-column: 1; }
+  .mhero:has(+ .shop-section)::after {
+    content: "";
+    grid-area: 1 / 2 / 6 / 3;
+    align-self: stretch;
+    min-height: 280px;
+    border-radius: 8px;
+    background: #ead9c2 url("countertop-editorial.jpg") center / cover no-repeat;
+  }
+  .mhero:has(+ .shop-section) h1 {
+    font-size: clamp(36px, 5vw, 66px);
+    line-height: .99;
+    letter-spacing: -.035em;
+    max-width: 14ch;
+  }
+  .mhero:has(+ .shop-section) .trust { margin-bottom: 0; }
+  .mhero:has(+ .shop-section) .btn-primary { background: var(--accent-strong); border-color: var(--accent-strong); }
+  .mhero:has(+ .shop-section) .btn-primary:hover { background: var(--ink); border-color: var(--ink); }
+  .mhero + .shop-section { margin-top: clamp(26px, 4vw, 48px); }
+  .mhero + .shop-section .shop-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 16px; }
+  .mhero + .shop-section .shop-card { padding: clamp(16px, 2vw, 24px); border-radius: 10px; }
+  .mhero + .shop-section .shop-card h3 { font-size: 21px; }
+}
+@media screen and (max-width: 760px) {
+  .mhero:has(+ .shop-section) { grid-template-columns: minmax(0, 1fr); }
+  .mhero:has(+ .shop-section)::after {
+    grid-area: auto / 1;
+    min-height: 0;
+    aspect-ratio: 2 / 1;
+    margin-top: 20px;
+  }
+}
