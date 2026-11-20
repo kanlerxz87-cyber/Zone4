@@ -1677,3 +1677,9 @@ Scope rule: this session does not touch `engine/`, `analytics-endpoint/`, `data/
 **Irregularities for review (none block the merge).** Carried forward unchanged: F-57, F-58, F-59, F-61 (owner-side gates), F-02 (prices/ratings withheld), F-60 (thermometer blanks), F-78 (P4 newer-model notice). New: none beyond F-94, which is recorded as corrected with the audit trail kept. The ENGINE.md comment column shifted because the generated comment is shorter than the old hand-typed one — cosmetic, inside the same code fence.
 
 **PR, merge and Pages.** Opened as **PR #113** (base `main`, head `arena/3c1cee74-zone4`) and merged without approval the same day after every gate on the branch passed; the merge result and Pages deployment are recorded in the board row above.
+
+## Session arena/0d83c52c-zone4 · 2026-11-20
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Art-direct front-page opener with original decorative food still life, not a product likeness or test result; preserve disclosure and existing reader actions. | in progress | arena/0d83c52c-zone4 | docs/styles.css, docs/editorial-table.webp, COORDINATION.md |
