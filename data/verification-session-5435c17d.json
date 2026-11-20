@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "session": "arena/5435c17d-zone4",
+    "date_utc": "2026-11-20",
+    "scope": "Staged measurement/build contracts and isolated rendered-layout checks only; not a product reread, production acceptance or campaign report."
+  },
+  "status": {
+    "collection_enabled": false,
+    "endpoint_url": "",
+    "confirmed_launch_checks": 0,
+    "authorized_campaign_rows": 0,
+    "hosting_permission": "not established",
+    "production_runtime": "not established",
+    "account_attribution": "not established",
+    "search_console_queries": "not available"
+  },
+  "decisions": {
+    "staged_contract": "D-74",
+    "open_hosting_path": "D-75",
+    "rendered_regression": "D-76"
+  },
+  "integration": {
+    "retained_parallel_work": [
+      "PR #115 exact-Origin and type guards",
+      "PR #119 trusted/middle-click generated-link contracts and Node CI",
+      "PR #122/#123 generated catalogue counts and verification records",
+      "PR #124 storefront/native menus, no-referrer and bounded destination aggregates",
+      "PR #125/#127 all design-prompt/organic-traffic review proposals and deployment logs"
+    ],
+    "rendering_delta": "Two existing class treatments only: promptblock on the prompt wrapper; small muted prose instead of a no-wrap provenance pill. No stylesheet, artwork, product fact, article or proposal wording changed.",
+    "reference_cleanup": "Own D-ids honor the review register’s reserved D-48..D-73 range; count-fix citations point to actual recorded D-54."
+  },
+  "local_checks": {
+    "python_unittest": {
+      "passed": 143,
+      "command": "python3 -m unittest discover -s tests"
+    },
+    "node_generated_client": {
+      "passed": 15,
+      "command": "node --test tests/measure_client.test.js"
+    },
+    "chromium_layout": {
+      "published_pages": 43,
+      "page_viewport_cases": 215,
+      "no_script_keyboard_paths": 9,
+      "external_destinations_activated": 0,
+      "source": "qa/browser/check.cjs",
+      "viewport_results": [
+        {
+          "width": 320,
+          "height": 568,
+          "checked_pages": 43,
+          "max_horizontal_overflow_px": 0,
+          "max_primary_disclosure_bottom_px": 345.125
+        },
+        {
+          "width": 375,
+          "height": 667,
+          "checked_pages": 43,
+          "max_horizontal_overflow_px": 0,
+          "max_primary_disclosure_bottom_px": 291.140625
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "checked_pages": 43,
+          "max_horizontal_overflow_px": 0,
+          "max_primary_disclosure_bottom_px": 291.140625
+        },
+        {
+          "width": 768,
+          "height": 1024,
+          "checked_pages": 43,
+          "max_horizontal_overflow_px": 0,
+          "max_primary_disclosure_bottom_px": 252.96875
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "checked_pages": 43,
+          "max_horizontal_overflow_px": 0,
+          "max_primary_disclosure_bottom_px": 136.578125
+        }
+      ]
+    }
+  },
+  "measurement_limits": [
+    "A complete evidence record is not automatic legal approval, DNS validation or uptime proof. All launch confirmations remain null.",
+    "Application aggregates exclude visitor identifiers; hosts/CDNs/proxies/network services still receive connection metadata.",
+    "Origin can be forged; raw counters are incomplete, repeatable and potentially inflated. They are not people, eligible Amazon sessions or conversions.",
+    "Local fixtures use temporary counts, no Amazon navigation and no campaign-ledger writes. Node VM/local HTTP tests are not deployed browser CORS acceptance.",
+    "Reference http.server is not production hosting. One process per count file; standalone pruning requires a stopped collector. Retention and infrastructure logging require separate reviewed evidence."
+  ],
+  "official_source_reads": [
+    {
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
+      "read_utc": "2026-11-20",
+      "scope": "Usage limits, not a determination by GitHub about this particular site."
+    },
+    {
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "read_utc": "2026-11-20",
+      "scope": "Static hosting and Pages security IP logging."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials",
+      "read_utc": "2026-11-20",
+      "scope": "credentials: omit sends no credentials."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy",
+      "read_utc": "2026-11-20",
+      "scope": "Transport referrer policy; the client never reads document.referrer."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive",
+      "read_utc": "2026-11-20",
+      "scope": "Best-effort analytics delivery across page unload."
+    },
+    {
+      "url": "https://docs.python.org/3/library/http.server.html",
+      "read_utc": "2026-11-20",
+      "scope": "Production warning; no assertion that the reference collector is production ready."
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+      "read_utc": "2026-11-20",
+      "scope": "Disclosure and legal/privacy duties; no enrollment or hosting-use conclusion."
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/help/operating/policies",
+      "read_utc": "2026-11-20",
+      "scope": "Special Links, privacy disclosures and prohibitions on artificial affiliate activity/related-person purchases; not account reporting evidence."
+    }
+  ],
+  "manual_review": [
+    "https://kanlerxz87-cyber.github.io/Zone4/docs/measurement.html#launch-checklist",
+    "https://kanlerxz87-cyber.github.io/Zone4/docs/flagged.html#F-98",
+    "https://kanlerxz87-cyber.github.io/Zone4/docs/review.html",
+    "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json"
+  ],
+  "final_local_gates": {
+    "publication_build": "pass, 43 HTML pages",
+    "verify": "pass, 43 pages",
+    "independent_qa": "pass, 0 warnings",
+    "published_link_and_css_gate": "pass",
+    "count_gate": "pass: 85 suggestions, 67 questions, 57 decisions (43 recorded, 14 open), 99 flags, 36 requirements, 143 Python tests; catalogue copy also agrees",
+    "engine_preview": "pass, six preview pages; all seven unverified drafts remain blocked as intended",
+    "design_prompt": "regenerated byte-identically; no proposal accepted by the layout correction",
+    "determinism": "all 55 docs/ files byte-identical across consecutive builds",
+    "pinned_tooling_install": "npm ci succeeds; browser package and lockfile pinned separately from the storefront",
+    "rendered_layout": "pass, 215 page/viewport cases and nine no-script keyboard paths, no external destination or collection"
+  },
+  "negative_tests": [
+    "The new browser gate failed on the unwrapped review prompt, then on the long no-wrap provenance paragraph, and passes after the two class corrections. GitHub’s rendered workflow independently failed on the pre-fix commits and passed on d07923e.",
+    "Added integer/hex/octal/shortened-loopback and private local-name activation fixtures. The six subcases failed before tightening the dotted-hostname fallback and pass afterwards; these fixtures make no DNS or HTTP request. This is syntactic completeness checking, not proof of public DNS or durable hosting."
+  ],
+  "source_sha256": {
+    "analytics-endpoint/client.js": "df9157e6982fa832ba2e01efb385628c7bc06cee530c0dd7957f93755869ad93",
+    "analytics-endpoint/server.py": "4f691e5881fa768649939f3d08b5a67b0542f843a42c320c3bb971fa6598257b",
+    "data/measurement.json": "650864dcae616590260a89e8a64bf39a89c063a2904678cfb01704c0438b2ee7",
+    "scripts/build_extras.py": "7d523514244272073e7b94aadbd3c12703eba84f937a39c9cee17f6373605bee",
+    "qa/browser/check.cjs": "aa8786f43bba4a059a533651e234f8e92f5db9feeef543847f613c7e957b1f98",
+    "qa/browser/package-lock.json": "837766123e7c59d436e0774582429d1e0ad0dc9f7bd6260f659deec6706ff2bd",
+    "DESIGN_PROMPT.md": "f7c8a91bf445b26eb03cc0eb606bc34c1008f9298e6d0e5d38584680abd06069"
+  }
+}

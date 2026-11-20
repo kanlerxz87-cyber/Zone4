@@ -43,7 +43,7 @@ def tagged_url(url: str) -> str:
 # Every count in the copy below is read from the registers, never typed here.
 # These strings go into the meta description, og/twitter descriptions and the
 # image alt texts of all 43 pages, so a stale numeral here is a false claim on
-# every page at once. Fixed on 2026-11-20 (decision D-55, flag F-95): the copy
+# every page at once. Fixed on 2026-11-20 (decision D-54, flag F-95): the copy
 # said "three countertop air fryers" and "eight sourced buying guides" while
 # five products and fourteen guides were published.
 COUNTS = build_extras.publication_counts()

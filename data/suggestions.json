@@ -2201,7 +2201,7 @@
         "F-59"
       ],
       "status": "Implemented 2026-11-20",
-      "decision": "D-55"
+      "decision": "D-74"
     },
     {
       "id": "S-62",
@@ -2212,7 +2212,7 @@
       "why": "This answers the missing operational question that design polish cannot: where the intended business model is actually permitted to run, and what data the real host handles.",
       "effort": "Host review and deployment work; cost, account availability and migration date are unverified and are not estimated.",
       "risk": "Activating collection without these facts would misstate readiness. Moving without a canonical/redirect plan could split indexing. No host is purchased and no migration is made from this proposal.",
-      "check": "Q-66/Q-67 answered with dated evidence; D-56 choice recorded; all MC-01..MC-05 evidence cells complete; one canonical site; authorized reports remain separately sourced. Test traffic and purchases are never fabricated.",
+      "check": "Q-66/Q-67 answered with dated evidence; D-75 choice recorded; all MC-01..MC-05 evidence cells complete; one canonical site; authorized reports remain separately sourced. Test traffic and purchases are never fabricated.",
       "sources": [
         {
           "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
@@ -2236,7 +2236,7 @@
         "F-98"
       ],
       "status": "Needs a decision first",
-      "decision": "D-56"
+      "decision": "D-75"
     },
     {
       "id": "S-63",
@@ -2266,7 +2266,7 @@
         "F-99"
       ],
       "status": "Implemented 2026-11-20",
-      "decision": "D-57",
+      "decision": "D-76",
       "status_note_2026_11_20": "Kept the parallel session’s three-menu masthead/CSS. Corrected two review-page wrapper classes without changing proposal content. Local Chromium passes 215 page/viewport cases and nine no-script keyboard paths. The new pinned workflow repeats this check in CI; no visitor metric or deployed measurement claim is made."
     }
   ]

@@ -41,12 +41,18 @@ def measure_endpoint(settings: dict | None = None) -> str:
     if not isinstance(endpoint, str):
         raise ValueError("measurement endpoint must be an HTTPS /event URL")
     import ipaddress
+    import re
     url = urlsplit(endpoint)
     host = (url.hostname or "").lower().rstrip(".")
     try:
         public_host = ipaddress.ip_address(host).is_global
     except ValueError:
-        public_host = bool(host) and host != "localhost" and not host.endswith(".localhost")
+        # Browser URL parsing accepts integer, hex, octal and shortened IPv4
+        # aliases that urllib/ipaddress do not normalize the same way. Requiring
+        # a dotted DNS name here prevents those aliases from evading the IP gate.
+        public_host = (len(host) <= 253 and bool(re.fullmatch(
+            r"(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}", host
+        )) and not host.endswith((".localhost", ".local", ".internal", ".home", ".lan", ".test", ".invalid", ".onion")))
     try:
         url.port  # reject malformed port strings rather than emitting a broken client URL
     except ValueError:

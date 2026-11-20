@@ -2241,7 +2241,7 @@
       "recorded_date_utc": "2026-11-20"
     },
     {
-      "id": "D-55",
+      "id": "D-74",
       "question": "Ship reversible measurement-contract corrections while keeping production collection disabled until deployment evidence exists?",
       "linked_question": "Q-67",
       "linked_suggestions": [
@@ -2264,7 +2264,7 @@
           "reversible": "Yes."
         }
       ],
-      "recommendation": "A under the standing no-manual-input brief: correct demonstrable staged-code defects without making an account-bound or legal decision. D-56 and MC-01..MC-05 remain the separate launch gates.",
+      "recommendation": "A under the standing no-manual-input brief: correct demonstrable staged-code defects without making an account-bound or legal decision. D-75 and MC-01..MC-05 remain the separate launch gates.",
       "sources": [
         {
           "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json",
@@ -2284,7 +2284,7 @@
       "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)"
     },
     {
-      "id": "D-56",
+      "id": "D-75",
       "question": "Which permitted hosting path should precede the commercial affiliate rollout and production analytics?",
       "linked_question": "Q-66, Q-67",
       "linked_suggestions": [
@@ -2328,7 +2328,7 @@
       ]
     },
     {
-      "id": "D-57",
+      "id": "D-76",
       "question": "Adopt the parallel compact native menus, correct the unwrapped review prompt, and require a rendered viewport gate?",
       "linked_question": "",
       "linked_suggestions": [
@@ -2669,14 +2669,14 @@
     },
     {
       "date_utc": "2026-11-20",
-      "decision": "D-55",
+      "decision": "D-74",
       "choice": "Option A - staged measurement hardening and deployment-evidence gate, with production collection still disabled.",
       "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)",
       "evidence": "Coordination claim preceded implementation; PR #115 and #119 fixes retained. Local Node and Python contracts exercise only isolated fixtures, not live Amazon links or reported orders. Official GitHub Pages limits/overview, Python production warning, MDN transport controls and Associates privacy/artificial-activity rules read 2026-11-20. data/measurement.json keeps every deployment confirmation null."
     },
     {
       "date_utc": "2026-11-20",
-      "decision": "D-57",
+      "decision": "D-76",
       "choice": "Option A - approve compact native directory and rendered viewport gate before implementation.",
       "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)",
       "evidence": "Local Chromium measurements on six pages at 1440x1000 and 390x844; mobile masthead about 718px tall and document about 848px wide. Existing HTML-order checks pass but do not establish above-the-fold disclosure. F-99 records the reproducible defect."

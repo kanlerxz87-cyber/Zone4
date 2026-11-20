@@ -1250,7 +1250,7 @@
         "https://affiliate-program.amazon.com/help/operating/policies"
       ],
       "status": "Needs review (hosting-use clearance / permitted commercial host and privacy evidence)",
-      "action": "Resolve D-56 and Q-66/Q-67 before commercial rollout or enabling collection. Obtain written use clarification or migrate to a host that permits the business model, preserving a single canonical site. Review HTTPS, runtime security, host/proxy logs, access, consent and deletion. Do not expose the Python reference server directly to the internet or describe the whole service as anonymous."
+      "action": "Resolve D-75 and Q-66/Q-67 before commercial rollout or enabling collection. Obtain written use clarification or migrate to a host that permits the business model, preserving a single canonical site. Review HTTPS, runtime security, host/proxy logs, access, consent and deletion. Do not expose the Python reference server directly to the internet or describe the whole service as anonymous."
     },
     {
       "id": "F-99",

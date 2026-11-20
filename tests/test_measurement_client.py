@@ -82,6 +82,8 @@ class ActivationTests(unittest.TestCase):
                          "https://collector.example/event?secret=1", "https://collector.example/event#secret",
                          "https://user:secret@collector.example/event", "https://collector.example:bad/event",
                          "https://localhost/event", "https://127.0.0.2/event", "https://[::1]/event",
+                         "https://2130706433/event", "https://127.1/event", "https://0x7f.0.0.1/event",
+                         "https://0177.0.0.1/event", "https://collector.local/event", "https://collector.internal/event",
                          "https://kanlerxz87-cyber.github.io/event", "https://example.github.io./event",
                          "https://collector.example/event\n"):
             rec = self.settings(approved=True)

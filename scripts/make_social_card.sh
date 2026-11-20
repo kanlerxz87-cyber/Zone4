@@ -12,7 +12,7 @@
 # scripts/build_extras.py::publication_counts(), never typed here. Until
 # 2026-11-20 they were literals (3, 2, 8) and the card kept asserting eight
 # sourced guides after fourteen were published - the same drift class as flag
-# F-94, on a surface no text gate could see (decision D-55, flag F-95).
+# F-94, on a surface no text gate could see (decision D-54, flag F-95).
 # Usage: scripts/make_social_card.sh [out.png]
 set -euo pipefail
 
