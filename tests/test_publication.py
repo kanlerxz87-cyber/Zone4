@@ -1,4 +1,5 @@
 """Regression checks for the buyer-facing publication, without an external browser."""
+import json
 import pathlib
 import re
 import unittest
@@ -49,9 +50,11 @@ class PublicationTests(unittest.TestCase):
     def test_measurement_disabled_until_permanent_host_is_configured(self):
         self.assertIn('<meta name="zone4-measure-endpoint" content="">', self.home)
         measurement = (ROOT / 'docs/measurement.html').read_text()
-        self.assertIn('Not hosted.', measurement)
+        self.assertIn('Off — no production collection', measurement)
         self.assertIn('not unique people', measurement)
-        self.assertIn('90-day', measurement)
+        settings = json.loads((ROOT / 'data/measurement.json').read_text())
+        self.assertFalse(settings['enabled'])
+        self.assertIn(settings['retention_status'], measurement)
 
 
 if __name__ == '__main__':

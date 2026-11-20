@@ -95,7 +95,7 @@ COUNT_SURFACES = [
 # They did not cover the pages themselves, so on 2026-11-20 the front page's meta
 # description, every page's social-card alt text and the social preview PNG still
 # said "three countertop air fryers" and "eight sourced guides" while five
-# products and fourteen guides were published (decision D-55, flag F-95).
+# products and fourteen guides were published (decision D-54, flag F-95).
 #
 # check_publication_counts() closes that gap from the other side: it does not
 # trust the build code at all, it reads the *generated* pages and the card
@@ -414,7 +414,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     if pub:
         print(
             "A generated page or the social card disagrees with the registers "
-            "(D-55 gate, flag F-95):"
+            "(D-54 gate, flag F-95):"
         )
         for d in pub:
             print(f"  - {d}")

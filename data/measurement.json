@@ -1,0 +1,144 @@
+{
+  "_meta": {
+    "description": "First-party measurement configuration and launch-evidence checklist. This is not visitor data or an authorized Amazon report.",
+    "created_utc": "2026-11-20",
+    "created_by": "arena/5435c17d-zone4",
+    "rule": "Collection is disabled. A nonempty URL alone cannot enable it: every launch check needs a dated evidence reference and reviewer. Local tests never become campaign-ledger rows."
+  },
+  "enabled": false,
+  "endpoint_url": "",
+  "site_url": "https://kanlerxz87-cyber.github.io/Zone4/docs/",
+  "retention_days": 30,
+  "retention_status": "Staged maximum: 30 UTC day buckets, including today. Pruned on writes, startup and hourly while the reference collector runs. Backups and host logs require a separate reviewed deletion policy before launch.",
+  "events": [
+    {
+      "name": "page_view",
+      "when": "Once per eligible page load",
+      "payload": "Known canonical page path only; no query string or fragment",
+      "aggregate": "Daily count per path",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/client.js"
+    },
+    {
+      "name": "outbound_click",
+      "when": "A trusted left, keyboard or middle click on a sponsored, tagged link to a registered product",
+      "payload": "Known page path and catalog ASIN; never the affiliate URL",
+      "aggregate": "Separate daily counts per path and per ASIN; not unique visitors or Amazon-reported clicks",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/server.py"
+    },
+    {
+      "name": "guide_read_75",
+      "when": "The 75% marker in a published guide or article becomes visible, at most once per eligible page load",
+      "payload": "Known guide or article path only",
+      "aggregate": "Daily count per guide; a visibility milestone, not proof of reading",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/client.js"
+    },
+    {
+      "name": "category_click",
+      "when": "A trusted click on a published category link",
+      "payload": "Known source page path and allowlisted category path only",
+      "aggregate": "Separate daily counts per source page and target category",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/server.py"
+    },
+    {
+      "name": "feed_click",
+      "when": "A trusted click on this site's RSS feed link",
+      "payload": "Known page path only",
+      "aggregate": "Daily count per path; not a subscription count",
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/client.js"
+    }
+  ],
+  "launch_checks": [
+    {
+      "id": "MC-01",
+      "question": "Does the selected host permit this commercial affiliate publication?",
+      "known": "GitHub Pages is static hosting. Its usage limits exclude running an online business or a site primarily facilitating commercial transactions as a free hosting service. A deployed preview is not evidence that this use is permitted.",
+      "missing": "Written hosting-use clearance or a suitable commercial host and canonical-site migration plan.",
+      "discovery": "Review the host's terms for the intended use; obtain written clarification or select permitted hosting. Keep one canonical site when migrating, including sitemap, feed and redirects.",
+      "confirmed_utc": null,
+      "evidence_reference": null,
+      "reviewed_by": null,
+      "source_url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
+      "source_label": "GitHub's Pages usage limits"
+    },
+    {
+      "id": "MC-02",
+      "question": "Is there a durable HTTPS collector with reviewed production protections?",
+      "known": "The reference Python collector is testable locally; Python explicitly does not recommend http.server for production. GitHub Pages cannot run this backend.",
+      "missing": "Production runtime, HTTPS URL, approved origin, request limits, access control for count exports, and operational review.",
+      "discovery": "Deploy an appropriately secured service on permitted hosting; review TLS termination, timeouts, request/body limits, storage permissions and operator access. Do not expose the reference server directly to the internet.",
+      "confirmed_utc": null,
+      "evidence_reference": null,
+      "reviewed_by": null,
+      "source_url": "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+      "source_label": "Python's http.server documentation and production warning"
+    },
+    {
+      "id": "MC-03",
+      "question": "Are privacy, consent and every layer of request logging reviewed?",
+      "known": "The client omits credentials and Referer, honors DNT/GPC, and sends bounded fields. The collector stores aggregates without visitor identifiers. Hosting and network services still receive connection metadata; GitHub documents security IP logging for Pages.",
+      "missing": "Controller identity, visitor-facing privacy terms, applicable consent decision, and host/CDN/proxy log handling.",
+      "discovery": "Document the actual provider, purpose, access, location and retention of host logs; review applicable privacy/consent duties. Inspect a staging request and every logging layer rather than describing the whole service as anonymous.",
+      "confirmed_utc": null,
+      "evidence_reference": null,
+      "reviewed_by": null,
+      "source_url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/what-is-github-pages.md",
+      "source_label": "GitHub's Pages data-collection notice"
+    },
+    {
+      "id": "MC-04",
+      "question": "Can retained aggregates, backups and logs actually be deleted on schedule?",
+      "known": "The staged collector limits its own aggregate file to 30 UTC day buckets. It prunes at startup, on writes and hourly while running; --prune-only supports an independent scheduled cleanup.",
+      "missing": "Accepted retention period and evidence of scheduled cleanup, stopped-service cleanup, backup expiry and restricted count-file access on the chosen host.",
+      "discovery": "Use an isolated dated fixture to prove cutoff and deletion, then configure and document the host's schedule and backup/log expiry. Never commit counts or test fixtures as real campaign data.",
+      "confirmed_utc": null,
+      "evidence_reference": null,
+      "reviewed_by": null,
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/server.py",
+      "source_label": "First-party retention and prune implementation"
+    },
+    {
+      "id": "MC-05",
+      "question": "Do the deployed browser and collector agree on the five events?",
+      "known": "Automated tests exercise the generated client and a temporary local collector. They are not production traffic, Amazon reporting evidence or completed Associates tests.",
+      "missing": "Dated deployment acceptance record for the permitted origin, five payloads, privacy opt-outs, error behavior and aggregate export.",
+      "discovery": "Run the contract checks against isolated staging counts with outbound destinations intercepted, never by generating Amazon affiliate clicks. Confirm opt-outs send nothing; reject foreign origins and unknown fields. Keep staging counts out of production and the campaign ledger.",
+      "confirmed_utc": null,
+      "evidence_reference": null,
+      "reviewed_by": null,
+      "source_url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/tests/measure_client.test.js",
+      "source_label": "Generated-client contract tests (first-party evidence)"
+    }
+  ],
+  "source_reads": [
+    {
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits",
+      "read_utc": "2026-11-20",
+      "scope": "Usage limits, not a determination by GitHub about this particular site."
+    },
+    {
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "read_utc": "2026-11-20",
+      "scope": "Static hosting and Pages security IP logging."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials",
+      "read_utc": "2026-11-20",
+      "scope": "credentials: omit sends no credentials."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy",
+      "read_utc": "2026-11-20",
+      "scope": "Transport referrer policy; the client never reads document.referrer."
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Request/keepalive",
+      "read_utc": "2026-11-20",
+      "scope": "Best-effort analytics delivery across page unload."
+    },
+    {
+      "url": "https://docs.python.org/3/library/http.server.html",
+      "read_utc": "2026-11-20",
+      "scope": "Production warning; no assertion that the reference collector is production ready."
+    }
+  ]
+}

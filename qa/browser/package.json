@@ -1,0 +1,15 @@
+{
+  "name": "zone4-rendered-site-checks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Isolated rendered-layout checks; not a storefront dependency or traffic generator.",
+  "scripts": {
+    "check": "node check.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1"
+  }
+}

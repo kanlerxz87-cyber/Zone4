@@ -1,0 +1,44 @@
+name: Rendered publication checks
+
+on:
+  pull_request:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/browser/package-lock.json
+      - name: Build the published site
+        run: python3 scripts/build_site.py
+      - name: Install pinned browser QA tooling
+        run: npm ci
+        working-directory: qa/browser
+      - name: Install Chromium and its runtime libraries
+        run: npx playwright install --with-deps chromium
+        working-directory: qa/browser
+      - name: Check every rendered page and no-script keyboard navigation
+        run: npm run check
+        working-directory: qa/browser
+      - name: Save isolated layout observations and failure screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-publication-checks
+          path: build/browser-qa/results/
+          if-no-files-found: ignore
+          retention-days: 7

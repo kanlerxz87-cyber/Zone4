@@ -23,7 +23,9 @@
       "Owner action required": "Only the account holder can perform it (Associates Central, Search Console, hosting); the agent-side preparation is complete.",
       "Implemented 2026-11-19": "Decision recorded 2026-11-19 and the change is live in this build.",
       "Partly implemented 2026-11-19": "Decision recorded 2026-11-19; part of the change is live in this build and the rest is staged, blocked on an owner fact, or taken by a concurrent session.",
-      "Decision recorded 2026-11-19 - work remains": "The direction was recorded on 2026-11-19; the deferred part is scheduled and the reason is in the decision log."
+      "Decision recorded 2026-11-19 - work remains": "The direction was recorded on 2026-11-19; the deferred part is scheduled and the reason is in the decision log.",
+      "Implemented 2026-11-20": "A staged, reversible correction recorded under the standing delegation; this status does not imply production hosting or collection.",
+      "Decision recorded 2026-11-20 - work remains": "Approved reversible correction; not marked implemented until its named acceptance checks pass."
     },
     "source_scope": "Only official sources are cited: Amazon (product pages, Associates Operating Agreement, Program Policies, commission statement, Conditions of Use, Creators API documentation) and Google Search Central, which publishes the requirements its own crawler applies. Where a suggestion has no external constraint, the evidence column says so instead of inventing a citation.",
     "evidence_rule": "A suggestion is never marked done on opinion. Each row names the check that would prove it worked, and the Decision queue records which check actually ran.",
@@ -2169,6 +2171,103 @@
       ],
       "status": "Awaiting decision",
       "decision": "D-16"
+    },
+    {
+      "id": "S-61",
+      "priority": "P1 - Decide first",
+      "title": "Make the staged counter safe to launch before publishing more content",
+      "problem": "The reader-event pipeline was built but dormant. A URL-only switch, arbitrary path/ASIN values, ignored category targets, unbounded retention and broad anonymity wording could have turned a prototype into misleading measurement.",
+      "proposal": "Keep the five event names stable; compile known public paths, categories and ASINs; omit credentials and Referer; reject unknown payload fields and destinations; store category-target aggregates and no visitor identifiers; expire the collector file after 30 UTC day buckets. Add a five-question deployment checklist and require dated evidence plus a reviewer before emitting an enabled endpoint. Retain PR #115/#119 fixes and their contracts, with one client source.",
+      "why": "The next guide can only be chosen from evidence if the event contract is useful and the collection status is honest. A staged code correction is reversible; inventing a production host or a reported conversion is not acceptable.",
+      "effort": "Implemented in the measurement client, reference collector, build gate and dedicated tests; no hosted service, payment or new product content.",
+      "risk": "The reference Python server is still not a production web server, Origin is spoofable, delivery is best-effort, and infrastructure receives connection metadata. These limits stay explicit rather than being called anonymous or conversion tracking.",
+      "check": "Generated-link Node contracts, Python payload/HTTP/retention tests, generated-client-to-temporary-HTTP roundtrip, blank endpoint meta on all pages and missing-evidence activation refusal. No fixture enters the campaign ledger.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json",
+          "ref": "Configuration and deployment evidence gate"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/server.py",
+          "ref": "First-party collector and aggregate retention"
+        },
+        {
+          "url": "https://github.com/mdn/content/blob/main/files/en-us/web/http/reference/headers/referrer-policy/index.md",
+          "ref": "MDN: no-referrer omits Referer transport"
+        }
+      ],
+      "flags": [
+        "F-97",
+        "F-59"
+      ],
+      "status": "Implemented 2026-11-20",
+      "decision": "D-74"
+    },
+    {
+      "id": "S-62",
+      "priority": "P1 - Decide first",
+      "title": "Choose permitted commercial hosting and verify privacy at every logging layer before rollout",
+      "problem": "A clean Pages build can be mistaken for commercial-hosting approval or a live analytics service. Neither follows from deployment; the official host restrictions and Python production warning need an explicit review path.",
+      "proposal": "Before commercial rollout or collection, choose between a reference-only Pages presence pending written clarification and migration to a host that permits the intended publication and backend. Review host/CDN/proxy logs, consent, access, aggregate retention, backup deletion and deployed contracts. Keep one canonical indexed site and keep the campaign ledger report-only.",
+      "why": "This answers the missing operational question that design polish cannot: where the intended business model is actually permitted to run, and what data the real host handles.",
+      "effort": "Host review and deployment work; cost, account availability and migration date are unverified and are not estimated.",
+      "risk": "Activating collection without these facts would misstate readiness. Moving without a canonical/redirect plan could split indexing. No host is purchased and no migration is made from this proposal.",
+      "check": "Q-66/Q-67 answered with dated evidence; D-75 choice recorded; all MC-01..MC-05 evidence cells complete; one canonical site; authorized reports remain separately sourced. Test traffic and purchases are never fabricated.",
+      "sources": [
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
+          "ref": "GitHub Pages usage limits"
+        },
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/what-is-github-pages.md",
+          "ref": "Static hosting and security IP logging"
+        },
+        {
+          "url": "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+          "ref": "Python: http.server is not recommended for production"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Site responsibility and privacy requirements"
+        }
+      ],
+      "flags": [
+        "F-59",
+        "F-98"
+      ],
+      "status": "Needs a decision first",
+      "decision": "D-75"
+    },
+    {
+      "id": "S-63",
+      "priority": "P1 - Decide first",
+      "title": "Keep compact native navigation and make rendered viewport checks cover every page, including paste-ready prompts",
+      "problem": "A real Chromium phone viewport exposes horizontal overflow and a disclosure below the fold on shorter phones. Source-order checks had accepted both; the current full directory consumes the masthead. The merged native-menu fix removes the original masthead overflow. An all-page 320px sweep still finds the new unwrapped review-page prompt stretching the document to about 4673px.",
+      "proposal": "Adopt the already-merged compact reader bar and three native menus from PR #124 rather than stacking a replacement directory on top. Keep the sole nav-group and every footer link. Apply the existing promptblock treatment to the new review-page preformatted prompt so its text wraps without changing a proposal. Check every page at real desktop, tablet and phone sizes, including keyboard operation with JavaScript disabled. In the same review-page register map, render the long unchanged/reservation provenance as wrapping prose, not a no-wrap pill.",
+      "why": "A buyer should encounter a useful headline and a visible disclosure, not a clipped audit menu. Native disclosure controls preserve keyboard and no-JavaScript navigation.",
+      "effort": "Small prompt-wrapper correction and a pinned real-browser regression workflow; the parallel session’s masthead/CSS fix is retained, not redone. No product, article or proposal wording changes.",
+      "risk": "Hiding a link without a working keyboard/no-script alternative would be a regression. Keep all directory links, the current-page marker and complete footer coverage; test menu activation rather than just screenshot it.",
+      "check": "At tested 320px, 375px, 390px, 768px and 1440px viewports, every page has no horizontal document overflow, one h1, disclosure initially visible below the masthead, and no script error or unintended collection. Directory is keyboard-operable and all footer destinations remain. Generated site, QA and link/source guards pass.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css",
+          "ref": "Current first-party layout being corrected"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "Current navigation and footer source"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Section 5: clear and prominent identification"
+        }
+      ],
+      "flags": [
+        "F-99"
+      ],
+      "status": "Implemented 2026-11-20",
+      "decision": "D-76",
+      "status_note_2026_11_20": "Kept the parallel session’s three-menu masthead/CSS. Corrected two review-page wrapper classes without changing proposal content. Local Chromium passes 215 page/viewport cases and nine no-script keyboard paths. The new pinned workflow repeats this check in CI; no visitor metric or deployed measurement claim is made."
     }
   ]
 }

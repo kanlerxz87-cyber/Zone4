@@ -25,9 +25,61 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
-# Set to the URL of a self-hosted analytics endpoint (analytics-endpoint/server.py)
-# once the owner hosts it. Empty means the site sends no measurement request at all.
-MEASURE_ENDPOINT = ""
+def measure_endpoint(settings: dict | None = None) -> str:
+    """Fail closed: a URL alone is not evidence that production collection is ready.
+
+    The checklist is reviewed deployment evidence, not automatic policy approval.
+    Disabled builds always emit an empty endpoint and send no network events.
+    """
+    from urllib.parse import urlsplit
+    rec = settings if settings is not None else json.loads((DATA / "measurement.json").read_text(encoding="utf-8"))
+    if not isinstance(rec.get("enabled"), bool):
+        raise ValueError("measurement.enabled must be a boolean")
+    if not rec["enabled"]:
+        return ""
+    endpoint = rec.get("endpoint_url")
+    if not isinstance(endpoint, str):
+        raise ValueError("measurement endpoint must be an HTTPS /event URL")
+    import ipaddress
+    import re
+    url = urlsplit(endpoint)
+    host = (url.hostname or "").lower().rstrip(".")
+    try:
+        public_host = ipaddress.ip_address(host).is_global
+    except ValueError:
+        # Browser URL parsing accepts integer, hex, octal and shortened IPv4
+        # aliases that urllib/ipaddress do not normalize the same way. Requiring
+        # a dotted DNS name here prevents those aliases from evading the IP gate.
+        public_host = (len(host) <= 253 and bool(re.fullmatch(
+            r"(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}", host
+        )) and not host.endswith((".localhost", ".local", ".internal", ".home", ".lan", ".test", ".invalid", ".onion")))
+    try:
+        url.port  # reject malformed port strings rather than emitting a broken client URL
+    except ValueError:
+        public_host = False
+    if (url.scheme != "https" or not public_host or url.username or url.password
+            or url.path != "/event" or url.query or url.fragment
+            or host == "github.io" or host.endswith(".github.io")
+            or any(c.isspace() or ord(c) < 32 for c in endpoint)):
+        raise ValueError("measurement endpoint must be a durable HTTPS /event URL, not Pages or a local address")
+    checks = rec.get("launch_checks") or []
+    if {c.get("id") for c in checks} != {f"MC-{n:02d}" for n in range(1, 6)} or len(checks) != 5:
+        raise ValueError("measurement launch checklist is incomplete")
+    for check in checks:
+        try:
+            date = check.get("confirmed_utc") or ""
+            if dt.date.fromisoformat(date).isoformat() != date:
+                raise ValueError("not an ISO calendar date")
+        except (TypeError, ValueError):
+            raise ValueError(f"measurement {check.get('id')}: dated launch evidence is missing") from None
+        for key in ("evidence_reference", "reviewed_by"):
+            if not isinstance(check.get(key), str) or not check[key].strip():
+                raise ValueError(f"measurement {check.get('id')}: {key} is missing")
+    return endpoint
+
+
+# Single configuration surface; a hand-edited URL cannot bypass the evidence gate.
+MEASURE_ENDPOINT = measure_endpoint()
 
 # Held candidates. Empty since 2026-11-19 (decision D-46, arena/4cfacb30-zone4): P4 and P5 were
 # re-resolved from their short links to the recorded ASINs and are published as tagged Special Links
@@ -51,7 +103,7 @@ def published_guides() -> list[dict]:
 
 # --- Publication counts, computed once -------------------------------------
 # Every count the site prints about its own catalogue is computed here and
-# nowhere else. Recorded as decision D-55 and flag F-95 on 2026-11-20 after the
+# nowhere else. Recorded as decision D-54 and flag F-95 on 2026-11-20 after the
 # front page and the social preview card were found asserting three air fryers
 # and eight guides while five products and fourteen guides were published.
 #
@@ -105,14 +157,9 @@ def publication_counts() -> dict:
         "categories": len({p["subcategory"] for p in products}),
     }
 
-# The five defined events. Anything else the page script sends is refused by the endpoint.
-EVENTS = [
-    ("page_view", "Once per page load", "The page path only (no query string, no referrer, no identifier)", "Daily count per path"),
-    ("outbound_click", "A click on any sponsored product link", "Published page path and intended ASIN parsed from the listing URL", "Daily count per path and ASIN"),
-    ("guide_read_75", "The reader scrolls past 75% of a guide, once per page load", "Path only", "Daily count per guide"),
-    ("category_click", "A click on a category link in the navigation or on the home page", "Published page path and allowlisted category slug", "Daily count per path and target"),
-    ("feed_click", "A click on the RSS feed link", "Path only", "Daily count"),
-]
+# Names and table definitions are read from the same launch record as the endpoint.
+MEASUREMENT = json.loads((DATA / "measurement.json").read_text(encoding="utf-8"))
+EVENTS = [(ev["name"], ev["when"], ev["payload"], ev["aggregate"]) for ev in MEASUREMENT["events"]]
 
 
 PAID_NOTE = '<span class="small">Paid link. As an Amazon Associate I earn from qualifying purchases.</span>'
@@ -563,47 +610,81 @@ def provenance_html(ledger: dict) -> str:
 
 
 def _measurement_body(bs, page) -> str:
+    rec = _load("measurement.json")
     ev_rows = "".join(
-        f'<tr><td class="mono">{_e(name)}</td><td>{_e(when)}</td><td>{_e(stored)}</td><td>{_e(where)}</td>'
-        f'<td><a href="{POLICY_URL}" rel="noopener noreferrer">Associates Program Policies</a></td></tr>'
-        for name, when, stored, where in EVENTS
+        f'<tr><td class="mono">{_e(ev["name"])}</td><td>{_e(ev["when"])}</td>'
+        f'<td>{_e(ev["payload"])}</td><td>{_e(ev["aggregate"])}</td>'
+        f'<td><a href="{_e(ev["source_url"])}" rel="noopener noreferrer">First-party implementation</a></td></tr>'
+        for ev in rec["events"]
     )
+    launch_rows = []
+    for check in rec["launch_checks"]:
+        # Null evidence remains blank; a status label never masquerades as confirmation.
+        proof = _e(check.get("confirmed_utc") or "")
+        if proof:
+            proof += f'<br>{_e(check.get("reviewed_by") or "")}<br>{_e(check.get("evidence_reference") or "")}'
+        launch_rows.append(
+            f'<tr id="{_e(check["id"])}"><td><strong>{_e(check["id"])}</strong><br>{_e(check["question"])}</td>'
+            f'<td>{_e(check["known"])}</td><td>{_e(check["missing"])}</td><td>{_e(check["discovery"])}</td>'
+            f'<td>{proof}</td><td><a href="{_e(check["source_url"])}" rel="noopener noreferrer">'
+            f'{_e(check["source_label"])}</a></td></tr>'
+        )
     ledger = _load("ledger.json")
     cols = "".join(f'<th scope="col">{_e(c)}</th>' for c in ledger["columns"])
     ledger_table = (f'<div class="tablewrap"><table class="data"><thead><tr>{cols}</tr></thead>'
                     '<tbody></tbody></table></div>')
-    endpoint = ("Not hosted. The page script sends nothing until an endpoint is set."
-                if not MEASURE_ENDPOINT else f"Set to {_e(MEASURE_ENDPOINT)}.")
+    endpoint = ("Off — no production collection (F-59)."
+                if not MEASURE_ENDPOINT else "Configured — delivery must be checked against the collector's own export.")
     return (
-        '<header class="hero"><h1>Measurement and campaign ledger</h1><p class="lead">What the site measures, '
-        'what it never stores, and the ledger that stays empty until an authorised first-party report is '
-        'imported. No conversion, revenue or traffic figure is published (F-15).</p></header>'
-        '<section><h2>Five defined events</h2><p class="section-lead">The page script honours Do Not Track and Global '
-        'Privacy Control and sets no cookie. The endpoint keeps counts per day and path only: no IP address, '
-        'user agent, referrer or visitor identifier is stored by this application. Only published page paths, the five intended ASINs and existing category slugs are accepted. '
-        'Counts are event totals, not unique people, eligible sessions, purchases or conversion rates. Repeat clicks and automated requests can inflate them.</p>'
+        '<header class="hero"><h1>Measurement and campaign ledger</h1><p class="lead">Measure the questions '
+        'people actually arrive with before choosing the next guide. Here is what is ready, what is not connected, '
+        'and the evidence needed to switch collection on.</p></header>'
+        f'<section class="cta"><h2>Collection status: {_e(endpoint)}</h2>'
+        '<p>The client and reference collector are built and covered by automated tests. That is not a live analytics '
+        'service. No production host or authorised order report is connected, so this page shows no traffic, '
+        'conversion score or revenue forecast. The separate browser-local log is not shared analytics.</p>'
+        f'<p><a class="btn" href="{_e(page.rel("decision-centre.html"))}">Review the next decisions</a> '
+        '<a class="btn" href="#launch-checklist">What is missing before launch?</a></p></section>'
+        '<section id="launch-checklist"><h2>Five questions before collection goes live</h2>'
+        '<p class="section-lead">Every confirmation cell below is blank until dated evidence exists. '
+        'The build refuses an enabled endpoint unless all five have an evidence reference and reviewer. '
+        'This is a publishing gate, not a legal-compliance certificate or a live-uptime check.</p>'
+        '<div class="tablewrap"><table class="data"><thead><tr><th scope="col">Question</th>'
+        '<th scope="col">What we know</th><th scope="col">What is missing</th><th scope="col">How to find out</th>'
+        '<th scope="col">Confirmed (UTC) / evidence</th><th scope="col">Official / first-party source</th>'
+        '</tr></thead><tbody>' + "".join(launch_rows) + '</tbody></table></div>'
+        '<p class="small muted">Unverified hosting and privacy decisions remain open (F-59, F-98). '
+        'No host is purchased, no account verification is asserted, and no personal details are requested here.</p></section>'
+        '<section><h2>Five site-side counters</h2><p class="section-lead">DNT and Global Privacy Control stop '
+        'the sender. Requests omit credentials and Referer; payloads contain only known public page paths, '
+        'category paths and catalog ASINs. The application stores daily aggregates, not visitor identifiers. '
+        'Hosts, proxies and network services still receive connection metadata: their logging needs a separate '
+        'review, and GitHub documents security IP logging for Pages.</p>'
         '<div class="tablewrap"><table class="data"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th>'
-        '<th scope="col">What is stored</th><th scope="col">Aggregated as</th><th scope="col">Source</th></tr></thead><tbody>' + ev_rows + '</tbody></table></div>'
-        f'<p><strong>Endpoint status:</strong> {endpoint} The server is in <code>analytics-endpoint/</code>; '
-        'it must run separately behind HTTPS, not on GitHub Pages, which serves static files. '
-        'The collector rejects other or missing origins, drops unexpected fields, and keeps a rolling 90-day aggregate window on writes. '
-        'A daily prune job is required even on inactive days. Hosting, access-log settings, request limits and privacy review remain deployment gates (F-59).</p>'
-        '<p class="small">Implementation and deployment checklist: '
-        '<a href="https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/README.md" rel="noopener noreferrer">collector README</a>. '
-        'GitHub itself logs visitor IP addresses for security: '
-        '<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noopener noreferrer">GitHub Pages data collection</a>.</p></section>'
-        '<section><h2>The five defined events (campaign ledger)</h2><p class="section-lead">The brief\'s five event types '
-        'with the official attribution windows each figure must satisfy before it can enter a ledger row. These are '
-        'the Associates measurement events - a different vocabulary from the local counter\'s event names above.</p>'
+        '<th scope="col">Payload</th><th scope="col">Stored as</th><th scope="col">Source</th></tr></thead><tbody>'
+        + ev_rows + '</tbody></table></div>'
+        f'<p><strong>Retention:</strong> {_e(rec["retention_status"])}</p>'
+        '<p>These are best-effort event counts, not unique people, sessions, search queries, confirmed Amazon '
+        'clicks or orders. Ad blockers, opt-outs and delivery failures mean totals can be incomplete; a caller can '
+        'also spoof an Origin header. Do not optimize for sales from these counters alone.</p></section>'
+        '<section><h2>Five campaign-report event types</h2><p class="section-lead">A different vocabulary '
+        'from the site-side counters above. Session, order and refund records require authorised first-party '
+        'reports; a browser click never creates them.</p>'
         + five_events_table(ledger) + '</section>'
-        '<section><h2>Campaign ledger</h2><p class="section-lead">Rows are added only from authorised first-party '
-        'reports. This ledger has no rows: no report has been imported, so no clicks, eligible sessions or orders '
-        'are shown anywhere. The site\'s own click counter is a different measurement and is never an order.</p>'
+        '<section><h2>Campaign ledger</h2><p class="section-lead">Empty by design: no authorised report has '
+        'been imported. Eligible sessions, reported clicks and orders stay blank. Each future row needs its '
+        'timestamp, source, channel, report reference and provenance.</p>'
         + ledger_table + provenance_html(ledger) + f'<p class="small muted">{_e(ledger["status"])}</p></section>'
-        '<section><h2>Not connected</h2><ul class="bullets">'
-        '<li>Search Console: needs the owner to verify the property. Nothing has been submitted.</li>'
-        '<li>Reader capture (email): needs an owner-chosen provider and consent text. Not built.</li>'
-        '<li>Associates reporting: needs the owner\'s Associates Central access (F-03, F-58).</li></ul></section>'
+        '<section><h2>What will choose the next topic?</h2><ol class="bullets">'
+        '<li>Verify Search Console and retain a dated first-party query/page report (F-61). '
+        'No query popularity or search-volume claim is made here.</li>'
+        '<li>After a permitted collector launch, compare query arrivals with category-target clicks and guide '
+        'milestones over the same stated period. Counts are not a conversion funnel or a causal experiment.</li>'
+        '<li>Record the question, evidence and editorial choice before adding a guide to the existing '
+        '14-day cadence, sitemap and feed. Keep reader email capture as a separate privacy decision.</li>'
+        '<li>Confirm the tracking ID and one-link-per-product Associates workflow before scaling '
+        'or claiming attribution (F-57/F-58). Do not generate artificial affiliate clicks or test purchases.</li>'
+        '</ol></section>'
     )
 
 
@@ -630,69 +711,24 @@ def feed_items(bs) -> list[str]:
     return items
 
 
-MEASURE_JS = r"""// Zone4 measurement script: five defined events, inert unless an endpoint is set.
-// No cookies, no storage, no identifiers. Honours Do Not Track and Global Privacy Control.
-(function () {
-  'use strict';
-  var meta = document.querySelector('meta[name="zone4-measure-endpoint"]');
-  var endpoint = meta ? meta.getAttribute('content') : '';
-  if (!endpoint) { return; }
-  if (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.globalPrivacyControl === true) { return; }
-  var base = new URL('./', document.currentScript.src);
-  var countedPath = location.pathname;
-  var EVENTS = { page_view: 1, outbound_click: 1, guide_read_75: 1, category_click: 1, feed_click: 1 };
-  function send(name, field, value) {
-    if (!EVENTS[name]) { return; }
-    var payload = { event: name, path: countedPath };
-    if (field) { payload[field] = value; }
-    try {
-      // Unlike sendBeacon, fetch can explicitly omit credentials.
-      fetch(endpoint, {
-        method: 'POST', body: JSON.stringify(payload),
-        headers: { 'Content-Type': 'application/json' },
-        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer'
-      }).catch(function () {});
-    } catch (e) { /* measurement must never break reading or navigation */ }
-  }
-  send('page_view');
-  function onClick(ev) {
-    if (ev.isTrusted === false || (ev.type === 'auxclick' && ev.button !== 1)) { return; }
-    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
-    if (!a) { return; }
-    var dest = new URL(a.href, location.href);
-    var rel = (a.getAttribute('rel') || '').toLowerCase().split(/\s+/);
-    var product = dest.pathname.match(/^\/dp\/(B[0-9A-Z]{9})(?:\/|$)/);
-    if (rel.indexOf('sponsored') !== -1 && dest.origin === 'https://www.amazon.com' && product) {
-      send('outbound_click', 'asin', product[1]);
-    } else if (dest.origin === base.origin && dest.pathname.indexOf(base.pathname) === 0) {
-      var relativePath = dest.pathname.slice(base.pathname.length);
-      var category = relativePath.match(/^categories\/([a-z0-9-]+)\.html$/);
-      if (relativePath === 'feed.xml') { send('feed_click'); }
-      else if (category) { send('category_click', 'target', category[1]); }
+def measurement_client(bs, extra_paths: list[str]) -> str:
+    """One client source, compiled with the same public routes/catalog as this build."""
+    if MEASUREMENT["site_url"] != bs.SITE_URL:
+        raise ValueError("measurement.site_url must match the site's canonical origin and path")
+    paths = sorted({p.path for p in bs.collect_pages()} | {p for p in extra_paths if p.endswith(".html")})
+    config = {
+        "site_url": bs.SITE_URL,
+        "paths": paths,
+        "guides": [p for p in paths if p.startswith(("guides/", "articles/")) and not p.endswith("/index.html")],
+        "categories": [p for p in paths if p.startswith("categories/")],
+        "asins": sorted(p["asin"] for p in all_products(bs) if not is_held(p["id"])),
+        "tracking_id": _load("intent-links.json")["_meta"]["tracking_id"],
     }
-  }
-  document.addEventListener('click', onClick, false);
-  document.addEventListener('auxclick', onClick, false);
-  var article = document.querySelector('article.guide, article.post');
-  if (article && 'IntersectionObserver' in window) {
-    // Marker sits at 75% of the article's own height, not of the viewport (fixed 2026-11-17).
-    article.style.position = 'relative';
-    var marker = document.createElement('div');
-    marker.setAttribute('aria-hidden', 'true');
-    marker.style.cssText = 'position:absolute;top:75%;height:1px;width:1px;pointer-events:none;';
-    article.appendChild(marker);
-    var seen = false;
-    var io = new IntersectionObserver(function (entries) {
-      if (!seen && entries.some(function (entry) { return entry.isIntersecting; })) {
-        seen = true;
-        io.disconnect();
-        send('guide_read_75');
-      }
-    });
-    io.observe(marker);
-  }
-})();
-"""
+    source = (ROOT / "analytics-endpoint" / "client.js").read_text(encoding="utf-8")
+    if source.count("__ZONE4_CONFIG__") != 1:
+        raise ValueError("measurement client must have exactly one configuration slot")
+    return source.replace("__ZONE4_CONFIG__", json.dumps(config, sort_keys=True, separators=(",", ":")))
+
 
 
 
@@ -822,7 +858,7 @@ def _review_body(bs, page) -> str:
             '<p class="section-lead">One paste-ready consolidated prompt, assembled from the twelve lines above. Reviewers '
             'strike what they reject; whatever survives goes into the design conversation verbatim.</p>'
             f'<ol class="steps">{prompt_list}</ol>'
-            f'<div class="aiwrap"><pre>{e(prompt_block)}</pre></div></section>'
+            f'<div class="aiwrap promptblock"><pre>{e(prompt_block)}</pre></div></section>'
         )
 
     # --- The questions that gate the proposals.
@@ -863,7 +899,7 @@ def _review_body(bs, page) -> str:
          f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
     ]
     register_list = '<ul class="bullets">' + "".join(
-        f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="pill pill-muted">{e(state)}</span></li>'
+        f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="small muted">{e(state)}</span></li>'
         for name, holds, state in register_rows
     ) + "</ul>"
 
@@ -1168,7 +1204,7 @@ def write_all(bs) -> list[str]:
     written.append("imagery.html")
 
     # feed.xml is written by scripts/build_site.py, which owns the one RSS feed (guides are added there).
-    (out / "measure.js").write_text(MEASURE_JS, encoding="utf-8")
+    (out / "measure.js").write_text(measurement_client(bs, written), encoding="utf-8")
     written.append("measure.js")
     return written
 
