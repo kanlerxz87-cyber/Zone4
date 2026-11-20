@@ -2265,8 +2265,9 @@
       "flags": [
         "F-99"
       ],
-      "status": "Decision recorded 2026-11-20 - work remains",
-      "decision": "D-57"
+      "status": "Implemented 2026-11-20",
+      "decision": "D-57",
+      "status_note_2026_11_20": "Kept the parallel session’s three-menu masthead/CSS. Corrected two review-page wrapper classes without changing proposal content. Local Chromium passes 215 page/viewport cases and nine no-script keyboard paths. The new pinned workflow repeats this check in CI; no visitor metric or deployed measurement claim is made."
     }
   ]
 }

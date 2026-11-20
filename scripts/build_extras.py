@@ -893,7 +893,7 @@ def _review_body(bs, page) -> str:
          f"The {len(fl)} open, corrected, resolved and historical items", "Unchanged by this pass"),
     ]
     register_list = '<ul class="bullets">' + "".join(
-        f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="pill pill-muted">{e(state)}</span></li>'
+        f'<li><strong>{e(name)}</strong> \u2014 {e(holds)}. <span class="small muted">{e(state)}</span></li>'
         for name, holds, state in register_rows
     ) + "</ul>"
 
