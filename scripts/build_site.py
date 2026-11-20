@@ -1032,57 +1032,63 @@ def transparency_band(current: Page) -> str:
 
 
 def page_index(current: Page) -> str:
-    """The front page as a shop, not an audit: hero, the shelf, categories, the
-    chooser, a buyer comparison, the content roadmap, then the receipts.
-
-    Governance apparatus (KPI counters, the decision queue, the full verified
-    table) is moved out of the shop window into the transparency band and the
-    footer, where it is still one click away. Implements suggestion S-21 (public
-    magazine / research appendix split) and completes D-21's "amend" decision.
-    """
+    """A short publication front page. Research and the calendar live on their own pages."""
     cat_tiles = "".join(
         f'<a class="tile" href="{esc(current.rel(target))}" data-measure="category">'
         f'{build_extras.footprint_figure(key)}'
         f'<div class="tile-title">{esc(label)}</div>'
         f'<div class="tile-sub">{esc(_category_product_name(key))}</div>'
-        f'<div class="tile-go">Open category \u2192</div></a>'
+        f'<div class="tile-go">Explore the format →</div></a>'
         for target, label, key in
         ((t, l, t[len("categories/"):-len(".html")]) for t, l, _g in NAV if t.startswith("categories/"))
     )
-    buying_guide_path = next(
-        (path for a, path in ARTICLE_PATHS if a["id"] == "M-BUY"), ARTICLE_PATHS[-1][1]
-    )
-    # The hero (with the page's only <h1>) comes first; the shop grid sits
-    # directly under it. Before 2026-11-19 the grid rendered above the h1, so the
-    # first thing a shopping page said — to a reader arriving cold and to a
-    # crawler reading document order — was a product card, not what the page is.
+    # An edited shelf of existing articles, not a new publishing run or trend claim.
+    shelf_ids = ["M-CMP", "M-G2", "M-G4"]
+    shelf = [a for aid in shelf_ids for a in ARTICLES if a["id"] == aid]
+    if len(shelf) < 3:
+        shelf = [a for a in ARTICLES if a["id"] != "M-BUY"][:3]
     return (
-        '<div class="mhero">'
-        '<span class="badge">The countertop issue</span>'
-        '<h1>One basket, two baskets, or an oven?</h1>'
-        f'<p class="lead">Start with dinner. Do you want room for one batch of potatoes, '
-        f'a separate basket for the side, or a rack for a tray? Compare {COUNTS["air_fryers_word"]} air fryer layouts '
-        'before you give one a permanent spot on the counter.</p>'
-        '<div class="mhero-actions"><a class="btn btn-primary" href="#chooser">Find my format</a>'
-        f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a></div></div>'
+        '<div class="mhero"><div class="front-hero-copy">'
+        '<span class="badge">The considered kitchen · buying guides</span>'
+        '<h1>Less guesswork.<br>More room for good food.</h1>'
+        '<p class="lead">One basket or two? A countertop oven instead? Find your format, '
+        'check the space it needs, and make a more considered choice.</p>'
+        '<div class="mhero-actions"><a class="btn btn-primary" href="#shop">Explore the products ↓</a>'
+        '<a class="btn" href="#chooser">Help me choose</a></div>'
+        f'<p class="front-byline">By Zone4 · <a href="{esc(current.rel("about.html"))}">How we research</a>'
+        ' · Listing-based guides, not hands-on reviews.</p></div>'
+        '<aside class="front-note"><span class="front-kicker">Before you buy / 01</span>'
+        '<h2>Start with your counter.<br>Not the feature count.</h2>'
+        '<p>A larger capacity label does not tell you whether an appliance will fit your kitchen. '
+        'Compare the listed dimensions, then check the manufacturer’s clearance instructions.</p>'
+        f'<a href="{esc(current.rel("guides/counter-space-and-cleanup-trade-offs.html"))}">The space & cleanup guide →</a>'
+        '</aside></div>'
         + shop_section_hook(current)
-        + featured_section(current)
-        + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
+        + '<section id="articles"><div class="front-section-head"><div>'
+        '<span class="front-kicker">The reading list</span><h2>Good questions. Useful starting points.</h2>'
+        '</div>' + href(current, ARTICLES_HUB, "All articles →") + '</div>'
+        '<p class="section-lead">Capacity, basket layouts and the numbers worth looking at before you buy.</p>'
+        '<div class="agrid">' + "".join(article_card(current, a) for a in shelf) + '</div></section>'
+        + '<section><div class="front-section-head"><div><span class="front-kicker">Find your format</span>'
+        '<h2>Shop by category</h2></div></div><div class="tiles">' + cat_tiles + '</div></section>'
         + chooser_section(current)
-        + gift_season_section(current)
-        + '<section><h2>The three, side by side</h2>'
-        '<p class="section-lead">The decision fields a shopper actually compares, taken straight from the listings. '
-        'Prices, ratings and per-product commission stay off this table by rule \u2014 see the full verified record for '
-        'what is withheld and why.</p>'
+        + '<section id="gift-season" class="front-season"><span class="front-kicker">The gifting edit / 2026</span>'
+        '<h2>Something for their kitchen.<br>Room for how they cook.</h2>'
+        '<p>Buying for someone else? Start with their available counter space and the format they would use. '
+        'Our existing gift guide is a specification-led checklist—not a deals or delivery promise.</p>'
+        + href(current, "articles/holiday-2026-air-fryer-gift-guide.html", "Read the gift guide →", ' class="btn"')
+        + '</section><section><h2>The three air fryers, side by side</h2>'
+        '<p class="section-lead">Compare the listed capacity and depth. These are listing specifications, '
+        'not results from cooking tests; check the current listing before ordering.</p>'
         + product_comparison_table(current)
-        + f'<p class="small muted">Full verified record, with every withheld cell and its flag: '
-        f'{href(current, "products.html", "All products")}.</p></section>'
-        + content_roadmap_section(current)
-        + transparency_band(current)
-        + '<p class="muted small">'
-        + "Product records observed " + esc(OBSERVED) + " (UTC); supplied links and cited policy pages re-read "
-        + esc(RECHECKED) + " (UTC). Verification scope and method: "
-        + href(current, "sources.html", "sources") + '.</p>'
+        + '</section><section id="transparency" class="front-transparency">'
+        '<h2>A considered choice, with the sources close by.</h2>'
+        '<p>We link the product listings behind the figures. We do not claim hands-on testing, '
+        'verified popularity, or measured conversion performance. Prices and ratings are not republished here.</p>'
+        '<p>' + href(current, "about.html", "About Zone4") + ' · '
+        + href(current, "verification.html", "Check the sources") + ' · '
+        + href(current, "flagged.html", "Flagged for Review") + ' · '
+        + href(current, "review.html", "Review suggested changes") + '</p></section>'
     )
 
 
@@ -2819,35 +2825,27 @@ def _render_page_raw(page: Page) -> str:
         cls = ' class="active" aria-current="page"' if target == page.active else ""
         return f'<a href="{esc(page.rel(target))}"{cls}>{esc(NAV_LABEL.get(target, target))}</a>'
 
-    # Reader-facing grouping (suggestion S-47, 2026-11-19). The sidebar keeps
-    # exactly ONE <div class="nav-group"> - scripts/verify.py enforces that - and
-    # inside it the links are split into labelled sub-lists: the shop surfaces
-    # first, then the guides and articles, then the research and review pages
-    # that the footer directory also lists. Every link is emitted exactly once,
-    # so aria-current appears on exactly one anchor per page.
-    all_targets = [t for _group, targets in NAV_ORDER for t in targets]
-    # The shop section is the fixed list above; everything after it in NAV_ORDER
-    # that is not research/governance is a guide or an article, i.e. "Read".
-    shop_targets = NAV_SECTIONS[0][1]
-    research_targets = [t for t, _label, group in NAV
-                        if group in ("Research", "Decide", "Governance")]
-    read_targets = [t for t in all_targets
-                    if t not in shop_targets and t not in research_targets]
-    rest_targets = research_targets
+    # Compact publication masthead: one navigation group, native keyboard-
+    # accessible menus, and no dependency on JavaScript to reach a register.
+    all_targets = list(dict.fromkeys(t for _group, targets in NAV_ORDER for t in targets))
+    primary = ["index.html", "products.html", "guides/index.html", ARTICLES_HUB, "about.html"]
+    categories = [t for t in all_targets if t.startswith("categories/")]
+    library = GUIDE_PATHS + [path for _a, path in ARTICLE_PATHS]
+    research = [t for t in all_targets if t not in primary + categories + library]
 
-    def _sub(title: str, targets: list[str], feed: bool = False) -> str:
+    def _menu(label: str, targets: list[str], feed: bool = False) -> str:
         links = "".join(_nav_a(t) for t in targets)
         if feed:
-            # The feed is a first-class publication surface (SG-27, 2026-11-17):
-            # linked from the sidebar, the footer directory and every page head.
-            links += f'<a href="{esc(page.rel("feed.xml"))}">RSS feed</a>'
-        return f'<div class="nav-sub"><span class="nav-sub-title">{title}</span>{links}</div>'
+            links += f'<a href="{esc(page.rel("feed.xml"))}" data-measure="feed">RSS feed</a>'
+        return (f'<details class="nav-menu"><summary>{esc(label)}</summary>'
+                f'<div class="nav-panel">{links}</div></details>')
 
     nav = (
-        '<div class="nav-group"><span class="nav-group-title">Explore</span>'
-        + _sub("Shop", shop_targets)
-        + _sub("Read the guides", read_targets)
-        + _sub("Research &amp; review", rest_targets, feed=True)
+        '<div class="nav-group">'
+        + "".join(_nav_a(t) for t in primary)
+        + _menu("Categories", categories)
+        + _menu("Reading list", library, feed=True)
+        + _menu("Research & review", research)
         + "</div>"
     )
     directory_targets = list(dict.fromkeys(target for _group, targets in NAV_ORDER for target in targets))
@@ -2903,7 +2901,7 @@ def _render_page_raw(page: Page) -> str:
 <a class="skip" href="#main">Skip to content</a>
 <div class="layout">
 <header class="masthead">
-  <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">air fryer buying guides</span></a>
+  <a class="brand" href="{esc(page.rel('index.html'))}"><span class="brand-name">Zone4</span><span class="brand-tag">The considered kitchen</span></a>
   <nav aria-label="Main" class="topnav">{nav}</nav>
 </header>
 <div class="content">

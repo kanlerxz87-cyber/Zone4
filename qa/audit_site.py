@@ -58,7 +58,7 @@ DATA = ROOT / "data"
 #: data/sources.json and the rationale recorded in COORDINATION.md.
 OFFICIAL_HOSTS = {
     "www.amazon.com", "amazon.com", "link.amazon",
-    "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com",
+    "affiliate-program.amazon.com", "www.ftc.gov", "api.github.com", "github.com", "docs.github.com",
     "sell.amazon.com", "developers.google.com", "www.iana.org", "consumer.ftc.gov",
     "github.io", "schema.org",
 }

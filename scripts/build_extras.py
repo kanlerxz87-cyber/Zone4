@@ -108,10 +108,10 @@ def publication_counts() -> dict:
 # The five defined events. Anything else the page script sends is refused by the endpoint.
 EVENTS = [
     ("page_view", "Once per page load", "The page path only (no query string, no referrer, no identifier)", "Daily count per path"),
-    ("outbound_click", "A click on a sponsored link to a product listing", "Path and ASIN", "Separate daily counts per path and per ASIN"),
-    ("guide_read_75", "The 75% marker becomes visible, once per page load", "Path only", "Daily count per guide"),
-    ("category_click", "A click on a link to a category page", "Source page path only; category destination is not collected", "Daily count per source page"),
-    ("feed_click", "A click on an RSS feed link on the site", "Path only", "Daily count per path"),
+    ("outbound_click", "A click on any sponsored product link", "Published page path and intended ASIN parsed from the listing URL", "Daily count per path and ASIN"),
+    ("guide_read_75", "The reader scrolls past 75% of a guide, once per page load", "Path only", "Daily count per guide"),
+    ("category_click", "A click on a category link in the navigation or on the home page", "Published page path and allowlisted category slug", "Daily count per path and target"),
+    ("feed_click", "A click on the RSS feed link", "Path only", "Daily count"),
 ]
 
 
@@ -262,36 +262,42 @@ def _recheck_line(bs, p) -> str:
 
 
 def shop_section(bs, current) -> str:
-    """Products first: one card per listing, above the verification material."""
+    """Product-first cards. Original diagrams are labelled, never product photographs."""
     guides = published_guides()
-    cards = []
+    air_fryers, thermometers = [], []
     for p in all_products(bs):
         if is_held(p["id"]):
             continue
         cat = _category_for(p)
         facts = _card_facts(p)
-        facts_html = "".join(f"<li>{f}</li>" for f in facts) or "<li class=\"spec-note\">Listing figures not recorded yet.</li>"
+        facts_html = "".join(f"<li>{f}</li>" for f in facts) or '<li>Listing figures not recorded yet.</li>'
         guide = _guide_for_product(guides, p["id"])
-        guide_html = (f'<a href="{_e(current.rel("guides/" + guide["slug"] + ".html"))}">Read the guide</a>'
-                      if guide else "")
-        cards.append(
-            f'<article class="shop-card"><div class="shop-cat">{_e(CATEGORY_LABEL[cat])}</div>'
-            f'<h3>{_e(p["name_short"])}</h3>'
-            f'<p class="small mono">ASIN {_e(p["asin"])} · {_e(p["id"])}</p>'
-            f'<ul class="small">{facts_html}</ul>'
-            f'<p class="small muted shop-dates">{_e(_recheck_line(bs, p))}</p>'
-            f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "Check price on Amazon", p["asin"], "shop sun")} '
-            + PAID_NOTE
-            + f'<a href="{_e(current.rel("products.html"))}" class="small">Source record</a> {guide_html}</p></article>'
+        guide_html = (f'<a href="{_e(current.rel("guides/" + guide["slug"] + ".html"))}">What to compare →</a>'
+                      if guide else f'<a href="{_e(current.rel("categories/" + cat + ".html"))}">Compare the types →</a>')
+        # Footprint diagrams already shipped on the category tiles. No listing
+        # image is copied and the caption prevents a diagram looking like a photo.
+        visual = '<div class="shop-visual">' + footprint_figure(cat) + '</div>'
+        card = (
+            f'<article class="shop-card">{visual}<div class="shop-card-copy">'
+            f'<div class="shop-cat">{_e(CATEGORY_LABEL[cat])}</div><h3>{_e(p["name_short"])}</h3>'
+            f'<ul class="small">{facts_html}</ul><p>{guide_html}</p>'
+            f'<p class="shop-actions">{_shop_link(_tagged_for(p["id"], p["asin"]), "View on Amazon →", p["asin"], "shop sun")}'
+            + PAID_NOTE + '</p>'
+            f'<p class="small muted shop-dates">{_e(_recheck_line(bs, p))} · '
+            f'<a href="{_e(current.rel("products.html"))}">Source record</a></p></div></article>'
         )
+        (thermometers if cat == "meat-thermometers" else air_fryers).append(card)
+    extra = ('<h3 class="shop-subhead">For the roast, the grill & the temperature check</h3>'
+             '<p class="section-lead">Two thermometer formats. Compare the listing claims, '
+             'then check the type of monitoring you need.</p>'
+             '<div class="shop-grid shop-grid-tools">' + "".join(thermometers) + '</div>') if thermometers else ''
     return (
-        '<section class="shop-section" id="shop"><h2>Shop the listings</h2>'
-        '<p class="section-lead">Each card links to the listing you supplied, marked as a sponsored link. '
-        'Prices and star ratings are not shown: the Associates programme withholds them from sites like this one (F-02). '
-        'What is shown is the title and the figures the listing states, each with its source.</p>'
-        f'<div class="shop-grid">{"".join(cards)}</div>'
-        f'<p class="small muted">The verification trail for every figure is on the '
-        f'<a href="{_e(current.rel("verification.html"))}">verification log</a>.</p></section>'
+        '<section class="shop-section" id="shop"><div class="front-section-head"><div>'
+        '<span class="front-kicker">The product edit</span><h2>Meet your countertop options.</h2></div>'
+        f'<a href="{_e(current.rel("products.html"))}">All product details →</a></div>'
+        '<p class="section-lead">Three air fryer formats, with the listed dimensions close at hand. '
+        'Follow a guide to compare, or open the current listing. All Amazon product links are paid links.</p>'
+        '<div class="shop-grid">' + "".join(air_fryers) + '</div>' + extra + '</section>'
     )
 
 
@@ -566,19 +572,26 @@ def _measurement_body(bs, page) -> str:
     cols = "".join(f'<th scope="col">{_e(c)}</th>' for c in ledger["columns"])
     ledger_table = (f'<div class="tablewrap"><table class="data"><thead><tr>{cols}</tr></thead>'
                     '<tbody></tbody></table></div>')
-    endpoint = ("Off (F-59). The page script sends nothing until an endpoint is set."
+    endpoint = ("Not hosted. The page script sends nothing until an endpoint is set."
                 if not MEASURE_ENDPOINT else f"Set to {_e(MEASURE_ENDPOINT)}.")
     return (
         '<header class="hero"><h1>Measurement and campaign ledger</h1><p class="lead">What the site measures, '
         'what it never stores, and the ledger that stays empty until an authorised first-party report is '
         'imported. No conversion, revenue or traffic figure is published (F-15).</p></header>'
         '<section><h2>Five defined events</h2><p class="section-lead">The page script honours Do Not Track and Global '
-        'Privacy Control and does not send cookies. The collector keeps daily aggregates only: no IP address, '
-        'user agent, referrer or visitor identifier is stored.</p>'
+        'Privacy Control and sets no cookie. The endpoint keeps counts per day and path only: no IP address, '
+        'user agent, referrer or visitor identifier is stored by this application. Only published page paths, the five intended ASINs and existing category slugs are accepted. '
+        'Counts are event totals, not unique people, eligible sessions, purchases or conversion rates. Repeat clicks and automated requests can inflate them.</p>'
         '<div class="tablewrap"><table class="data"><thead><tr><th scope="col">Event</th><th scope="col">Fires when</th>'
         '<th scope="col">What is stored</th><th scope="col">Aggregated as</th><th scope="col">Source</th></tr></thead><tbody>' + ev_rows + '</tbody></table></div>'
         f'<p><strong>Endpoint status:</strong> {endpoint} The server is in <code>analytics-endpoint/</code>; '
-        'it needs a separate host because GitHub Pages only serves static files. Counter events are best-effort and are not unique visitors, verified Amazon clicks or orders.</p></section>'
+        'it must run separately behind HTTPS, not on GitHub Pages, which serves static files. '
+        'The collector rejects other or missing origins, drops unexpected fields, and keeps a rolling 90-day aggregate window on writes. '
+        'A daily prune job is required even on inactive days. Hosting, access-log settings, request limits and privacy review remain deployment gates (F-59).</p>'
+        '<p class="small">Implementation and deployment checklist: '
+        '<a href="https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/README.md" rel="noopener noreferrer">collector README</a>. '
+        'GitHub itself logs visitor IP addresses for security: '
+        '<a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" rel="noopener noreferrer">GitHub Pages data collection</a>.</p></section>'
         '<section><h2>The five defined events (campaign ledger)</h2><p class="section-lead">The brief\'s five event types '
         'with the official attribution windows each figure must satisfy before it can enter a ledger row. These are '
         'the Associates measurement events - a different vocabulary from the local counter\'s event names above.</p>'
@@ -617,7 +630,7 @@ def feed_items(bs) -> list[str]:
     return items
 
 
-MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless an endpoint is set.
+MEASURE_JS = r"""// Zone4 measurement script: five defined events, inert unless an endpoint is set.
 // No cookies, no storage, no identifiers. Honours Do Not Track and Global Privacy Control.
 (function () {
   'use strict';
@@ -637,7 +650,7 @@ MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless a
       fetch(endpoint, {
         method: 'POST', body: JSON.stringify(payload),
         headers: { 'Content-Type': 'application/json' },
-        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error'
+        keepalive: true, mode: 'cors', credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer'
       }).catch(function () {});
     } catch (e) { /* measurement must never break reading or navigation */ }
   }
@@ -647,20 +660,20 @@ MEASURE_JS = """// Zone4 measurement script: five defined events, inert unless a
     var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
     if (!a) { return; }
     var dest = new URL(a.href, location.href);
-    var rel = (a.getAttribute('rel') || '').toLowerCase().split(/\\s+/);
-    var product = dest.pathname.match(/^\\/dp\\/(B[0-9A-Z]{9})(?:\\/|$)/);
+    var rel = (a.getAttribute('rel') || '').toLowerCase().split(/\s+/);
+    var product = dest.pathname.match(/^\/dp\/(B[0-9A-Z]{9})(?:\/|$)/);
     if (rel.indexOf('sponsored') !== -1 && dest.origin === 'https://www.amazon.com' && product) {
       send('outbound_click', 'asin', product[1]);
     } else if (dest.origin === base.origin && dest.pathname.indexOf(base.pathname) === 0) {
       var relativePath = dest.pathname.slice(base.pathname.length);
-      var category = relativePath.match(/^categories\\/([a-z0-9-]+)\\.html$/);
+      var category = relativePath.match(/^categories\/([a-z0-9-]+)\.html$/);
       if (relativePath === 'feed.xml') { send('feed_click'); }
-      else if (category) { send('category_click'); }
+      else if (category) { send('category_click', 'target', category[1]); }
     }
   }
   document.addEventListener('click', onClick, false);
   document.addEventListener('auxclick', onClick, false);
-  var article = document.querySelector('article.guide');
+  var article = document.querySelector('article.guide, article.post');
   if (article && 'IntersectionObserver' in window) {
     // Marker sits at 75% of the article's own height, not of the viewport (fixed 2026-11-17).
     article.style.position = 'relative';
