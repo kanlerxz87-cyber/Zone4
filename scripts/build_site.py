@@ -40,17 +40,28 @@ def tagged_url(url: str) -> str:
     return url + ("&" if "?" in url else "?") + f"tag={TRACKING_ID}"
 
 
+# Every count in the copy below is read from the registers, never typed here.
+# These strings go into the meta description, og/twitter descriptions and the
+# image alt texts of all 43 pages, so a stale numeral here is a false claim on
+# every page at once. Fixed on 2026-11-20 (decision D-55, flag F-95): the copy
+# said "three countertop air fryers" and "eight sourced buying guides" while
+# five products and fourteen guides were published.
+COUNTS = build_extras.publication_counts()
 SITE_DESCRIPTION = (
-    "Spec-checked buying guides for three countertop air fryers: product records, sourced articles, "
-    "and a receipt behind every number. What we cannot verify is flagged, not hidden."
+    f"Spec-checked buying guides for {COUNTS['products_word']} countertop appliances - "
+    f"{COUNTS['air_fryers_word']} air fryers and {COUNTS['thermometers_word']} meat thermometers: "
+    "product records, sourced articles, and a receipt behind every number. "
+    "What we cannot verify is flagged, not hidden."
 )
 # The front page leads with the shop, not the audit: its own marketing title and
 # meta description, distinct from the dashboard label used in the navigation.
 # No Amazon Mark appears in either (Participation Requirement 6(e)).
 INDEX_TITLE_TAG = "Find the air fryer that fits your kitchen"
 INDEX_DESCRIPTION = (
-    "Compare three countertop air fryers on the numbers their listings actually state. A three-question "
-    "chooser, eight sourced buying guides and a receipt behind every figure - no prices, ratings or guesses."
+    "Compare " + COUNTS["air_fryers_word"] + " countertop air fryers and "
+    + COUNTS["thermometers_word"] + " meat thermometers on the numbers their listings actually state. "
+    "A three-question chooser, " + COUNTS["published_guides_word"]
+    + " sourced buying guides and a receipt behind every figure - no prices, ratings or guesses."
 )
 
 
@@ -108,8 +119,11 @@ SITE_URL = "https://kanlerxz87-cyber.github.io/Zone4/docs/"
 # scripts/make_social_card.sh: text and shapes only, no product photography
 # (S-18 is still waiting on the owner's decision), and no external host.
 SOCIAL_CARD_URL = SITE_URL + "social-card.png"
-SOCIAL_CARD_ALT = ("Zone4 buying guides: find the air fryer that fits your kitchen - "
-                   "three air fryer formats, two meat thermometers, eight sourced guides.")
+SOCIAL_CARD_ALT = (
+    "Zone4 buying guides: find the air fryer that fits your kitchen - "
+    f"{COUNTS['air_fryers_word']} air fryer formats, {COUNTS['thermometers_word']} meat thermometers, "
+    f"{COUNTS['published_guides_word']} sourced guides."
+)
 
 NAV = [
     ("index.html", "Home", "Overview"),
@@ -969,8 +983,8 @@ def transparency_band(current: Page) -> str:
     """
     recorded = sum(1 for d in DECISIONS if d["status"] == "Recorded")
     counts = (
-        f'<div class="tcount"><span class="tcount-n">{len(PRODUCTS)}</span> verified products</div>'
-        f'<div class="tcount"><span class="tcount-n">{len(ARTICLES)}</span> sourced guides</div>'
+        f'<div class="tcount"><span class="tcount-n">{COUNTS["products"]}</span> verified products</div>'
+        f'<div class="tcount"><span class="tcount-n">{COUNTS["published_guides"]}</span> sourced guides</div>'
         f'<div class="tcount"><span class="tcount-n">0</span> prices or ratings published</div>'
         f'<div class="tcount"><span class="tcount-n">{recorded}</span> decisions recorded</div>'
     )
@@ -1046,8 +1060,8 @@ def page_index(current: Page) -> str:
         '<div class="mhero">'
         '<span class="badge">The countertop issue</span>'
         '<h1>One basket, two baskets, or an oven?</h1>'
-        '<p class="lead">Start with dinner. Do you want room for one batch of potatoes, '
-        'a separate basket for the side, or a rack for a tray? Compare three air fryer layouts '
+        f'<p class="lead">Start with dinner. Do you want room for one batch of potatoes, '
+        f'a separate basket for the side, or a rack for a tray? Compare {COUNTS["air_fryers_word"]} air fryer layouts '
         'before you give one a permanent spot on the counter.</p>'
         '<div class="mhero-actions"><a class="btn btn-primary" href="#chooser">Find my format</a>'
         f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a></div></div>'

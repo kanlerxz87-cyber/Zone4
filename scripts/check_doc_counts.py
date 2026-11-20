@@ -90,6 +90,109 @@ COUNT_SURFACES = [
     },
 ]
 
+# --- Publication counts on the generated site -------------------------------
+# The document surfaces above cover README/EXECUTIVE_SUMMARY/content.json/ENGINE.md.
+# They did not cover the pages themselves, so on 2026-11-20 the front page's meta
+# description, every page's social-card alt text and the social preview PNG still
+# said "three countertop air fryers" and "eight sourced guides" while five
+# products and fourteen guides were published (decision D-55, flag F-95).
+#
+# check_publication_counts() closes that gap from the other side: it does not
+# trust the build code at all, it reads the *generated* pages and the card
+# script, and fails if any of them prints a catalogue count that disagrees with
+# the registers.
+PUBLICATION_COPY_SURFACES = [
+    {
+        "label": "docs/index.html meta description",
+        "file": "docs/index.html",
+        "pattern": r'<meta name="description" content="([^"]*)"',
+        "expect": lambda c: [
+            f"{c['air_fryers_word']} countertop air fryers",
+            f"{c['thermometers_word']} meat thermometers",
+            f"{c['published_guides_word']} sourced buying guides",
+        ],
+    },
+    {
+        "label": "docs/index.html social preview alt text",
+        "file": "docs/index.html",
+        "pattern": r'<meta property="og:image:alt" content="([^"]*)"',
+        "expect": lambda c: [
+            f"{c['air_fryers_word']} air fryer formats",
+            f"{c['thermometers_word']} meat thermometers",
+            f"{c['published_guides_word']} sourced guides",
+        ],
+    },
+    {
+        "label": "docs/about.html social preview alt text",
+        "file": "docs/about.html",
+        "pattern": r'<meta property="og:image:alt" content="([^"]*)"',
+        "expect": lambda c: [
+            f"{c['air_fryers_word']} air fryer formats",
+            f"{c['published_guides_word']} sourced guides",
+        ],
+    },
+]
+
+# The card script must take its numerals from the register, not carry them.
+SOCIAL_CARD_SCRIPT = "scripts/make_social_card.sh"
+
+# Counts that are still typed into copy and are not yet derived. Each entry is a
+# known, deliberate exception with its flag, so the gate cannot be satisfied by
+# quietly widening it: removing a line here means the surface was fixed, adding
+# one means an owner accepted the drift.
+KNOWN_STATIC_COUNT_COPY = {
+    # The card script's own subtitle line is generated now (2026-11-20), so the
+    # only remaining static count in published copy is the case-study sentence
+    # below, which names a fixed historical event rather than the catalogue.
+    "scripts/build_site.py::1963": "design-prompt slot text, not a catalogue count",
+}
+
+
+def check_publication_counts(counts: Optional[Dict[str, int]] = None) -> List[str]:
+    """Fail when a generated page or the card script disagrees with the registers."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    counts = counts or publication_counts()
+    problems: List[str] = []
+    for surface in PUBLICATION_COPY_SURFACES:
+        path = ROOT / surface["file"]
+        if not path.exists():
+            problems.append(f"{surface['label']}: file missing ({surface['file']})")
+            continue
+        text = path.read_text(encoding="utf-8")
+        match = re.search(surface["pattern"], text)
+        if not match:
+            problems.append(
+                f"{surface['label']}: pattern not found in {surface['file']} "
+                "(was the markup reworded? update PUBLICATION_COPY_SURFACES consciously)"
+            )
+            continue
+        value = match.group(1)
+        for expected in surface["expect"](counts):
+            if expected not in value:
+                problems.append(
+                    f"{surface['label']}: expected {expected!r} in the published text "
+                    f"but the page says {value[:160]!r}"
+                )
+    card = ROOT / SOCIAL_CARD_SCRIPT
+    if not card.exists():
+        problems.append(f"social card script missing ({SOCIAL_CARD_SCRIPT})")
+    else:
+        script = card.read_text(encoding="utf-8")
+        # A hard-coded numeral in one of the three card() calls is the exact
+        # defect F-95 records. The variables must be used instead.
+        for literal_call in re.findall(r'^card c[abc] "\d+"', script, re.M):
+            problems.append(
+                f"{SOCIAL_CARD_SCRIPT}: {literal_call!r} carries a typed numeral; "
+                "the card must read its counts from publication_counts()"
+            )
+        for var in ("N_AIR_FRYERS", "N_THERMOMETERS", "N_GUIDES", "N_PRODUCTS"):
+            if f"{var}=" not in script.replace(" ", ""):
+                problems.append(
+                    f"{SOCIAL_CARD_SCRIPT}: {var} is not assigned from the register"
+                )
+    return problems
+
+
 # A liveness pointer rather than a count: the file README names as the latest
 # dated verification record must exist. Ordering same-day sessions is ambiguous,
 # so the gate checks existence, not recency.
@@ -110,6 +213,19 @@ class CountDrift(Exception):
 
 def _load(path: str, key: str):
     return json.loads((ROOT / path).read_text(encoding="utf-8"))[key]
+
+
+def publication_counts() -> Dict[str, int]:
+    """The site's own catalogue counts, computed once in scripts/build_extras.py."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import build_extras  # noqa: E402  (same pipeline the site build uses)
+
+    return build_extras.publication_counts()
+
+
+# One spelling map for the whole pipeline: scripts/build_extras.py owns it, so the
+# pages, the card and this gate cannot disagree about how a count is worded.
+_text_number = staticmethod(lambda n: __import__("build_extras")._text_number(n)).__func__
 
 
 def unittest_total() -> int:
@@ -293,8 +409,27 @@ def main(argv: Optional[List[str]] = None) -> int:
             print(f"  - {d}")
         print("Run: python3 scripts/check_doc_counts.py --fix   (numerals only, never prose)")
         return 1
+    pub_counts = publication_counts()
+    pub = check_publication_counts(pub_counts)
+    if pub:
+        print(
+            "A generated page or the social card disagrees with the registers "
+            "(D-55 gate, flag F-95):"
+        )
+        for d in pub:
+            print(f"  - {d}")
+        print(
+            "Fix the generator (scripts/build_site.py / scripts/make_social_card.sh), "
+            "rebuild, and re-run this gate. Do not edit docs/ by hand."
+        )
+        return 1
     summary = ", ".join(f"{k}={v}" for k, v in counts.items())
     print(f"OK all hand-typed counts agree with the registers ({summary})")
+    print(
+        "OK the generated pages and the social card print the register counts "
+        f"(products={pub_counts['products']}, air fryers={pub_counts['air_fryers']}, "
+        f"thermometers={pub_counts['thermometers']}, guides={pub_counts['published_guides']})"
+    )
     return 0
 
 

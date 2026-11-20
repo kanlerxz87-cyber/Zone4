@@ -6,10 +6,29 @@
 # (real product photography, never generated or copied imagery) is still
 # waiting on an owner decision, so the card carries no appliance images.
 # ImageMagick only, no external assets, so the QA audit's external-host rule
-# keeps holding. Re-run after changing the numbers below.
+# keeps holding.
+#
+# The three numerals on the card are read from the registers through
+# scripts/build_extras.py::publication_counts(), never typed here. Until
+# 2026-11-20 they were literals (3, 2, 8) and the card kept asserting eight
+# sourced guides after fourteen were published - the same drift class as flag
+# F-94, on a surface no text gate could see (decision D-55, flag F-95).
+# Usage: scripts/make_social_card.sh [out.png]
 set -euo pipefail
 
 OUT="${1:-docs/social-card.png}"
+
+# Numerals come from the data files. If the register cannot be read, fail loudly
+# rather than fall back to a remembered number.
+COUNTS_JSON="$(python3 -c 'import json,sys; sys.path.insert(0,"scripts"); import build_extras; print(json.dumps(build_extras.publication_counts()))')"
+read_counts() { python3 -c 'import json,sys; print(json.loads(sys.argv[1])[sys.argv[2]])' "$COUNTS_JSON" "$1"; }
+N_AIR_FRYERS="$(read_counts air_fryers)"
+N_THERMOMETERS="$(read_counts thermometers)"
+N_GUIDES="$(read_counts published_guides)"
+N_PRODUCTS="$(read_counts products)"
+: "${N_AIR_FRYERS:?could not read air fryer count}" "${N_THERMOMETERS:?could not read thermometer count}"
+: "${N_GUIDES:?could not read guide count}" "${N_PRODUCTS:?could not read product count}"
+
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
@@ -27,9 +46,9 @@ card() { # out num label sub
     "$TMP/$1.png"
 }
 
-card ca "3" "air fryer formats" "basket, dual-basket, oven"
-card cb "2" "meat thermometers" "instant-read, wireless"
-card cc "8" "sourced guides" "a receipt behind every figure"
+card ca "$N_AIR_FRYERS" "air fryer formats" "basket, dual-basket, oven"
+card cb "$N_THERMOMETERS" "meat thermometers" "instant-read, wireless"
+card cc "$N_GUIDES" "sourced guides" "a receipt behind every figure"
 
 convert -size ${W}x${H} xc:"$BG" \
   -fill "$SIDE" -draw "rectangle 0,0 46,${H}" \
@@ -42,7 +61,7 @@ convert -size ${W}x${H} xc:"$BG" \
   -fill "$INK" -font "$FB" -pointsize 60 -annotate +93+216 'Find the air fryer' \
   -fill "$INK" -font "$FB" -pointsize 60 -annotate +93+284 'that fits your kitchen.' \
   -fill "$MUTED" -font "$F" -pointsize 24 \
-  -annotate +96+336 'Five countertop appliances compared on the numbers their' \
+  -annotate +96+336 "$N_PRODUCTS countertop appliances compared on the numbers their" \
   -fill "$MUTED" -font "$F" -pointsize 24 \
   -annotate +96+370 'listings actually state: size, format and counter depth.' \
   "$TMP/ca.png" -geometry +92+404 -composite \

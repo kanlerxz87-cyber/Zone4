@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "session": "arena/713e855d-zone4",
+    "date_utc": "2026-11-20",
+    "method": "Platform page-fetch tool, one read per URL, no login, no access control used or bypassed. Each of the five canonical listing pages was read and its page title and category breadcrumb compared word for word with the stored record. Prices, star ratings and review counts were visible on the pages and were deliberately NOT copied (F-02). Only observations of text already stored were made; no specification value was added, inferred or changed.",
+    "scope": "The five published product listings (P1-P5). The two official policy pages were not re-read in this pass.",
+    "not_done": [
+      "Associates Central: no account access in this sandbox, so no tag registration, one-link test or tracking-report check (F-57, F-58). No test is claimed complete.",
+      "The five supplied link.amazon short links were not re-resolved; the 2026-11-19 resolution records in data/intent-links.json stand unchanged.",
+      "Item-details tables (brand, model, dimensions, capacity) were not reached in the retrievable chunks for P1-P3, and are not populated for P4/P5 in this read either, so capacity, dimensions and model_number stay blank for the thermometers (F-60).",
+      "No price, rating, review count, commission rate, traffic figure or revenue figure was read into any register.",
+      "Search Console, the analytics endpoint and reader capture were not exercised; none is connected (F-59, F-61)."
+    ],
+    "purpose": "Fresh line-by-line re-verification supporting D-54/F-95: the site's own catalogue counts were corrected, so the five records those counts describe were re-confirmed against their official listings in the same session."
+  },
+  "rows": [
+    {
+      "id": "V1",
+      "subject": "P1 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B0CDY277D3",
+      "read": "Page title: 'Amazon.com: CHEFMAN 6 Quart Dual Basket Air Fryer Oven with Easy View Windows, Sync Finish, Hi-Fry, Auto Shutoff, 2 Independent 3Qt Nonstick Dishwasher Safe Frying Baskets, Digital Double Air Fryer - Black : Home & Kitchen'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers (node 17659096011).",
+      "result": "Match, word for word, to data/products.json P1 name_listing and category_path. No value changed.",
+      "affects": "data/products.json P1 (read only)"
+    },
+    {
+      "id": "V2",
+      "subject": "P2 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B09B7SB46R",
+      "read": "Page title: 'Amazon.com: Emeril Lagasse 26QT French Door Multi-Function Air Fryer Toaster Oven | Countertop Convection Cooker, 24 One-Touch Preset Options, Extra Large Interior, Six Cooking Accessories Included : Home & Kitchen'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "result": "First segment and ASIN match; the second segment again differs from the stored name_listing, which still carries '26QT air fryer oven with French doors, 24 cooking functions, dual-speed fan and rotisserie for easy family meals.' This is the already-recorded F-66 title drift, confirmed unchanged on 2026-11-20. The record is not overwritten, so the change history stays visible.",
+      "affects": "F-66 (confirmation only; no value changed)"
+    },
+    {
+      "id": "V3",
+      "subject": "P3 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B08DKYBTPH",
+      "read": "Page title: 'Amazon.com: Chefman Air Fryer 8 Qt | TurboFry® 4-in-1 with 450°F Hi-Fry Option for Crispier Results | Bake, Dehydrate, Frozen | XL Nonstick Dishwasher-Safe Basket | Stainless Steel : Home & Kitchen'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Small Appliances > Fryers > Air Fryers.",
+      "result": "Match, word for word, to data/products.json P3 name_listing and category_path. No value changed.",
+      "affects": "data/products.json P3 (read only)"
+    },
+    {
+      "id": "V4",
+      "subject": "P4 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B0DHZTCNR5",
+      "read": "Page title: 'Amazon.com: ThermoMaven 1 Sec Professional Digital Meat Thermometer, ±0.5℉ Accuracy | NIST&NSF Certified, Auto-Rotate Bright LED Screen, IP67 Waterproof for Grill BBQ, Stocking Stuffers Gifts for Men, Black : Home & Kitchen'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat. The also-viewed module again shows a newer ThermoMaven model (B0GL7Z4KP4, Orange) alongside B0DNMTK56N and B0F5X3NSR4.",
+      "result": "Match, word for word, to data/products-extra.json P4 name_listing and category_path. The newer-model sighting is the already-recorded F-78 owner decision; nothing was changed and no replacement advice is published. Capacity, dimensions and model_number remain blank (F-60).",
+      "affects": "data/products-extra.json P4 (read only); F-78 confirmation"
+    },
+    {
+      "id": "V5",
+      "subject": "P5 listing title and breadcrumb",
+      "url": "https://www.amazon.com/dp/B0DZFD6R9Z",
+      "read": "Page title: 'Amazon.com: CHEF iQ Sense | Smart Wireless Meat Thermometer | 3 Ultra-Thin Probes | WiFi Unlimited Range | 1000°F Heat Safe | 5 Sensors | BBQ, Grill, Oven, Smoker, Air Fryer | Gen3: Home & Kitchen'. Breadcrumb: Home & Kitchen > Kitchen & Dining > Kitchen Utensils & Gadgets > Thermometers & Timers > Meat.",
+      "result": "Match, word for word, to data/products-extra.json P5 name_listing and category_path, including the '3 Ultra-Thin Probes' segment. No value changed. Capacity, dimensions and model_number remain blank (F-60).",
+      "affects": "data/products-extra.json P5 (read only)"
+    },
+    {
+      "id": "V6",
+      "subject": "Catalogue counts printed by the site",
+      "url": "https://github.com/kanlerxz87-cyber/Zone4",
+      "read": "Computed from the repository registers on 2026-11-20: data/products.json holds 3 records, data/products-extra.json holds 2, data/marketing.json holds 10 articles, data/guides.json holds 4 published guides. Total: 5 products (3 air fryers + 2 thermometers), 14 guides.",
+      "result": "The published pages and the social card had asserted 'three countertop air fryers' and 'eight sourced guides'. Corrected under D-54; recorded as F-95. The gate now recomputes these numerals from the registers on every build and fails on disagreement.",
+      "affects": "scripts/build_site.py, scripts/build_extras.py, scripts/make_social_card.sh, docs/ (regenerated); F-95, D-54"
+    }
+  ]
+}

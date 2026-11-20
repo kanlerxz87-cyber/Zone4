@@ -48,6 +48,63 @@ def published_guides() -> list[dict]:
     return [g for g in _load("guides.json")["guides"]
             if not any(is_held(pid) for pid in g["product_ids"]) and not is_queued(g)]
 
+
+# --- Publication counts, computed once -------------------------------------
+# Every count the site prints about its own catalogue is computed here and
+# nowhere else. Recorded as decision D-55 and flag F-95 on 2026-11-20 after the
+# front page and the social preview card were found asserting three air fryers
+# and eight guides while five products and fourteen guides were published.
+#
+# A count that is typed into a page, a meta description or an image is a claim
+# like any other: it has to come from the register, or it drifts silently.
+def _product_records() -> list[dict]:
+    """The five published product records: three air fryers, then two thermometers."""
+    return list(_load("products.json")["products"]) + list(_load("products-extra.json")["products"])
+
+
+def _article_records() -> list[dict]:
+    return _load("marketing.json")["articles"]
+
+
+def _text_number(n: int) -> str:
+    """Spell out a small count for prose, but never round it: 5 stays 'five'.
+
+    Only the words the copy already uses are mapped, and the mapping is exact
+    (not a range lookup), so an unexpected count falls back to the numeral
+    rather than inventing a near-miss word.
+    """
+    words = {0: "no", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+             6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
+             11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
+             15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen",
+             19: "nineteen", 20: "twenty"}
+    return words.get(n, str(n))
+
+
+def publication_counts() -> dict:
+    """Counts of what the site actually publishes, each read from its register."""
+    products = _product_records()
+    articles = _article_records()
+    guides = published_guides()
+    air_fryers = [p for p in products if "air fryer" in str(p.get("subcategory", "")).lower()]
+    thermometers = [p for p in products if "thermometer" in str(p.get("subcategory", "")).lower()]
+    return {
+        "products": len(products),
+        "products_word": _text_number(len(products)),
+        "air_fryers": len(air_fryers),
+        "air_fryers_word": _text_number(len(air_fryers)),
+        "thermometers": len(thermometers),
+        "thermometers_word": _text_number(len(thermometers)),
+        "articles": len(articles),
+        "guides": len(guides),
+        # A reader-facing "guide" is either a long-form article or a question-led
+        # guide page: the guides hub and the article hub both call their pages
+        # guides, so the published total is the sum.
+        "published_guides": len(articles) + len(guides),
+        "published_guides_word": _text_number(len(articles) + len(guides)),
+        "categories": len({p["subcategory"] for p in products}),
+    }
+
 # The five defined events. Anything else the page script sends is refused by the endpoint.
 EVENTS = [
     ("page_view", "Once per page load", "The page path only (no query string, no referrer, no identifier)", "Daily count per path"),
