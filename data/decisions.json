@@ -2239,6 +2239,136 @@
       "recommendation": "Option A. Recorded 2026-11-20 by the agent under the owner's standing brief (no manual input), because the failure it prevents was live on 43 pages at once (F-95) and because it is reversible. A count the site prints is a claim about the site: option A makes the claim and the register unable to disagree without failing the build; option B is the status quo that produced F-94 and F-95 within two days; option C gives away accurate shop copy to solve a problem the build solves. No product fact, link, disclosure or price/rating policy changes.",
       "recorded_choice": "A",
       "recorded_date_utc": "2026-11-20"
+    },
+    {
+      "id": "D-55",
+      "question": "Ship reversible measurement-contract corrections while keeping production collection disabled until deployment evidence exists?",
+      "linked_question": "Q-67",
+      "linked_suggestions": [
+        "S-61"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Repair and test the staged contract; keep launch behind evidence",
+          "commits_to": "Bounded public-route/category/ASIN payloads, category-target counts, no-credential/no-Referer transport, staged 30-day aggregate expiry, a single client source, and a fail-closed launch checklist. This does not select a host, approve legal/privacy terms, activate collection or infer an order.",
+          "effort": "Source/configuration changes and isolated regression tests.",
+          "reversible": "Yes; code/configuration revert, with no production collection to unwind."
+        },
+        {
+          "key": "B",
+          "label": "Leave the dormant reference counter unchanged",
+          "commits_to": "Keep the URL-only launch switch and remaining unbounded/undocumented prototype behavior; do not activate it.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A under the standing no-manual-input brief: correct demonstrable staged-code defects without making an account-bound or legal decision. D-56 and MC-01..MC-05 remain the separate launch gates.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json",
+          "ref": "The staged contract and blank launch evidence"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/tests/test_measurement_client.py",
+          "ref": "Isolated client/HTTP and completeness-gate evidence"
+        },
+        {
+          "url": "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+          "ref": "Production warning remains an open operational gate"
+        }
+      ],
+      "recorded_choice": "Option A, scoped in the coordination claim before implementation. The standing delegation permits reversible code corrections, not invented deployment facts. Collection stays off and no host, consent outcome, attribution claim or purchase is created.",
+      "recorded_date_utc": "2026-11-20",
+      "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)"
+    },
+    {
+      "id": "D-56",
+      "question": "Which permitted hosting path should precede the commercial affiliate rollout and production analytics?",
+      "linked_question": "Q-66, Q-67",
+      "linked_suggestions": [
+        "S-62"
+      ],
+      "status": "Open - needs your answer",
+      "options": [
+        {
+          "key": "A",
+          "label": "Keep a reference presence only while seeking hosting-use clarification",
+          "commits_to": "Do not enable collection or scale commercial promotion on the assumption a Pages deployment is approval. Obtain written clarification and maintain the disabled endpoint; a reference designation alone does not override host terms.",
+          "effort": "Host review; no purchase or migration.",
+          "reversible": "Yes; subject to any host instruction."
+        },
+        {
+          "key": "B",
+          "label": "Move the commercial publication and collector to explicitly permitted hosting",
+          "commits_to": "Select an allowed host and production runtime, review privacy/logging/retention, migrate canonical URLs and redirects together, then record deployed evidence before enabling collection. Host cost and access must be established, not guessed.",
+          "effort": "Unverified until a suitable host and authorized account are available.",
+          "reversible": "A later migration is possible, but redirect and data-deletion obligations remain."
+        }
+      ],
+      "recommendation": "B for an actual commercial rollout; A is a holding path while permission is clarified. No host account, budget, provider terms or deployed evidence was supplied, so neither commercial permission nor a completed migration is recorded here.",
+      "sources": [
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
+          "ref": "GitHub Pages usage limits"
+        },
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/what-is-github-pages.md",
+          "ref": "GitHub Pages static hosting and security IP logging"
+        },
+        {
+          "url": "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+          "ref": "Reference runtime is not a production server"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 3: site, privacy and hosting responsibilities"
+        }
+      ]
+    },
+    {
+      "id": "D-57",
+      "question": "Correct the browser-proven mobile navigation/disclosure failure with a compact native directory and a rendered-layout gate?",
+      "linked_question": "",
+      "linked_suggestions": [
+        "S-63"
+      ],
+      "status": "Recorded",
+      "options": [
+        {
+          "key": "A",
+          "label": "Compact buyer navigation plus one native expandable full directory",
+          "commits_to": "Preserve every page and footer link, the single nav-group, current-page access, all existing cover art and product content. Reduce the masthead footprint, contain min-content overflow, and check actual viewport disclosure placement and keyboard/no-script navigation before completion.",
+          "effort": "Shared shell/CSS and a pinned browser-QA workflow.",
+          "reversible": "Yes; shared-shell/CSS revert."
+        },
+        {
+          "key": "B",
+          "label": "Keep the full directory always expanded",
+          "commits_to": "Leave the browser-proven clipping and off-screen disclosure on smaller phones while HTML-order checks continue to pass.",
+          "effort": "None.",
+          "reversible": "Yes."
+        }
+      ],
+      "recommendation": "A as a mechanical correction under the standing no-manual-input brief; it implements the compact-navigation direction already proposed in RD-02 without removing a destination or inventing a reader metric.",
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+          "ref": "First-party shell"
+        },
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css",
+          "ref": "First-party styling"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Section 5 disclosure statement"
+        }
+      ],
+      "recorded_choice": "Option A approved before implementation on 2026-11-20. S-63 remains work-remains until browser acceptance checks pass. This is a reversible presentation correction, not an attribution, product or hosting decision.",
+      "recorded_date_utc": "2026-11-20",
+      "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)"
     }
   ],
   "log": [
@@ -2535,6 +2665,20 @@
       "choice": "Option A - every catalogue count the site prints (including the numerals baked into the social preview card) is computed from the registers, and the gate reads the generated output.",
       "recorded_by": "arena/713e855d-zone4 (standing delegation: no manual input)",
       "evidence": "Found live on the branch point 640660f: scripts/build_site.py's SITE_DESCRIPTION, INDEX_DESCRIPTION and SOCIAL_CARD_ALT and three literals in scripts/make_social_card.sh said 'three countertop air fryers' and 'eight sourced guides' while the registers held 5 products (3 air fryers + 2 thermometers) and 14 guides (10 articles + 4 published guides); the home page's transparency band printed 10 guides. Recorded as F-95. Fixed by one function (scripts/build_extras.py::publication_counts()) that the page copy and the card both read, plus scripts/check_doc_counts.py::check_publication_counts(), which reads the generated index.html and about.html and the card script's own text. Negative tests: the old description fails the gate naming the surface; 'card cc \"8\"' fails it naming the literal. Test count 102 -> 107."
+    },
+    {
+      "date_utc": "2026-11-20",
+      "decision": "D-55",
+      "choice": "Option A - staged measurement hardening and deployment-evidence gate, with production collection still disabled.",
+      "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)",
+      "evidence": "Coordination claim preceded implementation; PR #115 and #119 fixes retained. Local Node and Python contracts exercise only isolated fixtures, not live Amazon links or reported orders. Official GitHub Pages limits/overview, Python production warning, MDN transport controls and Associates privacy/artificial-activity rules read 2026-11-20. data/measurement.json keeps every deployment confirmation null."
+    },
+    {
+      "date_utc": "2026-11-20",
+      "decision": "D-57",
+      "choice": "Option A - approve compact native directory and rendered viewport gate before implementation.",
+      "recorded_by": "arena/5435c17d-zone4 (standing delegation: no manual input)",
+      "evidence": "Local Chromium measurements on six pages at 1440x1000 and 390x844; mobile masthead about 718px tall and document about 848px wide. Existing HTML-order checks pass but do not establish above-the-fold disclosure. F-99 records the reproducible defect."
     }
   ],
   "paths": {

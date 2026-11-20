@@ -877,6 +877,8 @@ def check_publication() -> None:
     if not isinstance(pub["cadence"]["interval_days"], int) or pub["cadence"]["interval_days"] < 1:
         fail("publishing cadence interval is not a positive whole number of days")
     measure = (DOCS / "measure.js").read_text(encoding="utf-8")
+    # Ban reading browsing metadata, not the referrerPolicy option that suppresses
+    # its transmission. A substring ban on "referrer" prevented no-referrer transport.
     for bad in ("document.cookie", "localStorage", "sessionStorage", "navigator.userAgent", "document.referrer"):
         if bad in measure:
             fail(f"measure.js uses {bad}: the measurement must not store or read identifiers")

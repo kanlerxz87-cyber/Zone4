@@ -1197,7 +1197,7 @@
       "id": "F-95",
       "severity": "High",
       "title": "The front page and the social preview card asserted three air fryers and eight guides while five products and fourteen guides were published",
-      "detail": "Found 2026-11-20 by arena/713e855d-zone4 by reading the built page against the registers, not by trusting a register row. `SITE_DESCRIPTION`, `INDEX_DESCRIPTION` and `SOCIAL_CARD_ALT` in scripts/build_site.py carried the typed phrases 'three countertop air fryers', 'eight sourced buying guides' and 'eight sourced guides', and scripts/make_social_card.sh carried the literals 3, 2 and 8 on the preview image itself. Those strings are emitted into the meta description, og:description, twitter:description and both image alt texts of all 43 published pages, so one stale numeral was a false catalogue claim on every page at once. The measured state at the time: 5 product records (3 air fryers + 2 thermometers, data/products.json + data/products-extra.json), 10 articles (data/marketing.json) and 4 published question-led guides (data/guides.json) = 14 guides. The transparency band on the home page was also under-counting guides: it printed len(ARTICLES) as the 'sourced guides' figure, which is 10, not 14. The existing count gate (scripts/check_doc_counts.py, SG-37/D-10) did not catch any of it because it inspects four documents (README.md, EXECUTIVE_SUMMARY.md, data/content.json, ENGINE.md) and never a generated page or an image. Corrected the same day under decision D-55: the counts are computed once in scripts/build_extras.py::publication_counts(), the page copy and the card both read from it, and check_doc_counts.py gained check_publication_counts(), which reads the *generated* index.html and about.html and the card script's own text and fails if any of them disagrees with the registers or if a typed numeral returns to a card() call. Negative tests were run: with the old description restored the gate fails naming the surface, and with `card cc \"8\"` restored it fails naming the literal. Nine regression tests cover it (tests/test_doc_counts.py::PublicationCounts and the RepoGate additions).",
+      "detail": "Found 2026-11-20 by arena/713e855d-zone4 by reading the built page against the registers, not by trusting a register row. `SITE_DESCRIPTION`, `INDEX_DESCRIPTION` and `SOCIAL_CARD_ALT` in scripts/build_site.py carried the typed phrases 'three countertop air fryers', 'eight sourced buying guides' and 'eight sourced guides', and scripts/make_social_card.sh carried the literals 3, 2 and 8 on the preview image itself. Those strings are emitted into the meta description, og:description, twitter:description and both image alt texts of all 43 published pages, so one stale numeral was a false catalogue claim on every page at once. The measured state at the time: 5 product records (3 air fryers + 2 thermometers, data/products.json + data/products-extra.json), 10 articles (data/marketing.json) and 4 published question-led guides (data/guides.json) = 14 guides. The transparency band on the home page was also under-counting guides: it printed len(ARTICLES) as the 'sourced guides' figure, which is 10, not 14. The existing count gate (scripts/check_doc_counts.py, SG-37/D-10) did not catch any of it because it inspects four documents (README.md, EXECUTIVE_SUMMARY.md, data/content.json, ENGINE.md) and never a generated page or an image. Corrected the same day under decision D-54: the counts are computed once in scripts/build_extras.py::publication_counts(), the page copy and the card both read from it, and check_doc_counts.py gained check_publication_counts(), which reads the *generated* index.html and about.html and the card script's own text and fails if any of them disagrees with the registers or if a typed numeral returns to a card() call. Negative tests were run: with the old description restored the gate fails naming the surface, and with `card cc \"8\"` restored it fails naming the literal. Nine regression tests cover it (tests/test_doc_counts.py::PublicationCounts and the RepoGate additions).",
       "sources": [
         "https://www.amazon.com/dp/B0CDY277D3",
         "https://www.amazon.com/dp/B09B7SB46R",
@@ -1206,7 +1206,7 @@
         "https://www.amazon.com/dp/B0DZFD6R9Z"
       ],
       "status": "Corrected",
-      "action": "Corrected 2026-11-20 (decision D-55). No product fact changed: the five listings were re-read the same day and their titles and breadcrumbs still match the stored records. What remains for the owner is nothing on this flag; the standing account-side items are unchanged (F-57 tracking-ID registration, F-58 one-link-per-product test).",
+      "action": "Corrected 2026-11-20 (decision D-54). No product fact changed: the five listings were re-read the same day and their titles and breadcrumbs still match the stored records. What remains for the owner is nothing on this flag; the standing account-side items are unchanged (F-57 tracking-ID registration, F-58 one-link-per-product test).",
       "found_utc": "2026-11-20",
       "found_by": "arena/713e855d-zone4"
     },
@@ -1223,6 +1223,47 @@
       ],
       "status": "Needs review — hardening shipped; production deployment and attribution remain unverified (F-59/F-58)",
       "action": "Follow the collector deployment acceptance checklist before configuring an endpoint. Use authorized Amazon reports for orders; do not compute an Amazon conversion rate from anonymous page views or raw clicks."
+    },
+    {
+      "id": "F-97",
+      "severity": "Medium",
+      "title": "Staged measurement needed bounded payloads, destination aggregates, transport privacy and a launch-evidence gate",
+      "detail": "Code review on 2026-11-20 by arena/5435c17d-zone4. PR #115 corrected the foreign-Origin write and unhashable-event defects; PR #119 made generated category/feed links detectable and omitted credentials. Those fixes are retained. This follow-up addresses the remaining issues: arbitrary syntactically valid page paths and ASINs, ignored category targets, unbounded aggregate retention, absent explicit no-Referer transport, and a URL-only activation switch. The client now compiles the published route/catalog allowlists; the collector validates exactly each event schema, stores category targets separately, and limits its aggregate file to 30 UTC day buckets. All five dated deployment confirmations are required before the build emits an enabled endpoint. Every test event uses an isolated fixture; no live collection or historical data exposure was established.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/server.py",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/analytics-endpoint/client.js",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json",
+        "https://github.com/mdn/content/blob/main/files/en-us/web/http/reference/headers/referrer-policy/index.md"
+      ],
+      "status": "Corrected 2026-11-20 (staged code); production launch still unverified (F-59/F-98)",
+      "action": "Review measurement.html MC-01..MC-05 before collection. Keep browser event counts separate from Associates reports; do not fabricate traffic, sessions or orders to exercise this pipeline."
+    },
+    {
+      "id": "F-98",
+      "severity": "High",
+      "title": "Commercial hosting suitability, production runtime and infrastructure logging are not established by a successful Pages deployment",
+      "detail": "Official GitHub Pages limits and overview read 2026-11-20. Pages is static hosting; its usage limits say it is not intended or allowed as free hosting for an online business or a site primarily facilitating commercial transactions. GitHub also documents Pages security IP logging. Python explicitly does not recommend http.server for production. The reference collector suppresses application request logs and stores only bounded aggregates, but cannot make claims about CDN, proxy, network or host logs. No GitHub determination about this particular site, suitable commercial host, production endpoint, controller/privacy review or host-log deletion evidence is available here. The separate storefront follow-up also raised the hosting issue in STOREFRONT_REVIEW.md; this flag makes it visible in the published review register.",
+      "sources": [
+        "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
+        "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/what-is-github-pages.md",
+        "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+        "https://affiliate-program.amazon.com/help/operating/policies"
+      ],
+      "status": "Needs review (hosting-use clearance / permitted commercial host and privacy evidence)",
+      "action": "Resolve D-56 and Q-66/Q-67 before commercial rollout or enabling collection. Obtain written use clarification or migrate to a host that permits the business model, preserving a single canonical site. Review HTTPS, runtime security, host/proxy logs, access, consent and deletion. Do not expose the Python reference server directly to the internet or describe the whole service as anonymous."
+    },
+    {
+      "id": "F-99",
+      "severity": "High",
+      "title": "Rendered mobile navigation overflows the viewport and pushes the disclosure below the fold despite HTML checks passing",
+      "detail": "2026-11-20 local Chromium checks at 390x844 found a masthead height of about 718px and page width about 848px on the front page and five review pages. The disclosure starts below 718px, outside a 667px-tall phone viewport. Existing verify.py checks disclosure order in HTML, not its rendered position. The expanding min-content width comes from the full navigation directory in the masthead. These are isolated layout observations, not live traffic or product evidence.",
+      "sources": [
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/docs/styles.css",
+        "https://github.com/kanlerxz87-cyber/Zone4/blob/main/scripts/build_site.py",
+        "https://affiliate-program.amazon.com/help/operating/agreement"
+      ],
+      "status": "Needs review (responsive correction claimed 2026-11-20)",
+      "action": "D-57 approves a compact primary bar and native expandable directory, preserving the single nav-group and footer links. Add real browser viewport gates for disclosure visibility, overflow, menu access and runtime errors before marking corrected."
     }
   ]
 }

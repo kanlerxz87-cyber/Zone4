@@ -1551,6 +1551,69 @@
         }
       ],
       "status": "Open — no authorized report or production metric has been validated"
+    },
+    {
+      "id": "Q-66",
+      "area": "Hosting and launch",
+      "question": "Does the selected host permit the intended commercial affiliate publication, and where can a durable HTTPS collector run?",
+      "why_it_matters": "A deployed static preview proves neither hosting-use permission nor the existence of a production backend. Turning on collection or scaling promotion without the right host would bypass the machinery gate.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "GitHub Pages is static. Its official usage limits restrict free hosting for an online business or a site primarily facilitating commercial transactions. No host-specific approval or alternative host account is recorded; Python warns that http.server is not recommended for production. No determination about this specific site is inferred.",
+      "how_to_discover": "Follow MC-01/MC-02 on the Measurement page: obtain hosting-use clarification or an allowed commercial host, then document the runtime, HTTPS origin and operational controls. If moving, migrate canonical URLs, feed, sitemap and redirects together; do not publish a second competing copy. No hosting purchase is authorized or made by this record.",
+      "answerable_by": "The hosting account holder and host support; production operator for runtime evidence.",
+      "blocks": [
+        "S-62",
+        "D-56"
+      ],
+      "flags": [
+        "F-59",
+        "F-98"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/github-pages-limits.md",
+          "ref": "GitHub Pages usage limits"
+        },
+        {
+          "url": "https://github.com/python/cpython/blob/3.11/Doc/library/http.server.rst",
+          "ref": "Python reference-server production warning"
+        }
+      ],
+      "status": "Open - hosting-use and runtime evidence absent"
+    },
+    {
+      "id": "Q-67",
+      "area": "Measurement launch evidence",
+      "question": "Have the actual deployed privacy, retention and five-event contracts passed without mixing test fixtures with production counts or reported orders?",
+      "why_it_matters": "Passing local tests is not a deployed privacy review, a clean production export, Search Console demand evidence or Amazon conversion attribution.",
+      "kind": "Unknown - not discoverable from here",
+      "known": "The staged code has bounded public-route/category/ASIN schemas, opt-outs, no-credential/no-Referer transport and a 30-day aggregate limit. Tests use temporary local files and intercepted outbound destinations. MC-03/MC-04/MC-05 confirmation fields remain null; no production host, host-log policy, backup deletion or deployed acceptance record exists in the supplied access.",
+      "how_to_discover": "Review controller/consent text and every host/CDN/proxy logging layer. On isolated staging, test the canonical origin, five event payloads, DNT/GPC suppression, malformed requests, deletion cutoff and stopped-service cleanup. Preserve dated results, reviewer and private evidence references in data/measurement.json. Do not send generated clicks to Amazon, create test purchases, or import staging data as campaign performance.",
+      "answerable_by": "The authorized hosting/privacy operator; an Associates account holder separately confirms F-57/F-58.",
+      "blocks": [
+        "S-62",
+        "D-56"
+      ],
+      "flags": [
+        "F-59",
+        "F-97",
+        "F-98"
+      ],
+      "sources": [
+        {
+          "url": "https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/measurement.json",
+          "ref": "The five launch checks and blank confirmation fields"
+        },
+        {
+          "url": "https://github.com/github/docs/blob/main/content/pages/getting-started-with-github-pages/what-is-github-pages.md",
+          "ref": "GitHub Pages host-level data collection"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Participation Requirements 3(b)/(e), 6(s)/(u): privacy and no artificial affiliate activity"
+        }
+      ],
+      "status": "Open - local contracts tested; deployment evidence missing"
     }
   ]
 }
