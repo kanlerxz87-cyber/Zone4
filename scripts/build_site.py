@@ -1044,18 +1044,13 @@ def page_index(current: Page) -> str:
     # crawler reading document order — was a product card, not what the page is.
     return (
         '<div class="mhero">'
-        '<span class="badge">A practical guide to three very different countertop formats \u00b7 every figure links to the listing it was read from</span>'
-        "<h1>Crispy dinners, one counter square.</h1>"
-        '<p class="lead">Three air fryers \u2014 dual basket, single basket and French-door oven \u2014 compared on the '
-        'numbers their listings state, so you can pick your format in a minute and be sure before you buy.</p>'
-        '<div class="mhero-actions">'
-        '<a class="btn btn-primary" href="#chooser">Which one is for me?</a>'
-        f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a>'
-        f'<a class="btn" href="{esc(current.rel("articles/dual-basket-vs-single-basket-vs-toaster-oven-air-fryer.html"))}">Compare the formats</a>'
-        '</div>'
-        '<div class="trust"><span>Receipts on every figure</span><span>Gaps flagged, never hidden</span>'
-        '<span>Written in plain sentences, checked line by line</span></div>'
-        '</div>'
+        '<span class="badge">The countertop issue</span>'
+        '<h1>One basket, two baskets, or an oven?</h1>'
+        '<p class="lead">Start with dinner. Do you want room for one batch of potatoes, '
+        'a separate basket for the side, or a rack for a tray? Compare three air fryer layouts '
+        'before you give one a permanent spot on the counter.</p>'
+        '<div class="mhero-actions"><a class="btn btn-primary" href="#chooser">Find my format</a>'
+        f'<a class="btn" href="{esc(current.rel(buying_guide_path))}">Read the buying guide</a></div></div>'
         + shop_section_hook(current)
         + featured_section(current)
         + '<section><h2>Shop by category</h2><div class="tiles">' + cat_tiles + "</div></section>"
