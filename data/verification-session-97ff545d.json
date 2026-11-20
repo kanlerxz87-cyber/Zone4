@@ -7,19 +7,71 @@
     "task": "File the design-prompt & organic-traffic polish batch (RD-15..RD-26, RQ-14..RQ-25) into the review gate (data/redesign.json), rendered as its own labelled section on docs/review.html with a paste-ready consolidated design prompt.",
     "external_fetches": "None. The sandbox reaches only github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org. No external page was re-read in this session; every source URL cited in the new rows is an official page already recorded in this repository (affiliate-program.amazon.com, www.ftc.gov, developers.google.com, schema.org). Nothing was quoted from memory; where a claim needed a source the row cites the recorded page or says it is missing.",
     "official_sources_reused": [
-      {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Google Search Central: helpful, people-first content", "used_for": "RD-15, RD-16, RD-17, RD-18, RD-19, RD-20, RD-24, RD-25, RD-26; RQ-14, RQ-18, RQ-19, RQ-20, RQ-21, RQ-23, RQ-24, RQ-25"},
-      {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Google Search Central: spam policies", "used_for": "RD-16, RD-18, RD-21; RQ-19, RQ-25"},
-      {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "Google Search Central: snippets and date display", "used_for": "RD-19; RQ-24"},
-      {"url": "https://developers.google.com/search/docs/appearance/page-experience", "ref": "Google Search Central: page experience", "used_for": "RD-15, RD-24; RQ-22, RQ-23"},
-      {"url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap", "ref": "Google Search Central: build and submit a sitemap", "used_for": "RD-17, RD-20; RQ-16, RQ-20"},
-      {"url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "ref": "Google Search Central: qualify outbound links", "used_for": "RD-20, RD-22"},
-      {"url": "https://developers.google.com/search/docs/appearance/structured-data/product", "ref": "Google Search Central: Product structured data", "used_for": "RD-21"},
-      {"url": "https://schema.org/Product", "ref": "schema.org: Product", "used_for": "RD-21"},
-      {"url": "https://affiliate-program.amazon.com/help/operating/agreement", "ref": "Associates Operating Agreement", "used_for": "RD-15, RQ-15"},
-      {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Associates Program Policies", "used_for": "RD-26; RQ-22"},
-      {"url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "ref": "Amazon Standard Commission Income Statement (Table 1) — category-band reference only", "used_for": "RD-26"},
-      {"url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "ref": "FTC: Disclosures 101", "used_for": "RD-22, RD-23; RQ-17"},
-      {"url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews", "ref": "FTC: Endorsements, Influencers, and Reviews", "used_for": "RD-18, RD-23, RD-25; RQ-14, RQ-17, RQ-21"}
+      {
+        "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+        "ref": "Google Search Central: helpful, people-first content",
+        "used_for": "RD-15, RD-16, RD-17, RD-18, RD-19, RD-20, RD-24, RD-25, RD-26; RQ-14, RQ-18, RQ-19, RQ-20, RQ-21, RQ-23, RQ-24, RQ-25"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+        "ref": "Google Search Central: spam policies",
+        "used_for": "RD-16, RD-18, RD-21; RQ-19, RQ-25"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/appearance/snippet",
+        "ref": "Google Search Central: snippets and date display",
+        "used_for": "RD-19; RQ-24"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/appearance/page-experience",
+        "ref": "Google Search Central: page experience",
+        "used_for": "RD-15, RD-24; RQ-22, RQ-23"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+        "ref": "Google Search Central: build and submit a sitemap",
+        "used_for": "RD-17, RD-20; RQ-16, RQ-20"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+        "ref": "Google Search Central: qualify outbound links",
+        "used_for": "RD-20, RD-22"
+      },
+      {
+        "url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+        "ref": "Google Search Central: Product structured data",
+        "used_for": "RD-21"
+      },
+      {
+        "url": "https://schema.org/Product",
+        "ref": "schema.org: Product",
+        "used_for": "RD-21"
+      },
+      {
+        "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+        "ref": "Associates Operating Agreement",
+        "used_for": "RD-15, RQ-15"
+      },
+      {
+        "url": "https://affiliate-program.amazon.com/help/operating/policies",
+        "ref": "Associates Program Policies",
+        "used_for": "RD-26; RQ-22"
+      },
+      {
+        "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+        "ref": "Amazon Standard Commission Income Statement (Table 1) — category-band reference only",
+        "used_for": "RD-26"
+      },
+      {
+        "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+        "ref": "FTC: Disclosures 101",
+        "used_for": "RD-22, RD-23; RQ-17"
+      },
+      {
+        "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+        "ref": "FTC: Endorsements, Influencers, and Reviews",
+        "used_for": "RD-18, RD-23, RD-25; RQ-14, RQ-17, RQ-21"
+      }
     ],
     "disallowed_sources_caught_by_gate": "The first build of this batch cited two pages that are official but not on the repository's OFFICIAL_HOSTS allowlist (support.google.com Search Console Performance report and docs.github.com GitHub Pages limits). scripts/verify.py and qa/audit_site.py rejected them; the rows were re-pointed at the recorded developers.google.com/search sitemap and helpful-content guidance. No unlisted host is linked from any page after this fix.",
     "claims_withheld": [
@@ -49,5 +101,19 @@
     "F-57 (tracking-ID confirmation), F-58 (one-link-per-product Associates test), F-59 (endpoint hosting), F-61 (Search Console), D-52 (gift-window cadence) — owner-side gates, untouched here.",
     "The published counts on other pages (suggestions, questions, decisions) are unchanged by design: this batch lives in data/redesign.json so no other register or page count moves.",
     "PR #103 and PR #114 were open at session time and their files were not edited; if either merges first, this branch is rebased before merge and the gates are re-run."
-  ]
+  ],
+  "post_rebase_2026_11_20": {
+    "note": "Main advanced 24+ commits during this session (PRs #114, #115, #116, #117, #118, #119, #120, #121, #122, #123: storefront hero, executive-summary reconciliation, reader measurement transport, generated catalogue counts; decisions now to D-55, flags to F-95, tests to 107). Branch rebased onto origin/main 0c554e8. Conflicts: COORDINATION.md (kept every main-side board row and log; both sides retained) and docs/review.html (generated page; rebuilt from the merged sources rather than hand-merged). scripts/build_extras.py auto-merged (main's publication_counts() block and this session's batch block coexist). The generated page and all gates were re-run after the rebase.",
+    "gates_after_rebase": {
+      "scripts/verify.py": "OK — 43 pages.",
+      "qa/audit_site.py --strict-warnings": "PASS — 43 pages, 0 warnings.",
+      "tools/check_links.py --root docs": "PASS — 23 pages, 1013 CSS lines.",
+      "python3 -m unittest discover -s tests": "107 passed.",
+      "python3 scripts/check_doc_counts.py": "OK — suggestions=80, questions=64, decisions=54 (41 recorded, 13 open), flags=95, requirements=36, tests=107; generated pages and the social card print products=5, air fryers=3, thermometers=2, guides=14.",
+      "build determinism": "docs/review.html byte-identical across consecutive builds before the rebase; the rebuilt page after the rebase carries the polish-batch and design-prompt-lines sections (26 scard articles total, 14 legacy + 12 batch).",
+      "python3 scripts/render_design_prompt.py": "no diff.",
+      "python3 -m engine.cli build + audit": "build OK; audit 0/7 ready (designed compliance gate), unchanged."
+    },
+    "test_count_note": "The original claim text recorded 102 tests (count at branch time). After the rebase the suite runs 107; no test was edited by this session."
+  }
 }
