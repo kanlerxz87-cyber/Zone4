@@ -163,5 +163,41 @@
     "qa/browser/check.cjs": "aa8786f43bba4a059a533651e234f8e92f5db9feeef543847f613c7e957b1f98",
     "qa/browser/package-lock.json": "837766123e7c59d436e0774582429d1e0ad0dc9f7bd6260f659deec6706ff2bd",
     "DESIGN_PROMPT.md": "f7c8a91bf445b26eb03cc0eb606bc34c1008f9298e6d0e5d38584680abd06069"
-  }
+  },
+  "publication_result": {
+    "pull_request": "https://github.com/kanlerxz87-cyber/Zone4/pull/128",
+    "merged_at_utc": "2026-11-20T06:29:04Z",
+    "merge_commit": "f34d67a498ecfc75c9b4b123eb4ef48691b5016e",
+    "pr_and_push_checks": "all eight successful on ada069cda60b6b9d357be8559798208338016f04",
+    "post_merge_checks": {
+      "ci": 44688111095,
+      "site_checks": 44688111089,
+      "qa_audit": 44688111183,
+      "rendered_publication": 44688111187,
+      "result": "all successful"
+    },
+    "pages": {
+      "run": "https://github.com/kanlerxz87-cyber/Zone4/actions/runs/44688110764",
+      "status": "built",
+      "commit": "f34d67a498ecfc75c9b4b123eb4ef48691b5016e",
+      "updated_utc": "2026-11-20T06:29:32Z",
+      "error": null
+    },
+    "live_fetches": [
+      {
+        "url": "https://kanlerxz87-cyber.github.io/Zone4/docs/index.html",
+        "observed": "Existing shorter shop, five paid product destinations, byline/source links and disclosure retained."
+      },
+      {
+        "url": "https://kanlerxz87-cyber.github.io/Zone4/docs/measurement.html",
+        "observed": "Off status; five blank launch confirmations, 30 staged UTC-day buckets, five counters, empty authorized ledger and footer disclosure."
+      },
+      {
+        "url": "https://kanlerxz87-cyber.github.io/Zone4/docs/executive-summary.html",
+        "observed": "D-74/F-97 staged contract, D-75/F-98 hosting/privacy limits and 85/67/57 register counts present."
+      }
+    ],
+    "boundary": "Confirms static publication only, not production collection, permitted commercial hosting, privacy/consent approval, account attribution or traffic. All MC confirmations remain null."
+  },
+  "preserved_open_handoff": "The legacy ledger impression definition says the local tracker records it; that wording review was already handed off in the #119 coordination log. data/ledger.json is preserved unchanged and remains empty; the old definition is not evidence of recorded impressions."
 }
