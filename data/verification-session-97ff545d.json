@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "session": "arena/97ff545d-zone4",
+    "date_utc": "2026-11-20",
+    "branch": "arena/97ff545d-zone4",
+    "base": "640660fc78a8d42833082eea392846fdb04d2d17",
+    "task": "File the design-prompt & organic-traffic polish batch (RD-15..RD-26, RQ-14..RQ-25) into the review gate (data/redesign.json), rendered as its own labelled section on docs/review.html with a paste-ready consolidated design prompt.",
+    "external_fetches": "None. The sandbox reaches only github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org. No external page was re-read in this session; every source URL cited in the new rows is an official page already recorded in this repository (affiliate-program.amazon.com, www.ftc.gov, developers.google.com, schema.org). Nothing was quoted from memory; where a claim needed a source the row cites the recorded page or says it is missing.",
+    "official_sources_reused": [
+      {"url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content", "ref": "Google Search Central: helpful, people-first content", "used_for": "RD-15, RD-16, RD-17, RD-18, RD-19, RD-20, RD-24, RD-25, RD-26; RQ-14, RQ-18, RQ-19, RQ-20, RQ-21, RQ-23, RQ-24, RQ-25"},
+      {"url": "https://developers.google.com/search/docs/essentials/spam-policies", "ref": "Google Search Central: spam policies", "used_for": "RD-16, RD-18, RD-21; RQ-19, RQ-25"},
+      {"url": "https://developers.google.com/search/docs/appearance/snippet", "ref": "Google Search Central: snippets and date display", "used_for": "RD-19; RQ-24"},
+      {"url": "https://developers.google.com/search/docs/appearance/page-experience", "ref": "Google Search Central: page experience", "used_for": "RD-15, RD-24; RQ-22, RQ-23"},
+      {"url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap", "ref": "Google Search Central: build and submit a sitemap", "used_for": "RD-17, RD-20; RQ-16, RQ-20"},
+      {"url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links", "ref": "Google Search Central: qualify outbound links", "used_for": "RD-20, RD-22"},
+      {"url": "https://developers.google.com/search/docs/appearance/structured-data/product", "ref": "Google Search Central: Product structured data", "used_for": "RD-21"},
+      {"url": "https://schema.org/Product", "ref": "schema.org: Product", "used_for": "RD-21"},
+      {"url": "https://affiliate-program.amazon.com/help/operating/agreement", "ref": "Associates Operating Agreement", "used_for": "RD-15, RQ-15"},
+      {"url": "https://affiliate-program.amazon.com/help/operating/policies", "ref": "Associates Program Policies", "used_for": "RD-26; RQ-22"},
+      {"url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ", "ref": "Amazon Standard Commission Income Statement (Table 1) — category-band reference only", "used_for": "RD-26"},
+      {"url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers", "ref": "FTC: Disclosures 101", "used_for": "RD-22, RD-23; RQ-17"},
+      {"url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews", "ref": "FTC: Endorsements, Influencers, and Reviews", "used_for": "RD-18, RD-23, RD-25; RQ-14, RQ-17, RQ-21"}
+    ],
+    "disallowed_sources_caught_by_gate": "The first build of this batch cited two pages that are official but not on the repository's OFFICIAL_HOSTS allowlist (support.google.com Search Console Performance report and docs.github.com GitHub Pages limits). scripts/verify.py and qa/audit_site.py rejected them; the rows were re-pointed at the recorded developers.google.com/search sitemap and helpful-content guidance. No unlisted host is linked from any page after this fix.",
+    "claims_withheld": [
+      "No search-volume, impression, click, order, revenue or conversion figure appears anywhere in the batch; topic titles are working hypotheses under a dated validation rule (RD-16, RQ-20).",
+      "No price, rating, review count, commission assignment or ASIN mapping is added, changed or restated.",
+      "No product photograph is copied, hosted or implied; imagery proposals stay diagram-first or owner-licensed (RD-15, RD-22, RQ-15).",
+      "Nothing in the batch is applied to the storefront; every row is filed for owner review with a check and a reserved decision id (D-62 to D-73, not written into data/decisions.json)."
+    ]
+  },
+  "verification_performed": {
+    "build_site_determinism": "scripts/build_site.py run twice consecutively; docs/review.html byte-identical between runs. Only docs/review.html changed among published pages.",
+    "scripts/verify.py": "OK — 43 pages: links, anchors, disclosure, row sources, no prices or ratings, no Amazon Mark in titles or keywords.",
+    "qa/audit_site.py --strict-warnings": "PASS — 43 pages, 0 warnings.",
+    "tools/check_links.py --root docs": "PASS — 23 pages, 957 CSS lines.",
+    "python3 -m unittest discover -s tests": "102 passed.",
+    "python3 scripts/check_doc_counts.py": "OK — suggestions=80, questions=63, decisions=53 (40 recorded, 13 open), flags=94, requirements=36, tests=102. The redesign register is intentionally outside these published counts.",
+    "python3 scripts/render_design_prompt.py": "No diff to DESIGN_PROMPT.md (data/design.json untouched; it is PR #103 scope).",
+    "python3 -m engine.cli build + audit": "Engine preview builds; audit reports 0/7 ready, the designed compliance-gate refusal. unchanged by this session.",
+    "rendered_page_spot_check": "docs/review.html contains the polish-batch section with 12 scard articles (RD-15..RD-26), the design-prompt-lines section with the 12 prompt_line entries and the consolidated <pre> prompt, 12 new question rows (RQ-14..RQ-25), updated KPI (26 proposals / 25 questions) and the D-62..D-73 reservation note. Legacy sections now render only the 14 original proposals."
+  },
+  "irregularities": [
+    "First build of the batch linked support.google.com and docs.github.com (official hosts but not on the repository's OFFICIAL_HOSTS allowlist); caught by scripts/verify.py and qa/audit_site.py and corrected before commit. Recorded here so the gate's behaviour is auditable.",
+    "An initial edit compared the batch marker against the literal '2026-11-20' while rows carry the full batch label; the first rebuilt page silently rendered the batch inside the legacy priority sections and omitted the new sections. Caught by inspecting the rendered HTML before commit; fixed by a startswith() match and re-verified (12 scard articles in the batch section, 14 in the legacy sections).",
+    "No new flag was filed: the two findings above are internal build defects corrected in-session, not published-site defects, and data/flags.json was out of scope (open PR #103)."
+  ],
+  "open_items_not_addressed": [
+    "F-57 (tracking-ID confirmation), F-58 (one-link-per-product Associates test), F-59 (endpoint hosting), F-61 (Search Console), D-52 (gift-window cadence) — owner-side gates, untouched here.",
+    "The published counts on other pages (suggestions, questions, decisions) are unchanged by design: this batch lives in data/redesign.json so no other register or page count moves.",
+    "PR #103 and PR #114 were open at session time and their files were not edited; if either merges first, this branch is rebased before merge and the gates are re-run."
+  ]
+}

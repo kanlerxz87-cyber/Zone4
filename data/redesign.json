@@ -6,10 +6,11 @@
     "scope_rule": "Proposals are filed here rather than appended to data/suggestions.json so the existing registers and their published counts stay correct; each row cross-references the register IDs it depends on (D-xx, F-xx, AS-xx) and never restates a product value.",
     "source_rule": "Every source link is an official Amazon, FTC, Google or schema.org page. No new product, price, rating, commission, traffic or policy fact is asserted here; where a value is unknown the row says so.",
     "decision_ids": "D-48 to D-60 are reserved for these proposals. They are not written into data/decisions.json by this session: that register is the owner's decision log, and writing 'open' rows into it would change the count published on the Decisions page. A row here becomes a D-row there only when the owner records a choice. [2026-11-19 update (arena/eb90e04d-zone4): D-48, D-49 and D-50 have since been written into data/decisions.json by the decision-support and thermometer-calendar pass (the calendar extension, the owner-actions panel and the gift-window cadence question) - unrelated to these proposals. The reserved range for THIS register's proposals therefore starts at D-53.]",
-    "build_2026_11_19": "Applied by this session, each recomputed from the build rather than typed: RD-01 (landing-page hero), RD-03/RD-12 (footprint diagrams on the category tiles and category page headers), RD-06 (decision-led product link labels), RD-08 (About page), plus the About and Imagery pages themselves and a storefront/mobile CSS pass. RD-02, RD-04, RD-05, RD-07, RD-09, RD-10, RD-11 and RD-13 are proposals only."
+    "build_2026_11_19": "Applied by this session, each recomputed from the build rather than typed: RD-01 (landing-page hero), RD-03/RD-12 (footprint diagrams on the category tiles and category page headers), RD-06 (decision-led product link labels), RD-08 (About page), plus the About and Imagery pages themselves and a storefront/mobile CSS pass. RD-02, RD-04, RD-05, RD-07, RD-09, RD-10, RD-11 and RD-13 are proposals only.",
+    "update_2026_11_20": "Second batch filed 2026-11-20 by arena/97ff545d-zone4: RD-15..RD-26 (each carries a prompt_line the owner can paste into the design prompt; batch='2026-11-20 design-prompt & organic-traffic polish') and RQ-14..RQ-25. Decisions D-62..D-73 are reserved for these rows; they are not written into data/decisions.json by this session. Scope unchanged from 2026-11-19: proposals are filed here so the existing registers and their published counts stay correct; no row is applied by the build. Every source link is an official Amazon, FTC, Google or GitHub page already recorded in this repository; no URL is invented and no product, price, rating, commission, traffic or search-demand value is asserted anywhere in the batch. Topic titles are working hypotheses until an authorized Search Console export exists (RQ-16, RQ-20)."
   },
   "review": {
-    "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01 fully; RD-03, RD-06 and RD-08 partly), each labelled with what shipped and what still waits on an answer; nothing else is applied. These proposals are filed in their own register and are not duplicated into data/suggestions.json, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in.",
+    "note": "This page is the review gate the brief asks for: a single place where every proposed change, its cost, its risk and the proof it worked sit beside the questions that must be answered before the change is worth making. Four of them have a dated partial or full application from 2026-11-19 (RD-01 fully; RD-03, RD-06 and RD-08 partly), each labelled with what shipped and what still waits on an answer; nothing else is applied. These proposals are filed in their own register and are not duplicated into data/suggestions.json, so no count on any other page moves. Every source link is an official page; where a fact could not be read from an official source it is marked as missing rather than filled in. A second batch (RD-15 to RD-26, filed 2026-11-20 by arena/97ff545d-zone4) feeds the site-design prompt directly — a paste-ready design-prompt v2, question-shaped trendy topic hypotheses under a dated validation rule, cluster architecture, an anti-slop pre-publish gate, a freshness programme, measurement-before-publishing restated as a gate, structured-data hygiene, a disclosed social distribution pack, reader capture, decision receipts, a humanised storefront and an adjacent-niche scorecard — with twelve matching questions (RQ-14 to RQ-25) naming what is known, what is missing, who can supply it and the discovery step. None of these rows is applied.",
     "flow": [
       {
         "step": 1,
@@ -447,6 +448,354 @@
       "decision": "D-61",
       "status": "Proposed",
       "shipped_note": ""
+    },
+    {
+      "seq": 15,
+      "id": "RD-15",
+      "priority": "P1 - Do first",
+      "decision": "D-62",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Assemble design-prompt v2: one paste-ready prompt for the warm-editorial affiliate shop",
+      "problem": "The brief asks for suggestions that feed the site-design prompt. DESIGN_PROMPT.md is rendered from data/design.json with the audience slot still open, and the design direction is split across registers (RD rows, the AS anti-filler findings, the DIR-A warm-editorial decision D-48). The owner has no single artifact to paste that yields the ‘polished marketing affiliate website’ outcome in one pass.",
+      "proposal": "File the consolidated prompt rendered on this page (Design-prompt-ready lines) and use it verbatim in the design conversation. It restates — never extends — what decisions D-12, D-17, D-18, D-19, D-35, D-37 and D-48 already record: warm editorial art direction, the disclosure strip above the fold, a benefit-led H1, one primary action per screen, a two-line trust row, honest card labels, serif display type with a readable body, a seasonal front-page slot, and mobile order heading → actions → art. After the conversation, accepted changes land through the normal verified build; anything rejected is recorded as rejected.",
+      "why": "A prompt that names the reader outcome produces a shop; a prompt that names the compliance apparatus produces another register. One paste-ready artifact removes the translation loss between what the owner wants and what a model draws.",
+      "effort": "One owner paste and one design round; no build change until something is accepted.",
+      "risk": "Low. The prompt restates recorded decisions only; the disclosure strip stays above the fold and verify.py stays green, or nothing ships.",
+      "check": "The rendered first screen shows a question, one action and the disclosure strip; no published product value changes; scripts/verify.py and qa/audit_site.py both pass; the prompt text stays archived on this page so the run is reproducible.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Associates Operating Agreement"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Design target: a warm kitchen-buying publication — benefit-led H1 naming the reader's dinner, one primary comparison action, a two-line trust row (receipts on every figure / gaps flagged, never hidden), warm editorial imagery clearly separated from listing photography, serif display type with a readable body, the disclosure strip above the fold, a seasonal slot below the fold, decision-led product-card labels, and mobile order heading → actions → art. Never a method statement as the headline."
+    },
+    {
+      "seq": 16,
+      "id": "RD-16",
+      "priority": "P2 - Then",
+      "decision": "D-63",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Publish trendy, question-shaped topic hypotheses — with a dated validation rule, never a volume claim",
+      "problem": "The brief asks for catchy, trendy articles that earn organic clicks. The repository records ten articles and a ten-topic calendar but zero search-demand evidence, and stating volumes without an authorized export would break the no-fabrication rule.",
+      "proposal": "Adopt these working-title hypotheses — all question-shaped, each tied to a promoted product or category, each filed as HYPOTHESIS until an authorized Search Console export shows impressions: (1) “The ‘24 functions, 7 accessories’ listing — what those numbers can and cannot tell you” (P2); (2) “Air fryer vs. toaster oven vs. dual basket: which one actually saves counter space?” (cluster hub piece); (3) “Instant-read vs. leave-in: what a meat thermometer should tell you” (P4/P5, calendar Wave 3, due 2026-12-01); (4) “The seven numbers to check on any air-fryer listing” (extends the published first-air-fryer checklist); (5) “Air fryer gift guide for small kitchens, 2026” (seasonal, extends the published holiday article); (6) “Why did my listing change? A dated re-check log for shoppers” (freshness angle under D-49). Publish order stays with the calendar; any title earning impressions in the first 28 days keeps its slot, the rest are parked — never padded.",
+      "why": "Catchy is a distribution property: the title must match how a buyer phrases the question. Question-shaped titles are the documented people-first pattern; unverifiable volume claims are how sites become slop.",
+      "effort": "Copy plus calendar entries; each piece ships through the normal verified build and source register.",
+      "risk": "Trend-chasing thin content violates the spam policies; the validation rule exists to park losers early. Honest risk: none of these titles is proven demand — they are hypotheses.",
+      "check": "Every title carries a dated HYPOTHESIS/VALIDATED status in the calendar register; zero invented volume numbers appear anywhere; the first 28-day impression review is logged with its export date.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Editorial voice: short, confident, question-shaped headlines a shopper would say out loud; no superlatives without a linked source; every trend claim is dated and labelled HYPOTHESIS until Search Console data says otherwise."
+    },
+    {
+      "seq": 17,
+      "id": "RD-17",
+      "priority": "P2 - Then",
+      "decision": "D-64",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Declare two topic clusters and link every spoke to its hub with descriptive anchors",
+      "problem": "Articles exist but no page names the cluster structure; readers and crawlers both rely on explicit hub-and-spoke architecture, and the thermometer category has no content spokes yet.",
+      "proposal": "Cluster A — air fryers: hub = docs/articles/air-fryer-buying-guide-2026.html; spokes = the format, capacity, cleanup, feature-name, listing-says and sizes articles plus the four question-led guides. Cluster B — meat thermometers: hub = docs/categories/meat-thermometers.html; spokes = the two Wave-3 guides due 2026-12-01 (T-09/T-10). Each hub gains a “Start here” block listing its spokes in buyer order with descriptive anchors (“How to assess cleanup and counter-space trade-offs”, never “click here”); each spoke links up to its hub once, early, with descriptive text. Markup stays BreadcrumbList (already shipped) plus ItemList (D-53).",
+      "why": "Topical coverage plus honest internal linking is what turns a shelf of articles into an authority on one narrow subject — the documented route to durable rankings.",
+      "effort": "One template change in scripts/build_site.py plus regenerated hubs. Note: scripts/build_site.py was inside PR #103's claimed scope at filing time, so this row waits for that file to be free or for its owner's go-ahead.",
+      "risk": "Over-linking reads as manipulation; keep one link per spoke direction and anchors that describe the target.",
+      "check": "Every spoke reaches its hub in one click; anchors describe their targets; tools/check_links.py and scripts/verify.py stay green; no orphan page in the sitemap.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Information architecture: one air-fryer hub and one thermometer hub; spokes link up with descriptive anchors; no orphan pages; BreadcrumbList and ItemList structured data stay on every spoke."
+    },
+    {
+      "seq": 18,
+      "id": "RD-18",
+      "priority": "P2 - Then",
+      "decision": "D-65",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Add an anti-slop pre-publish gate every article must pass",
+      "problem": "Google's spam policies and helpful-content guidance both target mass, low-value, interchangeable text — the ‘AI slop’ look — and FTC rules require truthful, non-misleading endorsements. The build checks sources and disclosures but has no named editorial-quality gate.",
+      "proposal": "Add a six-item pass/fail checklist to the article template and to qa/audit_site.py: (1) every factual claim sourced or withheld; (2) at least one first-hand-limit sentence where testing did not happen (“we have not tested this; the figures are the listing's”); (3) the byline states the real role and nothing more; (4) a read-aloud rhythm pass — no list-of-three sentence tics; (5) no superlative without a linked source; (6) the disclosure renders above the article body (qa already checks placement — keep it chained). An article missing any item fails the build and is named in the audit output.",
+      "why": "Conversion comes from trust and differentiation; both are lost when ten articles could have been written about anything.",
+      "effort": "Template plus audit rules; roughly half a day, plus one deliberately broken article to prove the gate fires.",
+      "risk": "Checklist fatigue — keep it to pass/fail; anything softer becomes theatre.",
+      "check": "The seeded broken article is rejected by name; a clean article passes; the audit output lists the six items explicitly.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Pre-publish gate: source or withhold every claim, state first-hand limits plainly, name the real author, ban unsourced superlatives, keep the disclosure above the article body."
+    },
+    {
+      "seq": 19,
+      "id": "RD-19",
+      "priority": "P3 - Later",
+      "decision": "D-66",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Freshness programme: dated re-checks, seasonal slots, visible ‘checked on’ lines",
+      "problem": "Freshness is both a ranking-relevant signal for deal-led topics and the only honest answer to ‘is this still true?’, but it currently happens ad hoc and only when a session happens to re-read a listing.",
+      "proposal": "Quarterly listing re-verification via the existing verification-session protocol (title and breadcrumb only — prices, ratings and commission stay withheld per F-02); seasonal front-page slots follow the calendar only (holiday window → January air-fryer reset → thermometer grilling prep in spring), each with its own dated record; articles keep the D-49 date rule and gain a visible “listing re-checked <date>” line drawn from their own records. Stale pieces are refreshed or unpublished — never silently left to age.",
+      "why": "A visible re-check date is the cheapest trust signal available, and it keeps the site's facts from drifting as listings change.",
+      "effort": "Recurring; one session per quarter plus calendar upkeep.",
+      "risk": "Refresh theatre — re-stamping dates without re-reading listings is fabrication; the re-check must remain a recorded read.",
+      "check": "Every seasonal slot and every refreshed article carries a dated record; QA rejects a date with no record behind it.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: snippets and date display"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Freshness: every seasonal slot and refreshed article carries a visible “listing re-checked” date backed by a dated record; never re-stamp without a re-read."
+    },
+    {
+      "seq": 20,
+      "id": "RD-20",
+      "priority": "P1 - Do first",
+      "decision": "D-67",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Measurement before more publishing: Search Console plus the five defined events, 28 days, then choose topics from data",
+      "problem": "The brief orders measurement first. F-61 (property verification) and F-59 (endpoint hosting) are open; publishing waves ahead of measurement just adds inventory nobody chose from evidence.",
+      "proposal": "Owner-side, in order: verify the property in Search Console; submit https://kanlerxz87-cyber.github.io/Zone4/docs/sitemap.xml; confirm the five defined events land in the self-hosted endpoint (or a provider the owner approves); run 28 days; export page/query pairs; hold the first topic review from that export. The endpoint may stay unhosted — tracker.js buffers locally exactly as designed — but no topic choice, headline test or “this is working” claim is made before the export exists.",
+      "why": "The cheapest traffic decision is the one made from measured queries; everything else is instinct with formatting.",
+      "effort": "One owner sign-in session plus an export; the agent wires only what is permitted (sitemap, event names, checklist).",
+      "risk": "Low. The failure mode is publishing anyway — this gate exists to stop exactly that.",
+      "check": "A dated Search Console performance export is filed; the topic calendar shows at least one entry chosen from it; no traffic figure is published anywhere without it.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "Google Search Central: qualify outbound links"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Measurement order: verify Search Console, submit the sitemap, confirm the five events, wait 28 days, export page/query — only then choose the next topic. No export, no claims."
+    },
+    {
+      "seq": 21,
+      "id": "RD-21",
+      "priority": "P3 - Later",
+      "decision": "D-68",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Structured-data hygiene pass against Google's Product guidance",
+      "problem": "ItemList and BreadcrumbList ship; nobody has re-audited the live markup against the current Product structured-data guidance, and markup that overstates what is known is a spam-policy risk.",
+      "proposal": "Audit the live Product/ItemList markup and the guides' short-answer blocks; remove or correct anything the current guidance does not support; never add offers, price or aggregateRating without authorized first-party values (the D-52/F-92 omission stays until such data exists); validate the audited URLs with the Rich Results test before any markup change ships.",
+      "why": "Invalid structured data can cost rich eligibility and reads as gaming; valid markup is free shelf signage.",
+      "effort": "One pass plus revalidation per release.",
+      "risk": "Low; the rule is deletion-biased — when in doubt, markup out.",
+      "check": "The Rich Results test reports zero errors on the audited URLs; offers, price and rating remain absent until authorized.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+          "ref": "Google Search Central: Product structured data"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies"
+        },
+        {
+          "url": "https://schema.org/Product",
+          "ref": "schema.org: Product"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Structured data: valid Product/ItemList only — no offers, price or ratings until authorized first-party values exist; validate before every release."
+    },
+    {
+      "seq": 22,
+      "id": "RD-22",
+      "priority": "P3 - Later",
+      "decision": "D-69",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "A social distribution pack with disclosure baked into every post",
+      "problem": "The site has an OG/Twitter card and a text-and-shapes social-card pipeline, but no distribution discipline; and an undisclosed affiliate post is an FTC problem, not a growth tactic.",
+      "proposal": "One 1200x630 card per flagship article via the existing make_social_card.sh pipeline (text and shapes, never listing photography); every post carries a plain-language disclosure (“affiliate link — buying through it may earn the site a commission at no extra cost to you”); links that support rel attributes ship rel=sponsored; platforms that strip attributes rely on the verbal disclosure. Cadence follows the publishing calendar; no paid amplification in scope.",
+      "why": "Distribution is where question-shaped titles pay off, and disclosure is the price of keeping that channel legal.",
+      "effort": "Card designs per wave (pipeline exists) plus posting discipline.",
+      "risk": "Moderate — social claims still need sources; keep cards fact-free beyond the question and the brand.",
+      "check": "Every live post carries a disclosure; rel=sponsored is present where supported; no card states an unsourced claim.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: Disclosures 101"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links",
+          "ref": "Google Search Central: qualify outbound links"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Distribution: a card per flagship article from the text-only pipeline, a plain-language disclosure in every post, rel=sponsored where the platform allows."
+    },
+    {
+      "seq": 23,
+      "id": "RD-23",
+      "priority": "P3 - Later",
+      "decision": "D-70",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Reader capture: RSS first; email only with explicit consent and an owner-chosen provider",
+      "problem": "The brief's publication path ends at reader capture; the site feeds nobody yet, and an improvised email form would collect PII with no privacy note and no unsubscribe path.",
+      "proposal": "Ship the RSS feed properly (generated already) as the zero-PII channel; if the owner wants email, choose a provider first (RQ-17), publish a privacy note (what is stored, who sees it, how to unsubscribe), disclose the affiliate relationship in every send, and never import or scrape addresses. No popups on the first screen — a quiet “get the next guide” line after the article body only.",
+      "why": "A list compounds; a popup that hides unsubscribe does not. RSS keeps the promise with zero PII at GitHub Pages scale.",
+      "effort": "RSS: done. Email: an owner decision plus provider setup.",
+      "risk": "High if improvised — email is regulated territory; the gate is provider plus privacy note first.",
+      "check": "The feed validates; if email ships, the privacy note is linked from every capture point and the unsubscribe path works from a test send.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: Disclosures 101"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Reader capture: RSS-first, no popups on screen one, email only with explicit consent, a linked privacy note and working unsubscribe, and FTC-disclosed sends."
+    },
+    {
+      "seq": 24,
+      "id": "RD-24",
+      "priority": "P2 - Then",
+      "decision": "D-71",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Decision receipts: every accepted proposal records choice, proof and rollback",
+      "problem": "The review gate records decisions in ad-hoc log lines; nothing forces the “how would we know it worked — and when do we undo it?” half of the decision to exist at accept time.",
+      "proposal": "Extend the decisions convention (next build that touches data/decisions.json): when a proposal is accepted, its receipt records the date, the person choosing, the check that ran (copied from the proposal's check field), and a rollback trigger with a 28-day review line. The Decision centre renders receipts beside open decisions; rejected rows stay visible with the reason they were rejected.",
+      "why": "Deciding without a receipt is how sites drift into unmeasured “improvements”; receipts make every build answerable to evidence.",
+      "effort": "Register convention plus one rendering block; no new infrastructure.",
+      "risk": "Low; the cost is discipline, not code.",
+      "check": "Every Recorded decision from this batch carries a receipt naming its check and rollback trigger; the Decision centre renders them.",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Governance: every accepted change ships with a dated receipt — chooser, the check that ran, a rollback trigger, and a 28-day review line."
+    },
+    {
+      "seq": 25,
+      "id": "RD-25",
+      "priority": "P2 - Then",
+      "decision": "D-72",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Humanise the storefront: a dated editor's note, honest bylines and a corrections log",
+      "problem": "Nothing on the front page says who runs the site or admits error; readers and reviewers both read that absence as “generated”.",
+      "proposal": "Surface a three-line “From the desk” note on the front page (who: the site owner; what it checks: every figure tied to a listing or withheld; what it never does: copy listing photos, invent prices, bury the disclosure); add a dated corrections log page (append-only; its first entry may be “no corrections yet as of 2026-11-20”); bylines stay exactly as honest as the About page — if the owner is the only human, the byline says so.",
+      "why": "Named, fallible, accountable authorship is the oldest answer to “is this a person?” — and the cheapest trust upgrade available.",
+      "effort": "Copy plus one small page through the verified build.",
+      "risk": "Low; the only failure is an invented bio, which the check forbids.",
+      "check": "The front page shows the note; the corrections page exists with a dated entry; no credential appears that the owner has not stated.",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Human surface: a dated editor's note and a corrections log; bylines claim only what the owner states; nothing generated signs an article."
+    },
+    {
+      "seq": 26,
+      "id": "RD-26",
+      "priority": "P3 - Later",
+      "decision": "D-73",
+      "status": "Proposed",
+      "batch": "2026-11-20 design-prompt & organic-traffic polish",
+      "title": "Adjacent-niche scorecard before expanding beyond air fryers and thermometers",
+      "problem": "The site has no recorded way to say yes or no to the next niche; growth by enthusiasm is how an air-fryer guide becomes an everything-store with no authority.",
+      "proposal": "Before any new category, fill a scorecard from recorded data only: demand evidence (Search Console once measured; otherwise blank), commission-band reference (the public Table 1 category row only — never a per-ASIN claim), content feasibility (how many question-shaped topics the cluster supports), policy risk (Amazon and FTC fit) and inventory risk (recorded volatility or blank). Cells that cannot be filled stay blank — the scorecard's first use is to kill bad ideas, not to rank them.",
+      "why": "D-46 (thermometers) worked because scope was recorded explicitly and stayed reversible; scaling that habit prevents niche sprawl.",
+      "effort": "One register row-set per candidate niche; one session each.",
+      "risk": "Low; the risk lives in skipping the card, not in using it.",
+      "check": "Each expansion proposal arrives with a filled or explicitly blank scorecard; no forecast totals appear anywhere.",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+          "ref": "Amazon Standard Commission Income Statement (Table 1)"
+        },
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ],
+      "flags": [],
+      "prompt_line": "Expansion rule: no new category without a sourced scorecard — demand evidence, commission-band reference, content feasibility, policy risk; blanks stay blank."
     }
   ],
   "questions": [
@@ -709,6 +1058,266 @@
         {
           "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
           "ref": "Google: people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 14,
+      "id": "RQ-14",
+      "area": "Editorial",
+      "question": "Who is the named human behind the site, and what verifiable experience may the copy state?",
+      "why_it_matters": "RD-18, RD-25 and the About page all hang on one honest answer; invented credentials are an FTC problem, not a style choice.",
+      "known": "The About page exists and states the checking method; no personal byline or credential is printed anywhere on the site.",
+      "missing": "The owner's preferred byline and the single true sentence about their kitchen experience (or explicit licence to use a desk byline).",
+      "who": "Site owner.",
+      "discover": "Two sentences in the brief. Default if unanswered: the byline reads “the Zone4 desk” with a link to the corrections policy — never an invented person.",
+      "blocks": "RD-18, RD-25, RD-15",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 15,
+      "id": "RQ-15",
+      "area": "Imagery",
+      "question": "Which imagery route is accepted: licensed or commissioned photography, or the AI-generated decorative still life?",
+      "why_it_matters": "The imagery policy forbids copying listing photos; the front page has no accepted photographic voice, and RD-15 and RD-22 both need one.",
+      "known": "Original footprint diagrams and the 1200x630 text social card exist and are shipped; PR #114 proposes one AI-generated decorative still life; no listing photo is hosted.",
+      "missing": "The owner's accepted imagery route, any licence budget, or an explicit choice to stay diagram-first.",
+      "who": "Site owner.",
+      "discover": "One question, three options (license / commission / diagram-first). Default if unanswered: stay diagram-first; adopt the PR #114 still life only if the owner approves that PR.",
+      "blocks": "RD-15, RD-22",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/agreement",
+          "ref": "Associates Operating Agreement"
+        }
+      ]
+    },
+    {
+      "seq": 16,
+      "id": "RQ-16",
+      "area": "Measurement",
+      "question": "Will the owner verify the Search Console property and let the five events run for 28 days before the next topic wave?",
+      "why_it_matters": "RD-16 and RD-20 gate on it; without an export, every “trendy” title stays a hypothesis and every traffic claim stays unsupported.",
+      "known": "Sitemap, feed, robots.txt, canonicals and ItemList ship; the measurement page defines five events; tracker.js buffers locally by design; F-59 and F-61 are open.",
+      "missing": "Property verification, an endpoint-hosting choice, and 28 days of real data.",
+      "who": "Site owner (account-side); the agent wires only what is permitted.",
+      "discover": "Owner signs in to Search Console and submits the sitemap URL shown on the measurement page; default if unanswered: the measurement page stays as-is and no Wave-3 topic is ever labelled validated.",
+      "blocks": "RD-16, RD-20, RD-24",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 17,
+      "id": "RQ-17",
+      "area": "Distribution",
+      "question": "Is there an email or reader-capture provider, and who owns privacy, consent and unsubscribe?",
+      "why_it_matters": "RD-23 is blocked on a real provider plus a real privacy note; an improvised capture collects PII with nothing behind it.",
+      "known": "The RSS feed is generated and valid; no email capture exists; none of the five defined events is email-specific.",
+      "missing": "Provider name, data retention, sender identity, unsubscribe mechanics.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: RSS only, revisited after the first 28-day export exists.",
+      "blocks": "RD-23",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers",
+          "ref": "FTC: Disclosures 101"
+        },
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        }
+      ]
+    },
+    {
+      "seq": 18,
+      "id": "RQ-18",
+      "area": "Scope",
+      "question": "After the thermometer precedent (D-46), which adjacent niches are in scope — and which are permanently out?",
+      "why_it_matters": "Cluster expansion (RD-17, RD-26) needs a boundary, or every category becomes “maybe” forever.",
+      "known": "D-46 published the two thermometer listings reversibly; the calendar extends to Wave 3 on 2026-12-01.",
+      "missing": "An explicit in/out list and the no-go reasons.",
+      "who": "Site owner.",
+      "discover": "A one-line answer: “A and B in, C out because D.” Default if unanswered: stay air fryers and thermometers until one full measured quarter exists.",
+      "blocks": "RD-17, RD-26",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 19,
+      "id": "RQ-19",
+      "area": "Editorial",
+      "question": "Who performs the anti-slop read-aloud pass, and what cadence can they sustain?",
+      "why_it_matters": "RD-18 is only real if a named human does the pass; otherwise the gate is ceremonial.",
+      "known": "qa/audit_site.py already gates disclosure and source placement; no human-in-the-loop step exists in the publish pipeline.",
+      "missing": "A named reviewer and a sustainable cadence; without both, “not slop” is aspiration.",
+      "who": "Site owner or their designee.",
+      "discover": "Default if unanswered: the owner reads every article aloud once before merge; if that cadence fails, publish fortnightly rather than weekly.",
+      "blocks": "RD-18, RD-16",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 20,
+      "id": "RQ-20",
+      "area": "Measurement",
+      "question": "What evidence may count as “trendy” that we are allowed to act on?",
+      "why_it_matters": "Without a recorded bar, the most confident voice in the room wins; with one, only dated data does.",
+      "known": "No query data exists yet; the topic calendar is hypothesis-ordered by design; the five events define reader behaviour to capture.",
+      "missing": "The owner's bar (for example, “impressions above X for a calendar quarter”) or explicit agreement that all titles remain hypotheses until the first export.",
+      "who": "Site owner; the agent can draft the bar from the export once it exists.",
+      "discover": "Default if unanswered: titles remain HYPOTHESIS until any Search Console export is filed; the bar is then set at the export review.",
+      "blocks": "RD-16, RD-19",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+          "ref": "Google Search Central: build and submit a sitemap"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 21,
+      "id": "RQ-21",
+      "area": "Product",
+      "question": "For the Wave-3 thermometer guides, do clearance/fit measurements exist, or do guides stay listing-fact-only?",
+      "why_it_matters": "RD-17's spokes need substance; “will it fit under my cabinets” requires a measurement the repository does not hold.",
+      "known": "Listing facts (title, breadcrumb, stated dimensions where recorded) are on file; F-02 keeps prices and ratings withheld; no cabinet-clearance or hands-on data exists.",
+      "missing": "Whether the owner can measure or photograph anything, or the guides must stick to listing-stated dimensions.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: listing-stated dimensions only, with the same withheld-fact style as the air-fryer guides.",
+      "blocks": "RD-17",
+      "sources": [
+        {
+          "url": "https://www.ftc.gov/business-guidance/advertising-marketing/endorsements-influencers-reviews",
+          "ref": "FTC: Endorsements, Influencers, and Reviews"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        }
+      ]
+    },
+    {
+      "seq": 22,
+      "id": "RQ-22",
+      "area": "Design",
+      "question": "Which rows of the design prompt are non-negotiable — disclosure, trust row, card labels — and which are the owner's call (palette, serif, motion)?",
+      "why_it_matters": "RD-15 needs the line between “never changes without a decision row” and “taste, your call”, or every design round re-litigates compliance.",
+      "known": "The disclosure strip above the masthead and the trust-row semantics are load-bearing for verify.py and qa/audit_site.py; DIR-A (D-48) recorded the warm-editorial palette.",
+      "missing": "The owner's two lists.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: non-negotiable = disclosure strip, trust-row semantics, decision-led labels, rel=sponsored; owner's-call = hex values, serif choice, hero art, motion.",
+      "blocks": "RD-15",
+      "sources": [
+        {
+          "url": "https://affiliate-program.amazon.com/help/operating/policies",
+          "ref": "Associates Program Policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience"
+        }
+      ]
+    },
+    {
+      "seq": 23,
+      "id": "RQ-23",
+      "area": "Decision-making",
+      "question": "What is the default decision receipt — who clicks accept, where is it filed, and what is the rollback trigger?",
+      "why_it_matters": "RD-24 only works if the receipt has a home and an owner; otherwise acceptances stay verbal and nothing is answerable.",
+      "known": "data/decisions.json carries Recorded and Open statuses; the Decision centre renders open decisions; D-51 added the owner-actions panel; the review page names this note's location.",
+      "missing": "Adoption of the receipt convention and its owner.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: the owner replies on the review page with “accept RD-xx; rollback if <condition>”, and the next session writes the receipt row with that sentence verbatim.",
+      "blocks": "RD-24",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/page-experience",
+          "ref": "Google Search Central: page experience"
+        }
+      ]
+    },
+    {
+      "seq": 24,
+      "id": "RQ-24",
+      "area": "Seasonal",
+      "question": "Who owns the seasonal front-page slot beyond the holiday window (D-52 open; F-91)?",
+      "why_it_matters": "D-52 remains open and the gift-window scope was flagged as F-91; without an owner the slot rots or overstays into January irrelevantly.",
+      "known": "A dated gift-season front-page section shipped under D-53 with a calendar-dates-only scope; D-52 (front-load 2026 gift window) is still Open.",
+      "missing": "A decision on D-52 and a standing owner for the slot beyond 2026-12-25.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: the slot clears itself on 2026-12-26 and reverts to evergreen; revisit at the January review.",
+      "blocks": "RD-19",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/appearance/snippet",
+          "ref": "Google Search Central: snippets and date display"
+        }
+      ]
+    },
+    {
+      "seq": 25,
+      "id": "RQ-25",
+      "area": "Claims",
+      "question": "May the word “trendy” appear in any published headline, or must every headline stay question-shaped?",
+      "why_it_matters": "The brief says trendy; Google's guidance and the spam policies both punish vague hype; the safest reading is the stricter one unless the owner records otherwise.",
+      "known": "All ten published articles use question-shaped or plain descriptive titles; no headline currently claims trend data; the word does not appear on any page.",
+      "missing": "The owner's call on headline style for Wave 3 and later.",
+      "who": "Site owner.",
+      "discover": "Default if unanswered: “trendy” is a working label inside this register only and never appears on a page; headlines stay question-shaped.",
+      "blocks": "RD-16, RD-25",
+      "sources": [
+        {
+          "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+          "ref": "Google Search Central: spam policies"
+        },
+        {
+          "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+          "ref": "Google Search Central: helpful, people-first content"
         }
       ]
     }
