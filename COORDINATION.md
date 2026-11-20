@@ -1681,6 +1681,15 @@ Scope rule: this session does not touch `engine/`, `analytics-endpoint/`, `data/
 
 **PR, merge and Pages.** Opened as **PR #113** (base `main`, head `arena/3c1cee74-zone4`) and merged without approval the same day after every gate on the branch passed; the merge result and Pages deployment are recorded in the board row above.
 
+## Session arena/0d83c52c-zone4 · 2026-11-20
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Art-direct front-page opener with original decorative food still life, not a product likeness or test result; preserve disclosure and existing reader actions. | done | arena/0d83c52c-zone4 | docs/styles.css, docs/editorial-table.webp, COORDINATION.md |
+
+**Done locally:** original AI-generated decorative food still life, compressed to WebP; desktop split cover and mobile crop. No Amazon photography, product likeness, price, claim or measured result added. All 43 pages rebuilt, disclosure/row-source/local-link gates passed, QA zero warnings, 102 unit tests passed; engine and published-tree link checks passed. These checks verify stored records and references, not a fresh Amazon listing read. Existing [flag register](https://kanlerxz87-cyber.github.io/Zone4/flagged.html) retains account attribution, analytics hosting and query-data gates. Policy reference: https://affiliate-program.amazon.com/help/operating/policies . No account-side results available.
+
+**Integration adjustment:** PR #114 concurrently shipped a cover. Kept its entire stylesheet and cover; moved our art direction to the gift-season front-page feature instead of duplicating or overwriting the opener. PR: https://github.com/kanlerxz87-cyber/Zone4/pull/116 .
 ### 2026-11-20 — arena/d3396660-zone4
 Changed only the front-page cover; no product identities, policy conclusions or tracking claims changed. Source of the three layouts: [product register](https://github.com/kanlerxz87-cyber/Zone4/blob/main/data/products.json). Original food illustration, not a product likeness. Built all pages; verify and strict audit passed on 43 pages, published-tree checker passed, 102 tests passed, count gate passed. The account-side destination/report checks and live analytics are still unresolved; see [review register](https://kanlerxz87-cyber.github.io/Zone4/docs/flagged.html).
 Integration: main gained a parallel editorial photograph and hero layout after the claim. Resolved stylesheet conflict by retaining that session’s entire treatment, dropping the duplicate SVG, and applying only the new buyer question and shopping actions. Delivery: [PR #117](https://github.com/kanlerxz87-cyber/Zone4/pull/117).
