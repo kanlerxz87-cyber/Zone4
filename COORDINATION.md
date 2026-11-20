@@ -1689,3 +1689,5 @@ Integration: main gained a parallel editorial photograph and hero layout after t
 Measurement preflight: the collector previously applied its origin allowlist only to response headers, not to writes. POST now checks the browser origin before recording; this is not client authentication. Malformed event types and trailing newlines in path/ASIN values are rejected. The hosting checklist links to GitHub Pages documentation, the collector, and Associates Central. No Amazon listing, tag, or policy claim changed; no fresh Amazon verification or authorized reporting is asserted. Existing public flags F-57/F-58/F-59/F-61 still apply. Local verification: 102 tests, 43-page verify and strict QA, published-tree integrity and engine preview integrity passed. No generated output changed.
 
 [PR #115](https://github.com/kanlerxz87-cyber/Zone4/pull/115). Rebase resolved board-only conflicts by preserving the parallel storefront claim and this measurement entry.
+
+PR #117 merged at `34755ded`; [Pages deployment succeeded](https://github.com/kanlerxz87-cyber/Zone4/actions/runs/44683888460).
