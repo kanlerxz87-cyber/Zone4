@@ -76,7 +76,7 @@ class HttpTests(unittest.TestCase):
         cls.server.server_close()
         cls.tmp.cleanup()
 
-    def _post(self, body: bytes, origin: str | None = None):
+    def _post(self, body: bytes, origin: str | None = ORIGIN):
         req = urllib.request.Request(f"http://127.0.0.1:{self.port}/event", data=body, method="POST")
         req.add_header("Content-Type", "application/json")
         if origin:
@@ -94,13 +94,18 @@ class HttpTests(unittest.TestCase):
         self.assertEqual(headers.get("Access-Control-Allow-Origin"), ORIGIN)
         self.assertEqual(headers.get("Cache-Control"), "no-store")
 
-    def test_other_origins_get_no_cors_grant(self):
-        status, headers = self._post(json.dumps({"event": "feed_click", "path": "/"}).encode(), origin="https://evil.example")
-        self.assertEqual(status, 204)
-        self.assertNotIn("Access-Control-Allow-Origin", headers)
+    def test_other_or_missing_origins_cannot_write_counts(self):
+        before = self.counts.read_bytes() if self.counts.exists() else None
+        for origin in (None, "null", "https://other.example"):
+            status, headers = self._post(b'{"event":"feed_click","path":"/"}', origin=origin)
+            self.assertEqual(status, 403)
+            self.assertNotIn("Access-Control-Allow-Origin", headers)
+        self.assertEqual(self.counts.read_bytes() if self.counts.exists() else None, before)
 
     def test_rejections(self):
         self.assertEqual(self._post(b"{not json")[0], 400)
+        self.assertEqual(self._post(b'{"event":[],"path":"/"}')[0], 400)
+        self.assertEqual(self._post(json.dumps({"event": "page_view", "path": "/\n"}).encode())[0], 400)
         self.assertEqual(self._post(json.dumps({"event": "nope", "path": "/"}).encode())[0], 400)
         self.assertEqual(self._post(b"x" * (srv.MAX_BODY + 1))[0], 413)
         self.assertEqual(self._post(b"")[0], 400)

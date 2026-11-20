@@ -37,13 +37,13 @@ def validate(payload: object) -> tuple[bool, str]:
     if not isinstance(payload, dict):
         return False, "body must be a JSON object"
     event = payload.get("event")
-    if event not in EVENT_NAMES:
+    if not isinstance(event, str) or event not in EVENT_NAMES:
         return False, "unknown event"
     path = payload.get("path")
-    if not isinstance(path, str) or not PATH_RE.match(path):
+    if not isinstance(path, str) or not PATH_RE.fullmatch(path):
         return False, "invalid path"
     asin = payload.get("asin", "")
-    if asin not in ("", None) and (not isinstance(asin, str) or not ASIN_RE.match(asin)):
+    if asin not in ("", None) and (not isinstance(asin, str) or not ASIN_RE.fullmatch(asin)):
         return False, "invalid asin"
     return True, ""
 
@@ -109,6 +109,9 @@ def make_handler(counts_file: pathlib.Path, allowed_origin: str):
         def do_POST(self):
             if self.path != "/event":
                 self._send(404)
+                return
+            if self.headers.get("Origin") != allowed_origin:
+                self._send(403)
                 return
             try:
                 length = int(self.headers.get("Content-Length", "0"))
